@@ -1,9 +1,25 @@
 import styles from "./Products.module.scss";
 
 const Products = () => {
+  const items = [
+    "Пиццы",
+    "Комбо",
+    "Закуски",
+    "Напитки",
+    "Коктейли",
+    "Кофе",
+    "Десерты",
+    "Соусы",
+    "Другие товары",
+    "Акции",
+  ];
   return (
     <div className={styles.products}>
-      <span>Products Cards</span>
+      {items.map((item, index) => (
+        <button key={index} className={styles.card}>
+          {item}
+        </button>
+      ))}
     </div>
   );
 };
