@@ -1,0 +1,66 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .logo {
+    // Стили для логотипа
+  }
+
+  .input {
+    display: flex;
+    font-size: 15px;
+    border-width: 0;
+    width: 300px;
+    height: 40px;
+    padding-left: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: #fcfcfc;
+    &:focus {
+      outline: none;
+      border-color: #ccc;
+      box-shadow: 0 0 5px #ccc;
+    }
+  }
+
+  .address {
+    display: flex;
+    font-size: 15px;
+    border-width: 0;
+    align-items: center;
+    justify-content: flex-start;
+    width: 380px;
+    height: 40px;
+    padding-left: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px #ccc;
+    background-color: #fcfcfc;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken(#fcfcfc, 2%);
+    }
+
+    &:active {
+      background-color: darken(#fcfcfc, 3%);
+    }
+  }
+
+  .buttonText {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block; // гарантирует, что текст занимает всю ширину кнопки
+    max-width: 100%; // ограничивает ширину текста шириной кнопки
+  }
+
+  .socialMedia {
+    // Стили для социальных сетей
+  }
+
+  .loginButton {
+    // Стили для кнопки входа
+  }
+}
