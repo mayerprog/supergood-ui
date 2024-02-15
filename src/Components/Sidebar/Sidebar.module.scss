@@ -1,0 +1,36 @@
+.sidebar {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-inline-start: 16px;
+  .item {
+    width: 87px;
+    height: 40px;
+    border-radius: 10px;
+    border-width: 0;
+    outline: none;
+    box-shadow: 0 0 5px #ccc;
+    align-items: center;
+    justify-content: center;
+    background-color: #fcfcfc;
+    margin-bottom: 25px;
+    font-size: 22px;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken(#fcfcfc, 2%);
+    }
+
+    &:active {
+      background-color: darken(#fcfcfc, 3%);
+    }
+  }
+
+  h2 {
+    font-size: 28px;
+    font-weight: 500;
+  }
+}

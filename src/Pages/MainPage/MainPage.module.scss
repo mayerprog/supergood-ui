@@ -2,8 +2,36 @@
   display: flex;
   flex-direction: column;
   padding: 34px;
+  align-items: center;
 }
 
 .mainContent {
   display: flex;
+  flex-direction: row;
+  width: 100%;
 }
+// @media (min-width: 1024px) and (max-width: 1440px) {
+//   .mainContent {
+//     display: flex;
+//     align-items: center;
+//   }
+// }
+// @media (max-width: 768px) {
+//   //mobile
+//   .app {
+//     padding: 15px;
+//   }
+
+//   .header {
+//     flex-direction: column;
+//     align-items: stretch;
+//   }
+
+//   .mainContent {
+//     flex-direction: column;
+//   }
+// }
+
+// @media (min-width: 769px) {
+//   //non mobile
+// }

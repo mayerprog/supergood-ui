@@ -3,9 +3,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 
   .logo {
-    // Стили для логотипа
+    width: 220px;
+    height: 51.8px;
   }
 
   .input {
@@ -52,15 +54,48 @@
   .buttonText {
     text-overflow: ellipsis;
     overflow: hidden;
-    display: block; // гарантирует, что текст занимает всю ширину кнопки
-    max-width: 100%; // ограничивает ширину текста шириной кнопки
+    white-space: nowrap;
+    display: block;
+    max-width: 100%;
   }
 
   .socialMedia {
-    // Стили для социальных сетей
+    width: 211px;
+    height: 63px;
   }
 
   .loginButton {
-    // Стили для кнопки входа
+    width: 87px;
+    height: 40px;
+    border-radius: 10px;
+    border-width: 0;
+    outline: none;
+    box-shadow: 0 0 5px #ccc;
+    font-size: 15px;
+    align-items: center;
+    justify-content: center;
+    background-color: #fcfcfc;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken(#fcfcfc, 2%);
+    }
+
+    &:active {
+      background-color: darken(#fcfcfc, 3%);
+    }
   }
 }
+
+// @media (max-width: 768px) {
+//   .header {
+//     flex-direction: column;
+//   }
+// }
+
+// @media (min-width: 1024px) and (max-width: 1440px) {
+//   .header {
+//     min-width: 800px;
+//     justify-content: space-between;
+//   }
+// }

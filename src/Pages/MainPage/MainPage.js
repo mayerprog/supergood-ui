@@ -1,4 +1,5 @@
 import Header from "../../Components/Header/Header";
+import Sidebar from "../../Components/Sidebar/Sidebar";
 import styles from "./MainPage.module.scss";
 
 const MainPage = () => {
@@ -6,8 +7,8 @@ const MainPage = () => {
     <div className={styles.app}>
       <Header />
       <div className={styles.mainContent}>
-        {/* <Sidebar />
-            <Products />
+        <Sidebar />
+        {/* <Products />
             <Cart /> */}
       </div>
     </div>
