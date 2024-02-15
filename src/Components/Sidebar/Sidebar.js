@@ -15,7 +15,6 @@ const Sidebar = () => {
   ];
   return (
     <div className={styles.sidebar}>
-      <h2>Меню</h2>
       {items.map((item, index) => (
         <button key={index} className={styles.item}>
           {item}
