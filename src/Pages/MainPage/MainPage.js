@@ -1,4 +1,6 @@
+import Cart from "../../Components/Cart/Cart";
 import Header from "../../Components/Header/Header";
+import Products from "../../Components/Products/Products";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import styles from "./MainPage.module.scss";
 
@@ -8,8 +10,8 @@ const MainPage = () => {
       <Header />
       <div className={styles.mainContent}>
         <Sidebar />
-        {/* <Products />
-            <Cart /> */}
+        <Products />
+        <Cart />
       </div>
     </div>
   );
