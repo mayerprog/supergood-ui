@@ -3,15 +3,15 @@
   flex: 4;
   flex-wrap: wrap;
   justify-content: flex-start;
+  padding: 0 10px;
 
   .card {
     display: flex;
-    font-size: 15px;
+    flex-basis: calc(20% - 12px);
+    max-width: calc(20% - 12px);
+    min-width: 170px;
+    min-height: 350px;
     border-width: 0;
-    outline: none;
-    justify-content: center;
-    width: 200px;
-    height: 350px;
     border-radius: 10px;
     box-shadow: 0 3px 5px #ccc;
     background-color: #f7f7f7;

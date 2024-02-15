@@ -3,6 +3,8 @@
   flex-direction: column;
   padding: 15px;
   align-items: center;
+  min-height: 100%;
+  overflow: hidden;
 }
 
 .mainContent {
