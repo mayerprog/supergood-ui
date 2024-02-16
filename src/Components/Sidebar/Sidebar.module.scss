@@ -1,17 +1,15 @@
 .sidebar {
   display: flex;
-  flex: 1;
+  flex: 0.8;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  margin-right: 10px;
-  margin-inline-start: 15px;
   .item {
     width: 245px;
     height: 40px;
     border-radius: 20px;
     border-width: 0;
-    background-color: #fcfcfc;
+    background-color: white;
     font-size: 16px;
     transition: background-color 0.15s ease;
     text-align: start;
