@@ -1,23 +1,26 @@
-.cartBox {
+.cart {
   display: flex;
+  flex-direction: column;
   width: 20%;
-  flex-direction: row;
-  justify-content: space-around;
   border-radius: 10px;
   box-shadow: 0 0 5px #ccc;
   padding-top: 13px;
-  display: flex;
-  // flex-direction: column;
   position: sticky;
   top: 100px;
   height: calc(100vh - 150px);
   padding: 20px;
+}
 
-  .cartTitle {
-    font-size: 19px;
-    font-weight: bold;
-  }
-  .deleteTitle {
-    font-size: 18px;
-  }
+.cartBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.cartTitle {
+  font-size: 19px;
+  font-weight: bold;
+}
+.deleteTitle {
+  font-size: 18px;
 }
