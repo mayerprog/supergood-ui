@@ -1,3 +1,35 @@
+$header-max-width: 768px;
+@mixin form-element-style {
+  display: flex;
+  font-size: 15px;
+  border-width: 0;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #fcfcfc;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin interactive-bg($base-color: #fcfcfc) {
+  &:hover {
+    background-color: darken(#fcfcfc, 2%);
+  }
+
+  &:active {
+    background-color: darken(#fcfcfc, 3%);
+  }
+}
+
+@mixin focus-style($color) {
+  &:focus {
+    outline: none;
+    border-color: $color;
+    box-shadow: 0 0 5px $color;
+  }
+}
+
 .header {
   display: flex;
   flex-direction: row;
@@ -5,7 +37,7 @@
   justify-content: space-between;
   width: 100%;
   border-bottom: 1px solid #fcfcfc;
-  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   padding: 10px 0 10px 0;
   position: sticky;
   top: 0;
@@ -13,50 +45,44 @@
   box-sizing: border-box;
   backdrop-filter: blur(5px);
 
+  @media (max-width: $header-max-width) {
+    flex-direction: column;
+    padding: 1rem 2%;
+
+    > * {
+      width: 100%; // Элементы занимают всю ширину
+      margin-bottom: 0.5rem;
+    }
+  }
+
   .logo {
     width: 220px;
     height: 51.8px;
+
+    @media (max-width: $header-max-width) {
+      width: 20%;
+      margin: 0 auto;
+      height: auto;
+    }
   }
 
   .input {
-    display: flex;
-    font-size: 15px;
-    border-width: 0;
-    width: 300px;
-    height: 40px;
-    padding-left: 15px;
-    border-radius: 10px;
+    @include form-element-style;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    background-color: #fcfcfc;
-    &:focus {
-      outline: none;
-      border-color: #ccc;
-      box-shadow: 0 0 5px #ccc;
-    }
+    max-width: 300px;
+    padding-left: 15px;
+
+    @include focus-style(#ccc);
   }
 
   .address {
-    display: flex;
-    font-size: 15px;
-    border-width: 0;
-    align-items: center;
-    justify-content: flex-start;
-    width: 380px;
-    height: 40px;
-    padding-left: 15px;
-    border-radius: 10px;
+    @include form-element-style;
     box-shadow: 0 0 5px #ccc;
-    background-color: #fcfcfc;
-    transition: background-color 0.3s ease;
+    max-width: 380px;
     cursor: pointer;
+    padding-left: 15px;
 
-    &:hover {
-      background-color: darken(#fcfcfc, 2%);
-    }
-
-    &:active {
-      background-color: darken(#fcfcfc, 3%);
-    }
+    @include interactive-bg;
   }
 
   .buttonText {
@@ -73,25 +99,13 @@
   }
 
   .loginButton {
-    width: 87px;
-    height: 40px;
-    border-radius: 10px;
-    border-width: 0;
-    outline: none;
-    box-shadow: 0 0 5px #ccc;
-    font-size: 15px;
+    @include form-element-style;
     align-items: center;
     justify-content: center;
-    background-color: #fcfcfc;
+    box-shadow: 0 0 5px #ccc;
+    max-width: 87px;
     cursor: pointer;
-
-    &:hover {
-      background-color: darken(#fcfcfc, 2%);
-    }
-
-    &:active {
-      background-color: darken(#fcfcfc, 3%);
-    }
+    @include interactive-bg;
   }
 }
 

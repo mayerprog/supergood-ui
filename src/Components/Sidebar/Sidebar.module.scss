@@ -1,12 +1,11 @@
 .sidebar {
   display: flex;
-  // // flex: 0.8;
   width: 15%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   position: sticky;
-  top: 100px;
+  top: 110px;
   height: calc(100vh - 150px);
   flex-basis: 190px;
   margin-right: 30px;
