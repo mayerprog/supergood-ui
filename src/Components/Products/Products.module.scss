@@ -14,7 +14,6 @@
     max-width: calc(20% - 20px);
     min-width: 170px;
     min-height: 350px;
-    // background: transparent;
     border-width: 0;
     border-radius: 10px;
     box-shadow: 0 1px 5px #ccc;
@@ -25,17 +24,9 @@
     transition: background-color 0.3s ease;
     cursor: pointer;
 
-    // &:hover {
-    //   background-color: lighten(#ffffff, 4%);
-
-    // &:active {
-    //   background-color: lighten(#ffffff, 4%);
-    // }
-
     .productImage {
       width: 170px;
       height: 170px;
-      border-radius: 5px;
       margin-bottom: 1rem;
     }
 
@@ -43,8 +34,8 @@
       width: 100%;
       .productTitle {
         font-size: 1rem;
-        text-align: center;
-        margin-bottom: 1rem;
+        text-align: left;
+        font-weight: 500;
       }
 
       .options,
@@ -95,20 +86,12 @@
       }
 
       .price {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
         font-weight: bold;
+      }
+      .amount {
+        font-size: 1rem;
       }
     }
   }
 }
-
-// .card {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   width: 228px; // Ширина карточки как на изображении
-//   border: 1px solid #ccc;
-//   border-radius: 10px;
-//   padding: 1rem;
-//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-//   background-color: white;

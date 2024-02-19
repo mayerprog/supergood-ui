@@ -11,6 +11,9 @@
   margin-right: 1.5vw;
   white-space: nowrap;
   scrollbar-width: none;
+  @media (max-width: 1378px) {
+    white-space: normal;
+  }
   .item {
     width: 100%;
     min-height: 40px;
@@ -19,7 +22,6 @@
     background-color: white;
     padding: 10px 25px;
     font-size: 1.1rem;
-    // font-size: 19px;
     transition: background-color 0.15s ease;
     text-align: start;
     font-family: "Inter", sans-serif;

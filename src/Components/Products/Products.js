@@ -36,12 +36,12 @@ const Products = () => {
     <div className={styles.products}>
       {items.map((item, index) => (
         <button className={styles.card}>
-          {item}
+          {/* {item} */}
           <img className={styles.productImage} src={pizza} alt="Pizza" />
           <div className={styles.productInfo}>
-            <h2 className={styles.productTitle}>
-              Пицца Фермерская SG на пышном тесте
-            </h2>
+            <span className={styles.productTitle}>
+              Пицца Фермерская SG на пышном тесте и другая важная информация
+            </span>
             <div className={styles.options}>
               <button className={styles.option}>Стандартное</button>
               <button className={styles.option}>Тонкое</button>
@@ -62,7 +62,10 @@ const Products = () => {
                 +
               </button>
             </div>
-            <div className={styles.price}>940 р.</div>
+            <div>
+              <div className={styles.amount}>920 г.</div>
+              <div className={styles.price}>940 р.</div>
+            </div>
           </div>
         </button>
       ))}
