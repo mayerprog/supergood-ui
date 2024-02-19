@@ -3,7 +3,7 @@
 $header-max-width: 768px;
 @mixin form-element-style {
   display: flex;
-  font-size: 16px;
+  font-size: 1rem;
   border-width: 0;
   height: 40px;
   border-radius: 10px;
@@ -39,14 +39,14 @@ $header-max-width: 768px;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  border-bottom: 1px solid #fcfcfc;
   box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   padding: 10px 0 10px 0;
   position: sticky;
   top: 0;
   z-index: 9999;
   box-sizing: border-box;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.8);
 
   // @media (max-width: $header-max-width) {
   //   flex-direction: column;
@@ -61,6 +61,7 @@ $header-max-width: 768px;
   .logo {
     width: 220px;
     height: 51.8px;
+    margin-inline-start: 0.5vw;
 
     // @media (max-width: $header-max-width) {
     //   width: 20%;
@@ -108,6 +109,7 @@ $header-max-width: 768px;
     box-shadow: 0 0 5px #ccc;
     max-width: 87px;
     cursor: pointer;
+    margin-inline-end: 0.5vw;
     @include interactive-bg;
   }
 }

@@ -5,16 +5,16 @@
   justify-content: center;
   min-height: 100%;
   min-width: 1400px;
-  max-width: 1873px;
   margin: 0 auto;
   height: 100%;
 }
 
 .mainContent {
+  max-width: 1873px;
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 2.2vh;
 }
 // @media (min-width: 1024px) and (max-width: 1440px) {
 //   .mainContent {

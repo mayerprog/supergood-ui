@@ -18,9 +18,10 @@
     min-height: 40px;
     border-radius: 20px;
     border-width: 0;
-    background-color: white;
+    background-color: #f6f6f6;
     padding: 10px 25px;
     font-size: 1.2rem;
+    // font-size: 19px;
     transition: background-color 0.15s ease;
     text-align: start;
     font-family: Lexend-Regular;
@@ -28,12 +29,12 @@
     cursor: pointer;
 
     &:hover {
-      background-color: darken(#fcfcfc, 4%);
+      background-color: lighten(#ffffff, 4%);
     }
 
-    &:active {
-      background-color: darken(#fcfcfc, 6%);
-    }
+    // &:active {
+    //   background-color: lighten(#fcfcfc, 6%);
+    // }
   }
 }
 

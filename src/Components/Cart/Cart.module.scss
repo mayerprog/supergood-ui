@@ -4,11 +4,10 @@
   width: 20%;
   border-radius: 10px;
   box-shadow: 0 0 5px #ccc;
-  padding-top: 13px;
   position: sticky;
   top: 110px;
   height: calc(100vh - 150px);
-  padding: 20px;
+  padding: 2.2vh;
   font-family: Lexend-Regular;
 }
 
@@ -19,10 +18,10 @@
 }
 
 .cartTitle {
-  font-size: 21px;
+  font-size: 1.3rem;
   font-weight: bold;
 }
 .deleteTitle {
-  font-size: 20px;
+  font-size: 1.2rem;
   color: #929292;
 }
