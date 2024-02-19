@@ -18,7 +18,7 @@
     min-height: 40px;
     border-radius: 20px;
     border-width: 0;
-    background-color: #f6f6f6;
+    background-color: white;
     padding: 10px 25px;
     font-size: 1.2rem;
     // font-size: 19px;
@@ -29,11 +29,11 @@
     cursor: pointer;
 
     &:hover {
-      background-color: lighten(#ffffff, 4%);
+      background-color: darken(#ffffff, 4%);
     }
 
     // &:active {
-    //   background-color: lighten(#fcfcfc, 6%);
+    //   background-color: darken(#fcfcfc, 6%);
     // }
   }
 }

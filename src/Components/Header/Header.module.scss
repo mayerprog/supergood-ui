@@ -13,6 +13,7 @@ $header-max-width: 768px;
   align-items: center;
   justify-content: flex-start;
   font-family: Lexend-Light;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 @mixin interactive-bg($base-color: #fcfcfc) {
@@ -61,7 +62,7 @@ $header-max-width: 768px;
   .logo {
     width: 220px;
     height: 51.8px;
-    margin-inline-start: 0.5vw;
+    margin-inline-start: 1vw;
 
     // @media (max-width: $header-max-width) {
     //   width: 20%;
@@ -109,7 +110,7 @@ $header-max-width: 768px;
     box-shadow: 0 0 5px #ccc;
     max-width: 87px;
     cursor: pointer;
-    margin-inline-end: 0.5vw;
+    margin-inline-end: 1vw;
     @include interactive-bg;
   }
 }
