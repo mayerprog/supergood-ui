@@ -1,3 +1,21 @@
+@mixin form-element-style {
+  border-width: 0;
+  border-radius: 10px;
+  width: 100%;
+  transition: background-color 0.3s ease;
+  padding: 0.5em;
+  background-color: #f6f6f6;
+}
+
+@mixin form-style {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 0.5rem;
+  border-radius: 10px;
+  width: 100%;
+  background-color: #f6f6f6;
+}
+
 .products {
   display: flex;
   width: 65%;
@@ -13,13 +31,14 @@
     flex-basis: calc(20% - 20px);
     max-width: calc(20% - 20px);
     min-width: 170px;
-    min-height: 350px;
+    min-height: 370px;
     border-width: 0;
     border-radius: 10px;
     box-shadow: 0 1px 5px #ccc;
-    background-color: #f6f6f6;
+    background-color: #f9f9f9;
     margin: 0 15px 25px 0;
     font-family: "Inter", sans-serif;
+    padding: 0.6em;
 
     transition: background-color 0.3s ease;
     cursor: pointer;
@@ -38,36 +57,38 @@
         font-weight: 500;
         text-overflow: ellipsis;
         overflow: hidden;
+
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
+        margin: 0 0.5em 1em 0.5em;
       }
 
       .options,
       .sizes {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0.5rem;
+        @include form-style;
+        border-width: 0;
       }
 
       .option,
       .size {
-        background-color: #f0f0f0;
-        border: none;
-        border-radius: 5px;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        &:hover {
-          background-color: darken(#f0f0f0, 5%);
-        }
+        @include form-element-style;
+      }
+
+      .chosenOption {
+        @include form-element-style;
+        background-color: #ffffff;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        z-index: 999;
       }
     }
 
     .order {
       display: flex;
       width: 100%;
-      justify-content: space-between;
+      justify-content: space-evenly;
       align-items: center;
+      padding-top: 0.7em;
 
       .counter {
         display: flex;
@@ -91,11 +112,11 @@
       }
 
       .price {
-        font-size: 1.15rem;
+        font-size: 1rem;
         font-weight: bold;
       }
       .amount {
-        font-size: 1rem;
+        font-size: 0.9rem;
       }
     }
   }

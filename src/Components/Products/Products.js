@@ -43,7 +43,7 @@ const Products = () => {
               Пицца Фермерская SG на пышном тесте и другая важная информация
             </span>
             <div className={styles.options}>
-              <button className={styles.option}>Стандартное</button>
+              <button className={styles.chosenOption}>Стандартное</button>
               <button className={styles.option}>Тонкое</button>
             </div>
             <div className={styles.sizes}>
