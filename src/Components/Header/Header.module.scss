@@ -1,9 +1,7 @@
-@import "../../fonts.scss";
-
 $header-max-width: 768px;
 @mixin form-element-style {
   display: flex;
-  font-size: 1rem;
+  font-size: 0.95rem;
   border-width: 0;
   height: 40px;
   border-radius: 10px;
@@ -12,7 +10,7 @@ $header-max-width: 768px;
   transition: background-color 0.3s ease;
   align-items: center;
   justify-content: flex-start;
-  font-family: Lexend-Light;
+  font-family: "Inter", sans-serif;
   background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -86,8 +84,6 @@ $header-max-width: 768px;
     max-width: 380px;
     cursor: pointer;
     padding-left: 15px;
-
-    @include interactive-bg;
   }
 
   .buttonText {
