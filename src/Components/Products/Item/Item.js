@@ -4,6 +4,16 @@ import pizza from "../../../assets/images/pizza.jpg";
 
 const Item = () => {
   const [count, setCount] = useState(1);
+  const [type, setType] = useState("Стандартное");
+  const [size, setSize] = useState("30 см");
+
+  const chooseType = (type) => {
+    setType(type);
+  };
+
+  const chooseSize = (sizeOption) => {
+    setSize(sizeOption);
+  };
 
   const increment = () => {
     setCount(count + 1);
@@ -23,13 +33,26 @@ const Item = () => {
           Пицца Фермерская SG на пышном тесте и другая важная информация
         </span>
         <div className={styles.options}>
-          <button className={styles.chosenOption}>Стандартное</button>
-          <button className={styles.option}>Тонкое</button>
+          {["Стандартное", "Тонкое"].map((option) => (
+            <button
+              key={option}
+              className={type === option ? styles.chosenOption : styles.option}
+              onClick={() => chooseType(option)}
+            >
+              {option}
+            </button>
+          ))}
         </div>
         <div className={styles.options}>
-          <button className={styles.option}>26 см</button>
-          <button className={styles.chosenOption}>30 см</button>
-          <button className={styles.option}>40 см</button>
+          {["26 см", "30 см", "40 см"].map((option) => (
+            <button
+              key={option}
+              className={size === option ? styles.chosenOption : styles.option}
+              onClick={() => chooseSize(option)}
+            >
+              {option}
+            </button>
+          ))}
         </div>
       </div>
       <div className={styles.order}>
