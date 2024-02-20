@@ -5,12 +5,13 @@
   transition: background-color 0.3s ease;
   padding: 0.5em;
   background-color: #ededed;
+  cursor: pointer;
 }
 
 @mixin form-style {
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.7rem;
   border-radius: 10px;
   width: 100%;
   background-color: #ededed;
@@ -71,7 +72,7 @@
     .chosenOption {
       @include form-element-style;
       background-color: #ffffff;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
       z-index: 999;
     }
   }
