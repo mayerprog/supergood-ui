@@ -16,6 +16,16 @@
   background-color: #ededed;
 }
 
+// @mixin interactive-bg($base-color: #fcfcfc) {
+//   &:hover {
+//     background-color: darken(#ccc, 2%);
+//   }
+
+//   &:active {
+//     background-color: darken(#ccc, 3%);
+//   }
+// }
+
 .card {
   display: flex;
   flex-direction: column;
@@ -99,6 +109,7 @@
       cursor: pointer;
       height: 1.7rem;
       width: 7rem;
+
       .counterButton {
         width: 100%;
         border: none;

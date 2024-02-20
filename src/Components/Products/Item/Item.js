@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import styles from "./Item.module.scss";
 import pizza from "../../../assets/images/pizza.jpg";
 import { AiOutlineMinus } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
+import { itemAPI } from "../../../api/itemAPI";
+// import { setItems } from "../../../redux/slices/itemSlice";
 
 const Item = () => {
   const [count, setCount] = useState(0);
   const [type, setType] = useState("Стандартное");
   const [size, setSize] = useState("30 см");
+  //   const items = useSelector((state) => state.task.items);
+
+  //   const dispatch = useDispatch();
+
+  //   useEffect(() => {
+  //     (async () => {
+  //       try {
+  //         const getItems = await itemAPI.getItems();
+  //         // dispatch(setItems(getItems));
+  //         console.log("itemAPI", getItems);
+  //       } catch (err) {
+  //         console.log(err);
+  //       }
+  //     })();
+  //   }, []);
 
   const chooseType = (type) => {
     setType(type);
