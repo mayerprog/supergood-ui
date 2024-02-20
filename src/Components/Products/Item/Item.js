@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styles from "./Item.module.scss";
 import pizza from "../../../assets/images/pizza.jpg";
+import { AiOutlineMinus } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const Item = () => {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [type, setType] = useState("Стандартное");
   const [size, setSize] = useState("30 см");
 
@@ -20,9 +22,7 @@ const Item = () => {
   };
 
   const decrement = () => {
-    if (count > 1) {
-      setCount(count - 1);
-    }
+    setCount(count - 1);
   };
 
   return (
@@ -56,15 +56,21 @@ const Item = () => {
         </div>
       </div>
       <div className={styles.order}>
-        <div className={styles.counter}>
-          <button onClick={decrement} className={styles.counterButton}>
-            -
+        {count >= 1 ? (
+          <button className={styles.counter}>
+            <button onClick={decrement} className={styles.counterButton}>
+              <AiOutlineMinus />
+            </button>
+            <span className={styles.count}>{count}</span>
+            <button onClick={increment} className={styles.counterButton}>
+              <AiOutlinePlus />
+            </button>
           </button>
-          <span className={styles.count}>{count}</span>
-          <button onClick={increment} className={styles.counterButton}>
-            +
+        ) : (
+          <button className={styles.counter} onClick={increment}>
+            <span className={styles.count}>Добавить</span>
           </button>
-        </div>
+        )}
         <div>
           <div className={styles.amount}>920 г.</div>
           <div className={styles.price}>940 р.</div>
