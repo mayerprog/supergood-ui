@@ -16,11 +16,11 @@ $header-max-width: 768px;
 
 @mixin interactive-bg($base-color: #fcfcfc) {
   &:hover {
-    background-color: darken(#fcfcfc, 2%);
+    background-color: darken($base-color, 2%);
   }
 
   &:active {
-    background-color: darken(#fcfcfc, 3%);
+    background-color: darken($base-color, 3%);
   }
 }
 
@@ -30,6 +30,18 @@ $header-max-width: 768px;
     border-color: $color;
     box-shadow: 0 0 5px $color;
   }
+}
+
+@mixin header-button($base-color: #fcfcfc) {
+  @include form-element-style;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px #ccc;
+  max-width: 90px;
+  cursor: pointer;
+  margin-inline-end: 1vw;
+  padding: 0 0.5em;
+  @include interactive-bg($base-color);
 }
 
 .header {
@@ -99,15 +111,14 @@ $header-max-width: 768px;
     height: 63px;
   }
 
+  .cartButton {
+    @include header-button(rgb(235, 187, 93));
+    background-color: #e9bc5b;
+    justify-content: space-around;
+  }
+
   .loginButton {
-    @include form-element-style;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 5px #ccc;
-    max-width: 87px;
-    cursor: pointer;
-    margin-inline-end: 1vw;
-    @include interactive-bg;
+    @include header-button;
   }
 }
 

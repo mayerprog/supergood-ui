@@ -1,3 +1,5 @@
+@import "../../../mixins/mixins";
+
 @mixin form-element-style {
   border-width: 0;
   border-radius: 10px;
@@ -103,21 +105,10 @@
       align-items: center;
       justify-content: center;
       align-self: center;
-      border-width: 0;
-      border-radius: 10px;
-      background-color: #e9bc5b;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
+      @include reusableBox;
+
       height: 2rem;
       width: 7rem;
-
-      .counterButton {
-        width: 100%;
-        border: none;
-        background-color: #e9bc5b;
-
-        cursor: pointer;
-      }
 
       .count {
         margin: 0 1rem;

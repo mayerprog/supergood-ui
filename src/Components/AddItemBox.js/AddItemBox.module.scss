@@ -1,24 +1,24 @@
+@import "../../mixins/mixins";
+
 .counter {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-width: 0;
-  border-radius: 10px;
-  background-color: #e9bc5b;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
+  align-self: center;
+  @include reusableBox;
   height: 2rem;
-  width: 7rem;
+  width: var(--counter-width, 7rem);
 
   .counterButton {
     width: 100%;
     border: none;
-    background-color: #e9bc5b;
-
+    background-color: var(--counter-bg-color, #e9bc5b);
+    color: var(--counter-color);
     cursor: pointer;
   }
   .count {
-    margin: 0 0.5rem;
+    margin: var(--counter-margin);
     font-size: 1em;
+    color: var(--counter-color);
   }
 }

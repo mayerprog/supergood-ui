@@ -1,12 +1,10 @@
 import styles from "./Cart.module.scss";
 import pizza from "../../assets/images/pizza.jpg";
 import AddItemBox from "../AddItemBox.js/AddItemBox";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { useState } from "react";
-import { BiDotsVerticalRounded } from "react-icons/bi";
 
 const Cart = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   const increment = () => {
     setCount(count + 1);
@@ -34,15 +32,15 @@ const Cart = () => {
             <span>920 г.</span>
           </div>
         </div>
-        <button className={styles.counter}>
-          <button onClick={decrement} className={styles.counterButton}>
-            <AiOutlineMinus />
-          </button>
-          <span className={styles.count}>{count}</span>
-          <button onClick={increment} className={styles.counterButton}>
-            <AiOutlinePlus />
-          </button>
-        </button>
+        <AddItemBox
+          count={count}
+          increment={increment}
+          decrement={decrement}
+          backgroundColor="#fcfcfc"
+          boxShadow="0 0 2px rgba(0, 0, 0, 0.2)"
+          width="5em"
+          color="#5f5f5f"
+        />
       </div>
       <div className={styles.button}>
         <button className={styles.buttonStyle}>

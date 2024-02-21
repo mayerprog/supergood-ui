@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import styles from "./Item.module.scss";
 import pizza from "../../../assets/images/pizza.jpg";
 // import { itemAPI } from "../../../api/itemAPI";
 import AddItemBox from "../../AddItemBox.js/AddItemBox";
-import { FaGripLinesVertical } from "react-icons/fa";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
@@ -14,6 +13,7 @@ const Item = () => {
   const [size, setSize] = useState("30 см");
   const types = ["Стандартное", "Тонкое"];
   const sizes = ["26 см", "30 см", "40 см"];
+
   //   const items = useSelector((state) => state.task.items);
 
   //   const dispatch = useDispatch();
@@ -82,6 +82,7 @@ const Item = () => {
             count={count}
             increment={increment}
             decrement={decrement}
+            margin="0 0.5rem"
           />
         ) : (
           <button className={styles.counter} onClick={increment}>

@@ -1,6 +1,7 @@
 import styles from "./Header.module.scss";
 import logo from "../../assets/images/logo.jpg";
 import socialNet from "../../assets/images/socialnetworks.jpg";
+import { GiShoppingCart } from "react-icons/gi";
 
 const Header = () => {
   return (
@@ -13,6 +14,10 @@ const Header = () => {
         </span>
       </button>
       <img src={socialNet} alt="" className={styles.socialMedia} />
+      <button className={styles.cartButton}>
+        <GiShoppingCart />
+        <span> 10000cccccdcdc р.</span>
+      </button>
       <button className={styles.loginButton}>Войти</button>
     </header>
   );
