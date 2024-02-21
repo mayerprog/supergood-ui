@@ -15,8 +15,8 @@ const Header = () => {
       </button>
       <img src={socialNet} alt="" className={styles.socialMedia} />
       <button className={styles.cartButton}>
-        <GiShoppingCart />
-        <span> 10000cccccdcdc р.</span>
+        <GiShoppingCart size={25} className={styles.icon} />
+        <span className={styles.buttonText}>0 р.</span>
       </button>
       <button className={styles.loginButton}>Войти</button>
     </header>

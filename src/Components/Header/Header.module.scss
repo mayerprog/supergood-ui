@@ -3,10 +3,9 @@ $header-max-width: 768px;
   display: flex;
   font-size: 0.95rem;
   border-width: 0;
-  height: 40px;
+  min-height: 40px;
   border-radius: 10px;
   background-color: #fcfcfc;
-  width: 100%;
   transition: background-color 0.3s ease;
   align-items: center;
   justify-content: flex-start;
@@ -34,13 +33,10 @@ $header-max-width: 768px;
 
 @mixin header-button($base-color: #fcfcfc) {
   @include form-element-style;
-  align-items: center;
-  justify-content: center;
   box-shadow: 0 0 5px #ccc;
-  max-width: 90px;
   cursor: pointer;
   margin-inline-end: 1vw;
-  padding: 0 0.5em;
+  padding: 0 1.5em;
   @include interactive-bg($base-color);
 }
 
@@ -83,6 +79,7 @@ $header-max-width: 768px;
 
   .input {
     @include form-element-style;
+    width: 100%;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     max-width: 300px;
     padding-left: 15px;
@@ -92,6 +89,7 @@ $header-max-width: 768px;
 
   .address {
     @include form-element-style;
+    width: 100%;
     box-shadow: 0 0 5px #ccc;
     max-width: 380px;
     cursor: pointer;
@@ -114,7 +112,12 @@ $header-max-width: 768px;
   .cartButton {
     @include header-button(rgb(235, 187, 93));
     background-color: #e9bc5b;
-    justify-content: space-around;
+    justify-content: space-between;
+    max-width: 200px;
+    .icon {
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
   }
 
   .loginButton {
