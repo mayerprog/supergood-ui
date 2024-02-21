@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import styles from "./Item.module.scss";
 import pizza from "../../../assets/images/pizza.jpg";
-import { itemAPI } from "../../../api/itemAPI";
+// import { itemAPI } from "../../../api/itemAPI";
 import AddItemBox from "../../AddItemBox.js/AddItemBox";
+import { FaGripLinesVertical } from "react-icons/fa";
+
 // import { setItems } from "../../../redux/slices/itemSlice";
 
 const Item = () => {

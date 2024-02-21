@@ -32,8 +32,8 @@
   padding: 1.2em 0;
 
   .cartImage {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
   }
   .cartBoxText {
     font-size: 11px;
@@ -45,7 +45,7 @@
   .text {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     text-overflow: ellipsis;
     overflow: hidden;
     margin-bottom: 0.3rem;

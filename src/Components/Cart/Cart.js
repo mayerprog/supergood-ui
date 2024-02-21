@@ -3,6 +3,7 @@ import pizza from "../../assets/images/pizza.jpg";
 import AddItemBox from "../AddItemBox.js/AddItemBox";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { useState } from "react";
+import { BiDotsVerticalRounded } from "react-icons/bi";
 
 const Cart = () => {
   const [count, setCount] = useState(0);
@@ -29,6 +30,7 @@ const Cart = () => {
           </span>
           <div>
             <span>940 р.</span>
+            &nbsp;|&nbsp;
             <span>920 г.</span>
           </div>
         </div>
