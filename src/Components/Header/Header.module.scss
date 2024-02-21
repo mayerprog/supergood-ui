@@ -40,6 +40,11 @@ $header-max-width: 768px;
   @include interactive-bg($base-color);
 }
 
+@mixin icon-style {
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
 .header {
   display: flex;
   flex-direction: row;
@@ -94,6 +99,9 @@ $header-max-width: 768px;
     max-width: 380px;
     cursor: pointer;
     padding-left: 15px;
+    .icon {
+      @include icon-style;
+    }
   }
 
   .buttonText {
@@ -115,8 +123,7 @@ $header-max-width: 768px;
     justify-content: space-between;
     max-width: 200px;
     .icon {
-      margin-right: 10px;
-      flex-shrink: 0;
+      @include icon-style;
     }
   }
 
