@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import styles from "./Item.module.scss";
 import pizza from "../../../assets/images/pizza.jpg";
-import { AiOutlineMinus } from "react-icons/ai";
-import { AiOutlinePlus } from "react-icons/ai";
 import { itemAPI } from "../../../api/itemAPI";
+import AddItemBox from "../../AddItemBox.js/AddItemBox";
 // import { setItems } from "../../../redux/slices/itemSlice";
 
 const Item = () => {
   const [count, setCount] = useState(0);
   const [type, setType] = useState("Стандартное");
   const [size, setSize] = useState("30 см");
+  const types = ["Стандартное", "Тонкое"];
+  const sizes = ["26 см", "30 см", "40 см"];
   //   const items = useSelector((state) => state.task.items);
 
   //   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ const Item = () => {
           Пицца Фермерская SG на пышном тесте и другая важная информация
         </span>
         <div className={styles.options}>
-          {["Стандартное", "Тонкое"].map((option) => (
+          {types.map((option) => (
             <button
               key={option}
               className={type === option ? styles.chosenOption : styles.option}
@@ -62,7 +63,7 @@ const Item = () => {
           ))}
         </div>
         <div className={styles.options}>
-          {["26 см", "30 см", "40 см"].map((option) => (
+          {sizes.map((option) => (
             <button
               key={option}
               className={size === option ? styles.chosenOption : styles.option}
@@ -75,15 +76,11 @@ const Item = () => {
       </div>
       <div className={styles.order}>
         {count >= 1 ? (
-          <button className={styles.counter}>
-            <button onClick={decrement} className={styles.counterButton}>
-              <AiOutlineMinus />
-            </button>
-            <span className={styles.count}>{count}</span>
-            <button onClick={increment} className={styles.counterButton}>
-              <AiOutlinePlus />
-            </button>
-          </button>
+          <AddItemBox
+            count={count}
+            increment={increment}
+            decrement={decrement}
+          />
         ) : (
           <button className={styles.counter} onClick={increment}>
             <span className={styles.count}>Добавить</span>
