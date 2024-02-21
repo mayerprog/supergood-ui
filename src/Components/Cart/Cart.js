@@ -4,7 +4,7 @@ import AddItemBox from "../AddItemBox.js/AddItemBox";
 import { useState } from "react";
 
 const Cart = () => {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(100);
 
   const increment = () => {
     setCount(count + 1);

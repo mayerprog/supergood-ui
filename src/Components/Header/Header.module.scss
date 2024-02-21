@@ -1,3 +1,5 @@
+@import "../../mixins/mixins";
+
 $header-max-width: 768px;
 @mixin form-element-style {
   display: flex;
@@ -11,16 +13,6 @@ $header-max-width: 768px;
   justify-content: flex-start;
   font-family: "Inter", sans-serif;
   background-color: rgba(255, 255, 255, 0.1);
-}
-
-@mixin interactive-bg($base-color: #fcfcfc) {
-  &:hover {
-    background-color: darken($base-color, 2%);
-  }
-
-  &:active {
-    background-color: darken($base-color, 3%);
-  }
 }
 
 @mixin focus-style($color) {
@@ -88,6 +80,7 @@ $header-max-width: 768px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     max-width: 300px;
     padding-left: 15px;
+    text-overflow: ellipsis;
 
     @include focus-style(#ccc);
   }

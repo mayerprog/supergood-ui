@@ -18,16 +18,27 @@ const AddItemBox = ({
     "--counter-color": color,
     "--counter-margin": margin,
   };
+
   return (
-    <button className={styles.counter} style={dynamicStyle}>
-      <button onClick={decrement} className={styles.counterButton}>
+    <div className={styles.counter} style={dynamicStyle}>
+      <button
+        onClick={decrement}
+        className={
+          !backgroundColor ? styles.cardCounterButton : styles.cartCounterButton
+        }
+      >
         <AiOutlineMinus />
       </button>
       <span className={styles.count}>{count}</span>
-      <button onClick={increment} className={styles.counterButton}>
+      <button
+        onClick={increment}
+        className={
+          !backgroundColor ? styles.cardCounterButton : styles.cartCounterButton
+        }
+      >
         <AiOutlinePlus />
       </button>
-    </button>
+    </div>
   );
 };
 

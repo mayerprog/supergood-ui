@@ -60,7 +60,7 @@
     justify-content: center;
 
     .buttonStyle {
-      @include reusableBox;
+      @include reusable-box;
       height: 2.5rem;
       width: 10rem;
     }

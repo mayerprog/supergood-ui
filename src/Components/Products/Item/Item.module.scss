@@ -105,7 +105,8 @@
       align-items: center;
       justify-content: center;
       align-self: center;
-      @include reusableBox;
+      @include reusable-box;
+      @include interactive-bg(rgb(235, 187, 93));
 
       height: 2rem;
       width: 7rem;
