@@ -42,6 +42,11 @@ const Cart = () => {
           </button>
         </button>
       </div>
+      <div className={styles.button}>
+        <button className={styles.buttonStyle}>
+          <span className={styles.buttonText}>Оформить заказ</span>
+        </button>
+      </div>
     </div>
   );
 };
