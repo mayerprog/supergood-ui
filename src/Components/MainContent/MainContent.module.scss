@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  flex-direction: column;
   width: 67%;
   min-width: 768px;
   height: 100%;
@@ -9,5 +10,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
+  }
+  .slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 40px;
   }
 }
