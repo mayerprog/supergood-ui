@@ -7,6 +7,7 @@ const Slider = ({ slide, index }) => {
         src={slide.image}
         alt={`Slide ${index + 1}`}
         className={styles.bannerImg}
+        onClick={() => window.open(slide.link, "_blank")}
       />
     </div>
   );

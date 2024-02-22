@@ -4,13 +4,14 @@
   width: 67%;
   min-width: 768px;
   height: 100%;
+  box-sizing: border-box;
 
   .items {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    margin-right: -1.6em;
+    margin-right: -1.7em;
   }
   .slider {
     display: flex;

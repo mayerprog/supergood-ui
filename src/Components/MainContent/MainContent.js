@@ -27,7 +27,7 @@ const MainContent = () => {
   ];
 
   const slides = [
-    { image: chorizo },
+    { image: chorizo, link: "https://supergood.ru/akcii/22" },
     // { image: kolc },
     // { image: minus10 },
     // { image: minus20 },
