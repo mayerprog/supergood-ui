@@ -63,6 +63,7 @@
       @include reusable-box;
       height: 2.5rem;
       width: 10rem;
+      @include interactive-bg(rgb(235, 187, 93));
     }
     .buttonText {
       color: rgb(255, 255, 255);
