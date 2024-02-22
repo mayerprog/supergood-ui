@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  width: 67%;
+  min-width: 768px;
+  height: 100%;
+
+  .items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}

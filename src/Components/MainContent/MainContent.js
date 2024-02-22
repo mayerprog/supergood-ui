@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./Products.module.scss";
+import styles from "./MainContent.module.scss";
 import Item from "./Item/Item";
 
-const Products = () => {
+const MainContent = () => {
   const items = [
     "Пиццы",
     "Комбо",
@@ -21,12 +21,14 @@ const Products = () => {
   ];
 
   return (
-    <div className={styles.products}>
-      {items.map((item, index) => (
-        <Item />
-      ))}
+    <div className={styles.container}>
+      <div className={styles.items}>
+        {items.map((item, index) => (
+          <Item />
+        ))}
+      </div>
     </div>
   );
 };
 
-export default Products;
+export default MainContent;
