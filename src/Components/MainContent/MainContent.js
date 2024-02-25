@@ -26,18 +26,29 @@ const MainContent = () => {
     "Еще акции",
   ];
 
-  const slides = useMemo(
-    () => [
-      { image: chorizo, link: "https://supergood.ru/akcii/22" },
-      { image: kolc },
-      { image: minus10 },
-      { image: minus20 },
-    ],
-    []
-  );
+  const slides = [
+    { image: chorizo, link: "https://supergood.ru/akcii/22" },
+    { image: kolc },
+    { image: minus10 },
+    { image: minus20 },
+  ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderRef = useRef(null);
+
+  const slideToRight = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+  };
+
+  const slideToLeft = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
+    );
+  };
+
+  const handleIndicatorClick = (index) => {
+    setCurrentIndex(index);
+  };
 
   useEffect(() => {
     const slider = sliderRef.current; // Получаем DOM-элемент
@@ -45,11 +56,9 @@ const MainContent = () => {
       e.preventDefault();
 
       if (e.deltaY > 0) {
-        setCurrentIndex((prevIndex) =>
-          Math.min(prevIndex + 1, slides.length - 1)
-        );
+        slideToRight();
       } else {
-        setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+        slideToLeft();
       }
     };
 
@@ -64,7 +73,7 @@ const MainContent = () => {
         slider.removeEventListener("wheel", handleWheel);
       }
     };
-  }, [slides]);
+  }, []);
 
   // const items = useSelector((state) => state.task.items);
 
@@ -108,30 +117,14 @@ const MainContent = () => {
   //   })();
   // }, []);
 
-  const handleIndicatorClick = (index) => {
-    setCurrentIndex(index);
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.slider} ref={sliderRef}>
-        <div
-          className={styles.sliderArrowLeft}
-          onClick={() =>
-            setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0))
-          }
-        >
+        <div className={styles.sliderArrowLeft} onClick={slideToLeft}>
           &#10094;
         </div>
         <Slider slides={slides} currentIndex={currentIndex} />
-        <div
-          className={styles.sliderArrowRight}
-          onClick={() =>
-            setCurrentIndex((prevIndex) =>
-              Math.min(prevIndex + 1, slides.length - 1)
-            )
-          }
-        >
+        <div className={styles.sliderArrowRight} onClick={slideToRight}>
           &#10095;
         </div>
       </div>

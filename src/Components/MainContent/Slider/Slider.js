@@ -1,4 +1,3 @@
-import { useRef, useState } from "react";
 import styles from "./Slider.module.scss";
 
 const Slider = ({ slides, currentIndex }) => {
