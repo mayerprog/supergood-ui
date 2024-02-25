@@ -5,8 +5,8 @@ import axios from "axios";
 
 const instance = axios.create({
   //   baseURL: baseURL + path,
-  baseURL: "https://api.supergood.ru",
-  withCredentials: true,
+  baseURL: "https://api-test.supergood1.ru",
+  // withCredentials: true,
   // headers: {
   //   Accept: "application/json",
   // },
@@ -17,13 +17,13 @@ export const itemAPI = {
     try {
       const response = await instance.get(`/getitems.php`);
       console.log("items1", response.data);
-      return response.data.items;
+      return response.data;
     } catch (err) {
       console.error(
         "Error getting products:",
         err.response ? err.response.data : err
       );
-      alert("Failed to get all products. Check console for details.");
+      console.log("Failed to get all products. Check console for details.");
     }
   },
 };
