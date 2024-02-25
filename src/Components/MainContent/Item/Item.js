@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Item.module.scss";
 import pizza from "../../../assets/images/pizza.jpg";
-// import { itemAPI } from "../../../api/itemAPI";
+import { itemAPI } from "../../../api/itemAPI";
 import AddItemBox from "../../AddItemBox.js/AddItemBox";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
@@ -14,21 +14,47 @@ const Item = () => {
   const types = ["Стандартное", "Тонкое"];
   const sizes = ["26 см", "30 см", "40 см"];
 
-  //   const items = useSelector((state) => state.task.items);
+  // const items = useSelector((state) => state.task.items);
 
-  //   const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  //     (async () => {
-  //       try {
-  //         const getItems = await itemAPI.getItems();
-  //         // dispatch(setItems(getItems));
-  //         console.log("itemAPI", getItems);
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     })();
-  //   }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const getItems = await itemAPI.getItems();
+  //       // dispatch(setItems(getItems));
+  //       console.log("itemAPI", getItems);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   })();
+  // }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        fetch("https://api.supergood.ru/getitems.php")
+          .then((response) => {
+            console.log("response", response);
+            if (response.ok) {
+              return response.json(); // Parse the response data as JSON
+            } else {
+              throw new Error("API request failed");
+            }
+          })
+          .then((data) => {
+            // Process the response data here
+            console.log(data); // Example: Logging the data to the console
+          })
+          .catch((error) => {
+            // Handle any errors here
+            console.error(error); // Example: Logging the error to the console
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
 
   const chooseType = (type) => {
     setType(type);

@@ -1,13 +1,14 @@
+import { useRef, useState } from "react";
 import styles from "./Slider.module.scss";
 
-const Slider = ({ slide, index }) => {
+const Slider = ({ slides, currentIndex }) => {
   return (
     <div className={styles.container}>
       <img
-        src={slide.image}
-        alt={`Slide ${index + 1}`}
+        src={slides[currentIndex].image}
+        alt={`Slide ${currentIndex + 1}`}
         className={styles.bannerImg}
-        onClick={() => window.open(slide.link, "_blank")}
+        onClick={() => window.open(slides[currentIndex].link, "_blank")}
       />
     </div>
   );
