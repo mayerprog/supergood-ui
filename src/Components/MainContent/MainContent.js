@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import styles from "./MainContent.module.scss";
 import Item from "./Item/Item";
 import Slider from "./Slider/Slider";
@@ -34,11 +40,12 @@ const MainContent = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+
   const sliderRef = useRef(null);
 
-  const slideToRight = () => {
+  const slideToRight = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-  };
+  }, [slides.length]);
 
   const slideToLeft = () => {
     setCurrentIndex(
@@ -74,6 +81,18 @@ const MainContent = () => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    const startAutoSlide = () => {
+      return setInterval(() => {
+        slideToRight();
+      }, 4000);
+    };
+
+    const interval = startAutoSlide();
+
+    return () => clearInterval(interval);
+  }, [slideToRight]);
 
   // const items = useSelector((state) => state.task.items);
 
