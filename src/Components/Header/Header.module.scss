@@ -13,6 +13,7 @@ $header-max-width: 768px;
   justify-content: flex-start;
   font-family: "Inter", sans-serif;
   background-color: rgba(255, 255, 255, 0.1);
+  margin-right: 7px;
 }
 
 @mixin focus-style($color) {
@@ -52,26 +53,11 @@ $header-max-width: 768px;
   backdrop-filter: blur(10px);
   background-color: rgba(255, 255, 255, 0.8);
 
-  // @media (max-width: $header-max-width) {
-  //   flex-direction: column;
-  //   padding: 1rem 2%;
-
-  //   > * {
-  //     width: 100%; // Элементы занимают всю ширину
-  //     margin-bottom: 0.5rem;
-  //   }
-  // }
-
   .logo {
     width: 220px;
     height: 51.8px;
     margin-inline-start: 1vw;
-
-    // @media (max-width: $header-max-width) {
-    //   width: 20%;
-    //   margin: 0 auto;
-    //   height: auto;
-    // }
+    margin-right: 5px;
   }
 
   .input {
@@ -79,6 +65,7 @@ $header-max-width: 768px;
     width: 100%;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     max-width: 300px;
+    min-width: 150px;
     padding-left: 15px;
     text-overflow: ellipsis;
 
@@ -90,6 +77,7 @@ $header-max-width: 768px;
     width: 100%;
     box-shadow: 0 0 5px #ccc;
     max-width: 380px;
+    min-width: 150px;
     cursor: pointer;
     padding-left: 15px;
     .icon {
@@ -115,6 +103,13 @@ $header-max-width: 768px;
     background-color: #e9bc5b;
     justify-content: space-between;
     max-width: 200px;
+    text-overflow: ellipsis;
+    transition: max-width 0.8s ease-out;
+    @media (max-width: 1481px) {
+      max-width: 110px;
+      width: auto;
+    }
+
     .icon {
       @include icon-style;
     }
@@ -124,16 +119,3 @@ $header-max-width: 768px;
     @include header-button;
   }
 }
-
-// @media (max-width: 768px) {
-//   .header {
-//     flex-direction: column;
-//   }
-// }
-
-// @media (min-width: 1024px) and (max-width: 1440px) {
-//   .header {
-//     min-width: 800px;
-//     justify-content: space-between;
-//   }
-// }
