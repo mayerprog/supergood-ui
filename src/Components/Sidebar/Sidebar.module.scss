@@ -9,10 +9,12 @@
   height: calc(100vh - 150px);
   flex-basis: 190px;
   margin-right: 1.5vw;
+  padding-left: 1vw;
   white-space: nowrap;
   scrollbar-width: none;
-  @media (max-width: 1378px) {
-    // white-space: normal;
+
+  @media (max-width: 1480px) {
+    width: 20%;
   }
   .item {
     width: 100%;

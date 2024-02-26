@@ -12,6 +12,10 @@
   padding: 2.2vh;
   font-family: "Inter", sans-serif;
   margin-left: 1.5vw;
+  min-width: 290px;
+  @media (max-width: 1480px) {
+    display: none;
+  }
 
   .cartHeader {
     display: flex;
