@@ -6,12 +6,13 @@
   align-items: flex-start;
   position: sticky;
   top: 103px;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 170px);
   flex-basis: 190px;
   margin-right: 1.5vw;
   padding-left: 1vw;
   white-space: nowrap;
   scrollbar-width: none;
+  scroll-behavior: smooth;
 
   @media (max-width: 1480px) {
     width: 20%;
@@ -19,6 +20,10 @@
   @media (max-width: 1200px) {
     width: 30%;
   }
+  @media (max-height: 600px) {
+    height: auto;
+  }
+
   .item {
     width: 100%;
     min-height: 40px;
