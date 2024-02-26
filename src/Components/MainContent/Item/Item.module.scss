@@ -54,11 +54,10 @@
     max-width: calc(33.3% - 20px);
   }
 
-  // @media (max-height: 1280px) {
-  //   .content {
-  //     max-width: 1300px;
-  //   }
-  // }
+  @media (max-width: 1200px) {
+    flex-basis: calc(33.3% - 20px);
+    max-width: calc(33.3% - 20px);
+  }
 
   .productImage {
     width: 170px;
