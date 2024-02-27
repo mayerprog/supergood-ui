@@ -34,7 +34,8 @@
   align-items: center;
   flex-basis: calc(25% - 20px);
   max-width: calc(25% - 20px);
-  min-height: 370px;
+  // min-height: 370px;
+  height: 410px;
   border-width: 0;
   border-radius: 10px;
   box-shadow: 0 1px 5px #ccc;
@@ -69,7 +70,8 @@
       font-weight: 500;
       text-overflow: ellipsis;
       overflow: hidden;
-
+      line-height: 1.2; /* Добавлено для ясности */
+      min-height: 38.4px;
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
@@ -99,7 +101,6 @@
     justify-content: space-around;
     align-items: center;
     padding-top: 1.5em;
-
     .counter {
       display: flex;
       align-items: center;
