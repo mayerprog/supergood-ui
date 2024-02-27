@@ -3,7 +3,7 @@ import styles from "./Sidebar.module.scss";
 const Sidebar = () => {
   const items = [
     "Наборы",
-    "Пицца Т.Т",
+    "Пицца",
     "Роллы",
     "Салаты",
     "Супы",
