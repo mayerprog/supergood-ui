@@ -136,7 +136,15 @@ const MainContent = ({ isCartVisible, wrapperRef }) => {
     <div className={styles.container}>
       {isCartVisible && (
         <div className={styles.overlay}>
-          <Cart wrapperRef={wrapperRef} />
+          {/* <div className={styles.cartBox}> */}
+          <Cart
+            wrapperRef={wrapperRef}
+            position="absolute"
+            top="90px"
+            height="calc(100vh - 180px)"
+            transform="translateX(-20%)"
+          />
+          {/* </div> */}
         </div>
       )}
       <div className={styles.slider} ref={sliderRef}>

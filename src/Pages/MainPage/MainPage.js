@@ -32,7 +32,14 @@ const MainPage = () => {
           toggleCartVisibility={toggleCartVisibility}
           wrapperRef={wrapperRef}
         />
-        {!mediaQuery && <Cart />}
+        {!mediaQuery && (
+          <Cart
+            position="sticky"
+            top="105px"
+            height="calc(100vh - 150px)"
+            transform="none"
+          />
+        )}
       </div>
     </div>
   );

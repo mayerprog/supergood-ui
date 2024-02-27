@@ -3,7 +3,7 @@ import pizza from "../../assets/images/pizza.jpg";
 import AddItemBox from "../AddItemBox.js/AddItemBox";
 import { useState } from "react";
 
-const Cart = ({ wrapperRef }) => {
+const Cart = ({ wrapperRef, position, top, height, transform }) => {
   const [count, setCount] = useState(100);
 
   const increment = () => {
@@ -14,8 +14,15 @@ const Cart = ({ wrapperRef }) => {
     setCount(count - 1);
   };
 
+  const dynamicStyle = {
+    "--cart-position": position,
+    "--cart-top": top,
+    "--cart-height": height,
+    "--cart-transform": transform,
+  };
+
   return (
-    <div className={styles.cart} ref={wrapperRef}>
+    <div className={styles.cart} ref={wrapperRef} style={dynamicStyle}>
       <div className={styles.cartHeader}>
         <span className={styles.cartTitle}>Корзина</span>
         <span className={styles.deleteTitle}>Очистить</span>

@@ -7,7 +7,6 @@ export const useOutsideHook = (refs, toggleVisibility) => {
         refs.every((ref) => ref.current && !ref.current.contains(event.target))
       ) {
         toggleVisibility();
-        // alert("you clicked outside");
       }
     }
 
