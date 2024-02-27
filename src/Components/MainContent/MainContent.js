@@ -13,8 +13,9 @@ import kolc from "../../assets/images/kolc.jpg";
 import minus10 from "../../assets/images/minus10.jpg";
 import minus20 from "../../assets/images/minus20.jpg";
 import { itemAPI } from "../../api/itemAPI";
+import Cart from "../Cart/Cart";
 
-const MainContent = () => {
+const MainContent = ({ isCartVisible }) => {
   const items = [
     "Пиццы",
     "Комбо",
@@ -138,6 +139,11 @@ const MainContent = () => {
 
   return (
     <div className={styles.container}>
+      {isCartVisible && (
+        <div className={styles.overlay}>
+          <Cart />
+        </div>
+      )}
       <div className={styles.slider} ref={sliderRef}>
         <div className={styles.sliderArrowLeft} onClick={slideToLeft}>
           &#10094;

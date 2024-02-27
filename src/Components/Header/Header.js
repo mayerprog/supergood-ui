@@ -3,8 +3,10 @@ import logo from "../../assets/images/logo.jpg";
 import socialNet from "../../assets/images/socialnetworks.jpg";
 import { GiShoppingCart } from "react-icons/gi";
 import { FaLocationDot } from "react-icons/fa6";
+import { useState } from "react";
+import Cart from "../Cart/Cart";
 
-const Header = () => {
+const Header = ({ toggleCartVisibility }) => {
   return (
     <header className={styles.header}>
       <img src={logo} alt="" className={styles.logo} />
@@ -16,7 +18,7 @@ const Header = () => {
         </span>
       </button>
       <img src={socialNet} alt="" className={styles.socialMedia} />
-      <button className={styles.cartButton}>
+      <button className={styles.cartButton} onClick={toggleCartVisibility}>
         <GiShoppingCart size={25} className={styles.icon} />
         <span className={styles.buttonText}>0 р.</span>
       </button>

@@ -12,10 +12,11 @@
   padding: 2.2vh;
   font-family: "Inter", sans-serif;
   margin-left: 1.5vw;
-  min-width: 290px;
-  @media (max-width: 1480px) {
-    display: none;
-  }
+  // min-width: 350px;
+  min-width: 300px;
+  background-color: #fcfcfc;
+
+  justify-content: center;
 
   .cartHeader {
     display: flex;
@@ -34,19 +35,27 @@
   .cartBox {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 1.2em 0;
 
     .cartImage {
       width: 70px;
       height: 70px;
+      margin-right: 6px;
     }
     .cartBoxText {
       font-size: 12px;
       flex-direction: column;
       font-family: "Inter", sans-serif;
       align-self: center;
-      max-width: 6vw;
+      max-width: 7vw;
+      margin-right: 6px;
+      @media (max-width: 1171px) {
+        max-width: 12vw;
+      }
+      @media (max-width: 682px) {
+        max-width: 16vw;
+      }
     }
     .text {
       display: -webkit-box;
