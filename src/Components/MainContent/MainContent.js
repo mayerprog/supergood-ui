@@ -8,26 +8,8 @@ import minus10 from "../../assets/images/minus10.jpg";
 import minus20 from "../../assets/images/minus20.jpg";
 import { itemAPI } from "../../api/itemAPI";
 import Cart from "../Cart/Cart";
-import { useOutsideHook } from "../../hooks/useOutsideHook";
-import { useSelector } from "react-redux";
 
 const MainContent = ({ isCartVisible, wrapperRef, items }) => {
-  // const items = [
-  //   "Пиццы",
-  //   "Комбо",
-  //   "Закуски",
-  //   "Напитки",
-  //   "Коктейли",
-  //   "Кофе",
-  //   "Десерты",
-  //   "Соусы",
-  //   "Другие товары",
-  //   "Акции",
-  //   "Пицца вот такая вот еще",
-  //   "Еще бургеры вот тут есть",
-  //   "Еще напитки",
-  //   "Еще акции",
-  // ];
 
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -37,8 +19,27 @@ const MainContent = ({ isCartVisible, wrapperRef, items }) => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const categories = [...new Set(items.map(item => item.category))]; // Unique categories
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  // const filteredProducts = items.filter(item => item.category === selectedCategory);
+
 
   const sliderRef = useRef(null);
+  const categoryRefs = useRef({});
+
+  const scrollToCategory = (categoryName) => {
+    categoryRefs.current[categoryName]?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
+  }
+
+  useEffect(() => {
+    if (selectedCategory) {
+      scrollToCategory(selectedCategory)
+    }
+  }, [selectedCategory])
 
   const slideToRight = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
@@ -164,12 +165,17 @@ const MainContent = ({ isCartVisible, wrapperRef, items }) => {
           ></span>
         ))}
       </div>
-
+      {categories.map((category, index) => (
+        <div key={index} ref={el => categoryRefs.current[category] = el } >
+          <h2>{category}</h2>
       <div className={styles.items}>
-        {items.map((item, index) => (
-          <Item item={item} />
+
+        {items.filter((item) => item.category === category).map((filteredProduct, index) => (
+          <Item item={filteredProduct}/>
         ))}
       </div>
+      </div>
+      ))}
     </div>
   );
 };

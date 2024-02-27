@@ -11,6 +11,7 @@ const Item = ({ item }) => {
   const types = ["Стандартное", "Тонкое"];
   const sizes = ["26 см", "30 см", "40 см"];
 
+
   const chooseType = (type) => {
     setType(type);
   };
@@ -29,7 +30,7 @@ const Item = ({ item }) => {
 
   return (
     <button className={styles.card}>
-      <img className={styles.productImage} src={item.imageUrl} alt="Product" />
+      <img className={styles.productImage} src={item.imageUrl} alt={item.name} />
       <div className={styles.productInfo}>
         <span className={styles.productTitle}>{item.name}</span>
         <div className={styles.options}>

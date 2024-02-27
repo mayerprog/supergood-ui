@@ -10,14 +10,29 @@ import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
 
 const MainPage = () => {
+
+  const categories = [
+    "Наборы",
+    "Пицца",
+    "Роллы",
+    "Салаты",
+    "Супы",
+    "Домашняя еда",
+    "Паста",
+    "Фитнес меню",
+    "Сэндвичи",
+    "Завтрак",
+    "Кулинария",
+    "Хлеб",
+    "Сладкое",
+    "Напитки",
+    "Кофе и чай",
+    "Корпоративное меню",
+  ];
   const [isCartVisible, setIsCartVisible] = useState(false);
   const wrapperRef = useRef(null);
   const headerRef = useRef(null);
   const items = useSelector((state) => state.item.items);
-
-  // useEffect(() => {
-  //   console.log("items", items);
-  // }, []);
 
   const toggleCartVisibility = () => {
     setIsCartVisible(!isCartVisible);
@@ -33,12 +48,13 @@ const MainPage = () => {
         headerRef={headerRef}
       />
       <div className={styles.content}>
-        <Sidebar />
+        <Sidebar categories={categories} />
         <MainContent
           isCartVisible={isCartVisible}
           toggleCartVisibility={toggleCartVisibility}
           wrapperRef={wrapperRef}
           items={items}
+          categories={categories}
         />
         {!mediaQuery && (
           <Cart
