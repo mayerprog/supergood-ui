@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Item.module.scss";
-import pizza from "../../../assets/images/pizza.jpg";
 import AddItemBox from "../../AddItemBox.js/AddItemBox";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
-const Item = () => {
+const Item = ({ item }) => {
   const [count, setCount] = useState(0);
   const [type, setType] = useState("Стандартное");
   const [size, setSize] = useState("30 см");
@@ -30,11 +29,9 @@ const Item = () => {
 
   return (
     <button className={styles.card}>
-      <img className={styles.productImage} src={pizza} alt="Pizza" />
+      <img className={styles.productImage} src={item.imageUrl} alt="Product" />
       <div className={styles.productInfo}>
-        <span className={styles.productTitle}>
-          Пицца Фермерская SG на пышном тесте и другая важная информация
-        </span>
+        <span className={styles.productTitle}>{item.name}</span>
         <div className={styles.options}>
           {types.map((option) => (
             <button

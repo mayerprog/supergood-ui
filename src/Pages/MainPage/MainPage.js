@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+
 import Cart from "../../Components/Cart/Cart";
 import Header from "../../Components/Header/Header";
 import MainContent from "../../Components/MainContent/MainContent";
@@ -11,13 +13,18 @@ const MainPage = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const wrapperRef = useRef(null);
   const headerRef = useRef(null);
+  const items = useSelector((state) => state.item.items);
+
+  // useEffect(() => {
+  //   console.log("items", items);
+  // }, []);
 
   const toggleCartVisibility = () => {
     setIsCartVisible(!isCartVisible);
   };
-  useOutsideHook([wrapperRef, headerRef], toggleCartVisibility);
+  useOutsideHook([wrapperRef, headerRef], toggleCartVisibility); // to close popup <Cart /> clicking outside
 
-  const mediaQuery = useMediaQuery({ maxWidth: 1480 });
+  const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
 
   return (
     <div className={styles.app}>
@@ -31,6 +38,7 @@ const MainPage = () => {
           isCartVisible={isCartVisible}
           toggleCartVisibility={toggleCartVisibility}
           wrapperRef={wrapperRef}
+          items={items}
         />
         {!mediaQuery && (
           <Cart

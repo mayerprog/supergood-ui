@@ -9,24 +9,25 @@ import minus20 from "../../assets/images/minus20.jpg";
 import { itemAPI } from "../../api/itemAPI";
 import Cart from "../Cart/Cart";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
+import { useSelector } from "react-redux";
 
-const MainContent = ({ isCartVisible, wrapperRef }) => {
-  const items = [
-    "Пиццы",
-    "Комбо",
-    "Закуски",
-    "Напитки",
-    "Коктейли",
-    "Кофе",
-    "Десерты",
-    "Соусы",
-    "Другие товары",
-    "Акции",
-    "Пицца вот такая вот еще",
-    "Еще бургеры вот тут есть",
-    "Еще напитки",
-    "Еще акции",
-  ];
+const MainContent = ({ isCartVisible, wrapperRef, items }) => {
+  // const items = [
+  //   "Пиццы",
+  //   "Комбо",
+  //   "Закуски",
+  //   "Напитки",
+  //   "Коктейли",
+  //   "Кофе",
+  //   "Десерты",
+  //   "Соусы",
+  //   "Другие товары",
+  //   "Акции",
+  //   "Пицца вот такая вот еще",
+  //   "Еще бургеры вот тут есть",
+  //   "Еще напитки",
+  //   "Еще акции",
+  // ];
 
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -89,8 +90,6 @@ const MainContent = ({ isCartVisible, wrapperRef }) => {
 
     return () => clearInterval(interval);
   }, [slideToRight]);
-
-  // const items = useSelector((state) => state.task.items);
 
   // const dispatch = useDispatch();
 
@@ -168,7 +167,7 @@ const MainContent = ({ isCartVisible, wrapperRef }) => {
 
       <div className={styles.items}>
         {items.map((item, index) => (
-          <Item />
+          <Item item={item} />
         ))}
       </div>
     </div>
