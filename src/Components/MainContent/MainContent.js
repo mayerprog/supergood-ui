@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./MainContent.module.scss";
 import Item from "./Item/Item";
 import Slider from "./Slider/Slider";
@@ -14,8 +8,9 @@ import minus10 from "../../assets/images/minus10.jpg";
 import minus20 from "../../assets/images/minus20.jpg";
 import { itemAPI } from "../../api/itemAPI";
 import Cart from "../Cart/Cart";
+import { useOutsideHook } from "../../hooks/useOutsideHook";
 
-const MainContent = ({ isCartVisible }) => {
+const MainContent = ({ isCartVisible, wrapperRef }) => {
   const items = [
     "Пиццы",
     "Комбо",
@@ -141,7 +136,7 @@ const MainContent = ({ isCartVisible }) => {
     <div className={styles.container}>
       {isCartVisible && (
         <div className={styles.overlay}>
-          <Cart />
+          <Cart wrapperRef={wrapperRef} />
         </div>
       )}
       <div className={styles.slider} ref={sliderRef}>

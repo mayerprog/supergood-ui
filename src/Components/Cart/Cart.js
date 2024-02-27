@@ -3,7 +3,7 @@ import pizza from "../../assets/images/pizza.jpg";
 import AddItemBox from "../AddItemBox.js/AddItemBox";
 import { useState } from "react";
 
-const Cart = () => {
+const Cart = ({ wrapperRef }) => {
   const [count, setCount] = useState(100);
 
   const increment = () => {
@@ -15,7 +15,7 @@ const Cart = () => {
   };
 
   return (
-    <div className={styles.cart}>
+    <div className={styles.cart} ref={wrapperRef}>
       <div className={styles.cartHeader}>
         <span className={styles.cartTitle}>Корзина</span>
         <span className={styles.deleteTitle}>Очистить</span>

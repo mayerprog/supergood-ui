@@ -3,12 +3,12 @@ import logo from "../../assets/images/logo.jpg";
 import socialNet from "../../assets/images/socialnetworks.jpg";
 import { GiShoppingCart } from "react-icons/gi";
 import { FaLocationDot } from "react-icons/fa6";
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import Cart from "../Cart/Cart";
 
-const Header = ({ toggleCartVisibility }) => {
+const Header = forwardRef(({ toggleCartVisibility, headerRef }) => {
   return (
-    <header className={styles.header}>
+    <header className={styles.header} ref={headerRef}>
       <img src={logo} alt="" className={styles.logo} />
       <input className={styles.input} placeholder="Найти блюдо" />
       <button onClick={() => console.log("click")} className={styles.address}>
@@ -25,6 +25,6 @@ const Header = ({ toggleCartVisibility }) => {
       <button className={styles.loginButton}>Войти</button>
     </header>
   );
-};
+});
 
 export default Header;
