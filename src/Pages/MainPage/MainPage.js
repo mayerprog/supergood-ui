@@ -10,7 +10,6 @@ import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
 
 const MainPage = () => {
-
   const categories = [
     "Наборы",
     "Пицца",
@@ -32,6 +31,9 @@ const MainPage = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const wrapperRef = useRef(null);
   const headerRef = useRef(null);
+  const sidebarRef = useRef(null); // Added ref for sidebar
+  const mainContentRef = useRef(null); // Added ref for main content
+
   const items = useSelector((state) => state.item.items);
 
   const toggleCartVisibility = () => {
@@ -43,10 +45,7 @@ const MainPage = () => {
 
   return (
     <div className={styles.app}>
-      <Header
-        toggleCartVisibility={toggleCartVisibility}
-        headerRef={headerRef}
-      />
+      <Header toggleCartVisibility={toggleCartVisibility} ref={headerRef} />
       <div className={styles.content}>
         <Sidebar categories={categories} />
         <MainContent

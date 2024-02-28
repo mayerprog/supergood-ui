@@ -43,15 +43,15 @@ const MainContent = ({ isCartVisible, wrapperRef, items }) => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
   }, [slides.length]);
 
-  const slideToLeft = () => {
+  const slideToLeft = useCallback(() => {
     setCurrentIndex(
       (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
     );
-  };
+  }, [slides.length]);
 
-  const handleIndicatorClick = (index) => {
+  const handleIndicatorClick = useCallback((index) => {
     setCurrentIndex(index);
-  };
+  }, []);
 
   useEffect(() => {
     const slider = sliderRef.current; // Получаем DOM-элемент
@@ -131,7 +131,7 @@ const MainContent = ({ isCartVisible, wrapperRef, items }) => {
   // }, []);
 
   return (
-    <div className={styles.container} id="main-content">
+    <div className={styles.container}>
       {isCartVisible && (
         <div className={styles.overlay}>
           <Cart

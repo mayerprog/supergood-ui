@@ -1,21 +1,20 @@
 .sidebar {
   display: flex;
-  min-width: 15%;
+  min-width: 13%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   position: sticky;
   top: 103px;
-  // height: calc(100vh - 170px);
-  height: calc(100vh - 100px);
+  height: calc(100vh - 170px);
   flex-basis: 190px;
   margin: 0 1.5vw;
   white-space: none;
   scrollbar-width: none;
   scroll-behavior: smooth;
   overflow-y: scroll;
-  padding: 0 10px 50px 0;
-  height: 100%;
+  padding-bottom: 70px;
+  max-height: 100%;
 
   @media (max-width: 1480px) {
     width: 20%;
@@ -33,7 +32,6 @@
     border-radius: 20px;
     border-width: 0;
     background-color: white;
-    padding: 0 10px;
     font-size: 1rem;
     transition: background-color 0.15s ease;
     text-align: start;

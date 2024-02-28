@@ -6,9 +6,9 @@ import { FaLocationDot } from "react-icons/fa6";
 import { forwardRef, useState } from "react";
 import Cart from "../Cart/Cart";
 
-const Header = forwardRef(({ toggleCartVisibility, headerRef }) => {
+const Header = forwardRef(({ toggleCartVisibility }, ref) => {
   return (
-    <header className={styles.header} ref={headerRef}>
+    <header className={styles.header} ref={ref}>
       <img src={logo} alt="" className={styles.logo} />
       <input className={styles.input} placeholder="Найти блюдо" />
       <button onClick={() => console.log("click")} className={styles.address}>
