@@ -10,11 +10,12 @@
   height: calc(100vh - 100px);
   flex-basis: 190px;
   margin: 0 1.5vw;
-  white-space: nowrap;
+  white-space: none;
   scrollbar-width: none;
   scroll-behavior: smooth;
   overflow-y: scroll;
-  padding-bottom: 50px;
+  padding: 0 10px 50px 0;
+  height: 100%;
 
   @media (max-width: 1480px) {
     width: 20%;

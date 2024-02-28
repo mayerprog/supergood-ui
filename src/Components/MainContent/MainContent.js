@@ -10,7 +10,6 @@ import { itemAPI } from "../../api/itemAPI";
 import Cart from "../Cart/Cart";
 
 const MainContent = ({ isCartVisible, wrapperRef, items }) => {
-
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
     { image: kolc },
@@ -19,27 +18,26 @@ const MainContent = ({ isCartVisible, wrapperRef, items }) => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  
-  const categories = [...new Set(items.map(item => item.category))]; // Unique categories
+
+  const categories = [...new Set(items.map((item) => item.category))]; // Unique categories
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   // const filteredProducts = items.filter(item => item.category === selectedCategory);
-
 
   const sliderRef = useRef(null);
   const categoryRefs = useRef({});
 
   const scrollToCategory = (categoryName) => {
     categoryRefs.current[categoryName]?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    })
-  }
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   useEffect(() => {
     if (selectedCategory) {
-      scrollToCategory(selectedCategory)
+      scrollToCategory(selectedCategory);
     }
-  }, [selectedCategory])
+  }, [selectedCategory]);
 
   const slideToRight = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
@@ -133,7 +131,7 @@ const MainContent = ({ isCartVisible, wrapperRef, items }) => {
   // }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="main-content">
       {isCartVisible && (
         <div className={styles.overlay}>
           <Cart
@@ -166,15 +164,16 @@ const MainContent = ({ isCartVisible, wrapperRef, items }) => {
         ))}
       </div>
       {categories.map((category, index) => (
-        <div key={index} ref={el => categoryRefs.current[category] = el } >
+        <div key={index} ref={(el) => (categoryRefs.current[category] = el)}>
           <h2>{category}</h2>
-      <div className={styles.items}>
-
-        {items.filter((item) => item.category === category).map((filteredProduct, index) => (
-          <Item item={filteredProduct}/>
-        ))}
-      </div>
-      </div>
+          <div className={styles.items}>
+            {items
+              .filter((item) => item.category === category)
+              .map((filteredProduct, index) => (
+                <Item item={filteredProduct} />
+              ))}
+          </div>
+        </div>
       ))}
     </div>
   );
