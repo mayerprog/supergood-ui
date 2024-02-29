@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
 import Cart from "../../Components/Cart/Cart";
@@ -12,6 +12,7 @@ import { useOutsideHook } from "../../hooks/useOutsideHook";
 const MainPage = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0); // State to store header height
+  const [scrolledCategory, setScrolledCategory] = useState(null);
 
   const items = useSelector((state) => state.item.items);
   const categories = [...new Set(items.map((item) => item.category))]; // Unique categories
@@ -41,6 +42,7 @@ const MainPage = () => {
           categories={categories}
           onCategorySelect={setSelectedCategory}
           selectedCategory={selectedCategory}
+          scrolledCategory={scrolledCategory}
         />
         <MainContent
           isCartVisible={isCartVisible}
@@ -50,6 +52,7 @@ const MainPage = () => {
           categories={categories}
           selectedCategory={selectedCategory}
           headerHeight={headerHeight}
+          setScrolledCategory={setScrolledCategory}
         />
         {!mediaQuery && (
           <Cart

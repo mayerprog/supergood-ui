@@ -16,6 +16,7 @@ const MainContent = ({
   categories,
   selectedCategory,
   headerHeight,
+  setScrolledCategory,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -40,12 +41,6 @@ const MainContent = ({
     });
   };
 
-  useEffect(() => {
-    if (selectedCategory) {
-      scrollToCategory(selectedCategory);
-    }
-  }, [selectedCategory]);
-
   const slideToRight = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
   }, [slides.length]);
@@ -59,6 +54,12 @@ const MainContent = ({
   const handleIndicatorClick = useCallback((index) => {
     setCurrentIndex(index);
   }, []);
+
+  useEffect(() => {
+    if (selectedCategory) {
+      scrollToCategory(selectedCategory);
+    }
+  }, [selectedCategory]);
 
   useEffect(() => {
     const slider = sliderRef.current; // Получаем DOM-элемент
@@ -96,6 +97,34 @@ const MainContent = ({
 
     return () => clearInterval(interval);
   }, [slideToRight]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setScrolledCategory(entry.target.querySelector("h2")?.innerText);
+          }
+        });
+      },
+      {
+        root: null, // observing intersections with the viewport
+        rootMargin: "0px",
+        threshold: 0.9, // trigger callback when the target is fully visible
+      }
+    );
+
+    const headings = Object.values(categoryRefs.current);
+    headings.forEach((el) => {
+      observer.observe(el);
+    });
+
+    return () => {
+      headings.forEach((el) => {
+        observer.unobserve(el);
+      });
+    };
+  }, [categories]); // Depend on categories to re-attach observer if categories change
 
   // const dispatch = useDispatch();
 
