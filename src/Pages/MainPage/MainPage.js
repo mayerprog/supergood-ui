@@ -10,31 +10,12 @@ import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
 
 const MainPage = () => {
-  const categories = [
-    "Наборы",
-    "Пицца",
-    "Роллы",
-    "Салаты",
-    "Супы",
-    "Домашняя еда",
-    "Паста",
-    "Фитнес меню",
-    "Сэндвичи",
-    "Завтрак",
-    "Кулинария",
-    "Хлеб",
-    "Сладкое",
-    "Напитки",
-    "Кофе и чай",
-    "Корпоративное меню",
-  ];
   const [isCartVisible, setIsCartVisible] = useState(false);
   const wrapperRef = useRef(null);
   const headerRef = useRef(null);
-  const sidebarRef = useRef(null); // Added ref for sidebar
-  const mainContentRef = useRef(null); // Added ref for main content
 
   const items = useSelector((state) => state.item.items);
+  const categories = [...new Set(items.map((item) => item.category))]; // Unique categories
 
   const toggleCartVisibility = () => {
     setIsCartVisible(!isCartVisible);

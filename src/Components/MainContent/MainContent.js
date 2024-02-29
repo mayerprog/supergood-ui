@@ -9,7 +9,7 @@ import minus20 from "../../assets/images/minus20.jpg";
 import { itemAPI } from "../../api/itemAPI";
 import Cart from "../Cart/Cart";
 
-const MainContent = ({ isCartVisible, wrapperRef, items }) => {
+const MainContent = ({ isCartVisible, wrapperRef, items, categories }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
     { image: kolc },
@@ -19,7 +19,6 @@ const MainContent = ({ isCartVisible, wrapperRef, items }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const categories = [...new Set(items.map((item) => item.category))]; // Unique categories
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   // const filteredProducts = items.filter(item => item.category === selectedCategory);
 
