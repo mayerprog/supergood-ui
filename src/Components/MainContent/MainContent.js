@@ -32,7 +32,7 @@ const MainContent = ({
   const scrollToCategory = (categoryName) => {
     const element = categoryRefs.current[categoryName];
     const offsetTop =
-      element.getBoundingClientRect().top + window.scrollY - headerHeight; // Header offset
+      element.getBoundingClientRect().top + window.scrollY - headerHeight;
 
     window.scrollTo({
       top: offsetTop,

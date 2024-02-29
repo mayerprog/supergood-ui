@@ -15,7 +15,7 @@ const MainPage = () => {
 
   const items = useSelector((state) => state.item.items);
   const categories = [...new Set(items.map((item) => item.category))]; // Unique categories
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const wrapperRef = useRef(null);
   const headerRef = useRef(null);
