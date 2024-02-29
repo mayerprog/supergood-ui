@@ -139,6 +139,72 @@ const initialState = {
       name: "Соевый соус",
       imageUrl: soySauce,
     },
+    {
+      id: 22,
+      category: "Супы",
+      name: "Борщ",
+      imageUrl: null,
+    },
+    {
+      id: 23,
+      category: "Домашняя еда",
+      name: "Котлетки",
+      imageUrl: null,
+    },
+    {
+      id: 24,
+      category: "Фитнес меню",
+      name: "ПП котлетки",
+      imageUrl: null,
+    },
+    {
+      id: 25,
+      category: "Сэндвичи",
+      name: "Сэндвич с ветчиной",
+      imageUrl: null,
+    },
+    {
+      id: 26,
+      category: "Завтрак",
+      name: "Шакшука",
+      imageUrl: null,
+    },
+    {
+      id: 27,
+      category: "Кулинария",
+      name: "Плюшки",
+      imageUrl: null,
+    },
+    {
+      id: 28,
+      category: "Хлеб",
+      name: "Бородинский хлеб",
+      imageUrl: null,
+    },
+    {
+      id: 29,
+      category: "Сладкое",
+      name: "Пирожное",
+      imageUrl: null,
+    },
+    {
+      id: 30,
+      category: "Напитки",
+      name: "Кола",
+      imageUrl: null,
+    },
+    {
+      id: 31,
+      category: "Кофе и чай",
+      name: "Капучино",
+      imageUrl: null,
+    },
+    {
+      id: 32,
+      category: "Корпоративное меню",
+      name: "Котлетки",
+      imageUrl: null,
+    },
   ],
 };
 
