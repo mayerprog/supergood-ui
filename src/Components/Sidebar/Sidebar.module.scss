@@ -26,27 +26,27 @@
   //   height: auto;
   // }
 
-  .item {
+  .item,
+  .active {
     width: 100%;
     min-height: 40px;
-    border-radius: 20px;
+    border-radius: 13px;
     border-width: 0;
-    background-color: white;
+    background-color: white; // Default background color
     font-size: 1rem;
-    transition: background-color 0.15s ease;
     text-align: start;
     font-family: "Inter", sans-serif;
     padding-left: 7px;
-
     cursor: pointer;
+    transition: background-color 0.15s ease;
 
     &:hover {
-      background-color: darken(#ffffff, 4%);
+      background-color: darken(#ffffff, 5%);
     }
+  }
 
-    // &:active {
-    //   background-color: darken(#fcfcfc, 6%);
-    // }
+  .active {
+    background-color: darken(#fcfcfc, 2%);
   }
 }
 

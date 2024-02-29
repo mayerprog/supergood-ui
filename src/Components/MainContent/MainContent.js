@@ -9,7 +9,14 @@ import minus20 from "../../assets/images/minus20.jpg";
 import { itemAPI } from "../../api/itemAPI";
 import Cart from "../Cart/Cart";
 
-const MainContent = ({ isCartVisible, wrapperRef, items, categories }) => {
+const MainContent = ({
+  isCartVisible,
+  wrapperRef,
+  items,
+  categories,
+  selectedCategory,
+  headerHeight,
+}) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
     { image: kolc },
@@ -19,16 +26,17 @@ const MainContent = ({ isCartVisible, wrapperRef, items, categories }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
-  // const filteredProducts = items.filter(item => item.category === selectedCategory);
-
   const sliderRef = useRef(null);
   const categoryRefs = useRef({});
 
   const scrollToCategory = (categoryName) => {
-    categoryRefs.current[categoryName]?.scrollIntoView({
+    const element = categoryRefs.current[categoryName];
+    const offsetTop =
+      element.getBoundingClientRect().top + window.scrollY - headerHeight; // Header offset
+
+    window.scrollTo({
+      top: offsetTop,
       behavior: "smooth",
-      block: "start",
     });
   };
 

@@ -11,11 +11,20 @@ import { useOutsideHook } from "../../hooks/useOutsideHook";
 
 const MainPage = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
-  const wrapperRef = useRef(null);
-  const headerRef = useRef(null);
+  const [headerHeight, setHeaderHeight] = useState(0); // State to store header height
 
   const items = useSelector((state) => state.item.items);
   const categories = [...new Set(items.map((item) => item.category))]; // Unique categories
+  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+
+  const wrapperRef = useRef(null);
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.offsetHeight); // height of Header
+    }
+  }, []);
 
   const toggleCartVisibility = () => {
     setIsCartVisible(!isCartVisible);
@@ -28,13 +37,19 @@ const MainPage = () => {
     <div className={styles.app}>
       <Header toggleCartVisibility={toggleCartVisibility} ref={headerRef} />
       <div className={styles.content}>
-        <Sidebar categories={categories} />
+        <Sidebar
+          categories={categories}
+          onCategorySelect={setSelectedCategory}
+          selectedCategory={selectedCategory}
+        />
         <MainContent
           isCartVisible={isCartVisible}
           toggleCartVisibility={toggleCartVisibility}
           wrapperRef={wrapperRef}
           items={items}
           categories={categories}
+          selectedCategory={selectedCategory}
+          headerHeight={headerHeight}
         />
         {!mediaQuery && (
           <Cart
