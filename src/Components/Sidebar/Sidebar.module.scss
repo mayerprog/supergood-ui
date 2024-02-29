@@ -7,9 +7,9 @@
   position: sticky;
   top: 103px;
   height: calc(100vh - 170px);
-  flex-basis: 190px;
+  flex-basis: 200px;
   margin: 0 1.5vw;
-  white-space: none;
+  white-space: nowrap;
   scrollbar-width: none;
   scroll-behavior: smooth;
   overflow-y: scroll;
@@ -36,7 +36,7 @@
     transition: background-color 0.15s ease;
     text-align: start;
     font-family: "Inter", sans-serif;
-    padding-left: 20px;
+    padding-left: 7px;
 
     cursor: pointer;
 
