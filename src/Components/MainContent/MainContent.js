@@ -17,6 +17,7 @@ const MainContent = ({
   selectedCategory,
   headerHeight,
   setScrolledCategory,
+  setSelectedCategory,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -103,7 +104,8 @@ const MainContent = ({
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setScrolledCategory(entry.target.querySelector("h2")?.innerText);
+            setScrolledCategory(entry.target.querySelector("h2")?.textContent);
+            setSelectedCategory(null);
           }
         });
       },
@@ -118,6 +120,11 @@ const MainContent = ({
     headings.forEach((el) => {
       observer.observe(el);
     });
+    // if (selectedCategory) {
+    //   headings.forEach((el) => {
+    //     observer.unobserve(el);
+    //   });
+    // }
 
     return () => {
       headings.forEach((el) => {
