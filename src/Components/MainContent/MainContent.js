@@ -178,7 +178,6 @@ const MainContent = ({
             top="90px"
             height="calc(100vh - 180px)"
             transform="translateX(-20%)"
-            items={items}
           />
         </div>
       )}

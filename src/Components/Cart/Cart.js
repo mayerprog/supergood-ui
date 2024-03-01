@@ -2,9 +2,12 @@ import styles from "./Cart.module.scss";
 import pizza from "../../assets/images/pizza.jpg";
 import AddItemBox from "../AddItemBox.js/AddItemBox";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
-const Cart = ({ wrapperRef, position, top, height, transform, items }) => {
+const Cart = ({ wrapperRef, position, top, height, transform }) => {
   const [count, setCount] = useState(100);
+  const items = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
 
   const increment = () => {
     setCount(count + 1);
