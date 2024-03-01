@@ -109,7 +109,7 @@ const MainContent = ({
       },
       {
         root: null, // observing intersections with the viewport
-        rootMargin: "0px",
+        rootMargin: "110px",
         threshold: 0.9, // trigger callback when the target is fully visible
       }
     );
