@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Item.module.scss";
 import AddItemBox from "../../AddItemBox.js/AddItemBox";
+import { useDispatch } from "react-redux";
+import { addItems } from "../../../redux/slices/cartSlice";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
@@ -10,7 +12,7 @@ const Item = ({ item }) => {
   const [size, setSize] = useState("30 см");
   const types = ["Стандартное", "Тонкое"];
   const sizes = ["26 см", "30 см", "40 см"];
-
+  const dispatch = useDispatch();
 
   const chooseType = (type) => {
     setType(type);
@@ -20,8 +22,9 @@ const Item = ({ item }) => {
     setSize(sizeOption);
   };
 
-  const increment = () => {
+  const increment = (itemId) => {
     setCount(count + 1);
+    if (itemId === item.id) dispatch(addItems(item));
   };
 
   const decrement = () => {
@@ -30,7 +33,11 @@ const Item = ({ item }) => {
 
   return (
     <button className={styles.card}>
-      <img className={styles.productImage} src={item.imageUrl} alt={item.name} />
+      <img
+        className={styles.productImage}
+        src={item.imageUrl}
+        alt={item.name}
+      />
       <div className={styles.productInfo}>
         <span className={styles.productTitle}>{item.name}</span>
         <div className={styles.options}>
@@ -65,7 +72,7 @@ const Item = ({ item }) => {
             margin="0 0.5rem"
           />
         ) : (
-          <button className={styles.counter} onClick={increment}>
+          <button className={styles.counter} onClick={() => increment(item.id)}>
             <span className={styles.count}>Добавить</span>
           </button>
         )}

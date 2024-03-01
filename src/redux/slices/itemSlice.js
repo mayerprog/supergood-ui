@@ -24,7 +24,7 @@ import soySauce from "../../assets/images/sushi/soy-sauce.jpg";
 const initialState = {
   items: [
     { id: 1, category: "Наборы", name: "Сет №5", imageUrl: set5 },
-    { id: 2, category: "Наборы", name: "Сет №5", imageUrl: set6 },
+    { id: 2, category: "Наборы", name: "Сет №6", imageUrl: set6 },
     {
       id: 3,
       category: "Пицца",
@@ -213,8 +213,8 @@ export const itemSlice = createSlice({
   initialState,
   reducers: {
     setItems: (state, action) => {
-      state.images = [...state.images, action.payload];
-      console.log("images", state.images);
+      state.items = [...state.items, action.payload];
+      console.log("items", state.items);
     },
   },
 });
