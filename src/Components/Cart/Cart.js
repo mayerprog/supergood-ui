@@ -40,15 +40,17 @@ const Cart = ({ wrapperRef, position, top, height, transform }) => {
               <span>920 г.</span>
             </div>
           </div>
-          <AddItemBox
-            count={count}
-            increment={increment}
-            decrement={decrement}
-            backgroundColor="#fcfcfc"
-            boxShadow="0 0 2px rgba(0, 0, 0, 0.2)"
-            width="5em"
-            color="#5f5f5f"
-          />
+          <div className={styles.countBox}>
+            <AddItemBox
+              count={count}
+              increment={increment}
+              decrement={decrement}
+              backgroundColor="#fcfcfc"
+              boxShadow="0 0 2px rgba(0, 0, 0, 0.2)"
+              width="5em"
+              color="#5f5f5f"
+            />
+          </div>
         </div>
       ))}
       <div className={styles.button}>
