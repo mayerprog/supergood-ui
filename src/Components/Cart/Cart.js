@@ -3,7 +3,7 @@ import pizza from "../../assets/images/pizza.jpg";
 import AddItemBox from "../AddItemBox.js/AddItemBox";
 import { useState } from "react";
 
-const Cart = ({ wrapperRef, position, top, height, transform }) => {
+const Cart = ({ wrapperRef, position, top, height, transform, items }) => {
   const [count, setCount] = useState(100);
 
   const increment = () => {
@@ -28,11 +28,9 @@ const Cart = ({ wrapperRef, position, top, height, transform }) => {
         <span className={styles.deleteTitle}>Очистить</span>
       </div>
       <div className={styles.cartBox}>
-        <img className={styles.cartImage} src={pizza} alt="Pizza" />
+        <img className={styles.cartImage} src={items[6].imageUrl} alt="Pizza" />
         <div className={styles.cartBoxText}>
-          <span className={styles.text}>
-            Пицца Фермерская SG на пышном тесте и другая важная информация
-          </span>
+          <span className={styles.text}>{items[6].name}</span>
           <div>
             <span>940 р.</span>
             &nbsp;|&nbsp;

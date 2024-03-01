@@ -120,18 +120,13 @@ const MainContent = ({
     headings.forEach((el) => {
       observer.observe(el);
     });
-    // if (selectedCategory) {
-    //   headings.forEach((el) => {
-    //     observer.unobserve(el);
-    //   });
-    // }
 
     return () => {
       headings.forEach((el) => {
         observer.unobserve(el);
       });
     };
-  }, [categories]); // Depend on categories to re-attach observer if categories change
+  }, [categories]);
 
   // const dispatch = useDispatch();
 
@@ -183,6 +178,7 @@ const MainContent = ({
             top="90px"
             height="calc(100vh - 180px)"
             transform="translateX(-20%)"
+            items={items}
           />
         </div>
       )}

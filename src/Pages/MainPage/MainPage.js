@@ -65,6 +65,7 @@ const MainPage = () => {
             top="105px"
             height="calc(100vh - 150px)"
             transform="none"
+            items={items}
           />
         )}
       </div>
