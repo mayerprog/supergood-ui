@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Cart = ({ wrapperRef, position, top, height, transform }) => {
   const [count, setCount] = useState(100);
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const items = useSelector((state) => state.item.items);
 
   const increment = () => {
     setCount(count + 1);
@@ -22,6 +23,10 @@ const Cart = ({ wrapperRef, position, top, height, transform }) => {
     "--cart-height": height,
     "--cart-transform": transform,
   };
+
+  // useEffect(() => {
+  //   console.log("items", items);
+  // }, []);
 
   return (
     <div className={styles.cart} ref={wrapperRef} style={dynamicStyle}>
@@ -42,7 +47,7 @@ const Cart = ({ wrapperRef, position, top, height, transform }) => {
           </div>
           <div className={styles.countBox}>
             <AddItemBox
-              count={count}
+              count={item.amount.value}
               increment={increment}
               decrement={decrement}
               backgroundColor="#fcfcfc"

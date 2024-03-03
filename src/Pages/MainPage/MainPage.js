@@ -34,17 +34,13 @@ const MainPage = () => {
 
   const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
 
-  const onCategorySelect = (category) => {
-    setSelectedCategory(category);
-  };
-
   return (
     <div className={styles.app}>
       <Header toggleCartVisibility={toggleCartVisibility} ref={headerRef} />
       <div className={styles.content}>
         <Sidebar
           categories={categories}
-          onCategorySelect={onCategorySelect}
+          onCategorySelect={setSelectedCategory}
           selectedCategory={selectedCategory}
           scrolledCategory={scrolledCategory}
         />

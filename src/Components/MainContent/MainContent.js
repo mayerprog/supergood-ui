@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import styles from "./MainContent.module.scss";
 import Item from "./Item/Item";
 import Slider from "./Slider/Slider";
@@ -7,6 +8,7 @@ import kolc from "../../assets/images/kolc.jpg";
 import minus10 from "../../assets/images/minus10.jpg";
 import minus20 from "../../assets/images/minus20.jpg";
 import { itemAPI } from "../../api/itemAPI";
+import { setItems } from "../../redux/slices/itemSlice";
 import Cart from "../Cart/Cart";
 
 const MainContent = ({
@@ -30,6 +32,8 @@ const MainContent = ({
 
   const sliderRef = useRef(null);
   const categoryRefs = useRef({});
+
+  const dispatch = useDispatch();
 
   const scrollToCategory = (categoryName) => {
     const element = categoryRefs.current[categoryName];
@@ -127,6 +131,10 @@ const MainContent = ({
       });
     };
   }, [categories]);
+
+  // useEffect(() => {
+  //   dispatch(setItems());
+  // });
 
   // const dispatch = useDispatch();
 
