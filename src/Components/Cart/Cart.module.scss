@@ -14,9 +14,10 @@
   margin-left: 1.5vw;
   min-width: 350px;
   background-color: #fcfcfc;
-  justify-content: center;
+  // justify-content: center;
   min-height: 300px;
   transform: var(--cart-transform);
+  overflow-y: auto;
 
   .cartHeader {
     display: flex;
@@ -37,6 +38,7 @@
     flex: 1;
     align-items: flex-end;
     justify-content: center;
+    margin-top: 15px;
 
     .buttonStyle {
       @include reusable-box;
