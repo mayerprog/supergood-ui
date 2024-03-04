@@ -6,7 +6,7 @@ import { addItems } from "../../../redux/slices/cartSlice";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
-const Item = ({ item, category }) => {
+const Item = ({ item, category, toggleCardOpen }) => {
   const [amount, setAmount] = useState(null);
   const [itemForUpdate, setItemForUpdate] = useState(null);
   const [type, setType] = useState("Стандартное");
@@ -42,7 +42,7 @@ const Item = ({ item, category }) => {
   };
 
   return (
-    <button className={styles.card}>
+    <button className={styles.card} onClick={() => toggleCardOpen(item.id)}>
       <img
         className={styles.productImage}
         src={item.imageUrl}

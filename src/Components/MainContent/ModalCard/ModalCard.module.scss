@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #ccc;
+  max-height: 400px;
+  max-width: 400px;
+  padding: 2.2vh;
+  font-family: "Inter", sans-serif;
+  background-color: #fcfcfc;
+  justify-content: center;
+  overflow-y: auto;
+}

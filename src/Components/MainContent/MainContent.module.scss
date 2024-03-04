@@ -80,7 +80,8 @@
   opacity: 50px;
 }
 
-.overlay {
+.overlay,
+.cardOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -92,4 +93,9 @@
   justify-content: flex-end;
   // align-items: center;
   overflow: auto;
+}
+
+.cardOverlay {
+  justify-content: center;
+  align-items: center;
 }

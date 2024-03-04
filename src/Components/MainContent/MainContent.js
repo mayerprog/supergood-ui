@@ -10,9 +10,12 @@ import minus20 from "../../assets/images/minus20.jpg";
 import { itemAPI } from "../../api/itemAPI";
 import { setItems } from "../../redux/slices/itemSlice";
 import Cart from "../Cart/Cart";
+import ModalCard from "./ModalCard/ModalCard";
 
 const MainContent = ({
   isCartVisible,
+  isCardOpen,
+  toggleCardOpen,
   wrapperRef,
   items,
   categories,
@@ -20,6 +23,8 @@ const MainContent = ({
   headerHeight,
   setScrolledCategory,
   setSelectedCategory,
+  itemCardId,
+  cardRef,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -208,6 +213,11 @@ const MainContent = ({
           ></span>
         ))}
       </div>
+      {isCardOpen && (
+        <div className={styles.cardOverlay}>
+          <ModalCard itemCardId={itemCardId} cardRef={cardRef} />
+        </div>
+      )}
       {categories.map((category, index) => (
         <div key={index} ref={(el) => (categoryRefs.current[category] = el)}>
           <h2>{category}</h2>
@@ -215,7 +225,11 @@ const MainContent = ({
             {items
               .filter((item) => item.category === category)
               .map((filteredProduct, index) => (
-                <Item item={filteredProduct} category={category} />
+                <Item
+                  item={filteredProduct}
+                  category={category}
+                  toggleCardOpen={toggleCardOpen}
+                />
               ))}
           </div>
         </div>

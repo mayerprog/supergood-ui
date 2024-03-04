@@ -11,6 +11,8 @@ import { useOutsideHook } from "../../hooks/useOutsideHook";
 
 const MainPage = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
+  const [isCardOpen, setIsCardOpen] = useState(false);
+  const [itemCardId, setItemCardId] = useState();
   const [headerHeight, setHeaderHeight] = useState(0); // State to store header height
   const [scrolledCategory, setScrolledCategory] = useState(null);
 
@@ -20,6 +22,7 @@ const MainPage = () => {
 
   const wrapperRef = useRef(null);
   const headerRef = useRef(null);
+  const cardRef = useRef(null);
 
   useEffect(() => {
     if (headerRef.current) {
@@ -27,10 +30,16 @@ const MainPage = () => {
     }
   }, []);
 
+  const toggleCardOpen = (itemId) => {
+    setIsCardOpen(!isCardOpen);
+    setItemCardId(itemId);
+  };
+
   const toggleCartVisibility = () => {
     setIsCartVisible(!isCartVisible);
   };
   useOutsideHook([wrapperRef, headerRef], toggleCartVisibility); // to close popup <Cart /> clicking outside
+  useOutsideHook([cardRef, headerRef], toggleCardOpen); // to close popup <Card /> clicking outside
 
   const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
 
@@ -46,14 +55,17 @@ const MainPage = () => {
         />
         <MainContent
           isCartVisible={isCartVisible}
-          toggleCartVisibility={toggleCartVisibility}
+          isCardOpen={isCardOpen}
+          toggleCardOpen={toggleCardOpen}
           wrapperRef={wrapperRef}
+          cardRef={cardRef}
           items={items}
           categories={categories}
           selectedCategory={selectedCategory}
           headerHeight={headerHeight}
           setScrolledCategory={setScrolledCategory}
           setSelectedCategory={setSelectedCategory}
+          itemCardId={itemCardId}
         />
         {!mediaQuery && (
           <Cart
