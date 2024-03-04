@@ -215,7 +215,7 @@ const MainContent = ({
             {items
               .filter((item) => item.category === category)
               .map((filteredProduct, index) => (
-                <Item item={filteredProduct} />
+                <Item item={filteredProduct} category={category} />
               ))}
           </div>
         </div>

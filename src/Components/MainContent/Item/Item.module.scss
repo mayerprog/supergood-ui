@@ -32,10 +32,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   flex-basis: calc(25% - 20px);
   max-width: calc(25% - 20px);
   // min-height: 370px;
-  height: 410px;
+  max-height: 410px;
   border-width: 0;
   border-radius: 10px;
   box-shadow: 0 1px 5px #ccc;

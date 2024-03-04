@@ -6,26 +6,26 @@ import { addItems } from "../../../redux/slices/cartSlice";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
-const Item = ({ item }) => {
-  const [type, setType] = useState("Стандартное");
-  const [size, setSize] = useState("30 см");
+const Item = ({ item, category }) => {
   const [amount, setAmount] = useState(null);
   const [itemForUpdate, setItemForUpdate] = useState(null);
+  const [type, setType] = useState("Стандартное");
+  const [size, setSize] = useState("30 см");
   const types = ["Стандартное", "Тонкое"];
   const sizes = ["26 см", "30 см", "40 см"];
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
 
-  // useEffect(() => {
-  //   const foundCartItem = cartItems.find((cartItem) => cartItem.id === item.id);
-  //   if (foundCartItem) {
-  //     setAmount(foundCartItem.amount.value);
-  //     setItemForUpdate({
-  //       ...foundCartItem,
-  //       amount: { ...foundCartItem.amount },
-  //     });
-  //   }
-  // }, [cartItems, item.id]);
+  useEffect(() => {
+    const foundCartItem = cartItems.find((cartItem) => cartItem.id === item.id);
+    if (foundCartItem) {
+      setAmount(foundCartItem.amount.value);
+      setItemForUpdate({
+        ...foundCartItem,
+        amount: { ...foundCartItem.amount },
+      });
+    }
+  }, [cartItems, item.id]);
 
   const chooseType = (type) => {
     setType(type);
@@ -50,28 +50,36 @@ const Item = ({ item }) => {
       />
       <div className={styles.productInfo}>
         <span className={styles.productTitle}>{item.name}</span>
-        <div className={styles.options}>
-          {types.map((option) => (
-            <button
-              key={option}
-              className={type === option ? styles.chosenOption : styles.option}
-              onClick={() => chooseType(option)}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-        <div className={styles.options}>
-          {sizes.map((option) => (
-            <button
-              key={option}
-              className={size === option ? styles.chosenOption : styles.option}
-              onClick={() => chooseSize(option)}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
+        {(category === "Наборы" || category === "Пицца") && (
+          <>
+            <div className={styles.options}>
+              {types.map((option) => (
+                <button
+                  key={option}
+                  className={
+                    type === option ? styles.chosenOption : styles.option
+                  }
+                  onClick={() => chooseType(option)}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+            <div className={styles.options}>
+              {sizes.map((option) => (
+                <button
+                  key={option}
+                  className={
+                    size === option ? styles.chosenOption : styles.option
+                  }
+                  onClick={() => chooseSize(option)}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
       <div className={styles.order}>
         {amount > 0 ? (
