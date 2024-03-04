@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Item.module.scss";
 import AddItemBox from "../../AddItemBox.js/AddItemBox";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItems } from "../../../redux/slices/cartSlice";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
 const Item = ({ item }) => {
-  const [count, setCount] = useState(0);
   const [type, setType] = useState("Стандартное");
   const [size, setSize] = useState("30 см");
+  const [amount, setAmount] = useState(null);
+  const [itemForUpdate, setItemForUpdate] = useState(null);
   const types = ["Стандартное", "Тонкое"];
   const sizes = ["26 см", "30 см", "40 см"];
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  useEffect(() => {
+    const foundCartItem = cartItems.find((cartItem) => cartItem.id === item.id);
+    if (foundCartItem) {
+      setAmount(foundCartItem.amount.value);
+      setItemForUpdate({
+        ...foundCartItem,
+        amount: { ...foundCartItem.amount },
+      });
+    }
+  }, [cartItems, item.id]);
 
   const chooseType = (type) => {
     setType(type);
@@ -22,13 +35,10 @@ const Item = ({ item }) => {
     setSize(sizeOption);
   };
 
-  const increment = (itemId) => {
-    setCount(count + 1);
-    if (itemId === item.id) dispatch(addItems(item));
-  };
-
-  const decrement = () => {
-    setCount(count - 1);
+  const addItemToCart = (itemId) => {
+    if (itemId === item.id) {
+      dispatch(addItems(item));
+    }
   };
 
   return (
@@ -64,15 +74,17 @@ const Item = ({ item }) => {
         </div>
       </div>
       <div className={styles.order}>
-        {count >= 1 ? (
+        {amount > 0 ? (
           <AddItemBox
-            count={count}
-            increment={increment}
-            decrement={decrement}
             margin="0 0.5rem"
+            amount={amount}
+            updatedItem={itemForUpdate}
           />
         ) : (
-          <button className={styles.counter} onClick={() => increment(item.id)}>
+          <button
+            className={styles.counter}
+            onClick={() => addItemToCart(item.id)}
+          >
             <span className={styles.count}>Добавить</span>
           </button>
         )}

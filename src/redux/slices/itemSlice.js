@@ -350,12 +350,7 @@ export const itemSlice = createSlice({
   name: "item",
   initialState,
   reducers: {
-    setItems: (state, action) => {
-      state.items.map((item, index) => {
-        item.amount = 0;
-      });
-      console.log("items", state.items);
-    },
+    setItems: (state, action) => {},
   },
 });
 

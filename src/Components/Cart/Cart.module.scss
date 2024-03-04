@@ -32,51 +32,6 @@
     }
   }
 
-  .cartBox {
-    display: flex;
-    flex-direction: row;
-    justify-content: safe;
-    padding: 0.5em 0;
-
-    .cartImage,
-    .cartBoxText {
-      margin-right: 20px;
-    }
-    .cartImage {
-      width: 70px;
-      height: 70px;
-    }
-
-    .cartBoxText {
-      font-size: 12px;
-      flex-direction: column;
-      font-family: "Inter", sans-serif;
-      align-self: center;
-      justify-content: flex-start;
-      max-width: 7vw;
-      @media (max-width: 1171px) {
-        max-width: 12vw;
-      }
-      @media (max-width: 682px) {
-        max-width: 16vw;
-      }
-    }
-    .text {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 4;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      margin-bottom: 0.3rem;
-    }
-    .countBox {
-      display: flex;
-      flex: 1;
-      align-self: center;
-      justify-content: flex-end;
-    }
-  }
-
   .button {
     display: flex;
     flex: 1;

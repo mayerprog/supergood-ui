@@ -35,16 +35,19 @@ const MainContent = ({
 
   const dispatch = useDispatch();
 
-  const scrollToCategory = (categoryName) => {
-    const element = categoryRefs.current[categoryName];
-    const offsetTop =
-      element.getBoundingClientRect().top + window.scrollY - headerHeight;
+  const scrollToCategory = useCallback(
+    (categoryName) => {
+      const element = categoryRefs.current[categoryName];
+      const offsetTop =
+        element.getBoundingClientRect().top + window.scrollY - headerHeight;
 
-    window.scrollTo({
-      top: offsetTop,
-      behavior: "smooth",
-    });
-  };
+      window.scrollTo({
+        top: offsetTop,
+        behavior: "smooth",
+      });
+    },
+    [headerHeight]
+  );
 
   const slideToRight = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
@@ -64,7 +67,7 @@ const MainContent = ({
     if (selectedCategory) {
       scrollToCategory(selectedCategory);
     }
-  }, [selectedCategory]);
+  }, [selectedCategory, scrollToCategory]);
 
   useEffect(() => {
     const slider = sliderRef.current; // Получаем DOM-элемент
@@ -115,7 +118,7 @@ const MainContent = ({
       },
       {
         root: null, // observing intersections with the viewport
-        rootMargin: "0px",
+        rootMargin: "110px",
         threshold: 0.9, // trigger callback when the target is fully visible
       }
     );
@@ -130,11 +133,7 @@ const MainContent = ({
         observer.unobserve(el);
       });
     };
-  }, [categories]);
-
-  // useEffect(() => {
-  //   dispatch(setItems());
-  // });
+  }, [categories, setScrolledCategory, setSelectedCategory]);
 
   // const dispatch = useDispatch();
 

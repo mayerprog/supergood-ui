@@ -1,15 +1,17 @@
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import styles from "./AddItemBox.module.scss";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { removeItems, updateItem } from "../../redux/slices/cartSlice";
 
 const AddItemBox = ({
-  count,
-  increment,
-  decrement,
   backgroundColor,
   boxShadow,
   width,
   color,
   margin,
+  updatedItem,
+  amount,
 }) => {
   const dynamicStyle = {
     "--counter-bg-color": backgroundColor,
@@ -17,6 +19,27 @@ const AddItemBox = ({
     "--counter-width": width,
     "--counter-color": color,
     "--counter-margin": margin,
+  };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (amount === 0) {
+      dispatch(removeItems(updatedItem.id));
+    }
+  }, [amount, updatedItem.id]);
+
+  const increment = () => {
+    updatedItem.amount.value = Number(updatedItem.amount.value) + 1;
+    dispatch(updateItem(updatedItem));
+  };
+
+  const decrement = () => {
+    updatedItem.amount.value = Math.max(
+      Number(updatedItem.amount.value) - 1,
+      0
+    );
+    dispatch(updateItem(updatedItem));
   };
 
   return (
@@ -29,7 +52,7 @@ const AddItemBox = ({
       >
         <AiOutlineMinus />
       </button>
-      <span className={styles.count}>{count}</span>
+      <span className={styles.count}>{amount}</span>
       <button
         onClick={increment}
         className={

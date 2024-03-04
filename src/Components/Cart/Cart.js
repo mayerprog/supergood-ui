@@ -3,19 +3,11 @@ import pizza from "../../assets/images/pizza.jpg";
 import AddItemBox from "../AddItemBox.js/AddItemBox";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { updateAmount } from "../../redux/slices/cartSlice";
+import CartBox from "./CartBox/CartBox";
 
 const Cart = ({ wrapperRef, position, top, height, transform }) => {
-  const [count, setCount] = useState(100);
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const items = useSelector((state) => state.item.items);
-
-  const increment = () => {
-    setCount(count + 1);
-  };
-
-  const decrement = () => {
-    setCount(count - 1);
-  };
 
   const dynamicStyle = {
     "--cart-position": position,
@@ -24,10 +16,6 @@ const Cart = ({ wrapperRef, position, top, height, transform }) => {
     "--cart-transform": transform,
   };
 
-  // useEffect(() => {
-  //   console.log("items", items);
-  // }, []);
-
   return (
     <div className={styles.cart} ref={wrapperRef} style={dynamicStyle}>
       <div className={styles.cartHeader}>
@@ -35,28 +23,7 @@ const Cart = ({ wrapperRef, position, top, height, transform }) => {
         <span className={styles.deleteTitle}>Очистить</span>
       </div>
       {cartItems.map((item, index) => (
-        <div className={styles.cartBox} key={index}>
-          <img className={styles.cartImage} src={item.imageUrl} alt="Pizza" />
-          <div className={styles.cartBoxText}>
-            <span className={styles.text}>{item.name}</span>
-            <div>
-              <span>940 р.</span>
-              &nbsp;|&nbsp;
-              <span>920 г.</span>
-            </div>
-          </div>
-          <div className={styles.countBox}>
-            <AddItemBox
-              count={item.amount.value}
-              increment={increment}
-              decrement={decrement}
-              backgroundColor="#fcfcfc"
-              boxShadow="0 0 2px rgba(0, 0, 0, 0.2)"
-              width="5em"
-              color="#5f5f5f"
-            />
-          </div>
-        </div>
+        <CartBox item={item} index={index} />
       ))}
       <div className={styles.button}>
         <button className={styles.buttonStyle}>
