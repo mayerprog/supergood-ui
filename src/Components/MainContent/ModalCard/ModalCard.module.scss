@@ -4,11 +4,15 @@
   position: absolute;
   border-radius: 10px;
   box-shadow: 0 0 5px #ccc;
-  max-height: 400px;
-  max-width: 400px;
-  padding: 2.2vh;
+  max-height: calc(100vh - 300px);
+  min-height: 400px;
+  height: 100%;
+  max-width: calc(100vw - 800px);
+  min-width: 600px;
+  width: 100%;
   font-family: "Inter", sans-serif;
   background-color: #fcfcfc;
   justify-content: center;
-  overflow-y: auto;
+  align-items: center;
+  overflow: hidden;
 }
