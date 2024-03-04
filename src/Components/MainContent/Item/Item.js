@@ -16,16 +16,16 @@ const Item = ({ item }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
 
-  useEffect(() => {
-    const foundCartItem = cartItems.find((cartItem) => cartItem.id === item.id);
-    if (foundCartItem) {
-      setAmount(foundCartItem.amount.value);
-      setItemForUpdate({
-        ...foundCartItem,
-        amount: { ...foundCartItem.amount },
-      });
-    }
-  }, [cartItems, item.id]);
+  // useEffect(() => {
+  //   const foundCartItem = cartItems.find((cartItem) => cartItem.id === item.id);
+  //   if (foundCartItem) {
+  //     setAmount(foundCartItem.amount.value);
+  //     setItemForUpdate({
+  //       ...foundCartItem,
+  //       amount: { ...foundCartItem.amount },
+  //     });
+  //   }
+  // }, [cartItems, item.id]);
 
   const chooseType = (type) => {
     setType(type);
