@@ -29,12 +29,16 @@ const AddItemBox = ({
     }
   }, [amount, updatedItem.id]);
 
-  const increment = () => {
+  const increment = (event) => {
+    event.stopPropagation();
+
     updatedItem.amount.value = Number(updatedItem.amount.value) + 1;
     dispatch(updateItem(updatedItem));
   };
 
-  const decrement = () => {
+  const decrement = (event) => {
+    event.stopPropagation();
+
     updatedItem.amount.value = Math.max(
       Number(updatedItem.amount.value) - 1,
       0
@@ -45,7 +49,7 @@ const AddItemBox = ({
   return (
     <div className={styles.counter} style={dynamicStyle}>
       <button
-        onClick={decrement}
+        onClick={(e) => decrement(e)}
         className={
           !backgroundColor ? styles.cardCounterButton : styles.cartCounterButton
         }
@@ -54,7 +58,7 @@ const AddItemBox = ({
       </button>
       <span className={styles.count}>{amount}</span>
       <button
-        onClick={increment}
+        onClick={(e) => increment(e)}
         className={
           !backgroundColor ? styles.cardCounterButton : styles.cartCounterButton
         }

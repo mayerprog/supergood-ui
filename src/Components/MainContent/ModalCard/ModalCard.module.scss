@@ -12,7 +12,29 @@
   width: 100%;
   font-family: "Inter", sans-serif;
   background-color: #fcfcfc;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   overflow: hidden;
+  padding: 15px;
+
+  .productImage {
+    width: 330px;
+    height: 330px;
+    align-self: center;
+  }
+  .productInfo {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    margin: 15px;
+
+    h2 {
+      font-weight: normal;
+    }
+    .addInfo,
+    .description {
+      font-size: medium;
+      margin-bottom: 7px;
+    }
+  }
 }

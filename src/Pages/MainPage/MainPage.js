@@ -39,7 +39,7 @@ const MainPage = () => {
     setIsCartVisible(!isCartVisible);
   };
   useOutsideHook([wrapperRef, headerRef], toggleCartVisibility); // to close popup <Cart /> clicking outside
-  useOutsideHook([cardRef, headerRef], toggleCardOpen); // to close popup <Card /> clicking outside
+  useOutsideHook([cardRef, headerRef], toggleCardOpen); // to close popup <ModalCard /> clicking outside
 
   const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
 

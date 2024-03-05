@@ -27,15 +27,18 @@ const Item = ({ item, category, toggleCardOpen }) => {
     }
   }, [cartItems, item.id]);
 
-  const chooseType = (type) => {
+  const chooseType = (type, event) => {
+    event.stopPropagation();
     setType(type);
   };
 
-  const chooseSize = (sizeOption) => {
+  const chooseSize = (sizeOption, event) => {
+    event.stopPropagation();
     setSize(sizeOption);
   };
 
-  const addItemToCart = (itemId) => {
+  const addItemToCart = (itemId, event) => {
+    event.stopPropagation();
     if (itemId === item.id) {
       dispatch(addItems(item));
     }
@@ -59,7 +62,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
                   className={
                     type === option ? styles.chosenOption : styles.option
                   }
-                  onClick={() => chooseType(option)}
+                  onClick={(e) => chooseType(option, e)}
                 >
                   {option}
                 </button>
@@ -72,7 +75,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
                   className={
                     size === option ? styles.chosenOption : styles.option
                   }
-                  onClick={() => chooseSize(option)}
+                  onClick={(e) => chooseSize(option, e)}
                 >
                   {option}
                 </button>
@@ -91,7 +94,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
         ) : (
           <button
             className={styles.counter}
-            onClick={() => addItemToCart(item.id)}
+            onClick={(e) => addItemToCart(item.id, e)}
           >
             <span className={styles.count}>Добавить</span>
           </button>
