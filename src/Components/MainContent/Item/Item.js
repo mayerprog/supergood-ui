@@ -3,16 +3,14 @@ import styles from "./Item.module.scss";
 import AddItemBox from "../../AddItemBox.js/AddItemBox";
 import { useDispatch, useSelector } from "react-redux";
 import { addItems } from "../../../redux/slices/cartSlice";
+import PizzaOptions from "../../PizzaOptions.js/PizzaOptions";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
 const Item = ({ item, category, toggleCardOpen }) => {
   const [amount, setAmount] = useState(null);
   const [itemForUpdate, setItemForUpdate] = useState(null);
-  const [type, setType] = useState("Стандартное");
-  const [size, setSize] = useState("30 см");
-  const types = ["Стандартное", "Тонкое"];
-  const sizes = ["26 см", "30 см", "40 см"];
+
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
 
@@ -26,16 +24,6 @@ const Item = ({ item, category, toggleCardOpen }) => {
       });
     }
   }, [cartItems, item.id]);
-
-  const chooseType = (type, event) => {
-    event.stopPropagation();
-    setType(type);
-  };
-
-  const chooseSize = (sizeOption, event) => {
-    event.stopPropagation();
-    setSize(sizeOption);
-  };
 
   const addItemToCart = (itemId, event) => {
     event.stopPropagation();
@@ -53,36 +41,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
       />
       <div className={styles.productInfo}>
         <span className={styles.productTitle}>{item.name}</span>
-        {(category === "Наборы" || category === "Пицца") && (
-          <>
-            <div className={styles.options}>
-              {types.map((option) => (
-                <button
-                  key={option}
-                  className={
-                    type === option ? styles.chosenOption : styles.option
-                  }
-                  onClick={(e) => chooseType(option, e)}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-            <div className={styles.options}>
-              {sizes.map((option) => (
-                <button
-                  key={option}
-                  className={
-                    size === option ? styles.chosenOption : styles.option
-                  }
-                  onClick={(e) => chooseSize(option, e)}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+        {(category === "Наборы" || category === "Пицца") && <PizzaOptions />}
       </div>
       <div className={styles.order}>
         {amount > 0 ? (

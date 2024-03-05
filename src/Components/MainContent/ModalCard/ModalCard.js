@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import styles from "./ModalCard.module.scss";
 import { useSelector } from "react-redux";
+import PizzaOptions from "../../PizzaOptions.js/PizzaOptions";
 
 const ModalCard = ({ itemCardId, cardRef }) => {
   const items = useSelector((state) => state.item.items);
@@ -23,6 +24,7 @@ const ModalCard = ({ itemCardId, cardRef }) => {
           маринованные, свинина маринованная, грудка куриная маринованная,
           бекон. Не содержит ГМО.
         </span>
+        <PizzaOptions />
       </div>
     </div>
   );
