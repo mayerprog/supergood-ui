@@ -17,14 +17,29 @@ const ModalCard = ({ itemCardId, cardRef }) => {
       <div className={styles.productInfo}>
         <h2>{foundCardItem.name}</h2>
         <span className={styles.addInfo}>920 г.</span>
-        <span className={styles.description}>
-          состав: мука пшеничная хлебопекарская в/с, дрожжи хлебопекарские
-          сухие, масло растительное рафинированное, сахар-песок, соль поваренная
-          пищевая, вода питьевая, соус Гриль, Моцарелла для пиццы, огурцы
-          маринованные, свинина маринованная, грудка куриная маринованная,
-          бекон. Не содержит ГМО.
-        </span>
-        <PizzaOptions />
+        <span className={styles.description}>{foundCardItem.description}</span>
+        <div className={styles.addInfo}>
+          <PizzaOptions />
+        </div>
+        <span className={styles.addInfo}>Энергетическая ценность на 100 г</span>
+        <div className={styles.energyBox}>
+          <div className={styles.energyInfo}>
+            <span className={styles.value}>{foundCardItem.protein.value}</span>
+            <span>Белки</span>
+          </div>
+          <div className={styles.energyInfo}>
+            <span className={styles.value}>{foundCardItem.fat.value}</span>
+            <span>Жиры</span>
+          </div>
+          <div className={styles.energyInfo}>
+            <span className={styles.value}>{foundCardItem.carbo.value}</span>
+            <span>Углеводы</span>
+          </div>
+          <div className={styles.energyInfo}>
+            <span className={styles.value}>{foundCardItem.kcal.value}</span>
+            <span>Калории</span>
+          </div>
+        </div>
       </div>
     </div>
   );
