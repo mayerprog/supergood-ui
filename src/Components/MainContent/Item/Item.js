@@ -25,11 +25,9 @@ const Item = ({ item, category, toggleCardOpen }) => {
     }
   }, [cartItems, item.id]);
 
-  const addItemToCart = (itemId, event) => {
+  const addItemToCart = (event) => {
     event.stopPropagation();
-    if (itemId === item.id) {
-      dispatch(addItems(item));
-    }
+    dispatch(addItems(item));
   };
 
   return (
@@ -51,10 +49,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
             updatedItem={itemForUpdate}
           />
         ) : (
-          <button
-            className={styles.counter}
-            onClick={(e) => addItemToCart(item.id, e)}
-          >
+          <button className={styles.counter} onClick={(e) => addItemToCart(e)}>
             <span className={styles.count}>Добавить</span>
           </button>
         )}

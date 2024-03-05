@@ -1,13 +1,15 @@
+@import "../../../mixins/mixins";
+
 .container {
   display: flex;
   flex-direction: row;
   position: absolute;
   border-radius: 10px;
   box-shadow: 0 0 5px #ccc;
-  max-height: calc(100vh - 400px);
+  max-height: calc(100vh - 300px);
   min-height: 400px;
   // height: 100%;
-  max-width: calc(100vw - 1000px);
+  max-width: calc(100vw - 800px);
   min-width: 600px;
   width: 100%;
   font-family: "Inter", sans-serif;
@@ -16,6 +18,8 @@
   align-items: center;
   overflow: hidden;
   padding: 7px;
+  overflow-y: auto;
+  background-color: #fafafa;
 
   .productImage {
     width: 330px;
@@ -56,6 +60,30 @@
       .value {
         font-size: medium;
         color: #5a5a5a;
+      }
+    }
+    .order {
+      display: flex;
+      width: 100%;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 3em;
+
+      .counter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+        @include reusable-box(#fcfcfc);
+        @include interactive-bg(#fcfcfc);
+        // box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+        height: 2rem;
+        width: 7rem;
+
+        .count {
+          margin: 0 1rem;
+          font-size: 1em;
+        }
       }
     }
   }

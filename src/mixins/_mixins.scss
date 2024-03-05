@@ -1,7 +1,7 @@
-@mixin reusable-box {
+@mixin reusable-box($base-color: #e9bc5b) {
   border-width: 0;
   border-radius: 10px;
-  background-color: var(--counter-bg-color, #e9bc5b);
+  background-color: var(--counter-bg-color, $base-color);
   box-shadow: var(--counter-box-shadow, 0px 2px 4px rgba(0, 0, 0, 0.2));
   cursor: pointer;
 }
