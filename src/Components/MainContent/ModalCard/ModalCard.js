@@ -86,6 +86,7 @@ const ModalCard = ({ itemCardId, cardRef }) => {
               <span className={styles.count}>Добавить</span>
             </button>
           )}
+          <span className={styles.price}>{`${foundItem.price} р.`}</span>
         </div>
       </div>
     </div>
