@@ -7,7 +7,7 @@
   max-height: calc(100vh - 300px);
   min-height: 400px;
   height: 100%;
-  max-width: calc(100vw - 800px);
+  max-width: calc(100vw - 1000px);
   min-width: 600px;
   width: 100%;
   font-family: "Inter", sans-serif;
@@ -27,6 +27,7 @@
     flex-direction: column;
     align-self: flex-start;
     margin: 15px;
+    width: 100%;
 
     h2 {
       font-weight: normal;

@@ -18,9 +18,12 @@ const ModalCard = ({ itemCardId, cardRef }) => {
         <h2>{foundCardItem.name}</h2>
         <span className={styles.addInfo}>920 г.</span>
         <span className={styles.description}>{foundCardItem.description}</span>
-        <div className={styles.addInfo}>
-          <PizzaOptions />
-        </div>
+        {(foundCardItem.category === "Наборы" ||
+          foundCardItem.category === "Пицца") && (
+          <div className={styles.addInfo}>
+            <PizzaOptions />
+          </div>
+        )}
         <span className={styles.addInfo}>Энергетическая ценность на 100 г</span>
         <div className={styles.energyBox}>
           <div className={styles.energyInfo}>
