@@ -9,29 +9,34 @@
   max-height: calc(100vh - 300px);
   min-height: 400px;
   // height: 100%;
-  max-width: calc(100vw - 800px);
+  max-width: calc(100vw - 900px);
   min-width: 600px;
-  width: 100%;
+  // width: 100%;
   font-family: "Inter", sans-serif;
   background-color: #fcfcfc;
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
   padding: 10px;
-  overflow-y: auto;
   background-color: #fafafa;
+  // overflow-y: auto;
 
   .productImage {
     width: 330px;
     height: 330px;
     align-self: center;
   }
+
   .productInfo {
     display: flex;
     flex-direction: column;
     align-self: flex-start;
-    margin: 15px;
-    width: 100%;
+    margin: 15px 5px;
+    overflow-y: auto;
+    max-height: calc(100vh - 350px);
+    min-height: 348px;
+    height: 100%;
+    // width: 100%;
 
     h2 {
       font-weight: normal;
@@ -62,33 +67,34 @@
         color: #5a5a5a;
       }
     }
-    .order {
+  }
+  .order {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 1em;
+
+    flex-direction: row;
+
+    .counter {
       display: flex;
-      width: 100%;
-      justify-content: space-around;
       align-items: center;
-      padding-top: 3em;
-      flex-direction: row;
+      justify-content: center;
+      align-self: center;
+      @include reusable-box(#fcfcfc);
+      @include interactive-bg(#fcfcfc);
+      // box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+      height: 2rem;
+      width: 7rem;
 
-      .counter {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        align-self: center;
-        @include reusable-box(#fcfcfc);
-        @include interactive-bg(#fcfcfc);
-        // box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-        height: 2rem;
-        width: 7rem;
-
-        .count {
-          margin: 0 1rem;
-          font-size: 1em;
-        }
+      .count {
+        margin: 0 1rem;
+        font-size: 1em;
       }
-      .price {
-        font-size: medium;
-      }
+    }
+    .price {
+      font-size: medium;
     }
   }
 }

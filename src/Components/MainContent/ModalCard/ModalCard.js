@@ -38,37 +38,42 @@ const ModalCard = ({ itemCardId, cardRef }) => {
         src={foundItem.imageUrl}
         alt={foundItem.name}
       />
-      <div className={styles.productInfo}>
-        <h2>{foundItem.name}</h2>
-        <span
-          className={styles.addInfo}
-        >{`${foundItem.weightout.value} г.`}</span>
-        <span className={styles.description}>{foundItem.description}</span>
-        {(foundItem.category === "Наборы" ||
-          foundItem.category === "Пицца") && (
-          <div className={styles.addInfo}>
-            <PizzaOptions />
-          </div>
-        )}
-        <span className={styles.addInfo}>Энергетическая ценность на 100 г</span>
-        <div className={styles.energyBox}>
-          <div className={styles.energyInfo}>
-            <span className={styles.value}>{foundItem.protein.value}</span>
-            <span>Белки</span>
-          </div>
-          <div className={styles.energyInfo}>
-            <span className={styles.value}>{foundItem.fat.value}</span>
-            <span>Жиры</span>
-          </div>
-          <div className={styles.energyInfo}>
-            <span className={styles.value}>{foundItem.carbo.value}</span>
-            <span>Углеводы</span>
-          </div>
-          <div className={styles.energyInfo}>
-            <span className={styles.value}>{foundItem.kcal.value}</span>
-            <span>Калории</span>
+      <div>
+        <div className={styles.productInfo}>
+          <h2>{foundItem.name}</h2>
+          <span
+            className={styles.addInfo}
+          >{`${foundItem.weightout.value} г.`}</span>
+          <span className={styles.description}>{foundItem.description}</span>
+          {(foundItem.category === "Наборы" ||
+            foundItem.category === "Пицца") && (
+            <div className={styles.addInfo}>
+              <PizzaOptions />
+            </div>
+          )}
+          <span className={styles.addInfo}>
+            Энергетическая ценность на 100 г
+          </span>
+          <div className={styles.energyBox}>
+            <div className={styles.energyInfo}>
+              <span className={styles.value}>{foundItem.protein.value}</span>
+              <span>Белки</span>
+            </div>
+            <div className={styles.energyInfo}>
+              <span className={styles.value}>{foundItem.fat.value}</span>
+              <span>Жиры</span>
+            </div>
+            <div className={styles.energyInfo}>
+              <span className={styles.value}>{foundItem.carbo.value}</span>
+              <span>Углеводы</span>
+            </div>
+            <div className={styles.energyInfo}>
+              <span className={styles.value}>{foundItem.kcal.value}</span>
+              <span>Калории</span>
+            </div>
           </div>
         </div>
+
         <div className={styles.order}>
           {amount > 0 ? (
             <AddItemBox
