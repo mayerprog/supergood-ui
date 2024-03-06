@@ -7,20 +7,8 @@ import { updateAmount, updateSum } from "../../redux/slices/cartSlice";
 import CartBox from "./CartBox/CartBox";
 
 const Cart = ({ wrapperRef, position, top, height, transform }) => {
-  const dispatch = useDispatch();
-
   const cartItems = useSelector((state) => state.cart.cartItems);
   const itemsSum = useSelector((state) => state.cart.itemsSum);
-
-  useEffect(() => {
-    if (cartItems) {
-      const sum = cartItems.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.price,
-        0
-      );
-      dispatch(updateSum(sum));
-    }
-  }, [cartItems]);
 
   const dynamicStyle = {
     "--cart-position": position,

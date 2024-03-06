@@ -5,8 +5,11 @@ import { GiShoppingCart } from "react-icons/gi";
 import { FaLocationDot } from "react-icons/fa6";
 import { forwardRef, useState } from "react";
 import Cart from "../Cart/Cart";
+import { useSelector } from "react-redux";
 
 const Header = forwardRef(({ toggleCartVisibility }, ref) => {
+  const itemsSum = useSelector((state) => state.cart.itemsSum);
+
   return (
     <header className={styles.header} ref={ref}>
       <img src={logo} alt="" className={styles.logo} />
@@ -20,7 +23,7 @@ const Header = forwardRef(({ toggleCartVisibility }, ref) => {
       <img src={socialNet} alt="" className={styles.socialMedia} />
       <button className={styles.cartButton} onClick={toggleCartVisibility}>
         <GiShoppingCart size={25} className={styles.icon} />
-        <span className={styles.buttonText}>0 р.</span>
+        <span className={styles.buttonText}>{itemsSum} ₽</span>
       </button>
       <button className={styles.loginButton}>Войти</button>
     </header>

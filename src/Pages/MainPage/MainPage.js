@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Cart from "../../Components/Cart/Cart";
 import Header from "../../Components/Header/Header";
@@ -8,6 +8,7 @@ import Sidebar from "../../Components/Sidebar/Sidebar";
 import styles from "./MainPage.module.scss";
 import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
+import { updateSum } from "../../redux/slices/cartSlice";
 
 const MainPage = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
@@ -17,8 +18,12 @@ const MainPage = () => {
   const [scrolledCategory, setScrolledCategory] = useState(null);
 
   const items = useSelector((state) => state.item.items);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
   const categories = [...new Set(items.map((item) => item.category))]; // Unique categories
   const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const dispatch = useDispatch();
 
   const wrapperRef = useRef(null);
   const headerRef = useRef(null);
@@ -29,6 +34,16 @@ const MainPage = () => {
       setHeaderHeight(headerRef.current.offsetHeight); // height of Header
     }
   }, []);
+
+  useEffect(() => {
+    if (cartItems) {
+      const sum = cartItems.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.price,
+        0
+      );
+      dispatch(updateSum(sum));
+    }
+  }, [cartItems]);
 
   const toggleCardOpen = (itemId) => {
     setIsCardOpen(!isCardOpen);
