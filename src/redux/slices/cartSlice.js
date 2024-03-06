@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cartItems: [],
+  itemsSum: 0,
 };
 
 export const cartSlice = createSlice({
@@ -21,11 +22,16 @@ export const cartSlice = createSlice({
       state.cartItems = state.cartItems.map((item) =>
         item.id === action.payload.id ? action.payload : item
       );
-      console.log("cartItems", state.cartItems);
+      // console.log("cartItems", state.cartItems);
+    },
+    updateSum: (state, action) => {
+      state.itemsSum = action.payload;
+      console.log("state.itemsSum", state.itemsSum);
     },
   },
 });
 
-export const { addItems, removeItems, updateItem } = cartSlice.actions;
+export const { addItems, removeItems, updateItem, updateSum } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

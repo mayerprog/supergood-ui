@@ -3,11 +3,24 @@ import pizza from "../../assets/images/pizza.jpg";
 import AddItemBox from "../AddItemBox.js/AddItemBox";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateAmount } from "../../redux/slices/cartSlice";
+import { updateAmount, updateSum } from "../../redux/slices/cartSlice";
 import CartBox from "./CartBox/CartBox";
 
 const Cart = ({ wrapperRef, position, top, height, transform }) => {
+  const dispatch = useDispatch();
+
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const itemsSum = useSelector((state) => state.cart.itemsSum);
+
+  useEffect(() => {
+    if (cartItems) {
+      const sum = cartItems.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.price,
+        0
+      );
+      dispatch(updateSum(sum));
+    }
+  }, [cartItems]);
 
   const dynamicStyle = {
     "--cart-position": position,
@@ -29,7 +42,7 @@ const Cart = ({ wrapperRef, position, top, height, transform }) => {
         <div className={styles.line} />
         <div className={styles.orderSum}>
           <span>Сумма заказа:</span>
-          <span>4000 ₽</span>
+          <span>{itemsSum} ₽</span>
         </div>
         <div className={styles.button}>
           <button className={styles.buttonStyle}>
