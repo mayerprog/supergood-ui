@@ -704,6 +704,10 @@ const initialState = {
       description: " ",
       imageUrl: soySauce,
       price: 500,
+      amount: {
+        value: "1",
+        unit: null,
+      },
       protein: {
         value: "0",
         unit: null,

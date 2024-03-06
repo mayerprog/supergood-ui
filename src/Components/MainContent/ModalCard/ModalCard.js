@@ -22,6 +22,7 @@ const ModalCard = ({ itemCardId, cardRef }) => {
       setItemForUpdate({
         ...foundCartItem,
         amount: { ...foundCartItem.amount },
+        weightout: { ...foundCartItem.weightout },
       });
     }
   }, [cartItems, itemCardId]);
@@ -91,7 +92,7 @@ const ModalCard = ({ itemCardId, cardRef }) => {
               <span className={styles.count}>Добавить</span>
             </button>
           )}
-          <span className={styles.price}>{`${foundItem.price} р.`}</span>
+          <span className={styles.price}>{`${foundItem.price} ₽`}</span>
         </div>
       </div>
     </div>

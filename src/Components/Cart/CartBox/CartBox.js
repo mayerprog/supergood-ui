@@ -5,6 +5,7 @@ const CartBox = ({ item, index }) => {
   let updatedItem = {
     ...item,
     amount: { ...item.amount },
+    weightout: { ...item.weightout },
   };
 
   return (
@@ -13,7 +14,7 @@ const CartBox = ({ item, index }) => {
       <div className={styles.cartBoxText}>
         <span className={styles.text}>{item.name}</span>
         <div>
-          <span>{`${item.price} р.`}</span>
+          <span>{`${item.price} ₽`}</span>
           &nbsp;|&nbsp;
           <span>{`${item.weightout.value} г.`}</span>
         </div>

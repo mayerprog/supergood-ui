@@ -33,6 +33,9 @@ const AddItemBox = ({
     event.stopPropagation();
 
     updatedItem.amount.value = Number(updatedItem.amount.value) + 1;
+    updatedItem.price = updatedItem.price * 2;
+    updatedItem.weightout.value = Number(updatedItem.weightout.value) * 2;
+
     dispatch(updateItem(updatedItem));
   };
 
@@ -43,6 +46,8 @@ const AddItemBox = ({
       Number(updatedItem.amount.value) - 1,
       0
     );
+    updatedItem.price = updatedItem.price / 2;
+    updatedItem.weightout.value = Number(updatedItem.weightout.value) / 2;
     dispatch(updateItem(updatedItem));
   };
 

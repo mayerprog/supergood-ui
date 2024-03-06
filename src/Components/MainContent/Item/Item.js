@@ -21,6 +21,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
       setItemForUpdate({
         ...foundCartItem,
         amount: { ...foundCartItem.amount },
+        weightout: { ...foundCartItem.weightout },
       });
     }
   }, [cartItems, item.id]);
@@ -55,7 +56,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
         )}
         <div>
           <div className={styles.amount}>{`${item.weightout.value} г.`}</div>
-          <div className={styles.price}>{`${item.price} р.`}</div>
+          <div className={styles.price}>{`${item.price} ₽`}</div>
         </div>
       </div>
     </button>

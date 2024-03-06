@@ -25,10 +25,17 @@ const Cart = ({ wrapperRef, position, top, height, transform }) => {
       {cartItems.map((item, index) => (
         <CartBox item={item} index={index} />
       ))}
-      <div className={styles.button}>
-        <button className={styles.buttonStyle}>
-          <span className={styles.buttonText}>Оформить заказ</span>
-        </button>
+      <div className={styles.cartFooter}>
+        <div className={styles.line} />
+        <div className={styles.orderSum}>
+          <span>Сумма заказа:</span>
+          <span>4000 ₽</span>
+        </div>
+        <div className={styles.button}>
+          <button className={styles.buttonStyle}>
+            <span className={styles.buttonText}>Оформить заказ</span>
+          </button>
+        </div>
       </div>
     </div>
   );
