@@ -10,16 +10,15 @@
   min-height: 400px;
   // height: 100%;
   max-width: calc(100vw - 900px);
-  min-width: 600px;
+  min-width: 700px;
   // width: 100%;
   font-family: "Inter", sans-serif;
   background-color: #fcfcfc;
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
-  padding: 10px;
+  padding: 25px 0;
   background-color: #fafafa;
-  // overflow-y: auto;
 
   .productImage {
     width: 330px;
@@ -31,11 +30,12 @@
     display: flex;
     flex-direction: column;
     align-self: flex-start;
-    margin: 15px 5px;
+    margin: 15px 0;
     overflow-y: auto;
     max-height: calc(100vh - 350px);
     min-height: 348px;
     height: 100%;
+    padding: 0 10px;
     // width: 100%;
 
     h2 {
@@ -96,5 +96,16 @@
     .price {
       font-size: medium;
     }
+  }
+
+  .productInfo::-webkit-scrollbar {
+    display: block;
+    width: 3px;
+  }
+
+  .productInfo::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-right: none;
+    border-left: none;
   }
 }

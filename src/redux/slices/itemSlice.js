@@ -476,10 +476,6 @@ const initialState = {
         value: "1",
         unit: null,
       },
-      amount: {
-        value: "1",
-        unit: null,
-      },
       protein: {
         value: "10.7",
         unit: null,
@@ -527,7 +523,7 @@ const initialState = {
         unit: null,
       },
       weightout: {
-        value: "200",
+        value: "300",
         unit: "г",
       },
       carbo: {
@@ -770,8 +766,6 @@ const initialState = {
       price: 100,
       description:
         "Говядина, морковь, лук репчатый, свекла, картофель, капуста, томатная паста, чеснок, петрушка, укроп, уксус столовый, масло подсолнечное, сметана, лавровый лист, перец черный, сахарный песок, соль",
-
-      description: "",
       imageUrl: null,
       amount: {
         value: "1",

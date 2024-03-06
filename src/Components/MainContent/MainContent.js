@@ -126,6 +126,11 @@ const MainContent = ({
         rootMargin: "-30px",
         threshold: 1, // trigger callback when the target is fully visible
       }
+      // { // for big screens
+      //   root: null, // observing intersections with the viewport
+      //   rootMargin: "-30px",
+      //   threshold: 1, // trigger callback when the target is fully visible
+      // }
     );
 
     const headings = Object.values(categoryRefs.current);

@@ -54,8 +54,8 @@ const Item = ({ item, category, toggleCardOpen }) => {
           </button>
         )}
         <div>
-          <div className={styles.amount}>920 г.</div>
-          <div className={styles.price}>940 р.</div>
+          <div className={styles.amount}>{`${item.weightout.value} г.`}</div>
+          <div className={styles.price}>{`${item.price} р.`}</div>
         </div>
       </div>
     </button>

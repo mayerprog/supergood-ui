@@ -13,9 +13,9 @@ const CartBox = ({ item, index }) => {
       <div className={styles.cartBoxText}>
         <span className={styles.text}>{item.name}</span>
         <div>
-          <span>940 р.</span>
+          <span>{`${item.price} р.`}</span>
           &nbsp;|&nbsp;
-          <span>920 г.</span>
+          <span>{`${item.weightout.value} г.`}</span>
         </div>
       </div>
       <div className={styles.countBox}>

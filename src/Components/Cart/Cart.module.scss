@@ -55,3 +55,17 @@
     }
   }
 }
+
+.cart::-webkit-scrollbar {
+  display: block;
+  width: 2px;
+}
+.cart::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cart::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-right: none;
+  border-left: none;
+}
