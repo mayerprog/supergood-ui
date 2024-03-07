@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./ModalCard.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import PizzaOptions from "../../PizzaOptions.js/PizzaOptions";
+import PizzaOptions from "../PizzaOptions/PizzaOptions";
 import AddItemBox from "../../AddItemBox.js/AddItemBox";
 import { addItems } from "../../../redux/slices/cartSlice";
 

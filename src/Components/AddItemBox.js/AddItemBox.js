@@ -23,12 +23,6 @@ const AddItemBox = ({
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (amount === 0) {
-      dispatch(removeItems(updatedItem.id));
-    }
-  }, [amount, updatedItem.id]);
-
   const increment = (event) => {
     event.stopPropagation();
 

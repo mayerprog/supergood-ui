@@ -26,7 +26,7 @@ export const cartSlice = createSlice({
     },
     updateSum: (state, action) => {
       state.itemsSum = action.payload;
-      console.log("state.itemsSum", state.itemsSum);
+      // console.log("state.itemsSum", state.itemsSum);
     },
   },
 });

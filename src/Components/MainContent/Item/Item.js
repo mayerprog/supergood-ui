@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import styles from "./Item.module.scss";
 import AddItemBox from "../../AddItemBox.js/AddItemBox";
 import { useDispatch, useSelector } from "react-redux";
-import { addItems } from "../../../redux/slices/cartSlice";
-import PizzaOptions from "../../PizzaOptions.js/PizzaOptions";
+import { addItems, removeItems } from "../../../redux/slices/cartSlice";
+import PizzaOptions from "../PizzaOptions/PizzaOptions";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
@@ -17,6 +17,9 @@ const Item = ({ item, category, toggleCardOpen }) => {
   useEffect(() => {
     const foundCartItem = cartItems.find((cartItem) => cartItem.id === item.id);
     if (foundCartItem) {
+      if (foundCartItem.amount.value < 1) {
+        dispatch(removeItems(foundCartItem.id));
+      } //!!!!!!!!
       setAmount(foundCartItem.amount.value);
       setItemForUpdate({
         ...foundCartItem,

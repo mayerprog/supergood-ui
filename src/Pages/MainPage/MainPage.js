@@ -69,7 +69,7 @@ const MainPage = () => {
       );
       dispatch(updateSum(sum));
     }
-  }, [cartItems]);
+  }, [cartItems, dispatch]);
 
   const toggleCardOpen = (itemId) => {
     setIsCardOpen(!isCardOpen);
