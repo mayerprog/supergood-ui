@@ -7,13 +7,17 @@ import { forwardRef, useState } from "react";
 import Cart from "../Cart/Cart";
 import { useSelector } from "react-redux";
 
-const Header = forwardRef(({ toggleCartVisibility }, ref) => {
+const Header = forwardRef(({ toggleCartVisibility, setSearchQuery }, ref) => {
   const itemsSum = useSelector((state) => state.cart.itemsSum);
 
   return (
     <header className={styles.header} ref={ref}>
       <img src={logo} alt="" className={styles.logo} />
-      <input className={styles.input} placeholder="Найти блюдо" />
+      <input
+        className={styles.input}
+        placeholder="Найти блюдо"
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
       <button onClick={() => console.log("click")} className={styles.address}>
         <FaLocationDot size={18} color="#BBBBBB" className={styles.icon} />
         <span className={styles.buttonText}>

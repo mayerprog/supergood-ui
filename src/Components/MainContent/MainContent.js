@@ -43,6 +43,8 @@ const MainContent = ({
   const scrollToCategory = useCallback(
     (categoryName) => {
       const element = categoryRefs.current[categoryName];
+      if (!element) return;
+
       const offsetTop =
         element.getBoundingClientRect().top + window.scrollY - headerHeight;
 
@@ -123,17 +125,16 @@ const MainContent = ({
       },
       {
         root: null, // observing intersections with the viewport
-        rootMargin: "-30px",
+        rootMargin: "30px",
         threshold: 1, // trigger callback when the target is fully visible
       }
-      // { // for big screens
-      //   root: null, // observing intersections with the viewport
-      //   rootMargin: "-30px",
-      //   threshold: 1, // trigger callback when the target is fully visible
-      // }
     );
 
-    const headings = Object.values(categoryRefs.current);
+    // const headings = Object.values(categoryRefs.current);
+    const headings = Object.values(categoryRefs.current).filter(
+      (el) => el instanceof Element
+    );
+
     headings.forEach((el) => {
       observer.observe(el);
     });
@@ -234,6 +235,7 @@ const MainContent = ({
                   item={filteredProduct}
                   category={category}
                   toggleCardOpen={toggleCardOpen}
+                  key={index}
                 />
               ))}
           </div>

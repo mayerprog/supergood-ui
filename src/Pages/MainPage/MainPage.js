@@ -16,18 +16,44 @@ const MainPage = () => {
   const [itemCardId, setItemCardId] = useState();
   const [headerHeight, setHeaderHeight] = useState(0); // State to store header height
   const [scrolledCategory, setScrolledCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const items = useSelector((state) => state.item.items);
   const cartItems = useSelector((state) => state.cart.cartItems);
-
   const categories = [...new Set(items.map((item) => item.category))]; // Unique categories
-  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const [searchedItems, setSearchedItems] = useState([]);
+  const [searchedCategories, setSearchedCategories] = useState(categories);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const dispatch = useDispatch();
 
   const wrapperRef = useRef(null);
   const headerRef = useRef(null);
   const cardRef = useRef(null);
+
+  useEffect(() => {
+    let filteredItems = searchQuery.trim()
+      ? items.filter((item) =>
+          item.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : items;
+
+    setSearchedItems(filteredItems);
+  }, [searchQuery, items]);
+
+  useEffect(() => {
+    let filteredCategories = [
+      ...new Set(searchedItems.map((item) => item.category)),
+    ];
+    setSearchedCategories(filteredCategories);
+  }, [searchedItems]);
+
+  useEffect(() => {
+    if (searchQuery.trim() && searchedItems.length === 0) {
+      setSearchedItems(items);
+    }
+  }, [searchQuery, items, searchedItems.length]);
 
   useEffect(() => {
     if (headerRef.current) {
@@ -60,27 +86,32 @@ const MainPage = () => {
 
   return (
     <div className={styles.app}>
-      <Header toggleCartVisibility={toggleCartVisibility} ref={headerRef} />
+      <Header
+        toggleCartVisibility={toggleCartVisibility}
+        ref={headerRef}
+        setSearchQuery={setSearchQuery}
+      />
       <div className={styles.content}>
         <Sidebar
-          categories={categories}
+          categories={searchedCategories}
           onCategorySelect={setSelectedCategory}
           selectedCategory={selectedCategory}
           scrolledCategory={scrolledCategory}
         />
         <MainContent
+          items={searchedItems}
+          categories={searchedCategories}
           isCartVisible={isCartVisible}
           isCardOpen={isCardOpen}
           toggleCardOpen={toggleCardOpen}
           wrapperRef={wrapperRef}
           cardRef={cardRef}
-          items={items}
-          categories={categories}
           selectedCategory={selectedCategory}
           headerHeight={headerHeight}
           setScrolledCategory={setScrolledCategory}
           setSelectedCategory={setSelectedCategory}
           itemCardId={itemCardId}
+          searchQuery={searchQuery}
         />
         {!mediaQuery && (
           <Cart
