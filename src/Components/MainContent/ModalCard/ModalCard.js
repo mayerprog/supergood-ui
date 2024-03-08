@@ -10,7 +10,6 @@ const ModalCard = ({ itemCardId, cardRef }) => {
   const foundItem = items.find((item) => itemCardId === item.id);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const [amount, setAmount] = useState(null);
-  const [itemForUpdate, setItemForUpdate] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,11 +18,6 @@ const ModalCard = ({ itemCardId, cardRef }) => {
     );
     if (foundCartItem) {
       setAmount(foundCartItem.amount.value);
-      setItemForUpdate({
-        ...foundCartItem,
-        amount: { ...foundCartItem.amount },
-        weightout: { ...foundCartItem.weightout },
-      });
     }
   }, [cartItems, itemCardId]);
 
@@ -79,8 +73,7 @@ const ModalCard = ({ itemCardId, cardRef }) => {
           {amount > 0 ? (
             <AddItemBox
               margin="0 0.5rem"
-              amount={amount}
-              updatedItem={itemForUpdate}
+              itemId={itemCardId}
               backgroundColor="#fcfcfc"
               // boxShadow="0 0 2px rgba(0, 0, 0, 0.2)"
             />

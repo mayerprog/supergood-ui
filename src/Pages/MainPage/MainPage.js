@@ -13,7 +13,7 @@ import { updateSum } from "../../redux/slices/cartSlice";
 const MainPage = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [isCardOpen, setIsCardOpen] = useState(false);
-  const [itemCardId, setItemCardId] = useState();
+  const [itemCardId, setItemCardId] = useState(null);
   const [headerHeight, setHeaderHeight] = useState(0); // State to store header height
   const [scrolledCategory, setScrolledCategory] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);

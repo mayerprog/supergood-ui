@@ -1,7 +1,7 @@
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import styles from "./AddItemBox.module.scss";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeItems, updateItem } from "../../redux/slices/cartSlice";
 
 const AddItemBox = ({
@@ -10,8 +10,7 @@ const AddItemBox = ({
   width,
   color,
   margin,
-  updatedItem,
-  amount,
+  itemId,
 }) => {
   const dynamicStyle = {
     "--counter-bg-color": backgroundColor,
@@ -21,7 +20,27 @@ const AddItemBox = ({
     "--counter-margin": margin,
   };
 
+  const [amount, setAmount] = useState(null);
+  const [updatedItem, setUpdatedItem] = useState(null);
+
   const dispatch = useDispatch();
+
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  useEffect(() => {
+    const foundCartItem = cartItems.find((cartItem) => itemId === cartItem.id);
+    if (foundCartItem) {
+      if (foundCartItem.amount.value < 1) {
+        dispatch(removeItems(foundCartItem.id));
+      }
+      setAmount(foundCartItem.amount.value);
+      setUpdatedItem({
+        ...foundCartItem,
+        amount: { ...foundCartItem.amount },
+        weightout: { ...foundCartItem.weightout },
+      });
+    }
+  }, [cartItems, itemId]);
 
   const increment = (event) => {
     event.stopPropagation();

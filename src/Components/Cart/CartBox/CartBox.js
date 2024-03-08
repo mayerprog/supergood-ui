@@ -2,12 +2,6 @@ import AddItemBox from "../../AddItemBox.js/AddItemBox";
 import styles from "./CartBox.module.scss";
 
 const CartBox = ({ item, index }) => {
-  let updatedItem = {
-    ...item,
-    amount: { ...item.amount },
-    weightout: { ...item.weightout },
-  };
-
   return (
     <div className={styles.cartBox} key={index}>
       <img className={styles.cartImage} src={item.imageUrl} alt="Pizza" />
@@ -21,8 +15,7 @@ const CartBox = ({ item, index }) => {
       </div>
       <div className={styles.countBox}>
         <AddItemBox
-          amount={item.amount.value}
-          updatedItem={updatedItem}
+          itemId={item.id}
           backgroundColor="#fcfcfc"
           boxShadow="0 0 2px rgba(0, 0, 0, 0.2)"
           width="5em"
