@@ -124,9 +124,9 @@ const MainContent = ({
         });
       },
       {
-        root: null, // observing intersections with the viewport
-        rootMargin: "30px",
-        threshold: 1, // trigger callback when the target is fully visible
+        root: null,
+        rootMargin: "0px 0px -100%",
+        threshold: 0,
       }
     );
 
