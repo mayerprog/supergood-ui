@@ -125,7 +125,7 @@ const MainContent = ({
       },
       {
         root: null,
-        rootMargin: "0px 0px -100%",
+        rootMargin: "0px 0px -90%", // element intersecting when it reaches top of the viewport.
         threshold: 0,
       }
     );
