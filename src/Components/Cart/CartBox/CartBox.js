@@ -1,4 +1,4 @@
-import AddItemBox from "../../AddItemBox.js/AddItemBox";
+import AddItemBox from "../../AddItemBox/AddItemBox";
 import styles from "./CartBox.module.scss";
 
 const CartBox = ({ item, index }) => {

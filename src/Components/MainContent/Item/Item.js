@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Item.module.scss";
-import AddItemBox from "../../AddItemBox.js/AddItemBox";
+import AddItemBox from "../../AddItemBox/AddItemBox";
 import { useDispatch, useSelector } from "react-redux";
 import { addItems } from "../../../redux/slices/cartSlice";
 import PizzaOptions from "../PizzaOptions/PizzaOptions";
