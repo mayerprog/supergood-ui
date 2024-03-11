@@ -93,8 +93,16 @@
   }
 
   .socialMedia {
-    width: 211px;
-    height: 63px;
+    display: flex;
+    flex-direction: row;
+    img {
+      width: 37px;
+      height: 37px;
+      margin-right: 10px;
+    }
+    .lastimg {
+      margin-right: 5px;
+    }
   }
 
   .cartButton {
@@ -104,6 +112,7 @@
     max-width: 200px;
     text-overflow: ellipsis;
     transition: max-width 0.8s ease-out;
+
     @media (max-width: 1481px) {
       max-width: 110px;
       width: auto;

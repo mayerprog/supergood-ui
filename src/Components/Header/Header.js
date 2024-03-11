@@ -1,10 +1,12 @@
 import styles from "./Header.module.scss";
 import logo from "../../assets/images/logo.jpg";
-import socialNet from "../../assets/images/socialnetworks.jpg";
+import vk from "../../assets/social-networks/vk.png";
+import telegram from "../../assets/social-networks/telegram.png";
+import discount from "../../assets/social-networks/discount.png";
+import phone from "../../assets/social-networks/phone.png";
 import { GiShoppingCart } from "react-icons/gi";
 import { FaLocationDot } from "react-icons/fa6";
 import { forwardRef, useState } from "react";
-import Cart from "../Cart/Cart";
 import { useSelector } from "react-redux";
 
 const Header = forwardRef(({ toggleCartVisibility, setSearchQuery }, ref) => {
@@ -24,7 +26,32 @@ const Header = forwardRef(({ toggleCartVisibility, setSearchQuery }, ref) => {
           Большая Новодмитровская улица, 12с15
         </span>
       </button>
-      <img src={socialNet} alt="" className={styles.socialMedia} />
+      <div className={styles.socialMedia}>
+        <a
+          href="https://vk.com/supergoodru"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={vk} alt="vk" />
+        </a>
+        <a
+          href="https://t.me/supergoodru"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={telegram} alt="telegram" />
+        </a>
+        <a
+          href="https://supergood.ru/akcii"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={discount} alt="discount" />
+        </a>
+        <a href="" target="_blank" rel="noopener noreferrer">
+          <img src={phone} alt="phone" className={styles.lastimg} />
+        </a>
+      </div>
       <button className={styles.cartButton} onClick={toggleCartVisibility}>
         <GiShoppingCart size={25} className={styles.icon} />
         <span className={styles.buttonText}>{itemsSum} ₽</span>
