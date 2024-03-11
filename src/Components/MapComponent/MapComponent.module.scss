@@ -1,0 +1,22 @@
+.mapContainer {
+  display: flex;
+  position: absolute;
+  margin-top: -170px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #ccc;
+  // max-height: calc(100vh - 300px);
+  min-height: 500px;
+  // max-width: calc(100vw - 900px);
+  min-width: 700px;
+  font-family: "Inter", sans-serif;
+  background-color: #fcfcfc;
+  justify-content: center;
+  align-items: center;
+  // padding: 10px;
+
+  .map {
+    display: flex;
+    width: 600px;
+    height: 400px;
+  }
+}

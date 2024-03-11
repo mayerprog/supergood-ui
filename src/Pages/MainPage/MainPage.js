@@ -13,6 +13,7 @@ import { updateSum } from "../../redux/slices/cartSlice";
 const MainPage = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [isCardOpen, setIsCardOpen] = useState(false);
+  const [isMapOpen, setIsMapOpen] = useState(false);
   const [itemCardId, setItemCardId] = useState(null);
   const [headerHeight, setHeaderHeight] = useState(0); // State to store header height
   const [scrolledCategory, setScrolledCategory] = useState(null);
@@ -31,6 +32,7 @@ const MainPage = () => {
   const wrapperRef = useRef(null);
   const headerRef = useRef(null);
   const cardRef = useRef(null);
+  const mapRef = useRef(null);
 
   useEffect(() => {
     let filteredItems = searchQuery.trim()
@@ -79,8 +81,12 @@ const MainPage = () => {
   const toggleCartVisibility = () => {
     setIsCartVisible(!isCartVisible);
   };
+  const toggleMapVisibility = () => {
+    setIsMapOpen(!isMapOpen);
+  };
   useOutsideHook([wrapperRef, headerRef], toggleCartVisibility); // to close popup <Cart /> clicking outside
   useOutsideHook([cardRef, headerRef], toggleCardOpen); // to close popup <ModalCard /> clicking outside
+  useOutsideHook([mapRef, headerRef], toggleMapVisibility); // to close popup <MapComponent /> clicking outside
 
   const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
 
@@ -88,6 +94,7 @@ const MainPage = () => {
     <div className={styles.app}>
       <Header
         toggleCartVisibility={toggleCartVisibility}
+        toggleMapVisibility={toggleMapVisibility}
         ref={headerRef}
         setSearchQuery={setSearchQuery}
       />
@@ -98,6 +105,7 @@ const MainPage = () => {
           selectedCategory={selectedCategory}
           scrolledCategory={scrolledCategory}
         />
+
         <MainContent
           items={searchedItems}
           categories={searchedCategories}
@@ -112,6 +120,8 @@ const MainPage = () => {
           setSelectedCategory={setSelectedCategory}
           itemCardId={itemCardId}
           searchQuery={searchQuery}
+          mapRef={mapRef}
+          isMapOpen={isMapOpen}
         />
         {!mediaQuery && (
           <Cart

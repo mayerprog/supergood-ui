@@ -11,6 +11,7 @@ import { itemAPI } from "../../api/itemAPI";
 import { setItems } from "../../redux/slices/itemSlice";
 import Cart from "../Cart/Cart";
 import ModalCard from "./ModalCard/ModalCard";
+import MapComponent from "../MapComponent/MapComponent";
 
 const MainContent = ({
   isCartVisible,
@@ -25,6 +26,8 @@ const MainContent = ({
   setSelectedCategory,
   itemCardId,
   cardRef,
+  mapRef,
+  isMapOpen,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -199,6 +202,7 @@ const MainContent = ({
           />
         </div>
       )}
+
       <div className={styles.slider} ref={sliderRef}>
         <div className={styles.sliderArrowLeft} onClick={slideToLeft}>
           &#10094;
@@ -222,6 +226,11 @@ const MainContent = ({
       {isCardOpen && (
         <div className={styles.cardOverlay}>
           <ModalCard itemCardId={itemCardId} cardRef={cardRef} />
+        </div>
+      )}
+      {isMapOpen && (
+        <div className={styles.cardOverlay}>
+          <MapComponent />
         </div>
       )}
       {categories.map((category, index) => (
