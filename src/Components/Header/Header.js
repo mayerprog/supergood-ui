@@ -23,9 +23,7 @@ const Header = forwardRef(
         />
         <button onClick={toggleMapVisibility} className={styles.address}>
           <FaLocationDot size={18} color="#BBBBBB" className={styles.icon} />
-          <span className={styles.buttonText}>
-            Большая Новодмитровская улица, 12с15
-          </span>
+          <span className={styles.buttonText}>Укажите адрес доставки</span>
         </button>
         <div className={styles.socialMedia}>
           <a

@@ -15,10 +15,10 @@
   margin-top: -170px;
   border-radius: 10px;
   box-shadow: 0 0 5px #ccc;
-  max-height: calc(100vh - 350px);
+  max-height: calc(100vh - 450px);
   min-height: 500px;
   height: 100%;
-  max-width: calc(100vw - 1140px);
+  max-width: calc(100vw - 1200px);
   min-width: 730px;
   width: 100%;
   font-family: "Inter", sans-serif;
@@ -26,13 +26,18 @@
   background-color: #fcfcfc;
   justify-content: center;
   align-items: center;
-  padding: 20px 5px;
+  padding: 25px;
+
+  h3 {
+    align-self: flex-start;
+  }
 
   .addressContainer {
     display: flex;
     flex-direction: row;
     margin-bottom: 15px;
     height: 30px;
+    align-self: flex-start;
 
     .input {
       padding: 0.5em;
@@ -61,8 +66,7 @@
   }
 
   .map {
-    display: flex;
-    width: 700px;
+    width: 730px;
     height: 400px;
   }
 }
