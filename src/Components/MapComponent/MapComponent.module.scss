@@ -7,8 +7,9 @@
   // max-height: calc(100vh - 300px);
   min-height: 500px;
   // max-width: calc(100vw - 900px);
-  min-width: 700px;
+  min-width: 800px;
   font-family: "Inter", sans-serif;
+  font-size: small;
   background-color: #fcfcfc;
   justify-content: center;
   align-items: center;
@@ -16,7 +17,7 @@
 
   .map {
     display: flex;
-    width: 600px;
+    width: 700px;
     height: 400px;
   }
 }

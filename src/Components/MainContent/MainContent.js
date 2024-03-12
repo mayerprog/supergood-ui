@@ -26,7 +26,7 @@ const MainContent = ({
   setSelectedCategory,
   itemCardId,
   cardRef,
-  mapRef,
+  mapWrapperRef,
   isMapOpen,
 }) => {
   const slides = [
@@ -230,7 +230,7 @@ const MainContent = ({
       )}
       {isMapOpen && (
         <div className={styles.cardOverlay}>
-          <MapComponent />
+          <MapComponent mapWrapperRef={mapWrapperRef} />
         </div>
       )}
       {categories.map((category, index) => (

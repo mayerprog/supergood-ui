@@ -1,35 +1,41 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./MapComponent.module.scss";
-import Map from "ol/Map.js";
-import View from "ol/View.js";
-import TileLayer from "ol/layer/Tile.js";
-import OSM from "ol/source/OSM.js";
-import { fromLonLat } from "ol/proj";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L, { Icon } from "leaflet";
+import placeholder from "../../assets/images/placeholder.png";
 
-const MapComponent = () => {
-  const ref = useRef(null);
-  const mapRef = useRef(null);
+const MapComponent = ({ mapWrapperRef }) => {
+  const position = [55.7558, 37.6173]; //Moscow
 
-  useEffect(() => {
-    if (ref.current && !mapRef.current) {
-      //!mapRef.current means the map has not yet been initialized and stored in mapRef. This effectively prevents re-initializing the map if the component re-renders.
-      mapRef.current = new Map({
-        target: ref.current,
-        layers: [new TileLayer({ source: new OSM() })],
-        view: new View({
-          center: fromLonLat([37.6173, 55.7558]), // Coordinates for Moscow, adjust accordingly
-          zoom: 12,
-        }),
-      });
-    }
-  }, [ref, mapRef]);
+  delete L.Icon.Default.prototype._getIconUrl;
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+    shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+  });
 
-  useEffect(() => {
-    mapRef.current?.getView().setZoom(12);
-  }, [mapRef]);
+  const customIcon = new Icon({
+    iconUrl: placeholder,
+    iconSize: [30, 30],
+  });
+
   return (
-    <div className={styles.mapContainer}>
-      <div ref={ref} className={styles.map}></div>
+    <div className={styles.mapContainer} ref={mapWrapperRef}>
+      <MapContainer
+        center={position}
+        zoom={12}
+        attributionControl={false}
+        className={styles.map}
+      >
+        <TileLayer
+          url="https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
+          //   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        <Marker position={position} icon={customIcon}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      </MapContainer>
     </div>
   );
 };

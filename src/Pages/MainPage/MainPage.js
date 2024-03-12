@@ -32,7 +32,7 @@ const MainPage = () => {
   const wrapperRef = useRef(null);
   const headerRef = useRef(null);
   const cardRef = useRef(null);
-  const mapRef = useRef(null);
+  const mapWrapperRef = useRef(null);
 
   useEffect(() => {
     let filteredItems = searchQuery.trim()
@@ -86,7 +86,7 @@ const MainPage = () => {
   };
   useOutsideHook([wrapperRef, headerRef], toggleCartVisibility); // to close popup <Cart /> clicking outside
   useOutsideHook([cardRef, headerRef], toggleCardOpen); // to close popup <ModalCard /> clicking outside
-  useOutsideHook([mapRef, headerRef], toggleMapVisibility); // to close popup <MapComponent /> clicking outside
+  useOutsideHook([mapWrapperRef, headerRef], toggleMapVisibility); // to close popup <MapComponent /> clicking outside
 
   const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
 
@@ -120,7 +120,7 @@ const MainPage = () => {
           setSelectedCategory={setSelectedCategory}
           itemCardId={itemCardId}
           searchQuery={searchQuery}
-          mapRef={mapRef}
+          mapWrapperRef={mapWrapperRef}
           isMapOpen={isMapOpen}
         />
         {!mediaQuery && (
