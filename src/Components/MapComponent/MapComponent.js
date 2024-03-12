@@ -54,8 +54,13 @@ const MapComponent = ({ mapWrapperRef }) => {
 
   return (
     <div className={styles.mapContainer} ref={mapWrapperRef}>
+      <h3>Наша территория доставки </h3>
+
       <div className={styles.addressContainer}>
-        <input className={styles.input} placeholder="Укажите адрес доставки" />
+        <input
+          className={styles.input}
+          placeholder="Укажите адрес доставки (улица, номер дома)"
+        />
         <button className={styles.buttonStyle}>
           <span className={styles.buttonText}>Подтвердить</span>
         </button>
