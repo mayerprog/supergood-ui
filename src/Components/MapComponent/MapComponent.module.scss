@@ -27,7 +27,6 @@
   justify-content: center;
   align-items: center;
   padding: 20px 5px;
-  // padding: 10px;
 
   .addressContainer {
     display: flex;
@@ -38,9 +37,9 @@
     .input {
       padding: 0.5em;
       @include reusable-address-box;
-      min-width: 300px;
+      min-width: 400px;
       padding-left: 20px;
-
+      font-family: "Inter", sans-serif;
       text-overflow: ellipsis;
 
       @include focus-style(#ccc);

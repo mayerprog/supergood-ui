@@ -25,12 +25,12 @@ const MapComponent = ({ mapWrapperRef }) => {
     };
 
     try {
-      //   const response = await axios.get(url, axiosConfig);
-      //   const data = response.data;
-      //   setAddress(data.display_name);
-      //   console.log("Address:", data);
-      const address = await addressAPI.postAddress(lat, lng);
-      console.log(address, "address");
+      const response = await axios.get(url, axiosConfig);
+      const data = response.data;
+      setAddress(data.display_name);
+      console.log("Address:", data);
+      //   const address = await addressAPI.postAddress(lat, lng);
+      //   console.log(address, "address");
     } catch (error) {
       console.error("Failed to fetch address:", error);
     }
@@ -54,12 +54,13 @@ const MapComponent = ({ mapWrapperRef }) => {
 
   return (
     <div className={styles.mapContainer} ref={mapWrapperRef}>
-      <h3>Наша территория доставки </h3>
+      <h3>Наша территория доставки</h3>
 
       <div className={styles.addressContainer}>
         <input
           className={styles.input}
           placeholder="Укажите адрес доставки (улица, номер дома)"
+          value={address}
         />
         <button className={styles.buttonStyle}>
           <span className={styles.buttonText}>Подтвердить</span>
