@@ -15,14 +15,6 @@
   margin-right: 7px;
 }
 
-@mixin focus-style($color) {
-  &:focus {
-    outline: none;
-    border-color: $color;
-    box-shadow: 0 0 5px $color;
-  }
-}
-
 @mixin header-button($base-color: #fcfcfc) {
   @include form-element-style;
   box-shadow: 0 0 5px #ccc;
@@ -30,11 +22,6 @@
   margin-inline-end: 1vw;
   padding: 0 1.5em;
   @include interactive-bg($base-color);
-}
-
-@mixin icon-style {
-  margin-right: 10px;
-  flex-shrink: 0;
 }
 
 .header {

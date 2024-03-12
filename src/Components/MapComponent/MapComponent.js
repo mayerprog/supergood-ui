@@ -6,14 +6,16 @@ import {
   Marker,
   Popup,
   useMapEvents,
+  ZoomControl,
 } from "react-leaflet";
 import L, { Icon } from "leaflet";
 import placeholder from "../../assets/images/placeholder.png";
 import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
+import { FaLocationDot } from "react-icons/fa6";
 
 const MapComponent = ({ mapWrapperRef }) => {
-  const [position, setPosition] = useState([55.7558, 37.6173]); // Initial position for Moscow
+  const [position, setPosition] = useState([0, 0]); // Initial position for Moscow
   const [address, setAddress] = useState(null);
 
   const fetchAddress = async (lat, lng) => {
@@ -23,15 +25,12 @@ const MapComponent = ({ mapWrapperRef }) => {
     };
 
     try {
-      const response = await axios.get(url, axiosConfig);
-      const data = response.data;
-      setAddress(data.display_name);
-      console.log("Address:", data);
-      // const address = await addressAPI.postAddress(
-      //   marker.getLatLng().lat,
-      //   marker.getLatLng().lng
-      // );
-      //   console.log(address, "address");
+      //   const response = await axios.get(url, axiosConfig);
+      //   const data = response.data;
+      //   setAddress(data.display_name);
+      //   console.log("Address:", data);
+      const address = await addressAPI.postAddress(lat, lng);
+      console.log(address, "address");
     } catch (error) {
       console.error("Failed to fetch address:", error);
     }
@@ -55,11 +54,19 @@ const MapComponent = ({ mapWrapperRef }) => {
 
   return (
     <div className={styles.mapContainer} ref={mapWrapperRef}>
+      <div className={styles.addressContainer}>
+        <input className={styles.input} placeholder="Укажите адрес доставки" />
+        <button className={styles.buttonStyle}>
+          <span className={styles.buttonText}>Подтвердить</span>
+        </button>
+      </div>
       <MapContainer
-        center={position}
+        center={[55.7558, 37.6173]}
         zoom={12}
         attributionControl={false}
         className={styles.map}
+        zoomControl={false}
+        minZoom={12}
       >
         <TileLayer
           url="https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
@@ -69,6 +76,7 @@ const MapComponent = ({ mapWrapperRef }) => {
           <Popup>{address}</Popup>
         </Marker>
         <MapEvents />
+        <ZoomControl position="topleft" zoomInText="+" zoomOutText="-" />
       </MapContainer>
     </div>
   );
