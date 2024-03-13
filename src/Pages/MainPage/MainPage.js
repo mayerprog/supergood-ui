@@ -127,7 +127,7 @@ const MainPage = () => {
           <Cart
             position="sticky"
             top="105px"
-            height="calc(100vh - 150px)"
+            height="calc(100vh - 180px)"
             transform="none"
           />
         )}

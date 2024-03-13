@@ -101,10 +101,7 @@ const MapComponent = ({ mapWrapperRef }) => {
         zoomControl={false}
         minZoom={10}
       >
-        <TileLayer
-          url="https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png"
-          //   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
+        <TileLayer url="https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png" />
         <Marker position={position} icon={customIcon}>
           <Popup>{address}</Popup>
         </Marker>
