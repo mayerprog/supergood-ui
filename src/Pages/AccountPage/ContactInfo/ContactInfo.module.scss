@@ -29,11 +29,6 @@
     font-size: 0.95rem;
     font-family: "Inter", sans-serif;
 
-    &:focus {
-      border-color: #e9bc5b; // Example to match MUI focus style
-      outline: none;
-    }
-
     @include focus-style(#ccc);
   }
 }

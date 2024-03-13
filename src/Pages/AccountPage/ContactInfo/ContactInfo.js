@@ -12,6 +12,8 @@ dayjs.extend(customParseFormat);
 
 dayjs.locale("ru"); // Use the Russian locale globally
 
+const mainColor = "#e9bc5b";
+
 const theme = createTheme({
   components: {
     MuiTextField: {
@@ -29,6 +31,9 @@ const theme = createTheme({
           fontSize: "0.95rem",
           fontFamily: "Inter",
           top: "-2px",
+          "&.Mui-focused": {
+            color: mainColor, // Label color when the TextField is focused
+          },
         },
       },
     },
@@ -41,13 +46,16 @@ const theme = createTheme({
             borderRadius: "10px",
             height: "50px",
           },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: mainColor,
+          },
         },
       },
     },
     MuiInputAdornment: {
       styleOverrides: {
         positionEnd: {
-          marginTop: "-5px",
+          marginTop: "-2px",
         },
       },
     },
@@ -56,6 +64,23 @@ const theme = createTheme({
         input: {
           marginTop: "-2px",
         },
+      },
+    },
+    MuiPickersDay: {
+      styleOverrides: {
+        root: {
+          "&.MuiPickersDay-root.Mui-selected": {
+            backgroundColor: mainColor,
+          },
+          "&.Mui-selected": {
+            backgroundColor: mainColor,
+          },
+        },
+      },
+    },
+    MuiIconButton: {
+      defaultProps: {
+        disableRipple: true, // Globally disables the ripple effect for all IconButton components
       },
     },
   },
@@ -77,7 +102,7 @@ const ContactInfo = ({ selectedDate, setSelectedDate }) => {
         <ThemeProvider theme={theme}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              label="Введите дату"
+              label="Дата рождения"
               value={selectedDate}
               onChange={(newValue) => {
                 setSelectedDate(newValue);
