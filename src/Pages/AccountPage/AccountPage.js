@@ -18,9 +18,12 @@ const AccountPage = () => {
     <div className={styles.container}>
       <Header isProfile={true} />
       <div className={styles.content}>
-        <h2>Personal Information</h2>
-        <div onClick={handleLogoutClick}>
-          <AiOutlineLogout size={25} className={styles.icon} />
+        <div className={styles.title}>
+          <h2>Личный кабинет</h2>
+          <div onClick={handleLogoutClick} className={styles.logout}>
+            <span>Выйти</span>
+            <AiOutlineLogout size={25} className={styles.icon} />
+          </div>
         </div>
       </div>
     </div>
