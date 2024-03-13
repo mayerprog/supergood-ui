@@ -8,10 +8,17 @@ import { GiShoppingCart } from "react-icons/gi";
 import { FaLocationDot } from "react-icons/fa6";
 import { forwardRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Header = forwardRef(
   ({ toggleCartVisibility, setSearchQuery, toggleMapVisibility }, ref) => {
     const itemsSum = useSelector((state) => state.cart.itemsSum);
+
+    let navigate = useNavigate();
+
+    const handleLoginClick = () => {
+      navigate("/user");
+    };
 
     return (
       <header className={styles.header} ref={ref}>
@@ -55,7 +62,9 @@ const Header = forwardRef(
           <GiShoppingCart size={25} className={styles.icon} />
           <span className={styles.buttonText}>{itemsSum} ₽</span>
         </button>
-        <button className={styles.loginButton}>Войти</button>
+        <button className={styles.loginButton} onClick={handleLoginClick}>
+          Войти
+        </button>
       </header>
     );
   }
