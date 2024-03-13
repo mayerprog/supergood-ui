@@ -1,22 +1,7 @@
 @import "../../mixins/mixins";
 
-@mixin form-element-style {
-  display: flex;
-  font-size: 0.95rem;
-  border-width: 0;
-  min-height: 40px;
-  border-radius: 10px;
-  background-color: #fcfcfc;
-  transition: background-color 0.3s ease;
-  align-items: center;
-  justify-content: flex-start;
-  font-family: "Inter", sans-serif;
-  background-color: rgba(255, 255, 255, 0.1);
-  margin-right: 7px;
-}
-
 @mixin header-button($base-color: #fcfcfc) {
-  @include form-element-style;
+  @include form-input-style;
   box-shadow: 0 0 5px #ccc;
   cursor: pointer;
   margin-inline-end: 1vw;
@@ -48,7 +33,7 @@
   }
 
   .input {
-    @include form-element-style;
+    @include form-input-style;
     width: 100%;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     max-width: 300px;
@@ -60,7 +45,7 @@
   }
 
   .address {
-    @include form-element-style;
+    @include form-input-style;
     width: 100%;
     box-shadow: 0 0 5px #ccc;
     max-width: 380px;

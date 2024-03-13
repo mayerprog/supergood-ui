@@ -46,3 +46,18 @@
   margin-right: 10px;
   flex-shrink: 0;
 }
+
+@mixin form-input-style {
+  display: flex;
+  font-size: 0.95rem;
+  border-width: 0;
+  min-height: 40px;
+  border-radius: 10px;
+  background-color: #fcfcfc;
+  transition: background-color 0.3s ease;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: "Inter", sans-serif;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-right: 7px;
+}
