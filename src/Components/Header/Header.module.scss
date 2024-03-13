@@ -54,7 +54,7 @@
     min-width: 150px;
     padding-left: 15px;
     text-overflow: ellipsis;
-
+    margin-left: 20px;
     @include focus-style(#ccc);
   }
 
@@ -66,6 +66,8 @@
     min-width: 150px;
     cursor: pointer;
     padding-left: 15px;
+    margin: 0 15px;
+
     .icon {
       @include icon-style;
     }
@@ -77,6 +79,13 @@
     white-space: nowrap;
     display: block;
     max-width: 100%;
+  }
+
+  .leftCluster {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: flex-end;
   }
 
   .socialMedia {
@@ -108,6 +117,11 @@
     .icon {
       @include icon-style;
     }
+  }
+
+  .socialMedia,
+  .cartButton {
+    margin-right: 40px;
   }
 
   .loginButton {

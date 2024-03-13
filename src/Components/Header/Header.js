@@ -32,39 +32,41 @@ const Header = forwardRef(
           <FaLocationDot size={18} color="#BBBBBB" className={styles.icon} />
           <span className={styles.buttonText}>Укажите адрес доставки</span>
         </button>
-        <div className={styles.socialMedia}>
-          <a
-            href="https://vk.com/supergoodru"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={vk} alt="vk" />
-          </a>
-          <a
-            href="https://t.me/supergoodru"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={telegram} alt="telegram" />
-          </a>
-          <a
-            href="https://supergood.ru/akcii"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={discount} alt="discount" />
-          </a>
-          <a href="" target="_blank" rel="noopener noreferrer">
-            <img src={phone} alt="phone" className={styles.lastimg} />
-          </a>
+        <div className={styles.leftCluster}>
+          <div className={styles.socialMedia}>
+            <a
+              href="https://vk.com/supergoodru"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={vk} alt="vk" />
+            </a>
+            <a
+              href="https://t.me/supergoodru"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={telegram} alt="telegram" />
+            </a>
+            <a
+              href="https://supergood.ru/akcii"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={discount} alt="discount" />
+            </a>
+            <a href="" target="_blank" rel="noopener noreferrer">
+              <img src={phone} alt="phone" className={styles.lastimg} />
+            </a>
+          </div>
+          <button className={styles.cartButton} onClick={toggleCartVisibility}>
+            <GiShoppingCart size={25} className={styles.icon} />
+            <span className={styles.buttonText}>{itemsSum} ₽</span>
+          </button>
+          <button className={styles.loginButton} onClick={handleLoginClick}>
+            Войти
+          </button>
         </div>
-        <button className={styles.cartButton} onClick={toggleCartVisibility}>
-          <GiShoppingCart size={25} className={styles.icon} />
-          <span className={styles.buttonText}>{itemsSum} ₽</span>
-        </button>
-        <button className={styles.loginButton} onClick={handleLoginClick}>
-          Войти
-        </button>
       </header>
     );
   }
