@@ -37,7 +37,6 @@ const MainContent = ({
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-
   const sliderRef = useRef(null);
   const categoryRefs = useRef({});
 
