@@ -98,7 +98,7 @@ const ContactInfo = ({ selectedDate, setSelectedDate }) => {
         <input className={styles.input} placeholder="Электронная почта" />
       </div>
       <div className={styles.inputContainer}>
-        <span>Дата рождения</span>
+        <span></span>
         <ThemeProvider theme={theme}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker

@@ -10,28 +10,31 @@ import { CgProfile } from "react-icons/cg";
 
 import { FaLocationDot } from "react-icons/fa6";
 import { forwardRef, useContext } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LevelContext from "../../contexts/LevelContext";
+import { setIsAuth } from "../../redux/slices/authSlice";
 
 const Header = forwardRef(
   (
     { toggleCartVisibility, setSearchQuery, toggleMapVisibility, isProfile },
     ref
   ) => {
+    const dispatch = useDispatch();
+
     const itemsSum = useSelector((state) => state.cart.itemsSum);
-    const { isAuthorised, setIsAuthorised } = useContext(LevelContext);
+    const isAuth = useSelector((state) => state.auth.isAuth);
 
     let navigate = useNavigate();
 
     const handleLoginClick = () => {
       // where authorisation must take place
-      setIsAuthorised(true);
+      dispatch(setIsAuth(true));
       navigate("/");
     };
 
     const handleProfileClick = () => {
-      if (isAuthorised) navigate("/user");
+      if (isAuth) navigate("/user");
     };
 
     return (
@@ -89,7 +92,7 @@ const Header = forwardRef(
               <img src={phone} alt="phone" className={styles.lastimg} />
             </a>
           </div>
-          {!isAuthorised && (
+          {!isAuth && (
             <button
               className={styles.cartButton}
               onClick={toggleCartVisibility}
@@ -98,7 +101,7 @@ const Header = forwardRef(
               <span className={styles.buttonText}>{itemsSum} ₽</span>
             </button>
           )}
-          {!isAuthorised ? (
+          {!isAuth ? (
             <button className={styles.loginButton} onClick={handleLoginClick}>
               Войти
             </button>

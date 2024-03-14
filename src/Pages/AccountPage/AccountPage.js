@@ -1,19 +1,21 @@
 import { useContext, useState } from "react";
 import Header from "../../Components/Header/Header";
 import styles from "./AccountPage.module.scss";
-import LevelContext from "../../contexts/LevelContext";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import ContactInfo from "./ContactInfo/ContactInfo";
+import { useDispatch } from "react-redux";
+import { setIsAuth } from "../../redux/slices/authSlice";
 
 const AccountPage = () => {
   const [selectedDate, setSelectedDate] = useState(null);
 
-  const { setIsAuthorised } = useContext(LevelContext);
+  const dispatch = useDispatch();
+
   let navigate = useNavigate();
 
   const handleLogoutClick = () => {
-    setIsAuthorised(false);
+    dispatch(setIsAuth(false));
     navigate("/");
   };
   return (
