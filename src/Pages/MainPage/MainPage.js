@@ -96,11 +96,13 @@ const MainPage = () => {
   const toggleUserInfoVisibility = () => {
     setIsUserInfoOpen(!isUserInfoOpen);
   };
-  useOutsideHook([wrapperRef, headerRef], toggleCartVisibility); // to close popup <Cart /> clicking outside
-  useOutsideHook([cardRef, headerRef], toggleCardOpen); // to close popup <ModalCard /> clicking outside
-  useOutsideHook([mapWrapperRef, headerRef], toggleMapVisibility); // to close popup <MapComponent /> clicking outside
-  useOutsideHook([optionsRef, headerRef], toggleOptionsVisibility); // to close popup <ModalOptions /> clicking outside
-  useOutsideHook([userInfoRef, headerRef], toggleUserInfoVisibility); // to close popup <ModalOptions /> clicking outside
+  useOutsideHook(wrapperRef, toggleCartVisibility); // to close popup <Cart /> clicking outside
+  useOutsideHook(cardRef, toggleCardOpen); // to close popup <ModalCard /> clicking outside
+  useOutsideHook(mapWrapperRef, toggleMapVisibility); // to close popup <MapComponent /> clicking outside
+  useOutsideHook(optionsRef, toggleOptionsVisibility); // to close popup <ModalOptions /> clicking outside
+  useOutsideHook(userInfoRef, toggleUserInfoVisibility, [
+    ".MuiDateCalendar-root",
+  ]); // to close popup <UserInfo /> clicking outside
 
   const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
 

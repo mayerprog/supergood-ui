@@ -1,17 +1,22 @@
 import { useEffect } from "react";
 
-export const useOutsideHook = (refs, toggleVisibility) => {
+export const useOutsideHook = (ref, toggleVisibility, ignoreSelectors = []) => {
   useEffect(() => {
     function handleClickOutside(event) {
+      const isInsideIgnoredElement = ignoreSelectors.some((selector) =>
+        event.target.closest(selector)
+      );
+
+      if (isInsideIgnoredElement) {
+        return;
+      }
+
       if (
-        refs.every(
-          (ref) =>
-            ref.current &&
-            !ref.current.contains(event.target) &&
-            !event.target.closest(".MuiDateCalendar-root")
-        )
+        ref.current &&
+        !ref.current.contains(event.target)
+        // !event.target.closest(".MuiDateCalendar-root")
       ) {
-        toggleVisibility();
+        toggleVisibility(false);
       }
     }
 
@@ -19,5 +24,5 @@ export const useOutsideHook = (refs, toggleVisibility) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [refs, toggleVisibility]);
+  }, [ref, toggleVisibility]);
 };
