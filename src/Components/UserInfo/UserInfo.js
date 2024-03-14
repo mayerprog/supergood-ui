@@ -1,4 +1,4 @@
-import styles from "./ContactInfo.module.scss";
+import styles from "./UserInfo.module.scss";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -20,8 +20,7 @@ const theme = createTheme(
       MuiTextField: {
         styleOverrides: {
           root: {
-            maxWidth: "320px",
-            minWidth: "150px",
+            minWidth: "388px",
           },
         },
       },
@@ -89,9 +88,9 @@ const theme = createTheme(
   ruRU
 );
 
-const ContactInfo = ({ selectedDate, setSelectedDate }) => {
+const UserInfo = ({ selectedDate, setSelectedDate, userInfoRef }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={userInfoRef}>
       <div className={styles.inputContainer}>
         <span>Имя</span>
         <input className={styles.input} placeholder="Ваше имя" />
@@ -118,18 +117,21 @@ const ContactInfo = ({ selectedDate, setSelectedDate }) => {
         </ThemeProvider>
       </div>
       <div className={styles.buttonsContainer}>
-        <button className={styles.button} onClick={() => console.log("Save")}>
+        <button
+          className={styles.buttonStyle}
+          onClick={() => console.log("Save")}
+        >
           <span className={styles.buttonText}>Сохранить</span>
         </button>
         <button
-          className={styles.button}
+          className={styles.buttonStyle}
           onClick={() => console.log("Back to menu")}
         >
-          <span className={styles.buttonText}>Вернуться к выбору блюд</span>
+          <span className={styles.buttonText}>Отмена</span>
         </button>
       </div>
     </div>
   );
 };
 
-export default ContactInfo;
+export default UserInfo;

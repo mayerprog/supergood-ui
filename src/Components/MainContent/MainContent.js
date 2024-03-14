@@ -13,6 +13,7 @@ import Cart from "../Cart/Cart";
 import ModalCard from "./ModalCard/ModalCard";
 import MapComponent from "../MapComponent/MapComponent";
 import ModalOptions from "../ModalOptions/ModalOptions";
+import UserInfo from "../UserInfo/UserInfo";
 
 const MainContent = ({
   isCartVisible,
@@ -33,6 +34,9 @@ const MainContent = ({
   optionsRef,
   isModalOptionsOpen,
   toggleOptionsVisibility,
+  userInfoRef,
+  isUserInfoOpen,
+  toggleUserInfoVisibility,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -212,6 +216,7 @@ const MainContent = ({
           <ModalOptions
             optionsRef={optionsRef}
             toggleOptionsVisibility={toggleOptionsVisibility}
+            toggleUserInfoVisibility={toggleUserInfoVisibility}
           />
         </div>
       )}
@@ -247,6 +252,11 @@ const MainContent = ({
             mapWrapperRef={mapWrapperRef}
             setIsMapOpen={setIsMapOpen}
           />
+        </div>
+      )}
+      {isUserInfoOpen && (
+        <div className={styles.cardOverlay}>
+          <UserInfo userInfoRef={userInfoRef} />
         </div>
       )}
       {categories.map((category, index) => (

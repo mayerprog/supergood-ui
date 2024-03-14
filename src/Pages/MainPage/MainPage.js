@@ -15,6 +15,7 @@ const MainPage = () => {
   const [isCardOpen, setIsCardOpen] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [isModalOptionsOpen, setIsModalOptionsOpen] = useState(false);
+  const [isUserInfoOpen, setIsUserInfoOpen] = useState(false);
   const [itemCardId, setItemCardId] = useState(null);
   const [headerHeight, setHeaderHeight] = useState(0); // State to store header height
   const [scrolledCategory, setScrolledCategory] = useState(null);
@@ -35,6 +36,7 @@ const MainPage = () => {
   const cardRef = useRef(null);
   const mapWrapperRef = useRef(null);
   const optionsRef = useRef(null);
+  const userInfoRef = useRef(null);
 
   useEffect(() => {
     let filteredItems = searchQuery.trim()
@@ -90,10 +92,15 @@ const MainPage = () => {
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
   };
+
+  const toggleUserInfoVisibility = () => {
+    setIsUserInfoOpen(!isUserInfoOpen);
+  };
   useOutsideHook([wrapperRef, headerRef], toggleCartVisibility); // to close popup <Cart /> clicking outside
   useOutsideHook([cardRef, headerRef], toggleCardOpen); // to close popup <ModalCard /> clicking outside
   useOutsideHook([mapWrapperRef, headerRef], toggleMapVisibility); // to close popup <MapComponent /> clicking outside
   useOutsideHook([optionsRef, headerRef], toggleOptionsVisibility); // to close popup <ModalOptions /> clicking outside
+  useOutsideHook([userInfoRef, headerRef], toggleUserInfoVisibility); // to close popup <ModalOptions /> clicking outside
 
   const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
 
@@ -134,6 +141,9 @@ const MainPage = () => {
           optionsRef={optionsRef}
           isModalOptionsOpen={isModalOptionsOpen}
           toggleOptionsVisibility={toggleOptionsVisibility}
+          userInfoRef={userInfoRef}
+          isUserInfoOpen={isUserInfoOpen}
+          toggleUserInfoVisibility={toggleUserInfoVisibility}
         />
         {!mediaQuery && (
           <Cart
