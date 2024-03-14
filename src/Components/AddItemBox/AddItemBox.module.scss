@@ -23,11 +23,13 @@
   .cartCounterButton {
     @include counter-button-box;
     @include interactive-bg;
+    transition: 0.6s ease;
   }
 
   .cardCounterButton {
     @include counter-button-box;
     @include interactive-bg(rgb(235, 187, 93));
+    transition: 0.6s ease;
   }
   .count {
     margin: var(--counter-margin);
