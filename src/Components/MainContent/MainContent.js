@@ -12,6 +12,7 @@ import { setItems } from "../../redux/slices/itemSlice";
 import Cart from "../Cart/Cart";
 import ModalCard from "./ModalCard/ModalCard";
 import MapComponent from "../MapComponent/MapComponent";
+import ModalOptions from "../ModalOptions/ModalOptions";
 
 const MainContent = ({
   isCartVisible,
@@ -29,6 +30,9 @@ const MainContent = ({
   mapWrapperRef,
   isMapOpen,
   setIsMapOpen,
+  optionsRef,
+  isModalOptionsOpen,
+  toggleOptionsVisibility,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -199,6 +203,15 @@ const MainContent = ({
             height="calc(100vh - 180px)"
             transform="translateX(-20%)"
             wrapperRef={wrapperRef}
+          />
+        </div>
+      )}
+
+      {isModalOptionsOpen && (
+        <div className={styles.optionsOverlay}>
+          <ModalOptions
+            optionsRef={optionsRef}
+            toggleOptionsVisibility={toggleOptionsVisibility}
           />
         </div>
       )}

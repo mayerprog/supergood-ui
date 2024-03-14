@@ -110,7 +110,7 @@ const ContactInfo = ({ selectedDate, setSelectedDate }) => {
               onChange={(newValue) => {
                 setSelectedDate(newValue);
               }}
-              format="DD/MM/YYYY"
+              format="DD.MM.YYYY"
               mask="__.__.____"
               defaultValue={dayjs("2022-04-17")}
             />

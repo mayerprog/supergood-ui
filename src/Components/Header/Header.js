@@ -17,7 +17,13 @@ import { setIsAuth } from "../../redux/slices/authSlice";
 
 const Header = forwardRef(
   (
-    { toggleCartVisibility, setSearchQuery, toggleMapVisibility, isProfile },
+    {
+      toggleCartVisibility,
+      setSearchQuery,
+      toggleMapVisibility,
+      toggleOptionsVisibility,
+      isProfile,
+    },
     ref
   ) => {
     const dispatch = useDispatch();
@@ -113,7 +119,8 @@ const Header = forwardRef(
           ) : (
             <button
               className={styles.profileButton}
-              onClick={handleProfileClick}
+              // onClick={handleProfileClick}
+              onClick={toggleOptionsVisibility}
             >
               <CgProfile size={30} className={styles.icon} />
             </button>

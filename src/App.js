@@ -6,6 +6,7 @@ import { store } from "./redux/store";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AccountPage from "./Pages/AccountPage/AccountPage";
 import ProtectedRoute from "./HOC/ProtectedRoute";
+import NewOrderPage from "./Pages/NewOrderPage/NewOrderPage";
 // import LevelContext, { LevelContextProvider } from "./contexts/LevelContext";
 
 function App() {
@@ -19,6 +20,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <AccountPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/submit"
+            element={
+              <ProtectedRoute>
+                <NewOrderPage />
               </ProtectedRoute>
             }
           />

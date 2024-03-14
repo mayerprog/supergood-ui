@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAmount, updateSum } from "../../redux/slices/cartSlice";
 import CartBox from "./CartBox/CartBox";
+import { useNavigate } from "react-router-dom";
 
 const Cart = ({ wrapperRef, position, top, height, transform }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -16,6 +17,8 @@ const Cart = ({ wrapperRef, position, top, height, transform }) => {
     "--cart-height": height,
     "--cart-transform": transform,
   };
+
+  let navigate = useNavigate();
 
   return (
     <div className={styles.cart} ref={wrapperRef} style={dynamicStyle}>
@@ -33,7 +36,10 @@ const Cart = ({ wrapperRef, position, top, height, transform }) => {
           <span>{itemsSum} ₽</span>
         </div>
         <div className={styles.button}>
-          <button className={styles.buttonStyle}>
+          <button
+            className={styles.buttonStyle}
+            onClick={() => navigate("/submit")}
+          >
             <span className={styles.buttonText}>Оформить заказ</span>
           </button>
         </div>
