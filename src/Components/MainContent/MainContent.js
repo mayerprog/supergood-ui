@@ -46,6 +46,7 @@ const MainContent = ({
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(null);
   const sliderRef = useRef(null);
   const categoryRefs = useRef({});
 
@@ -256,7 +257,11 @@ const MainContent = ({
       )}
       {isUserInfoOpen && (
         <div className={styles.cardOverlay}>
-          <UserInfo userInfoRef={userInfoRef} />
+          <UserInfo
+            userInfoRef={userInfoRef}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+          />
         </div>
       )}
       {categories.map((category, index) => (
