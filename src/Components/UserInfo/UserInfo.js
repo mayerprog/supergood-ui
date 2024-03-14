@@ -83,6 +83,13 @@ const theme = createTheme(
           disableRipple: true, // Globally disables the ripple effect for all IconButton components
         },
       },
+      MuiPickersPopper: {
+        styleOverrides: {
+          root: {
+            zIndex: 10001, // Ensure this is higher than the modal's z-index
+          },
+        },
+      },
     },
   },
   ruRU
