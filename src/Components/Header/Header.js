@@ -24,6 +24,7 @@ const Header = forwardRef(
 
     const isAuth = useSelector((state) => state.auth.isAuth);
     const itemsSum = useSelector((state) => state.cart.itemsSum);
+    const address = useSelector((state) => state.address.address);
 
     let navigate = useNavigate();
 
@@ -59,7 +60,11 @@ const Header = forwardRef(
           disabled={isProfile}
         >
           <FaLocationDot size={18} color="#BBBBBB" className={styles.icon} />
-          <span className={styles.buttonText}>Укажите адрес доставки</span>
+          {address ? (
+            <span className={styles.buttonText}>{address}</span>
+          ) : (
+            <span className={styles.buttonText}>Укажите адрес доставки</span>
+          )}
         </button>
         <div className={styles.leftCluster}>
           <div className={styles.socialMedia}>
@@ -92,7 +97,7 @@ const Header = forwardRef(
               <img src={phone} alt="phone" className={styles.lastimg} />
             </a>
           </div>
-          {!isAuth && (
+          {!isProfile && (
             <button
               className={styles.cartButton}
               onClick={toggleCartVisibility}

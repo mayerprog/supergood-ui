@@ -1095,6 +1095,8 @@ const initialState = {
       dept_id: 1257,
     },
   },
+  address: "",
+  position: [0, 0],
 };
 
 export const addressSlice = createSlice({
@@ -1102,9 +1104,15 @@ export const addressSlice = createSlice({
   initialState,
   reducers: {
     setPolyLayers: (state, action) => {},
+    addAddress: (state, action) => {
+      state.address = action.payload;
+    },
+    setPosition: (state, action) => {
+      state.position = action.payload;
+    },
   },
 });
 
-export const { setPolyPoints } = addressSlice.actions;
+export const { setPolyPoints, addAddress, setPosition } = addressSlice.actions;
 
 export default addressSlice.reducer;

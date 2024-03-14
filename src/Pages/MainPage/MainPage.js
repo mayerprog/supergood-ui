@@ -122,6 +122,7 @@ const MainPage = () => {
           searchQuery={searchQuery}
           mapWrapperRef={mapWrapperRef}
           isMapOpen={isMapOpen}
+          setIsMapOpen={setIsMapOpen}
         />
         {!mediaQuery && (
           <Cart

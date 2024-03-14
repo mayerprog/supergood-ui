@@ -11,17 +11,26 @@ import {
 } from "react-leaflet";
 import L, { Icon } from "leaflet";
 import placeholder from "../../assets/images/placeholder.png";
+import pin from "../../assets/images/pin.png";
 import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { FaLocationDot } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addAddress, setPosition } from "../../redux/slices/addressSlice";
 
-const MapComponent = ({ mapWrapperRef }) => {
-  const [position, setPosition] = useState([0, 0]);
-  const [address, setAddress] = useState("");
+const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygon, setmMltiPolygon] = useState([]);
+  const [inputAddress, setInputAddress] = useState("");
+  // const [onChangeAddress, setOnChangeAddress] = useState(null); //для onchange и выпадающего списка
+  const dispatch = useDispatch();
 
   const polyLayers = useSelector((state) => state.address.polyLayers);
+  const position = useSelector((state) => state.address.position);
+  const address = useSelector((state) => state.address.address);
+
+  useEffect(() => {
+    setInputAddress(address);
+  }, []);
 
   useEffect(() => {
     const polygonArray = [];
@@ -52,7 +61,7 @@ const MapComponent = ({ mapWrapperRef }) => {
     try {
       const response = await axios.get(url, axiosConfig);
       const data = response.data;
-      setAddress(data.display_name);
+      setInputAddress(data.display_name);
       console.log("Address:", data);
       //   const address = await addressAPI.postAddress(lat, lng);
       //   console.log(address, "address");
@@ -65,15 +74,20 @@ const MapComponent = ({ mapWrapperRef }) => {
     useMapEvents({
       click(e) {
         const { lat, lng } = e.latlng;
-        setPosition([lat, lng]);
+        dispatch(setPosition([lat, lng]));
         fetchAddress(lat, lng);
       },
     });
     return null; // the component is only for side effects, it doesn't render anything
   };
 
+  const handleAddress = () => {
+    dispatch(addAddress(inputAddress));
+    setIsMapOpen(false);
+  };
+
   const customIcon = new Icon({
-    iconUrl: placeholder,
+    iconUrl: pin,
     iconSize: [30, 30],
   });
 
@@ -86,10 +100,11 @@ const MapComponent = ({ mapWrapperRef }) => {
         <input
           className={styles.input}
           placeholder="Укажите адрес доставки (улица, номер дома)"
-          value={address}
-          onChange={() => console.log("something")}
+          value={inputAddress ? inputAddress : address}
+          // onChange={(inputAddress) => dispatch(setAddress(inputAddress))}
+          onChange={() => console.log("inputAddress")}
         />
-        <button className={styles.buttonStyle}>
+        <button className={styles.buttonStyle} onClick={handleAddress}>
           <span className={styles.buttonText}>Подтвердить</span>
         </button>
       </div>
@@ -103,7 +118,7 @@ const MapComponent = ({ mapWrapperRef }) => {
       >
         <TileLayer url="https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png" />
         <Marker position={position} icon={customIcon}>
-          <Popup>{address}</Popup>
+          <Popup>{inputAddress}</Popup>
         </Marker>
         <MapEvents />
         <ZoomControl position="topleft" zoomInText="+" zoomOutText="-" />

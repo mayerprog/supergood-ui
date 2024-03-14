@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setIsAuth } from "../../redux/slices/authSlice";
 import ContactInfo from "../../Components/ContactInfo/ContactInfo";
+import OrdersContainer from "../../Components/Orders/OrdersContainer";
+import AddressContainer from "../../Components/Address/AddressContainer";
 
 const AccountPage = () => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -33,6 +35,8 @@ const AccountPage = () => {
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
         />
+        <OrdersContainer />
+        <AddressContainer />
       </div>
     </div>
   );

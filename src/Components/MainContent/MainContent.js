@@ -28,6 +28,7 @@ const MainContent = ({
   cardRef,
   mapWrapperRef,
   isMapOpen,
+  setIsMapOpen,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -229,7 +230,10 @@ const MainContent = ({
       )}
       {isMapOpen && (
         <div className={styles.cardOverlay}>
-          <MapComponent mapWrapperRef={mapWrapperRef} />
+          <MapComponent
+            mapWrapperRef={mapWrapperRef}
+            setIsMapOpen={setIsMapOpen}
+          />
         </div>
       )}
       {categories.map((category, index) => (
