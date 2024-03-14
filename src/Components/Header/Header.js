@@ -106,8 +106,11 @@ const Header = forwardRef(
               Войти
             </button>
           ) : (
-            <button className={styles.loginButton} onClick={handleProfileClick}>
-              <CgProfile size={30} className={styles.icon} color="#e9bc5b" />
+            <button
+              className={styles.profileButton}
+              onClick={handleProfileClick}
+            >
+              <CgProfile size={30} className={styles.icon} />
             </button>
           )}
         </div>

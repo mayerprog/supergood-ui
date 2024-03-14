@@ -3,7 +3,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ruRU } from "@mui/x-date-pickers/locales";
-import TextField from "@mui/material/TextField";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -112,9 +111,6 @@ const ContactInfo = ({ selectedDate, setSelectedDate }) => {
                 setSelectedDate(newValue);
               }}
               format="DD/MM/YYYY"
-              renderInput={(params) => (
-                <TextField placeholder="tt.mm.jjjj" {...params} />
-              )}
               mask="__.__.____"
               defaultValue={dayjs("2022-04-17")}
             />
@@ -125,7 +121,10 @@ const ContactInfo = ({ selectedDate, setSelectedDate }) => {
         <button className={styles.button} onClick={() => console.log("Save")}>
           <span className={styles.buttonText}>Сохранить</span>
         </button>
-        <button className={styles.button} onClick={() => console.log("Save")}>
+        <button
+          className={styles.button}
+          onClick={() => console.log("Back to menu")}
+        >
           <span className={styles.buttonText}>Вернуться к выбору блюд</span>
         </button>
       </div>
