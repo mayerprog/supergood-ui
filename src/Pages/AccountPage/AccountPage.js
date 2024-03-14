@@ -3,9 +3,9 @@ import Header from "../../Components/Header/Header";
 import styles from "./AccountPage.module.scss";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import ContactInfo from "./ContactInfo/ContactInfo";
 import { useDispatch } from "react-redux";
 import { setIsAuth } from "../../redux/slices/authSlice";
+import ContactInfo from "../../Components/ContactInfo/ContactInfo";
 
 const AccountPage = () => {
   const [selectedDate, setSelectedDate] = useState(null);

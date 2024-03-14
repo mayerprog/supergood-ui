@@ -22,8 +22,8 @@ const Header = forwardRef(
   ) => {
     const dispatch = useDispatch();
 
-    const itemsSum = useSelector((state) => state.cart.itemsSum);
     const isAuth = useSelector((state) => state.auth.isAuth);
+    const itemsSum = useSelector((state) => state.cart.itemsSum);
 
     let navigate = useNavigate();
 
