@@ -1,11 +1,15 @@
 import { useSelector } from "react-redux";
 import styles from "./AddressModal.module.scss";
 import { FiEdit } from "react-icons/fi";
+import { MdOutlineAdd } from "react-icons/md";
+
 import { useState } from "react";
+import AddAddressComponent from "../AddAddressComponent/AddAddressComponent";
 
 const AddressModal = ({ addressRef }) => {
   const address = useSelector((state) => state.address.address);
-  const [isAddressOpen, setIsAddressOpen] = useState(false);
+  const [isChangeAddressOpen, setIsChangeAddressOpen] = useState(false);
+  const [isNewAddressOpen, setIsNewAddressOpen] = useState(false);
   const [addressIndex, setAddressIndex] = useState(null);
   const addressList = [
     "5-я улица Ямского Поля, 7к2",
@@ -14,7 +18,7 @@ const AddressModal = ({ addressRef }) => {
   ];
   const handlePickAddress = (id) => {
     setAddressIndex(id);
-    setIsAddressOpen(true);
+    setIsChangeAddressOpen(true);
   };
 
   return (
@@ -36,64 +40,25 @@ const AddressModal = ({ addressRef }) => {
               <div className={styles.line} />
             </div>
           )}
-          {isAddressOpen && addressIndex === index && (
-            <>
-              <div className={styles.inputContainer}>
-                <input
-                  className={styles.input}
-                  placeholder="Введите улицу"
-                  value={item}
-                />
-                <div className={styles.details}>
-                  <input
-                    className={styles.detailsInput}
-                    placeholder="Дом"
-                    // value={address}
-                  />
-                  <input
-                    className={styles.detailsInput}
-                    placeholder="Кв./офис"
-                    // value={address}
-                  />
-                  <input
-                    className={styles.detailsInput}
-                    placeholder="Домофон"
-                    // value={address}
-                  />
-                  <input
-                    className={styles.detailsInput}
-                    placeholder="Подъезд"
-                    // value={address}
-                  />
-                  <input
-                    className={styles.detailsInput}
-                    placeholder="Этаж"
-                    // value={address}
-                  />
-                </div>
-                <input
-                  className={styles.input}
-                  placeholder="Комментарий курьеру"
-                />
-              </div>
-              <div className={styles.buttonsContainer}>
-                <button
-                  className={styles.buttonStyle}
-                  onClick={() => console.log("Save")}
-                >
-                  <span className={styles.buttonText}>Сохранить</span>
-                </button>
-                <button
-                  className={styles.buttonStyle}
-                  onClick={() => console.log("Back to menu")}
-                >
-                  <span className={styles.buttonText}>Отмена</span>
-                </button>
-              </div>
-            </>
+          {isChangeAddressOpen && addressIndex === index && (
+            <AddAddressComponent streetName={item} />
           )}
         </>
       ))}
+      {isNewAddressOpen ? (
+        <div>
+          <h3>Добавьте адрес</h3>
+          <AddAddressComponent streetName="" />
+        </div>
+      ) : (
+        <div
+          className={styles.addAddress}
+          onClick={() => setIsNewAddressOpen(true)}
+        >
+          <MdOutlineAdd size={25} />
+          <span>Добавить адрес</span>
+        </div>
+      )}
     </div>
   );
 };

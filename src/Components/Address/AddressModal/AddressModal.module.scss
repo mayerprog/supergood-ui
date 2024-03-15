@@ -79,7 +79,7 @@
   .buttonsContainer {
     display: flex;
     flex-direction: row;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
   }
 
   .buttonStyle {
@@ -88,5 +88,18 @@
   }
   .buttonText {
     @include reusable-button-text;
+  }
+
+  .addAddress {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    align-self: center;
+    padding-top: 20px;
+    cursor: pointer;
+    span {
+      margin-left: 7px;
+    }
   }
 }
