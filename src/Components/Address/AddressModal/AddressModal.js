@@ -6,6 +6,7 @@ const AddressModal = ({ addressRef }) => {
 
   return (
     <div className={styles.container} ref={addressRef}>
+      <h2>Мои адреса</h2>
       <div className={styles.inputContainer}>
         <input
           className={styles.input}

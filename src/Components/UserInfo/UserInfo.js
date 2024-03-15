@@ -20,7 +20,7 @@ const theme = createTheme(
       MuiTextField: {
         styleOverrides: {
           root: {
-            minWidth: "388px",
+            minWidth: "414px",
           },
         },
       },
@@ -30,7 +30,7 @@ const theme = createTheme(
             color: "grey",
             fontSize: "0.95rem",
             fontFamily: "Inter",
-            top: "-2px",
+            top: "-5px",
             "&.Mui-focused": {
               color: mainColor, // Label color when the TextField is focused
             },
@@ -44,7 +44,7 @@ const theme = createTheme(
               borderWidth: "1px",
               borderColor: "#ccc",
               borderRadius: "10px",
-              height: "50px",
+              height: "46px",
             },
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
               borderColor: mainColor,
@@ -55,14 +55,14 @@ const theme = createTheme(
       MuiInputAdornment: {
         styleOverrides: {
           positionEnd: {
-            marginTop: "-2px",
+            marginTop: "-7px",
           },
         },
       },
       MuiInputBase: {
         styleOverrides: {
           input: {
-            marginTop: "-2px",
+            marginTop: "-6px",
           },
         },
       },
@@ -98,6 +98,8 @@ const theme = createTheme(
 const UserInfo = ({ selectedDate, setSelectedDate, userInfoRef }) => {
   return (
     <div className={styles.container} ref={userInfoRef}>
+      <h2>Мои данные</h2>
+
       <div className={styles.inputContainer}>
         <span>Имя</span>
         <input className={styles.input} placeholder="Ваше имя" />
@@ -107,11 +109,11 @@ const UserInfo = ({ selectedDate, setSelectedDate, userInfoRef }) => {
         <input className={styles.input} placeholder="Электронная почта" />
       </div>
       <div className={styles.inputContainer}>
-        <span></span>
+        <span>Дата рождения</span>
         <ThemeProvider theme={theme}>
           <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
             <DatePicker
-              label="Дата рождения"
+              label="Введите дату"
               value={selectedDate}
               onChange={(newValue) => {
                 setSelectedDate(newValue);
