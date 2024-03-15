@@ -9,10 +9,15 @@ const AddressModal = ({ addressRef }) => {
       <div className={styles.inputContainer}>
         <input
           className={styles.input}
-          placeholder="Введите адрес (улица, дом)"
+          placeholder="Введите улицу"
           value={address}
         />
         <div className={styles.details}>
+          <input
+            className={styles.detailsInput}
+            placeholder="Дом"
+            // value={address}
+          />
           <input
             className={styles.detailsInput}
             placeholder="Кв./офис"
