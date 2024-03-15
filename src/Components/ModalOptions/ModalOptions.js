@@ -5,6 +5,7 @@ const ModalOptions = ({
   optionsRef,
   toggleOptionsVisibility,
   toggleUserInfoVisibility,
+  toggleAddressVisibility,
 }) => {
   const handleResize = () => {
     toggleOptionsVisibility();
@@ -12,7 +13,12 @@ const ModalOptions = ({
 
   const handleInfoOnClick = () => {
     toggleUserInfoVisibility();
-    toggleOptionsVisibility();
+    toggleOptionsVisibility(false);
+  };
+
+  const handleAddressOnClick = () => {
+    toggleAddressVisibility();
+    toggleOptionsVisibility(false);
   };
 
   useEffect(() => {
@@ -25,7 +31,9 @@ const ModalOptions = ({
       <button className={styles.item} onClick={handleInfoOnClick}>
         Мои данные
       </button>
-      <button className={styles.item}>Мои адреса</button>
+      <button className={styles.item} onClick={handleAddressOnClick}>
+        Мои адреса
+      </button>
       <button className={styles.item}>Мои заказы</button>
       <button className={styles.item}>Выйти</button>
     </div>

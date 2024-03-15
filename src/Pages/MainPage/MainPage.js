@@ -16,6 +16,8 @@ const MainPage = () => {
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [isModalOptionsOpen, setIsModalOptionsOpen] = useState(false);
   const [isUserInfoOpen, setIsUserInfoOpen] = useState(false);
+  const [isModalAddressOpen, setIsModalAddressOpen] = useState(false);
+
   const [itemCardId, setItemCardId] = useState(null);
   const [headerHeight, setHeaderHeight] = useState(0); // State to store header height
   const [scrolledCategory, setScrolledCategory] = useState(null);
@@ -37,6 +39,7 @@ const MainPage = () => {
   const mapWrapperRef = useRef(null);
   const optionsRef = useRef(null);
   const userInfoRef = useRef(null);
+  const addressRef = useRef(null);
 
   useEffect(() => {
     let filteredItems = searchQuery.trim()
@@ -92,9 +95,11 @@ const MainPage = () => {
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
   };
-
   const toggleUserInfoVisibility = () => {
     setIsUserInfoOpen(!isUserInfoOpen);
+  };
+  const toggleAddressVisibility = () => {
+    setIsModalAddressOpen(!isModalAddressOpen);
   };
   useOutsideHook(wrapperRef, toggleCartVisibility); // to close popup <Cart /> clicking outside
   useOutsideHook(cardRef, toggleCardOpen); // to close popup <ModalCard /> clicking outside
@@ -103,6 +108,7 @@ const MainPage = () => {
   useOutsideHook(userInfoRef, toggleUserInfoVisibility, [
     ".MuiDateCalendar-root",
   ]); // to close popup <UserInfo /> clicking outside
+  useOutsideHook(addressRef, toggleAddressVisibility); // to close popup <ModalOptions /> clicking outside
 
   const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
 
@@ -146,6 +152,9 @@ const MainPage = () => {
           userInfoRef={userInfoRef}
           isUserInfoOpen={isUserInfoOpen}
           toggleUserInfoVisibility={toggleUserInfoVisibility}
+          addressRef={addressRef}
+          toggleAddressVisibility={toggleAddressVisibility}
+          isModalAddressOpen={isModalAddressOpen}
         />
         {!mediaQuery && (
           <Cart

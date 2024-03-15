@@ -14,6 +14,7 @@ import ModalCard from "./ModalCard/ModalCard";
 import MapComponent from "../MapComponent/MapComponent";
 import ModalOptions from "../ModalOptions/ModalOptions";
 import UserInfo from "../UserInfo/UserInfo";
+import AddressModal from "../Address/AddressModal/AddressModal";
 
 const MainContent = ({
   isCartVisible,
@@ -37,6 +38,9 @@ const MainContent = ({
   userInfoRef,
   isUserInfoOpen,
   toggleUserInfoVisibility,
+  addressRef,
+  toggleAddressVisibility,
+  isModalAddressOpen,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -218,6 +222,7 @@ const MainContent = ({
             optionsRef={optionsRef}
             toggleOptionsVisibility={toggleOptionsVisibility}
             toggleUserInfoVisibility={toggleUserInfoVisibility}
+            toggleAddressVisibility={toggleAddressVisibility}
           />
         </div>
       )}
@@ -262,6 +267,11 @@ const MainContent = ({
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
+        </div>
+      )}
+      {isModalAddressOpen && (
+        <div className={styles.cardOverlay}>
+          <AddressModal addressRef={addressRef} />
         </div>
       )}
       {categories.map((category, index) => (
