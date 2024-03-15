@@ -16,9 +16,15 @@ const AddressModal = ({ addressRef }) => {
     "Авангардная улица, 13",
     "Кантемировская улица, 27А",
   ];
-  const handlePickAddress = (id) => {
+  const handleChangeAddress = (id) => {
     setAddressIndex(id);
+    setIsNewAddressOpen(false);
     setIsChangeAddressOpen(true);
+  };
+
+  const handleAddAddress = () => {
+    setIsChangeAddressOpen(false);
+    setIsNewAddressOpen(true);
   };
 
   return (
@@ -31,7 +37,7 @@ const AddressModal = ({ addressRef }) => {
               <div className={styles.addressContainer}>
                 <span>{item}</span>
                 <div
-                  onClick={() => handlePickAddress(index)}
+                  onClick={() => handleChangeAddress(index)}
                   className={styles.edit}
                 >
                   <FiEdit size={20} />
@@ -51,10 +57,7 @@ const AddressModal = ({ addressRef }) => {
           <AddAddressComponent streetName="" />
         </div>
       ) : (
-        <div
-          className={styles.addAddress}
-          onClick={() => setIsNewAddressOpen(true)}
-        >
+        <div className={styles.addAddress} onClick={handleAddAddress}>
           <MdOutlineAdd size={25} />
           <span>Добавить адрес</span>
         </div>
