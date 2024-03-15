@@ -33,63 +33,6 @@
     background: #ccc;
     margin: 20px 0;
   }
-
-  .inputContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 480px;
-  }
-
-  .input {
-    padding: 0 15px;
-    margin-bottom: 20px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #ccc;
-    border-radius: 10px;
-    height: 40px;
-    font-size: 0.95rem;
-    font-family: "Inter", sans-serif;
-    text-overflow: ellipsis;
-
-    @include focus-style(#ccc);
-  }
-  .details {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
-    .detailsInput {
-      text-align: center;
-      max-width: 80px;
-      margin: 0 0 20px 0;
-      border-width: 1px;
-      border-style: solid;
-      border-color: #ccc;
-      border-radius: 10px;
-      height: 40px;
-      font-size: 0.95rem;
-      font-family: "Inter", sans-serif;
-      @include focus-style(#ccc);
-    }
-  }
-
-  .buttonsContainer {
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 20px;
-  }
-
-  .buttonStyle {
-    @include reusable-button;
-    margin: 0.3rem 1.5rem 0 0;
-  }
-  .buttonText {
-    @include reusable-button-text;
-  }
-
   .addAddress {
     display: flex;
     flex: 1;
