@@ -20,5 +20,5 @@ export const useOutsideHook = (ref, toggleVisibility, ignoreSelectors = []) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [ref, toggleVisibility]);
+  }, [ref, toggleVisibility, ignoreSelectors]);
 };
