@@ -1,18 +1,40 @@
+import { useSelector } from "react-redux";
 import styles from "./AddressModal.module.scss";
 
 const AddressModal = ({ addressRef }) => {
+  const address = useSelector((state) => state.address.address);
+
   return (
     <div className={styles.container} ref={addressRef}>
       <div className={styles.inputContainer}>
-        <span>Имя</span>
-        <input className={styles.input} placeholder="Ваше имя" />
-      </div>
-      <div className={styles.inputContainer}>
-        <span>Эл.почта</span>
-        <input className={styles.input} placeholder="Электронная почта" />
-      </div>
-      <div className={styles.inputContainer}>
-        <span></span>
+        <input
+          className={styles.input}
+          placeholder="Введите адрес (улица, дом)"
+          value={address}
+        />
+        <div className={styles.details}>
+          <input
+            className={styles.detailsInput}
+            placeholder="Кв./офис"
+            // value={address}
+          />
+          <input
+            className={styles.detailsInput}
+            placeholder="Домофон"
+            // value={address}
+          />
+          <input
+            className={styles.detailsInput}
+            placeholder="Подъезд"
+            // value={address}
+          />
+          <input
+            className={styles.detailsInput}
+            placeholder="Этаж"
+            // value={address}
+          />
+        </div>
+        <input className={styles.input} placeholder="Комментарий курьеру" />
       </div>
       <div className={styles.buttonsContainer}>
         <button
