@@ -13,6 +13,17 @@ const Footer = () => {
         className={styles.logo}
         onClick={() => navigate("/")}
       />
+      <div className={styles.infoContainer}>
+        <div className={styles.info}>
+          <span>О компании</span>
+          <span>Оплата и доставка</span>
+          <span>Сделать заказ</span>
+        </div>
+        <div className={styles.info}>
+          <span>Акции и скидки</span>
+          <span>Контакты</span>
+        </div>
+      </div>
       <p>Author: Hege Refsnes</p>
       <p>
         <a href="mailto:hege@example.com">hege@example.com</a>
