@@ -9,6 +9,7 @@ import styles from "./MainPage.module.scss";
 import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
 import { updateSum } from "../../redux/slices/cartSlice";
+import Footer from "../../Components/Footer/Footer";
 
 const MainPage = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
@@ -165,6 +166,7 @@ const MainPage = () => {
           />
         )}
       </div>
+      <Footer />
     </div>
   );
 };
