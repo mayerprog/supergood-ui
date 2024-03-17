@@ -1,3 +1,5 @@
+@import "../../mixins/mixins";
+
 .footer {
   display: flex;
   flex-direction: row;
@@ -7,7 +9,8 @@
   padding: 30px 15px;
   box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.8);
-  border-top: solid 1px #7a8699;
+  // border-top: solid 1px #7a8699;
+  box-shadow: 0 4px 6px 4px rgba(0, 0, 0, 0.1);
   font-family: "Inter", sans-serif;
 
   .logo {
@@ -24,10 +27,34 @@
     .info {
       display: flex;
       flex-direction: column;
-      padding-right: 30px;
+      margin-right: 50px;
+      a {
+        text-decoration: none;
+        cursor: pointer;
+        color: #727070;
+        margin-bottom: 5px;
+      }
     }
   }
 
   .appLinks {
+    display: flex;
+    flex-direction: column;
+    margin-left: -50px;
+    span {
+      margin-bottom: 10px;
+    }
+  }
+  .images {
+    display: flex;
+    justify-content: space-between;
+    img {
+      width: 90px;
+      height: 30px;
+    }
+  }
+  h2 {
+    cursor: pointer;
+    color: #565656;
   }
 }
