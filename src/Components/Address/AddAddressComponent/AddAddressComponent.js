@@ -1,6 +1,6 @@
 import styles from "./AddAddressComponent.module.scss";
 
-const AddAddressComponent = ({ streetName }) => {
+const AddAddressComponent = ({ streetName, closeChangeField }) => {
   return (
     <>
       <div className={styles.inputContainer}>
@@ -45,10 +45,7 @@ const AddAddressComponent = ({ streetName }) => {
         >
           <span className={styles.buttonText}>Сохранить</span>
         </button>
-        <button
-          className={styles.buttonStyle}
-          onClick={() => console.log("Back to menu")}
-        >
+        <button className={styles.buttonStyle} onClick={closeChangeField}>
           <span className={styles.buttonText}>Отмена</span>
         </button>
       </div>

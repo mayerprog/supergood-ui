@@ -95,7 +95,12 @@ const theme = createTheme(
   ruRU
 );
 
-const UserInfo = ({ selectedDate, setSelectedDate, userInfoRef }) => {
+const UserInfo = ({
+  selectedDate,
+  setSelectedDate,
+  userInfoRef,
+  toggleUserInfoVisibility,
+}) => {
   return (
     <div className={styles.container} ref={userInfoRef}>
       <h2>Мои данные</h2>
@@ -134,7 +139,7 @@ const UserInfo = ({ selectedDate, setSelectedDate, userInfoRef }) => {
         </button>
         <button
           className={styles.buttonStyle}
-          onClick={() => console.log("Back to menu")}
+          onClick={toggleUserInfoVisibility}
         >
           <span className={styles.buttonText}>Отмена</span>
         </button>

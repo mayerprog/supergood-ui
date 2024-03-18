@@ -266,6 +266,7 @@ const MainContent = ({
             userInfoRef={userInfoRef}
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
+            toggleUserInfoVisibility={toggleUserInfoVisibility}
           />
         </div>
       )}

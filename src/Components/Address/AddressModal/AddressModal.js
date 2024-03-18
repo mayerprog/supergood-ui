@@ -1,13 +1,12 @@
-import { useSelector } from "react-redux";
 import styles from "./AddressModal.module.scss";
 import { FiEdit } from "react-icons/fi";
 import { MdOutlineAdd } from "react-icons/md";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddAddressComponent from "../AddAddressComponent/AddAddressComponent";
 
 const AddressModal = ({ addressRef }) => {
-  const address = useSelector((state) => state.address.address);
+  // const address = useSelector((state) => state.address.address);
   const [isChangeAddressOpen, setIsChangeAddressOpen] = useState(false);
   const [isNewAddressOpen, setIsNewAddressOpen] = useState(false);
   const [addressIndex, setAddressIndex] = useState(null);
@@ -26,6 +25,16 @@ const AddressModal = ({ addressRef }) => {
     setIsChangeAddressOpen(false);
     setIsNewAddressOpen(true);
   };
+
+  const handleCloseChanging = () => {
+    setAddressIndex(null);
+    setIsChangeAddressOpen(false);
+    setIsNewAddressOpen(false);
+  };
+
+  useEffect(() => {
+    console.log("addressIndex", addressIndex);
+  }, [addressIndex]);
 
   return (
     <div className={styles.container} ref={addressRef}>
@@ -47,14 +56,20 @@ const AddressModal = ({ addressRef }) => {
             </div>
           )}
           {isChangeAddressOpen && addressIndex === index && (
-            <AddAddressComponent streetName={item} />
+            <AddAddressComponent
+              streetName={item}
+              closeChangeField={handleCloseChanging}
+            />
           )}
         </>
       ))}
       {isNewAddressOpen ? (
         <div>
           <h3>Добавьте адрес</h3>
-          <AddAddressComponent streetName="" />
+          <AddAddressComponent
+            streetName=""
+            closeChangeField={handleCloseChanging}
+          />
         </div>
       ) : (
         <div className={styles.addAddress} onClick={handleAddAddress}>
