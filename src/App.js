@@ -6,6 +6,7 @@ import { store } from "./redux/store";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./HOC/ProtectedRoute";
 import NewOrderPage from "./Pages/NewOrderPage/NewOrderPage";
+import OrdersPage from "./Pages/OrdersPage/OrdersPage";
 import { ModalOptionsContextProvider } from "./contexts/ModalOptionsContext";
 // import LevelContext, { LevelContextProvider } from "./contexts/LevelContext";
 
@@ -21,6 +22,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <NewOrderPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/orders"
+              element={
+                <ProtectedRoute>
+                  <OrdersPage />
                 </ProtectedRoute>
               }
             />

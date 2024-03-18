@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Cart from "../../Components/Cart/Cart";
@@ -10,15 +10,12 @@ import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
 import { updateSum } from "../../redux/slices/cartSlice";
 import Footer from "../../Components/Footer/Footer";
+import ModalOptionsContext from "../../contexts/ModalOptionsContext";
 
 const MainPage = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [isCardOpen, setIsCardOpen] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
-  const [isModalOptionsOpen, setIsModalOptionsOpen] = useState(false);
-  const [isUserInfoOpen, setIsUserInfoOpen] = useState(false);
-  const [isModalAddressOpen, setIsModalAddressOpen] = useState(false);
-
   const [itemCardId, setItemCardId] = useState(null);
   const [headerHeight, setHeaderHeight] = useState(0); // State to store header height
   const [scrolledCategory, setScrolledCategory] = useState(null);
@@ -38,9 +35,18 @@ const MainPage = () => {
   const headerRef = useRef(null);
   const cardRef = useRef(null);
   const mapWrapperRef = useRef(null);
-  const optionsRef = useRef(null);
-  const userInfoRef = useRef(null);
-  const addressRef = useRef(null);
+
+  const {
+    isModalOptionsOpen,
+    isUserInfoOpen,
+    isModalAddressOpen,
+    optionsRef,
+    userInfoRef,
+    addressRef,
+    toggleOptionsVisibility,
+    toggleUserInfoVisibility,
+    toggleAddressVisibility,
+  } = useContext(ModalOptionsContext);
 
   useEffect(() => {
     let filteredItems = searchQuery.trim()
@@ -93,15 +99,6 @@ const MainPage = () => {
     setIsMapOpen(!isMapOpen);
   };
 
-  const toggleOptionsVisibility = () => {
-    setIsModalOptionsOpen(!isModalOptionsOpen);
-  };
-  const toggleUserInfoVisibility = () => {
-    setIsUserInfoOpen(!isUserInfoOpen);
-  };
-  const toggleAddressVisibility = () => {
-    setIsModalAddressOpen(!isModalAddressOpen);
-  };
   useOutsideHook(wrapperRef, toggleCartVisibility); // to close popup <Cart /> clicking outside
   useOutsideHook(cardRef, toggleCardOpen); // to close popup <ModalCard /> clicking outside
   useOutsideHook(mapWrapperRef, toggleMapVisibility); // to close popup <MapComponent /> clicking outside
@@ -121,6 +118,10 @@ const MainPage = () => {
         toggleOptionsVisibility={toggleOptionsVisibility}
         ref={headerRef}
         setSearchQuery={setSearchQuery}
+        isModalOptionsOpen={isModalOptionsOpen}
+        optionsRef={optionsRef}
+        toggleUserInfoVisibility={toggleUserInfoVisibility}
+        toggleAddressVisibility={toggleAddressVisibility}
       />
       <div className={styles.content}>
         <Sidebar
@@ -147,8 +148,6 @@ const MainPage = () => {
           mapWrapperRef={mapWrapperRef}
           isMapOpen={isMapOpen}
           setIsMapOpen={setIsMapOpen}
-          optionsRef={optionsRef}
-          isModalOptionsOpen={isModalOptionsOpen}
           toggleOptionsVisibility={toggleOptionsVisibility}
           userInfoRef={userInfoRef}
           isUserInfoOpen={isUserInfoOpen}

@@ -24,6 +24,10 @@ const Header = forwardRef(
       toggleMapVisibility,
       toggleOptionsVisibility,
       isProfile,
+      isModalOptionsOpen,
+      optionsRef,
+      toggleUserInfoVisibility,
+      toggleAddressVisibility,
     },
     ref
   ) => {
@@ -60,9 +64,16 @@ const Header = forwardRef(
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         )}
-        <div className={styles.optionsOverlay}>
-          <ModalOptions toggleOptionsVisibility={toggleOptionsVisibility} />
-        </div>
+        {isModalOptionsOpen && (
+          <div className={styles.optionsOverlay}>
+            <ModalOptions
+              toggleOptionsVisibility={toggleOptionsVisibility}
+              optionsRef={optionsRef}
+              toggleUserInfoVisibility={toggleUserInfoVisibility}
+              toggleAddressVisibility={toggleAddressVisibility}
+            />
+          </div>
+        )}
         <button
           onClick={toggleMapVisibility}
           className={styles.address}

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import styles from "./ModalOptions.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const ModalOptions = ({
   optionsRef,
@@ -7,6 +8,8 @@ const ModalOptions = ({
   toggleUserInfoVisibility,
   toggleAddressVisibility,
 }) => {
+  let navigate = useNavigate();
+
   const handleResize = () => {
     toggleOptionsVisibility();
   };
@@ -34,7 +37,9 @@ const ModalOptions = ({
       <button className={styles.item} onClick={handleAddressOnClick}>
         Мои адреса
       </button>
-      <button className={styles.item}>Мои заказы</button>
+      <button className={styles.item} onClick={() => navigate("/orders")}>
+        Мои заказы
+      </button>
       <button className={styles.item}>Выйти</button>
     </div>
   );

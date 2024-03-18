@@ -32,14 +32,10 @@ const MainContent = ({
   mapWrapperRef,
   isMapOpen,
   setIsMapOpen,
-  optionsRef,
-  isModalOptionsOpen,
-  toggleOptionsVisibility,
   userInfoRef,
   isUserInfoOpen,
   toggleUserInfoVisibility,
   addressRef,
-  toggleAddressVisibility,
   isModalAddressOpen,
 }) => {
   const slides = [
@@ -215,18 +211,6 @@ const MainContent = ({
           />
         </div>
       )}
-
-      {isModalOptionsOpen && (
-        <div className={styles.optionsOverlay}>
-          <ModalOptions
-            optionsRef={optionsRef}
-            toggleOptionsVisibility={toggleOptionsVisibility}
-            toggleUserInfoVisibility={toggleUserInfoVisibility}
-            toggleAddressVisibility={toggleAddressVisibility}
-          />
-        </div>
-      )}
-
       <div className={styles.slider} ref={sliderRef}>
         <div className={styles.sliderArrowLeft} onClick={slideToLeft}>
           &#10094;
