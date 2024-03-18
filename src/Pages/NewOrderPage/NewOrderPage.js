@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import Header from "../../Components/Header/Header";
 import styles from "./NewOrderPage.module.scss";
+import Footer from "../../Components/Footer/Footer";
 
 const NewOrderPage = () => {
   return (
@@ -11,6 +12,7 @@ const NewOrderPage = () => {
           <h2>Оформление заказа</h2>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

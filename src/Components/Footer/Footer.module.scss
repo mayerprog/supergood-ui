@@ -3,10 +3,9 @@
 .footer {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 30px 15px;
+  padding: 30px 0px;
   box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.8);
   // border-top: solid 1px #7a8699;
@@ -56,5 +55,7 @@
   h2 {
     cursor: pointer;
     color: #565656;
+    margin-inline-end: 1vw;
+    margin-right: 10px;
   }
 }

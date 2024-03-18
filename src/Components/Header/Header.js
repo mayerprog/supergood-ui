@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LevelContext from "../../contexts/LevelContext";
 import { setIsAuth } from "../../redux/slices/authSlice";
+import ModalOptions from "../ModalOptions/ModalOptions";
 
 const Header = forwardRef(
   (
@@ -59,7 +60,9 @@ const Header = forwardRef(
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         )}
-
+        <div className={styles.optionsOverlay}>
+          <ModalOptions toggleOptionsVisibility={toggleOptionsVisibility} />
+        </div>
         <button
           onClick={toggleMapVisibility}
           className={styles.address}

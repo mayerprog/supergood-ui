@@ -6,24 +6,27 @@ import { store } from "./redux/store";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./HOC/ProtectedRoute";
 import NewOrderPage from "./Pages/NewOrderPage/NewOrderPage";
+import { ModalOptionsContextProvider } from "./contexts/ModalOptionsContext";
 // import LevelContext, { LevelContextProvider } from "./contexts/LevelContext";
 
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route
-            path="/submit"
-            element={
-              <ProtectedRoute>
-                <NewOrderPage />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <ModalOptionsContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route
+              path="/submit"
+              element={
+                <ProtectedRoute>
+                  <NewOrderPage />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </ModalOptionsContextProvider>
     </Provider>
   );
 }
