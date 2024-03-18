@@ -15,23 +15,17 @@
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  // width: 100%;
-  // padding: 10px 0;
-  // position: sticky;
-  // // position: sticky;
-  // top: 0;
-  // z-index: 9999;
+  // position: fixed;
   // border-bottom: solid 1px #7a8699;
-  //alternative settings for sticky position
   box-sizing: border-box;
   backdrop-filter: blur(10px);
   background-color: rgba(255, 255, 255, 0.8);
   top: 0;
-  left: 0;
+  // left: 0;
   width: 100%;
-  padding: 10px 0;
+  padding: 10px;
   z-index: 9999;
-  position: fixed;
+  position: sticky;
   transition: box-shadow 0.2s ease-in-out, background 0.4s;
   will-change: transform;
 
