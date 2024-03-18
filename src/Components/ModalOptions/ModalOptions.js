@@ -24,6 +24,11 @@ const ModalOptions = ({
     toggleOptionsVisibility(false);
   };
 
+  const handleOrdersOnClick = () => {
+    navigate("/orders");
+    toggleOptionsVisibility(false);
+  };
+
   useEffect(() => {
     window.addEventListener("resize", handleResize);
 
@@ -37,7 +42,7 @@ const ModalOptions = ({
       <button className={styles.item} onClick={handleAddressOnClick}>
         Мои адреса
       </button>
-      <button className={styles.item} onClick={() => navigate("/orders")}>
+      <button className={styles.item} onClick={handleOrdersOnClick}>
         Мои заказы
       </button>
       <button className={styles.item}>Выйти</button>

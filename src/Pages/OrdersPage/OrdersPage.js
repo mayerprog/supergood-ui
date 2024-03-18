@@ -1,4 +1,3 @@
-import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import styles from "./OrdersPage.module.scss";
 
@@ -16,7 +15,6 @@ const OrdersPage = () => {
           .
         </span>
       </div>
-      <Footer />
     </div>
   );
 };

@@ -12,7 +12,6 @@ const NewOrderPage = () => {
           <h2>Оформление заказа</h2>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
