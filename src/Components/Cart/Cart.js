@@ -29,7 +29,7 @@ const Cart = ({
 
   const handleClickSubmit = () => {
     toggleCartVisibility(false);
-    navigate("/submit");
+    navigate("/orders");
   };
 
   return (

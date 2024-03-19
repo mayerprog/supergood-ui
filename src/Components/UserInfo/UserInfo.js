@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
 import "dayjs/locale/ru";
+import { useState } from "react";
 dayjs.extend(customParseFormat);
 
 dayjs.locale("ru"); // Use the Russian locale globally
@@ -95,12 +96,9 @@ const theme = createTheme(
   ruRU
 );
 
-const UserInfo = ({
-  selectedDate,
-  setSelectedDate,
-  userInfoRef,
-  toggleUserInfoVisibility,
-}) => {
+const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
+  const [selectedDate, setSelectedDate] = useState(null);
+
   return (
     <div className={styles.container} ref={userInfoRef}>
       <h2>Мои данные</h2>

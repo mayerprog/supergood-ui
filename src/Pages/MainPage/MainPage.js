@@ -23,7 +23,6 @@ const MainPage = ({
   toggleUserInfoVisibility,
   toggleAddressVisibility,
   mapWrapperRef,
-  setIsMainPage,
 }) => {
   const [isCardOpen, setIsCardOpen] = useState(false);
   const [itemCardId, setItemCardId] = useState(null);

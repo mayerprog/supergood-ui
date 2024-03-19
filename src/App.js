@@ -60,7 +60,6 @@ function App() {
 
   return (
     <Provider store={store}>
-      {/* <BrowserRouter> */}
       <div className={styles.app}>
         <Header
           isMainPage={isMainPage}
@@ -95,30 +94,34 @@ function App() {
                 toggleUserInfoVisibility={toggleUserInfoVisibility}
                 toggleAddressVisibility={toggleAddressVisibility}
                 mapWrapperRef={mapWrapperRef}
-                // setIsMainPage={setIsMainPage}
               />
             }
           />
-          <Route
+          {/* <Route
             path="/submit"
             element={
               <ProtectedRoute>
                 <NewOrderPage />
               </ProtectedRoute>
             }
-          />
+          /> */}
           <Route
             path="/orders"
             element={
               <ProtectedRoute>
-                <OrdersPage />
+                <OrdersPage
+                  userInfoRef={userInfoRef}
+                  toggleUserInfoVisibility={toggleUserInfoVisibility}
+                  addressRef={addressRef}
+                  isUserInfoOpen={isUserInfoOpen}
+                  isModalAddressOpen={isModalAddressOpen}
+                />
               </ProtectedRoute>
             }
           />
         </Routes>
         <Footer />
       </div>
-      {/* </BrowserRouter> */}
     </Provider>
   );
 }
