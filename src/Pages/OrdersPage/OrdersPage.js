@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./OrdersPage.module.scss";
 import UserInfo from "../../Components/UserInfo/UserInfo";
 import AddressModal from "../../Components/Address/AddressModal/AddressModal";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const OrdersPage = ({
   userInfoRef,
@@ -11,6 +12,9 @@ const OrdersPage = ({
   isModalAddressOpen,
 }) => {
   const [ordersExist, setOrdersExist] = useState(true); //check if client has orders
+  const [isPendingListVisible, setIsPendingListVisible] = useState(false);
+  const [isCompletedListVisible, setIsCompletedListVisible] = useState(false);
+
   const orders = [
     {
       orderId: 1048,
@@ -155,42 +159,58 @@ const OrdersPage = ({
         </span>
       ) : (
         <div className={styles.ordersContainer}>
-          <h3>Активные</h3>
-          <div className={styles.ordersList}>
-            {orders
-              .filter((order) => order.status === "Pending")
-              .map((order, index) => (
-                <>
-                  <div key={index} className={styles.orderInfo}>
-                    <span>Заказ {order.orderId}</span>
-                    <span>{order.date}</span>
-                    <span className={styles.time}>{order.time}</span>
-                    <span>{order.paymentType}</span>
-                    <span>Готовится</span>
-                    <span className={styles.price}>{order.price} ₽</span>
-                  </div>
-                  <div className={styles.line} />
-                </>
-              ))}
+          <div className={styles.title}>
+            <h3>Активные</h3>
+            <div onClick={() => setIsPendingListVisible(!isPendingListVisible)}>
+              {isPendingListVisible ? <FaChevronUp /> : <FaChevronDown />}
+            </div>
           </div>
-          <h3>Завершенные</h3>
-          <div className={styles.ordersList}>
-            {orders
-              .filter((order) => order.status === "Cancelled")
-              .map((order, index) => (
-                <>
-                  <div key={index} className={styles.orderInfo}>
-                    <span>Заказ {order.orderId}</span>
-                    <span>{order.date}</span>
-                    <span className={styles.time}>{order.time}</span>
-                    <span>{order.paymentType}</span>
-                    <span>Отменен</span>
-                    <span className={styles.price}>{order.price} ₽</span>
-                  </div>
-                  <div className={styles.line} />
-                </>
-              ))}
+          {isPendingListVisible && (
+            <div className={styles.ordersList}>
+              {orders
+                .filter((order) => order.status === "Pending")
+                .map((order, index) => (
+                  <>
+                    <div key={index} className={styles.orderInfo}>
+                      <span>Заказ {order.orderId}</span>
+                      <span>{order.date}</span>
+                      <span className={styles.time}>{order.time}</span>
+                      <span>{order.paymentType}</span>
+                      <span>Готовится</span>
+                      <span className={styles.price}>{order.price} ₽</span>
+                    </div>
+                    <div className={styles.line} />
+                  </>
+                ))}
+            </div>
+          )}
+          <div className={styles.title}>
+            <h3>Завершенные</h3>
+            <div
+              onClick={() => setIsCompletedListVisible(!isCompletedListVisible)}
+            >
+              {isCompletedListVisible ? <FaChevronUp /> : <FaChevronDown />}
+            </div>
           </div>
+          {isCompletedListVisible && (
+            <div className={styles.ordersList}>
+              {orders
+                .filter((order) => order.status === "Cancelled")
+                .map((order, index) => (
+                  <>
+                    <div key={index} className={styles.orderInfo}>
+                      <span>Заказ {order.orderId}</span>
+                      <span>{order.date}</span>
+                      <span className={styles.time}>{order.time}</span>
+                      <span>{order.paymentType}</span>
+                      <span>Отменен</span>
+                      <span className={styles.price}>{order.price} ₽</span>
+                    </div>
+                    <div className={styles.line} />
+                  </>
+                ))}
+            </div>
+          )}
         </div>
       )}
       {isUserInfoOpen && (
