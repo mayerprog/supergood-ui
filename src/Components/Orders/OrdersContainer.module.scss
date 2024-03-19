@@ -28,14 +28,21 @@
       font-weight: 600;
       font-size: 17px;
     }
-
-    .title {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+    .order {
+      font-weight: 600;
+      color: #c49e4c;
       cursor: pointer;
+      &:hover {
+        color: lighten(#e9bc5b, 3%);
+      }
     }
+  }
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
   }
   .line {
     // height: 1px;

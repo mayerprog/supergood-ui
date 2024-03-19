@@ -152,9 +152,11 @@ const OrdersContainer = () => {
             .map((order, index) => (
               <>
                 <div key={index} className={styles.orderInfo}>
-                  <span>Заказ {order.orderId}</span>
+                  <div>
+                    <span className={styles.order}>Заказ {order.orderId}</span>
+                  </div>{" "}
                   <span>{order.date}</span>
-                  <span className={styles.time}>{order.time}</span>
+                  <span>{order.time}</span>
                   <span>{order.paymentType}</span>
                   <span>Готовится</span>
                   <span className={styles.price}>{order.price} ₽</span>
@@ -177,7 +179,9 @@ const OrdersContainer = () => {
             .map((order, index) => (
               <>
                 <div key={index} className={styles.orderInfo}>
-                  <span>Заказ {order.orderId}</span>
+                  <div>
+                    <span className={styles.order}>Заказ {order.orderId}</span>
+                  </div>
                   <span>{order.date}</span>
                   <span className={styles.time}>{order.time}</span>
                   <span>{order.paymentType}</span>
