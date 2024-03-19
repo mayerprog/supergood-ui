@@ -3,6 +3,7 @@ import styles from "./OrdersPage.module.scss";
 import UserInfo from "../../Components/UserInfo/UserInfo";
 import AddressModal from "../../Components/Address/AddressModal/AddressModal";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import OrdersContainer from "../../Components/Orders/OrdersContainer";
 
 const OrdersPage = ({
   userInfoRef,
@@ -158,60 +159,7 @@ const OrdersPage = ({
           .
         </span>
       ) : (
-        <div className={styles.ordersContainer}>
-          <div className={styles.title}>
-            <h3>Активные</h3>
-            <div onClick={() => setIsPendingListVisible(!isPendingListVisible)}>
-              {isPendingListVisible ? <FaChevronUp /> : <FaChevronDown />}
-            </div>
-          </div>
-          {isPendingListVisible && (
-            <div className={styles.ordersList}>
-              {orders
-                .filter((order) => order.status === "Pending")
-                .map((order, index) => (
-                  <>
-                    <div key={index} className={styles.orderInfo}>
-                      <span>Заказ {order.orderId}</span>
-                      <span>{order.date}</span>
-                      <span className={styles.time}>{order.time}</span>
-                      <span>{order.paymentType}</span>
-                      <span>Готовится</span>
-                      <span className={styles.price}>{order.price} ₽</span>
-                    </div>
-                    <div className={styles.line} />
-                  </>
-                ))}
-            </div>
-          )}
-          <div className={styles.title}>
-            <h3>Завершенные</h3>
-            <div
-              onClick={() => setIsCompletedListVisible(!isCompletedListVisible)}
-            >
-              {isCompletedListVisible ? <FaChevronUp /> : <FaChevronDown />}
-            </div>
-          </div>
-          {isCompletedListVisible && (
-            <div className={styles.ordersList}>
-              {orders
-                .filter((order) => order.status === "Cancelled")
-                .map((order, index) => (
-                  <>
-                    <div key={index} className={styles.orderInfo}>
-                      <span>Заказ {order.orderId}</span>
-                      <span>{order.date}</span>
-                      <span className={styles.time}>{order.time}</span>
-                      <span>{order.paymentType}</span>
-                      <span>Отменен</span>
-                      <span className={styles.price}>{order.price} ₽</span>
-                    </div>
-                    <div className={styles.line} />
-                  </>
-                ))}
-            </div>
-          )}
-        </div>
+        <OrdersContainer />
       )}
       {isUserInfoOpen && (
         <div className={styles.cardOverlay}>

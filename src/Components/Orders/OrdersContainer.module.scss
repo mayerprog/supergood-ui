@@ -1,10 +1,46 @@
-.container {
-  margin-top: 1vh;
-}
+.ordersContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 
-.linkStyle {
-  color: #e9bc5b;
-  text-decoration: none;
-  font-weight: 800;
-  cursor: pointer;
+  .ordersList {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 230px;
+
+    .orderInfo {
+      display: flex;
+      // white-space: nowrap;
+      flex-direction: row;
+      font-size: 15px;
+    }
+
+    span {
+      flex: 1;
+      margin-right: 20px;
+    }
+    .price {
+      font-weight: 600;
+      font-size: 17px;
+    }
+
+    .title {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+  .line {
+    // height: 1px;
+    border: 0;
+    // background: #ccc;
+    margin: 10px 0;
+  }
 }
