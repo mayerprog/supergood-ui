@@ -37,6 +37,7 @@ const MainContent = ({
   toggleUserInfoVisibility,
   addressRef,
   isModalAddressOpen,
+  toggleCartVisibility,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -208,6 +209,7 @@ const MainContent = ({
             height="calc(100vh - 180px)"
             transform="translateX(-20%)"
             wrapperRef={wrapperRef}
+            toggleCartVisibility={toggleCartVisibility}
           />
         </div>
       )}

@@ -1,21 +1,32 @@
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Cart from "../../Components/Cart/Cart";
-import Header from "../../Components/Header/Header";
 import MainContent from "../../Components/MainContent/MainContent";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import styles from "./MainPage.module.scss";
 import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
 import { updateSum } from "../../redux/slices/cartSlice";
-import Footer from "../../Components/Footer/Footer";
-import LevelContext from "../../contexts/LevelContext";
 
-const MainPage = () => {
-  const [isCartVisible, setIsCartVisible] = useState(false);
+const MainPage = ({
+  searchQuery,
+  headerRef,
+  toggleCartVisibility,
+  isCartVisible,
+  isMapOpen,
+  setIsMapOpen,
+  toggleMapVisibility,
+  isUserInfoOpen,
+  isModalAddressOpen,
+  optionsRef,
+  userInfoRef,
+  addressRef,
+  toggleOptionsVisibility,
+  toggleUserInfoVisibility,
+  toggleAddressVisibility,
+}) => {
   const [isCardOpen, setIsCardOpen] = useState(false);
-  const [isMapOpen, setIsMapOpen] = useState(false);
   const [itemCardId, setItemCardId] = useState(null);
   const [headerHeight, setHeaderHeight] = useState(0); // State to store header height
   const [scrolledCategory, setScrolledCategory] = useState(null);
@@ -27,24 +38,10 @@ const MainPage = () => {
 
   const [searchedItems, setSearchedItems] = useState([]);
   const [searchedCategories, setSearchedCategories] = useState(categories);
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const {
-    isModalOptionsOpen,
-    isUserInfoOpen,
-    isModalAddressOpen,
-    optionsRef,
-    userInfoRef,
-    addressRef,
-    toggleOptionsVisibility,
-    toggleUserInfoVisibility,
-    toggleAddressVisibility,
-  } = useContext(LevelContext);
 
   const dispatch = useDispatch();
 
   const wrapperRef = useRef(null);
-  const headerRef = useRef(null);
   const cardRef = useRef(null);
   const mapWrapperRef = useRef(null);
 
@@ -92,13 +89,6 @@ const MainPage = () => {
     setItemCardId(itemId);
   };
 
-  const toggleCartVisibility = () => {
-    setIsCartVisible(!isCartVisible);
-  };
-  const toggleMapVisibility = () => {
-    setIsMapOpen(!isMapOpen);
-  };
-
   useOutsideHook(wrapperRef, toggleCartVisibility); // to close popup <Cart /> clicking outside
   useOutsideHook(cardRef, toggleCardOpen); // to close popup <ModalCard /> clicking outside
   useOutsideHook(mapWrapperRef, toggleMapVisibility); // to close popup <MapComponent /> clicking outside
@@ -111,18 +101,6 @@ const MainPage = () => {
   const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
 
   return (
-    // <div className={styles.app}>
-    //   <Header
-    //     toggleCartVisibility={toggleCartVisibility}
-    //     toggleMapVisibility={toggleMapVisibility}
-    //     toggleOptionsVisibility={toggleOptionsVisibility}
-    //     ref={headerRef}
-    //     setSearchQuery={setSearchQuery}
-    //     isModalOptionsOpen={isModalOptionsOpen}
-    //     optionsRef={optionsRef}
-    //     toggleUserInfoVisibility={toggleUserInfoVisibility}
-    //     toggleAddressVisibility={toggleAddressVisibility}
-    //   />
     <div className={styles.content}>
       <Sidebar
         categories={searchedCategories}
@@ -144,17 +122,16 @@ const MainPage = () => {
         setScrolledCategory={setScrolledCategory}
         setSelectedCategory={setSelectedCategory}
         itemCardId={itemCardId}
-        searchQuery={searchQuery}
         mapWrapperRef={mapWrapperRef}
         isMapOpen={isMapOpen}
         setIsMapOpen={setIsMapOpen}
-        toggleOptionsVisibility={toggleOptionsVisibility}
         userInfoRef={userInfoRef}
         isUserInfoOpen={isUserInfoOpen}
         toggleUserInfoVisibility={toggleUserInfoVisibility}
         addressRef={addressRef}
         toggleAddressVisibility={toggleAddressVisibility}
         isModalAddressOpen={isModalAddressOpen}
+        toggleCartVisibility={toggleCartVisibility}
       />
       {!mediaQuery && (
         <Cart
@@ -165,8 +142,6 @@ const MainPage = () => {
         />
       )}
     </div>
-    // <Footer />
-    // </div>
   );
 };
 

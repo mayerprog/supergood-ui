@@ -7,7 +7,14 @@ import { updateAmount, updateSum } from "../../redux/slices/cartSlice";
 import CartBox from "./CartBox/CartBox";
 import { useNavigate } from "react-router-dom";
 
-const Cart = ({ wrapperRef, position, top, height, transform }) => {
+const Cart = ({
+  wrapperRef,
+  position,
+  top,
+  height,
+  transform,
+  toggleCartVisibility,
+}) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const itemsSum = useSelector((state) => state.cart.itemsSum);
 
@@ -19,6 +26,11 @@ const Cart = ({ wrapperRef, position, top, height, transform }) => {
   };
 
   let navigate = useNavigate();
+
+  const handleClickSubmit = () => {
+    toggleCartVisibility();
+    navigate("/submit");
+  };
 
   return (
     <div className={styles.cart} ref={wrapperRef} style={dynamicStyle}>
@@ -36,10 +48,7 @@ const Cart = ({ wrapperRef, position, top, height, transform }) => {
           <span>{itemsSum} ₽</span>
         </div>
         <div className={styles.button}>
-          <button
-            className={styles.buttonStyle}
-            onClick={() => navigate("/submit")}
-          >
+          <button className={styles.buttonStyle} onClick={handleClickSubmit}>
             <span className={styles.buttonText}>Оформить заказ</span>
           </button>
         </div>
