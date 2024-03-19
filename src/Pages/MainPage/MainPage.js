@@ -10,7 +10,7 @@ import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
 import { updateSum } from "../../redux/slices/cartSlice";
 import Footer from "../../Components/Footer/Footer";
-import ModalOptionsContext from "../../contexts/ModalOptionsContext";
+import LevelContext from "../../contexts/LevelContext";
 
 const MainPage = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
@@ -29,13 +29,6 @@ const MainPage = () => {
   const [searchedCategories, setSearchedCategories] = useState(categories);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const dispatch = useDispatch();
-
-  const wrapperRef = useRef(null);
-  const headerRef = useRef(null);
-  const cardRef = useRef(null);
-  const mapWrapperRef = useRef(null);
-
   const {
     isModalOptionsOpen,
     isUserInfoOpen,
@@ -46,7 +39,14 @@ const MainPage = () => {
     toggleOptionsVisibility,
     toggleUserInfoVisibility,
     toggleAddressVisibility,
-  } = useContext(ModalOptionsContext);
+  } = useContext(LevelContext);
+
+  const dispatch = useDispatch();
+
+  const wrapperRef = useRef(null);
+  const headerRef = useRef(null);
+  const cardRef = useRef(null);
+  const mapWrapperRef = useRef(null);
 
   useEffect(() => {
     let filteredItems = searchQuery.trim()
@@ -111,62 +111,62 @@ const MainPage = () => {
   const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
 
   return (
-    <div className={styles.app}>
-      <Header
-        toggleCartVisibility={toggleCartVisibility}
-        toggleMapVisibility={toggleMapVisibility}
-        toggleOptionsVisibility={toggleOptionsVisibility}
-        ref={headerRef}
-        setSearchQuery={setSearchQuery}
-        isModalOptionsOpen={isModalOptionsOpen}
-        optionsRef={optionsRef}
-        toggleUserInfoVisibility={toggleUserInfoVisibility}
-        toggleAddressVisibility={toggleAddressVisibility}
+    // <div className={styles.app}>
+    //   <Header
+    //     toggleCartVisibility={toggleCartVisibility}
+    //     toggleMapVisibility={toggleMapVisibility}
+    //     toggleOptionsVisibility={toggleOptionsVisibility}
+    //     ref={headerRef}
+    //     setSearchQuery={setSearchQuery}
+    //     isModalOptionsOpen={isModalOptionsOpen}
+    //     optionsRef={optionsRef}
+    //     toggleUserInfoVisibility={toggleUserInfoVisibility}
+    //     toggleAddressVisibility={toggleAddressVisibility}
+    //   />
+    <div className={styles.content}>
+      <Sidebar
+        categories={searchedCategories}
+        onCategorySelect={setSelectedCategory}
+        selectedCategory={selectedCategory}
+        scrolledCategory={scrolledCategory}
       />
-      <div className={styles.content}>
-        <Sidebar
-          categories={searchedCategories}
-          onCategorySelect={setSelectedCategory}
-          selectedCategory={selectedCategory}
-          scrolledCategory={scrolledCategory}
-        />
 
-        <MainContent
-          items={searchedItems}
-          categories={searchedCategories}
-          isCartVisible={isCartVisible}
-          isCardOpen={isCardOpen}
-          toggleCardOpen={toggleCardOpen}
-          wrapperRef={wrapperRef}
-          cardRef={cardRef}
-          selectedCategory={selectedCategory}
-          headerHeight={headerHeight}
-          setScrolledCategory={setScrolledCategory}
-          setSelectedCategory={setSelectedCategory}
-          itemCardId={itemCardId}
-          searchQuery={searchQuery}
-          mapWrapperRef={mapWrapperRef}
-          isMapOpen={isMapOpen}
-          setIsMapOpen={setIsMapOpen}
-          toggleOptionsVisibility={toggleOptionsVisibility}
-          userInfoRef={userInfoRef}
-          isUserInfoOpen={isUserInfoOpen}
-          toggleUserInfoVisibility={toggleUserInfoVisibility}
-          addressRef={addressRef}
-          toggleAddressVisibility={toggleAddressVisibility}
-          isModalAddressOpen={isModalAddressOpen}
+      <MainContent
+        items={searchedItems}
+        categories={searchedCategories}
+        isCartVisible={isCartVisible}
+        isCardOpen={isCardOpen}
+        toggleCardOpen={toggleCardOpen}
+        wrapperRef={wrapperRef}
+        cardRef={cardRef}
+        selectedCategory={selectedCategory}
+        headerHeight={headerHeight}
+        setScrolledCategory={setScrolledCategory}
+        setSelectedCategory={setSelectedCategory}
+        itemCardId={itemCardId}
+        searchQuery={searchQuery}
+        mapWrapperRef={mapWrapperRef}
+        isMapOpen={isMapOpen}
+        setIsMapOpen={setIsMapOpen}
+        toggleOptionsVisibility={toggleOptionsVisibility}
+        userInfoRef={userInfoRef}
+        isUserInfoOpen={isUserInfoOpen}
+        toggleUserInfoVisibility={toggleUserInfoVisibility}
+        addressRef={addressRef}
+        toggleAddressVisibility={toggleAddressVisibility}
+        isModalAddressOpen={isModalAddressOpen}
+      />
+      {!mediaQuery && (
+        <Cart
+          position="sticky"
+          top="105px"
+          height="calc(100vh - 180px)"
+          transform="none"
         />
-        {!mediaQuery && (
-          <Cart
-            position="sticky"
-            top="105px"
-            height="calc(100vh - 180px)"
-            transform="none"
-          />
-        )}
-      </div>
-      <Footer />
+      )}
     </div>
+    // <Footer />
+    // </div>
   );
 };
 

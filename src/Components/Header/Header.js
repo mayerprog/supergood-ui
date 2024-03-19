@@ -12,7 +12,6 @@ import { FaLocationDot } from "react-icons/fa6";
 import { forwardRef, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import LevelContext from "../../contexts/LevelContext";
 import { setIsAuth } from "../../redux/slices/authSlice";
 import ModalOptions from "../ModalOptions/ModalOptions";
 
