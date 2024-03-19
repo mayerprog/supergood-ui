@@ -4,7 +4,6 @@ import vk from "../../assets/social-networks/vk.png";
 import telegram from "../../assets/social-networks/telegram.png";
 import discount from "../../assets/social-networks/discount.png";
 import phone from "../../assets/social-networks/phone.png";
-import profile from "../../assets/images/user.png";
 import { GiShoppingCart } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
 
@@ -22,7 +21,7 @@ const Header = forwardRef(
       setSearchQuery,
       toggleMapVisibility,
       toggleOptionsVisibility,
-      isProfile,
+      isMainPage,
       isModalOptionsOpen,
       optionsRef,
       toggleUserInfoVisibility,
@@ -56,7 +55,7 @@ const Header = forwardRef(
           className={styles.logo}
           onClick={() => navigate("/")}
         />
-        {!isProfile && (
+        {isMainPage && (
           <input
             className={styles.input}
             placeholder="Найти блюдо"
@@ -76,7 +75,7 @@ const Header = forwardRef(
         <button
           onClick={toggleMapVisibility}
           className={styles.address}
-          disabled={isProfile}
+          disabled={!isMainPage}
         >
           <FaLocationDot size={18} color="#BBBBBB" className={styles.icon} />
           {address ? (
@@ -116,10 +115,10 @@ const Header = forwardRef(
               <img src={phone} alt="phone" className={styles.lastimg} />
             </a>
           </div>
-          {!isProfile && (
+          {isMainPage && (
             <button
               className={styles.cartButton}
-              onClick={toggleCartVisibility}
+              onClick={() => toggleCartVisibility(true)}
             >
               <GiShoppingCart size={25} className={styles.icon} />
               <span className={styles.buttonText}>{itemsSum} ₽</span>

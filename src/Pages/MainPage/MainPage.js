@@ -16,15 +16,14 @@ const MainPage = ({
   isCartVisible,
   isMapOpen,
   setIsMapOpen,
-  toggleMapVisibility,
   isUserInfoOpen,
   isModalAddressOpen,
-  optionsRef,
   userInfoRef,
   addressRef,
-  toggleOptionsVisibility,
   toggleUserInfoVisibility,
   toggleAddressVisibility,
+  mapWrapperRef,
+  setIsMainPage,
 }) => {
   const [isCardOpen, setIsCardOpen] = useState(false);
   const [itemCardId, setItemCardId] = useState(null);
@@ -41,9 +40,8 @@ const MainPage = ({
 
   const dispatch = useDispatch();
 
-  const wrapperRef = useRef(null);
   const cardRef = useRef(null);
-  const mapWrapperRef = useRef(null);
+  const wrapperRef = useRef(null);
 
   useEffect(() => {
     let filteredItems = searchQuery.trim()
@@ -89,14 +87,8 @@ const MainPage = ({
     setItemCardId(itemId);
   };
 
-  useOutsideHook(wrapperRef, toggleCartVisibility); // to close popup <Cart /> clicking outside
   useOutsideHook(cardRef, toggleCardOpen); // to close popup <ModalCard /> clicking outside
-  useOutsideHook(mapWrapperRef, toggleMapVisibility); // to close popup <MapComponent /> clicking outside
-  useOutsideHook(optionsRef, toggleOptionsVisibility); // to close popup <ModalOptions /> clicking outside
-  useOutsideHook(userInfoRef, toggleUserInfoVisibility, [
-    ".MuiDateCalendar-root",
-  ]); // to close popup <UserInfo /> clicking outside
-  useOutsideHook(addressRef, toggleAddressVisibility); // to close popup <ModalOptions /> clicking outside
+  useOutsideHook(wrapperRef, toggleCartVisibility); // to close popup <Cart /> clicking outside
 
   const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
 
@@ -139,6 +131,7 @@ const MainPage = ({
           top="105px"
           height="calc(100vh - 180px)"
           transform="none"
+          toggleCartVisibility={toggleCartVisibility}
         />
       )}
     </div>

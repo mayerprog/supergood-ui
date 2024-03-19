@@ -4,13 +4,14 @@ import styles from "./App.module.scss";
 import "leaflet/dist/leaflet.css";
 import MainPage from "./Pages/MainPage/MainPage";
 import { store } from "./redux/store";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import ProtectedRoute from "./HOC/ProtectedRoute";
 import NewOrderPage from "./Pages/NewOrderPage/NewOrderPage";
 import OrdersPage from "./Pages/OrdersPage/OrdersPage";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useOutsideHook } from "./hooks/useOutsideHook";
 
 function App() {
   const [isModalOptionsOpen, setIsModalOptionsOpen] = useState(false);
@@ -19,11 +20,13 @@ function App() {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isMainPage, setIsMainPage] = useState(false);
 
   const headerRef = useRef(null);
   const optionsRef = useRef(null);
   const userInfoRef = useRef(null);
   const addressRef = useRef(null);
+  const mapWrapperRef = useRef(null);
 
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
@@ -35,72 +38,87 @@ function App() {
     setIsModalAddressOpen(!isModalAddressOpen);
   };
 
-  const toggleCartVisibility = () => {
-    setIsCartVisible(!isCartVisible);
+  const toggleCartVisibility = (isVisible) => {
+    setIsCartVisible(isVisible);
   };
   const toggleMapVisibility = () => {
     setIsMapOpen(!isMapOpen);
   };
 
+  useOutsideHook(mapWrapperRef, toggleMapVisibility); // to close popup <MapComponent /> clicking outside
+  useOutsideHook(optionsRef, toggleOptionsVisibility); // to close popup <ModalOptions /> clicking outside
+  useOutsideHook(userInfoRef, toggleUserInfoVisibility, [
+    ".MuiDateCalendar-root",
+  ]); // to close popup <UserInfo /> clicking outside
+  useOutsideHook(addressRef, toggleAddressVisibility); // to close popup <AddressModal /> clicking outside
+
+  const location = useLocation(); // Getting the current location
+
+  useEffect(() => {
+    setIsMainPage(location.pathname === "/");
+  }, [location]);
+
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <div className={styles.app}>
-          <Header
-            isProfile={false}
-            toggleCartVisibility={toggleCartVisibility}
-            toggleMapVisibility={toggleMapVisibility}
-            toggleOptionsVisibility={toggleOptionsVisibility}
-            ref={headerRef}
-            setSearchQuery={setSearchQuery}
-            isModalOptionsOpen={isModalOptionsOpen}
-            optionsRef={optionsRef}
-            toggleUserInfoVisibility={toggleUserInfoVisibility}
-            toggleAddressVisibility={toggleAddressVisibility}
+      {/* <BrowserRouter> */}
+      <div className={styles.app}>
+        <Header
+          isMainPage={isMainPage}
+          toggleCartVisibility={toggleCartVisibility}
+          toggleMapVisibility={toggleMapVisibility}
+          toggleOptionsVisibility={toggleOptionsVisibility}
+          ref={headerRef}
+          setSearchQuery={setSearchQuery}
+          isModalOptionsOpen={isModalOptionsOpen}
+          optionsRef={optionsRef}
+          toggleUserInfoVisibility={toggleUserInfoVisibility}
+          toggleAddressVisibility={toggleAddressVisibility}
+        />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <MainPage
+                searchQuery={searchQuery}
+                headerRef={headerRef}
+                toggleCartVisibility={toggleCartVisibility}
+                isCartVisible={isCartVisible}
+                isMapOpen={isMapOpen}
+                setIsMapOpen={setIsMapOpen}
+                toggleMapVisibility={toggleMapVisibility}
+                isUserInfoOpen={isUserInfoOpen}
+                isModalAddressOpen={isModalAddressOpen}
+                optionsRef={optionsRef}
+                userInfoRef={userInfoRef}
+                addressRef={addressRef}
+                toggleOptionsVisibility={toggleOptionsVisibility}
+                toggleUserInfoVisibility={toggleUserInfoVisibility}
+                toggleAddressVisibility={toggleAddressVisibility}
+                mapWrapperRef={mapWrapperRef}
+                // setIsMainPage={setIsMainPage}
+              />
+            }
           />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <MainPage
-                  searchQuery={searchQuery}
-                  headerRef={headerRef}
-                  toggleCartVisibility={toggleCartVisibility}
-                  isCartVisible={isCartVisible}
-                  isMapOpen={isMapOpen}
-                  setIsMapOpen={setIsMapOpen}
-                  toggleMapVisibility={toggleMapVisibility}
-                  isUserInfoOpen={isUserInfoOpen}
-                  isModalAddressOpen={isModalAddressOpen}
-                  optionsRef={optionsRef}
-                  userInfoRef={userInfoRef}
-                  addressRef={addressRef}
-                  toggleOptionsVisibility={toggleOptionsVisibility}
-                  toggleUserInfoVisibility={toggleUserInfoVisibility}
-                  toggleAddressVisibility={toggleAddressVisibility}
-                />
-              }
-            />
-            <Route
-              path="/submit"
-              element={
-                <ProtectedRoute>
-                  <NewOrderPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/orders"
-              element={
-                <ProtectedRoute>
-                  <OrdersPage />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-          <Footer />
-        </div>
-      </BrowserRouter>
+          <Route
+            path="/submit"
+            element={
+              <ProtectedRoute>
+                <NewOrderPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <OrdersPage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+        <Footer />
+      </div>
+      {/* </BrowserRouter> */}
     </Provider>
   );
 }

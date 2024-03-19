@@ -1,10 +1,8 @@
-import Header from "../../Components/Header/Header";
+import { useEffect } from "react";
 import styles from "./OrdersPage.module.scss";
 
-const OrdersPage = () => {
+const OrdersPage = ({ setIsMainPage }) => {
   return (
-    // <div className={styles.container}>
-    //   <Header isProfile={true} />
     <div className={styles.content}>
       <h2>Мои заказы</h2>
       <span>
@@ -15,7 +13,6 @@ const OrdersPage = () => {
         .
       </span>
     </div>
-    // </div>
   );
 };
 
