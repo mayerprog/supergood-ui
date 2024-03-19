@@ -12,7 +12,7 @@ const OrdersPage = ({
   isModalAddressOpen,
 }) => {
   const [ordersExist, setOrdersExist] = useState(true); //check if client has orders
-  const [isPendingListVisible, setIsPendingListVisible] = useState(false);
+  const [isPendingListVisible, setIsPendingListVisible] = useState(true);
   const [isCompletedListVisible, setIsCompletedListVisible] = useState(false);
 
   const orders = [
@@ -151,7 +151,7 @@ const OrdersPage = ({
       <h2>Мои заказы</h2>
       {!ordersExist ? (
         <span>
-          Пока нет ваших заказов. Заказать блюда можно{" "}
+          Пока нет ваших заказов. Заказать блюда можно
           <a href="/" className={styles.linkStyle}>
             здесь
           </a>
