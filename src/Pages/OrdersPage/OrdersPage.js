@@ -21,6 +21,38 @@ const OrdersPage = ({
       price: "1392",
     },
     {
+      orderId: 1048,
+      date: "12.12.2023",
+      time: "12:45",
+      paymentType: "Банковская карта",
+      status: "Cancelled",
+      price: "1392",
+    },
+    {
+      orderId: 1048,
+      date: "12.12.2023",
+      time: "12:45",
+      paymentType: "Банковская карта",
+      status: "Cancelled",
+      price: "1392",
+    },
+    {
+      orderId: 1048,
+      date: "12.12.2023",
+      time: "12:45",
+      paymentType: "Банковская карта",
+      status: "Cancelled",
+      price: "1392",
+    },
+    {
+      orderId: 1048,
+      date: "12.12.2023",
+      time: "12:45",
+      paymentType: "Банковская карта",
+      status: "Cancelled",
+      price: "1392",
+    },
+    {
       orderId: 237,
       date: "06.12.2023",
       time: "10:30",
@@ -52,6 +84,62 @@ const OrdersPage = ({
       status: "Pending",
       price: "885",
     },
+    {
+      orderId: 1875,
+      date: "13.01.2023",
+      time: "12:45",
+      paymentType: "Банковская карта",
+      status: "Pending",
+      price: "885",
+    },
+    {
+      orderId: 1875,
+      date: "13.01.2023",
+      time: "12:45",
+      paymentType: "Банковская карта",
+      status: "Pending",
+      price: "885",
+    },
+    {
+      orderId: 1875,
+      date: "13.01.2023",
+      time: "12:45",
+      paymentType: "Банковская карта",
+      status: "Pending",
+      price: "885",
+    },
+    {
+      orderId: 1875,
+      date: "13.01.2023",
+      time: "12:45",
+      paymentType: "Банковская карта",
+      status: "Pending",
+      price: "885",
+    },
+    {
+      orderId: 1875,
+      date: "13.01.2023",
+      time: "12:45",
+      paymentType: "Банковская карта",
+      status: "Pending",
+      price: "885",
+    },
+    {
+      orderId: 1875,
+      date: "13.01.2023",
+      time: "12:45",
+      paymentType: "Банковская карта",
+      status: "Pending",
+      price: "885",
+    },
+    {
+      orderId: 1875,
+      date: "13.01.2023",
+      time: "12:45",
+      paymentType: "Банковская карта",
+      status: "Pending",
+      price: "885",
+    },
   ];
 
   return (
@@ -67,34 +155,40 @@ const OrdersPage = ({
         </span>
       ) : (
         <div className={styles.ordersContainer}>
+          <h3>Активные</h3>
           <div className={styles.ordersList}>
-            <h3>Активные</h3>
             {orders
               .filter((order) => order.status === "Pending")
               .map((order, index) => (
-                <div key={index} className={styles.orderInfo}>
-                  <span>Заказ {order.orderId}</span>
-                  <span>{order.date}</span>
-                  <span className={styles.time}>{order.time}</span>
-                  <span>{order.paymentType}</span>
-                  <span>Готовится</span>
-                  <span className={styles.price}>{order.price} ₽</span>
-                </div>
+                <>
+                  <div key={index} className={styles.orderInfo}>
+                    <span>Заказ {order.orderId}</span>
+                    <span>{order.date}</span>
+                    <span className={styles.time}>{order.time}</span>
+                    <span>{order.paymentType}</span>
+                    <span>Готовится</span>
+                    <span className={styles.price}>{order.price} ₽</span>
+                  </div>
+                  <div className={styles.line} />
+                </>
               ))}
           </div>
+          <h3>Завершенные</h3>
           <div className={styles.ordersList}>
-            <h3>Завершенные</h3>
             {orders
               .filter((order) => order.status === "Cancelled")
               .map((order, index) => (
-                <div key={index} className={styles.orderInfo}>
-                  <span>Заказ {order.orderId}</span>
-                  <span>{order.date}</span>
-                  <span className={styles.time}>{order.time}</span>
-                  <span>{order.paymentType}</span>
-                  <span>Отменен</span>
-                  <span className={styles.price}>{order.price} ₽</span>
-                </div>
+                <>
+                  <div key={index} className={styles.orderInfo}>
+                    <span>Заказ {order.orderId}</span>
+                    <span>{order.date}</span>
+                    <span className={styles.time}>{order.time}</span>
+                    <span>{order.paymentType}</span>
+                    <span>Отменен</span>
+                    <span className={styles.price}>{order.price} ₽</span>
+                  </div>
+                  <div className={styles.line} />
+                </>
               ))}
           </div>
         </div>

@@ -5,38 +5,50 @@
   align-items: flex-start;
   // justify-content: center;
   // min-width: 1336px;
-  max-width: 1200px;
-  min-width: 1086px;
+  max-width: 1086px;
+  // min-width: 800px;
   margin: 0 auto;
-  height: 100%;
+  height: 100vh;
   font-family: "Inter", sans-serif;
   width: 100%;
+  overflow: hidden;
 
   .ordersContainer {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    justify-content: center;
+    width: 50%;
+
     .ordersList {
       display: flex;
       flex-direction: column;
-      white-space: nowrap;
+      max-height: 250px; /* Adjust based on your needs */
+
+      overflow-y: auto; /* Enables vertical scrolling */
 
       .orderInfo {
         display: flex;
+        // white-space: nowrap;
         flex-direction: row;
-        font-size: 17px;
-        margin: 10px 0;
+        font-size: 15px;
       }
       span {
         flex: 1;
-        // margin-right: 100px;
+        margin-right: 20px;
       }
     }
   }
 
   .price {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 17px;
+  }
+
+  .line {
+    height: 1px;
+    border: 0;
+    background: #ccc;
+    margin: 10px 0;
   }
 
   .linkStyle {
