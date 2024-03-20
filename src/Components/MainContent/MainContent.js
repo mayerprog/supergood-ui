@@ -255,7 +255,11 @@ const MainContent = ({
       )}
       {isModalAddressOpen && (
         <div className={styles.cardOverlay}>
-          <AddressModal addressRef={addressRef} />
+          <AddressModal
+            addressRef={addressRef}
+            marginTop="-170px"
+            width="none"
+          />
         </div>
       )}
       {categories.map((category, index) => (

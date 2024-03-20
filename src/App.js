@@ -97,14 +97,20 @@ function App() {
               />
             }
           />
-          {/* <Route
+          <Route
             path="/submit"
             element={
               <ProtectedRoute>
-                <NewOrderPage />
+                <NewOrderPage
+                  userInfoRef={userInfoRef}
+                  toggleUserInfoVisibility={toggleUserInfoVisibility}
+                  addressRef={addressRef}
+                  isUserInfoOpen={isUserInfoOpen}
+                  isModalAddressOpen={isModalAddressOpen}
+                />
               </ProtectedRoute>
             }
-          /> */}
+          />
           <Route
             path="/orders"
             element={

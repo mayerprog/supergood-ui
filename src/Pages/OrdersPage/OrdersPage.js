@@ -37,7 +37,11 @@ const OrdersPage = ({
       )}
       {isModalAddressOpen && (
         <div className={styles.cardOverlay}>
-          <AddressModal addressRef={addressRef} />
+          <AddressModal
+            addressRef={addressRef}
+            marginTop="-170px"
+            width="none"
+          />
         </div>
       )}
     </div>

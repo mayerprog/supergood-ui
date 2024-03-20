@@ -1,8 +1,9 @@
+@import "../../mixins/mixins";
+
 .content {
   display: flex;
   flex: 1;
   flex-direction: column;
-  // min-width: 1336px;
   max-width: 1300px;
   // min-width: 800px;
   margin: 0 auto;
@@ -18,16 +19,6 @@
     cursor: pointer;
   }
   .cardOverlay {
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 10000;
-    display: flex;
-    overflow: auto;
+    @include card-overlay;
   }
 }

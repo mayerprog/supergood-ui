@@ -5,7 +5,7 @@ import { MdOutlineAdd } from "react-icons/md";
 import { useEffect, useState } from "react";
 import AddAddressComponent from "../AddAddressComponent/AddAddressComponent";
 
-const AddressModal = ({ addressRef }) => {
+const AddressModal = ({ addressRef, marginTop, width }) => {
   // const address = useSelector((state) => state.address.address);
   const [isChangeAddressOpen, setIsChangeAddressOpen] = useState(false);
   const [isNewAddressOpen, setIsNewAddressOpen] = useState(false);
@@ -15,6 +15,10 @@ const AddressModal = ({ addressRef }) => {
     "Авангардная улица, 13",
     "Кантемировская улица, 27А",
   ];
+  const dynamicStyle = {
+    "--address-margin-top": marginTop,
+    "--address-width": width,
+  };
   const handleChangeAddress = (id) => {
     setAddressIndex(id);
     setIsNewAddressOpen(false);
@@ -44,8 +48,8 @@ const AddressModal = ({ addressRef }) => {
   };
 
   return (
-    <div className={styles.container} ref={addressRef}>
-      <h2>Мои адреса</h2>
+    <div className={styles.container} ref={addressRef} style={dynamicStyle}>
+      <h2>Выберите адрес доставки</h2>
       {addressList.map((item, index) => (
         <>
           {addressIndex !== index && (
