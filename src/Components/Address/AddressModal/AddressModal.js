@@ -37,6 +37,12 @@ const AddressModal = ({ addressRef }) => {
     console.log("addressIndex", addressIndex);
   }, [addressIndex]);
 
+  const [chosenAddress, setChosenAddress] = useState(null);
+  const changeCheckbox = (e) => {
+    console.log("e.target.value", e.target.value);
+    setChosenAddress(e.target.value);
+  };
+
   return (
     <div className={styles.container} ref={addressRef}>
       <h2>Мои адреса</h2>
@@ -45,7 +51,16 @@ const AddressModal = ({ addressRef }) => {
           {addressIndex !== index && (
             <div style={{ width: "100%" }}>
               <div className={styles.addressContainer}>
-                <span>{item}</span>
+                <div>
+                  <input
+                    type="radio"
+                    checked={chosenAddress == index ? true : false}
+                    onChange={(e) => changeCheckbox(e)}
+                    value={index}
+                  />
+                  <label>{item}</label>
+                </div>
+
                 <div
                   onClick={() => handleChangeAddress(index)}
                   className={styles.edit}
