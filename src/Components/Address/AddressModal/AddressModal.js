@@ -22,6 +22,7 @@ const AddressModal = ({ addressRef }) => {
   };
 
   const handleAddAddress = () => {
+    setAddressIndex(null);
     setIsChangeAddressOpen(false);
     setIsNewAddressOpen(true);
   };

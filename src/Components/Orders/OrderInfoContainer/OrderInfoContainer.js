@@ -1,4 +1,5 @@
 import styles from "./OrderInfoContainer.module.scss";
+import pepperoni from "../../../assets/images/pizza/pepperoni.jpg";
 
 const OrderInfoContainer = () => {
   return (
@@ -15,6 +16,7 @@ const OrderInfoContainer = () => {
       <div className={styles.details}>
         <span>Состав заказа</span>
         <div className={styles.orderDetails}>
+          <img src={pepperoni} alt="pepperoni" />
           <div className={styles.info}>
             <div>Пицца Мексиканская</div>
             <div className={styles.amount}>2 шт.</div>
@@ -23,7 +25,17 @@ const OrderInfoContainer = () => {
         </div>
         <div className={styles.line} />
       </div>
-      <div className={styles.payment}></div>
+      <div className={styles.details}>
+        <span>Оплата</span>
+        <div className={styles.payment}>
+          <div className={styles.info}>Стоимость заказа</div>
+          <div className={styles.info}>1056 ₽</div>
+        </div>
+        <div className={styles.payment}>
+          <div className={styles.wholeSum}>Итого</div>
+          <div className={styles.wholeSum}>1056 ₽</div>
+        </div>
+      </div>
     </div>
   );
 };

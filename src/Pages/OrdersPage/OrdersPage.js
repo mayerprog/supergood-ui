@@ -19,6 +19,7 @@ const OrdersPage = ({
         <span>
           Пока нет ваших заказов. Заказать блюда можно
           <a href="/" className={styles.linkStyle}>
+            {" "}
             здесь
           </a>
           .
