@@ -259,6 +259,7 @@ const MainContent = ({
             addressRef={addressRef}
             marginTop="-170px"
             width="none"
+            isModal={true}
           />
         </div>
       )}

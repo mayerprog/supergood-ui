@@ -9,11 +9,21 @@ const NewOrderPage = ({
   addressRef,
   isUserInfoOpen,
   isModalAddressOpen,
+  mapWrapperRef,
+  setIsMapOpen,
+  isMapOpen,
 }) => {
   return (
     <div className={styles.content}>
       <h2>Оформление заказа</h2>
-      <AddressModal addressRef={addressRef} marginTop="none" width="50%" />
+      <AddressModal
+        marginTop="none"
+        width="50%"
+        isModal={false}
+        mapWrapperRef={mapWrapperRef}
+        setIsMapOpen={setIsMapOpen}
+        isMapOpen={isMapOpen}
+      />
       {isUserInfoOpen && (
         <div className={styles.cardOverlay}>
           <UserInfo
@@ -28,6 +38,7 @@ const NewOrderPage = ({
             addressRef={addressRef}
             marginTop="-170px"
             width="none"
+            isModal={true}
           />
         </div>
       )}

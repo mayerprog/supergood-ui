@@ -107,6 +107,9 @@ function App() {
                   addressRef={addressRef}
                   isUserInfoOpen={isUserInfoOpen}
                   isModalAddressOpen={isModalAddressOpen}
+                  mapWrapperRef={mapWrapperRef}
+                  setIsMapOpen={setIsMapOpen}
+                  isMapOpen={isMapOpen}
                 />
               </ProtectedRoute>
             }

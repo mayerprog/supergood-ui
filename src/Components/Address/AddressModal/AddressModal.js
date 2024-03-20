@@ -4,12 +4,22 @@ import { MdOutlineAdd } from "react-icons/md";
 
 import { useEffect, useState } from "react";
 import AddAddressComponent from "../AddAddressComponent/AddAddressComponent";
+import MapComponent from "../../MapComponent/MapComponent";
 
-const AddressModal = ({ addressRef, marginTop, width }) => {
+const AddressModal = ({
+  addressRef,
+  marginTop,
+  width,
+  isModal,
+  mapWrapperRef,
+  setIsMapOpen,
+  isMapOpen,
+}) => {
   // const address = useSelector((state) => state.address.address);
   const [isChangeAddressOpen, setIsChangeAddressOpen] = useState(false);
   const [isNewAddressOpen, setIsNewAddressOpen] = useState(false);
   const [addressIndex, setAddressIndex] = useState(null);
+
   const addressList = [
     "5-я улица Ямского Поля, 7к2",
     "Авангардная улица, 13",
@@ -29,6 +39,7 @@ const AddressModal = ({ addressRef, marginTop, width }) => {
     setAddressIndex(null);
     setIsChangeAddressOpen(false);
     setIsNewAddressOpen(true);
+    if (!isModal) setIsMapOpen(true);
   };
 
   const handleCloseChanging = () => {
@@ -83,20 +94,36 @@ const AddressModal = ({ addressRef, marginTop, width }) => {
           )}
         </>
       ))}
-      {isNewAddressOpen ? (
-        <div>
-          <h3>Добавьте адрес</h3>
-          <AddAddressComponent
-            streetName=""
-            closeChangeField={handleCloseChanging}
-          />
-        </div>
-      ) : (
-        <div className={styles.addAddress} onClick={handleAddAddress}>
-          <MdOutlineAdd size={25} />
-          <span>Добавить адрес</span>
-        </div>
-      )}
+      {isModal &&
+        (isNewAddressOpen ? (
+          <div>
+            <h3>Добавьте адрес</h3>
+            <AddAddressComponent
+              streetName=""
+              closeChangeField={handleCloseChanging}
+            />
+          </div>
+        ) : (
+          <div className={styles.addAddress} onClick={handleAddAddress}>
+            <MdOutlineAdd size={25} />
+            <span>Добавить адрес</span>
+          </div>
+        ))}
+
+      {!isModal &&
+        (isMapOpen ? (
+          <div className={styles.cardOverlay}>
+            <MapComponent
+              mapWrapperRef={mapWrapperRef}
+              setIsMapOpen={setIsMapOpen}
+            />
+          </div>
+        ) : (
+          <div className={styles.addAddress} onClick={handleAddAddress}>
+            <MdOutlineAdd size={25} />
+            <span>Добавить адрес</span>
+          </div>
+        ))}
     </div>
   );
 };

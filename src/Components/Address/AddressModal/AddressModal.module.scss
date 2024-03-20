@@ -17,6 +17,10 @@
   align-items: flex-start;
   padding: 30px;
 
+  h2 {
+    font-weight: 400;
+  }
+
   .addressContainer {
     display: flex;
     flex-direction: row;
@@ -48,5 +52,9 @@
     span {
       margin-left: 7px;
     }
+  }
+
+  .cardOverlay {
+    @include card-overlay;
   }
 }
