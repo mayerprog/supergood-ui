@@ -138,7 +138,7 @@ const OrdersContainer = () => {
   ];
 
   return (
-    <div className={styles.ordersContainer}>
+    <div className={styles.container}>
       <div className={styles.title}>
         <h3>Активные</h3>
         <div onClick={() => setIsPendingListVisible(!isPendingListVisible)}>

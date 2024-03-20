@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  min-width: 450px;
+  margin-left: 50px;
+  // width: 100%;
+
+  .header {
+    color: #888888;
+    font-size: 15px;
+  }
+
+  .details {
+    margin: 10px;
+    span {
+      color: #888888;
+      margin: 10px;
+    }
+    .info {
+      margin: 20px;
+    }
+    .amount {
+      color: #888888;
+      font-size: 15px;
+    }
+  }
+  .orderDetails {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .line {
+    height: 1px;
+    border: 0;
+    background: #e6e6e6;
+    margin: 10px 0;
+  }
+}
