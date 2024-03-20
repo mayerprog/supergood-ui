@@ -29,8 +29,9 @@
       font-size: 17px;
     }
     .order {
+      min-width: 110px;
       font-weight: 600;
-      color: #c49e4c;
+      color: #d7a63d;
       cursor: pointer;
       &:hover {
         color: lighten(#e9bc5b, 3%);
@@ -45,9 +46,9 @@
     cursor: pointer;
   }
   .line {
-    // height: 1px;
+    height: 1px;
     border: 0;
-    // background: #ccc;
+    background: #e6e6e6;
     margin: 10px 0;
   }
 }

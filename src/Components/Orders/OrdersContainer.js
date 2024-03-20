@@ -11,7 +11,7 @@ const OrdersContainer = () => {
       orderId: 1048,
       date: "12.12.2023",
       time: "12:45",
-      paymentType: "Банковская карта",
+      paymentType: "Наличными курьеру",
       status: "Cancelled",
       price: "1392",
     },
@@ -150,11 +150,11 @@ const OrdersContainer = () => {
           {orders
             .filter((order) => order.status === "Pending")
             .map((order, index) => (
-              <>
+              <div>
                 <div key={index} className={styles.orderInfo}>
-                  <div>
-                    <span className={styles.order}>Заказ {order.orderId}</span>
-                  </div>{" "}
+                  <div className={styles.order}>
+                    <span>Заказ {order.orderId}</span>
+                  </div>
                   <span>{order.date}</span>
                   <span>{order.time}</span>
                   <span>{order.paymentType}</span>
@@ -162,7 +162,7 @@ const OrdersContainer = () => {
                   <span className={styles.price}>{order.price} ₽</span>
                 </div>
                 <div className={styles.line} />
-              </>
+              </div>
             ))}
         </div>
       )}
@@ -177,10 +177,10 @@ const OrdersContainer = () => {
           {orders
             .filter((order) => order.status === "Cancelled")
             .map((order, index) => (
-              <>
+              <div>
                 <div key={index} className={styles.orderInfo}>
-                  <div>
-                    <span className={styles.order}>Заказ {order.orderId}</span>
+                  <div className={styles.order}>
+                    <span>Заказ {order.orderId}</span>
                   </div>
                   <span>{order.date}</span>
                   <span className={styles.time}>{order.time}</span>
@@ -189,7 +189,7 @@ const OrdersContainer = () => {
                   <span className={styles.price}>{order.price} ₽</span>
                 </div>
                 <div className={styles.line} />
-              </>
+              </div>
             ))}
         </div>
       )}
