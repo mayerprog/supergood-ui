@@ -8,6 +8,7 @@ import styles from "./MainPage.module.scss";
 import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
 import { updateSum } from "../../redux/slices/cartSlice";
+import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 
 const MainPage = ({
   searchQuery,
@@ -31,13 +32,10 @@ const MainPage = ({
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const items = useSelector((state) => state.item.items);
-  const cartItems = useSelector((state) => state.cart.cartItems);
   const categories = [...new Set(items.map((item) => item.category))]; // Unique categories
 
   const [searchedItems, setSearchedItems] = useState([]);
   const [searchedCategories, setSearchedCategories] = useState(categories);
-
-  const dispatch = useDispatch();
 
   const cardRef = useRef(null);
   const wrapperRef = useRef(null);
@@ -71,15 +69,7 @@ const MainPage = ({
     }
   }, []);
 
-  useEffect(() => {
-    if (cartItems) {
-      const sum = cartItems.reduce(
-        (accumulator, currentValue) => accumulator + currentValue.price,
-        0
-      );
-      dispatch(updateSum(sum));
-    }
-  }, [cartItems, dispatch]);
+  useUpdateSumHook();
 
   const toggleCardOpen = (itemId) => {
     setIsCardOpen(!isCardOpen);

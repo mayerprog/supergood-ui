@@ -2,10 +2,13 @@ import styles from "./Payment.module.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { updateSum } from "../../redux/slices/cartSlice";
+import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 
 const Payment = ({}) => {
-  const cartItems = useSelector((state) => state.cart.cartItems);
   const itemsSum = useSelector((state) => state.cart.itemsSum);
+
+  useUpdateSumHook();
 
   let navigate = useNavigate();
 
@@ -34,7 +37,7 @@ const Payment = ({}) => {
         <h2>Итого</h2>
         <div className={styles.paymentDetails}>
           <div className={styles.info}>Стоимость заказа</div>
-          <div className={styles.info}>1056 ₽</div>
+          <div className={styles.info}>{itemsSum} ₽</div>
         </div>
         <div className={styles.paymentDetails}>
           <div className={styles.info}>Время доставки</div>
@@ -47,7 +50,7 @@ const Payment = ({}) => {
           >
             <span className={styles.paymentButtonText}>Оплатить</span>
           </button>
-          <div className={styles.sum}>1056 ₽</div>
+          <div className={styles.sum}>{itemsSum} ₽</div>
         </div>
       </div>
     </div>

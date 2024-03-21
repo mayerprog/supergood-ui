@@ -17,8 +17,6 @@ const NewOrderPage = ({
   setIsMapOpen,
   isMapOpen,
 }) => {
-  // const mediaQuery = useMediaQuery({ maxWidth: 1274 }); // to hide <Cart /> when maxWidth: 1480px
-
   return (
     <div className={styles.container}>
       <h2>Оформление заказа</h2>
