@@ -14,7 +14,8 @@
   // height: calc(100vh - 400px);
   // overflow-y: auto;
 
-  h2 {
+  h2,
+  h3 {
     font-weight: 600;
   }
 
@@ -45,23 +46,41 @@
   .info {
     margin: 10px;
   }
+  .sum {
+    font-weight: 600;
+    font-size: 20px;
+    margin: 10px;
+  }
+  .paymentButtonStyle,
   .buttonStyle {
     @include reusable-button;
     margin: 0;
+  }
+  .paymentButtonStyle {
     background-color: rgb(239, 199, 118);
     &:hover {
       background-color: darken(rgb(239, 199, 118), 2%);
     }
-
     &:active {
       background-color: darken(rgb(239, 199, 118), 3%);
     }
   }
+  .buttonStyle {
+    width: 100%;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    height: 40px;
+    width: 100px;
+    background-color: white;
+  }
 
+  .paymentButtonText,
   .buttonText {
     color: rgb(31, 31, 31);
     font-family: "Inter", sans-serif;
     font-size: 15px;
     font-weight: 600;
+  }
+  .buttonText {
+    font-weight: 400;
   }
 }

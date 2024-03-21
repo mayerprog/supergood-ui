@@ -18,6 +18,18 @@ const Payment = ({}) => {
       <div className={styles.header}>
         <h2>Оплата</h2>
       </div>
+      <div>
+        <h3>Способ оплаты</h3>
+        <div className={styles.paymentDetails}>
+          <div className={styles.info}>Банковская карта</div>
+          <button
+            className={styles.buttonStyle}
+            onClick={() => console.log("Pay")}
+          >
+            <span className={styles.buttonText}>Изменить</span>
+          </button>
+        </div>
+      </div>
       <div className={styles.sumContainer}>
         <h2>Итого</h2>
         <div className={styles.paymentDetails}>
@@ -30,12 +42,12 @@ const Payment = ({}) => {
         </div>
         <div className={styles.finalPayment}>
           <button
-            className={styles.buttonStyle}
+            className={styles.paymentButtonStyle}
             onClick={() => console.log("Pay")}
           >
-            <span className={styles.buttonText}>Оплатить</span>
+            <span className={styles.paymentButtonText}>Оплатить</span>
           </button>
-          <div className={styles.info}>1056 ₽</div>
+          <div className={styles.sum}>1056 ₽</div>
         </div>
       </div>
     </div>
