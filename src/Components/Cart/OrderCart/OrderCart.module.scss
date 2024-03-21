@@ -1,0 +1,45 @@
+@import "../../../mixins/mixins";
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  box-shadow: 0 0 5px #ccc;
+  padding: 2.2vh;
+  font-size: 15px;
+  font-family: "Inter", sans-serif;
+  margin-left: 1.5vw;
+  min-width: 330px;
+  min-height: 400px;
+  // height: calc(100vh - 400px);
+  // overflow-y: auto;
+
+  .cartHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 5px;
+    .cartTitle {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    .deleteTitle {
+      font-size: 1rem;
+      color: #929292;
+    }
+  }
+}
+
+.cart::-webkit-scrollbar {
+  display: block;
+  width: 2px;
+}
+.cart::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cart::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-right: none;
+  border-left: none;
+}

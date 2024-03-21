@@ -41,6 +41,7 @@ const OrdersPage = ({
             addressRef={addressRef}
             marginTop="-170px"
             width="none"
+            height="none"
             isModal={true}
           />
         </div>

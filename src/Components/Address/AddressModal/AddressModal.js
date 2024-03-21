@@ -10,6 +10,7 @@ const AddressModal = ({
   addressRef,
   marginTop,
   width,
+  height,
   isModal,
   mapWrapperRef,
   setIsMapOpen,
@@ -19,6 +20,12 @@ const AddressModal = ({
   const [isChangeAddressOpen, setIsChangeAddressOpen] = useState(false);
   const [isNewAddressOpen, setIsNewAddressOpen] = useState(false);
   const [addressIndex, setAddressIndex] = useState(null);
+  const [chosenAddress, setChosenAddress] = useState(null);
+
+  const changeCheckbox = (e) => {
+    console.log("e.target.value", e.target.value);
+    setChosenAddress(e.target.value);
+  };
 
   const addressList = [
     "5-я улица Ямского Поля, 7к2",
@@ -28,6 +35,7 @@ const AddressModal = ({
   const dynamicStyle = {
     "--address-margin-top": marginTop,
     "--address-width": width,
+    "--address-height": height,
   };
   const handleChangeAddress = (id) => {
     setAddressIndex(id);
@@ -51,12 +59,6 @@ const AddressModal = ({
   useEffect(() => {
     console.log("addressIndex", addressIndex);
   }, [addressIndex]);
-
-  const [chosenAddress, setChosenAddress] = useState(null);
-  const changeCheckbox = (e) => {
-    console.log("e.target.value", e.target.value);
-    setChosenAddress(e.target.value);
-  };
 
   return (
     <div className={styles.container} ref={addressRef} style={dynamicStyle}>

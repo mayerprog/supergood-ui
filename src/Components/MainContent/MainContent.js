@@ -30,8 +30,8 @@ const MainContent = ({
   itemCardId,
   cardRef,
   mapWrapperRef,
-  isMapOpen,
   setIsMapOpen,
+  isMapOpen,
   userInfoRef,
   isUserInfoOpen,
   toggleUserInfoVisibility,
@@ -259,6 +259,7 @@ const MainContent = ({
             addressRef={addressRef}
             marginTop="-170px"
             width="none"
+            height="none"
             isModal={true}
           />
         </div>

@@ -1,9 +1,5 @@
 import styles from "./Cart.module.scss";
-import pizza from "../../assets/images/pizza.jpg";
-import AddItemBox from "../AddItemBox/AddItemBox";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updateAmount, updateSum } from "../../redux/slices/cartSlice";
+import { useSelector } from "react-redux";
 import CartBox from "./CartBox/CartBox";
 import { useNavigate } from "react-router-dom";
 

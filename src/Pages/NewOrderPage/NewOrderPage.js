@@ -2,6 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import styles from "./NewOrderPage.module.scss";
 import UserInfo from "../../Components/UserInfo/UserInfo";
 import AddressModal from "../../Components/Address/AddressModal/AddressModal";
+import Cart from "../../Components/Cart/Cart";
+import OrderCart from "../../Components/Cart/OrderCart/OrderCart";
+import Payment from "../../Components/Payment/Payment";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -14,16 +17,22 @@ const NewOrderPage = ({
   isMapOpen,
 }) => {
   return (
-    <div className={styles.content}>
+    <div className={styles.container}>
       <h2>Оформление заказа</h2>
-      <AddressModal
-        marginTop="none"
-        width="50%"
-        isModal={false}
-        mapWrapperRef={mapWrapperRef}
-        setIsMapOpen={setIsMapOpen}
-        isMapOpen={isMapOpen}
-      />
+      <div className={styles.content}>
+        <AddressModal
+          marginTop="none"
+          width="40%"
+          height="100%"
+          isModal={false}
+          mapWrapperRef={mapWrapperRef}
+          setIsMapOpen={setIsMapOpen}
+          isMapOpen={isMapOpen}
+        />
+
+        <OrderCart />
+        <Payment />
+      </div>
       {isUserInfoOpen && (
         <div className={styles.cardOverlay}>
           <UserInfo
@@ -38,6 +47,7 @@ const NewOrderPage = ({
             addressRef={addressRef}
             marginTop="-170px"
             width="none"
+            height="none"
             isModal={true}
           />
         </div>

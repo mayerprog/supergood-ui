@@ -1,6 +1,6 @@
 @import "../../mixins/mixins";
 
-.content {
+.container {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -11,6 +11,12 @@
   font-family: "Inter", sans-serif;
   width: 100%;
   margin-bottom: 20px;
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
   .cardOverlay {
     @include card-overlay;
