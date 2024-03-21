@@ -135,14 +135,11 @@ const Orders = () => {
       price: "885",
     },
   ];
-  const orderForDisplay = orders.filter(
-    (order) => order.orderId === orderIndex
-  );
 
   return (
     <div className={styles.container}>
       <OrdersContainer setOrderIndex={setOrderIndex} orders={orders} />
-      <OrderInfoContainer orderForDisplay={orderForDisplay[0]} />
+      <OrderInfoContainer />
     </div>
   );
 };
