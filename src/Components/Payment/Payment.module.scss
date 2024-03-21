@@ -3,15 +3,19 @@
 .container {
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 90px;
   border-radius: 20px;
   box-shadow: 0 0 5px #ccc;
-  padding: 2.2vh;
+  padding: 30px;
   font-size: 15px;
   font-family: "Inter", sans-serif;
-  margin-left: 1.5vw;
-  min-width: 330px;
+  // margin-left: 1.5vw;
+  max-width: 400px;
+  width: 100%;
+  // min-width: 400px;
   // min-height: 400px;
-  // height: calc(100vh - 400px);
+  height: calc(100vh - 500px);
   // overflow-y: auto;
 
   h2,

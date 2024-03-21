@@ -5,6 +5,7 @@ import AddressModal from "../../Components/Address/AddressModal/AddressModal";
 import Cart from "../../Components/Cart/Cart";
 import OrderCart from "../../Components/Cart/OrderCart/OrderCart";
 import Payment from "../../Components/Payment/Payment";
+import { useMediaQuery } from "react-responsive";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -16,23 +17,27 @@ const NewOrderPage = ({
   setIsMapOpen,
   isMapOpen,
 }) => {
+  // const mediaQuery = useMediaQuery({ maxWidth: 1274 }); // to hide <Cart /> when maxWidth: 1480px
+
   return (
     <div className={styles.container}>
       <h2>Оформление заказа</h2>
       <div className={styles.content}>
-        <AddressModal
-          marginTop="none"
-          width="40%"
-          height="100%"
-          isModal={false}
-          mapWrapperRef={mapWrapperRef}
-          setIsMapOpen={setIsMapOpen}
-          isMapOpen={isMapOpen}
-        />
-
-        <OrderCart />
+        <div className={styles.addressCartContainer}>
+          <AddressModal
+            marginTop="none"
+            maxWidth="500px"
+            height="100%"
+            isModal={false}
+            mapWrapperRef={mapWrapperRef}
+            setIsMapOpen={setIsMapOpen}
+            isMapOpen={isMapOpen}
+          />
+          <OrderCart />
+        </div>
         <Payment />
       </div>
+
       {isUserInfoOpen && (
         <div className={styles.cardOverlay}>
           <UserInfo
@@ -46,7 +51,7 @@ const NewOrderPage = ({
           <AddressModal
             addressRef={addressRef}
             marginTop="-170px"
-            width="none"
+            maxWidth="500px"
             height="none"
             isModal={true}
           />

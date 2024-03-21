@@ -21,10 +21,10 @@ const Payment = ({}) => {
       <div>
         <h3>Способ оплаты</h3>
         <div className={styles.paymentDetails}>
-          <div className={styles.info}>Банковская карта</div>
+          <div className={styles.info}>Выбрать способ оплаты</div>
           <button
             className={styles.buttonStyle}
-            onClick={() => console.log("Pay")}
+            onClick={() => console.log("Change payment method")}
           >
             <span className={styles.buttonText}>Изменить</span>
           </button>

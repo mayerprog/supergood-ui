@@ -258,7 +258,7 @@ const MainContent = ({
           <AddressModal
             addressRef={addressRef}
             marginTop="-170px"
-            width="none"
+            maxWidth="500px"
             height="none"
             isModal={true}
           />

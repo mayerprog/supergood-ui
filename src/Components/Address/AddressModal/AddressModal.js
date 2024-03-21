@@ -9,7 +9,7 @@ import MapComponent from "../../MapComponent/MapComponent";
 const AddressModal = ({
   addressRef,
   marginTop,
-  width,
+  maxWidth,
   height,
   isModal,
   mapWrapperRef,
@@ -34,7 +34,7 @@ const AddressModal = ({
   ];
   const dynamicStyle = {
     "--address-margin-top": marginTop,
-    "--address-width": width,
+    "--address-maxWidth": maxWidth,
     "--address-height": height,
   };
   const handleChangeAddress = (id) => {
@@ -98,13 +98,13 @@ const AddressModal = ({
       ))}
       {isModal &&
         (isNewAddressOpen ? (
-          <div>
+          <>
             <h3>Добавьте адрес</h3>
             <AddAddressComponent
               streetName=""
               closeChangeField={handleCloseChanging}
             />
-          </div>
+          </>
         ) : (
           <div className={styles.addAddress} onClick={handleAddAddress}>
             <MdOutlineAdd size={25} />
