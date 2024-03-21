@@ -35,7 +35,7 @@ const Header = forwardRef(
     const itemsSum = useSelector((state) => state.cart.itemsSum);
     const address = useSelector((state) => state.address.address);
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleLoginClick = () => {
       // where authorisation must take place

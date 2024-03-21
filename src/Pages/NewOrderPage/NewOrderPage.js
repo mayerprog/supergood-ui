@@ -20,7 +20,7 @@ const NewOrderPage = ({
   isMapOpen,
 }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (cartItems.length === 0) {

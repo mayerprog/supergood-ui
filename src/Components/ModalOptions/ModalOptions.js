@@ -8,7 +8,7 @@ const ModalOptions = ({
   toggleUserInfoVisibility,
   toggleAddressVisibility,
 }) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleResize = () => {
     toggleOptionsVisibility();

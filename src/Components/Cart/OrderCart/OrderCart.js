@@ -8,7 +8,7 @@ const OrderCart = ({}) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const itemsSum = useSelector((state) => state.cart.itemsSum);
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleClickSubmit = () => {
     navigate("/submit");

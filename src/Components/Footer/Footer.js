@@ -5,7 +5,7 @@ import logo from "../../assets/images/logo.jpg";
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <footer className={styles.footer}>

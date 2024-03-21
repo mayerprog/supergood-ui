@@ -10,7 +10,7 @@ const Payment = ({}) => {
 
   useUpdateSumHook();
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleClickSubmit = () => {
     navigate("/submit");

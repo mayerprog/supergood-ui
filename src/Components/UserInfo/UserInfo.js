@@ -112,11 +112,15 @@ const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
         <input className={styles.input} placeholder="Электронная почта" />
       </div>
       <div className={styles.inputContainer}>
-        <span>Дата рождения</span>
+        <span>Телефон</span>
+        <span className={styles.phone}>8 (977) 589 7234</span>
+      </div>
+      <div className={styles.inputContainer}>
+        {/* <span>Дата рождения</span> */}
         <ThemeProvider theme={theme}>
           <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
             <DatePicker
-              label="Введите дату"
+              label="Введите дату рождения"
               value={selectedDate}
               onChange={(newValue) => {
                 setSelectedDate(newValue);
