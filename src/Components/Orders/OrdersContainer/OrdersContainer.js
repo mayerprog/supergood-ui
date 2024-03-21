@@ -2,140 +2,14 @@ import { useState } from "react";
 import styles from "./OrdersContainer.module.scss";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-const OrdersContainer = () => {
+const OrdersContainer = ({ setOrderIndex, orders }) => {
   const [isPendingListVisible, setIsPendingListVisible] = useState(true);
   const [isCompletedListVisible, setIsCompletedListVisible] = useState(false);
 
-  const orders = [
-    {
-      orderId: 1048,
-      date: "12.12.2023",
-      time: "12:45",
-      paymentType: "Наличными курьеру",
-      status: "Cancelled",
-      price: "1392",
-    },
-    {
-      orderId: 1048,
-      date: "12.12.2023",
-      time: "12:45",
-      paymentType: "Банковская карта",
-      status: "Cancelled",
-      price: "1392",
-    },
-    {
-      orderId: 1048,
-      date: "12.12.2023",
-      time: "12:45",
-      paymentType: "Банковская карта",
-      status: "Cancelled",
-      price: "1392",
-    },
-    {
-      orderId: 1048,
-      date: "12.12.2023",
-      time: "12:45",
-      paymentType: "Банковская карта",
-      status: "Cancelled",
-      price: "1392",
-    },
-    {
-      orderId: 1048,
-      date: "12.12.2023",
-      time: "12:45",
-      paymentType: "Банковская карта",
-      status: "Cancelled",
-      price: "1392",
-    },
-    {
-      orderId: 237,
-      date: "06.12.2023",
-      time: "10:30",
-      paymentType: "Наличными курьеру",
-      status: "Cancelled",
-      price: "968",
-    },
-    {
-      orderId: 212,
-      date: "10.12.2023",
-      time: "10:15",
-      paymentType: "Наличными курьеру",
-      status: "Cancelled",
-      price: "600",
-    },
-    {
-      orderId: 1893,
-      date: "12.10.2023",
-      time: "17:25",
-      paymentType: "Наличными курьеру",
-      status: "Pending",
-      price: "1050",
-    },
-    {
-      orderId: 1875,
-      date: "13.01.2023",
-      time: "12:45",
-      paymentType: "Банковская карта",
-      status: "Pending",
-      price: "885",
-    },
-    {
-      orderId: 1875,
-      date: "13.01.2023",
-      time: "12:45",
-      paymentType: "Банковская карта",
-      status: "Pending",
-      price: "885",
-    },
-    {
-      orderId: 1875,
-      date: "13.01.2023",
-      time: "12:45",
-      paymentType: "Банковская карта",
-      status: "Pending",
-      price: "885",
-    },
-    {
-      orderId: 1875,
-      date: "13.01.2023",
-      time: "12:45",
-      paymentType: "Банковская карта",
-      status: "Pending",
-      price: "885",
-    },
-    {
-      orderId: 1875,
-      date: "13.01.2023",
-      time: "12:45",
-      paymentType: "Банковская карта",
-      status: "Pending",
-      price: "885",
-    },
-    {
-      orderId: 1875,
-      date: "13.01.2023",
-      time: "12:45",
-      paymentType: "Банковская карта",
-      status: "Pending",
-      price: "885",
-    },
-    {
-      orderId: 1875,
-      date: "13.01.2023",
-      time: "12:45",
-      paymentType: "Банковская карта",
-      status: "Pending",
-      price: "885",
-    },
-    {
-      orderId: 1875,
-      date: "13.01.2023",
-      time: "12:45",
-      paymentType: "Банковская карта",
-      status: "Pending",
-      price: "885",
-    },
-  ];
+  const handleChooseOrder = (orderId) => {
+    console.log("id", orderId);
+    setOrderIndex(orderId);
+  };
 
   return (
     <div className={styles.container}>
@@ -152,7 +26,10 @@ const OrdersContainer = () => {
             .map((order, index) => (
               <div>
                 <div key={index} className={styles.orderInfo}>
-                  <div className={styles.order}>
+                  <div
+                    className={styles.order}
+                    onClick={() => handleChooseOrder(order.orderId)}
+                  >
                     <span>Заказ {order.orderId}</span>
                   </div>
                   <span>{order.date}</span>
@@ -179,7 +56,10 @@ const OrdersContainer = () => {
             .map((order, index) => (
               <div>
                 <div key={index} className={styles.orderInfo}>
-                  <div className={styles.order}>
+                  <div
+                    className={styles.order}
+                    onClick={() => handleChooseOrder(order.orderId)}
+                  >
                     <span>Заказ {order.orderId}</span>
                   </div>
                   <span>{order.date}</span>

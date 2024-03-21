@@ -1,11 +1,11 @@
 import styles from "./OrderInfoContainer.module.scss";
 import pepperoni from "../../../assets/images/pizza/pepperoni.jpg";
 
-const OrderInfoContainer = () => {
+const OrderInfoContainer = ({ orderForDisplay }) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h3>Заказ № 1086</h3>
+        <h3>Заказ № {orderForDisplay.orderId}</h3>
       </div>
       <div className={styles.progress}></div>
       <div className={styles.details}>

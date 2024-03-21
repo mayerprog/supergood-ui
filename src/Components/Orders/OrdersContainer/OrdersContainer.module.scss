@@ -60,11 +60,12 @@
 
 .ordersList::-webkit-scrollbar {
   display: block;
-  width: 3px;
+  width: 5px;
 }
 
 .ordersList::-webkit-scrollbar-thumb {
   background-color: #ccc;
   border-right: none;
   border-left: none;
+  cursor: pointer;
 }

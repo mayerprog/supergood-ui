@@ -21,7 +21,7 @@ const Cart = ({
     "--cart-transform": transform,
   };
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleClickSubmit = () => {
     if (cartItems.length > 0) {
