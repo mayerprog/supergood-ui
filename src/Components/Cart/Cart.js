@@ -24,8 +24,10 @@ const Cart = ({
   let navigate = useNavigate();
 
   const handleClickSubmit = () => {
-    toggleCartVisibility(false);
-    navigate("/submit");
+    if (cartItems.length > 0) {
+      toggleCartVisibility(false);
+      navigate("/submit");
+    }
   };
 
   return (

@@ -6,6 +6,8 @@ import Cart from "../../Components/Cart/Cart";
 import OrderCart from "../../Components/Cart/OrderCart/OrderCart";
 import Payment from "../../Components/Payment/Payment";
 import { useMediaQuery } from "react-responsive";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -17,6 +19,15 @@ const NewOrderPage = ({
   setIsMapOpen,
   isMapOpen,
 }) => {
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      navigate("/");
+    }
+  }, [cartItems]);
+
   return (
     <div className={styles.container}>
       <h2>Оформление заказа</h2>
