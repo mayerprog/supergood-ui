@@ -27,10 +27,10 @@ export const itemAPI = {
       console.log("Failed to get all products. Check console for details.");
     }
   },
-  async getFile(formData) {
+  async getFile(uid) {
     try {
       const response = await instance.post(`/getFile`, {
-        uid: formData,
+        uid: uid,
       });
       console.log("files", response.data);
       return response.data;
