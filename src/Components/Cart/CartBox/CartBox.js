@@ -9,7 +9,7 @@ const CartBox = ({ item, index }) => {
   useEffect(() => {
     (async () => {
       try {
-        const uid = item.img.uid;
+        const uid = item.img[0].uid;
         const image = await itemAPI.getFile(uid);
         setItemImage(image);
       } catch (err) {
