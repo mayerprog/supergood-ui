@@ -15,12 +15,12 @@ export const cartSlice = createSlice({
     },
     removeItems: (state, action) => {
       state.cartItems = state.cartItems.filter(
-        (item) => item.id !== action.payload
+        (item) => item.itemid !== action.payload
       );
     },
     updateItem: (state, action) => {
       state.cartItems = state.cartItems.map((item) =>
-        item.id === action.payload.id ? action.payload : item
+        item.itemid === action.payload.itemid ? action.payload : item
       );
       // console.log("cartItems", state.cartItems);
     },

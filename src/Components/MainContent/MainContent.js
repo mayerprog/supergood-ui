@@ -50,6 +50,10 @@ const MainContent = ({
   const sliderRef = useRef(null);
   const categoryRefs = useRef({});
 
+  useEffect(() => {
+    console.log("items", items);
+  }, [items]);
+
   const scrollToCategory = useCallback(
     (categoryName) => {
       const element = categoryRefs.current[categoryName];
@@ -227,7 +231,7 @@ const MainContent = ({
           <h2>{category}</h2>
           <div className={styles.items}>
             {items
-              .filter((item) => item.category === category)
+              .filter((item) => item.catname === category)
               .map((filteredProduct, index) => (
                 <Item
                   item={filteredProduct}

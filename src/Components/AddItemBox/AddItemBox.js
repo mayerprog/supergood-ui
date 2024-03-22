@@ -28,26 +28,34 @@ const AddItemBox = ({
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   useEffect(() => {
-    const foundCartItem = cartItems.find((cartItem) => itemId === cartItem.id);
+    const foundCartItem = cartItems.find(
+      (cartItem) => itemId === cartItem.itemid
+    );
+
     if (foundCartItem) {
-      if (foundCartItem.amount.value < 1) {
-        dispatch(removeItems(foundCartItem.id));
+      if (foundCartItem.params.amount.value < 1) {
+        dispatch(removeItems(foundCartItem.itemid));
       }
-      setAmount(foundCartItem.amount.value);
+      setAmount(foundCartItem.params.amount.value);
       setUpdatedItem({
         ...foundCartItem,
-        amount: { ...foundCartItem.amount },
-        weightout: { ...foundCartItem.weightout },
+        params: {
+          ...foundCartItem.params,
+          amount: { ...foundCartItem.params.amount },
+          weightout: { ...foundCartItem.params.weightout },
+        },
       });
     }
   }, [cartItems, itemId]);
 
   const increment = (event) => {
     event.stopPropagation();
-
-    updatedItem.amount.value = Number(updatedItem.amount.value) + 1;
+    console.log("amount", updatedItem.params.amount.value);
+    updatedItem.params.amount.value =
+      Number(updatedItem.params.amount.value) + 1;
     updatedItem.price = updatedItem.price * 2;
-    updatedItem.weightout.value = Number(updatedItem.weightout.value) * 2;
+    updatedItem.params.weightout.value =
+      Number(updatedItem.params.weightout.value) * 2;
 
     dispatch(updateItem(updatedItem));
   };
@@ -55,12 +63,13 @@ const AddItemBox = ({
   const decrement = (event) => {
     event.stopPropagation();
 
-    updatedItem.amount.value = Math.max(
-      Number(updatedItem.amount.value) - 1,
+    updatedItem.params.amount.value = Math.max(
+      Number(updatedItem.params.amount.value) - 1,
       0
     );
     updatedItem.price = updatedItem.price / 2;
-    updatedItem.weightout.value = Number(updatedItem.weightout.value) / 2;
+    updatedItem.params.weightout.value =
+      Number(updatedItem.params.weightout.value) / 2;
     dispatch(updateItem(updatedItem));
   };
 

@@ -11,6 +11,7 @@ import { updateSum } from "../../redux/slices/cartSlice";
 import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 import { itemAPI } from "../../api/itemAPI";
 import { setItems } from "../../redux/slices/itemSlice";
+import jsonData from "../../newApi_getItems.json";
 
 const MainPage = ({
   searchQuery,
@@ -34,7 +35,7 @@ const MainPage = ({
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const items = useSelector((state) => state.item.items);
-  const categories = [...new Set(items.map((item) => item.category))]; // Unique categories
+  const categories = [...new Set(items.map((item) => item.catname))]; // Unique categories
 
   const [searchedItems, setSearchedItems] = useState([]);
   const [searchedCategories, setSearchedCategories] = useState(categories);
@@ -44,16 +45,35 @@ const MainPage = ({
 
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const allItems = await itemAPI.getItems();
+  //       // dispatch(setItems(allItems));
+  //       console.log("itemAPI", allItems);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   })();
+  // }, []);
+
   useEffect(() => {
-    (async () => {
-      try {
-        const allItems = await itemAPI.getItems();
-        // dispatch(setItems(allItems));
-        console.log("itemAPI", allItems);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
+    const itemsArray = [];
+
+    Object.keys(jsonData.items).forEach((categoryId) => {
+      const categoryObject = jsonData.items[categoryId];
+      const category = Object.values(categoryObject);
+      // console.log("category", category);
+      category.forEach((itemGroup) => {
+        Object.values(itemGroup).forEach((item) => {
+          const itemForPush = Object.values(item);
+          // console.log("item", itemForPush);
+          itemsArray.push(itemForPush[0]);
+        });
+      });
+    });
+    dispatch(setItems(itemsArray));
+    // console.log("jsonData", jsonData.items);
   }, []);
 
   // useEffect(() => {
@@ -94,7 +114,7 @@ const MainPage = ({
 
   useEffect(() => {
     let filteredCategories = [
-      ...new Set(searchedItems.map((item) => item.category)),
+      ...new Set(searchedItems.map((item) => item.catname)),
     ];
     setSearchedCategories(filteredCategories);
   }, [searchedItems]);
