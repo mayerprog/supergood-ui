@@ -8,9 +8,10 @@ const instance = axios.create({
   // baseURL: "https://api-test.supergood1.ru",
   baseURL: "http://localhost:8000",
   // withCredentials: true,
-  // headers: {
-  //   Accept: "application/json",
-  // },
+  headers: {
+    // Accept: "application/json",
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
 });
 
 export const itemAPI = {
