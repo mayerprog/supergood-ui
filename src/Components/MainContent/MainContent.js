@@ -50,8 +50,6 @@ const MainContent = ({
   const sliderRef = useRef(null);
   const categoryRefs = useRef({});
 
-  const dispatch = useDispatch();
-
   const scrollToCategory = useCallback(
     (categoryName) => {
       const element = categoryRefs.current[categoryName];
@@ -157,46 +155,6 @@ const MainContent = ({
       });
     };
   }, [categories, setScrolledCategory, setSelectedCategory]);
-
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const getItems = await itemAPI.getItems();
-  //       // dispatch(setItems(getItems));
-  //       console.log("itemAPI", getItems);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   })();
-  // }, []);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
-  //         .then((response) => {
-  //           console.log("response", response);
-  //           if (response.ok) {
-  //             return response.json(); // Parse the response data as JSON
-  //           } else {
-  //             throw new Error("API request failed");
-  //           }
-  //         })
-  //         .then((data) => {
-  //           // Process the response data here
-  //           console.log(data); // Example: Logging the data to the console
-  //         })
-  //         .catch((error) => {
-  //           // Handle any errors here
-  //           console.error(error); // Example: Logging the error to the console
-  //         });
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   })();
-  // }, []);
 
   return (
     <div className={styles.container}>

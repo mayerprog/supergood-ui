@@ -9,6 +9,8 @@ import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
 import { updateSum } from "../../redux/slices/cartSlice";
 import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
+import { itemAPI } from "../../api/itemAPI";
+import { setItems } from "../../redux/slices/itemSlice";
 
 const MainPage = ({
   searchQuery,
@@ -39,6 +41,46 @@ const MainPage = ({
 
   const cardRef = useRef(null);
   const wrapperRef = useRef(null);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const allItems = await itemAPI.getItems();
+        // dispatch(setItems(allItems));
+        console.log("itemAPI", allItems);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       fetch("https://api.coindesk.com/v1/bpi/currentprice.json")
+  //         .then((response) => {
+  //           console.log("response", response);
+  //           if (response.ok) {
+  //             return response.json(); // Parse the response data as JSON
+  //           } else {
+  //             throw new Error("API request failed");
+  //           }
+  //         })
+  //         .then((data) => {
+  //           // Process the response data here
+  //           console.log(data); // Example: Logging the data to the console
+  //         })
+  //         .catch((error) => {
+  //           // Handle any errors here
+  //           console.error(error); // Example: Logging the error to the console
+  //         });
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   })();
+  // }, []);
 
   useEffect(() => {
     let filteredItems = searchQuery.trim()

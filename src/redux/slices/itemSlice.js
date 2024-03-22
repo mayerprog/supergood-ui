@@ -1099,7 +1099,9 @@ export const itemSlice = createSlice({
   name: "item",
   initialState,
   reducers: {
-    setItems: (state, action) => {},
+    setItems: (state, action) => {
+      state.items = action.payload;
+    },
   },
 });
 
