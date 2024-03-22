@@ -5,7 +5,8 @@ import axios from "axios";
 
 const instance = axios.create({
   //   baseURL: baseURL + path,
-  baseURL: "https://api-test.supergood1.ru",
+  // baseURL: "https://api-test.supergood1.ru",
+  baseURL: "http://localhost:8000",
   // withCredentials: true,
   // headers: {
   //   Accept: "application/json",
@@ -15,7 +16,7 @@ const instance = axios.create({
 export const itemAPI = {
   async getItems() {
     try {
-      const response = await instance.get(`/getitems.php`);
+      const response = await instance.post(`/getItems`);
       console.log("items", response.data);
       return response.data;
     } catch (err) {
