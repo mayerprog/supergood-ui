@@ -27,4 +27,19 @@ export const itemAPI = {
       console.log("Failed to get all products. Check console for details.");
     }
   },
+  async getFile(uid) {
+    try {
+      const response = await instance.post(`/getFile`, {
+        uid: uid,
+      });
+      console.log("files", response.data);
+      return response.data;
+    } catch (err) {
+      console.error(
+        "Error getting products:",
+        err.response ? err.response.data : err
+      );
+      console.log("Failed to get all products. Check console for details.");
+    }
+  },
 };

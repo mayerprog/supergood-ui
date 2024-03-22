@@ -4,11 +4,26 @@ import AddItemBox from "../../AddItemBox/AddItemBox";
 import { useDispatch, useSelector } from "react-redux";
 import { addItems } from "../../../redux/slices/cartSlice";
 import PizzaOptions from "../PizzaOptions/PizzaOptions";
+import { itemAPI } from "../../../api/itemAPI";
 // import noImage from "../../../assets/images/No-Image-Placeholder.svg";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
 const Item = ({ item, category, toggleCardOpen }) => {
+  const [itemImage, setItemImage] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const uid = item.img.uid;
+        const image = await itemAPI.getFile(uid);
+        setItemImage(image);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
+
   const [amount, setAmount] = useState(null);
 
   const dispatch = useDispatch();
@@ -34,7 +49,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
 
   return (
     <button className={styles.card} onClick={() => toggleCardOpen(item.itemid)}>
-      <img className={styles.productImage} alt={item.name} />
+      <img className={styles.productImage} alt={item.name} src={itemImage} />
       <div className={styles.productInfo}>
         <span className={styles.productTitle}>{item.name}</span>
         {(category === "Наборы" || category === "Пицца") && <PizzaOptions />}

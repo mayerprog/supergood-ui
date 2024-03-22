@@ -1,11 +1,26 @@
+import { useEffect, useState } from "react";
 import AddItemBox from "../../AddItemBox/AddItemBox";
 import styles from "./CartBox.module.scss";
+import { itemAPI } from "../../../api/itemAPI";
 // import noImage from "../../../assets/images/No-Image-Placeholder.svg";
 
 const CartBox = ({ item, index }) => {
+  const [itemImage, setItemImage] = useState("");
+  useEffect(() => {
+    (async () => {
+      try {
+        const uid = item.img.uid;
+        const image = await itemAPI.getFile(uid);
+        setItemImage(image);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
+
   return (
     <div className={styles.cartBox} key={index}>
-      <img className={styles.cartImage} alt="Pizza" />
+      <img className={styles.cartImage} alt="Pizza" src={itemImage} />
       <div className={styles.cartBoxText}>
         <span className={styles.text}>{item.name}</span>
         <div>
