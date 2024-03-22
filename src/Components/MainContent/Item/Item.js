@@ -16,12 +16,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
     (async () => {
       try {
         const uid = item.img.uid;
-        const formData = new FormData();
-        formData.append("uid", {
-          uid: uid,
-        });
-
-        const image = await itemAPI.getFile(formData);
+        const image = await itemAPI.getFile(uid);
         setItemImage(image);
       } catch (err) {
         console.log(err);
