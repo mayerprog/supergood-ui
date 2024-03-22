@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OrderInfoContainer from "./OrderInfoContainer/OrderInfoContainer";
 import styles from "./Orders.module.scss";
 import OrdersContainer from "./OrdersContainer/OrdersContainer";
 
 const Orders = () => {
   const [orderIndex, setOrderIndex] = useState(null);
+  const [chosenOrder, setChosenOrder] = useState();
   const orders = [
     {
       orderId: 1048,
@@ -136,10 +137,22 @@ const Orders = () => {
     },
   ];
 
+  useEffect(() => {
+    const foundItem = orders.find((order) => order.orderId === orderIndex);
+    if (foundItem) {
+      setChosenOrder(foundItem);
+    }
+    console.log("foundItem", foundItem);
+  }, [orderIndex]);
+
+  useEffect(() => {
+    console.log("chosenOrder", chosenOrder);
+  }, [chosenOrder]);
+
   return (
     <div className={styles.container}>
       <OrdersContainer setOrderIndex={setOrderIndex} orders={orders} />
-      <OrderInfoContainer />
+      <OrderInfoContainer chosenOrder={chosenOrder} />
     </div>
   );
 };
