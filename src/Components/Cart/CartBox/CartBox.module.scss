@@ -6,7 +6,7 @@
 
   .cartImage,
   .cartBoxText {
-    margin-right: 20px;
+    margin-right: 5px;
   }
   .cartImage {
     width: 70px;
@@ -18,6 +18,8 @@
     flex-direction: column;
     font-family: "Inter", sans-serif;
     align-self: center;
+    display: flex;
+    flex: 1;
     justify-content: flex-start;
     // max-width: 7vw;
     // @media (max-width: 1171px) {
@@ -30,7 +32,7 @@
   .text {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     text-overflow: ellipsis;
     overflow: hidden;
     margin-bottom: 0.3rem;
