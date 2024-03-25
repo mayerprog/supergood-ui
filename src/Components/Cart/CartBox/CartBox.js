@@ -6,21 +6,23 @@ import { itemAPI } from "../../../api/itemAPI";
 
 const CartBox = ({ item, index }) => {
   const [itemImage, setItemImage] = useState("");
-  useEffect(() => {
-    (async () => {
-      try {
-        const uid = item.img[0].uid;
-        const image = await itemAPI.getFile(uid);
-        setItemImage(image);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const uid = item.img[0].uid;
+  //       const image = await itemAPI.getFile(uid);
+  //       setItemImage(image);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   })();
+  // }, []);
+  const uid = item.img[0].uid;
+  const uri = `http://localhost:8000/?uid=${uid}`;
 
   return (
     <div className={styles.cartBox} key={index}>
-      <img className={styles.cartImage} alt="Pizza" src={itemImage} />
+      <img className={styles.cartImage} alt="Pizza" src={uri} />
       <div className={styles.cartBoxText}>
         <span className={styles.text}>{item.name}</span>
         <div>

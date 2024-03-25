@@ -33,8 +33,8 @@ export const itemAPI = {
       const response = await instance.post(`/getFile`, {
         uid: uid,
       });
-      console.log("files", response.data);
-      return response.data;
+      console.log("files", response);
+      return response;
     } catch (err) {
       console.error(
         "Error getting products:",

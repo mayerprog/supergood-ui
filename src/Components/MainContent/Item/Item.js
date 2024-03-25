@@ -12,17 +12,19 @@ import { itemAPI } from "../../../api/itemAPI";
 const Item = ({ item, category, toggleCardOpen }) => {
   const [itemImage, setItemImage] = useState("");
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const uid = item.img[0].uid;
-        const image = await itemAPI.getFile(uid);
-        setItemImage(image);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const uid = item.img[0].uid;
+  //       const image = await itemAPI.getFile(uid);
+  //       setItemImage(image);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   })();
+  // }, []);
+  const uid = item.img[0].uid;
+  const uri = `http://localhost:8000/?uid=${uid}`;
 
   const [amount, setAmount] = useState(null);
 
@@ -49,7 +51,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
 
   return (
     <button className={styles.card} onClick={() => toggleCardOpen(item.itemid)}>
-      <img className={styles.productImage} alt={item.name} src={itemImage} />
+      <img className={styles.productImage} alt={item.name} src={uri} />
       <div className={styles.productInfo}>
         <span className={styles.productTitle}>{item.name}</span>
         {(category === "Наборы" || category === "Пицца") && <PizzaOptions />}
