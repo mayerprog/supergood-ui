@@ -48,7 +48,9 @@ const ModalCard = ({ itemCardId, cardRef }) => {
       {/* {uid ? (
          <img className={styles.productImage} alt={foundItem.name} src={uri} />
       ) : ( */}
-      <MdImageNotSupported className={styles.productImage} color="#ccc" />
+      <div className={styles.productImage}>
+        <MdImageNotSupported size={330} color="#ccc" />
+      </div>
       {/* )} */}
       <div>
         <div className={styles.productInfo}>

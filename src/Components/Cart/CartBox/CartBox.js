@@ -26,7 +26,9 @@ const CartBox = ({ item, index }) => {
       {/* {uid ? (
        <img className={styles.cartImage} alt={item.name} src={uri} />
       ) : ( */}
-      <MdImageNotSupported className={styles.cartImage} color="#ccc" />
+      <div className={styles.cartImage}>
+        <MdImageNotSupported size={40} color="#ccc" />
+      </div>
       {/* )} */}
       <div className={styles.cartBoxText}>
         <span className={styles.text}>{item.name}</span>

@@ -1,7 +1,8 @@
 import styles from "./Cart.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CartBox from "./CartBox/CartBox";
 import { useNavigate } from "react-router-dom";
+import { removeAllItems } from "../../redux/slices/cartSlice";
 
 const Cart = ({
   wrapperRef,
@@ -11,6 +12,8 @@ const Cart = ({
   transform,
   toggleCartVisibility,
 }) => {
+  const dispatch = useDispatch();
+
   const cartItems = useSelector((state) => state.cart.cartItems);
   const itemsSum = useSelector((state) => state.cart.itemsSum);
 
@@ -34,7 +37,12 @@ const Cart = ({
     <div className={styles.cart} ref={wrapperRef} style={dynamicStyle}>
       <div className={styles.cartHeader}>
         <span className={styles.cartTitle}>Корзина</span>
-        <span className={styles.deleteTitle}>Очистить</span>
+        <span
+          className={styles.deleteTitle}
+          onClick={() => dispatch(removeAllItems())}
+        >
+          Очистить
+        </span>
       </div>
       {cartItems.map((item, index) => (
         <CartBox item={item} index={index} />

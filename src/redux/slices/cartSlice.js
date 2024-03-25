@@ -18,6 +18,9 @@ export const cartSlice = createSlice({
         (item) => item.itemid !== action.payload
       );
     },
+    removeAllItems: (state, action) => {
+      state.cartItems = [];
+    },
     updateItem: (state, action) => {
       state.cartItems = state.cartItems.map((item) =>
         item.itemid === action.payload.itemid ? action.payload : item
@@ -31,7 +34,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addItems, removeItems, updateItem, updateSum } =
+export const { addItems, removeItems, updateItem, updateSum, removeAllItems } =
   cartSlice.actions;
 
 export default cartSlice.reducer;
