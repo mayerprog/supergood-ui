@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItems } from "../../../redux/slices/cartSlice";
 import PizzaOptions from "../PizzaOptions/PizzaOptions";
 import { itemAPI } from "../../../api/itemAPI";
-// import noImage from "../../../assets/images/No-Image-Placeholder.svg";
+import { MdImageNotSupported } from "react-icons/md";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
@@ -32,6 +32,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   useEffect(() => {
+    console.log("uid", uid);
     const foundCartItem = cartItems.find(
       (cartItem) => cartItem.itemid === item.itemid
     );
@@ -51,7 +52,12 @@ const Item = ({ item, category, toggleCardOpen }) => {
 
   return (
     <button className={styles.card} onClick={() => toggleCardOpen(item.itemid)}>
-      <img className={styles.productImage} alt={item.name} src={uri} />
+      {/* {uid ? (
+        <img className={styles.productImage} alt={item.name} src={uri} />
+      ) : ( */}
+      <MdImageNotSupported className={styles.productImage} color="#ccc" />
+      {/* )} */}
+
       <div className={styles.productInfo}>
         <span className={styles.productTitle}>{item.name}</span>
         {(category === "Наборы" || category === "Пицца") && <PizzaOptions />}

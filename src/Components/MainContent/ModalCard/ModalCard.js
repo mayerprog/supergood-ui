@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PizzaOptions from "../PizzaOptions/PizzaOptions";
 import AddItemBox from "../../AddItemBox/AddItemBox";
 import { addItems } from "../../../redux/slices/cartSlice";
+import { MdImageNotSupported } from "react-icons/md";
 // import noImage from "../../../assets/images/No-Image-Placeholder.svg";
 
 const ModalCard = ({ itemCardId, cardRef }) => {
@@ -22,6 +23,21 @@ const ModalCard = ({ itemCardId, cardRef }) => {
     }
   }, [cartItems, itemCardId]);
 
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const uid = item.img[0].uid;
+  //       const image = await itemAPI.getFile(uid);
+  //       setItemImage(image);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   })();
+  // }, []);
+
+  const uid = foundItem.img[0].uid;
+  const uri = `http://localhost:8000/?uid=${uid}`;
+
   const addItemToCart = (event) => {
     event.stopPropagation();
     dispatch(addItems(foundItem));
@@ -29,7 +45,11 @@ const ModalCard = ({ itemCardId, cardRef }) => {
 
   return (
     <div ref={cardRef} className={styles.container}>
-      <img className={styles.productImage} alt={foundItem.name} />
+      {/* {uid ? (
+         <img className={styles.productImage} alt={foundItem.name} src={uri} />
+      ) : ( */}
+      <MdImageNotSupported className={styles.productImage} color="#ccc" />
+      {/* )} */}
       <div>
         <div className={styles.productInfo}>
           <h2>{foundItem.name}</h2>

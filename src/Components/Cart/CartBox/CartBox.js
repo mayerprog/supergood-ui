@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AddItemBox from "../../AddItemBox/AddItemBox";
 import styles from "./CartBox.module.scss";
 import { itemAPI } from "../../../api/itemAPI";
+import { MdImageNotSupported } from "react-icons/md";
 // import noImage from "../../../assets/images/No-Image-Placeholder.svg";
 
 const CartBox = ({ item, index }) => {
@@ -22,7 +23,11 @@ const CartBox = ({ item, index }) => {
 
   return (
     <div className={styles.cartBox} key={index}>
-      <img className={styles.cartImage} alt="Pizza" src={uri} />
+      {/* {uid ? (
+       <img className={styles.cartImage} alt={item.name} src={uri} />
+      ) : ( */}
+      <MdImageNotSupported className={styles.cartImage} color="#ccc" />
+      {/* )} */}
       <div className={styles.cartBoxText}>
         <span className={styles.text}>{item.name}</span>
         <div>
