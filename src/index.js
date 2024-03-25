@@ -4,18 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-// import { LevelContextProvider } from "./contexts/LevelContext";
+import { LevelContextProvider } from "./contexts/LevelContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    {/* <LevelContextProvider> */}
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-
-    {/* </LevelContextProvider> */}
-  </React.StrictMode>
+  // <React.StrictMode>
+  // <LevelContextProvider>
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+  // </LevelContextProvider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -11,6 +11,8 @@ const AddItemBox = ({
   color,
   margin,
   itemId,
+  // amount,
+  // setAmount,
 }) => {
   const dynamicStyle = {
     "--counter-bg-color": backgroundColor,
@@ -27,11 +29,10 @@ const AddItemBox = ({
 
   const cartItems = useSelector((state) => state.cart.cartItems);
 
+  const foundCartItem = cartItems.find(
+    (cartItem) => itemId === cartItem.itemid
+  );
   useEffect(() => {
-    const foundCartItem = cartItems.find(
-      (cartItem) => itemId === cartItem.itemid
-    );
-
     if (foundCartItem) {
       if (foundCartItem.params.amount.value < 1) {
         dispatch(removeItems(foundCartItem.itemid));

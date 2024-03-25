@@ -5,7 +5,6 @@ import PizzaOptions from "../PizzaOptions/PizzaOptions";
 import AddItemBox from "../../AddItemBox/AddItemBox";
 import { addItems } from "../../../redux/slices/cartSlice";
 import { MdImageNotSupported } from "react-icons/md";
-// import noImage from "../../../assets/images/No-Image-Placeholder.svg";
 
 const ModalCard = ({ itemCardId, cardRef }) => {
   const items = useSelector((state) => state.item.items);
@@ -20,6 +19,8 @@ const ModalCard = ({ itemCardId, cardRef }) => {
     );
     if (foundCartItem) {
       setAmount(foundCartItem.params.amount.value);
+    } else {
+      setAmount(0);
     }
   }, [cartItems, itemCardId]);
 

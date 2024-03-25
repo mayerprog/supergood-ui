@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Item.module.scss";
 import AddItemBox from "../../AddItemBox/AddItemBox";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,16 +28,18 @@ const Item = ({ item, category, toggleCardOpen }) => {
 
   const [amount, setAmount] = useState(null);
 
-  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    console.log("uid", uid);
     const foundCartItem = cartItems.find(
       (cartItem) => cartItem.itemid === item.itemid
     );
     if (foundCartItem) {
       setAmount(foundCartItem.params.amount.value);
+    } else {
+      setAmount(0);
     }
   }, [cartItems, item.itemid]);
 
@@ -45,10 +47,6 @@ const Item = ({ item, category, toggleCardOpen }) => {
     event.stopPropagation();
     dispatch(addItems(item));
   };
-
-  useEffect(() => {
-    console.log("item", item);
-  }, [item]);
 
   return (
     <button className={styles.card} onClick={() => toggleCardOpen(item.itemid)}>

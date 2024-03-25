@@ -1,47 +1,21 @@
-// import { createContext, useRef, useState } from "react";
-// import { useSelector } from "react-redux";
+import { createContext, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
-// const LevelContext = createContext();
+const LevelContext = createContext();
 
-// export const LevelContextProvider = ({ children }) => {
-//   const [isModalOptionsOpen, setIsModalOptionsOpen] = useState(false);
-//   const [isUserInfoOpen, setIsUserInfoOpen] = useState(false);
-//   const [isModalAddressOpen, setIsModalAddressOpen] = useState(false);
+export const LevelContextProvider = ({ children }) => {
+  const [amount, setAmount] = useState(null);
 
-//   const optionsRef = useRef(null);
-//   const userInfoRef = useRef(null);
-//   const addressRef = useRef(null);
+  return (
+    <LevelContext.Provider
+      value={{
+        amount,
+        setAmount,
+      }}
+    >
+      {children}
+    </LevelContext.Provider>
+  );
+};
 
-//   const toggleOptionsVisibility = () => {
-//     setIsModalOptionsOpen(!isModalOptionsOpen);
-//   };
-//   const toggleUserInfoVisibility = () => {
-//     setIsUserInfoOpen(!isUserInfoOpen);
-//   };
-//   const toggleAddressVisibility = () => {
-//     setIsModalAddressOpen(!isModalAddressOpen);
-//   };
-
-//   return (
-//     <LevelContext.Provider
-//       value={{
-//         isModalOptionsOpen,
-//         setIsModalOptionsOpen,
-//         isUserInfoOpen,
-//         setIsUserInfoOpen,
-//         isModalAddressOpen,
-//         setIsModalAddressOpen,
-//         optionsRef,
-//         userInfoRef,
-//         addressRef,
-//         toggleOptionsVisibility,
-//         toggleUserInfoVisibility,
-//         toggleAddressVisibility,
-//       }}
-//     >
-//       {children}
-//     </LevelContext.Provider>
-//   );
-// };
-
-// export default LevelContext;
+export default LevelContext;

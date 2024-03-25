@@ -3,7 +3,6 @@ import AddItemBox from "../../AddItemBox/AddItemBox";
 import styles from "./CartBox.module.scss";
 import { itemAPI } from "../../../api/itemAPI";
 import { MdImageNotSupported } from "react-icons/md";
-// import noImage from "../../../assets/images/No-Image-Placeholder.svg";
 
 const CartBox = ({ item, index }) => {
   const [itemImage, setItemImage] = useState("");
@@ -18,6 +17,7 @@ const CartBox = ({ item, index }) => {
   //     }
   //   })();
   // }, []);
+
   const uid = item.img[0].uid;
   const uri = `http://localhost:8000/?uid=${uid}`;
 
