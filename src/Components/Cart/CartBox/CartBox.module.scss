@@ -7,17 +7,18 @@
   .cartImage,
   .cartBoxText {
     margin-right: 5px;
+    align-self: center;
   }
   .cartImage {
-    width: 70px;
-    height: 70px;
+    margin-right: 20px;
+    // width: 70px;
+    // height: 70px;
   }
 
   .cartBoxText {
     font-size: 12px;
     flex-direction: column;
     font-family: "Inter", sans-serif;
-    align-self: center;
     display: flex;
     flex: 1;
     justify-content: flex-start;
