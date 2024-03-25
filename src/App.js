@@ -12,6 +12,7 @@ import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import { useEffect, useRef, useState } from "react";
 import { useOutsideHook } from "./hooks/useOutsideHook";
+import { useMediaQuery } from "react-responsive";
 
 function App() {
   const [isModalOptionsOpen, setIsModalOptionsOpen] = useState(false);
@@ -28,6 +29,8 @@ function App() {
   const addressRef = useRef(null);
   const mapWrapperRef = useRef(null);
 
+  const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
+
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
   };
@@ -39,7 +42,8 @@ function App() {
   };
 
   const toggleCartVisibility = (isVisible) => {
-    setIsCartVisible(isVisible);
+    if (!mediaQuery) setIsCartVisible(false);
+    else setIsCartVisible(isVisible);
   };
   const toggleMapVisibility = () => {
     setIsMapOpen(!isMapOpen);
@@ -95,6 +99,7 @@ function App() {
                 toggleUserInfoVisibility={toggleUserInfoVisibility}
                 toggleAddressVisibility={toggleAddressVisibility}
                 mapWrapperRef={mapWrapperRef}
+                mediaQuery={mediaQuery}
               />
             }
           />

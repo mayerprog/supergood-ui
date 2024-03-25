@@ -27,6 +27,7 @@ const MainPage = ({
   toggleUserInfoVisibility,
   toggleAddressVisibility,
   mapWrapperRef,
+  mediaQuery,
 }) => {
   const [isCardOpen, setIsCardOpen] = useState(false);
   const [itemCardId, setItemCardId] = useState(null);
@@ -128,8 +129,6 @@ const MainPage = ({
 
   useOutsideHook(cardRef, toggleCardOpen); // to close popup <ModalCard /> clicking outside
   useOutsideHook(wrapperRef, toggleCartVisibility); // to close popup <Cart /> clicking outside
-
-  const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
 
   return (
     <div className={styles.content}>
