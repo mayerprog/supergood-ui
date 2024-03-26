@@ -6,6 +6,7 @@ import AddItemBox from "../../AddItemBox/AddItemBox";
 import { addItems } from "../../../redux/slices/cartSlice";
 import { MdImageNotSupported } from "react-icons/md";
 import { useImageLoaded } from "../../../hooks/useImageLoaded";
+import { baseURL } from "../../../config";
 
 const ModalCard = ({ itemCardId, cardRef }) => {
   const items = useSelector((state) => state.item.items);
@@ -28,7 +29,7 @@ const ModalCard = ({ itemCardId, cardRef }) => {
   const [ref, loaded, onLoad] = useImageLoaded();
 
   const uid = foundItem.img[0].uid;
-  const uri = `http://localhost:8000/getFile?uid=${uid}`;
+  const uri = `${baseURL}/getFile?uid=${uid}`;
 
   const addItemToCart = (event) => {
     event.stopPropagation();

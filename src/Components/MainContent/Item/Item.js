@@ -7,6 +7,7 @@ import PizzaOptions from "../PizzaOptions/PizzaOptions";
 import { itemAPI } from "../../../api/itemAPI";
 import { MdImageNotSupported } from "react-icons/md";
 import { useImageLoaded } from "../../../hooks/useImageLoaded";
+import { baseURL } from "../../../config.js";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
@@ -18,7 +19,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
   const [ref, loaded, onLoad] = useImageLoaded();
 
   const uid = item.img[0].uid;
-  const uri = `http://localhost:8000/getFile?uid=${uid}`;
+  const uri = `${baseURL}/getFile?uid=${uid}`;
 
   const cartItems = useSelector((state) => state.cart.cartItems);
 

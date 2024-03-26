@@ -1,12 +1,12 @@
 import axios from "axios";
-// import { baseURL } from "../config.js";
+import { baseURL } from "../config.js";
 
 // const path = "/tasks";
 
 const instance = axios.create({
-  //   baseURL: baseURL + path,
+  baseURL: baseURL,
   // baseURL: "https://api-test.supergood1.ru",
-  baseURL: "http://localhost:8000",
+  // baseURL: "http://176.99.7.81:8000",
   // withCredentials: true,
   headers: {
     // Accept: "application/json",

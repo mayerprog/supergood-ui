@@ -1,1 +1,1 @@
-module.exports.baseURL = "https://api-test.supergood1.ru";
+module.exports.baseURL = "http://176.99.7.81:8000";

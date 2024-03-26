@@ -4,13 +4,14 @@ import styles from "./CartBox.module.scss";
 import { itemAPI } from "../../../api/itemAPI";
 import { MdImageNotSupported } from "react-icons/md";
 import { useImageLoaded } from "../../../hooks/useImageLoaded";
+import { baseURL } from "../../../config";
 
 const CartBox = ({ item, index }) => {
   const [itemImage, setItemImage] = useState("");
   const [ref, loaded, onLoad] = useImageLoaded();
 
   const uid = item.img[0].uid;
-  const uri = `http://localhost:8000/getFile?uid=${uid}`;
+  const uri = `${baseURL}/getFile?uid=${uid}`;
 
   return (
     <div className={styles.cartBox} key={index}>
