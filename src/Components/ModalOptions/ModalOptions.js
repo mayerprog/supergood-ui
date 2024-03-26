@@ -32,6 +32,11 @@ const ModalOptions = ({
     toggleOptionsVisibility(false);
   };
 
+  const handleLogoutOnClick = () => {
+    dispatch(setIsAuth(false));
+    toggleOptionsVisibility(false);
+  };
+
   useEffect(() => {
     window.addEventListener("resize", handleResize);
 
@@ -48,10 +53,7 @@ const ModalOptions = ({
       <button className={styles.item} onClick={handleOrdersOnClick}>
         Мои заказы
       </button>
-      <button
-        className={styles.item}
-        onClick={() => dispatch(setIsAuth(false))}
-      >
+      <button className={styles.item} onClick={handleLogoutOnClick}>
         Выйти
       </button>
     </div>

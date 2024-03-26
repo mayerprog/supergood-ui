@@ -18,7 +18,7 @@ export const useImageLoaded = () => {
     if (ref.current && ref.current.complete) {
       onLoad();
     }
-  }, [ref.current]);
+  });
 
   // useEffect(() => {
   //   const image = ref.current;

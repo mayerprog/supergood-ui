@@ -40,19 +40,54 @@ const Item = ({ item, category, toggleCardOpen }) => {
     dispatch(addItems(item));
   };
 
+  // lazy loading
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.unobserve(itemRef.current);
+          }
+        });
+      },
+      {
+        rootMargin: "0px", // Loads images a little before they come into view
+      }
+    );
+
+    if (itemRef.current) {
+      observer.observe(itemRef.current);
+    }
+    return () => {
+      if (itemRef.current) {
+        observer.unobserve(itemRef.current);
+      }
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   console.log("isVisible", isVisible);
+  // }, [isVisible]);
+
   return (
-    <div className={styles.card} onClick={() => toggleCardOpen(item.itemid)}>
-      {loaded ? (
-        <img
-          className={styles.productImage}
-          alt={item.name}
-          src={uri}
-          ref={ref}
-          onLoad={onLoad}
-        />
-      ) : (
-        <MdImageNotSupported className={styles.productImage} color="#ccc" />
-      )}
+    <div
+      className={styles.card}
+      onClick={() => toggleCardOpen(item.itemid)}
+      ref={itemRef}
+    >
+      {isVisible &&
+        (loaded ? (
+          <img
+            className={styles.productImage}
+            alt={item.name}
+            src={uri}
+            ref={ref}
+            onLoad={onLoad}
+          />
+        ) : (
+          <MdImageNotSupported className={styles.productImage} color="#ccc" />
+        ))}
 
       <div className={styles.productInfo}>
         <span className={styles.productTitle}>{item.name}</span>
