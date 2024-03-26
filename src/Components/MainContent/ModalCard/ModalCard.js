@@ -5,6 +5,7 @@ import PizzaOptions from "../PizzaOptions/PizzaOptions";
 import AddItemBox from "../../AddItemBox/AddItemBox";
 import { addItems } from "../../../redux/slices/cartSlice";
 import { MdImageNotSupported } from "react-icons/md";
+import { useImageLoaded } from "../../../hooks/useImageLoaded";
 
 const ModalCard = ({ itemCardId, cardRef }) => {
   const items = useSelector((state) => state.item.items);
@@ -24,20 +25,10 @@ const ModalCard = ({ itemCardId, cardRef }) => {
     }
   }, [cartItems, itemCardId]);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const uid = item.img[0].uid;
-  //       const image = await itemAPI.getFile(uid);
-  //       setItemImage(image);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   })();
-  // }, []);
+  const [ref, loaded, onLoad] = useImageLoaded();
 
   const uid = foundItem.img[0].uid;
-  const uri = `http://localhost:8000/?uid=${uid}`;
+  const uri = `http://localhost:8000/getFile?uid=${uid}`;
 
   const addItemToCart = (event) => {
     event.stopPropagation();
@@ -46,13 +37,19 @@ const ModalCard = ({ itemCardId, cardRef }) => {
 
   return (
     <div ref={cardRef} className={styles.container}>
-      {/* {uid ? (
-         <img className={styles.productImage} alt={foundItem.name} src={uri} />
-      ) : ( */}
-      <div className={styles.productImage}>
-        <MdImageNotSupported size={330} color="#ccc" />
-      </div>
-      {/* )} */}
+      {loaded ? (
+        <img
+          className={styles.productImage}
+          alt={foundItem.name}
+          src={uri}
+          ref={ref}
+          onLoad={onLoad}
+        />
+      ) : (
+        <div className={styles.productImage}>
+          <MdImageNotSupported size={330} color="#ccc" />
+        </div>
+      )}
       <div>
         <div className={styles.productInfo}>
           <h2>{foundItem.name}</h2>
@@ -60,8 +57,7 @@ const ModalCard = ({ itemCardId, cardRef }) => {
             className={styles.addInfo}
           >{`${foundItem.params.weightout.value} г.`}</span>
           <span className={styles.description}>{foundItem.description}</span>
-          {(foundItem.category === "Наборы" ||
-            foundItem.category === "Пицца") && (
+          {foundItem.catname === "Пицца" && (
             <div className={styles.addInfo}>
               <PizzaOptions />
             </div>

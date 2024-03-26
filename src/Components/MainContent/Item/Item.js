@@ -6,25 +6,17 @@ import { addItems } from "../../../redux/slices/cartSlice";
 import PizzaOptions from "../PizzaOptions/PizzaOptions";
 import { itemAPI } from "../../../api/itemAPI";
 import { MdImageNotSupported } from "react-icons/md";
+import { useImageLoaded } from "../../../hooks/useImageLoaded";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
 const Item = ({ item, category, toggleCardOpen }) => {
   const [itemImage, setItemImage] = useState("");
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const uid = item.img[0].uid;
-  //       const image = await itemAPI.getFile(uid);
-  //       setItemImage(image);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   })();
-  // }, []);
+  const [ref, loaded, onLoad] = useImageLoaded();
+
   const uid = item.img[0].uid;
-  const uri = `http://localhost:8000/?uid=${uid}`;
+  const uri = `http://localhost:8000/getFile?uid=${uid}`;
 
   const [amount, setAmount] = useState(null);
 
@@ -50,15 +42,21 @@ const Item = ({ item, category, toggleCardOpen }) => {
 
   return (
     <button className={styles.card} onClick={() => toggleCardOpen(item.itemid)}>
-      {/* {uid ? (
-        <img className={styles.productImage} alt={item.name} src={uri} />
-      ) : ( */}
-      <MdImageNotSupported className={styles.productImage} color="#ccc" />
-      {/* )} */}
+      {loaded ? (
+        <img
+          className={styles.productImage}
+          alt={item.name}
+          src={uri}
+          ref={ref}
+          onLoad={onLoad}
+        />
+      ) : (
+        <MdImageNotSupported className={styles.productImage} color="#ccc" />
+      )}
 
       <div className={styles.productInfo}>
         <span className={styles.productTitle}>{item.name}</span>
-        {(category === "Наборы" || category === "Пицца") && <PizzaOptions />}
+        {category === "Пицца" && <PizzaOptions />}
       </div>
       <div className={styles.order}>
         {amount > 0 ? (

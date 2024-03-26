@@ -3,33 +3,30 @@ import AddItemBox from "../../AddItemBox/AddItemBox";
 import styles from "./CartBox.module.scss";
 import { itemAPI } from "../../../api/itemAPI";
 import { MdImageNotSupported } from "react-icons/md";
+import { useImageLoaded } from "../../../hooks/useImageLoaded";
 
 const CartBox = ({ item, index }) => {
   const [itemImage, setItemImage] = useState("");
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const uid = item.img[0].uid;
-  //       const image = await itemAPI.getFile(uid);
-  //       setItemImage(image);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   })();
-  // }, []);
+  const [ref, loaded, onLoad] = useImageLoaded();
 
   const uid = item.img[0].uid;
-  const uri = `http://localhost:8000/?uid=${uid}`;
+  const uri = `http://localhost:8000/getFile?uid=${uid}`;
 
   return (
     <div className={styles.cartBox} key={index}>
-      {/* {uid ? (
-       <img className={styles.cartImage} alt={item.name} src={uri} />
-      ) : ( */}
-      <div className={styles.cartImage}>
-        <MdImageNotSupported size={40} color="#ccc" />
-      </div>
-      {/* )} */}
+      {loaded ? (
+        <img
+          className={styles.cartImage}
+          alt={item.name}
+          src={uri}
+          ref={ref}
+          onLoad={onLoad}
+        />
+      ) : (
+        <div className={styles.cartImage}>
+          <MdImageNotSupported size={40} color="#ccc" />
+        </div>
+      )}
       <div className={styles.cartBoxText}>
         <span className={styles.text}>{item.name}</span>
         <div>
