@@ -15,8 +15,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-basis: calc(25% - 20px);
-  max-width: calc(25% - 20px);
+  flex-basis: calc(25% - 45px);
+  max-width: calc(25% - 45px);
   // min-height: 370px;
   max-height: 410px;
   border-width: 0;
@@ -30,13 +30,13 @@
   cursor: pointer;
 
   @media (max-width: 1745px) and (min-width: 1481px) {
-    flex-basis: calc(33.3% - 20px);
-    max-width: calc(33.3% - 20px);
+    flex-basis: calc(33.3% - 45px);
+    max-width: calc(33.3% - 45px);
   }
 
   @media (max-width: 1200px) {
-    flex-basis: calc(33.3% - 20px);
-    max-width: calc(33.3% - 20px);
+    flex-basis: calc(33.3% - 45px);
+    max-width: calc(33.3% - 45px);
   }
 
   .productImage {

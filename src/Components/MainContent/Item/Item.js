@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./Item.module.scss";
 import AddItemBox from "../../AddItemBox/AddItemBox";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,14 +11,14 @@ import { useImageLoaded } from "../../../hooks/useImageLoaded";
 // import { setItems } from "../../../redux/slices/itemSlice";
 
 const Item = ({ item, category, toggleCardOpen }) => {
-  const [itemImage, setItemImage] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
+  const [amount, setAmount] = useState(null);
+  const itemRef = useRef();
 
   const [ref, loaded, onLoad] = useImageLoaded();
 
   const uid = item.img[0].uid;
   const uri = `http://localhost:8000/getFile?uid=${uid}`;
-
-  const [amount, setAmount] = useState(null);
 
   const cartItems = useSelector((state) => state.cart.cartItems);
 
@@ -41,7 +41,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
   };
 
   return (
-    <button className={styles.card} onClick={() => toggleCardOpen(item.itemid)}>
+    <div className={styles.card} onClick={() => toggleCardOpen(item.itemid)}>
       {loaded ? (
         <img
           className={styles.productImage}
@@ -73,7 +73,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
           <div className={styles.price}>{`${item.price} ₽`}</div>
         </div>
       </div>
-    </button>
+    </div>
   );
 };
 
