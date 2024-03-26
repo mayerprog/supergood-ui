@@ -15,6 +15,7 @@ import MapComponent from "../MapComponent/MapComponent";
 import ModalOptions from "../ModalOptions/ModalOptions";
 import UserInfo from "../UserInfo/UserInfo";
 import AddressModal from "../Address/AddressModal/AddressModal";
+import ItemsShimmer from "../../Loaders/ItemsShimmer";
 
 const MainContent = ({
   isCartVisible,
@@ -38,6 +39,7 @@ const MainContent = ({
   addressRef,
   isModalAddressOpen,
   toggleCartVisibility,
+  loading,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -159,6 +161,10 @@ const MainContent = ({
       });
     };
   }, [categories, setScrolledCategory, setSelectedCategory]);
+
+  if (loading) {
+    return <ItemsShimmer />;
+  }
 
   return (
     <div className={styles.container}>

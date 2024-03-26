@@ -1,3 +1,4 @@
+import SidebarShimmer from "../../Loaders/SidebarShimmer";
 import styles from "./Sidebar.module.scss";
 
 const Sidebar = ({
@@ -5,7 +6,11 @@ const Sidebar = ({
   onCategorySelect,
   selectedCategory,
   scrolledCategory,
+  loading,
 }) => {
+  if (loading) {
+    return <SidebarShimmer />;
+  }
   return (
     <div className={styles.sidebar}>
       {categories.map((category, index) => (

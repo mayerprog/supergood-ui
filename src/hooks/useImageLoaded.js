@@ -5,14 +5,37 @@ export const useImageLoaded = () => {
   const ref = useRef();
 
   const onLoad = () => {
-    setLoaded(true);
+    if (
+      ref.current &&
+      ref.current.complete &&
+      ref.current.naturalHeight !== 0
+    ) {
+      setLoaded(true);
+    }
   };
 
   useEffect(() => {
     if (ref.current && ref.current.complete) {
       onLoad();
     }
-  });
+  }, [ref.current]);
+
+  // useEffect(() => {
+  //   const image = ref.current;
+  //   if (image.complete && image.naturalHeight !== 0) {
+  //     onLoad();
+  //   } else {
+  //     image.addEventListener("load", onLoad);
+  //     image.addEventListener("error", onLoad);
+  //   }
+
+  //   return () => {
+  //     if (image) {
+  //       image.removeEventListener("load", onLoad);
+  //       image.removeEventListener("error", onLoad);
+  //     }
+  //   };
+  // }, [ref.current]);
 
   return [ref, loaded, onLoad];
 };

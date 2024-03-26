@@ -12,6 +12,7 @@ import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 import { itemAPI } from "../../api/itemAPI";
 import { setItems } from "../../redux/slices/itemSlice";
 import jsonData from "../../newApi_getItems.json";
+import Loader from "../../Loaders/SidebarShimmer";
 
 const MainPage = ({
   searchQuery,
@@ -34,6 +35,7 @@ const MainPage = ({
   const [headerHeight, setHeaderHeight] = useState(0); // State to store header height
   const [scrolledCategory, setScrolledCategory] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const items = useSelector((state) => state.item.items);
   const categories = [...new Set(items.map((item) => item.catname))]; // Unique categories
@@ -46,50 +48,54 @@ const MainPage = ({
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const itemsArray = [];
-  //       const allItems = await itemAPI.getItems();
-
-  //       Object.keys(allItems.items).forEach((categoryId) => {
-  //         const categoryObject = allItems.items[categoryId];
-  //         const category = Object.values(categoryObject);
-  //         // console.log("category", category);
-  //         category.forEach((itemGroup) => {
-  //           Object.values(itemGroup).forEach((item) => {
-  //             const itemForPush = Object.values(item);
-  //             // console.log("item", itemForPush);
-  //             itemsArray.push(itemForPush[0]);
-  //           });
-  //         });
-  //       });
-  //       dispatch(setItems(itemsArray));
-  //       console.log("itemAPI", allItems);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   })();
-  // }, []);
-
   useEffect(() => {
-    const itemsArray = [];
+    (async () => {
+      try {
+        setLoading(true);
 
-    Object.keys(jsonData.items).forEach((categoryId) => {
-      const categoryObject = jsonData.items[categoryId];
-      const category = Object.values(categoryObject);
-      // console.log("category", category);
-      category.forEach((itemGroup) => {
-        Object.values(itemGroup).forEach((item) => {
-          const itemForPush = Object.values(item);
-          // console.log("item", itemForPush);
-          itemsArray.push(itemForPush[0]);
+        const itemsArray = [];
+        const allItems = await itemAPI.getItems();
+
+        Object.keys(allItems.items).forEach((categoryId) => {
+          const categoryObject = allItems.items[categoryId];
+          const category = Object.values(categoryObject);
+          // console.log("category", category);
+          category.forEach((itemGroup) => {
+            Object.values(itemGroup).forEach((item) => {
+              const itemForPush = Object.values(item);
+              // console.log("item", itemForPush);
+              itemsArray.push(itemForPush[0]);
+            });
+          });
         });
-      });
-    });
-    dispatch(setItems(itemsArray));
-    // console.log("jsonData", jsonData.items);
+        dispatch(setItems(itemsArray));
+        setLoading(false);
+
+        console.log("itemAPI", allItems);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
   }, []);
+
+  // useEffect(() => {
+  //   const itemsArray = [];
+
+  //   Object.keys(jsonData.items).forEach((categoryId) => {
+  //     const categoryObject = jsonData.items[categoryId];
+  //     const category = Object.values(categoryObject);
+  //     // console.log("category", category);
+  //     category.forEach((itemGroup) => {
+  //       Object.values(itemGroup).forEach((item) => {
+  //         const itemForPush = Object.values(item);
+  //         // console.log("item", itemForPush);
+  //         itemsArray.push(itemForPush[0]);
+  //       });
+  //     });
+  //   });
+  //   dispatch(setItems(itemsArray));
+  //   // console.log("jsonData", jsonData.items);
+  // }, []);
 
   useEffect(() => {
     let filteredItems = searchQuery.trim()
@@ -137,6 +143,7 @@ const MainPage = ({
         onCategorySelect={setSelectedCategory}
         selectedCategory={selectedCategory}
         scrolledCategory={scrolledCategory}
+        loading={loading}
       />
 
       <MainContent
@@ -162,6 +169,8 @@ const MainPage = ({
         toggleAddressVisibility={toggleAddressVisibility}
         isModalAddressOpen={isModalAddressOpen}
         toggleCartVisibility={toggleCartVisibility}
+        loading={loading}
+
       />
       {!mediaQuery && (
         <Cart
@@ -170,6 +179,8 @@ const MainPage = ({
           height="calc(100vh - 180px)"
           transform="none"
           toggleCartVisibility={toggleCartVisibility}
+          loading={loading}
+
         />
       )}
     </div>

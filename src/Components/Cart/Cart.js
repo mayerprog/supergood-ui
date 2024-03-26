@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CartBox from "./CartBox/CartBox";
 import { useNavigate } from "react-router-dom";
 import { removeAllItems } from "../../redux/slices/cartSlice";
+import CartShimmer from "../../Loaders/CartShimmer";
 
 const Cart = ({
   wrapperRef,
@@ -11,6 +12,7 @@ const Cart = ({
   height,
   transform,
   toggleCartVisibility,
+  loading,
 }) => {
   const dispatch = useDispatch();
 
@@ -32,7 +34,9 @@ const Cart = ({
       navigate("/submit");
     }
   };
-
+  if (loading) {
+    return <CartShimmer />;
+  }
   return (
     <div className={styles.cart} ref={wrapperRef} style={dynamicStyle}>
       <div className={styles.cartHeader}>
