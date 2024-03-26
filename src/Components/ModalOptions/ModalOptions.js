@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import styles from "./ModalOptions.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setIsAuth } from "../../redux/slices/authSlice";
 
 const ModalOptions = ({
   optionsRef,
@@ -9,6 +11,7 @@ const ModalOptions = ({
   toggleAddressVisibility,
 }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleResize = () => {
     toggleOptionsVisibility();
@@ -45,7 +48,12 @@ const ModalOptions = ({
       <button className={styles.item} onClick={handleOrdersOnClick}>
         Мои заказы
       </button>
-      <button className={styles.item}>Выйти</button>
+      <button
+        className={styles.item}
+        onClick={() => dispatch(setIsAuth(false))}
+      >
+        Выйти
+      </button>
     </div>
   );
 };
