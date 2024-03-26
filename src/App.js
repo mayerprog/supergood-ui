@@ -29,7 +29,8 @@ function App() {
   const addressRef = useRef(null);
   const mapWrapperRef = useRef(null);
 
-  const mediaQuery = useMediaQuery({ maxWidth: 1480 }); // to hide <Cart /> when maxWidth: 1480px
+  // to show <Cart /> and to disable Cart button in Header when width > 1480px
+  const mediaQuery = useMediaQuery({ maxWidth: 1480 });
 
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
