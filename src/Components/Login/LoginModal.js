@@ -11,7 +11,7 @@ const LoginModal = ({ loginWrapperRef }) => {
     setValue(val);
   };
   const changeCheckbox = () => {
-    setChecked(true);
+    setChecked(!checked);
   };
 
   return (
@@ -27,13 +27,15 @@ const LoginModal = ({ loginWrapperRef }) => {
           placeholder="Введите телефон"
           onChange={handleChangePhone}
         />
-        <div className={styles.checkBoxContainer}>
+        <div className={styles.checkboxContainer}>
           <input
+            id="data"
             type="checkbox"
             checked={checked}
             onChange={() => changeCheckbox()}
+            className={styles.checkbox}
           />
-          <label>Разрешаю обработку персональных данных</label>
+          <label htmlFor="data">Разрешаю обработку персональных данных</label>
         </div>
       </div>
       <button
