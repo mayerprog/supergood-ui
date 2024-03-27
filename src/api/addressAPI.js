@@ -33,7 +33,6 @@ export const addressAPI = {
   async getPoly() {
     try {
       const response = await instance.post(`/getPoly`);
-      console.log("points", response.data);
       return response.data;
     } catch (err) {
       console.error(
