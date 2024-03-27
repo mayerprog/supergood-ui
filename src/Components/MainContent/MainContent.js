@@ -16,6 +16,7 @@ import ModalOptions from "../ModalOptions/ModalOptions";
 import UserInfo from "../UserInfo/UserInfo";
 import AddressModal from "../Address/AddressModal/AddressModal";
 import ItemsShimmer from "../../Loaders/ItemsShimmer";
+import LoginModal from "../Login/LoginModal";
 
 const MainContent = ({
   isCartVisible,
@@ -40,6 +41,8 @@ const MainContent = ({
   isModalAddressOpen,
   toggleCartVisibility,
   loading,
+  isLoginOpen,
+  loginWrapperRef,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -211,6 +214,11 @@ const MainContent = ({
             mapWrapperRef={mapWrapperRef}
             setIsMapOpen={setIsMapOpen}
           />
+        </div>
+      )}
+      {isLoginOpen && (
+        <div className={styles.cardOverlay}>
+          <LoginModal loginWrapperRef={loginWrapperRef} />
         </div>
       )}
       {isUserInfoOpen && (

@@ -20,6 +20,8 @@ function App() {
   const [isModalAddressOpen, setIsModalAddressOpen] = useState(false);
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [isMainPage, setIsMainPage] = useState(false);
 
@@ -28,6 +30,7 @@ function App() {
   const userInfoRef = useRef(null);
   const addressRef = useRef(null);
   const mapWrapperRef = useRef(null);
+  const loginWrapperRef = useRef(null);
 
   // to show <Cart /> and to disable Cart button in Header when width > 1480px
   const mediaQuery = useMediaQuery({ maxWidth: 1480 });
@@ -50,12 +53,17 @@ function App() {
     setIsMapOpen(!isMapOpen);
   };
 
+  const toggleLoginVisibility = () => {
+    setIsLoginOpen(!isLoginOpen);
+  };
+
   useOutsideHook(mapWrapperRef, toggleMapVisibility); // to close popup <MapComponent /> clicking outside
   useOutsideHook(optionsRef, toggleOptionsVisibility); // to close popup <ModalOptions /> clicking outside
   useOutsideHook(userInfoRef, toggleUserInfoVisibility, [
     ".MuiDateCalendar-root",
   ]); // to close popup <UserInfo /> clicking outside
   useOutsideHook(addressRef, toggleAddressVisibility); // to close popup <AddressModal /> clicking outside
+  useOutsideHook(loginWrapperRef, toggleLoginVisibility); // to close popup <LoginModal /> clicking outside
 
   const location = useLocation(); // Getting the current location
 
@@ -78,6 +86,7 @@ function App() {
           optionsRef={optionsRef}
           toggleUserInfoVisibility={toggleUserInfoVisibility}
           toggleAddressVisibility={toggleAddressVisibility}
+          toggleLoginVisibility={toggleLoginVisibility}
         />
         <Routes>
           <Route
@@ -101,6 +110,8 @@ function App() {
                 toggleAddressVisibility={toggleAddressVisibility}
                 mapWrapperRef={mapWrapperRef}
                 mediaQuery={mediaQuery}
+                isLoginOpen={isLoginOpen}
+                loginWrapperRef={loginWrapperRef}
               />
             }
           />

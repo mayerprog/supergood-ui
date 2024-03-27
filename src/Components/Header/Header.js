@@ -26,6 +26,7 @@ const Header = forwardRef(
       optionsRef,
       toggleUserInfoVisibility,
       toggleAddressVisibility,
+      toggleLoginVisibility,
     },
     ref
   ) => {
@@ -38,9 +39,10 @@ const Header = forwardRef(
     const navigate = useNavigate();
 
     const handleLoginClick = () => {
+      toggleLoginVisibility();
       // where authorisation must take place
-      dispatch(setIsAuth(true));
-      navigate("/");
+      // dispatch(setIsAuth(true));
+      // navigate("/");
     };
 
     const handleProfileClick = () => {
@@ -131,7 +133,6 @@ const Header = forwardRef(
           ) : (
             <button
               className={styles.profileButton}
-              // onClick={handleProfileClick}
               onClick={toggleOptionsVisibility}
             >
               <CgProfile size={30} className={styles.icon} />

@@ -29,6 +29,8 @@ const MainPage = ({
   toggleAddressVisibility,
   mapWrapperRef,
   mediaQuery,
+  isLoginOpen,
+  loginWrapperRef,
 }) => {
   const [isCardOpen, setIsCardOpen] = useState(false);
   const [itemCardId, setItemCardId] = useState(null);
@@ -80,7 +82,6 @@ const MainPage = ({
 
   // useEffect(() => {
   //   const itemsArray = [];
-
   //   Object.keys(jsonData.items).forEach((categoryId) => {
   //     const categoryObject = jsonData.items[categoryId];
   //     const category = Object.values(categoryObject);
@@ -170,6 +171,8 @@ const MainPage = ({
         isModalAddressOpen={isModalAddressOpen}
         toggleCartVisibility={toggleCartVisibility}
         loading={loading}
+        isLoginOpen={isLoginOpen}
+        loginWrapperRef={loginWrapperRef}
       />
       {!mediaQuery && (
         <Cart

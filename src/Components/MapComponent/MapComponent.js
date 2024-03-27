@@ -22,7 +22,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   // const [onChangeAddress, setOnChangeAddress] = useState(null); //для onchange и выпадающего списка
   const dispatch = useDispatch();
 
-  const polyLayers = useSelector((state) => state.address.polyLayers);
+  // const polyLayers = useSelector((state) => state.address.polyLayers);
   const position = useSelector((state) => state.address.position);
   const address = useSelector((state) => state.address.address);
 
