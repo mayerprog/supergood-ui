@@ -7,9 +7,6 @@ const instance = axios.create({
   //   baseURL: baseURL + path,
   baseURL: baseURL,
   // withCredentials: true,
-  // headers: {
-  //   Accept: "application/json",
-  // },
 });
 
 export const addressAPI = {
