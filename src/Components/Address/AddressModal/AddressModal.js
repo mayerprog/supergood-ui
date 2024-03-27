@@ -23,7 +23,6 @@ const AddressModal = ({
   const [chosenAddress, setChosenAddress] = useState(null);
 
   const changeCheckbox = (e) => {
-    console.log("e.target.value", e.target.value);
     setChosenAddress(e.target.value);
   };
 

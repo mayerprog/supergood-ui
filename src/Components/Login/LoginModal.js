@@ -4,14 +4,16 @@ import { useState } from "react";
 
 const LoginModal = ({ loginWrapperRef }) => {
   const [value, setValue] = useState("");
+  const [checked, setChecked] = useState(false);
 
   const handleChangePhone = (event) => {
     let val = event.target.value;
-    // if (!val.startsWith("+7")) {
-    //   val = "+7";
-    // }
     setValue(val);
   };
+  const changeCheckbox = () => {
+    setChecked(true);
+  };
+
   return (
     <div className={styles.container} ref={loginWrapperRef}>
       <div className={styles.inputContainer}>
@@ -25,7 +27,21 @@ const LoginModal = ({ loginWrapperRef }) => {
           placeholder="Введите телефон"
           onChange={handleChangePhone}
         />
+        <div className={styles.checkBoxContainer}>
+          <input
+            type="checkbox"
+            checked={checked}
+            onChange={() => changeCheckbox()}
+          />
+          <label>Разрешаю обработку персональных данных</label>
+        </div>
       </div>
+      <button
+        className={styles.buttonStyle}
+        onClick={() => console.log("Save")}
+      >
+        <span className={styles.buttonText}>Выслать код</span>
+      </button>
     </div>
   );
 };

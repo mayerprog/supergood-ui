@@ -13,15 +13,14 @@
   background-color: white;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  padding: 50px;
   .inputContainer {
     display: flex;
     flex-direction: column;
     span {
-      margin: 0 0 10px 10px;
+      margin: 0 0 10px 0;
     }
   }
-
   .input {
     align-self: center;
     width: 100%;
@@ -36,5 +35,21 @@
     font-size: 0.95rem;
     font-family: "Inter", sans-serif;
     @include focus-style(#ccc);
+  }
+
+  .checkBoxContainer {
+    label {
+      margin-left: 7px;
+      font-size: small;
+    }
+  }
+
+  .buttonStyle {
+    @include reusable-button;
+    width: 140px;
+  }
+  .buttonText {
+    @include reusable-button-text;
+    font-size: 14px;
   }
 }
