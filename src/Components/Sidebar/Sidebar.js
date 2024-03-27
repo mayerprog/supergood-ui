@@ -13,6 +13,9 @@ const Sidebar = ({
   }
   return (
     <div className={styles.sidebar}>
+      {/* {loading ? (
+        <SidebarShimmer />
+      ) : ( */}
       {categories.map((category, index) => (
         <button
           key={index}

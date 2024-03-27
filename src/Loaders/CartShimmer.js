@@ -1,16 +1,24 @@
 import ContentLoader from "react-content-loader";
 
 const CartShimmer = () => (
-  <ContentLoader
-    speed={2}
-    width={330}
-    height={700}
-    viewBox="0 0 330 700"
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
+  <div
+    style={{
+      position: "sticky",
+      top: "50px",
+      height: "380px",
+    }}
   >
-    <rect rx="10" ry="10" width="330" height="700" y={20} />
-  </ContentLoader>
+    <ContentLoader
+      speed={2}
+      width={330}
+      height={800}
+      viewBox="0 0 330 800"
+      backgroundColor="#f3f3f3"
+      foregroundColor="#ecebeb"
+    >
+      <rect rx="10" ry="10" width="330" height="700" y={20} />
+    </ContentLoader>
+  </div>
 );
 
 export default CartShimmer;
