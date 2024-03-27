@@ -43,6 +43,7 @@ const MainContent = ({
   loading,
   isLoginOpen,
   loginWrapperRef,
+  toggleLoginVisibility,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -218,7 +219,10 @@ const MainContent = ({
       )}
       {isLoginOpen && (
         <div className={styles.cardOverlay}>
-          <LoginModal loginWrapperRef={loginWrapperRef} />
+          <LoginModal
+            loginWrapperRef={loginWrapperRef}
+            toggleLoginVisibility={toggleLoginVisibility}
+          />
         </div>
       )}
       {isUserInfoOpen && (

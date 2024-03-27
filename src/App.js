@@ -112,6 +112,7 @@ function App() {
                 mediaQuery={mediaQuery}
                 isLoginOpen={isLoginOpen}
                 loginWrapperRef={loginWrapperRef}
+                toggleLoginVisibility={toggleLoginVisibility}
               />
             }
           />

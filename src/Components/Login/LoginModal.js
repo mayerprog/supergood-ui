@@ -1,10 +1,15 @@
 import ReactInputMask from "react-input-mask";
 import styles from "./LoginModal.module.scss";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { setIsAuth } from "../../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
-const LoginModal = ({ loginWrapperRef }) => {
+const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const [value, setValue] = useState("");
   const [checked, setChecked] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChangePhone = (event) => {
     let val = event.target.value;
@@ -12,6 +17,12 @@ const LoginModal = ({ loginWrapperRef }) => {
   };
   const changeCheckbox = () => {
     setChecked(!checked);
+  };
+
+  const handleLogin = () => {
+    dispatch(setIsAuth(true));
+    toggleLoginVisibility();
+    navigate("/");
   };
 
   return (
@@ -42,7 +53,9 @@ const LoginModal = ({ loginWrapperRef }) => {
         className={styles.buttonStyle}
         onClick={() => console.log("Save")}
       >
-        <span className={styles.buttonText}>Выслать код</span>
+        <span className={styles.buttonText} onClick={handleLogin}>
+          Выслать код
+        </span>
       </button>
     </div>
   );

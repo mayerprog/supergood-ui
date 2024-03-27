@@ -38,13 +38,6 @@ const Header = forwardRef(
 
     const navigate = useNavigate();
 
-    const handleLoginClick = () => {
-      toggleLoginVisibility();
-      // where authorisation must take place
-      // dispatch(setIsAuth(true));
-      // navigate("/");
-    };
-
     const handleProfileClick = () => {
       if (isAuth) navigate("/user");
     };
@@ -127,7 +120,10 @@ const Header = forwardRef(
             </button>
           )}
           {!isAuth ? (
-            <button className={styles.loginButton} onClick={handleLoginClick}>
+            <button
+              className={styles.loginButton}
+              onClick={toggleLoginVisibility}
+            >
               Войти
             </button>
           ) : (

@@ -31,6 +31,7 @@ const MainPage = ({
   mediaQuery,
   isLoginOpen,
   loginWrapperRef,
+  toggleLoginVisibility,
 }) => {
   const [isCardOpen, setIsCardOpen] = useState(false);
   const [itemCardId, setItemCardId] = useState(null);
@@ -173,6 +174,7 @@ const MainPage = ({
         loading={loading}
         isLoginOpen={isLoginOpen}
         loginWrapperRef={loginWrapperRef}
+        toggleLoginVisibility={toggleLoginVisibility}
       />
       {!mediaQuery && (
         <Cart
