@@ -107,3 +107,16 @@
   display: flex;
   overflow: auto;
 }
+
+@mixin reusable-input {
+  align-self: center;
+  padding: 0 15px;
+  margin-bottom: 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ccc;
+  border-radius: 10px;
+  min-height: 40px;
+  font-size: 0.95rem;
+  font-family: "Inter", sans-serif;
+}

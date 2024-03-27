@@ -22,35 +22,17 @@
     }
   }
   .input {
-    align-self: center;
-    width: 100%;
-    min-width: 200px;
-    padding: 0 15px;
-    margin-bottom: 20px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #ccc;
-    border-radius: 10px;
-    min-height: 40px;
-    font-size: 0.95rem;
-    font-family: "Inter", sans-serif;
+    @include reusable-input;
     @include focus-style(#ccc);
+    width: 100%;
+    border-color: var(--border-color);
   }
 
   .inputCode {
-    align-self: center;
+    @include reusable-input;
+    @include focus-style(#ccc);
     text-align: center;
     width: 60px;
-    padding: 0 15px;
-    margin-bottom: 20px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #ccc;
-    border-radius: 10px;
-    min-height: 40px;
-    font-size: 0.95rem;
-    font-family: "Inter", sans-serif;
-    @include focus-style(#ccc);
   }
 
   .checkboxContainer {
@@ -78,8 +60,9 @@
   .buttonStyle {
     @include reusable-button;
     align-self: center;
-    margin: 0.3rem 0 0 0;
-    background-color: white;
+    margin: 1rem 0 0 0;
+    background-color: #e9bc5b;
+    @include interactive-bg(rgb(235, 187, 93));
   }
   .buttonLogin {
     width: 140px;
