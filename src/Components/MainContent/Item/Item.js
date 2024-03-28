@@ -41,16 +41,14 @@ const Item = ({ item, category, toggleCardOpen }) => {
     dispatch(addItems(item));
   };
 
-  // lazy loading
+  //lazy loading
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
-            if (itemRef.current instanceof Element) {
-              observer.unobserve(itemRef.current);
-            }
+            observer.unobserve(entry.target);
           }
         });
       },
@@ -59,19 +57,10 @@ const Item = ({ item, category, toggleCardOpen }) => {
       }
     );
 
-    if (itemRef.current instanceof Element) {
-      observer.observe(itemRef.current);
-    }
-    return () => {
-      if (itemRef.current instanceof Element) {
-        observer.unobserve(itemRef.current);
-      }
-    };
-  }, []);
+    observer.observe(itemRef.current);
 
-  // useEffect(() => {
-  //   console.log("isVisible", isVisible);
-  // }, [isVisible]);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
@@ -79,18 +68,17 @@ const Item = ({ item, category, toggleCardOpen }) => {
       onClick={() => toggleCardOpen(item.itemid)}
       ref={itemRef}
     >
-      {isVisible &&
-        (loaded ? (
-          <img
-            className={styles.productImage}
-            alt={item.name}
-            src={uri}
-            ref={ref}
-            onLoad={onLoad}
-          />
-        ) : (
-          <MdImageNotSupported className={styles.productImage} color="#ccc" />
-        ))}
+      {isVisible && loaded ? (
+        <img
+          className={styles.productImage}
+          alt={item.name}
+          src={uri}
+          ref={ref}
+          onLoad={onLoad}
+        />
+      ) : (
+        <MdImageNotSupported className={styles.productImage} color="#ccc" />
+      )}
 
       <div className={styles.productInfo}>
         <span className={styles.productTitle}>{item.name}</span>
