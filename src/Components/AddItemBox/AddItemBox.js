@@ -24,39 +24,53 @@ const AddItemBox = ({
 
   const [amount, setAmount] = useState(null);
   const [updatedItem, setUpdatedItem] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [weightout, setWeightout] = useState(null);
 
   const dispatch = useDispatch();
 
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const items = useSelector((state) => state.item.items);
 
   const foundCartItem = cartItems.find(
     (cartItem) => itemId === cartItem.itemid
   );
+  const foundItem = items.find((item) => itemId === item.itemid);
+
+  useEffect(() => {
+    setPrice(foundItem.price);
+    setWeightout(foundItem.params.weightout.value);
+  }, []);
+
   useEffect(() => {
     if (foundCartItem) {
       if (foundCartItem.params.amount.value < 1) {
         dispatch(removeItems(foundCartItem.itemid));
       }
       setAmount(foundCartItem.params.amount.value);
-      setUpdatedItem({
-        ...foundCartItem,
-        params: {
-          ...foundCartItem.params,
-          amount: { ...foundCartItem.params.amount },
-          weightout: { ...foundCartItem.params.weightout },
-        },
-      });
     }
   }, [cartItems, itemId]);
 
   const increment = (event) => {
     event.stopPropagation();
-    console.log("amount", updatedItem.params.amount.value);
-    updatedItem.params.amount.value =
-      Number(updatedItem.params.amount.value) + 1;
-    updatedItem.price = updatedItem.price * 2;
-    updatedItem.params.weightout.value =
-      Number(updatedItem.params.weightout.value) * 2;
+    const item = cartItems.find((item) => item.itemid === itemId);
+    if (!item) return; // Item not found
+
+    const updatedItem = {
+      ...item,
+      params: {
+        ...item.params,
+        amount: {
+          ...item.params.amount,
+          value: Number(item.params.amount.value) + 1,
+        },
+        weightout: {
+          ...item.params.weightout,
+          value: Number(item.params.weightout.value) + Number(weightout),
+        },
+      },
+      price: item.price + price,
+    };
 
     dispatch(updateItem(updatedItem));
   };
@@ -64,13 +78,25 @@ const AddItemBox = ({
   const decrement = (event) => {
     event.stopPropagation();
 
-    updatedItem.params.amount.value = Math.max(
-      Number(updatedItem.params.amount.value) - 1,
-      0
-    );
-    updatedItem.price = updatedItem.price / 2;
-    updatedItem.params.weightout.value =
-      Number(updatedItem.params.weightout.value) / 2;
+    const item = cartItems.find((item) => item.itemid === itemId);
+    if (!item) return;
+
+    const updatedItem = {
+      ...item,
+      params: {
+        ...item.params,
+        amount: {
+          ...item.params.amount,
+          value: Math.max(Number(item.params.amount.value) - 1, 0),
+        },
+        weightout: {
+          ...item.params.weightout,
+          value: Number(item.params.weightout.value) - Number(weightout),
+        },
+      },
+      price: item.price - price,
+    };
+
     dispatch(updateItem(updatedItem));
   };
 

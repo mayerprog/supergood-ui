@@ -5,7 +5,7 @@ import { baseURL } from "../config.js";
 
 const instance = axios.create({
   baseURL: baseURL,
-  // withCredentials: true,
+  // withCredentials: true, // Axios includes the cookie in the request
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
   },

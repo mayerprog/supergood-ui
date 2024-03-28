@@ -5,8 +5,6 @@ import { baseURL } from "../config.js";
 
 const instance = axios.create({
   baseURL: baseURL,
-  // baseURL: "https://api-test.supergood1.ru",
-  // baseURL: "http://176.99.7.81:8000",
   // withCredentials: true,
   headers: {
     // Accept: "application/json",
