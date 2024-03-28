@@ -37,7 +37,6 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   useEffect(() => {
     (async () => {
       try {
-        console.log("code", code);
         if (code.length === 4) {
           const response = await authAPI.login(
             dataSms.phone,

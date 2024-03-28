@@ -48,7 +48,9 @@ const Item = ({ item, category, toggleCardOpen }) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
-            observer.unobserve(itemRef.current);
+            if (itemRef.current instanceof Element) {
+              observer.unobserve(itemRef.current);
+            }
           }
         });
       },
@@ -57,11 +59,11 @@ const Item = ({ item, category, toggleCardOpen }) => {
       }
     );
 
-    if (itemRef.current) {
+    if (itemRef.current instanceof Element) {
       observer.observe(itemRef.current);
     }
     return () => {
-      if (itemRef.current) {
+      if (itemRef.current instanceof Element) {
         observer.unobserve(itemRef.current);
       }
     };

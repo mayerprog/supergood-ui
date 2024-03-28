@@ -1,1 +1,0 @@
-self.__SSG_MANIFEST=new Set(["\u002F[pid]","\u002F[pid]\u002F[customLinkId]","\u002Fshare\u002F[pid]","\u002Fshare\u002F[pid]\u002F[customLinkId]","\u002Fshare\u002Fcollections\u002F[pid]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
