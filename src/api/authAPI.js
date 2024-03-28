@@ -6,6 +6,9 @@ import { baseURL } from "../config.js";
 const instance = axios.create({
   baseURL: baseURL,
   // withCredentials: true,
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
 });
 
 export const authAPI = {
@@ -14,7 +17,7 @@ export const authAPI = {
       const response = await instance.post(`/auth`, {
         phone: phone,
       });
-      console.log("items", response.data);
+      console.log("data", response.data);
       return response.data;
     } catch (err) {
       console.error(
@@ -31,7 +34,7 @@ export const authAPI = {
         code: code,
         token: token,
       });
-      console.log("items", response.data);
+      console.log("data", response.data);
       return response.data;
     } catch (err) {
       console.error(

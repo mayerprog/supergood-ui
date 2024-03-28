@@ -2,17 +2,25 @@ import ReactInputMask from "react-input-mask";
 import styles from "./LoginModal.module.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { setIsAuth } from "../../redux/slices/authSlice";
-import { useDispatch } from "react-redux";
+import {
+  setIsAuth,
+  setDataSms,
+  setDataLogin,
+} from "../../redux/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { authAPI } from "../../api/authAPI";
 
 const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const [phone, setPhone] = useState("");
+  const [phoneToDB, setPhoneToDB] = useState("");
   const [code, setCode] = useState("");
   const [checked, setChecked] = useState(false);
   const [codeSent, setCodeSent] = useState(false);
   const [isPhoneComplete, setIsPhoneComplete] = useState(false);
   const [borderColor, setBorderColor] = useState("#ccc");
+
+  const dataSms = useSelector((state) => state.auth.dataSms);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,9 +29,36 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
     "--border-color": borderColor,
   };
 
+  useEffect(() => {
+    // console.log("codeLength", code.length);
+    console.log("phoneToDB", phoneToDB);
+  }, [code]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        console.log("code", code);
+        if (code.length === 4) {
+          const response = await authAPI.login(
+            dataSms.phone,
+            code,
+            dataSms.token
+          );
+          if (response.status === "ok") {
+            dispatch(setDataLogin(response));
+            handleLogin();
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [code]);
+
   const handleChangePhone = (event) => {
     let val = event.target.value;
     setPhone(val);
+    setPhoneToDB(val.replace(/\D/g, ""));
     if (val.length < 18) setBorderColor("#c36060");
     else setBorderColor("#ccc");
     setIsPhoneComplete(val.length === 18);
@@ -36,15 +71,19 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
     setChecked(!checked);
   };
 
-  const handleSendCode = () => {
-    if (code) {
-      dispatch(setIsAuth(true));
-      toggleLoginVisibility();
-      navigate("/");
-    }
-  };
   const handleLogin = () => {
-    if (checked && isPhoneComplete) setCodeSent(true);
+    dispatch(setIsAuth(true));
+    toggleLoginVisibility();
+    navigate("/");
+  };
+  const handleSendPhone = async () => {
+    if (checked && isPhoneComplete) {
+      const response = await authAPI.getSms(phoneToDB);
+      dispatch(setDataSms(response));
+      if (response.status === "sms") {
+        setCodeSent(true);
+      }
+    }
   };
 
   return (
@@ -71,7 +110,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
             />
             <label htmlFor="data">Разрешаю обработку персональных данных</label>
           </div>
-          <button className={styles.buttonLogin} onClick={handleLogin}>
+          <button className={styles.buttonLogin} onClick={handleSendPhone}>
             <span className={styles.buttonText}>Выслать код</span>
           </button>
         </div>
@@ -85,7 +124,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
             onChange={handleEnterCode}
             maxLength="4"
           />
-          <button className={styles.buttonStyle} onClick={handleSendCode}>
+          <button className={styles.buttonStyle}>
             <span className={styles.buttonText}>Выслать код повторно</span>
           </button>
         </div>
