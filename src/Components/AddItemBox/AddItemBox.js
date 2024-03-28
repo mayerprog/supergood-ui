@@ -11,8 +11,6 @@ const AddItemBox = ({
   color,
   margin,
   itemId,
-  // amount,
-  // setAmount,
 }) => {
   const dynamicStyle = {
     "--counter-bg-color": backgroundColor,
@@ -23,7 +21,6 @@ const AddItemBox = ({
   };
 
   const [amount, setAmount] = useState(null);
-  const [updatedItem, setUpdatedItem] = useState(null);
   const [price, setPrice] = useState(null);
   const [weightout, setWeightout] = useState(null);
 
@@ -54,7 +51,7 @@ const AddItemBox = ({
   const increment = (event) => {
     event.stopPropagation();
     const item = cartItems.find((item) => item.itemid === itemId);
-    if (!item) return; // Item not found
+    if (!item) return;
 
     const updatedItem = {
       ...item,
