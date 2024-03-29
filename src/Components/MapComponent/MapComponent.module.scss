@@ -3,7 +3,6 @@
 @mixin reusable-address-box() {
   border-width: 0;
   border-radius: 5px;
-  cursor: pointer;
   width: 100%;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
 }
@@ -55,6 +54,7 @@
       min-width: 100px;
       background-color: #fcfcfc;
       margin-left: 10px;
+      cursor: pointer;
 
       @include interactive-bg(#fcfcfc);
     }

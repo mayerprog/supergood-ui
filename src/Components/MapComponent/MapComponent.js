@@ -19,7 +19,6 @@ import { addAddress, setPosition } from "../../redux/slices/addressSlice";
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygon, setmMltiPolygon] = useState([]);
   const [inputAddress, setInputAddress] = useState("");
-  // const [onChangeAddress, setOnChangeAddress] = useState(null); //для onchange и выпадающего списка
   const dispatch = useDispatch();
 
   // const polyLayers = useSelector((state) => state.address.polyLayers);
@@ -34,7 +33,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
     (async () => {
       try {
         const data = await addressAPI.getPoly();
-        console.log("data", data);
         const polygonArray = [];
         const polyMap = new Map();
 
@@ -115,9 +113,8 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         <input
           className={styles.input}
           placeholder="Укажите адрес доставки (улица, номер дома)"
-          value={inputAddress ? inputAddress : address}
-          // onChange={(inputAddress) => dispatch(setAddress(inputAddress))}
-          onChange={() => console.log("inputAddress")}
+          value={inputAddress}
+          onChange={(e) => setInputAddress(e.target.value)}
         />
         <button className={styles.buttonStyle} onClick={handleAddress}>
           <span className={styles.buttonText}>Подтвердить</span>
