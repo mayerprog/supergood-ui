@@ -110,7 +110,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         setSuggestions(data);
         setShowDropdown(true);
         dispatch(setPosition([0, 0]));
-        console.log("DropDownAddress:", data);
+        // console.log("DropDownAddress:", data);
       }
     } catch (error) {
       console.error("Failed to fetch suggestions:", error);
@@ -157,18 +157,29 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         />
         {showDropdown && (
           <ul>
-            {suggestions.map((suggestion, index) => (
+            {suggestions.length === 0 ? (
               <li
-                key={index}
                 onClick={() => {
-                  setInputAddress(suggestion.display_name);
                   setSuggestions([]);
                   setShowDropdown(false);
                 }}
               >
-                {suggestion.display_name}
+                К сожалению, мы не доставляем по этому адресу
               </li>
-            ))}
+            ) : (
+              suggestions.map((suggestion, index) => (
+                <li
+                  key={index}
+                  onClick={() => {
+                    setInputAddress(suggestion.display_name);
+                    setSuggestions([]);
+                    setShowDropdown(false);
+                  }}
+                >
+                  {suggestion.display_name}
+                </li>
+              ))
+            )}
           </ul>
         )}
         <button className={styles.buttonStyle} onClick={handleAddress}>
