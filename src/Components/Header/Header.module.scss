@@ -100,14 +100,16 @@
     text-overflow: ellipsis;
     transition: 0.4s ease;
     font-weight: 400;
-    &:hover {
-      color: #fcfcfc;
-      text-shadow: 0px 1px 2px #ccc;
-    }
+    cursor: default;
 
     @media (max-width: 1481px) {
       max-width: 110px;
       width: auto;
+      cursor: pointer;
+      &:hover {
+        color: #fcfcfc;
+        text-shadow: 0px 1px 2px #ccc;
+      }
     }
 
     .icon {
