@@ -17,8 +17,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { addAddress, setPosition } from "../../redux/slices/addressSlice";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
-  const [multiPolygon, setmMltiPolygon] = useState([]);
+  const [multiPolygon, setmMultiPolygon] = useState([]);
   const [inputAddress, setInputAddress] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+
   const dispatch = useDispatch();
 
   // const polyLayers = useSelector((state) => state.address.polyLayers);
@@ -58,7 +61,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         for (let item of polyMap.values()) {
           polygonArray.push(item);
         }
-        setmMltiPolygon(polygonArray);
+        setmMultiPolygon(polygonArray);
       } catch (err) {
         console.log(err);
       }
@@ -73,13 +76,44 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
 
     try {
       const response = await axios.get(url, axiosConfig);
-      const data = response.data;
-      setInputAddress(data.display_name);
-      console.log("Address:", data);
+      if (response.data) {
+        const data = response.data;
+        setInputAddress(data.display_name);
+        // console.log("Address:", data);
+      }
       //   const address = await addressAPI.postAddress(lat, lng);
       //   console.log(address, "address");
     } catch (error) {
       console.error("Failed to fetch address:", error);
+    }
+  };
+
+  const fetchSuggestions = async (input) => {
+    if (!input) {
+      setSuggestions([]);
+      setShowDropdown(false);
+      return;
+    }
+
+    const axiosConfig = {
+      timeout: 10000,
+    };
+
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+      input
+    )}`;
+
+    try {
+      const response = await axios.get(url, axiosConfig);
+      if (response.data) {
+        const data = response.data;
+        setSuggestions(data);
+        setShowDropdown(true);
+        dispatch(setPosition([0, 0]));
+        console.log("DropDownAddress:", data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch suggestions:", error);
     }
   };
 
@@ -114,8 +148,29 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
           className={styles.input}
           placeholder="Укажите адрес доставки (улица, номер дома)"
           value={inputAddress}
-          onChange={(e) => setInputAddress(e.target.value)}
+          onChange={(e) => {
+            setInputAddress(e.target.value);
+            fetchSuggestions(e.target.value);
+          }}
+          onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
+          onBlur={() => setTimeout(() => setShowDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
         />
+        {showDropdown && (
+          <ul>
+            {suggestions.map((suggestion, index) => (
+              <li
+                key={index}
+                onClick={() => {
+                  setInputAddress(suggestion.display_name);
+                  setSuggestions([]);
+                  setShowDropdown(false);
+                }}
+              >
+                {suggestion.display_name}
+              </li>
+            ))}
+          </ul>
+        )}
         <button className={styles.buttonStyle} onClick={handleAddress}>
           <span className={styles.buttonText}>Подтвердить</span>
         </button>
