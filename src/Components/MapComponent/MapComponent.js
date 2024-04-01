@@ -14,13 +14,14 @@ import pin from "../../assets/images/pin.png";
 import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
-import { addAddress, setPosition } from "../../redux/slices/addressSlice";
+import { addAddress, addPosition } from "../../redux/slices/addressSlice";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygon, setmMultiPolygon] = useState([]);
   const [inputAddress, setInputAddress] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [mapPosition, setMapPosition] = useState([0, 0]);
 
   const dispatch = useDispatch();
 
@@ -30,6 +31,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
 
   useEffect(() => {
     setInputAddress(address);
+    if (position) setMapPosition(position);
   }, []);
 
   useEffect(() => {
@@ -109,7 +111,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         const data = response.data;
         setSuggestions(data);
         setShowDropdown(true);
-        dispatch(setPosition([0, 0]));
         // console.log("DropDownAddress:", data);
       }
     } catch (error) {
@@ -121,7 +122,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
     useMapEvents({
       click(e) {
         const { lat, lng } = e.latlng;
-        dispatch(setPosition([lat, lng]));
+        setMapPosition([lat, lng]);
         fetchAddress(lat, lng);
       },
     });
@@ -130,6 +131,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
 
   const handleAddress = () => {
     dispatch(addAddress(inputAddress));
+    dispatch(addPosition(mapPosition));
     setIsMapOpen(false);
   };
 
@@ -195,7 +197,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         minZoom={10}
       >
         <TileLayer url="https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png" />
-        <Marker position={position} icon={customIcon}>
+        <Marker position={mapPosition} icon={customIcon}>
           <Popup>{inputAddress}</Popup>
         </Marker>
         <MapEvents />

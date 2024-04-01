@@ -1107,12 +1107,12 @@ export const addressSlice = createSlice({
     addAddress: (state, action) => {
       state.address = action.payload;
     },
-    setPosition: (state, action) => {
+    addPosition: (state, action) => {
       state.position = action.payload;
     },
   },
 });
 
-export const { setPolyPoints, addAddress, setPosition } = addressSlice.actions;
+export const { setPolyPoints, addAddress, addPosition } = addressSlice.actions;
 
 export default addressSlice.reducer;
