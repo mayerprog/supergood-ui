@@ -72,9 +72,10 @@ const MainPage = ({
           });
         });
         dispatch(setItems(itemsArray));
-        setLoading(false);
+        if (itemsArray.length === 0) setLoading(true);
+        else setLoading(false);
 
-        console.log("itemAPI", allItems);
+        console.log("itemsArray", itemsArray);
       } catch (err) {
         console.log(err);
       }

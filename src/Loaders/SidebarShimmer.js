@@ -4,7 +4,7 @@ const SidebarShimmer = () => (
   <div
     style={{
       position: "sticky",
-      top: "50px",
+      top: "calc(100vh - 850px)",
       height: "380px",
     }}
   >
@@ -26,7 +26,7 @@ const SidebarShimmer = () => (
           height="40"
         />
       ))}
-    </ContentLoader>{" "}
+    </ContentLoader>
   </div>
 );
 

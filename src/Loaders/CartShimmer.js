@@ -4,7 +4,7 @@ const CartShimmer = () => (
   <div
     style={{
       position: "sticky",
-      top: "50px",
+      top: "calc(100vh - 900px)",
       height: "380px",
     }}
   >
