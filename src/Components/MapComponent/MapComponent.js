@@ -15,13 +15,15 @@ import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { addAddress, addPosition } from "../../redux/slices/addressSlice";
+import AddressDropDown from "../Address/AddressDropDown/AddressDropDown";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygon, setmMultiPolygon] = useState([]);
   const [inputAddress, setInputAddress] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  const [markerAddress, setMarkerAddress] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [mapPosition, setMapPosition] = useState([0, 0]);
+  const [suggestions, setSuggestions] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -31,6 +33,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
 
   useEffect(() => {
     setInputAddress(address);
+    setMarkerAddress(address);
     if (position) setMapPosition(position);
   }, []);
 
@@ -81,6 +84,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
       if (response.data) {
         const data = response.data;
         setInputAddress(data.display_name);
+        setMarkerAddress(data.display_name);
         // console.log("Address:", data);
       }
       //   const address = await addressAPI.postAddress(lat, lng);
@@ -118,12 +122,34 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
     }
   };
 
+  const fetchCoordinatesForAddress = async (address) => {
+    const axiosConfig = {
+      timeout: 10000,
+    };
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+      address
+    )}`;
+    try {
+      const response = await axios.get(url, axiosConfig);
+      console.log("response", response.data);
+      if (response.data && response.data[0]) {
+        const { lat, lon } = response.data[0];
+        const newPosition = [parseFloat(lat), parseFloat(lon)];
+        setMapPosition(newPosition);
+        setMarkerAddress(address);
+      }
+    } catch (error) {
+      console.error("Failed to fetch coordinates:", error);
+    }
+  };
+
   const MapEvents = () => {
     useMapEvents({
       click(e) {
         const { lat, lng } = e.latlng;
         setMapPosition([lat, lng]);
         fetchAddress(lat, lng);
+        console.log([lat, lng]);
       },
     });
     return null; // the component is only for side effects, it doesn't render anything
@@ -158,31 +184,13 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
           onBlur={() => setTimeout(() => setShowDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
         />
         {showDropdown && (
-          <ul>
-            {suggestions.length === 0 ? (
-              <li
-                onClick={() => {
-                  setSuggestions([]);
-                  setShowDropdown(false);
-                }}
-              >
-                К сожалению, мы не доставляем по этому адресу
-              </li>
-            ) : (
-              suggestions.map((suggestion, index) => (
-                <li
-                  key={index}
-                  onClick={() => {
-                    setInputAddress(suggestion.display_name);
-                    setSuggestions([]);
-                    setShowDropdown(false);
-                  }}
-                >
-                  {suggestion.display_name}
-                </li>
-              ))
-            )}
-          </ul>
+          <AddressDropDown
+            setShowDropdown={setShowDropdown}
+            setInputAddress={setInputAddress}
+            suggestions={suggestions}
+            setSuggestions={setSuggestions}
+            fetchCoordinatesForAddress={fetchCoordinatesForAddress}
+          />
         )}
         <button className={styles.buttonStyle} onClick={handleAddress}>
           <span className={styles.buttonText}>Подтвердить</span>
@@ -198,7 +206,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
       >
         <TileLayer url="https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png" />
         <Marker position={mapPosition} icon={customIcon}>
-          <Popup>{inputAddress}</Popup>
+          <Popup>{markerAddress}</Popup>
         </Marker>
         <MapEvents />
         <ZoomControl position="topleft" zoomInText="+" zoomOutText="-" />
