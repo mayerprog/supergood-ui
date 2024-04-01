@@ -60,7 +60,12 @@ const AddressModal = ({
   }, [addressIndex]);
 
   return (
-    <div className={styles.container} ref={addressRef} style={dynamicStyle}>
+    <div
+      className={styles.container}
+      ref={addressRef}
+      style={dynamicStyle}
+      data-is-modal={isModal ? "true" : "false"}
+    >
       <h2>Выберите адрес доставки</h2>
       {addressList.map((item, index) => (
         <>

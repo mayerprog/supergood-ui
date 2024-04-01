@@ -19,6 +19,12 @@
   align-items: flex-start;
   padding: 30px;
 
+  &[data-is-modal="true"] {
+    @media (max-height: 540px) {
+      margin-top: 200px;
+    }
+  }
+
   h2 {
     font-weight: 400;
   }

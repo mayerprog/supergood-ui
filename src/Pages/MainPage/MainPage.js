@@ -51,54 +51,52 @@ const MainPage = ({
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-
-        const itemsArray = [];
-        const allItems = await itemAPI.getItems();
-
-        Object.keys(allItems.items).forEach((categoryId) => {
-          const categoryObject = allItems.items[categoryId];
-          const category = Object.values(categoryObject);
-          // console.log("category", category);
-          category.forEach((itemGroup) => {
-            Object.values(itemGroup).forEach((item) => {
-              const itemForPush = Object.values(item);
-              // console.log("item", itemForPush);
-              itemsArray.push(itemForPush[0]);
-            });
-          });
-        });
-        dispatch(setItems(itemsArray));
-        if (itemsArray.length === 0) setLoading(true);
-        else setLoading(false);
-
-        console.log("itemsArray", itemsArray);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, []);
-
   // useEffect(() => {
-  //   const itemsArray = [];
-  //   Object.keys(jsonData.items).forEach((categoryId) => {
-  //     const categoryObject = jsonData.items[categoryId];
-  //     const category = Object.values(categoryObject);
-  //     // console.log("category", category);
-  //     category.forEach((itemGroup) => {
-  //       Object.values(itemGroup).forEach((item) => {
-  //         const itemForPush = Object.values(item);
-  //         // console.log("item", itemForPush);
-  //         itemsArray.push(itemForPush[0]);
+  //   (async () => {
+  //     try {
+  //       setLoading(true);
+
+  //       const itemsArray = [];
+  //       const allItems = await itemAPI.getItems();
+
+  //       Object.keys(allItems.items).forEach((categoryId) => {
+  //         const categoryObject = allItems.items[categoryId];
+  //         const category = Object.values(categoryObject);
+  //         // console.log("category", category);
+  //         category.forEach((itemGroup) => {
+  //           Object.values(itemGroup).forEach((item) => {
+  //             const itemForPush = Object.values(item);
+  //             // console.log("item", itemForPush);
+  //             itemsArray.push(itemForPush[0]);
+  //           });
+  //         });
   //       });
-  //     });
-  //   });
-  //   dispatch(setItems(itemsArray));
-  //   // console.log("jsonData", jsonData.items);
+  //       dispatch(setItems(itemsArray));
+  //       if (itemsArray.length === 0) setLoading(true);
+  //       else setLoading(false);
+
+  //       console.log("itemsArray", itemsArray);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   })();
   // }, []);
+
+  useEffect(() => {
+    const itemsArray = [];
+    Object.keys(jsonData.items).forEach((categoryId) => {
+      const categoryObject = jsonData.items[categoryId];
+      const category = Object.values(categoryObject);
+      // console.log("category", category);
+      category.forEach((itemGroup) => {
+        Object.values(itemGroup).forEach((item) => {
+          const itemForPush = Object.values(item);
+          itemsArray.push(itemForPush[0]);
+        });
+      });
+    });
+    dispatch(setItems(itemsArray));
+  }, []);
 
   useEffect(() => {
     let filteredItems = searchQuery.trim()
