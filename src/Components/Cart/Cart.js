@@ -49,7 +49,7 @@ const Cart = ({
         </span>
       </div>
       {cartItems.map((item, index) => (
-        <CartBox item={item} index={index} />
+        <CartBox item={item} index={index} key={index} />
       ))}
       <div className={styles.cartFooter}>
         <div className={styles.line} />

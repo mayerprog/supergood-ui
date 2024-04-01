@@ -5,6 +5,7 @@ import { MdOutlineAdd } from "react-icons/md";
 import { useEffect, useState } from "react";
 import AddAddressComponent from "../AddAddressComponent/AddAddressComponent";
 import MapComponent from "../../MapComponent/MapComponent";
+import { useSelector } from "react-redux";
 
 const AddressModal = ({
   addressRef,
@@ -22,15 +23,12 @@ const AddressModal = ({
   const [addressIndex, setAddressIndex] = useState(null);
   const [chosenAddress, setChosenAddress] = useState(null);
 
+  const addressList = useSelector((state) => state.address.addressList);
+
   const changeCheckbox = (e) => {
     setChosenAddress(e.target.value);
   };
 
-  const addressList = [
-    "5-я улица Ямского Поля, 7к2",
-    "Авангардная улица, 13",
-    "Кантемировская улица, 27А",
-  ];
   const dynamicStyle = {
     "--address-margin-top": marginTop,
     "--address-maxWidth": maxWidth,

@@ -1097,22 +1097,29 @@ const initialState = {
   // },
   address: "",
   position: [0, 0],
+  addressList: [
+    "5-я улица Ямского Поля, 7к2",
+    "Авангардная улица, 13",
+    "Кантемировская улица, 27А",
+  ],
 };
 
 export const addressSlice = createSlice({
   name: "address",
   initialState,
   reducers: {
-    setPolyLayers: (state, action) => {},
-    addAddress: (state, action) => {
+    setAddress: (state, action) => {
       state.address = action.payload;
     },
     addPosition: (state, action) => {
       state.position = action.payload;
     },
+    addAddress: (state, action) => {
+      state.addressList = [...state.addressList, action.payload]; //for adding new address to addressList
+    },
   },
 });
 
-export const { setPolyPoints, addAddress, addPosition } = addressSlice.actions;
+export const { setAddress, addPosition, addAddress } = addressSlice.actions;
 
 export default addressSlice.reducer;

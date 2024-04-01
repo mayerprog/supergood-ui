@@ -14,8 +14,9 @@ import pin from "../../assets/images/pin.png";
 import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
-import { addAddress, addPosition } from "../../redux/slices/addressSlice";
+import { setAddress, addPosition } from "../../redux/slices/addressSlice";
 import AddressDropDown from "../Address/AddressDropDown/AddressDropDown";
+import { fetchSuggestions } from "../../services/fetchSuggestions";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygon, setmMultiPolygon] = useState([]);
@@ -85,7 +86,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         const data = response.data;
         setInputAddress(data.display_name);
         setMarkerAddress(data.display_name);
-        // console.log("Address:", data);
       }
       //   const address = await addressAPI.postAddress(lat, lng);
       //   console.log(address, "address");
@@ -94,54 +94,53 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
     }
   };
 
-  const fetchSuggestions = async (input) => {
-    if (!input) {
-      setSuggestions([]);
-      setShowDropdown(false);
-      return;
-    }
+  // const fetchSuggestions = async (input) => {
+  //   if (!input) {
+  //     setSuggestions([]);
+  //     setShowDropdown(false);
+  //     return;
+  //   }
 
-    const axiosConfig = {
-      timeout: 10000,
-    };
+  //   const axiosConfig = {
+  //     timeout: 10000,
+  //   };
 
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-      input
-    )}`;
+  //   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+  //     input
+  //   )}`;
 
-    try {
-      const response = await axios.get(url, axiosConfig);
-      if (response.data) {
-        const data = response.data;
-        setSuggestions(data);
-        setShowDropdown(true);
-        // console.log("DropDownAddress:", data);
-      }
-    } catch (error) {
-      console.error("Failed to fetch suggestions:", error);
-    }
-  };
+  //   try {
+  //     const response = await axios.get(url, axiosConfig);
+  //     if (response.data) {
+  //       const data = response.data;
+  //       setSuggestions(data);
+  //       setShowDropdown(true);
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to fetch suggestions:", error);
+  //   }
+  // };
 
-  const fetchCoordinatesForAddress = async (address) => {
-    const axiosConfig = {
-      timeout: 10000,
-    };
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-      address
-    )}`;
-    try {
-      const response = await axios.get(url, axiosConfig);
-      console.log("response", response.data);
-      if (response.data && response.data[0]) {
-        const { lat, lon } = response.data[0];
-        const newPosition = [parseFloat(lat), parseFloat(lon)];
-        setMapPosition(newPosition);
-        setMarkerAddress(address);
-      }
-    } catch (error) {
-      console.error("Failed to fetch coordinates:", error);
-    }
-  };
+  // const fetchCoordinatesForAddress = async (address) => {
+  //   const axiosConfig = {
+  //     timeout: 10000,
+  //   };
+  //   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+  //     address
+  //   )}`;
+  //   try {
+  //     const response = await axios.get(url, axiosConfig);
+  //     console.log("response", response.data);
+  //     if (response.data && response.data[0]) {
+  //       const { lat, lon } = response.data[0];
+  //       const newPosition = [parseFloat(lat), parseFloat(lon)];
+  //       setMapPosition(newPosition);
+  //       setMarkerAddress(address);
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to fetch coordinates:", error);
+  //   }
+  // };
 
   const MapEvents = () => {
     useMapEvents({
@@ -156,7 +155,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   };
 
   const handleAddress = () => {
-    dispatch(addAddress(inputAddress));
+    dispatch(setAddress(inputAddress));
     dispatch(addPosition(mapPosition));
     setIsMapOpen(false);
   };
@@ -178,7 +177,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
           value={inputAddress}
           onChange={(e) => {
             setInputAddress(e.target.value);
-            fetchSuggestions(e.target.value);
+            fetchSuggestions(e.target.value, setSuggestions, setShowDropdown);
           }}
           onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
           onBlur={() => setTimeout(() => setShowDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
@@ -189,7 +188,9 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
             setInputAddress={setInputAddress}
             suggestions={suggestions}
             setSuggestions={setSuggestions}
-            fetchCoordinatesForAddress={fetchCoordinatesForAddress}
+            setMapPosition={setMapPosition}
+            setMarkerAddress={setMarkerAddress}
+            // fetchCoordinatesForAddress={fetchCoordinatesForAddress}
           />
         )}
         <button className={styles.buttonStyle} onClick={handleAddress}>

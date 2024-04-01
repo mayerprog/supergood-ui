@@ -1,3 +1,4 @@
+import { fetchCoordinatesForAddress } from "../../../services/fetchCoordinatesForAddress";
 import styles from "./AddressDropDown.module.scss";
 
 const AddressDropDown = ({
@@ -5,8 +6,17 @@ const AddressDropDown = ({
   setInputAddress,
   suggestions,
   setSuggestions,
-  fetchCoordinatesForAddress,
+  setMapPosition,
+  setMarkerAddress,
 }) => {
+  const handleAddressClick = (name) => {
+    if (setMapPosition && setMarkerAddress) {
+      fetchCoordinatesForAddress(name, setMapPosition, setMarkerAddress);
+    }
+    setInputAddress(name);
+    setSuggestions([]);
+    setShowDropdown(false);
+  };
   return (
     <ul>
       {suggestions.length === 0 ? (
@@ -23,10 +33,7 @@ const AddressDropDown = ({
           <li
             key={index}
             onClick={() => {
-              setInputAddress(suggestion.display_name);
-              fetchCoordinatesForAddress(suggestion.display_name);
-              setSuggestions([]);
-              setShowDropdown(false);
+              handleAddressClick(suggestion.display_name);
             }}
           >
             {suggestion.display_name}
