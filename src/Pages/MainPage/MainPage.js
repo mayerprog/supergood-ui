@@ -127,7 +127,7 @@ const MainPage = ({
     if (headerRef.current) {
       setHeaderHeight(headerRef.current.offsetHeight); // height of Header
     }
-  }, []);
+  }, [headerRef]);
 
   useUpdateSumHook();
 
