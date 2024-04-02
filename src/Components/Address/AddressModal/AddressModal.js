@@ -15,11 +15,9 @@ const AddressModal = ({
   setIsMapOpen,
   isMapOpen,
 }) => {
-  // const address = useSelector((state) => state.address.address);
   const [isChangeAddressOpen, setIsChangeAddressOpen] = useState(false); //for updating address
   const [isNewAddressOpen, setIsNewAddressOpen] = useState(false); //for adding new address
   const [addressIndexForChange, setAddressIndexForChange] = useState(null); //for identifying address for update
-  const [chosenAddress, setChosenAddress] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -46,7 +44,6 @@ const AddressModal = ({
 
   const handleChangeSelected = (id) => {
     dispatch(updateSelected(id));
-    // setChosenAddress(id);
   };
 
   useEffect(() => {

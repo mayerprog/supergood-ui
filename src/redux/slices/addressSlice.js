@@ -1098,9 +1098,9 @@ const initialState = {
   addressSelected: "",
   position: [0, 0],
   addressList: [
-    { id: 1, address: "5-я улица Ямского Поля, 7к2", selected: true },
-    { id: 2, address: "Авангардная улица, 13", selected: false },
-    { id: 3, address: "Кантемировская улица, 27А", selected: false },
+    // { id: 1, address: "5-я улица Ямского Поля, 7к2", selected: true },
+    // { id: 2, address: "Авангардная улица, 13", selected: false },
+    // { id: 3, address: "Кантемировская улица, 27А", selected: false },
   ],
 };
 
@@ -1117,8 +1117,19 @@ export const addressSlice = createSlice({
     addAddress: (state, action) => {
       //to add id to new address
       const { address, selected } = action.payload;
+
+      // to check if the address already exists in the addressList
+      const addressExists = state.addressList.some(
+        (item) => item.address === address
+      );
+      // If the address exists, return immediately without adding it
+      if (addressExists) {
+        return;
+      }
+
       const lastAddress = state.addressList[state.addressList.length - 1];
-      const lastId = lastAddress.id;
+      // to handle empty list
+      const lastId = lastAddress ? lastAddress.id : 0;
       const newId = lastId + 1;
 
       //if new address selected=true, then make all old addresses selected false
@@ -1127,7 +1138,6 @@ export const addressSlice = createSlice({
           item.selected = false;
         });
       }
-
       //to add new address to addressList
       state.addressList = [
         ...state.addressList,
@@ -1152,8 +1162,6 @@ export const addressSlice = createSlice({
       state.addressList = state.addressList.map((item) =>
         item.id === id ? { ...item, selected: true } : item
       );
-
-      console.log("addressList", state.addressList);
     },
   },
 });
