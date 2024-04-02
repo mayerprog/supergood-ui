@@ -5,14 +5,10 @@ import Cart from "../../Components/Cart/Cart";
 import MainContent from "../../Components/MainContent/MainContent";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import styles from "./MainPage.module.scss";
-import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
-import { updateSum } from "../../redux/slices/cartSlice";
 import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
-import { itemAPI } from "../../api/itemAPI";
 import { setItems } from "../../redux/slices/itemSlice";
 import jsonData from "../../newApi_getItems.json";
-import Loader from "../../Loaders/SidebarShimmer";
 
 const MainPage = ({
   searchQuery,
@@ -96,6 +92,7 @@ const MainPage = ({
       });
     });
     dispatch(setItems(itemsArray));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

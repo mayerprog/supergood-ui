@@ -37,7 +37,7 @@ const AddItemBox = ({
   useEffect(() => {
     setPrice(foundItem.price);
     setWeightout(foundItem.params.weightout.value);
-  }, []);
+  }, [foundItem]);
 
   useEffect(() => {
     if (foundCartItem) {
@@ -46,7 +46,8 @@ const AddItemBox = ({
       }
       setAmount(foundCartItem.params.amount.value);
     }
-  }, [cartItems, itemId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartItems, itemId, foundCartItem]);
 
   const increment = (event) => {
     event.stopPropagation();

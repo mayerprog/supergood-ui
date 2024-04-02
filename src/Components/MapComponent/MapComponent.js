@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./MapComponent.module.scss";
 import {
   MapContainer,
@@ -9,7 +9,7 @@ import {
   ZoomControl,
   Polygon,
 } from "react-leaflet";
-import L, { Icon } from "leaflet";
+import { Icon } from "leaflet";
 import pin from "../../assets/images/pin.png";
 import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
@@ -36,7 +36,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
     setInputAddress(address);
     setMarkerAddress(address);
     if (position) setMapPosition(position);
-  }, []);
+  }, [address, position]);
 
   useEffect(() => {
     (async () => {
@@ -93,54 +93,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
       console.error("Failed to fetch address:", error);
     }
   };
-
-  // const fetchSuggestions = async (input) => {
-  //   if (!input) {
-  //     setSuggestions([]);
-  //     setShowDropdown(false);
-  //     return;
-  //   }
-
-  //   const axiosConfig = {
-  //     timeout: 10000,
-  //   };
-
-  //   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-  //     input
-  //   )}`;
-
-  //   try {
-  //     const response = await axios.get(url, axiosConfig);
-  //     if (response.data) {
-  //       const data = response.data;
-  //       setSuggestions(data);
-  //       setShowDropdown(true);
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to fetch suggestions:", error);
-  //   }
-  // };
-
-  // const fetchCoordinatesForAddress = async (address) => {
-  //   const axiosConfig = {
-  //     timeout: 10000,
-  //   };
-  //   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
-  //     address
-  //   )}`;
-  //   try {
-  //     const response = await axios.get(url, axiosConfig);
-  //     console.log("response", response.data);
-  //     if (response.data && response.data[0]) {
-  //       const { lat, lon } = response.data[0];
-  //       const newPosition = [parseFloat(lat), parseFloat(lon)];
-  //       setMapPosition(newPosition);
-  //       setMarkerAddress(address);
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to fetch coordinates:", error);
-  //   }
-  // };
 
   const MapEvents = () => {
     useMapEvents({

@@ -30,11 +30,6 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   };
 
   useEffect(() => {
-    // console.log("codeLength", code.length);
-    console.log("phoneToDB", phoneToDB);
-  }, [code]);
-
-  useEffect(() => {
     (async () => {
       try {
         if (code.length === 4) {
@@ -52,7 +47,8 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
         console.log(err);
       }
     })();
-  }, [code]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [code, dataSms]);
 
   const handleChangePhone = (event) => {
     let val = event.target.value;

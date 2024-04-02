@@ -15,7 +15,7 @@ const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
 
   useEffect(() => {
     setInputAddress(streetName);
-  }, []);
+  }, [streetName]);
 
   const addressOnChange = (value) => {
     setInputAddress(value);

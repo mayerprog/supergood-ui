@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./OrdersPage.module.scss";
 import UserInfo from "../../Components/UserInfo/UserInfo";
 import AddressModal from "../../Components/Address/AddressModal/AddressModal";

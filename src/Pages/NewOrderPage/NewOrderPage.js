@@ -1,11 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import styles from "./NewOrderPage.module.scss";
 import UserInfo from "../../Components/UserInfo/UserInfo";
 import AddressModal from "../../Components/Address/AddressModal/AddressModal";
-import Cart from "../../Components/Cart/Cart";
 import OrderCart from "../../Components/Cart/OrderCart/OrderCart";
 import Payment from "../../Components/Payment/Payment";
-import { useMediaQuery } from "react-responsive";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -26,6 +24,7 @@ const NewOrderPage = ({
     if (cartItems.length === 0) {
       navigate("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItems]);
 
   return (

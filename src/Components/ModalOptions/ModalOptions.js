@@ -39,8 +39,8 @@ const ModalOptions = ({
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className={styles.container} ref={optionsRef}>

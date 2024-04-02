@@ -12,7 +12,6 @@ import { setItems } from "../../redux/slices/itemSlice";
 import Cart from "../Cart/Cart";
 import ModalCard from "./ModalCard/ModalCard";
 import MapComponent from "../MapComponent/MapComponent";
-import ModalOptions from "../ModalOptions/ModalOptions";
 import UserInfo from "../UserInfo/UserInfo";
 import AddressModal from "../Address/AddressModal/AddressModal";
 import ItemsShimmer from "../../Loaders/ItemsShimmer";
@@ -119,6 +118,7 @@ const MainContent = ({
         slider.removeEventListener("wheel", handleWheel);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
