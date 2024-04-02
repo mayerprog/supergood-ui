@@ -26,7 +26,10 @@ const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
     if (item)
       dispatch(updateAddress({ id: item.id, newAddress: inputAddress }));
     else {
-      dispatch(addAddress({ address: inputAddress, selected: false }));
+      // if no addresses added then first address should be selected automatically
+      if (addressList.length === 0)
+        dispatch(addAddress({ address: inputAddress, selected: true }));
+      else dispatch(addAddress({ address: inputAddress, selected: false }));
     }
     closeChangeField();
   };

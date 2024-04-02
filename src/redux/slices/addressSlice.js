@@ -1115,18 +1115,17 @@ export const addressSlice = createSlice({
       state.position = action.payload;
     },
     addAddress: (state, action) => {
-      //to add id to new address
       const { address, selected } = action.payload;
 
       // to check if the address already exists in the addressList
       const addressExists = state.addressList.some(
         (item) => item.address === address
       );
-      // If the address exists, return immediately without adding it
       if (addressExists) {
         return;
       }
 
+      //to add id to new address
       const lastAddress = state.addressList[state.addressList.length - 1];
       // to handle empty list
       const lastId = lastAddress ? lastAddress.id : 0;
