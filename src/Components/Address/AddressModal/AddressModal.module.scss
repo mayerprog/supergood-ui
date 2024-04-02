@@ -3,21 +3,20 @@
 .container {
   display: flex;
   flex-direction: column;
-  // position: absolute;
-  // margin-top: var(--address-margin-top);
+  margin-top: var(--address-margin-top);
   width: 100%;
   border-radius: 20px;
   box-shadow: 0 0 5px #ccc;
   min-height: 400px;
-  height: var(--address-height);
+  max-height: var(--address-maxHeight);
   min-width: 200px;
   max-width: var(--address-maxWidth);
   font-family: "Inter", sans-serif;
   font-size: 15px;
   background-color: white;
-  // justify-content: center;
   align-items: flex-start;
   padding: 30px;
+  overflow-y: auto;
 
   &[data-is-modal="true"] {
     @media (max-height: 540px) {
@@ -95,3 +94,24 @@
     @include card-overlay;
   }
 }
+
+.container::-webkit-scrollbar {
+  display: block;
+  width: 5px;
+}
+.container::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 15px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-right: none;
+  border-left: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+// .container {
+//   -ms-overflow-style: none; /* IE and Edge */
+//   scrollbar-width: none; /* Firefox */
+// }

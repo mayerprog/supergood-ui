@@ -12,7 +12,7 @@ const AddressModal = ({
   addressRef,
   marginTop,
   maxWidth,
-  height,
+  maxHeight,
   isModal,
   mapWrapperRef,
   setIsMapOpen,
@@ -31,7 +31,7 @@ const AddressModal = ({
   const dynamicStyle = {
     "--address-margin-top": marginTop,
     "--address-maxWidth": maxWidth,
-    "--address-height": height,
+    "--address-maxHeight": maxHeight,
   };
   const handleChangeAddress = (id) => {
     setAddressIndexForChange(id);
