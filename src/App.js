@@ -77,6 +77,7 @@ function App() {
     const selectedAddress = addressList.filter((address) => address.selected);
     if (selectedAddress.length > 0)
       dispatch(setAddressSelected(selectedAddress[0].address));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressList]);
 
   useEffect(() => {

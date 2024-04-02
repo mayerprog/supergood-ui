@@ -2,7 +2,7 @@ import styles from "./AddressModal.module.scss";
 import { FiEdit } from "react-icons/fi";
 import { MdOutlineAdd } from "react-icons/md";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddAddressComponent from "../AddAddressComponent/AddAddressComponent";
 import MapComponent from "../../MapComponent/MapComponent";
 import { useDispatch, useSelector } from "react-redux";
@@ -58,9 +58,9 @@ const AddressModal = ({
     >
       <h2>Выберите адрес доставки</h2>
       {addressList.map((item, index) => (
-        <>
+        <React.Fragment key={index}>
           {addressIndexForChange !== index && (
-            <div style={{ width: "100%" }} key={index}>
+            <div style={{ width: "100%" }}>
               <div className={styles.addressContainer}>
                 <div>
                   <input
@@ -89,7 +89,7 @@ const AddressModal = ({
               item={item}
             />
           )}
-        </>
+        </React.Fragment>
       ))}
       {isModal &&
         (isNewAddressOpen ? (
