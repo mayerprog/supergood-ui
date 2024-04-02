@@ -43,26 +43,34 @@ const AddAddressComponent = ({ streetName, closeChangeField }) => {
           <input
             className={styles.detailsInput}
             placeholder="Дом"
+            type="number"
+            name="house"
             // value={address}
           />
           <input
             className={styles.detailsInput}
             placeholder="Кв./офис"
+            name="flat"
             // value={address}
           />
           <input
             className={styles.detailsInput}
             placeholder="Домофон"
+            name="doorphone"
             // value={address}
           />
           <input
             className={styles.detailsInput}
             placeholder="Подъезд"
+            type="number"
+            name="entrance"
             // value={address}
           />
           <input
             className={styles.detailsInput}
             placeholder="Этаж"
+            type="number"
+            name="floor"
             // value={address}
           />
         </div>
