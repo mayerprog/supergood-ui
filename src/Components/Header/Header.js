@@ -34,7 +34,9 @@ const Header = forwardRef(
 
     const isAuth = useSelector((state) => state.auth.isAuth);
     const itemsSum = useSelector((state) => state.cart.itemsSum);
-    const address = useSelector((state) => state.address.address);
+    const addressSelected = useSelector(
+      (state) => state.address.addressSelected
+    );
 
     const navigate = useNavigate();
 
@@ -73,8 +75,8 @@ const Header = forwardRef(
           disabled={!isMainPage}
         >
           <FaLocationDot size={18} color="#BBBBBB" className={styles.icon} />
-          {address ? (
-            <span className={styles.buttonText}>{address}</span>
+          {addressSelected ? (
+            <span className={styles.buttonText}>{addressSelected}</span>
           ) : (
             <span className={styles.buttonText}>Укажите адрес доставки</span>
           )}

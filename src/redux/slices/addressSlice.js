@@ -1095,10 +1095,10 @@ const initialState = {
   //     dept_id: 1257,
   //   },
   // },
-  address: "",
+  addressSelected: "",
   position: [0, 0],
   addressList: [
-    { id: 1, address: "5-я улица Ямского Поля, 7к2", selected: false },
+    { id: 1, address: "5-я улица Ямского Поля, 7к2", selected: true },
     { id: 2, address: "Авангардная улица, 13", selected: false },
     { id: 3, address: "Кантемировская улица, 27А", selected: false },
   ],
@@ -1108,21 +1108,31 @@ export const addressSlice = createSlice({
   name: "address",
   initialState,
   reducers: {
-    setAddress: (state, action) => {
-      state.address = action.payload;
+    setAddressSelected: (state, action) => {
+      state.addressSelected = action.payload;
     },
     addPosition: (state, action) => {
       state.position = action.payload;
     },
     addAddress: (state, action) => {
+      //to add id to new address
       const { address, selected } = action.payload;
       const lastAddress = state.addressList[state.addressList.length - 1];
       const lastId = lastAddress.id;
       const newId = lastId + 1;
+
+      //if new address selected=true, then make all old addresses selected false
+      if (selected) {
+        state.addressList.forEach((item) => {
+          item.selected = false;
+        });
+      }
+
+      //to add new address to addressList
       state.addressList = [
         ...state.addressList,
         { id: newId, address: address, selected: selected },
-      ]; //for adding new address to addressList
+      ];
 
       console.log("addressList", state.addressList);
     },
@@ -1149,7 +1159,7 @@ export const addressSlice = createSlice({
 });
 
 export const {
-  setAddress,
+  setAddressSelected,
   addPosition,
   addAddress,
   updateAddress,

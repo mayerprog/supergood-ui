@@ -1,4 +1,4 @@
-import { Provider } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import styles from "./App.module.scss";
 
 import "leaflet/dist/leaflet.css";
@@ -13,6 +13,7 @@ import Footer from "./Components/Footer/Footer";
 import { useEffect, useRef, useState } from "react";
 import { useOutsideHook } from "./hooks/useOutsideHook";
 import { useMediaQuery } from "react-responsive";
+import { setAddressSelected } from "./redux/slices/addressSlice";
 
 function App() {
   const [isModalOptionsOpen, setIsModalOptionsOpen] = useState(false);
@@ -67,90 +68,99 @@ function App() {
 
   const location = useLocation(); // Getting the current location
 
+  const dispatch = useDispatch();
+
+  const addressList = useSelector((state) => state.address.addressList);
+
+  // we find here address with selected: true to display it all over the app
+  useEffect(() => {
+    const selectedAddress = addressList.filter((address) => address.selected);
+    if (selectedAddress.length > 0)
+      dispatch(setAddressSelected(selectedAddress[0].address));
+  }, [addressList]);
+
   useEffect(() => {
     setIsMainPage(location.pathname === "/");
     window.scrollTo(0, 0);
   }, [location]);
 
   return (
-    <Provider store={store}>
-      <div className={styles.app}>
-        <Header
-          isMainPage={isMainPage}
-          toggleCartVisibility={toggleCartVisibility}
-          toggleMapVisibility={toggleMapVisibility}
-          toggleOptionsVisibility={toggleOptionsVisibility}
-          ref={headerRef}
-          setSearchQuery={setSearchQuery}
-          isModalOptionsOpen={isModalOptionsOpen}
-          optionsRef={optionsRef}
-          toggleUserInfoVisibility={toggleUserInfoVisibility}
-          toggleAddressVisibility={toggleAddressVisibility}
-          toggleLoginVisibility={toggleLoginVisibility}
+    <div className={styles.app}>
+      <Header
+        isMainPage={isMainPage}
+        toggleCartVisibility={toggleCartVisibility}
+        toggleMapVisibility={toggleMapVisibility}
+        toggleOptionsVisibility={toggleOptionsVisibility}
+        ref={headerRef}
+        setSearchQuery={setSearchQuery}
+        isModalOptionsOpen={isModalOptionsOpen}
+        optionsRef={optionsRef}
+        toggleUserInfoVisibility={toggleUserInfoVisibility}
+        toggleAddressVisibility={toggleAddressVisibility}
+        toggleLoginVisibility={toggleLoginVisibility}
+      />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <MainPage
+              searchQuery={searchQuery}
+              headerRef={headerRef}
+              toggleCartVisibility={toggleCartVisibility}
+              isCartVisible={isCartVisible}
+              isMapOpen={isMapOpen}
+              setIsMapOpen={setIsMapOpen}
+              toggleMapVisibility={toggleMapVisibility}
+              isUserInfoOpen={isUserInfoOpen}
+              isModalAddressOpen={isModalAddressOpen}
+              optionsRef={optionsRef}
+              userInfoRef={userInfoRef}
+              addressRef={addressRef}
+              toggleOptionsVisibility={toggleOptionsVisibility}
+              toggleUserInfoVisibility={toggleUserInfoVisibility}
+              toggleAddressVisibility={toggleAddressVisibility}
+              mapWrapperRef={mapWrapperRef}
+              mediaQuery={mediaQuery}
+              isLoginOpen={isLoginOpen}
+              loginWrapperRef={loginWrapperRef}
+              toggleLoginVisibility={toggleLoginVisibility}
+            />
+          }
         />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <MainPage
-                searchQuery={searchQuery}
-                headerRef={headerRef}
-                toggleCartVisibility={toggleCartVisibility}
-                isCartVisible={isCartVisible}
-                isMapOpen={isMapOpen}
-                setIsMapOpen={setIsMapOpen}
-                toggleMapVisibility={toggleMapVisibility}
+        <Route
+          path="/submit"
+          element={
+            <ProtectedRoute>
+              <NewOrderPage
+                userInfoRef={userInfoRef}
+                toggleUserInfoVisibility={toggleUserInfoVisibility}
+                addressRef={addressRef}
                 isUserInfoOpen={isUserInfoOpen}
                 isModalAddressOpen={isModalAddressOpen}
-                optionsRef={optionsRef}
-                userInfoRef={userInfoRef}
-                addressRef={addressRef}
-                toggleOptionsVisibility={toggleOptionsVisibility}
-                toggleUserInfoVisibility={toggleUserInfoVisibility}
-                toggleAddressVisibility={toggleAddressVisibility}
                 mapWrapperRef={mapWrapperRef}
-                mediaQuery={mediaQuery}
-                isLoginOpen={isLoginOpen}
-                loginWrapperRef={loginWrapperRef}
-                toggleLoginVisibility={toggleLoginVisibility}
+                setIsMapOpen={setIsMapOpen}
+                isMapOpen={isMapOpen}
               />
-            }
-          />
-          <Route
-            path="/submit"
-            element={
-              <ProtectedRoute>
-                <NewOrderPage
-                  userInfoRef={userInfoRef}
-                  toggleUserInfoVisibility={toggleUserInfoVisibility}
-                  addressRef={addressRef}
-                  isUserInfoOpen={isUserInfoOpen}
-                  isModalAddressOpen={isModalAddressOpen}
-                  mapWrapperRef={mapWrapperRef}
-                  setIsMapOpen={setIsMapOpen}
-                  isMapOpen={isMapOpen}
-                />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/orders"
-            element={
-              <ProtectedRoute>
-                <OrdersPage
-                  userInfoRef={userInfoRef}
-                  toggleUserInfoVisibility={toggleUserInfoVisibility}
-                  addressRef={addressRef}
-                  isUserInfoOpen={isUserInfoOpen}
-                  isModalAddressOpen={isModalAddressOpen}
-                />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-        <Footer />
-      </div>
-    </Provider>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <OrdersPage
+                userInfoRef={userInfoRef}
+                toggleUserInfoVisibility={toggleUserInfoVisibility}
+                addressRef={addressRef}
+                isUserInfoOpen={isUserInfoOpen}
+                isModalAddressOpen={isModalAddressOpen}
+              />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+      <Footer />
+    </div>
   );
 }
 

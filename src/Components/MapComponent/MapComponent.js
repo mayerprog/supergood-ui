@@ -15,9 +15,10 @@ import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setAddress,
+  setAddressSelected,
   addPosition,
   addAddress,
+  updateSelected,
 } from "../../redux/slices/addressSlice";
 import AddressDropDown from "../Address/AddressDropDown/AddressDropDown";
 import { fetchSuggestions } from "../../services/fetchSuggestions";
@@ -34,13 +35,13 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
 
   // const polyLayers = useSelector((state) => state.address.polyLayers);
   const position = useSelector((state) => state.address.position);
-  const address = useSelector((state) => state.address.address);
+  const addressSelected = useSelector((state) => state.address.addressSelected);
 
   useEffect(() => {
-    setInputAddress(address);
-    setMarkerAddress(address);
+    setInputAddress(addressSelected);
+    setMarkerAddress(addressSelected);
     if (position) setMapPosition(position);
-  }, [address, position]);
+  }, [addressSelected, position]);
 
   useEffect(() => {
     (async () => {
@@ -111,7 +112,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   };
 
   const handleAddress = () => {
-    dispatch(setAddress(inputAddress));
+    //  dispatch(setAddressSelected(inputAddress));
     dispatch(addAddress({ address: inputAddress, selected: true }));
     dispatch(addPosition(mapPosition));
     setIsMapOpen(false);
