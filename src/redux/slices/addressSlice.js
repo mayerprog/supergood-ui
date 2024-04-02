@@ -1115,6 +1115,7 @@ export const addressSlice = createSlice({
       state.position = action.payload;
     },
     addAddress: (state, action) => {
+      console.log("action.payload", action.payload);
       state.addressList = [...state.addressList, action.payload]; //for adding new address to addressList
     },
     updateAddress: (state, action) => {

@@ -18,9 +18,9 @@ const AddressModal = ({
   isMapOpen,
 }) => {
   // const address = useSelector((state) => state.address.address);
-  const [isChangeAddressOpen, setIsChangeAddressOpen] = useState(false);
-  const [isNewAddressOpen, setIsNewAddressOpen] = useState(false);
-  const [addressIndexForChange, setAddressIndexForChange] = useState(null);
+  const [isChangeAddressOpen, setIsChangeAddressOpen] = useState(false); //for updating address
+  const [isNewAddressOpen, setIsNewAddressOpen] = useState(false); //for adding new address
+  const [addressIndexForChange, setAddressIndexForChange] = useState(null); //for identifying address for update
   const [chosenAddress, setChosenAddress] = useState(null);
 
   const addressList = useSelector((state) => state.address.addressList);
@@ -95,8 +95,6 @@ const AddressModal = ({
               streetName={item.address}
               closeChangeField={handleCloseChanging}
               item={item}
-              setIsChangeAddressOpen={setIsChangeAddressOpen}
-              setAddressIndexForChange={setAddressIndexForChange}
             />
           )}
         </>

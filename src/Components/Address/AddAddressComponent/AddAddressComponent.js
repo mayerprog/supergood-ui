@@ -2,19 +2,21 @@ import { useEffect, useState } from "react";
 import { fetchSuggestions } from "../../../services/fetchSuggestions";
 import styles from "./AddAddressComponent.module.scss";
 import AddressDropDown from "../AddressDropDown/AddressDropDown";
-import { useDispatch } from "react-redux";
-import { updateAddress } from "../../../redux/slices/addressSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addAddress, updateAddress } from "../../../redux/slices/addressSlice";
 
 const AddAddressComponent = ({
   item,
   streetName,
   closeChangeField,
   setIsChangeAddressOpen,
+  setIsNewAddressOpen,
   setAddressIndexForChange,
 }) => {
   const [inputAddress, setInputAddress] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
+  const addressList = useSelector((state) => state.address.addressList);
 
   const dispatch = useDispatch();
 
@@ -28,9 +30,15 @@ const AddAddressComponent = ({
   };
 
   const handleUpdateAddress = () => {
-    dispatch(updateAddress({ id: item.id, newAddress: inputAddress }));
-    setIsChangeAddressOpen(false);
-    setAddressIndexForChange(null);
+    if (item)
+      dispatch(updateAddress({ id: item.id, newAddress: inputAddress }));
+    else {
+      const lastAddress = addressList[addressList.length - 1];
+      const lastId = lastAddress.id;
+      const newId = lastId + 1;
+      dispatch(addAddress({ id: newId, address: inputAddress }));
+    }
+    closeChangeField();
   };
 
   return (
