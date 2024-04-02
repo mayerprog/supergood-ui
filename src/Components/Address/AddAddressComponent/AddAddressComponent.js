@@ -27,8 +27,8 @@ const AddAddressComponent = ({ streetName, closeChangeField }) => {
           onChange={(e) => {
             changeAddress(e.target.value);
           }}
-          // onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
-          // onBlur={() => setTimeout(() => setShowDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
+          onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
+          onBlur={() => setTimeout(() => setShowDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
         />
         {showDropdown && (
           <AddressDropDown

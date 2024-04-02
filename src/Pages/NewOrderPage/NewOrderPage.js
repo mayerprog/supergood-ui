@@ -34,7 +34,7 @@ const NewOrderPage = ({
       <div className={styles.content}>
         <div className={styles.addressCartContainer}>
           <AddressModal
-            marginTop="none"
+            // marginTop="none"
             maxWidth="500px"
             height="100%"
             isModal={false}
@@ -59,7 +59,7 @@ const NewOrderPage = ({
         <div className={styles.cardOverlay}>
           <AddressModal
             addressRef={addressRef}
-            marginTop="-170px"
+            // marginTop="-170px"
             maxWidth="500px"
             height="none"
             isModal={true}
