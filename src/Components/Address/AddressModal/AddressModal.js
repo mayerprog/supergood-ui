@@ -5,7 +5,8 @@ import { MdOutlineAdd } from "react-icons/md";
 import { useEffect, useState } from "react";
 import AddAddressComponent from "../AddAddressComponent/AddAddressComponent";
 import MapComponent from "../../MapComponent/MapComponent";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateSelected } from "../../../redux/slices/addressSlice";
 
 const AddressModal = ({
   addressRef,
@@ -23,11 +24,9 @@ const AddressModal = ({
   const [addressIndexForChange, setAddressIndexForChange] = useState(null); //for identifying address for update
   const [chosenAddress, setChosenAddress] = useState(null);
 
-  const addressList = useSelector((state) => state.address.addressList);
+  const dispatch = useDispatch();
 
-  const changeCheckbox = (e) => {
-    setChosenAddress(e.target.value);
-  };
+  const addressList = useSelector((state) => state.address.addressList);
 
   const dynamicStyle = {
     "--address-margin-top": marginTop,
@@ -53,6 +52,11 @@ const AddressModal = ({
     setIsNewAddressOpen(false);
   };
 
+  const handleChangeSelected = (id) => {
+    dispatch(updateSelected(id));
+    // setChosenAddress(id);
+  };
+
   useEffect(() => {
     console.log("addressIndex", addressIndexForChange);
   }, [addressIndexForChange]);
@@ -73,8 +77,8 @@ const AddressModal = ({
                 <div>
                   <input
                     type="radio"
-                    checked={chosenAddress == index ? true : false}
-                    onChange={(e) => changeCheckbox(e)}
+                    checked={item.selected}
+                    onChange={() => handleChangeSelected(item.id)}
                     value={index}
                   />
                   <label>{item.address}</label>

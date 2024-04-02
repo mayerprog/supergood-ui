@@ -1115,7 +1115,6 @@ export const addressSlice = createSlice({
       state.position = action.payload;
     },
     addAddress: (state, action) => {
-      console.log("action.payload", action.payload);
       state.addressList = [...state.addressList, action.payload]; //for adding new address to addressList
     },
     updateAddress: (state, action) => {
@@ -1123,12 +1122,29 @@ export const addressSlice = createSlice({
       state.addressList = state.addressList.map((item) =>
         item.id === id ? { ...item, address: newAddress } : item
       );
+    },
+    updateSelected: (state, action) => {
+      const id = action.payload;
+
+      state.addressList.forEach((item) => {
+        item.selected = false;
+      });
+
+      state.addressList = state.addressList.map((item) =>
+        item.id === id ? { ...item, selected: true } : item
+      );
+
       console.log("addressList", state.addressList);
     },
   },
 });
 
-export const { setAddress, addPosition, addAddress, updateAddress } =
-  addressSlice.actions;
+export const {
+  setAddress,
+  addPosition,
+  addAddress,
+  updateAddress,
+  updateSelected,
+} = addressSlice.actions;
 
 export default addressSlice.reducer;

@@ -5,14 +5,7 @@ import AddressDropDown from "../AddressDropDown/AddressDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { addAddress, updateAddress } from "../../../redux/slices/addressSlice";
 
-const AddAddressComponent = ({
-  item,
-  streetName,
-  closeChangeField,
-  setIsChangeAddressOpen,
-  setIsNewAddressOpen,
-  setAddressIndexForChange,
-}) => {
+const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
   const [inputAddress, setInputAddress] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -36,7 +29,9 @@ const AddAddressComponent = ({
       const lastAddress = addressList[addressList.length - 1];
       const lastId = lastAddress.id;
       const newId = lastId + 1;
-      dispatch(addAddress({ id: newId, address: inputAddress }));
+      dispatch(
+        addAddress({ id: newId, address: inputAddress, selected: false })
+      );
     }
     closeChangeField();
   };
