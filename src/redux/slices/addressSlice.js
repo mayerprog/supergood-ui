@@ -1098,9 +1098,9 @@ const initialState = {
   address: "",
   position: [0, 0],
   addressList: [
-    "5-я улица Ямского Поля, 7к2",
-    "Авангардная улица, 13",
-    "Кантемировская улица, 27А",
+    { id: 1, address: "5-я улица Ямского Поля, 7к2", selected: false },
+    { id: 2, address: "Авангардная улица, 13", selected: false },
+    { id: 3, address: "Кантемировская улица, 27А", selected: false },
   ],
 };
 
@@ -1117,9 +1117,17 @@ export const addressSlice = createSlice({
     addAddress: (state, action) => {
       state.addressList = [...state.addressList, action.payload]; //for adding new address to addressList
     },
+    updateAddress: (state, action) => {
+      const { id, newAddress } = action.payload;
+      state.addressList = state.addressList.map((item) =>
+        item.id === id ? { ...item, address: newAddress } : item
+      );
+      console.log("addressList", state.addressList);
+    },
   },
 });
 
-export const { setAddress, addPosition, addAddress } = addressSlice.actions;
+export const { setAddress, addPosition, addAddress, updateAddress } =
+  addressSlice.actions;
 
 export default addressSlice.reducer;

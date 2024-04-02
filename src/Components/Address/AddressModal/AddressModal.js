@@ -20,7 +20,7 @@ const AddressModal = ({
   // const address = useSelector((state) => state.address.address);
   const [isChangeAddressOpen, setIsChangeAddressOpen] = useState(false);
   const [isNewAddressOpen, setIsNewAddressOpen] = useState(false);
-  const [addressIndex, setAddressIndex] = useState(null);
+  const [addressIndexForChange, setAddressIndexForChange] = useState(null);
   const [chosenAddress, setChosenAddress] = useState(null);
 
   const addressList = useSelector((state) => state.address.addressList);
@@ -35,27 +35,27 @@ const AddressModal = ({
     "--address-height": height,
   };
   const handleChangeAddress = (id) => {
-    setAddressIndex(id);
+    setAddressIndexForChange(id);
     setIsNewAddressOpen(false);
     setIsChangeAddressOpen(true);
   };
 
   const handleAddAddress = () => {
-    setAddressIndex(null);
+    setAddressIndexForChange(null);
     setIsChangeAddressOpen(false);
     setIsNewAddressOpen(true);
     if (!isModal) setIsMapOpen(true);
   };
 
   const handleCloseChanging = () => {
-    setAddressIndex(null);
+    setAddressIndexForChange(null);
     setIsChangeAddressOpen(false);
     setIsNewAddressOpen(false);
   };
 
   useEffect(() => {
-    console.log("addressIndex", addressIndex);
-  }, [addressIndex]);
+    console.log("addressIndex", addressIndexForChange);
+  }, [addressIndexForChange]);
 
   return (
     <div
@@ -67,7 +67,7 @@ const AddressModal = ({
       <h2>Выберите адрес доставки</h2>
       {addressList.map((item, index) => (
         <>
-          {addressIndex !== index && (
+          {addressIndexForChange !== index && (
             <div style={{ width: "100%" }}>
               <div className={styles.addressContainer}>
                 <div>
@@ -77,7 +77,7 @@ const AddressModal = ({
                     onChange={(e) => changeCheckbox(e)}
                     value={index}
                   />
-                  <label>{item}</label>
+                  <label>{item.address}</label>
                 </div>
 
                 <div
@@ -90,10 +90,13 @@ const AddressModal = ({
               <div className={styles.line} />
             </div>
           )}
-          {isChangeAddressOpen && addressIndex === index && (
+          {isChangeAddressOpen && addressIndexForChange === index && (
             <AddAddressComponent
-              streetName={item}
+              streetName={item.address}
               closeChangeField={handleCloseChanging}
+              item={item}
+              setIsChangeAddressOpen={setIsChangeAddressOpen}
+              setAddressIndexForChange={setAddressIndexForChange}
             />
           )}
         </>
