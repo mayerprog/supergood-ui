@@ -24,8 +24,8 @@ const OrdersContainer = ({ setOrderIndex, orders }) => {
           {orders
             .filter((order) => order.status === "Pending")
             .map((order, index) => (
-              <div>
-                <div key={index} className={styles.orderInfo}>
+              <div key={index}>
+                <div className={styles.orderInfo}>
                   <div
                     className={styles.order}
                     onClick={() => handleChooseOrder(order.orderId)}

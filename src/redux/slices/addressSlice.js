@@ -1115,7 +1115,16 @@ export const addressSlice = createSlice({
       state.position = action.payload;
     },
     addAddress: (state, action) => {
-      state.addressList = [...state.addressList, action.payload]; //for adding new address to addressList
+      const { address, selected } = action.payload;
+      const lastAddress = state.addressList[state.addressList.length - 1];
+      const lastId = lastAddress.id;
+      const newId = lastId + 1;
+      state.addressList = [
+        ...state.addressList,
+        { id: newId, address: address, selected: selected },
+      ]; //for adding new address to addressList
+
+      console.log("addressList", state.addressList);
     },
     updateAddress: (state, action) => {
       const { id, newAddress } = action.payload;

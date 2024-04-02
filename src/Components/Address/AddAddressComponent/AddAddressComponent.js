@@ -26,12 +26,7 @@ const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
     if (item)
       dispatch(updateAddress({ id: item.id, newAddress: inputAddress }));
     else {
-      const lastAddress = addressList[addressList.length - 1];
-      const lastId = lastAddress.id;
-      const newId = lastId + 1;
-      dispatch(
-        addAddress({ id: newId, address: inputAddress, selected: false })
-      );
+      dispatch(addAddress({ address: inputAddress, selected: false }));
     }
     closeChangeField();
   };

@@ -72,7 +72,7 @@ const AddressModal = ({
       {addressList.map((item, index) => (
         <>
           {addressIndexForChange !== index && (
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "100%" }} key={index}>
               <div className={styles.addressContainer}>
                 <div>
                   <input

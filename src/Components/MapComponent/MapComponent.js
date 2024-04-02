@@ -14,7 +14,11 @@ import pin from "../../assets/images/pin.png";
 import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
-import { setAddress, addPosition } from "../../redux/slices/addressSlice";
+import {
+  setAddress,
+  addPosition,
+  addAddress,
+} from "../../redux/slices/addressSlice";
 import AddressDropDown from "../Address/AddressDropDown/AddressDropDown";
 import { fetchSuggestions } from "../../services/fetchSuggestions";
 
@@ -108,6 +112,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
 
   const handleAddress = () => {
     dispatch(setAddress(inputAddress));
+    dispatch(addAddress({ address: inputAddress, selected: true }));
     dispatch(addPosition(mapPosition));
     setIsMapOpen(false);
   };
