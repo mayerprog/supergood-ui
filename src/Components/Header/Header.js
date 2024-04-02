@@ -6,7 +6,7 @@ import discount from "../../assets/social-networks/discount.png";
 import phone from "../../assets/social-networks/phone.png";
 import { GiShoppingCart } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
-
+import { CiSearch } from "react-icons/ci";
 import { FaLocationDot } from "react-icons/fa6";
 import { forwardRef, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -53,11 +53,14 @@ const Header = forwardRef(
           onClick={() => navigate("/")}
         />
         {isMainPage && (
-          <input
-            className={styles.input}
-            placeholder="Найти блюдо"
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+          <div className={styles.inputWrapper}>
+            <CiSearch className={styles.inputIcon} size={20} />
+            <input
+              className={styles.input}
+              placeholder="Найти блюдо"
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
         )}
         {isModalOptionsOpen && (
           <div className={styles.optionsOverlay}>

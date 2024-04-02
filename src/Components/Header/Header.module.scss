@@ -37,16 +37,30 @@
     cursor: pointer;
   }
 
-  .input {
-    @include form-input-style;
-    width: 100%;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  .inputWrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
     max-width: 300px;
     min-width: 150px;
-    padding-left: 15px;
-    text-overflow: ellipsis;
     margin-left: 20px;
-    @include focus-style(#ccc);
+    align-items: center;
+
+    .input {
+      @include form-input-style;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+      text-overflow: ellipsis;
+      width: 100%;
+      padding-left: 37px;
+
+      @include focus-style(#ccc);
+    }
+    .inputIcon {
+      @include icon-style;
+      color: grey;
+      padding-left: 10px;
+      position: absolute;
+    }
   }
 
   .address {
