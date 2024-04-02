@@ -9,24 +9,15 @@ const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
   const [inputAddress, setInputAddress] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [addressNotValid, setAddressNotValid] = useState("");
+  const [isAddressValid, setIsAddressValid] = useState(false);
+
   const addressList = useSelector((state) => state.address.addressList);
 
   const dispatch = useDispatch();
 
-  const addressIsValid = suggestions.some(
-    (suggestion) => suggestion.display_name === inputAddress
-  );
-
   useEffect(() => {
     setInputAddress(streetName);
   }, [streetName]);
-
-  useEffect(() => {
-    if (!addressIsValid) {
-      setAddressNotValid("К сожалению, мы не доставляем по этому адресу");
-    }
-  }, [addressIsValid]);
 
   const addressOnChange = (value) => {
     setInputAddress(value);
@@ -34,7 +25,10 @@ const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
   };
 
   const handleUpdateAddress = () => {
-    if (!addressIsValid) return;
+    if (!isAddressValid) {
+      return; // Stop the function if the address is not validated
+    }
+
     if (item)
       dispatch(updateAddress({ id: item.id, newAddress: inputAddress }));
     else {
@@ -65,7 +59,7 @@ const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
             setInputAddress={setInputAddress}
             suggestions={suggestions}
             setSuggestions={setSuggestions}
-            addressNotValid={addressNotValid}
+            setIsAddressValid={setIsAddressValid}
           />
         )}
 

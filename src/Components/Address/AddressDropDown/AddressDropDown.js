@@ -8,13 +8,14 @@ const AddressDropDown = ({
   setSuggestions,
   setMapPosition,
   setMarkerAddress,
-  addressNotValid,
+  setIsAddressValid,
 }) => {
   const handleAddressClick = (name) => {
     if (setMapPosition && setMarkerAddress) {
       fetchCoordinatesForAddress(name, setMapPosition, setMarkerAddress);
     }
     setInputAddress(name);
+    setIsAddressValid(true);
     setSuggestions([]);
     setShowDropdown(false);
   };
@@ -27,7 +28,7 @@ const AddressDropDown = ({
             setShowDropdown(false);
           }}
         >
-          {addressNotValid}
+          К сожалению, мы не доставляем по этому адресу
         </li>
       ) : (
         suggestions.map((suggestion, index) => (
