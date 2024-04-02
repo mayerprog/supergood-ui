@@ -3,14 +3,12 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin-top: var(--address-margin-top);
   width: 100%;
   border-radius: 20px;
   box-shadow: 0 0 5px #ccc;
   min-height: 400px;
-  max-height: var(--address-maxHeight);
   min-width: 200px;
-  max-width: var(--address-maxWidth);
+  max-width: 500px;
   font-family: "Inter", sans-serif;
   font-size: 15px;
   background-color: white;
@@ -19,8 +17,9 @@
   overflow-y: auto;
 
   &[data-is-modal="true"] {
-    @media (max-height: 540px) {
-      margin-top: 200px;
+    max-height: 500px;
+    @media (max-height: 666px) {
+      margin-top: 300px;
     }
   }
 

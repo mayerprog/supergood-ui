@@ -10,9 +10,6 @@ import { updateSelected } from "../../../redux/slices/addressSlice";
 
 const AddressModal = ({
   addressRef,
-  marginTop,
-  maxWidth,
-  maxHeight,
   isModal,
   mapWrapperRef,
   setIsMapOpen,
@@ -28,11 +25,6 @@ const AddressModal = ({
 
   const addressList = useSelector((state) => state.address.addressList);
 
-  const dynamicStyle = {
-    "--address-margin-top": marginTop,
-    "--address-maxWidth": maxWidth,
-    "--address-maxHeight": maxHeight,
-  };
   const handleChangeAddress = (id) => {
     setAddressIndexForChange(id);
     setIsNewAddressOpen(false);
@@ -65,7 +57,6 @@ const AddressModal = ({
     <div
       className={styles.container}
       ref={addressRef}
-      style={dynamicStyle}
       data-is-modal={isModal ? "true" : "false"}
     >
       <h2>Выберите адрес доставки</h2>
