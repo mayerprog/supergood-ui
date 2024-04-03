@@ -14,6 +14,8 @@ import { baseURL } from "../../../config.js";
 const Item = ({ item, category, toggleCardOpen }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [amount, setAmount] = useState(null);
+  const [addingInProgress, setAddingInProgress] = useState(false);
+
   const itemRef = useRef();
 
   const [ref, loaded, onLoad] = useImageLoaded();
@@ -38,7 +40,12 @@ const Item = ({ item, category, toggleCardOpen }) => {
 
   const addItemToCart = (event) => {
     event.stopPropagation();
+    //for preventing multiple dispatches
+    if (addingInProgress) return;
+    setAddingInProgress(true);
+
     dispatch(addItems(item));
+    setTimeout(() => setAddingInProgress(false), 300);
   };
 
   //lazy loading

@@ -74,6 +74,7 @@ function App() {
   const dispatch = useDispatch();
 
   const addressList = useSelector((state) => state.address.addressList);
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   // we find here address with selected: true to display it all over the app
   useEffect(() => {
@@ -90,6 +91,10 @@ function App() {
     setIsMainPage(location.pathname === "/");
     window.scrollTo(0, 0);
   }, [location]);
+
+  useEffect(() => {
+    console.log("cartItems", cartItems);
+  }, [cartItems]);
 
   return (
     <div className={styles.app}>
