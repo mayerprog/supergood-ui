@@ -33,7 +33,9 @@ const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
       (item) => item.address === inputAddress
     );
     if (item) {
+      //if address exists then return
       if (addressExists) return;
+      // if address does not exist then update
       else dispatch(updateAddress({ id: item.id, newAddress: inputAddress }));
     } else {
       //if address exists just make it selected

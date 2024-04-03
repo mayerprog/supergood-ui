@@ -1115,7 +1115,7 @@ export const addressSlice = createSlice({
 
       //to add id to new address
       const lastAddress = state.addressList[state.addressList.length - 1];
-      // to handle empty list
+      // if list is empty
       const lastId = lastAddress ? lastAddress.id : 0;
       const newId = lastId + 1;
 
@@ -1130,8 +1130,6 @@ export const addressSlice = createSlice({
         ...state.addressList,
         { id: newId, address: address, selected: selected },
       ];
-
-      console.log("addressList", state.addressList);
     },
     updateAddress: (state, action) => {
       const { id, newAddress } = action.payload;
@@ -1149,7 +1147,7 @@ export const addressSlice = createSlice({
       state.addressList = state.addressList.map((item) =>
         item.id === id ? { ...item, selected: true } : item
       );
-      // to update addressSelected according to changing selected property
+      // to update addressSelected according to changed selected property
       const selected = state.addressList.find((item) => item.selected);
       state.addressSelected = selected.address;
     },
