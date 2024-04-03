@@ -14,12 +14,7 @@ import pin from "../../assets/images/pin.png";
 import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setAddressSelected,
-  addPosition,
-  addAddress,
-  updateSelected,
-} from "../../redux/slices/addressSlice";
+import { addPosition, addAddress } from "../../redux/slices/addressSlice";
 import AddressDropDown from "../Address/AddressDropDown/AddressDropDown";
 import { fetchSuggestions } from "../../services/fetchSuggestions";
 
@@ -30,6 +25,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [mapPosition, setMapPosition] = useState([0, 0]);
   const [suggestions, setSuggestions] = useState([]);
+  const [isAddressValid, setIsAddressValid] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -112,6 +108,9 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   };
 
   const handleAddress = () => {
+    if (!isAddressValid) {
+      return; // Stop the function if the address is not validated
+    }
     //  dispatch(setAddressSelected(inputAddress));
     dispatch(addAddress({ address: inputAddress, selected: true }));
     dispatch(addPosition(mapPosition));
@@ -148,7 +147,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
             setSuggestions={setSuggestions}
             setMapPosition={setMapPosition}
             setMarkerAddress={setMarkerAddress}
-            // fetchCoordinatesForAddress={fetchCoordinatesForAddress}
+            setIsAddressValid={setIsAddressValid}
           />
         )}
         <button className={styles.buttonStyle} onClick={handleAddress}>
