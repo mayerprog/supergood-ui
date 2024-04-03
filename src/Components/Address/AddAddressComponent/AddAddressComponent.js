@@ -3,7 +3,11 @@ import { fetchSuggestions } from "../../../services/fetchSuggestions";
 import styles from "./AddAddressComponent.module.scss";
 import AddressDropDown from "../AddressDropDown/AddressDropDown";
 import { useDispatch, useSelector } from "react-redux";
-import { addAddress, updateAddress } from "../../../redux/slices/addressSlice";
+import {
+  addAddress,
+  removeAddress,
+  updateAddress,
+} from "../../../redux/slices/addressSlice";
 import { makeExistingAddressSelected } from "../../../services/makeExistingAddressSelected";
 import { ImBin } from "react-icons/im";
 
@@ -51,6 +55,10 @@ const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
       }
     }
     closeChangeField();
+  };
+
+  const handleRemoveAddress = () => {
+    dispatch(removeAddress(item.id));
   };
 
   return (
@@ -120,9 +128,11 @@ const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
         <button className={styles.buttonStyle} onClick={closeChangeField}>
           <span className={styles.buttonText}>Отмена</span>
         </button>
-        <button className={styles.binButton} onClick={closeChangeField}>
-          <ImBin size={17} />
-        </button>
+        {item && (
+          <button className={styles.binButton} onClick={handleRemoveAddress}>
+            <ImBin size={17} />
+          </button>
+        )}
       </div>
     </>
   );

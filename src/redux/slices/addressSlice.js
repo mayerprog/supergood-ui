@@ -1151,10 +1151,20 @@ export const addressSlice = createSlice({
       const selected = state.addressList.find((item) => item.selected);
       state.addressSelected = selected.address;
     },
+    removeAddress: (state, action) => {
+      state.addressList = state.addressList.filter(
+        (item) => item.id !== action.payload
+      );
+    },
   },
 });
 
-export const { setAddressSelected, addAddress, updateAddress, updateSelected } =
-  addressSlice.actions;
+export const {
+  setAddressSelected,
+  addAddress,
+  updateAddress,
+  updateSelected,
+  removeAddress,
+} = addressSlice.actions;
 
 export default addressSlice.reducer;
