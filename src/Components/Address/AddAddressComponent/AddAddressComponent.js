@@ -5,6 +5,7 @@ import AddressDropDown from "../AddressDropDown/AddressDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { addAddress, updateAddress } from "../../../redux/slices/addressSlice";
 import { makeExistingAddressSelected } from "../../../services/makeExistingAddressSelected";
+import { ImBin } from "react-icons/im";
 
 const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
   const [inputAddress, setInputAddress] = useState("");
@@ -118,6 +119,9 @@ const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
         </button>
         <button className={styles.buttonStyle} onClick={closeChangeField}>
           <span className={styles.buttonText}>Отмена</span>
+        </button>
+        <button className={styles.binButton} onClick={closeChangeField}>
+          <ImBin size={17} />
         </button>
       </div>
     </>
