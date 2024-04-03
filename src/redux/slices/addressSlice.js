@@ -1096,7 +1096,6 @@ const initialState = {
   //   },
   // },
   addressSelected: "",
-  position: [0, 0],
   addressList: [
     // { id: 1, address: "5-я улица Ямского Поля, 7к2", selected: true },
     // { id: 2, address: "Авангардная улица, 13", selected: false },
@@ -1111,19 +1110,8 @@ export const addressSlice = createSlice({
     setAddressSelected: (state, action) => {
       state.addressSelected = action.payload;
     },
-    addPosition: (state, action) => {
-      state.position = action.payload;
-    },
     addAddress: (state, action) => {
       const { address, selected } = action.payload;
-
-      // to check if the address already exists in the addressList
-      const addressExists = state.addressList.some(
-        (item) => item.address === address
-      );
-      if (addressExists) {
-        return;
-      }
 
       //to add id to new address
       const lastAddress = state.addressList[state.addressList.length - 1];
@@ -1168,12 +1156,7 @@ export const addressSlice = createSlice({
   },
 });
 
-export const {
-  setAddressSelected,
-  addPosition,
-  addAddress,
-  updateAddress,
-  updateSelected,
-} = addressSlice.actions;
+export const { setAddressSelected, addAddress, updateAddress, updateSelected } =
+  addressSlice.actions;
 
 export default addressSlice.reducer;

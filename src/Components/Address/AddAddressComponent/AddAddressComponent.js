@@ -4,6 +4,7 @@ import styles from "./AddAddressComponent.module.scss";
 import AddressDropDown from "../AddressDropDown/AddressDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { addAddress, updateAddress } from "../../../redux/slices/addressSlice";
+import { makeExistingAddressSelected } from "../../../services/makeExistingAddressSelected";
 
 const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
   const [inputAddress, setInputAddress] = useState("");
@@ -28,14 +29,23 @@ const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
     if (!isAddressValid) {
       return; // Stop the function if the address is not validated
     }
-
-    if (item)
-      dispatch(updateAddress({ id: item.id, newAddress: inputAddress }));
-    else {
-      // if no addresses added then first address should be selected automatically
-      if (addressList.length === 0)
-        dispatch(addAddress({ address: inputAddress, selected: true }));
-      else dispatch(addAddress({ address: inputAddress, selected: false }));
+    const addressExists = addressList.some(
+      (item) => item.address === inputAddress
+    );
+    if (item) {
+      if (addressExists) return;
+      else dispatch(updateAddress({ id: item.id, newAddress: inputAddress }));
+    } else {
+      //if address exists just make it selected
+      if (addressExists) {
+        makeExistingAddressSelected(addressList, inputAddress, dispatch);
+        // if address does not exist then add to the addressList
+      } else {
+        // if no addresses added then first address should be selected automatically
+        if (addressList.length === 0)
+          dispatch(addAddress({ address: inputAddress, selected: true }));
+        else dispatch(addAddress({ address: inputAddress, selected: false }));
+      }
     }
     closeChangeField();
   };

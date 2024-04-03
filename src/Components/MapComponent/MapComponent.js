@@ -15,33 +15,40 @@ import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addPosition,
   addAddress,
   setAddressSelected,
+  updateSelected,
 } from "../../redux/slices/addressSlice";
 import AddressDropDown from "../Address/AddressDropDown/AddressDropDown";
 import { fetchSuggestions } from "../../services/fetchSuggestions";
+import { fetchCoordinatesForAddress } from "../../services/fetchCoordinatesForAddress";
+import { makeExistingAddressSelected } from "../../services/makeExistingAddressSelected";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygon, setmMultiPolygon] = useState([]);
   const [inputAddress, setInputAddress] = useState("");
-  const [markerAddress, setMarkerAddress] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const [mapPosition, setMapPosition] = useState([0, 0]);
+  const [markerAddress, setMarkerAddress] = useState(""); //temporary address while choosing
+  const [mapPosition, setMapPosition] = useState([0, 0]); //temporary position while choosing
   const [suggestions, setSuggestions] = useState([]);
   const [isAddressValid, setIsAddressValid] = useState(false);
 
   const dispatch = useDispatch();
 
   // const polyLayers = useSelector((state) => state.address.polyLayers);
-  const position = useSelector((state) => state.address.position);
   const addressSelected = useSelector((state) => state.address.addressSelected);
+  const addressList = useSelector((state) => state.address.addressList);
 
   useEffect(() => {
+    if (addressSelected) {
+      fetchCoordinatesForAddress(
+        addressSelected,
+        setMapPosition,
+        setMarkerAddress
+      );
+    }
     setInputAddress(addressSelected);
-    setMarkerAddress(addressSelected);
-    if (position) setMapPosition(position);
-  }, [addressSelected, position]);
+  }, [addressSelected]);
 
   useEffect(() => {
     (async () => {
@@ -113,13 +120,20 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   };
 
   const handleAddress = () => {
-    console.log("isAddressValid", isAddressValid);
     if (!isAddressValid) {
       return; // Stop the function if the address is not validated
     }
+    const addressExists = addressList.some(
+      (item) => item.address === inputAddress
+    );
+    if (addressExists) {
+      //if exists just make it selected
+      makeExistingAddressSelected(addressList, inputAddress, dispatch);
+    } else {
+      // if does not exist then add to the addressList
+      dispatch(addAddress({ address: inputAddress, selected: true }));
+    }
     dispatch(setAddressSelected(inputAddress));
-    dispatch(addAddress({ address: inputAddress, selected: true }));
-    dispatch(addPosition(mapPosition));
     setIsMapOpen(false);
   };
 
