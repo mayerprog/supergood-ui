@@ -83,12 +83,7 @@ function App() {
       dispatch(updateSelected(0));
     if (selectedAddress.length > 0)
       dispatch(setAddressSelected(selectedAddress[0].address));
-    console.log("addressList1", addressList[0]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addressList]);
-
-  useEffect(() => {
-    console.log("addressList", addressList);
   }, [addressList]);
 
   useEffect(() => {

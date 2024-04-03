@@ -46,10 +46,6 @@ const AddressModal = ({
     dispatch(updateSelected(index));
   };
 
-  useEffect(() => {
-    console.log("addressIndex", addressIndexForChange);
-  }, [addressIndexForChange]);
-
   return (
     <div
       className={styles.container}
