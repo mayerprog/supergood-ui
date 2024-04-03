@@ -14,7 +14,11 @@ import pin from "../../assets/images/pin.png";
 import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
-import { addPosition, addAddress } from "../../redux/slices/addressSlice";
+import {
+  addPosition,
+  addAddress,
+  setAddressSelected,
+} from "../../redux/slices/addressSlice";
 import AddressDropDown from "../Address/AddressDropDown/AddressDropDown";
 import { fetchSuggestions } from "../../services/fetchSuggestions";
 
@@ -87,6 +91,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         const data = response.data;
         setInputAddress(data.display_name);
         setMarkerAddress(data.display_name);
+        setIsAddressValid(true);
       }
       //   const address = await addressAPI.postAddress(lat, lng);
       //   console.log(address, "address");
@@ -108,10 +113,11 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   };
 
   const handleAddress = () => {
+    console.log("isAddressValid", isAddressValid);
     if (!isAddressValid) {
       return; // Stop the function if the address is not validated
     }
-    //  dispatch(setAddressSelected(inputAddress));
+    dispatch(setAddressSelected(inputAddress));
     dispatch(addAddress({ address: inputAddress, selected: true }));
     dispatch(addPosition(mapPosition));
     setIsMapOpen(false);

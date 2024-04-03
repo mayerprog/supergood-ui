@@ -1161,6 +1161,9 @@ export const addressSlice = createSlice({
       state.addressList = state.addressList.map((item) =>
         item.id === id ? { ...item, selected: true } : item
       );
+      // to update addressSelected according to changing selected property
+      const selected = state.addressList.find((item) => item.selected);
+      state.addressSelected = selected.address;
     },
   },
 });
