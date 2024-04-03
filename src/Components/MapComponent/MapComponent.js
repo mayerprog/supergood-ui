@@ -14,11 +14,7 @@ import pin from "../../assets/images/pin.png";
 import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addAddress,
-  setAddressSelected,
-  updateSelected,
-} from "../../redux/slices/addressSlice";
+import { addAddress } from "../../redux/slices/addressSlice";
 import AddressDropDown from "../Address/AddressDropDown/AddressDropDown";
 import { fetchSuggestions } from "../../services/fetchSuggestions";
 import { fetchCoordinatesForAddress } from "../../services/fetchCoordinatesForAddress";
@@ -113,7 +109,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         const { lat, lng } = e.latlng;
         setMapPosition([lat, lng]);
         fetchAddress(lat, lng);
-        console.log([lat, lng]);
       },
     });
     return null; // the component is only for side effects, it doesn't render anything
@@ -133,7 +128,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
       // if does not exist then add to the addressList
       dispatch(addAddress({ address: inputAddress, selected: true }));
     }
-    dispatch(setAddressSelected(inputAddress));
     setIsMapOpen(false);
   };
 
