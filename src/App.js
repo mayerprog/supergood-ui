@@ -13,7 +13,10 @@ import Footer from "./Components/Footer/Footer";
 import { useEffect, useRef, useState } from "react";
 import { useOutsideHook } from "./hooks/useOutsideHook";
 import { useMediaQuery } from "react-responsive";
-import { setAddressSelected } from "./redux/slices/addressSlice";
+import {
+  setAddressSelected,
+  updateSelected,
+} from "./redux/slices/addressSlice";
 
 function App() {
   const [isModalOptionsOpen, setIsModalOptionsOpen] = useState(false);
@@ -75,9 +78,17 @@ function App() {
   // we find here address with selected: true to display it all over the app
   useEffect(() => {
     const selectedAddress = addressList.filter((address) => address.selected);
+    //if no selected addresses then make first address selected
+    if (selectedAddress.length === 0 && addressList.length > 0)
+      dispatch(updateSelected(0));
     if (selectedAddress.length > 0)
       dispatch(setAddressSelected(selectedAddress[0].address));
+    console.log("addressList1", addressList[0]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [addressList]);
+
+  useEffect(() => {
+    console.log("addressList", addressList);
   }, [addressList]);
 
   useEffect(() => {

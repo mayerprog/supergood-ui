@@ -6,12 +6,19 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addAddress,
   removeAddress,
+  removeAddressSelected,
   updateAddress,
+  updateSelected,
 } from "../../../redux/slices/addressSlice";
 import { makeExistingAddressSelected } from "../../../services/makeExistingAddressSelected";
 import { ImBin } from "react-icons/im";
 
-const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
+const AddAddressComponent = ({
+  item,
+  streetName,
+  closeChangeField,
+  setAddressIndexForChange,
+}) => {
   const [inputAddress, setInputAddress] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -59,6 +66,8 @@ const AddAddressComponent = ({ item, streetName, closeChangeField }) => {
 
   const handleRemoveAddress = () => {
     dispatch(removeAddress(item.id));
+    dispatch(removeAddressSelected());
+    setAddressIndexForChange(null);
   };
 
   return (

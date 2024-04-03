@@ -1110,6 +1110,9 @@ export const addressSlice = createSlice({
     setAddressSelected: (state, action) => {
       state.addressSelected = action.payload;
     },
+    removeAddressSelected: (state, action) => {
+      state.addressSelected = "";
+    },
     addAddress: (state, action) => {
       const { address, selected } = action.payload;
 
@@ -1138,14 +1141,14 @@ export const addressSlice = createSlice({
       );
     },
     updateSelected: (state, action) => {
-      const id = action.payload;
+      const elementIndex = action.payload;
 
       state.addressList.forEach((item) => {
         item.selected = false;
       });
 
-      state.addressList = state.addressList.map((item) =>
-        item.id === id ? { ...item, selected: true } : item
+      state.addressList = state.addressList.map((item, index) =>
+        index === elementIndex ? { ...item, selected: true } : item
       );
       // to update addressSelected according to changed selected property
       const selected = state.addressList.find((item) => item.selected);
@@ -1165,6 +1168,7 @@ export const {
   updateAddress,
   updateSelected,
   removeAddress,
+  removeAddressSelected,
 } = addressSlice.actions;
 
 export default addressSlice.reducer;

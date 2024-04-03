@@ -42,8 +42,8 @@ const AddressModal = ({
     setIsNewAddressOpen(false);
   };
 
-  const handleChangeSelected = (id) => {
-    dispatch(updateSelected(id));
+  const handleChangeSelected = (index) => {
+    dispatch(updateSelected(index));
   };
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const AddressModal = ({
                   <input
                     type="radio"
                     checked={item.selected}
-                    onChange={() => handleChangeSelected(item.id)}
+                    onChange={() => handleChangeSelected(index)}
                     value={index}
                   />
                   <label>{item.address}</label>
@@ -87,6 +87,7 @@ const AddressModal = ({
               streetName={item.address}
               closeChangeField={handleCloseChanging}
               item={item}
+              setAddressIndexForChange={setAddressIndexForChange}
             />
           )}
         </React.Fragment>
