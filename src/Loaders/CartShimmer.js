@@ -11,7 +11,7 @@ const CartShimmer = () => {
       style={{
         flex: "1",
         position: "sticky",
-        top: "calc(100vh - 900px)",
+        top: "calc(100vh - 840px)",
         height: "380px",
       }}
     >
@@ -23,7 +23,7 @@ const CartShimmer = () => {
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
       >
-        <rect rx="10" ry="10" width={width} height="700" y={20} />
+        <rect rx="10" ry="10" width={width} height="650" y={20} />
       </ContentLoader>
     </div>
   );
