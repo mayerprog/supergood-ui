@@ -11,8 +11,9 @@ const CartShimmer = () => {
       style={{
         flex: "1",
         position: "sticky",
-        top: "calc(100vh - 840px)",
+        top: "55px",
         height: "380px",
+        paddingBottom: "300px",
       }}
     >
       <ContentLoader
