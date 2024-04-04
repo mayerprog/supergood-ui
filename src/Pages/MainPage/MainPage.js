@@ -69,8 +69,8 @@ const MainPage = ({
           });
         });
         dispatch(setItems(itemsArray));
-        if (itemsArray.length === 0) setLoading(true);
-        else setLoading(false);
+        // if (itemsArray.length === 0) setLoading(true);
+        // else setLoading(false);
       } catch (err) {
         console.log(err);
       }
