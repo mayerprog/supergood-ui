@@ -11,7 +11,6 @@ export const cartSlice = createSlice({
   reducers: {
     addItems: (state, action) => {
       state.cartItems = [...state.cartItems, action.payload];
-      // console.log("reduxItems", state.cartItems);
     },
     removeItems: (state, action) => {
       state.cartItems = state.cartItems.filter(
@@ -25,11 +24,9 @@ export const cartSlice = createSlice({
       state.cartItems = state.cartItems.map((item) =>
         item.itemid === action.payload.itemid ? action.payload : item
       );
-      // console.log("cartItems", state.cartItems);
     },
     updateSum: (state, action) => {
       state.itemsSum = action.payload;
-      // console.log("state.itemsSum", state.itemsSum);
     },
   },
 });

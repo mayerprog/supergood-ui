@@ -25,12 +25,10 @@ const AddItemBox = ({
   const dispatch = useDispatch();
 
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const items = useSelector((state) => state.item.items);
 
   const foundCartItem = cartItems.find(
     (cartItem) => itemId === cartItem.itemid
   );
-  const foundItem = items.find((item) => itemId === item.itemid);
 
   useEffect(() => {
     if (foundCartItem) {

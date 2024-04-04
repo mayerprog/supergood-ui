@@ -75,7 +75,7 @@ const MainPage = ({
         console.log(err);
       }
     })();
-  }, []);
+  }, [dispatch]);
 
   // useEffect(() => {
   //   const itemsArray = [];
