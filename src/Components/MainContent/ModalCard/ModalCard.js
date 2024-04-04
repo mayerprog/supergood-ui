@@ -33,7 +33,13 @@ const ModalCard = ({ itemCardId, cardRef }) => {
 
   const addItemToCart = (event) => {
     event.stopPropagation();
-    dispatch(addItems(foundItem));
+    dispatch(
+      addItems({
+        ...foundItem,
+        initialPrice: foundItem.price,
+        initialWeightout: foundItem.params.weightout.value,
+      })
+    );
   };
 
   return (

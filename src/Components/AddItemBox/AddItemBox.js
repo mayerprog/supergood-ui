@@ -21,8 +21,6 @@ const AddItemBox = ({
   };
 
   const [amount, setAmount] = useState(null);
-  const [price, setPrice] = useState(null);
-  const [weightout, setWeightout] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -33,17 +31,6 @@ const AddItemBox = ({
     (cartItem) => itemId === cartItem.itemid
   );
   const foundItem = items.find((item) => itemId === item.itemid);
-
-  useEffect(() => {
-    console.log("LoggedcartItems", cartItems);
-  }, [cartItems]);
-
-  useEffect(() => {
-    console.log("itemsCheck", items);
-
-    setPrice(foundItem.price);
-    setWeightout(foundItem.params.weightout.value);
-  }, [foundItem]);
 
   useEffect(() => {
     if (foundCartItem) {
@@ -70,10 +57,11 @@ const AddItemBox = ({
         },
         weightout: {
           ...item.params.weightout,
-          value: Number(item.params.weightout.value) + Number(weightout),
+          value:
+            Number(item.params.weightout.value) + Number(item.initialWeightout),
         },
       },
-      price: item.price + price,
+      price: item.price + item.initialPrice,
     };
 
     dispatch(updateItem(updatedItem));
@@ -95,10 +83,11 @@ const AddItemBox = ({
         },
         weightout: {
           ...item.params.weightout,
-          value: Number(item.params.weightout.value) - Number(weightout),
+          value:
+            Number(item.params.weightout.value) - Number(item.initialWeightout),
         },
       },
-      price: item.price - price,
+      price: item.price - item.initialPrice,
     };
 
     dispatch(updateItem(updatedItem));

@@ -34,6 +34,7 @@ const Cart = ({
       navigate("/submit");
     }
   };
+
   if (loading) {
     return <CartShimmer />;
   }

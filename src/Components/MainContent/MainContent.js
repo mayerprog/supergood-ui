@@ -39,10 +39,10 @@ const MainContent = ({
   addressRef,
   isModalAddressOpen,
   toggleCartVisibility,
-  loading,
   isLoginOpen,
   loginWrapperRef,
   toggleLoginVisibility,
+  loading,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -54,10 +54,6 @@ const MainContent = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const sliderRef = useRef(null);
   const categoryRefs = useRef({});
-
-  useEffect(() => {
-    console.log("items", items);
-  }, [items]);
 
   const scrollToCategory = useCallback(
     (categoryName) => {

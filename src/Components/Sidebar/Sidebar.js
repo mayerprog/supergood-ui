@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import SidebarShimmer from "../../Loaders/SidebarShimmer";
 import styles from "./Sidebar.module.scss";
 
@@ -13,9 +14,6 @@ const Sidebar = ({
   }
   return (
     <div className={styles.sidebar}>
-      {/* {loading ? (
-        <SidebarShimmer />
-      ) : ( */}
       {categories.map((category, index) => (
         <button
           key={index}

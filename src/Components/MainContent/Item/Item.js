@@ -44,7 +44,13 @@ const Item = ({ item, category, toggleCardOpen }) => {
     if (addingInProgress) return;
     setAddingInProgress(true);
 
-    dispatch(addItems(item));
+    dispatch(
+      addItems({
+        ...item,
+        initialPrice: item.price,
+        initialWeightout: item.params.weightout.value,
+      })
+    );
     setTimeout(() => setAddingInProgress(false), 300);
   };
 
