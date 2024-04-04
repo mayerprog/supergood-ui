@@ -20,7 +20,7 @@ const ItemsShimmer = () => {
           <rect
             key={index}
             x={30 + (index % 4) * 250}
-            y={Math.floor(index / 4) * 350}
+            y={Math.floor(index / 4) * 330}
             rx="10"
             ry="10"
             width="200"

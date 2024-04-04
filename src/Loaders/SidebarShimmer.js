@@ -10,7 +10,7 @@ const SidebarShimmer = () => {
       style={{
         flex: "1",
         position: "sticky",
-        top: "55px",
+        top: "70px",
         height: "380px",
         paddingBottom: "250px",
       }}
