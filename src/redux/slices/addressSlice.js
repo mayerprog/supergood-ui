@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
   // polyLayers: {
@@ -1116,12 +1117,6 @@ export const addressSlice = createSlice({
     addAddress: (state, action) => {
       const { address, selected } = action.payload;
 
-      //to add id to new address
-      const lastAddress = state.addressList[state.addressList.length - 1];
-      // if list is empty
-      const lastId = lastAddress ? lastAddress.id : 0;
-      const newId = lastId + 1;
-
       //if new address selected=true, then make all old addresses selected false
       if (selected) {
         state.addressList.forEach((item) => {
@@ -1131,7 +1126,7 @@ export const addressSlice = createSlice({
       //to add new address to addressList
       state.addressList = [
         ...state.addressList,
-        { id: newId, address: address, selected: selected },
+        { id: uuidv4(), address: address, selected: selected },
       ];
     },
     updateAddress: (state, action) => {
@@ -1143,16 +1138,16 @@ export const addressSlice = createSlice({
     updateSelected: (state, action) => {
       const elementIndex = action.payload;
 
-      state.addressList.forEach((item) => {
-        item.selected = false;
+      state.addressList = state.addressList.map((item, index) => {
+        const isSelected = index === elementIndex;
+        return {
+          ...item,
+          selected: isSelected,
+        };
       });
-
-      state.addressList = state.addressList.map((item, index) =>
-        index === elementIndex ? { ...item, selected: true } : item
-      );
       // to update addressSelected according to changed selected property
-      const selected = state.addressList.find((item) => item.selected);
-      state.addressSelected = selected.address;
+      const selectedAddress = state.addressList.find((item) => item.selected);
+      state.addressSelected = selectedAddress ? selectedAddress.address : "";
     },
     removeAddress: (state, action) => {
       state.addressList = state.addressList.filter(

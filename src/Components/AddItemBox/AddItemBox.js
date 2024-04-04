@@ -35,6 +35,12 @@ const AddItemBox = ({
   const foundItem = items.find((item) => itemId === item.itemid);
 
   useEffect(() => {
+    console.log("LoggedcartItems", cartItems);
+  }, [cartItems]);
+
+  useEffect(() => {
+    console.log("itemsCheck", items);
+
     setPrice(foundItem.price);
     setWeightout(foundItem.params.weightout.value);
   }, [foundItem]);
