@@ -54,7 +54,7 @@ const MainPage = ({
         setLoading(true);
 
         const itemsArray = [];
-        const allItems = await itemAPI.getItems();
+        const allItems = await itemAPI.getItems(1257);
 
         Object.keys(allItems.items).forEach((categoryId) => {
           const categoryObject = allItems.items[categoryId];
@@ -69,8 +69,8 @@ const MainPage = ({
           });
         });
         dispatch(setItems(itemsArray));
-        // if (itemsArray.length === 0) setLoading(true);
-        // else setLoading(false);
+        if (itemsArray.length === 0) setLoading(true);
+        else setLoading(false);
       } catch (err) {
         console.log(err);
       }

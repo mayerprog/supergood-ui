@@ -99,6 +99,9 @@ const theme = createTheme(
 const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
   const [selectedDate, setSelectedDate] = useState(null);
 
+  const maximumDate = new Date("2023-1-1");
+  const minimumDate = new Date("1930-1-1");
+
   return (
     <div className={styles.container} ref={userInfoRef}>
       <h2>Мои данные</h2>
@@ -128,6 +131,8 @@ const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
               format="DD.MM.YYYY"
               mask="__.__.____"
               defaultValue={dayjs("2022-04-17")}
+              minDate={dayjs("1930-01-01")}
+              maxDate={dayjs("2023-01-01")}
             />
           </LocalizationProvider>
         </ThemeProvider>
