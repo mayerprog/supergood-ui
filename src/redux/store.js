@@ -3,6 +3,7 @@ import itemReducer from "./slices/itemSlice";
 import cartReducer from "./slices/cartSlice";
 import addressReducer from "./slices/addressSlice";
 import authReducer from "./slices/authSlice";
+import orderReducer from "./slices/orderSlice";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   cart: persistReducer(cartPersistConfig, cartReducer),
   address: persistReducer(addressPersistConfig, addressReducer),
   auth: authReducer,
+  order: orderReducer,
 });
 
 export const store = configureStore({

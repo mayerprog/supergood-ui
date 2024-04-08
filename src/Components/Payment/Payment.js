@@ -13,7 +13,7 @@ const Payment = ({}) => {
   const navigate = useNavigate();
 
   const handleClickSubmit = () => {
-    navigate("/submit");
+    navigate("/orders");
   };
 
   return (
@@ -46,9 +46,9 @@ const Payment = ({}) => {
         <div className={styles.finalPayment}>
           <button
             className={styles.paymentButtonStyle}
-            onClick={() => console.log("Pay")}
+            onClick={handleClickSubmit}
           >
-            <span className={styles.paymentButtonText}>Оплатить</span>
+            <span className={styles.paymentButtonText}>Оформить заказ</span>
           </button>
           <div className={styles.sum}>{itemsSum} ₽</div>
         </div>

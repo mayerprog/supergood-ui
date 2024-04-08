@@ -3,9 +3,6 @@ import pepperoni from "../../../assets/images/pizza/pepperoni.jpg";
 import ProgressTracking from "../ProgressTracking/ProgressTracking";
 
 const OrderInfoContainer = ({ chosenOrder }) => {
-  if (!chosenOrder) {
-    return null;
-  }
   return (
     <div className={styles.container}>
       <div className={styles.header}>

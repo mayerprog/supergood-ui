@@ -5,7 +5,6 @@ import OrdersContainer from "./OrdersContainer/OrdersContainer";
 
 const Orders = () => {
   const [orderIndex, setOrderIndex] = useState(null);
-  const [chosenOrder, setChosenOrder] = useState();
   const orders = [
     {
       orderId: 1048,
@@ -136,6 +135,7 @@ const Orders = () => {
       price: "885",
     },
   ];
+  const [chosenOrder, setChosenOrder] = useState(orders[0]);
 
   useEffect(() => {
     const foundItem = orders.find((order) => order.orderId === orderIndex);
@@ -144,10 +144,6 @@ const Orders = () => {
     }
     console.log("foundItem", foundItem);
   }, [orderIndex]);
-
-  useEffect(() => {
-    console.log("chosenOrder", chosenOrder);
-  }, [chosenOrder]);
 
   return (
     <div className={styles.container}>
