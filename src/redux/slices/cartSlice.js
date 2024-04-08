@@ -16,6 +16,7 @@ export const cartSlice = createSlice({
       state.cartItems = state.cartItems.filter(
         (item) => item.itemid !== action.payload
       );
+      state.itemsSum = 0;
     },
     removeAllItems: (state, action) => {
       state.cartItems = [];

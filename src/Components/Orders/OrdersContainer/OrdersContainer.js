@@ -34,9 +34,9 @@ const OrdersContainer = ({ setOrderIndex, orders }) => {
                   </div>
                   <span>{order.date}</span>
                   <span>{order.time}</span>
-                  <span>{order.paymentType}</span>
+                  <span>{order.payType}</span>
                   <span>Готовится</span>
-                  <span className={styles.price}>{order.price} ₽</span>
+                  <span className={styles.price}>{order.payAmount} ₽</span>
                 </div>
                 <div className={styles.line} />
               </div>
@@ -64,9 +64,9 @@ const OrdersContainer = ({ setOrderIndex, orders }) => {
                   </div>
                   <span>{order.date}</span>
                   <span className={styles.time}>{order.time}</span>
-                  <span>{order.paymentType}</span>
+                  <span>Наличными курьеру</span>
                   <span>Отменен</span>
-                  <span className={styles.price}>{order.price} ₽</span>
+                  <span className={styles.price}>{order.payAmount} ₽</span>
                 </div>
                 <div className={styles.line} />
               </div>

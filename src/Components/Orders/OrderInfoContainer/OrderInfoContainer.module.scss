@@ -20,8 +20,12 @@
       color: #888888;
       margin: 10px;
     }
-    .info {
+    .info,
+    .price {
       margin: 20px;
+    }
+    .price {
+      margin-left: auto;
     }
     .amount {
       color: #888888;
@@ -39,7 +43,7 @@
   .orderDetails {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
   }
 

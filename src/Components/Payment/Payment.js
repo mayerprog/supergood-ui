@@ -4,15 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateSum } from "../../redux/slices/cartSlice";
 import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
+import { removeOrderInfo } from "../../redux/slices/orderSlice";
 
-const Payment = ({}) => {
+const Payment = ({ handleSetOrderInfo }) => {
   const itemsSum = useSelector((state) => state.cart.itemsSum);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useUpdateSumHook();
 
-  const navigate = useNavigate();
-
   const handleClickSubmit = () => {
+    handleSetOrderInfo();
+    // dispatch(removeOrderInfo());
     navigate("/orders");
   };
 
