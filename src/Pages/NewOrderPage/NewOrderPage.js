@@ -42,6 +42,7 @@ const NewOrderPage = ({
     now.getHours().toString().padStart(2, "0") +
     ":" +
     now.getMinutes().toString().padStart(2, "0");
+
   useEffect(() => {
     if (cartItems.length === 0) {
       navigate("/");

@@ -92,31 +92,31 @@ const MainContent = ({
     }
   }, [selectedCategory, scrollToCategory]);
 
-  useEffect(() => {
-    const slider = sliderRef.current; // Получаем DOM-элемент
-    const handleWheel = (e) => {
-      e.preventDefault();
+  //for wheeling the slider
+  // useEffect(() => {
+  //   const slider = sliderRef.current; // Получаем DOM-элемент
+  //   const handleWheel = (e) => {
+  //     e.preventDefault();
 
-      if (e.deltaY > 0) {
-        slideToRight();
-      } else {
-        slideToLeft();
-      }
-    };
+  //     if (e.deltaY > 0) {
+  //       slideToRight();
+  //     } else {
+  //       slideToLeft();
+  //     }
+  //   };
 
-    // Добавляем обработчик события
-    if (slider) {
-      slider.addEventListener("wheel", handleWheel, { passive: false });
-    }
+  //   // Добавляем обработчик события
+  //   if (slider) {
+  //     slider.addEventListener("wheel", handleWheel, { passive: false });
+  //   }
 
-    // Убираем обработчик события при размонтировании компонента
-    return () => {
-      if (slider) {
-        slider.removeEventListener("wheel", handleWheel);
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   // Убираем обработчик события при размонтировании компонента
+  //   return () => {
+  //     if (slider) {
+  //       slider.removeEventListener("wheel", handleWheel);
+  //     }
+  //   };
+  // }, [slideToRight, slideToLeft, sliderRef]);
 
   useEffect(() => {
     const startAutoSlide = () => {

@@ -12,13 +12,6 @@ const Orders = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("orders", orders);
-    if (orders.length === 0) {
-      navigate("/");
-    }
-  }, [orders]);
-
-  useEffect(() => {
     if (orders.length > 1) {
       const foundItem = orders.find((order) => order.orderId === orderIndex);
       if (foundItem) {

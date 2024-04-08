@@ -4,7 +4,6 @@ import ProgressTracking from "../ProgressTracking/ProgressTracking";
 import { MdImageNotSupported } from "react-icons/md";
 
 const OrderInfoContainer = ({ chosenOrder }) => {
-  if (!chosenOrder) return;
   return (
     <div className={styles.container}>
       <div className={styles.header}>
