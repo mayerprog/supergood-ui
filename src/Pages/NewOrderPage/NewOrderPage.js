@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { addOrders, setOrderInfo } from "../../redux/slices/orderSlice";
 import { removeAllItems } from "../../redux/slices/cartSlice";
 import { v4 as uuidv4 } from "uuid";
+import PayTypeModal from "../../Components/Payment/PayTypeModal/PayTypeModal";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -19,6 +20,9 @@ const NewOrderPage = ({
   mapWrapperRef,
   setIsMapOpen,
   isMapOpen,
+  isPayTypeOpen,
+  payTypeWrapperRef,
+  togglePayTypeVisibility,
 }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const addressSelected = useSelector((state) => state.address.addressSelected);
@@ -79,7 +83,15 @@ const NewOrderPage = ({
           />
           <OrderCart />
         </div>
-        <Payment handleSetOrderInfo={handleSetOrderInfo} />
+        <Payment
+          handleSetOrderInfo={handleSetOrderInfo}
+          togglePayTypeVisibility={togglePayTypeVisibility}
+        />
+        {isPayTypeOpen && (
+          <div className={styles.cardOverlay}>
+            <PayTypeModal payTypeWrapperRef={payTypeWrapperRef} />
+          </div>
+        )}
       </div>
 
       {isUserInfoOpen && (

@@ -26,6 +26,7 @@ function App() {
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isPayTypeOpen, setIsPayTypeOpen] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isMainPage, setIsMainPage] = useState(false);
@@ -36,6 +37,7 @@ function App() {
   const addressRef = useRef(null);
   const mapWrapperRef = useRef(null);
   const loginWrapperRef = useRef(null);
+  const payTypeWrapperRef = useRef(null);
 
   // to show <Cart /> and to disable Cart button in Header when width > 1480px
   const mediaQuery = useMediaQuery({ maxWidth: 1480 });
@@ -62,6 +64,10 @@ function App() {
     setIsLoginOpen(!isLoginOpen);
   };
 
+  const togglePayTypeVisibility = () => {
+    setIsPayTypeOpen(!isPayTypeOpen);
+  };
+
   useOutsideHook(mapWrapperRef, toggleMapVisibility); // to close popup <MapComponent /> clicking outside
   useOutsideHook(optionsRef, toggleOptionsVisibility); // to close popup <ModalOptions /> clicking outside
   useOutsideHook(userInfoRef, toggleUserInfoVisibility, [
@@ -69,6 +75,7 @@ function App() {
   ]); // to close popup <UserInfo /> clicking outside
   useOutsideHook(addressRef, toggleAddressVisibility); // to close popup <AddressModal /> clicking outside
   useOutsideHook(loginWrapperRef, toggleLoginVisibility); // to close popup <LoginModal /> clicking outside
+  useOutsideHook(payTypeWrapperRef, togglePayTypeVisibility); // to close popup <LoginModal /> clicking outside
 
   const location = useLocation(); // Getting the current location
 
@@ -161,6 +168,9 @@ function App() {
                 mapWrapperRef={mapWrapperRef}
                 setIsMapOpen={setIsMapOpen}
                 isMapOpen={isMapOpen}
+                isPayTypeOpen={isPayTypeOpen}
+                payTypeWrapperRef={payTypeWrapperRef}
+                togglePayTypeVisibility={togglePayTypeVisibility}
               />
             </ProtectedRoute>
           }

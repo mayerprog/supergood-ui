@@ -6,7 +6,7 @@ import { updateSum } from "../../redux/slices/cartSlice";
 import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 import { removeOrderInfo } from "../../redux/slices/orderSlice";
 
-const Payment = ({ handleSetOrderInfo }) => {
+const Payment = ({ handleSetOrderInfo, togglePayTypeVisibility }) => {
   const itemsSum = useSelector((state) => state.cart.itemsSum);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const Payment = ({ handleSetOrderInfo }) => {
           <div className={styles.info}>Выбрать способ оплаты</div>
           <button
             className={styles.buttonStyle}
-            onClick={() => console.log("Change payment method")}
+            onClick={togglePayTypeVisibility}
           >
             <span className={styles.buttonText}>Изменить</span>
           </button>
