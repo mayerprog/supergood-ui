@@ -1,5 +1,6 @@
 import styles from "./OrderInfoContainer.module.scss";
 import pepperoni from "../../../assets/images/pizza/pepperoni.jpg";
+import ProgressTracking from "../ProgressTracking/ProgressTracking";
 
 const OrderInfoContainer = ({ chosenOrder }) => {
   if (!chosenOrder) {
@@ -10,7 +11,7 @@ const OrderInfoContainer = ({ chosenOrder }) => {
       <div className={styles.header}>
         <h3>Заказ № {chosenOrder.orderId}</h3>
       </div>
-      <div className={styles.progress}></div>
+      <ProgressTracking />
       <div className={styles.details}>
         <span>Адрес</span>
         <div className={styles.info}>Москва, Казарменный переулок, 8</div>

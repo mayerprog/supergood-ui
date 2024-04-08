@@ -1,0 +1,55 @@
+.container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.stepContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+
+  .line,
+  .activeLine {
+    content: "";
+    position: absolute;
+    height: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    z-index: 0;
+  }
+
+  .line {
+    background: #dcdcdc; // Default line color
+    width: 100%;
+  }
+
+  .activeLine {
+    background: #ffc852; // Active line color
+    transition: width 0.6s ease;
+  }
+}
+
+.step {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #dcdcdc; // Default step color
+  transition: background-color 0.8s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1; // Make sure step icons are above the line
+
+  &.active {
+    background-color: #ffc852; // Active step color
+  }
+}
+
+.icon {
+  z-index: 1;
+  position: relative;
+}
