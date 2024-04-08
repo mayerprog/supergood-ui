@@ -6,22 +6,32 @@ import authReducer from "./slices/authSlice";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+const cartPersistConfig = {
+  key: "cart",
+  storage,
+};
+
+const authPersistConfig = {
+  key: "auth",
+  storage: storage,
+  blacklist: ["dataSms", "dataLogin"],
+};
+
+const addressPersistConfig = {
+  key: "address",
+  storage: storage,
+  blacklist: ["addressList"],
+};
+
 const rootReducer = combineReducers({
   item: itemReducer,
-  cart: cartReducer,
-  address: addressReducer,
-  auth: authReducer,
+  cart: persistReducer(cartPersistConfig, cartReducer),
+  address: persistReducer(addressPersistConfig, addressReducer),
+  auth: persistReducer(authPersistConfig, authReducer),
 });
 
-const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["cart"],
-};
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       immutableCheck: {

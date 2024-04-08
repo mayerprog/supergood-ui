@@ -8,10 +8,12 @@ import { MdImageNotSupported } from "react-icons/md";
 import { useImageLoaded } from "../../../hooks/useImageLoaded";
 import { baseURL } from "../../../config";
 
-const ModalCard = ({ itemCardId, cardRef }) => {
+const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
   const items = useSelector((state) => state.item.items);
   const foundItem = items.find((item) => itemCardId === item.itemid);
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const addressList = useSelector((state) => state.address.addressList);
+  const [addingInProgress, setAddingInProgress] = useState(false);
   const [amount, setAmount] = useState(null);
   const dispatch = useDispatch();
 
@@ -33,13 +35,19 @@ const ModalCard = ({ itemCardId, cardRef }) => {
 
   const addItemToCart = (event) => {
     event.stopPropagation();
-    dispatch(
-      addItems({
-        ...foundItem,
-        initialPrice: foundItem.price,
-        initialWeightout: foundItem.params.weightout.value,
-      })
-    );
+    if (addingInProgress)
+      //for preventing multiple dispatches
+      return;
+    setAddingInProgress(true);
+    if (addressList.length === 0) toggleMapVisibility();
+    else
+      dispatch(
+        addItems({
+          ...foundItem,
+          initialPrice: foundItem.price,
+          initialWeightout: foundItem.params.weightout.value,
+        })
+      );
   };
 
   return (

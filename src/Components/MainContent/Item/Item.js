@@ -11,7 +11,7 @@ import { baseURL } from "../../../config.js";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
-const Item = ({ item, category, toggleCardOpen }) => {
+const Item = ({ item, category, toggleCardOpen, toggleMapVisibility }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [amount, setAmount] = useState(null);
   const [addingInProgress, setAddingInProgress] = useState(false);
@@ -24,6 +24,7 @@ const Item = ({ item, category, toggleCardOpen }) => {
   const uri = `${baseURL}/getFile?uid=${uid}`;
 
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const addressList = useSelector((state) => state.address.addressList);
 
   const dispatch = useDispatch();
 
@@ -40,17 +41,19 @@ const Item = ({ item, category, toggleCardOpen }) => {
 
   const addItemToCart = (event) => {
     event.stopPropagation();
-    //for preventing multiple dispatches
-    if (addingInProgress) return;
+    if (addingInProgress)
+      //for preventing multiple dispatches
+      return;
     setAddingInProgress(true);
-
-    dispatch(
-      addItems({
-        ...item,
-        initialPrice: item.price,
-        initialWeightout: item.params.weightout.value,
-      })
-    );
+    if (addressList.length === 0) toggleMapVisibility();
+    else
+      dispatch(
+        addItems({
+          ...item,
+          initialPrice: item.price,
+          initialWeightout: item.params.weightout.value,
+        })
+      );
     setTimeout(() => setAddingInProgress(false), 300);
   };
 

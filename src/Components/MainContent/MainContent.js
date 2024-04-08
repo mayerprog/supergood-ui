@@ -43,6 +43,7 @@ const MainContent = ({
   loginWrapperRef,
   toggleLoginVisibility,
   loading,
+  toggleMapVisibility,
 }) => {
   const slides = [
     { image: chorizo, link: "https://supergood.ru/akcii/22" },
@@ -202,7 +203,11 @@ const MainContent = ({
       </div>
       {isCardOpen && (
         <div className={styles.cardOverlay}>
-          <ModalCard itemCardId={itemCardId} cardRef={cardRef} />
+          <ModalCard
+            itemCardId={itemCardId}
+            cardRef={cardRef}
+            toggleMapVisibility={toggleMapVisibility}
+          />
         </div>
       )}
       {isMapOpen && (
@@ -246,6 +251,7 @@ const MainContent = ({
                   category={category}
                   toggleCardOpen={toggleCardOpen}
                   key={index}
+                  toggleMapVisibility={toggleMapVisibility}
                 />
               ))}
           </div>
