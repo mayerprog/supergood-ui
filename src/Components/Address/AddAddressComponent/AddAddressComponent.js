@@ -8,7 +8,6 @@ import {
   removeAddress,
   removeAddressSelected,
   updateAddress,
-  updateSelected,
 } from "../../../redux/slices/addressSlice";
 import { makeExistingAddressSelected } from "../../../services/makeExistingAddressSelected";
 import { ImBin } from "react-icons/im";
@@ -44,11 +43,14 @@ const AddAddressComponent = ({
     const addressExists = addressList.some(
       (item) => item.address === inputAddress
     );
+    //if we update existing address
     if (item) {
       //if address exists then return
       if (addressExists) return;
       // if address does not exist then update
       else dispatch(updateAddress({ id: item.id, newAddress: inputAddress }));
+
+      //if we add new address
     } else {
       //if address exists just make it selected
       if (addressExists) {
