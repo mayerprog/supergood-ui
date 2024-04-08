@@ -11,12 +11,6 @@ const cartPersistConfig = {
   storage,
 };
 
-const authPersistConfig = {
-  key: "auth",
-  storage: storage,
-  blacklist: ["dataSms", "dataLogin"],
-};
-
 const addressPersistConfig = {
   key: "address",
   storage: storage,
@@ -27,7 +21,7 @@ const rootReducer = combineReducers({
   item: itemReducer,
   cart: persistReducer(cartPersistConfig, cartReducer),
   address: persistReducer(addressPersistConfig, addressReducer),
-  auth: persistReducer(authPersistConfig, authReducer),
+  auth: authReducer,
 });
 
 export const store = configureStore({

@@ -14,6 +14,7 @@ import { useEffect, useRef, useState } from "react";
 import { useOutsideHook } from "./hooks/useOutsideHook";
 import { useMediaQuery } from "react-responsive";
 import {
+  addAddress,
   setAddressSelected,
   updateSelected,
 } from "./redux/slices/addressSlice";
@@ -88,14 +89,17 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressList]);
 
+  //add address saved in redux persist before authorisation to addressList
+  useEffect(() => {
+    if (addressSelected) {
+      dispatch(addAddress({ address: addressSelected, selected: true }));
+    }
+  }, [addressSelected]);
+
   useEffect(() => {
     setIsMainPage(location.pathname === "/");
     window.scrollTo(0, 0);
   }, [location]);
-
-  useEffect(() => {
-    console.log("addressList", addressList);
-  }, [addressList]);
 
   useEffect(() => {
     console.log("cartItems", cartItems);
