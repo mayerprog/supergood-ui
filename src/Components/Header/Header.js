@@ -9,6 +9,7 @@ import { CgProfile } from "react-icons/cg";
 import { CiSearch } from "react-icons/ci";
 import { FaLocationDot } from "react-icons/fa6";
 import { forwardRef, useContext } from "react";
+import { useMediaQuery } from "react-responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setIsAuth } from "../../redux/slices/authSlice";
@@ -43,6 +44,8 @@ const Header = forwardRef(
     const handleProfileClick = () => {
       if (isAuth) navigate("/user");
     };
+
+    const socialMediaQuery = useMediaQuery({ maxWidth: 1064 });
 
     return (
       <header className={styles.header} ref={ref}>
@@ -85,36 +88,38 @@ const Header = forwardRef(
           )}
         </button>
         <div className={styles.leftCluster}>
-          <div className={styles.socialMedia}>
-            <a
-              href="https://vk.com/supergoodru"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={vk} alt="vk" />
-            </a>
-            <a
-              href="https://t.me/supergoodru"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={telegram} alt="telegram" />
-            </a>
-            <a
-              href="https://supergood.ru/akcii"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={discount} alt="discount" />
-            </a>
-            <a
-              href="https://supergood.ru/akcii"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={phone} alt="phone" className={styles.lastimg} />
-            </a>
-          </div>
+          {!socialMediaQuery && (
+            <div className={styles.socialMedia}>
+              <a
+                href="https://vk.com/supergoodru"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={vk} alt="vk" />
+              </a>
+              <a
+                href="https://t.me/supergoodru"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={telegram} alt="telegram" />
+              </a>
+              <a
+                href="https://supergood.ru/akcii"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={discount} alt="discount" />
+              </a>
+              <a
+                href="https://supergood.ru/akcii"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={phone} alt="phone" className={styles.lastimg} />
+              </a>
+            </div>
+          )}
           {isMainPage && (
             <button
               className={styles.cartButton}

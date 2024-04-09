@@ -31,6 +31,17 @@
   }
 }
 
+@media (max-width: 871px) {
+  .container {
+    width: 90%;
+  }
+}
+@media (max-width: 830px) {
+  .container {
+    width: 100%;
+  }
+}
+
 .indicators {
   display: flex;
   justify-content: center;
