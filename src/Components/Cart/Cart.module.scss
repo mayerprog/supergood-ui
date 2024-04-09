@@ -19,6 +19,10 @@
   transform: var(--cart-transform);
   overflow-y: auto;
 
+  @media (max-width: 1745px) {
+    min-width: 270px;
+  }
+
   .cartHeader {
     display: flex;
     flex-direction: row;

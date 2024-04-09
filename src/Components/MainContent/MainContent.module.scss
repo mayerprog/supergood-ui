@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 67%;
-  min-width: 768px;
+  // min-width: 740px;
   height: 100%;
   box-sizing: border-box;
   padding: 0 0 50px;
@@ -25,14 +25,9 @@
   }
 }
 
-@media (max-width: 1480px) {
+@media (max-width: 1318px) {
   .container {
-    width: 80%;
-  }
-}
-@media (max-width: 1200px) {
-  .container {
-    width: 70%;
+    width: 76%;
   }
 }
 

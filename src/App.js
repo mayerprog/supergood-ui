@@ -40,7 +40,7 @@ function App() {
   const payTypeWrapperRef = useRef(null);
 
   // to show <Cart /> and to disable Cart button in Header when width > 1480px
-  const mediaQuery = useMediaQuery({ maxWidth: 1480 });
+  const mediaQuery = useMediaQuery({ maxWidth: 1318 });
 
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
