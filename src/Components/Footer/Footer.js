@@ -15,7 +15,7 @@ const Footer = () => {
         className={styles.logo}
         onClick={() => navigate("/")}
       />
-      <div className={styles.infoContainer}>
+      {/* <div className={styles.infoContainer}>
         <div className={styles.info}>
           <a
             href="https://supergood.ru/about"
@@ -55,8 +55,8 @@ const Footer = () => {
             <span>Контакты</span>
           </a>
         </div>
-      </div>
-      <div className={styles.appLinks}>
+      </div> */}
+      {/* <div className={styles.appLinks}>
         <span>С приложением удобнее!</span>
         <div className={styles.images}>
           <a
@@ -75,7 +75,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      <h2>+7 (495) 138 0123</h2>
+      <h2>+7 (495) 138 0123</h2> */}
     </footer>
   );
 };

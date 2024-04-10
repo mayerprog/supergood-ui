@@ -10,6 +10,8 @@
   padding-bottom: 30px;
 }
 
+// monitors
+
 @media (max-width: 1700px) {
   .content {
     max-width: 1500px;
@@ -22,11 +24,13 @@
   }
 }
 
-@media (max-width: 1318px) {
-  .content {
-    max-width: 1200px;
-  }
-}
+// netbooks
+
+// @media (max-width: 1280px) {
+//   .content {
+//     max-width: 1200px;
+//   }
+// }
 
 @media (max-width: 1200px) {
   .content {
@@ -34,42 +38,50 @@
   }
 }
 
-@media (max-width: 1150px) {
-  .content {
-    max-width: 1000px;
-  }
-}
+// @media (max-width: 1150px) {
+//   .content {
+//     max-width: 1000px;
+//   }
+// }
 
-@media (max-width: 1050px) {
-  .content {
-    max-width: 950px;
-  }
-}
+// tablets
 
-@media (max-width: 1000px) {
-  .content {
-    max-width: 900px;
-  }
-}
+// @media (max-width: 1050px) {
+//   .content {
+//     max-width: 950px;
+//   }
+// }
 
-@media (max-width: 950px) {
-  .content {
-    max-width: 850px;
-  }
-}
+// @media (max-width: 1000px) {
+//   .content {
+//     max-width: 900px;
+//   }
+// }
 
-@media (max-width: 900px) {
-  .content {
-    max-width: 800px;
-  }
-}
-@media (max-width: 850px) {
-  .content {
-    max-width: 750px;
-  }
-}
-@media (max-width: 800px) {
-  .content {
-    max-width: 700px;
-  }
-}
+// @media (max-width: 950px) {
+//   .content {
+//     max-width: 850px;
+//   }
+// }
+
+// @media (max-width: 900px) {
+//   .content {
+//     max-width: 800px;
+//   }
+// }
+// @media (max-width: 850px) {
+//   .content {
+//     max-width: 750px;
+//   }
+// }
+// @media (max-width: 800px) {
+//   .content {
+//     max-width: 700px;
+//   }
+// }
+
+// @media (max-width: 768px) {
+//   .content {
+//     max-width: 650px;
+//   }
+// }

@@ -55,7 +55,7 @@ const Header = forwardRef(
           className={styles.logo}
           onClick={() => navigate("/")}
         />
-        {isMainPage && (
+        {/* {isMainPage && (
           <div className={styles.inputWrapper}>
             <CiSearch className={styles.inputIcon} size={20} />
             <input
@@ -64,7 +64,7 @@ const Header = forwardRef(
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-        )}
+        )} */}
         {isModalOptionsOpen && (
           <div className={styles.optionsOverlay}>
             <ModalOptions
@@ -75,7 +75,7 @@ const Header = forwardRef(
             />
           </div>
         )}
-        <button
+        {/* <button
           onClick={toggleMapVisibility}
           className={styles.address}
           disabled={!isMainPage}
@@ -86,7 +86,7 @@ const Header = forwardRef(
           ) : (
             <span className={styles.buttonText}>Укажите адрес доставки</span>
           )}
-        </button>
+        </button> */}
         <div className={styles.leftCluster}>
           {!socialMediaQuery && (
             <div className={styles.socialMedia}>
@@ -129,7 +129,7 @@ const Header = forwardRef(
               <span className={styles.buttonText}>{itemsSum} ₽</span>
             </button>
           )} */}
-          {!isAuth ? (
+          {/* {!isAuth ? (
             <button
               className={styles.loginButton}
               onClick={toggleLoginVisibility}
@@ -143,7 +143,7 @@ const Header = forwardRef(
             >
               <CgProfile size={30} className={styles.icon} />
             </button>
-          )}
+          )} */}
         </div>
       </header>
     );

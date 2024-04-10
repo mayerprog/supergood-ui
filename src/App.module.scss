@@ -1,23 +1,15 @@
-.app {
-  min-width: 768px;
-}
+// .app {
+//   min-width: 60px;
+// }
 
-.container {
+.app {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   min-height: 100vh;
-  // min-width: 1336px;
+  min-width: 280px;
   width: 100%;
-  // min-width: 860px;
-  // min-width: 1100px;
   margin: 0 auto;
   height: 100%;
 }
-
-// @media (max-width: 1065px) {
-//   .app {
-//     min-width: 1100px;
-//   }
-// }
