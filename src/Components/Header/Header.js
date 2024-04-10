@@ -120,7 +120,7 @@ const Header = forwardRef(
               </a>
             </div>
           )}
-          {isMainPage && (
+          {/* {isMainPage && (
             <button
               className={styles.cartButton}
               onClick={() => toggleCartVisibility(true)}
@@ -128,7 +128,7 @@ const Header = forwardRef(
               <GiShoppingCart size={25} className={styles.icon} />
               <span className={styles.buttonText}>{itemsSum} ₽</span>
             </button>
-          )}
+          )} */}
           {!isAuth ? (
             <button
               className={styles.loginButton}

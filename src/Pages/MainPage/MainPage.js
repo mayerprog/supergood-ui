@@ -10,6 +10,7 @@ import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 import { setItems } from "../../redux/slices/itemSlice";
 import jsonData from "../../newApi_getItems.json";
 import { itemAPI } from "../../api/itemAPI";
+import { useMediaQuery } from "react-responsive";
 
 const MainPage = ({
   searchQuery,
@@ -37,6 +38,8 @@ const MainPage = ({
   const [scrolledCategory, setScrolledCategory] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const sideBarMediaQuery = useMediaQuery({ maxWidth: 1200 });
 
   const items = useSelector((state) => state.item.items);
   const categories = [...new Set(items.map((item) => item.catname))]; // Unique categories
@@ -136,13 +139,15 @@ const MainPage = ({
   useOutsideHook(wrapperRef, toggleCartVisibility); // to close popup <Cart /> clicking outside
   return (
     <div className={styles.content}>
-      <Sidebar
-        categories={searchedCategories}
-        onCategorySelect={setSelectedCategory}
-        selectedCategory={selectedCategory}
-        scrolledCategory={scrolledCategory}
-        loading={loading}
-      />
+      {!sideBarMediaQuery && (
+        <Sidebar
+          categories={searchedCategories}
+          onCategorySelect={setSelectedCategory}
+          selectedCategory={selectedCategory}
+          scrolledCategory={scrolledCategory}
+          loading={loading}
+        />
+      )}
 
       <MainContent
         items={searchedItems}
