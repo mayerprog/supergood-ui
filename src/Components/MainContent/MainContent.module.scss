@@ -22,6 +22,7 @@
   @media (max-width: 1280px) {
     .items {
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      margin: 0 10px;
     }
   }
 
@@ -34,6 +35,12 @@
   @media (max-width: 850px) {
     .items {
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+  }
+
+  @media (max-width: 378px) {
+    .items {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
   }
 

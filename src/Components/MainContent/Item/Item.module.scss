@@ -16,7 +16,6 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 1; // Allow shrinking
-
   max-height: 410px;
   border-width: 0;
   border-radius: 10px;
@@ -84,7 +83,7 @@
   }
 }
 
-@media (max-width: 768px) and (min-width: 650px) {
+@media (max-width: 768px) and (min-width: 579px) {
   .card {
     .productInfo {
       .productTitle {
