@@ -9,11 +9,11 @@ import { CgProfile } from "react-icons/cg";
 import { CiSearch } from "react-icons/ci";
 import { FaLocationDot } from "react-icons/fa6";
 import { forwardRef, useContext } from "react";
-import { useMediaQuery } from "react-responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setIsAuth } from "../../redux/slices/authSlice";
 import ModalOptions from "../ModalOptions/ModalOptions";
+import { IoMenuSharp } from "react-icons/io5";
 
 const Header = forwardRef(
   (
@@ -150,7 +150,9 @@ const Header = forwardRef(
             </div>
           </>
         ) : (
-          <div></div>
+          <div>
+            <IoMenuSharp size={33} color="#5f5f5f" className={styles.menu} />
+          </div>
         )}
       </header>
     );

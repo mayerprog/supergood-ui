@@ -34,24 +34,6 @@ const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
   const uid = foundItem.img[0].uid;
   const uri = `${baseURL}/getFile?uid=${uid}`;
 
-  // const addItemToCart = (event) => {
-  //   event.stopPropagation();
-  //   if (addingInProgress)
-  //     //for preventing multiple dispatches
-  //     return;
-  //   setAddingInProgress(true);
-  //   if (addressList.length === 0) toggleMapVisibility();
-  //   else
-  //     dispatch(
-  //       addItems({
-  //         ...foundItem,
-  //         initialPrice: foundItem.price,
-  //         initialWeightout: foundItem.params.weightout.value,
-  //       })
-  //     );
-  //   setTimeout(() => setAddingInProgress(false), 300);
-  // };
-
   return (
     <div ref={cardRef} className={styles.container}>
       {loaded ? (
