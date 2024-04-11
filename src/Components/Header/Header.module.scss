@@ -127,6 +127,10 @@
       }
     }
 
+    @media (max-width: 1099px) {
+      max-width: 70px;
+    }
+
     .icon {
       @include icon-style;
     }
@@ -183,7 +187,7 @@
   }
 }
 
-@media (max-width: 1099px) {
+@media (max-width: 1024px) {
   .header {
     .logo {
       width: 120px;

@@ -41,7 +41,7 @@ function App() {
 
   // to show <Cart /> and to disable Cart button in Header when width > 1480px
   const mediaQuery = useMediaQuery({ maxWidth: 1280 });
-  const headerFooterMediaQuery = useMediaQuery({ maxWidth: 1099 });
+  const headerFooterMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
