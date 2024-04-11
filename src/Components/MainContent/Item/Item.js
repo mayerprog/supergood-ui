@@ -9,6 +9,7 @@ import { MdImageNotSupported } from "react-icons/md";
 import { useImageLoaded } from "../../../hooks/useImageLoaded";
 import { baseURL } from "../../../config.js";
 import { useMediaQuery } from "react-responsive";
+import { addItemToCart } from "../../../services/addItemToCart.js";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
@@ -41,24 +42,6 @@ const Item = ({ item, category, toggleCardOpen, toggleMapVisibility }) => {
       setAmount(0);
     }
   }, [cartItems, item.itemid]);
-
-  const addItemToCart = (event) => {
-    event.stopPropagation();
-    if (addingInProgress)
-      //for preventing multiple dispatches
-      return;
-    setAddingInProgress(true);
-    if (addressList.length === 0) toggleMapVisibility();
-    else
-      dispatch(
-        addItems({
-          ...item,
-          initialPrice: item.price,
-          initialWeightout: item.params.weightout.value,
-        })
-      );
-    setTimeout(() => setAddingInProgress(false), 300);
-  };
 
   //lazy loading
   useEffect(() => {
@@ -107,7 +90,20 @@ const Item = ({ item, category, toggleCardOpen, toggleMapVisibility }) => {
         {amount > 0 ? (
           <AddItemBox margin="0 0.5rem" itemId={item.itemid} />
         ) : (
-          <button className={styles.counter} onClick={(e) => addItemToCart(e)}>
+          <button
+            className={styles.counter}
+            onClick={(event) =>
+              addItemToCart({
+                event,
+                addingInProgress,
+                setAddingInProgress,
+                toggleMapVisibility,
+                addressList,
+                dispatch,
+                item,
+              })
+            }
+          >
             <span className={styles.count}>Добавить</span>
           </button>
         )}

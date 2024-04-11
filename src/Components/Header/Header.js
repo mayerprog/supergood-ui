@@ -45,8 +45,6 @@ const Header = forwardRef(
       if (isAuth) navigate("/user");
     };
 
-    const socialMediaQuery = useMediaQuery({ maxWidth: 1064 });
-
     return (
       <header className={styles.header} ref={ref}>
         <img
@@ -55,7 +53,7 @@ const Header = forwardRef(
           className={styles.logo}
           onClick={() => navigate("/")}
         />
-        {/* {isMainPage && (
+        {isMainPage && (
           <div className={styles.inputWrapper}>
             <CiSearch className={styles.inputIcon} size={20} />
             <input
@@ -64,7 +62,7 @@ const Header = forwardRef(
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-        )} */}
+        )}
         {isModalOptionsOpen && (
           <div className={styles.optionsOverlay}>
             <ModalOptions
@@ -75,7 +73,7 @@ const Header = forwardRef(
             />
           </div>
         )}
-        {/* <button
+        <button
           onClick={toggleMapVisibility}
           className={styles.address}
           disabled={!isMainPage}
@@ -86,41 +84,39 @@ const Header = forwardRef(
           ) : (
             <span className={styles.buttonText}>Укажите адрес доставки</span>
           )}
-        </button> */}
+        </button>
         <div className={styles.leftCluster}>
-          {!socialMediaQuery && (
-            <div className={styles.socialMedia}>
-              <a
-                href="https://vk.com/supergoodru"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={vk} alt="vk" />
-              </a>
-              <a
-                href="https://t.me/supergoodru"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={telegram} alt="telegram" />
-              </a>
-              <a
-                href="https://supergood.ru/akcii"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={discount} alt="discount" />
-              </a>
-              <a
-                href="https://supergood.ru/akcii"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={phone} alt="phone" className={styles.lastimg} />
-              </a>
-            </div>
-          )}
-          {/* {isMainPage && (
+          <div className={styles.socialMedia}>
+            <a
+              href="https://vk.com/supergoodru"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={vk} alt="vk" />
+            </a>
+            <a
+              href="https://t.me/supergoodru"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={telegram} alt="telegram" />
+            </a>
+            <a
+              href="https://supergood.ru/akcii"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={discount} alt="discount" />
+            </a>
+            <a
+              href="https://supergood.ru/akcii"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={phone} alt="phone" className={styles.lastimg} />
+            </a>
+          </div>
+          {isMainPage && (
             <button
               className={styles.cartButton}
               onClick={() => toggleCartVisibility(true)}
@@ -128,8 +124,8 @@ const Header = forwardRef(
               <GiShoppingCart size={25} className={styles.icon} />
               <span className={styles.buttonText}>{itemsSum} ₽</span>
             </button>
-          )} */}
-          {/* {!isAuth ? (
+          )}
+          {!isAuth ? (
             <button
               className={styles.loginButton}
               onClick={toggleLoginVisibility}
@@ -143,7 +139,7 @@ const Header = forwardRef(
             >
               <CgProfile size={30} className={styles.icon} />
             </button>
-          )} */}
+          )}
         </div>
       </header>
     );

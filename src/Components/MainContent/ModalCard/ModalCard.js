@@ -7,6 +7,7 @@ import { addItems } from "../../../redux/slices/cartSlice";
 import { MdImageNotSupported } from "react-icons/md";
 import { useImageLoaded } from "../../../hooks/useImageLoaded";
 import { baseURL } from "../../../config";
+import { addItemToCart } from "../../../services/addItemToCart";
 
 const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
   const items = useSelector((state) => state.item.items);
@@ -33,22 +34,23 @@ const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
   const uid = foundItem.img[0].uid;
   const uri = `${baseURL}/getFile?uid=${uid}`;
 
-  const addItemToCart = (event) => {
-    event.stopPropagation();
-    if (addingInProgress)
-      //for preventing multiple dispatches
-      return;
-    setAddingInProgress(true);
-    if (addressList.length === 0) toggleMapVisibility();
-    else
-      dispatch(
-        addItems({
-          ...foundItem,
-          initialPrice: foundItem.price,
-          initialWeightout: foundItem.params.weightout.value,
-        })
-      );
-  };
+  // const addItemToCart = (event) => {
+  //   event.stopPropagation();
+  //   if (addingInProgress)
+  //     //for preventing multiple dispatches
+  //     return;
+  //   setAddingInProgress(true);
+  //   if (addressList.length === 0) toggleMapVisibility();
+  //   else
+  //     dispatch(
+  //       addItems({
+  //         ...foundItem,
+  //         initialPrice: foundItem.price,
+  //         initialWeightout: foundItem.params.weightout.value,
+  //       })
+  //     );
+  //   setTimeout(() => setAddingInProgress(false), 300);
+  // };
 
   return (
     <div ref={cardRef} className={styles.container}>
@@ -117,7 +119,17 @@ const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
           ) : (
             <button
               className={styles.counter}
-              onClick={(e) => addItemToCart(e)}
+              onClick={(event) =>
+                addItemToCart({
+                  event,
+                  addingInProgress,
+                  setAddingInProgress,
+                  toggleMapVisibility,
+                  addressList,
+                  dispatch,
+                  item: foundItem,
+                })
+              }
             >
               <span className={styles.count}>Добавить</span>
             </button>

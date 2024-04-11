@@ -137,6 +137,7 @@ const MainPage = ({
 
   useOutsideHook(cardRef, toggleCardOpen); // to close popup <ModalCard /> clicking outside
   useOutsideHook(wrapperRef, toggleCartVisibility); // to close popup <Cart /> clicking outside
+
   return (
     <div className={styles.content}>
       {!sideBarMediaQuery && (
