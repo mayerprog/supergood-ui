@@ -9,7 +9,7 @@ import { MdImageNotSupported } from "react-icons/md";
 import { useImageLoaded } from "../../../hooks/useImageLoaded";
 import { baseURL } from "../../../config.js";
 import { useMediaQuery } from "react-responsive";
-import { addItemToCart } from "../../../services/addItemToCart.js";
+import { addItemToCart } from "../../../services/addItemToCart";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 

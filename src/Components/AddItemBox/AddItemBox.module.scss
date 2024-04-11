@@ -37,3 +37,37 @@
     color: var(--counter-color);
   }
 }
+
+@media (max-width: 845px) and (min-width: 800px) {
+  .counter {
+    width: 6rem;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 599px) {
+  .counter {
+    width: 6rem;
+  }
+}
+
+@media (max-width: 440px) {
+  .counter {
+    width: 5.5rem;
+  }
+}
+
+@media (max-width: 368px) {
+  .counter {
+    width: 4.5rem;
+  }
+}
+
+@media (max-width: 319px) {
+  .counter {
+    width: 3.6rem;
+    .count {
+      font-size: 0.8em;
+      margin: 0;
+    }
+  }
+}

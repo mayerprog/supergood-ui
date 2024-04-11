@@ -6,14 +6,10 @@
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 1);
   box-shadow: 0 4px 6px 4px rgba(0, 0, 0, 0.1);
   font-family: "Inter", sans-serif;
   padding: 15px;
-  @media (max-width: 1099px) {
-    position: fixed;
-    bottom: 0;
-  }
 
   .logo {
     width: 220px;
@@ -61,5 +57,14 @@
     color: #565656;
     margin-inline-end: 1vw;
     margin-right: 10px;
+  }
+}
+
+@media (max-width: 1099px) {
+  .footer {
+    position: fixed;
+    bottom: 0;
+    height: 52px;
+    border-radius: 15px 15px 0 0;
   }
 }

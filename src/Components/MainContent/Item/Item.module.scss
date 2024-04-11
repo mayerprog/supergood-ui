@@ -83,6 +83,14 @@
   }
 }
 
+@media (max-width: 1099) {
+  .card {
+    .order {
+      padding-top: 0;
+    }
+  }
+}
+
 @media (max-width: 845px) and (min-width: 800px) {
   .card {
     .order {

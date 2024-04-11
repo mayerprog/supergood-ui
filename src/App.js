@@ -41,6 +41,7 @@ function App() {
 
   // to show <Cart /> and to disable Cart button in Header when width > 1480px
   const mediaQuery = useMediaQuery({ maxWidth: 1280 });
+  const headerFooterMediaQuery = useMediaQuery({ maxWidth: 1099 });
 
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
@@ -126,6 +127,7 @@ function App() {
         toggleUserInfoVisibility={toggleUserInfoVisibility}
         toggleAddressVisibility={toggleAddressVisibility}
         toggleLoginVisibility={toggleLoginVisibility}
+        headerFooterMediaQuery={headerFooterMediaQuery}
       />
       <Routes>
         <Route
@@ -190,7 +192,7 @@ function App() {
           }
         />
       </Routes>
-      <Footer />
+      <Footer headerFooterMediaQuery={headerFooterMediaQuery} />
     </div>
   );
 }
