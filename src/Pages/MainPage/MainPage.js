@@ -39,7 +39,7 @@ const MainPage = ({
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const sideBarMediaQuery = useMediaQuery({ maxWidth: 1200 });
+  const sideBarMediaQuery = useMediaQuery({ maxWidth: 1099 });
 
   const items = useSelector((state) => state.item.items);
   const categories = [...new Set(items.map((item) => item.catname))]; // Unique categories
