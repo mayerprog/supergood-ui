@@ -22,25 +22,31 @@
   @media (max-width: 1280px) {
     .items {
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      margin: 0 10px;
     }
+    margin: 0 10px;
   }
 
   @media (max-width: 1200px) {
     .items {
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
   }
 
-  @media (max-width: 850px) {
+  @media (max-width: 880px) {
     .items {
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     }
   }
 
-  @media (max-width: 378px) {
+  @media (max-width: 400px) {
     .items {
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+  }
+
+  @media (max-width: 319px) {
+    .items {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     }
   }
 

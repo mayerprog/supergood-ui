@@ -8,6 +8,7 @@ import { itemAPI } from "../../../api/itemAPI";
 import { MdImageNotSupported } from "react-icons/md";
 import { useImageLoaded } from "../../../hooks/useImageLoaded";
 import { baseURL } from "../../../config.js";
+import { useMediaQuery } from "react-responsive";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
@@ -27,6 +28,8 @@ const Item = ({ item, category, toggleCardOpen, toggleMapVisibility }) => {
   const addressList = useSelector((state) => state.address.addressList);
 
   const dispatch = useDispatch();
+
+  const mediaQuery = useMediaQuery({ maxWidth: 400 });
 
   useEffect(() => {
     const foundCartItem = cartItems.find(
@@ -98,7 +101,7 @@ const Item = ({ item, category, toggleCardOpen, toggleMapVisibility }) => {
 
       <div className={styles.productInfo}>
         <span className={styles.productTitle}>{item.name}</span>
-        {category === "Пицца" && <PizzaOptions />}
+        {category === "Пицца" && !mediaQuery && <PizzaOptions />}
       </div>
       <div className={styles.order}>
         {amount > 0 ? (

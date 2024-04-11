@@ -88,7 +88,7 @@ function App() {
   // we find here address with selected: true to display it all over the app
   useEffect(() => {
     const selectedAddress = addressList.filter((address) => address.selected);
-    //if no selected addresses then make first address selected (additional validation)
+    // if no selected addresses then make first address selected (additional validation)
     if (selectedAddress.length === 0 && addressList.length > 0)
       dispatch(updateSelected(0));
     if (selectedAddress.length > 0)
@@ -96,12 +96,12 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressList]);
 
-  //add address which saved in redux persist to addressList
+  // add address which saved in redux persist to addressList
   useEffect(() => {
     if (addressSelected && addressList.length === 0) {
       dispatch(addAddress({ address: addressSelected, selected: true }));
     }
-  }, [addressSelected]);
+  }, [addressSelected, addressList.length, dispatch]);
 
   useEffect(() => {
     setIsMainPage(location.pathname === "/");
