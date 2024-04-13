@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 0 5px #ccc;
+
+  position: absolute;
+  padding: 0 20px;
+  font-family: "Inter", sans-serif;
+  min-width: 280px;
+  background-color: #fcfcfc;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: white;
+}

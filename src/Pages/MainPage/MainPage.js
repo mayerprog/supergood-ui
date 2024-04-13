@@ -11,6 +11,7 @@ import { setItems } from "../../redux/slices/itemSlice";
 import jsonData from "../../newApi_getItems.json";
 import { itemAPI } from "../../api/itemAPI";
 import { useMediaQuery } from "react-responsive";
+import MainSheet from "../../Components/MainSheet/MainSheet";
 
 const MainPage = ({
   searchQuery,
@@ -26,11 +27,16 @@ const MainPage = ({
   toggleUserInfoVisibility,
   toggleAddressVisibility,
   mapWrapperRef,
-  mediaQuery,
+  cartMediaQuery,
   isLoginOpen,
   loginWrapperRef,
   toggleLoginVisibility,
   toggleMapVisibility,
+  isMainSheetOpen,
+  setIsMainSheetOpen,
+  mainSheetWrapperRef,
+  mainSheetClosing,
+  setMainSheetClosing,
 }) => {
   const [isCardOpen, setIsCardOpen] = useState(false);
   const [itemCardId, setItemCardId] = useState(null);
@@ -52,52 +58,52 @@ const MainPage = ({
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-
-        const itemsArray = [];
-        const allItems = await itemAPI.getItems(1257);
-
-        Object.keys(allItems.items).forEach((categoryId) => {
-          const categoryObject = allItems.items[categoryId];
-          const category = Object.values(categoryObject);
-          // console.log("category", category);
-          category.forEach((itemGroup) => {
-            Object.values(itemGroup).forEach((item) => {
-              const itemForPush = Object.values(item);
-              // console.log("item", itemForPush);
-              itemsArray.push(itemForPush[0]);
-            });
-          });
-        });
-        dispatch(setItems(itemsArray));
-        if (itemsArray.length === 0) setLoading(true);
-        else setLoading(false);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, [dispatch]);
-
   // useEffect(() => {
-  //   const itemsArray = [];
-  //   Object.keys(jsonData.items).forEach((categoryId) => {
-  //     const categoryObject = jsonData.items[categoryId];
-  //     const category = Object.values(categoryObject);
-  //     // console.log("category", category);
-  //     category.forEach((itemGroup) => {
-  //       Object.values(itemGroup).forEach((item) => {
-  //         const itemForPush = Object.values(item);
-  //         itemsArray.push(itemForPush[0]);
+  //   (async () => {
+  //     try {
+  //       setLoading(true);
+
+  //       const itemsArray = [];
+  //       const allItems = await itemAPI.getItems(1257);
+
+  //       Object.keys(allItems.items).forEach((categoryId) => {
+  //         const categoryObject = allItems.items[categoryId];
+  //         const category = Object.values(categoryObject);
+  //         // console.log("category", category);
+  //         category.forEach((itemGroup) => {
+  //           Object.values(itemGroup).forEach((item) => {
+  //             const itemForPush = Object.values(item);
+  //             // console.log("item", itemForPush);
+  //             itemsArray.push(itemForPush[0]);
+  //           });
+  //         });
   //       });
-  //     });
-  //   });
-  //   console.log("itemsArray", itemsArray);
-  //   dispatch(setItems(itemsArray));
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //       dispatch(setItems(itemsArray));
+  //       if (itemsArray.length === 0) setLoading(true);
+  //       else setLoading(false);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   })();
   // }, [dispatch]);
+
+  useEffect(() => {
+    const itemsArray = [];
+    Object.keys(jsonData.items).forEach((categoryId) => {
+      const categoryObject = jsonData.items[categoryId];
+      const category = Object.values(categoryObject);
+      // console.log("category", category);
+      category.forEach((itemGroup) => {
+        Object.values(itemGroup).forEach((item) => {
+          const itemForPush = Object.values(item);
+          itemsArray.push(itemForPush[0]);
+        });
+      });
+    });
+    console.log("itemsArray", itemsArray);
+    dispatch(setItems(itemsArray));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   useEffect(() => {
     let filteredItems = searchQuery.trim()
@@ -150,6 +156,17 @@ const MainPage = ({
         />
       )}
 
+      {isMainSheetOpen && (
+        <div className={styles.mainSheetOverlay}>
+          <MainSheet
+            mainSheetWrapperRef={mainSheetWrapperRef}
+            setIsMainSheetOpen={setIsMainSheetOpen}
+            mainSheetClosing={mainSheetClosing}
+            setMainSheetClosing={setMainSheetClosing}
+          />
+        </div>
+      )}
+
       <MainContent
         items={searchedItems}
         categories={searchedCategories}
@@ -179,7 +196,7 @@ const MainPage = ({
         toggleLoginVisibility={toggleLoginVisibility}
         toggleMapVisibility={toggleMapVisibility}
       />
-      {!mediaQuery && (
+      {!cartMediaQuery && (
         <Cart
           position="sticky"
           top="105px"

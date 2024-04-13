@@ -114,8 +114,7 @@
 }
 
 .overlay,
-.cardOverlay,
-.optionsOverlay {
+.cardOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -132,8 +131,4 @@
 .cardOverlay {
   justify-content: center;
   align-items: center;
-}
-
-.optionsOverlay {
-  background-color: transparent;
 }

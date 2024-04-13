@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { setIsAuth } from "../../redux/slices/authSlice";
 import ModalOptions from "../ModalOptions/ModalOptions";
 import { IoMenuSharp } from "react-icons/io5";
+import { gsap } from "gsap";
 
 const Header = forwardRef(
   (
@@ -28,7 +29,9 @@ const Header = forwardRef(
       toggleUserInfoVisibility,
       toggleAddressVisibility,
       toggleLoginVisibility,
+      setIsMainSheetOpen,
       headerFooterMediaQuery,
+      isMainSheetOpen,
     },
     ref
   ) => {
@@ -42,6 +45,10 @@ const Header = forwardRef(
 
     const handleProfileClick = () => {
       if (isAuth) navigate("/user");
+    };
+
+    const toggleMenu = () => {
+      setIsMainSheetOpen(true);
     };
 
     return (
@@ -151,7 +158,12 @@ const Header = forwardRef(
           </>
         ) : (
           <div>
-            <IoMenuSharp size={33} color="#5f5f5f" className={styles.menu} />
+            <IoMenuSharp
+              size={33}
+              color="#5f5f5f"
+              className={styles.menu}
+              onClick={toggleMenu}
+            />
           </div>
         )}
       </header>

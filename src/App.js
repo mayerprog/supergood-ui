@@ -20,6 +20,7 @@ import {
 } from "./redux/slices/addressSlice";
 
 function App() {
+  // modals and sheets
   const [isModalOptionsOpen, setIsModalOptionsOpen] = useState(false);
   const [isUserInfoOpen, setIsUserInfoOpen] = useState(false);
   const [isModalAddressOpen, setIsModalAddressOpen] = useState(false);
@@ -27,6 +28,8 @@ function App() {
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isPayTypeOpen, setIsPayTypeOpen] = useState(false);
+  const [isMainSheetOpen, setIsMainSheetOpen] = useState(false);
+  const [mainSheetClosing, setMainSheetClosing] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isMainPage, setIsMainPage] = useState(false);
@@ -38,9 +41,10 @@ function App() {
   const mapWrapperRef = useRef(null);
   const loginWrapperRef = useRef(null);
   const payTypeWrapperRef = useRef(null);
+  const mainSheetWrapperRef = useRef(null);
 
-  // to show <Cart /> and to disable Cart button in Header when width > 1480px
-  const mediaQuery = useMediaQuery({ maxWidth: 1280 });
+  // to show <Cart /> and to disable Cart button in Header when width > 1280px
+  const cartMediaQuery = useMediaQuery({ maxWidth: 1280 });
   const headerFooterMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   const toggleOptionsVisibility = () => {
@@ -54,7 +58,7 @@ function App() {
   };
 
   const toggleCartVisibility = (isVisible) => {
-    if (!mediaQuery) setIsCartVisible(false);
+    if (!cartMediaQuery) setIsCartVisible(false);
     else setIsCartVisible(isVisible);
   };
   const toggleMapVisibility = () => {
@@ -69,6 +73,11 @@ function App() {
     setIsPayTypeOpen(!isPayTypeOpen);
   };
 
+  const toggleMainSheetVisibility = () => {
+    setMainSheetClosing(true);
+    // setIsMainSheetOpen(!isMainSheetOpen);
+  };
+
   useOutsideHook(mapWrapperRef, toggleMapVisibility); // to close popup <MapComponent /> clicking outside
   useOutsideHook(optionsRef, toggleOptionsVisibility); // to close popup <ModalOptions /> clicking outside
   useOutsideHook(userInfoRef, toggleUserInfoVisibility, [
@@ -76,7 +85,8 @@ function App() {
   ]); // to close popup <UserInfo /> clicking outside
   useOutsideHook(addressRef, toggleAddressVisibility); // to close popup <AddressModal /> clicking outside
   useOutsideHook(loginWrapperRef, toggleLoginVisibility); // to close popup <LoginModal /> clicking outside
-  useOutsideHook(payTypeWrapperRef, togglePayTypeVisibility); // to close popup <LoginModal /> clicking outside
+  useOutsideHook(payTypeWrapperRef, togglePayTypeVisibility); // to close popup <PayTypeModal /> clicking outside
+  useOutsideHook(mainSheetWrapperRef, toggleMainSheetVisibility); // to close popup <MainSheet /> clicking outside
 
   const location = useLocation(); // Getting the current location
 
@@ -128,6 +138,7 @@ function App() {
         toggleAddressVisibility={toggleAddressVisibility}
         toggleLoginVisibility={toggleLoginVisibility}
         headerFooterMediaQuery={headerFooterMediaQuery}
+        setIsMainSheetOpen={setIsMainSheetOpen}
       />
       <Routes>
         <Route
@@ -150,10 +161,15 @@ function App() {
               toggleUserInfoVisibility={toggleUserInfoVisibility}
               toggleAddressVisibility={toggleAddressVisibility}
               mapWrapperRef={mapWrapperRef}
-              mediaQuery={mediaQuery}
+              cartMediaQuery={cartMediaQuery}
               isLoginOpen={isLoginOpen}
               loginWrapperRef={loginWrapperRef}
               toggleLoginVisibility={toggleLoginVisibility}
+              isMainSheetOpen={isMainSheetOpen}
+              setIsMainSheetOpen={setIsMainSheetOpen}
+              mainSheetWrapperRef={mainSheetWrapperRef}
+              mainSheetClosing={mainSheetClosing}
+              setMainSheetClosing={setMainSheetClosing}
             />
           }
         />
