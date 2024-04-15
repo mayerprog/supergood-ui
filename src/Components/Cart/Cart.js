@@ -4,6 +4,7 @@ import CartBox from "./CartBox/CartBox";
 import { useNavigate } from "react-router-dom";
 import { removeAllItems } from "../../redux/slices/cartSlice";
 import CartShimmer from "../../Loaders/CartShimmer";
+import { useEffect } from "react";
 
 const Cart = ({
   wrapperRef,
@@ -25,6 +26,12 @@ const Cart = ({
     "--cart-height": height,
     "--cart-transform": transform,
   };
+
+  useEffect(() => {
+    console.log(
+      `Компонент Cart отрисован в ${new Date().toLocaleTimeString()}`
+    );
+  });
 
   const navigate = useNavigate();
 

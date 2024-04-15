@@ -3,10 +3,7 @@ import { useDispatch } from "react-redux";
 import styles from "./MainContent.module.scss";
 import Item from "./Item/Item";
 import Slider from "./Slider/Slider";
-import chorizo from "../../assets/images/chorizo.jpg";
-import kolc from "../../assets/images/kolc.jpg";
-import minus10 from "../../assets/images/minus10.jpg";
-import minus20 from "../../assets/images/minus20.jpg";
+
 import { itemAPI } from "../../api/itemAPI";
 import { setItems } from "../../redux/slices/itemSlice";
 import Cart from "../Cart/Cart";
@@ -45,16 +42,13 @@ const MainContent = ({
   loading,
   toggleMapVisibility,
 }) => {
-  const slides = [
-    { image: chorizo, link: "https://supergood.ru/akcii/22" },
-    { image: kolc },
-    { image: minus10 },
-    { image: minus20 },
-  ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const sliderRef = useRef(null);
   const categoryRefs = useRef({});
+
+  useEffect(() => {
+    console.log(
+      `Компонент MainContent отрисован в ${new Date().toLocaleTimeString()}`
+    );
+  });
 
   const scrollToCategory = useCallback(
     (categoryName) => {
@@ -71,20 +65,6 @@ const MainContent = ({
     },
     [headerHeight]
   );
-
-  const slideToRight = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-  }, [slides.length]);
-
-  const slideToLeft = useCallback(() => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
-    );
-  }, [slides.length]);
-
-  const handleIndicatorClick = useCallback((index) => {
-    setCurrentIndex(index);
-  }, []);
 
   useEffect(() => {
     if (selectedCategory) {
@@ -118,17 +98,17 @@ const MainContent = ({
   //   };
   // }, [slideToRight, slideToLeft, sliderRef]);
 
-  useEffect(() => {
-    const startAutoSlide = () => {
-      return setInterval(() => {
-        slideToRight();
-      }, 4000);
-    };
+  // useEffect(() => {
+  //   const startAutoSlide = () => {
+  //     return setInterval(() => {
+  //       slideToRight();
+  //     }, 4000);
+  //   };
 
-    const interval = startAutoSlide();
+  //   const interval = startAutoSlide();
 
-    return () => clearInterval(interval);
-  }, [slideToRight]);
+  //   return () => clearInterval(interval);
+  // }, [slideToRight]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -181,26 +161,9 @@ const MainContent = ({
           />
         </div>
       )}
-      <div className={styles.slider} ref={sliderRef}>
-        <div className={styles.sliderArrowLeft} onClick={slideToLeft}>
-          &#10094;
-        </div>
-        <Slider slides={slides} currentIndex={currentIndex} />
-        <div className={styles.sliderArrowRight} onClick={slideToRight}>
-          &#10095;
-        </div>
-      </div>
-      <div className={styles.indicators}>
-        {slides.map((_, index) => (
-          <span
-            key={index}
-            className={`${styles.indicator} ${
-              index === currentIndex ? styles.active : ""
-            }`}
-            onClick={() => handleIndicatorClick(index)}
-          ></span>
-        ))}
-      </div>
+
+      <Slider />
+
       {isCardOpen && (
         <div className={styles.cardOverlay}>
           <ModalCard

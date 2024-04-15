@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import styles from "./ModalCard.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import PizzaOptions from "../PizzaOptions/PizzaOptions";
@@ -17,6 +17,12 @@ const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
   const [addingInProgress, setAddingInProgress] = useState(false);
   const [amount, setAmount] = useState(null);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(
+      `Компонент ModalCard отрисован в ${new Date().toLocaleTimeString()}`
+    );
+  });
 
   useEffect(() => {
     const foundCartItem = cartItems.find(
@@ -123,4 +129,4 @@ const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
   );
 };
 
-export default ModalCard;
+export default memo(ModalCard);

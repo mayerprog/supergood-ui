@@ -2,6 +2,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
 import styles from "./MainSheet.module.scss";
+import { useEffect } from "react";
 
 const MainSheet = ({
   mainSheetWrapperRef,
@@ -9,6 +10,11 @@ const MainSheet = ({
   mainSheetClosing,
   setMainSheetClosing,
 }) => {
+  // useEffect(() => {
+  //   console.log(
+  //     `Компонент MainSheet отрисован в ${new Date().toLocaleTimeString()}`
+  //   );
+  // });
   const handleClosing = () => {
     setIsMainSheetOpen(false);
     setMainSheetClosing(false);

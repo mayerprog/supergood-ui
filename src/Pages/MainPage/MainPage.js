@@ -58,6 +58,12 @@ const MainPage = ({
 
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   console.log(
+  //     `Компонент MainPage отрисован в ${new Date().toLocaleTimeString()}`
+  //   );
+  // });
+
   useEffect(() => {
     (async () => {
       try {

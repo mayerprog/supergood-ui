@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import SidebarShimmer from "../../Loaders/SidebarShimmer";
 import styles from "./Sidebar.module.scss";
+import { useEffect } from "react";
 
 const Sidebar = ({
   categories,
@@ -9,6 +10,12 @@ const Sidebar = ({
   scrolledCategory,
   loading,
 }) => {
+  // useEffect(() => {
+  //   console.log(
+  //     `Компонент Sidebar отрисован в ${new Date().toLocaleTimeString()}`
+  //   );
+  // });
+
   if (loading) {
     return <SidebarShimmer />;
   }

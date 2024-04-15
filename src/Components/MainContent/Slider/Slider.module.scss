@@ -11,3 +11,58 @@
   border-radius: 15px;
   cursor: pointer;
 }
+.slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  top: 12px;
+}
+
+.sliderArrowLeft,
+.sliderArrowRight {
+  cursor: pointer;
+  position: absolute;
+  width: auto;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+.sliderArrowRight {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+.sliderArrowLeft {
+  left: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.sliderArrowLeft:hover,
+.sliderArrowRight:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 50px;
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 30px 0;
+
+  .indicator {
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+
+    cursor: pointer;
+    &.active {
+      background-color: #717171;
+    }
+  }
+}
