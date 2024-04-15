@@ -7,6 +7,6 @@ export const makeExistingAddressSelected = (
 ) => {
   const foundIndex = addressList.findIndex(
     (item) => item.address === inputAddress
-  ).id;
+  );
   dispatch(updateSelected(foundIndex));
 };

@@ -9,6 +9,7 @@ import { useOutsideHook } from "../../hooks/useOutsideHook";
 import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 import { setItems } from "../../redux/slices/itemSlice";
 import jsonData from "../../newApi_getItems.json";
+import { useNavigate } from "react-router-dom";
 import { itemAPI } from "../../api/itemAPI";
 import { useMediaQuery } from "react-responsive";
 import MainSheet from "../../Components/MainSheet/MainSheet";
@@ -44,6 +45,7 @@ const MainPage = ({
   const [scrolledCategory, setScrolledCategory] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const sideBarMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
@@ -136,7 +138,7 @@ const MainPage = ({
 
   useEffect(() => {
     if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight - 5); // height of Header
+      setHeaderHeight(headerRef.current.offsetHeight - 3); // height of Header
     }
   }, [headerRef]);
 
@@ -210,6 +212,7 @@ const MainPage = ({
           transform="none"
           toggleCartVisibility={toggleCartVisibility}
           loading={loading}
+          navigate={navigate}
         />
       )}
     </div>

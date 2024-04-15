@@ -7,6 +7,7 @@ import Slider from "./Slider/Slider";
 import { itemAPI } from "../../api/itemAPI";
 import { setItems } from "../../redux/slices/itemSlice";
 import Cart from "../Cart/Cart";
+import { useNavigate } from "react-router-dom";
 import ModalCard from "./ModalCard/ModalCard";
 import MapComponent from "../MapComponent/MapComponent";
 import UserInfo from "../UserInfo/UserInfo";
@@ -43,6 +44,7 @@ const MainContent = ({
   toggleMapVisibility,
 }) => {
   const categoryRefs = useRef({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(
@@ -71,44 +73,6 @@ const MainContent = ({
       scrollToCategory(selectedCategory);
     }
   }, [selectedCategory, scrollToCategory]);
-
-  //for wheeling the slider
-  // useEffect(() => {
-  //   const slider = sliderRef.current; // Получаем DOM-элемент
-  //   const handleWheel = (e) => {
-  //     e.preventDefault();
-
-  //     if (e.deltaY > 0) {
-  //       slideToRight();
-  //     } else {
-  //       slideToLeft();
-  //     }
-  //   };
-
-  //   // Добавляем обработчик события
-  //   if (slider) {
-  //     slider.addEventListener("wheel", handleWheel, { passive: false });
-  //   }
-
-  //   // Убираем обработчик события при размонтировании компонента
-  //   return () => {
-  //     if (slider) {
-  //       slider.removeEventListener("wheel", handleWheel);
-  //     }
-  //   };
-  // }, [slideToRight, slideToLeft, sliderRef]);
-
-  // useEffect(() => {
-  //   const startAutoSlide = () => {
-  //     return setInterval(() => {
-  //       slideToRight();
-  //     }, 4000);
-  //   };
-
-  //   const interval = startAutoSlide();
-
-  //   return () => clearInterval(interval);
-  // }, [slideToRight]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -158,6 +122,7 @@ const MainContent = ({
             transform="translateX(-20%)"
             wrapperRef={wrapperRef}
             toggleCartVisibility={toggleCartVisibility}
+            navigate={navigate}
           />
         </div>
       )}

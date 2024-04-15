@@ -3,7 +3,7 @@ import chorizo from "../../../assets/images/chorizo.jpg";
 import kolc from "../../../assets/images/kolc.jpg";
 import minus10 from "../../../assets/images/minus10.jpg";
 import minus20 from "../../../assets/images/minus20.jpg";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 
 const Slider = ({}) => {
   const slides = [
@@ -39,7 +39,7 @@ const Slider = ({}) => {
     return () => {
       clearInterval(intervalRef.current);
     };
-  }, []); // empty dependency array means this runs once on mount and cleanup on unmount
+  }, []);
 
   //for wheeling the slider
   // useEffect(() => {
@@ -73,8 +73,7 @@ const Slider = ({}) => {
         <div className={styles.sliderArrowLeft} onClick={slideToLeft}>
           &#10094;
         </div>
-        {/* <Slider slides={slides} currentIndex={currentIndex} /> */}
-        <div className={styles.container}>
+        <div className={styles.sliderContainer}>
           <img
             src={slides[currentIndex].image}
             alt={`Slide ${currentIndex + 1}`}

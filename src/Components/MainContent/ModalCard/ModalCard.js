@@ -18,11 +18,11 @@ const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
   const [amount, setAmount] = useState(null);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(
-      `Компонент ModalCard отрисован в ${new Date().toLocaleTimeString()}`
-    );
-  });
+  // useEffect(() => {
+  //   console.log(
+  //     `Компонент ModalCard отрисован в ${new Date().toLocaleTimeString()}`
+  //   );
+  // });
 
   useEffect(() => {
     const foundCartItem = cartItems.find(
@@ -129,4 +129,4 @@ const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
   );
 };
 
-export default memo(ModalCard);
+export default ModalCard;

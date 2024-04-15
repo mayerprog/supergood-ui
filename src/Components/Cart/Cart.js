@@ -4,7 +4,7 @@ import CartBox from "./CartBox/CartBox";
 import { useNavigate } from "react-router-dom";
 import { removeAllItems } from "../../redux/slices/cartSlice";
 import CartShimmer from "../../Loaders/CartShimmer";
-import { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 
 const Cart = ({
   wrapperRef,
@@ -14,6 +14,7 @@ const Cart = ({
   transform,
   toggleCartVisibility,
   loading,
+  navigate,
 }) => {
   const dispatch = useDispatch();
 
@@ -33,7 +34,7 @@ const Cart = ({
     );
   });
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleClickSubmit = () => {
     if (cartItems.length > 0) {
@@ -75,4 +76,4 @@ const Cart = ({
   );
 };
 
-export default Cart;
+export default memo(Cart);

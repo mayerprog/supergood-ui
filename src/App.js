@@ -10,7 +10,7 @@ import NewOrderPage from "./Pages/NewOrderPage/NewOrderPage";
 import OrdersPage from "./Pages/OrdersPage/OrdersPage";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useOutsideHook } from "./hooks/useOutsideHook";
 import { useMediaQuery } from "react-responsive";
 import {
@@ -43,6 +43,9 @@ function App() {
   const payTypeWrapperRef = useRef(null);
   const mainSheetWrapperRef = useRef(null);
 
+  //strict mode flag
+  const hasRunOnce = useRef(false);
+
   // to show <Cart /> and to disable Cart button in Header when width > 1280px
   const cartMediaQuery = useMediaQuery({ maxWidth: 1280 });
   const headerFooterMediaQuery = useMediaQuery({ maxWidth: 1024 });
@@ -57,10 +60,15 @@ function App() {
     setIsModalAddressOpen(!isModalAddressOpen);
   };
 
-  const toggleCartVisibility = (isVisible) => {
-    if (!cartMediaQuery) setIsCartVisible(false);
-    else setIsCartVisible(isVisible);
-  };
+  // memoizizng the function to avoid <Cart /> re-rendering when search input change
+  const toggleCartVisibility = useCallback(
+    (isVisible) => {
+      if (!cartMediaQuery) setIsCartVisible(false);
+      else setIsCartVisible(isVisible);
+    },
+    [cartMediaQuery]
+  );
+
   const toggleMapVisibility = () => {
     setIsMapOpen(!isMapOpen);
   };
@@ -98,21 +106,22 @@ function App() {
 
   // we find here address with selected: true to display it all over the app
   useEffect(() => {
-    const selectedAddress = addressList.filter((address) => address.selected);
+    const selectedAddressList = addressList.filter(
+      (address) => address.selected
+    );
     // if no selected addresses then make first address selected (additional validation)
-    if (selectedAddress.length === 0 && addressList.length > 0)
+    if (selectedAddressList.length === 0 && addressList.length > 0)
       dispatch(updateSelected(0));
-    if (selectedAddress.length > 0)
-      dispatch(setAddressSelected(selectedAddress[0].address));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addressList]);
-
-  // add address which saved in redux persist to addressList
-  useEffect(() => {
-    if (addressSelected && addressList.length === 0) {
+    // to set selected address
+    if (selectedAddressList.length > 0)
+      dispatch(setAddressSelected(selectedAddressList[0].address));
+    // add address which saved in redux persist (addressSelected) to addressList
+    if (addressSelected && addressList.length === 0 && !hasRunOnce.current) {
+      hasRunOnce.current = true;
       dispatch(addAddress({ address: addressSelected, selected: true }));
     }
-  }, [addressSelected, addressList.length, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [addressList, addressSelected]);
 
   useEffect(() => {
     setIsMainPage(location.pathname === "/");
