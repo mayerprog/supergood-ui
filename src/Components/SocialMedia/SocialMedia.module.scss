@@ -1,0 +1,18 @@
+.socialMedia {
+  display: flex;
+  margin-right: 40px;
+  flex-direction: row;
+  img {
+    width: 37px;
+    height: 37px;
+    margin-right: 10px;
+  }
+  .lastimg {
+    margin-right: 5px;
+  }
+
+  @media (max-width: 822px) {
+    margin-right: 20px;
+    max-width: 70px;
+  }
+}

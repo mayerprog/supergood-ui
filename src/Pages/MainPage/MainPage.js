@@ -165,16 +165,20 @@ const MainPage = ({
         />
       )}
 
-      {isMainSheetOpen && (
-        <div className={styles.mainSheetOverlay}>
+      <div
+        className={`${styles.mainSheetOverlay} ${
+          isMainSheetOpen ? styles.visible : ""
+        }`}
+      >
+        {isMainSheetOpen && (
           <MainSheet
             mainSheetWrapperRef={mainSheetWrapperRef}
             setIsMainSheetOpen={setIsMainSheetOpen}
             mainSheetClosing={mainSheetClosing}
             setMainSheetClosing={setMainSheetClosing}
           />
-        </div>
-      )}
+        )}
+      </div>
 
       <MainContent
         items={searchedItems}
