@@ -28,13 +28,11 @@ const Cart = ({
     "--cart-transform": transform,
   };
 
-  useEffect(() => {
-    console.log(
-      `Компонент Cart отрисован в ${new Date().toLocaleTimeString()}`
-    );
-  });
-
-  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   console.log(
+  //     `Компонент Cart отрисован в ${new Date().toLocaleTimeString()}`
+  //   );
+  // });
 
   const handleClickSubmit = () => {
     if (cartItems.length > 0) {

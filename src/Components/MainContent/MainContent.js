@@ -46,11 +46,11 @@ const MainContent = ({
   const categoryRefs = useRef({});
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(
-      `Компонент MainContent отрисован в ${new Date().toLocaleTimeString()}`
-    );
-  });
+  // useEffect(() => {
+  //   console.log(
+  //     `Компонент MainContent отрисован в ${new Date().toLocaleTimeString()}`
+  //   );
+  // });
 
   const scrollToCategory = useCallback(
     (categoryName) => {

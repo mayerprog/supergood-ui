@@ -142,6 +142,7 @@ const MainPage = ({
     }
   }, [headerRef]);
 
+  //to sum total price of items from cart
   useUpdateSumHook();
 
   const toggleCardOpen = (itemId) => {

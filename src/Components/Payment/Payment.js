@@ -11,6 +11,7 @@ const Payment = ({ handleSetOrderInfo, togglePayTypeVisibility }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  //to sum total price of items from cart
   useUpdateSumHook();
 
   const handleClickSubmit = () => {

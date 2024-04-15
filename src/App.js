@@ -109,7 +109,7 @@ function App() {
     const selectedAddressList = addressList.filter(
       (address) => address.selected
     );
-    // if no selected addresses then make first address selected (additional validation)
+    // if no selected addresses then make first address selected
     if (selectedAddressList.length === 0 && addressList.length > 0)
       dispatch(updateSelected(0));
     // to set selected address
