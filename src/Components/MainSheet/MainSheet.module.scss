@@ -1,14 +1,56 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  box-shadow: 0 0 5px #ccc;
-  position: absolute;
-  padding: 0 20px;
-  font-family: "Inter", sans-serif;
-  min-width: 280px;
+  justify-content: flex-start;
+  align-items: center;
+  width: 80%;
+  max-width: 300px;
   background-color: #fcfcfc;
+  position: absolute;
   height: 100vh;
   overflow-y: auto;
-  background-color: white;
+  overflow-x: hidden;
+  padding: 0 20px;
+
+  @media (max-width: 599px) {
+    max-width: 250px;
+  }
+
+  .item {
+    width: 100%;
+    min-width: 50px; // Ensures items have a minimum width
+    min-height: 40px;
+    border-radius: 13px;
+    border-width: 0;
+    text-align: start;
+    font-size: 1.1em;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    background-color: #fcfcfc;
+    cursor: pointer;
+    padding: 15px 0px 15px 15px;
+
+    @media (max-width: 599px) {
+      font-size: 1em;
+    }
+
+    // &:hover {
+    //   background-color: darken(#ffffff, 5%);
+    // }
+  }
+
+  span,
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #636363;
+  }
+
+  .line {
+    height: 1px;
+    width: 100%;
+    border: 0;
+    background: #ccc;
+    margin: 15px 0;
+  }
 }

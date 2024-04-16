@@ -4,6 +4,7 @@ import GooglePlay from "../../assets/images/Google-Play.png";
 import logo from "../../assets/images/logo.jpg";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import MobileApps from "../Reusables/MobileApps/MobileApps";
 
 const Footer = ({ headerFooterMediaQuery }) => {
   const navigate = useNavigate();
@@ -59,25 +60,7 @@ const Footer = ({ headerFooterMediaQuery }) => {
               </a>
             </div>
           </div>
-          <div className={styles.appLinks}>
-            <span>С приложением удобнее!</span>
-            <div className={styles.images}>
-              <a
-                href="https://apps.apple.com/ru/app/supergood/id1520374517"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={AppStore} alt="" />
-              </a>
-              <a
-                href="https://play.google.com/store/apps/details?id=com.psw.supergood"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={GooglePlay} alt="" />
-              </a>
-            </div>
-          </div>
+          <MobileApps />
           <h2>+7 (495) 138 0123</h2>
         </>
       )}

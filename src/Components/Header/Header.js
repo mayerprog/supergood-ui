@@ -11,7 +11,7 @@ import { setIsAuth } from "../../redux/slices/authSlice";
 import ModalOptions from "../ModalOptions/ModalOptions";
 import { IoMenuSharp } from "react-icons/io5";
 import { gsap } from "gsap";
-import SocialMedia from "../SocialMedia/SocialMedia";
+import SocialMedia from "../Reusables/SocialMedia/SocialMedia";
 
 const Header = forwardRef(
   (

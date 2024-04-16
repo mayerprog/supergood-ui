@@ -1,0 +1,17 @@
+.appLinks {
+  display: flex;
+  flex-direction: column;
+  // margin-left: -50px;
+  margin-right: 15px;
+  span {
+    margin-bottom: 10px;
+  }
+}
+.images {
+  display: flex;
+  justify-content: space-between;
+  img {
+    width: 90px;
+    height: 30px;
+  }
+}

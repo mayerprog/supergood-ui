@@ -1,8 +1,8 @@
 import styles from "./SocialMedia.module.scss";
-import vk from "../../assets/social-networks/vk.png";
-import telegram from "../../assets/social-networks/telegram.png";
-import discount from "../../assets/social-networks/discount.png";
-import phone from "../../assets/social-networks/phone.png";
+import vk from "../../../assets/social-networks/vk.png";
+import telegram from "../../../assets/social-networks/telegram.png";
+import discount from "../../../assets/social-networks/discount.png";
+import phone from "../../../assets/social-networks/phone.png";
 
 const SocialMedia = () => {
   return (
@@ -33,7 +33,7 @@ const SocialMedia = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src={phone} alt="phone" />
+        <img src={phone} alt="phone" className={styles.lastimg} />
       </a>
     </div>
   );

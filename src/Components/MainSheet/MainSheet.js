@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 
 import styles from "./MainSheet.module.scss";
 import { useEffect } from "react";
-import SocialMedia from "../SocialMedia/SocialMedia";
+import SocialMedia from "../Reusables/SocialMedia/SocialMedia";
 
 const MainSheet = ({
   mainSheetWrapperRef,
@@ -20,6 +20,7 @@ const MainSheet = ({
     setIsMainSheetOpen(false);
     setMainSheetClosing(false);
   };
+
   useGSAP(() => {
     const menu = mainSheetWrapperRef.current;
     gsap.from(menu, {
@@ -42,50 +43,31 @@ const MainSheet = ({
       });
     }
   }, [mainSheetClosing]);
+  const links = [
+    { name: "О компании", link: "https://supergood.ru/about" },
+    { name: "Оплата и доставка", link: "https://supergood.ru/delivery-n-pay" },
+    { name: "Сделать заказ", link: "https://supergood.ru/howto" },
+    { name: "Акции и скидки", link: "https://supergood.ru/akcii" },
+    { name: "Контакты", link: "https://supergood.ru/contacts" },
+  ];
   return (
     <div className={styles.container} ref={mainSheetWrapperRef}>
       <SocialMedia />
-      <div>Мои данные</div>
-      <div>Мои адреса</div>
-      <div>Мои заказы</div>
-      <div>Выйти</div>
 
-      <a
-        href="https://supergood.ru/about"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span>О компании</span>
-      </a>
-      <a
-        href="https://supergood.ru/delivery-n-pay"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span>Оплата и доставка</span>
-      </a>
-      <a
-        href="https://supergood.ru/howto"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span>Сделать заказ</span>
-      </a>
+      {["Мои данные", "Мои адреса", "Мои заказы", "Выйти"].map((item) => (
+        <button className={styles.item}>
+          <span>{item}</span>
+        </button>
+      ))}
+      <div className={styles.line} />
 
-      <a
-        href="https://supergood.ru/akcii"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span>Акции и скидки</span>
-      </a>
-      <a
-        href="https://supergood.ru/contacts"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span>Контакты</span>
-      </a>
+      {links.map((item) => (
+        <button className={styles.item}>
+          <a href={item.link} target="_blank" rel="noopener noreferrer">
+            {item.name}
+          </a>
+        </button>
+      ))}
     </div>
   );
 };
