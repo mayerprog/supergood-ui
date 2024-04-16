@@ -8,6 +8,8 @@
   background-color: #fcfcfc;
   position: absolute;
   min-height: 100vh;
+  height: 100vh;
+
   overflow-y: auto;
   overflow-x: hidden;
   padding: 0 20px;
@@ -19,7 +21,7 @@
   .item {
     width: 100%;
     min-width: 50px; // Ensures items have a minimum width
-    min-height: 40px;
+    min-height: 50px;
     border-radius: 13px;
     border-width: 0;
     text-align: start;
@@ -47,10 +49,10 @@
   }
 
   .line {
-    height: 1px;
     width: 100%;
-    border: 0;
-    background: #ccc;
+    background: #dbdbdb;
     margin: 15px 0;
+    border-top: 0.1px solid #ccc;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 }

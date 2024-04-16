@@ -129,6 +129,12 @@ function App() {
   }, [location]);
 
   useEffect(() => {
+    if (!headerFooterMediaQuery) {
+      setIsMainSheetOpen(false);
+    }
+  }, [headerFooterMediaQuery]);
+
+  useEffect(() => {
     console.log("cartItems", cartItems);
   }, [cartItems]);
 

@@ -28,7 +28,6 @@ const Header = forwardRef(
       toggleLoginVisibility,
       setIsMainSheetOpen,
       headerFooterMediaQuery,
-      isMainSheetOpen,
     },
     ref
   ) => {
