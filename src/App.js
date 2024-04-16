@@ -47,8 +47,8 @@ function App() {
   const hasRunOnce = useRef(false);
 
   // to show <Cart /> and to disable Cart button in Header when width > 1280px
-  const cartMediaQuery = useMediaQuery({ maxWidth: 1280 });
-  const headerFooterMediaQuery = useMediaQuery({ maxWidth: 1024 });
+  const monitorMediaQuery = useMediaQuery({ maxWidth: 1280 });
+  const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
@@ -63,10 +63,10 @@ function App() {
   // memoizizng the function to avoid <Cart /> re-rendering when search input change
   const toggleCartVisibility = useCallback(
     (isVisible) => {
-      if (!cartMediaQuery) setIsCartVisible(false);
+      if (!monitorMediaQuery) setIsCartVisible(false);
       else setIsCartVisible(isVisible);
     },
-    [cartMediaQuery]
+    [monitorMediaQuery]
   );
 
   const toggleMapVisibility = () => {
@@ -129,10 +129,10 @@ function App() {
   }, [location]);
 
   useEffect(() => {
-    if (!headerFooterMediaQuery) {
+    if (!netbooksMediaQuery) {
       setIsMainSheetOpen(false);
     }
-  }, [headerFooterMediaQuery]);
+  }, [netbooksMediaQuery]);
 
   useEffect(() => {
     console.log("cartItems", cartItems);
@@ -152,7 +152,7 @@ function App() {
         toggleUserInfoVisibility={toggleUserInfoVisibility}
         toggleAddressVisibility={toggleAddressVisibility}
         toggleLoginVisibility={toggleLoginVisibility}
-        headerFooterMediaQuery={headerFooterMediaQuery}
+        netbooksMediaQuery={netbooksMediaQuery}
         setIsMainSheetOpen={setIsMainSheetOpen}
       />
       <Routes>
@@ -176,7 +176,7 @@ function App() {
               toggleUserInfoVisibility={toggleUserInfoVisibility}
               toggleAddressVisibility={toggleAddressVisibility}
               mapWrapperRef={mapWrapperRef}
-              cartMediaQuery={cartMediaQuery}
+              monitorMediaQuery={monitorMediaQuery}
               isLoginOpen={isLoginOpen}
               loginWrapperRef={loginWrapperRef}
               toggleLoginVisibility={toggleLoginVisibility}
@@ -185,6 +185,7 @@ function App() {
               mainSheetWrapperRef={mainSheetWrapperRef}
               mainSheetClosing={mainSheetClosing}
               setMainSheetClosing={setMainSheetClosing}
+              setSearchQuery={setSearchQuery}
             />
           }
         />
@@ -223,7 +224,7 @@ function App() {
           }
         />
       </Routes>
-      <Footer headerFooterMediaQuery={headerFooterMediaQuery} />
+      <Footer netbooksMediaQuery={netbooksMediaQuery} />
     </div>
   );
 }

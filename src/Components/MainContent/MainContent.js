@@ -14,6 +14,8 @@ import UserInfo from "../UserInfo/UserInfo";
 import AddressModal from "../Address/AddressModal/AddressModal";
 import ItemsShimmer from "../../Loaders/ItemsShimmer";
 import LoginModal from "../Login/LoginModal";
+import SearchField from "../Reusables/SearchField/SearchField";
+import { useMediaQuery } from "react-responsive";
 
 const MainContent = ({
   isCartVisible,
@@ -42,9 +44,12 @@ const MainContent = ({
   toggleLoginVisibility,
   loading,
   toggleMapVisibility,
+  setSearchQuery,
 }) => {
   const categoryRefs = useRef({});
   const navigate = useNavigate();
+
+  const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   // useEffect(() => {
   //   console.log(
@@ -126,6 +131,8 @@ const MainContent = ({
           />
         </div>
       )}
+
+      {netbooksMediaQuery && <SearchField setSearchQuery={setSearchQuery} />}
 
       <Slider />
 

@@ -1,15 +1,14 @@
 import styles from "./Footer.module.scss";
 import logo from "../../assets/images/logo.jpg";
 import { useNavigate } from "react-router-dom";
-import { useMediaQuery } from "react-responsive";
 import MobileApps from "../Reusables/MobileApps/MobileApps";
 
-const Footer = ({ headerFooterMediaQuery }) => {
+const Footer = ({ netbooksMediaQuery }) => {
   const navigate = useNavigate();
 
   return (
     <footer className={styles.footer}>
-      {!headerFooterMediaQuery && (
+      {!netbooksMediaQuery && (
         <>
           <img
             src={logo}

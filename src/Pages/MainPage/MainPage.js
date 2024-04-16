@@ -28,7 +28,7 @@ const MainPage = ({
   toggleUserInfoVisibility,
   toggleAddressVisibility,
   mapWrapperRef,
-  cartMediaQuery,
+  monitorMediaQuery,
   isLoginOpen,
   loginWrapperRef,
   toggleLoginVisibility,
@@ -38,6 +38,7 @@ const MainPage = ({
   mainSheetWrapperRef,
   mainSheetClosing,
   setMainSheetClosing,
+  setSearchQuery,
 }) => {
   const [isCardOpen, setIsCardOpen] = useState(false);
   const [itemCardId, setItemCardId] = useState(null);
@@ -47,7 +48,7 @@ const MainPage = ({
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const sideBarMediaQuery = useMediaQuery({ maxWidth: 1024 });
+  const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   const items = useSelector((state) => state.item.items);
   const categories = [...new Set(items.map((item) => item.catname))]; // Unique categories
@@ -138,7 +139,7 @@ const MainPage = ({
 
   useEffect(() => {
     if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight - 3); // height of Header
+      setHeaderHeight(headerRef.current.offsetHeight - 2); // height of Header
     }
   }, [headerRef]);
 
@@ -155,7 +156,7 @@ const MainPage = ({
 
   return (
     <div className={styles.content}>
-      {!sideBarMediaQuery && (
+      {!netbooksMediaQuery && (
         <Sidebar
           categories={searchedCategories}
           onCategorySelect={setSelectedCategory}
@@ -208,8 +209,9 @@ const MainPage = ({
         loginWrapperRef={loginWrapperRef}
         toggleLoginVisibility={toggleLoginVisibility}
         toggleMapVisibility={toggleMapVisibility}
+        setSearchQuery={setSearchQuery}
       />
-      {!cartMediaQuery && (
+      {!monitorMediaQuery && (
         <Cart
           position="sticky"
           top="105px"

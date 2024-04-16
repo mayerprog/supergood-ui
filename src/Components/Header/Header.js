@@ -2,7 +2,6 @@ import styles from "./Header.module.scss";
 import logo from "../../assets/images/logo.jpg";
 import { GiShoppingCart } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
-import { CiSearch } from "react-icons/ci";
 import { FaLocationDot } from "react-icons/fa6";
 import { forwardRef, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +11,7 @@ import ModalOptions from "../ModalOptions/ModalOptions";
 import { IoMenuSharp } from "react-icons/io5";
 import { gsap } from "gsap";
 import SocialMedia from "../Reusables/SocialMedia/SocialMedia";
+import SearchField from "../Reusables/SearchField/SearchField";
 
 const Header = forwardRef(
   (
@@ -27,7 +27,7 @@ const Header = forwardRef(
       toggleAddressVisibility,
       toggleLoginVisibility,
       setIsMainSheetOpen,
-      headerFooterMediaQuery,
+      netbooksMediaQuery,
     },
     ref
   ) => {
@@ -55,18 +55,9 @@ const Header = forwardRef(
           className={styles.logo}
           onClick={() => navigate("/")}
         />
-        {!headerFooterMediaQuery ? (
+        {!netbooksMediaQuery ? (
           <>
-            {isMainPage && (
-              <div className={styles.inputWrapper}>
-                <CiSearch className={styles.inputIcon} size={20} />
-                <input
-                  className={styles.input}
-                  placeholder="Найти блюдо"
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </div>
-            )}
+            {isMainPage && <SearchField setSearchQuery={setSearchQuery} />}
             {isModalOptionsOpen && (
               <div className={styles.optionsOverlay}>
                 <ModalOptions
