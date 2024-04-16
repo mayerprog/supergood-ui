@@ -18,6 +18,7 @@
     text-overflow: ellipsis;
     width: 100%;
     padding-left: 37px;
+    // background-color: #fcfcfc;
 
     @include focus-style(#ccc);
   }
