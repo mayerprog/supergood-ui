@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import styles from "./MainSheet.module.scss";
 import { useEffect } from "react";
 import SocialMedia from "../Reusables/SocialMedia/SocialMedia";
+import MobileApps from "../Reusables/MobileApps/MobileApps";
 
 const MainSheet = ({
   mainSheetWrapperRef,
@@ -68,6 +69,8 @@ const MainSheet = ({
           </a>
         </button>
       ))}
+
+      <MobileApps />
     </div>
   );
 };

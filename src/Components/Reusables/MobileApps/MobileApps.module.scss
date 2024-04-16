@@ -1,8 +1,9 @@
 .appLinks {
   display: flex;
   flex-direction: column;
-  // margin-left: -50px;
   margin-right: 15px;
+  font-family: "Inter", sans-serif;
+
   span {
     margin-bottom: 10px;
   }
@@ -13,5 +14,27 @@
   img {
     width: 90px;
     height: 30px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .appLinks {
+    margin-right: 0px;
+    margin-top: 30px;
+    padding: 10px;
+    width: 100%;
+
+    span {
+      align-self: center;
+    }
+  }
+
+  .images {
+    justify-content: space-evenly;
+
+    img {
+      width: 100px;
+      height: 30px;
+    }
   }
 }
