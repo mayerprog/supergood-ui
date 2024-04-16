@@ -162,6 +162,9 @@
 
 @media (max-width: 1024px) {
   .header {
+    box-shadow: none;
+    background-color: white;
+
     .logo {
       width: 130px;
       height: 38px;

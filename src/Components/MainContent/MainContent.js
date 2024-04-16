@@ -16,6 +16,7 @@ import ItemsShimmer from "../../Loaders/ItemsShimmer";
 import LoginModal from "../Login/LoginModal";
 import SearchField from "../Reusables/SearchField/SearchField";
 import { useMediaQuery } from "react-responsive";
+import NavBar from "../NavBar/NavBar";
 
 const MainContent = ({
   isCartVisible,

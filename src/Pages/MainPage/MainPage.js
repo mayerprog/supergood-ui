@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { itemAPI } from "../../api/itemAPI";
 import { useMediaQuery } from "react-responsive";
 import MainSheet from "../../Components/MainSheet/MainSheet";
+import NavBar from "../../Components/NavBar/NavBar";
 
 const MainPage = ({
   searchQuery,
@@ -156,6 +157,14 @@ const MainPage = ({
 
   return (
     <div className={styles.content}>
+      {netbooksMediaQuery && (
+        <NavBar
+          categories={categories}
+          onCategorySelect={setSelectedCategory}
+          selectedCategory={selectedCategory}
+          scrolledCategory={scrolledCategory}
+        />
+      )}
       {!netbooksMediaQuery && (
         <Sidebar
           categories={searchedCategories}
