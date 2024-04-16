@@ -132,7 +132,7 @@ const DeliveryAddress = ({
       className={styles.address}
       disabled={!isMainPage}
     >
-      <FaLocationDot size={18} color="#BBBBBB" className={styles.icon} />
+      <FaLocationDot size={18} color="#7c7c7c" className={styles.icon} />
       {addressSelected ? (
         <span className={styles.buttonText}>{addressSelected}</span>
       ) : (
