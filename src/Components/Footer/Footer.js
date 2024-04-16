@@ -1,6 +1,4 @@
 import styles from "./Footer.module.scss";
-import AppStore from "../../assets/images/App-Store.png";
-import GooglePlay from "../../assets/images/Google-Play.png";
 import logo from "../../assets/images/logo.jpg";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";

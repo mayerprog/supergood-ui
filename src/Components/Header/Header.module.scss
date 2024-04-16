@@ -64,12 +64,12 @@
 
   .address {
     display: flex;
-    flex: 1;
+
     @include form-input-style;
     width: 100%;
     box-shadow: 0 0 5px #ccc;
     max-width: 380px;
-    min-width: 150px;
+    min-width: 50px;
     cursor: pointer;
     padding-left: 15px;
     margin: 0 15px;
@@ -92,19 +92,6 @@
     flex-direction: row;
     flex: 1;
     justify-content: flex-end;
-  }
-
-  .socialMedia {
-    display: flex;
-    flex-direction: row;
-    img {
-      width: 37px;
-      height: 37px;
-      margin-right: 10px;
-    }
-    .lastimg {
-      margin-right: 5px;
-    }
   }
 
   .cartButton {
@@ -136,7 +123,6 @@
     }
   }
 
-  .socialMedia,
   .cartButton {
     margin-right: 40px;
 
@@ -182,6 +168,8 @@
   }
 
   .menu {
+    min-width: 33px;
+    height: 33px;
     cursor: pointer;
   }
 }

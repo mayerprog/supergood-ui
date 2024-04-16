@@ -77,24 +77,11 @@ const Header = forwardRef(
                 />
               </div>
             )}
-            <button
-              onClick={toggleMapVisibility}
-              className={styles.address}
-              disabled={!isMainPage}
-            >
-              <FaLocationDot
-                size={18}
-                color="#BBBBBB"
-                className={styles.icon}
-              />
-              {addressSelected ? (
-                <span className={styles.buttonText}>{addressSelected}</span>
-              ) : (
-                <span className={styles.buttonText}>
-                  Укажите адрес доставки
-                </span>
-              )}
-            </button>
+            <DeliveryAddress
+              toggleMapVisibility={toggleMapVisibility}
+              isMainPage={isMainPage}
+              addressSelected={addressSelected}
+            />
             <div className={styles.leftCluster}>
               <SocialMedia />
               {isMainPage && (
@@ -124,18 +111,44 @@ const Header = forwardRef(
             </div>
           </>
         ) : (
-          <div>
+          <>
+            <DeliveryAddress
+              toggleMapVisibility={toggleMapVisibility}
+              isMainPage={isMainPage}
+              addressSelected={addressSelected}
+            />
             <IoMenuSharp
-              size={33}
+              // size={33}
               color="#5f5f5f"
               className={styles.menu}
               onClick={toggleMenu}
             />
-          </div>
+          </>
         )}
       </header>
     );
   }
 );
+
+const DeliveryAddress = ({
+  toggleMapVisibility,
+  isMainPage,
+  addressSelected,
+}) => {
+  return (
+    <button
+      onClick={toggleMapVisibility}
+      className={styles.address}
+      disabled={!isMainPage}
+    >
+      <FaLocationDot size={18} color="#BBBBBB" className={styles.icon} />
+      {addressSelected ? (
+        <span className={styles.buttonText}>{addressSelected}</span>
+      ) : (
+        <span className={styles.buttonText}>Укажите адрес доставки</span>
+      )}
+    </button>
+  );
+};
 
 export default Header;
