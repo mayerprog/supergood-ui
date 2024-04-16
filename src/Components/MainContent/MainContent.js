@@ -133,11 +133,9 @@ const MainContent = ({
         </div>
       )}
 
-      <div className={styles.sliderSearchField}>
-        {netbooksMediaQuery && <SearchField setSearchQuery={setSearchQuery} />}
+      {netbooksMediaQuery && <SearchField setSearchQuery={setSearchQuery} />}
 
-        <Slider />
-      </div>
+      <Slider />
 
       {isCardOpen && (
         <div className={styles.cardOverlay}>

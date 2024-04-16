@@ -156,7 +156,7 @@ const MainPage = ({
   useOutsideHook(wrapperRef, toggleCartVisibility); // to close popup <Cart /> clicking outside
 
   return (
-    <div className={styles.content}>
+    <>
       {netbooksMediaQuery && (
         <NavBar
           categories={categories}
@@ -165,73 +165,75 @@ const MainPage = ({
           scrolledCategory={scrolledCategory}
         />
       )}
-      {!netbooksMediaQuery && (
-        <Sidebar
-          categories={searchedCategories}
-          onCategorySelect={setSelectedCategory}
-          selectedCategory={selectedCategory}
-          scrolledCategory={scrolledCategory}
-          loading={loading}
-        />
-      )}
+      <div className={styles.content}>
+        {!netbooksMediaQuery && (
+          <Sidebar
+            categories={searchedCategories}
+            onCategorySelect={setSelectedCategory}
+            selectedCategory={selectedCategory}
+            scrolledCategory={scrolledCategory}
+            loading={loading}
+          />
+        )}
 
-      <div
-        className={`${styles.mainSheetOverlay} ${
-          isMainSheetOpen ? styles.visible : ""
-        }`}
-      >
-        {isMainSheetOpen && (
-          <MainSheet
-            mainSheetWrapperRef={mainSheetWrapperRef}
-            setIsMainSheetOpen={setIsMainSheetOpen}
-            mainSheetClosing={mainSheetClosing}
-            setMainSheetClosing={setMainSheetClosing}
+        <div
+          className={`${styles.mainSheetOverlay} ${
+            isMainSheetOpen ? styles.visible : ""
+          }`}
+        >
+          {isMainSheetOpen && (
+            <MainSheet
+              mainSheetWrapperRef={mainSheetWrapperRef}
+              setIsMainSheetOpen={setIsMainSheetOpen}
+              mainSheetClosing={mainSheetClosing}
+              setMainSheetClosing={setMainSheetClosing}
+            />
+          )}
+        </div>
+
+        <MainContent
+          items={searchedItems}
+          categories={searchedCategories}
+          isCartVisible={isCartVisible}
+          isCardOpen={isCardOpen}
+          toggleCardOpen={toggleCardOpen}
+          wrapperRef={wrapperRef}
+          cardRef={cardRef}
+          selectedCategory={selectedCategory}
+          headerHeight={headerHeight}
+          setScrolledCategory={setScrolledCategory}
+          setSelectedCategory={setSelectedCategory}
+          itemCardId={itemCardId}
+          mapWrapperRef={mapWrapperRef}
+          isMapOpen={isMapOpen}
+          setIsMapOpen={setIsMapOpen}
+          userInfoRef={userInfoRef}
+          isUserInfoOpen={isUserInfoOpen}
+          toggleUserInfoVisibility={toggleUserInfoVisibility}
+          addressRef={addressRef}
+          toggleAddressVisibility={toggleAddressVisibility}
+          isModalAddressOpen={isModalAddressOpen}
+          toggleCartVisibility={toggleCartVisibility}
+          loading={loading}
+          isLoginOpen={isLoginOpen}
+          loginWrapperRef={loginWrapperRef}
+          toggleLoginVisibility={toggleLoginVisibility}
+          toggleMapVisibility={toggleMapVisibility}
+          setSearchQuery={setSearchQuery}
+        />
+        {!monitorMediaQuery && (
+          <Cart
+            position="sticky"
+            top="105px"
+            height="calc(100vh - 180px)"
+            transform="none"
+            toggleCartVisibility={toggleCartVisibility}
+            loading={loading}
+            navigate={navigate}
           />
         )}
       </div>
-
-      <MainContent
-        items={searchedItems}
-        categories={searchedCategories}
-        isCartVisible={isCartVisible}
-        isCardOpen={isCardOpen}
-        toggleCardOpen={toggleCardOpen}
-        wrapperRef={wrapperRef}
-        cardRef={cardRef}
-        selectedCategory={selectedCategory}
-        headerHeight={headerHeight}
-        setScrolledCategory={setScrolledCategory}
-        setSelectedCategory={setSelectedCategory}
-        itemCardId={itemCardId}
-        mapWrapperRef={mapWrapperRef}
-        isMapOpen={isMapOpen}
-        setIsMapOpen={setIsMapOpen}
-        userInfoRef={userInfoRef}
-        isUserInfoOpen={isUserInfoOpen}
-        toggleUserInfoVisibility={toggleUserInfoVisibility}
-        addressRef={addressRef}
-        toggleAddressVisibility={toggleAddressVisibility}
-        isModalAddressOpen={isModalAddressOpen}
-        toggleCartVisibility={toggleCartVisibility}
-        loading={loading}
-        isLoginOpen={isLoginOpen}
-        loginWrapperRef={loginWrapperRef}
-        toggleLoginVisibility={toggleLoginVisibility}
-        toggleMapVisibility={toggleMapVisibility}
-        setSearchQuery={setSearchQuery}
-      />
-      {!monitorMediaQuery && (
-        <Cart
-          position="sticky"
-          top="105px"
-          height="calc(100vh - 180px)"
-          transform="none"
-          toggleCartVisibility={toggleCartVisibility}
-          loading={loading}
-          navigate={navigate}
-        />
-      )}
-    </div>
+    </>
   );
 };
 
