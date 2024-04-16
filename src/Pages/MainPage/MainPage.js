@@ -140,9 +140,13 @@ const MainPage = ({
 
   useEffect(() => {
     if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight - 2); // height of Header
+      if (!netbooksMediaQuery) {
+        setHeaderHeight(headerRef.current.offsetHeight - 2); // height of Header
+      } else {
+        setHeaderHeight(headerRef.current.offsetHeight + 65); // height of Header
+      }
     }
-  }, [headerRef]);
+  }, [headerRef, netbooksMediaQuery]);
 
   //to sum total price of items from cart
   useUpdateSumHook();
