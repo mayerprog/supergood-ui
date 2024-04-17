@@ -37,5 +37,7 @@
 
   .active {
     background-color: darken(#fcfcfc, 2%);
+    // transform: translateZ(0);
+    // transition-property: opacity;
   }
 }
