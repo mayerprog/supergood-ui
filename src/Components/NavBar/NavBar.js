@@ -48,12 +48,6 @@ const NavBar = ({
         });
         setPrevActiveButtonId(activeButtonIndex);
       }
-
-      console.log("activeButtonWidth", activeButton.offsetWidth);
-      console.log(
-        "navbarRef.current.clientWidth",
-        navbarRef.current.clientWidth
-      );
     }
   }, [selectedCategory, prevActiveButtonId]);
 
