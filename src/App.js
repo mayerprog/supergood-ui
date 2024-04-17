@@ -18,6 +18,7 @@ import {
   setAddressSelected,
   updateSelected,
 } from "./redux/slices/addressSlice";
+import DeviceFooter from "./Components/Footer/DeviceFooter/DeviceFooter";
 
 function App() {
   // modals and sheets
@@ -30,6 +31,8 @@ function App() {
   const [isPayTypeOpen, setIsPayTypeOpen] = useState(false);
   const [isMainSheetOpen, setIsMainSheetOpen] = useState(false);
   const [mainSheetClosing, setMainSheetClosing] = useState(false);
+  const [isCartSheetOpen, setIsCartSheetOpen] = useState(false);
+  const [cartSheetClosing, setCartSheetClosing] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isMainPage, setIsMainPage] = useState(false);
@@ -42,6 +45,7 @@ function App() {
   const loginWrapperRef = useRef(null);
   const payTypeWrapperRef = useRef(null);
   const mainSheetWrapperRef = useRef(null);
+  const cartSheetWrapperRef = useRef(null);
 
   //strict mode flag
   const hasRunOnce = useRef(false);
@@ -83,7 +87,9 @@ function App() {
 
   const toggleMainSheetVisibility = () => {
     setMainSheetClosing(true);
-    // setIsMainSheetOpen(!isMainSheetOpen);
+  };
+  const toggleCartSheetVisibility = () => {
+    setCartSheetClosing(true);
   };
 
   useOutsideHook(mapWrapperRef, toggleMapVisibility); // to close popup <MapComponent /> clicking outside
@@ -94,7 +100,8 @@ function App() {
   useOutsideHook(addressRef, toggleAddressVisibility); // to close popup <AddressModal /> clicking outside
   useOutsideHook(loginWrapperRef, toggleLoginVisibility); // to close popup <LoginModal /> clicking outside
   useOutsideHook(payTypeWrapperRef, togglePayTypeVisibility); // to close popup <PayTypeModal /> clicking outside
-  useOutsideHook(mainSheetWrapperRef, toggleMainSheetVisibility); // to close popup <MainSheet /> clicking outside
+  useOutsideHook(mainSheetWrapperRef, toggleMainSheetVisibility); // to close <MainSheet /> clicking outside
+  useOutsideHook(cartSheetWrapperRef, toggleCartSheetVisibility); // to close <CartSheet /> clicking outside
 
   const location = useLocation(); // Getting the current location
 
@@ -224,7 +231,11 @@ function App() {
           }
         />
       </Routes>
-      <Footer netbooksMediaQuery={netbooksMediaQuery} />
+      {!netbooksMediaQuery ? (
+        <Footer setIsCartSheetOpen={setIsCartSheetOpen} />
+      ) : (
+        <DeviceFooter />
+      )}
     </div>
   );
 }

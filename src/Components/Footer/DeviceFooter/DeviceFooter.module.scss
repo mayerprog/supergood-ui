@@ -1,0 +1,42 @@
+@import "../../../mixins/mixins";
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  padding: 15px;
+  z-index: 999;
+  position: fixed;
+  bottom: 0;
+  height: 52px;
+  border-radius: 30px 30px 0 0;
+  background-color: #edb848;
+  box-shadow: 0 -1px 4px 2px rgba(0, 0, 0, 0.1);
+
+  .cart {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  h3 {
+    color: #303030;
+    font-weight: 600;
+  }
+  .icon {
+    margin-right: 5px;
+  }
+  .buttonText {
+    display: flex;
+    flex: 1;
+    color: #222222;
+    justify-content: flex-end;
+    font-size: medium;
+    max-width: 100%;
+  }
+}
