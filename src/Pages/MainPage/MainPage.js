@@ -161,7 +161,7 @@ const MainPage = ({
 
   return (
     <>
-      {netbooksMediaQuery && (
+      {netbooksMediaQuery && !loading && (
         <NavBar
           categories={categories}
           onCategorySelect={setSelectedCategory}
