@@ -259,7 +259,7 @@ const MainPage = ({
                   setCartSheetClosing={setCartSheetClosing}
                   setIsCartSheetOpen={setIsCartSheetOpen}
                   cartSheetClosing={cartSheetClosing}
-                  isCartSheetOpen={isCartSheetOpen}
+                  navigate={navigate}
                 />
               )}
             </div>

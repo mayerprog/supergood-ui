@@ -13,7 +13,7 @@ const CartSheet = ({
   setCartSheetClosing,
   setIsCartSheetOpen,
   cartSheetClosing,
-  isCartSheetOpen,
+  navigate,
 }) => {
   const dispatch = useDispatch();
 
@@ -23,6 +23,13 @@ const CartSheet = ({
   const handleClosing = () => {
     setCartSheetClosing(false);
     setIsCartSheetOpen(false);
+  };
+
+  const handleClickSubmit = () => {
+    if (cartItems.length > 0) {
+      setIsCartSheetOpen(false);
+      navigate("/submit");
+    }
   };
 
   const toggleDeviceCart = () => {
@@ -60,18 +67,41 @@ const CartSheet = ({
           <GiShoppingCart size={25} className={styles.icon} />
           <h3>Корзина</h3>
         </div>
-        <span
-          className={styles.buttonText}
-          onClick={() => dispatch(removeAllItems())}
-        >
-          Очистить
-        </span>
+        {cartItems.length > 0 ? (
+          <span
+            className={styles.buttonText}
+            onClick={() => dispatch(removeAllItems())}
+          >
+            Очистить
+          </span>
+        ) : (
+          <span
+            className={styles.noItemsText}
+            onClick={() => setCartSheetClosing(true)}
+          >
+            Вернуться к выбору блюд
+          </span>
+        )}
       </div>
-      <div className={styles.items}>
-        {cartItems.map((item, index) => (
-          <CartBox item={item} index={index} key={index} isSheet={true} />
-        ))}
-      </div>
+      {cartItems.length > 0 ? (
+        <>
+          <div className={styles.items}>
+            {cartItems.map((item, index) => (
+              <CartBox item={item} index={index} key={index} isSheet={true} />
+            ))}
+          </div>
+          <div className={styles.button}>
+            <button className={styles.buttonStyle} onClick={handleClickSubmit}>
+              <span className={styles.buttonText}>Оформить заказ</span>
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className={styles.noItems}>
+          <p>В корзине ничего нет {":("}</p>
+          <p>Добавьте товары в корзину, чтобы можно было оформить заказ</p>
+        </div>
+      )}
     </div>
   );
 };
