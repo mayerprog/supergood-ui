@@ -12,11 +12,11 @@ const MainSheet = ({
   mainSheetClosing,
   setMainSheetClosing,
 }) => {
-  useEffect(() => {
-    console.log(
-      `Компонент MainSheet отрисован в ${new Date().toLocaleTimeString()}`
-    );
-  });
+  // useEffect(() => {
+  //   console.log(
+  //     `Компонент MainSheet отрисован в ${new Date().toLocaleTimeString()}`
+  //   );
+  // });
   const handleClosing = () => {
     setIsMainSheetOpen(false);
     setMainSheetClosing(false);

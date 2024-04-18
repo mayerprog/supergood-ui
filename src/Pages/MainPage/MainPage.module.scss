@@ -10,7 +10,7 @@
   padding-bottom: 30px;
 }
 
-.mainSheetOverlay {
+.sheetOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -23,12 +23,18 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.8s, visibility 0s 0.8s;
+  &[data-is-cart="true"] {
+    transition: opacity 0.4s, visibility 0s 0.4s;
+  }
 }
 
-.mainSheetOverlay.visible {
+.sheetOverlay.visible {
   opacity: 1;
   visibility: visible;
   transition: opacity 0.8s;
+  &[data-is-cart="true"] {
+    transition: opacity 0.4s;
+  }
 }
 
 // monitors

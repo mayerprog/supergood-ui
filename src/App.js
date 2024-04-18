@@ -89,6 +89,7 @@ function App() {
     setMainSheetClosing(true);
   };
   const toggleCartSheetVisibility = () => {
+    // setIsCartSheetOpen(false);
     setCartSheetClosing(true);
   };
 
@@ -193,6 +194,11 @@ function App() {
               mainSheetClosing={mainSheetClosing}
               setMainSheetClosing={setMainSheetClosing}
               setSearchQuery={setSearchQuery}
+              isCartSheetOpen={isCartSheetOpen}
+              cartSheetWrapperRef={cartSheetWrapperRef}
+              setCartSheetClosing={setCartSheetClosing}
+              setIsCartSheetOpen={setIsCartSheetOpen}
+              cartSheetClosing={cartSheetClosing}
             />
           }
         />
@@ -231,11 +237,12 @@ function App() {
           }
         />
       </Routes>
-      {!netbooksMediaQuery ? (
-        <Footer setIsCartSheetOpen={setIsCartSheetOpen} />
-      ) : (
-        <DeviceFooter />
-      )}
+      {
+        !netbooksMediaQuery && <Footer />
+        //  : (
+        //   <DeviceFooter setIsCartSheetOpen={setIsCartSheetOpen} />
+        // )
+      }
     </div>
   );
 }
