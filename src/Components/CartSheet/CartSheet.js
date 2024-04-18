@@ -34,8 +34,8 @@ const CartSheet = ({
     gsap.from(menu, {
       y: "100%",
       opacity: 1,
-      duration: 0.4,
-      delay: 0.3,
+      duration: 0.2,
+      delay: 0.2,
       ease: "power2.out",
     });
   }, []);
@@ -45,7 +45,7 @@ const CartSheet = ({
       gsap.to(menu, {
         y: "100%",
         opacity: 1,
-        duration: 0.4,
+        duration: 0.2,
         ease: "power2.in",
         onComplete: () => handleClosing(),
       });
@@ -62,6 +62,7 @@ const CartSheet = ({
         </div>
         <span className={styles.buttonText}>{itemsSum} ₽</span>
       </div>
+      Б
     </div>
   );
 };

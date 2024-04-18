@@ -24,7 +24,7 @@
   visibility: hidden;
   transition: opacity 0.8s, visibility 0s 0.8s;
   &[data-is-cart="true"] {
-    transition: opacity 0.4s, visibility 0s 0.4s;
+    transition: opacity 0.4s, visibility 0.4s;
   }
 }
 
