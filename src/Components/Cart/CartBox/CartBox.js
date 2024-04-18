@@ -5,10 +5,13 @@ import { itemAPI } from "../../../api/itemAPI";
 import { MdImageNotSupported } from "react-icons/md";
 import { useImageLoaded } from "../../../hooks/useImageLoaded";
 import { baseURL } from "../../../config";
+import { useMediaQuery } from "react-responsive";
 
-const CartBox = ({ item, index }) => {
+const CartBox = ({ item, index, isSheet }) => {
   const [itemImage, setItemImage] = useState("");
   const [ref, loaded, onLoad] = useImageLoaded();
+  const mediaQuery = useMediaQuery({ maxWidth: 1024, minWidth: 368 });
+  const phoneMediaQuery = useMediaQuery({ maxWidth: 340 });
 
   const uid = item.img[0].uid;
   const uri = `${baseURL}/getFile?uid=${uid}`;
@@ -25,16 +28,25 @@ const CartBox = ({ item, index }) => {
         />
       ) : (
         <div className={styles.cartImage}>
-          <MdImageNotSupported size={40} color="#ccc" />
+          <MdImageNotSupported size={!mediaQuery ? 50 : 100} color="#ccc" />
         </div>
       )}
       <div className={styles.cartBoxText}>
         <span className={styles.text}>{item.name}</span>
-        <div>
-          <span>{`${item.price} ₽`}</span>
-          &nbsp;|&nbsp;
-          <span>{`${item.params.weightout.value} г.`}</span>
-        </div>
+        {!phoneMediaQuery ? (
+          <div>
+            <span>{`${item.price} ₽`}</span>
+            &nbsp;|&nbsp;
+            <span>{`${item.params.weightout.value} г.`}</span>
+          </div>
+        ) : (
+          <div>
+            <span className={styles.text}>{`${item.price} ₽`}</span>
+            <span
+              className={styles.text}
+            >{`${item.params.weightout.value} г.`}</span>
+          </div>
+        )}
       </div>
       <div className={styles.countBox}>
         <AddItemBox
@@ -43,6 +55,7 @@ const CartBox = ({ item, index }) => {
           boxShadow="0 0 2px rgba(0, 0, 0, 0.2)"
           width="5em"
           color="#5f5f5f"
+          isSheet={isSheet}
         />
       </div>
     </div>

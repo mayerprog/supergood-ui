@@ -118,7 +118,7 @@ const MainContent = ({
 
   return (
     <div className={styles.container}>
-      {isCartVisible && (
+      {isCartVisible && !netbooksMediaQuery && (
         <div className={styles.overlay}>
           <Cart
             position="absolute"

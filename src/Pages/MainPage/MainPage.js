@@ -14,7 +14,7 @@ import { itemAPI } from "../../api/itemAPI";
 import { useMediaQuery } from "react-responsive";
 import MainSheet from "../../Components/MainSheet/MainSheet";
 import NavBar from "../../Components/NavBar/NavBar";
-import CartSheet from "../../Components/CartSheet/CartSheet";
+import CartSheet from "../../Components/Cart/CartSheet/CartSheet";
 import DeviceFooter from "../../Components/Footer/DeviceFooter/DeviceFooter";
 
 const MainPage = ({
@@ -245,27 +245,26 @@ const MainPage = ({
           />
         )}
 
-        <>
-          <div
-            className={`${styles.sheetOverlay} ${
-              isCartSheetOpen ? styles.visible : ""
-            }`}
-            data-is-cart="true"
-          >
-            {isCartSheetOpen && (
-              <CartSheet
-                cartSheetWrapperRef={cartSheetWrapperRef}
-                setCartSheetClosing={setCartSheetClosing}
-                setIsCartSheetOpen={setIsCartSheetOpen}
-                cartSheetClosing={cartSheetClosing}
-                isCartSheetOpen={isCartSheetOpen}
-              />
-            )}
-          </div>
-          {!isCartSheetOpen && (
-            <DeviceFooter setIsCartSheetOpen={setIsCartSheetOpen} />
-          )}
-        </>
+        {netbooksMediaQuery && (
+          <>
+            <div
+              className={`${styles.sheetOverlay} ${
+                isCartSheetOpen ? styles.visible : ""
+              }`}
+              data-is-cart="true"
+            >
+              {isCartSheetOpen && (
+                <CartSheet
+                  cartSheetWrapperRef={cartSheetWrapperRef}
+                  setCartSheetClosing={setCartSheetClosing}
+                  setIsCartSheetOpen={setIsCartSheetOpen}
+                  cartSheetClosing={cartSheetClosing}
+                  isCartSheetOpen={isCartSheetOpen}
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
     </>
   );

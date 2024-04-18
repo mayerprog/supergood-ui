@@ -1,4 +1,4 @@
-@import "../../mixins/mixins";
+@import "../../../mixins/mixins";
 
 .cartSheet {
   display: flex;
@@ -43,6 +43,9 @@
   h3 {
     color: #303030;
     font-weight: 600;
+    @media (max-width: 310px) {
+      font-size: 15px;
+    }
   }
   .icon {
     margin-right: 5px;
@@ -54,5 +57,13 @@
     justify-content: flex-end;
     font-size: medium;
     max-width: 100%;
+    cursor: pointer;
+    @media (max-width: 310px) {
+      font-size: 13px;
+    }
   }
+}
+
+.items {
+  margin-top: 80px;
 }

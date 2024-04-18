@@ -1,11 +1,11 @@
 import styles from "./CartSheet.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { removeAllItems } from "../../redux/slices/cartSlice";
+import { removeAllItems } from "../../../redux/slices/cartSlice";
 import React, { memo, useEffect } from "react";
-import CartBox from "../Cart/CartBox/CartBox";
+import CartBox from "../CartBox/CartBox";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import DeviceFooter from "../Footer/DeviceFooter/DeviceFooter";
+import DeviceFooter from "../../Footer/DeviceFooter/DeviceFooter";
 import { GiShoppingCart } from "react-icons/gi";
 
 const CartSheet = ({
@@ -60,9 +60,18 @@ const CartSheet = ({
           <GiShoppingCart size={25} className={styles.icon} />
           <h3>Корзина</h3>
         </div>
-        <span className={styles.buttonText}>{itemsSum} ₽</span>
+        <span
+          className={styles.buttonText}
+          onClick={() => dispatch(removeAllItems())}
+        >
+          Очистить
+        </span>
       </div>
-      Б
+      <div className={styles.items}>
+        {cartItems.map((item, index) => (
+          <CartBox item={item} index={index} key={index} isSheet={true} />
+        ))}
+      </div>
     </div>
   );
 };

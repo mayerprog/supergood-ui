@@ -41,7 +41,6 @@
     @include form-input-style;
     width: 100%;
     height: 43px;
-    // box-shadow: 0 0 5px #ccc;
 
     border: 1px solid #ccc;
     max-width: 380px;
@@ -53,11 +52,6 @@
     .icon {
       @include icon-style;
     }
-
-    // @media (max-width: 1024px) {
-    //   box-shadow: none;
-    //   border: 1px solid #ccc;
-    // }
   }
 
   .buttonText {
@@ -66,7 +60,6 @@
     white-space: nowrap;
     display: block;
     max-width: 100%;
-    color: #313131;
 
     @media (max-width: 1024px) {
       font-size: 13px;
@@ -88,33 +81,31 @@
     text-overflow: ellipsis;
     transition: 0.4s ease;
     font-weight: 400;
+    margin-right: 40px;
+
     cursor: default;
 
     @media (max-width: 1481px) {
       max-width: 110px;
       width: auto;
-      cursor: pointer;
+    }
+
+    @media (max-width: 1280px) {
       &:hover {
         color: #fcfcfc;
         text-shadow: 0px 1px 2px #ccc;
+        cursor: pointer;
       }
     }
-
     @media (max-width: 1099px) {
       max-width: 70px;
+    }
+    @media (max-width: 822px) {
+      margin-right: 20px;
     }
 
     .icon {
       @include icon-style;
-    }
-  }
-
-  .cartButton {
-    margin-right: 40px;
-
-    @media (max-width: 822px) {
-      margin-right: 20px;
-      max-width: 70px;
     }
   }
 

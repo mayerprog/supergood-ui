@@ -56,7 +56,7 @@ const Cart = ({
         </span>
       </div>
       {cartItems.map((item, index) => (
-        <CartBox item={item} index={index} key={index} />
+        <CartBox item={item} index={index} key={index} isSheet={false} />
       ))}
       <div className={styles.cartFooter}>
         <div className={styles.line} />

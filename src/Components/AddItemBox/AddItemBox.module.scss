@@ -19,6 +19,18 @@
   height: 2rem;
   width: var(--counter-width, 7rem);
   border: 1px none #ccc;
+  &[data-is-sheet="true"] {
+    @media (min-width: 500px) {
+      width: 8rem;
+      height: 2.5rem;
+    }
+    @media (max-width: 500px) {
+      width: 6rem;
+    }
+    @media (max-width: 400px) {
+      width: 5rem;
+    }
+  }
 
   .cartCounterButton {
     @include counter-button-box;

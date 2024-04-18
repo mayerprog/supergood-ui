@@ -116,7 +116,6 @@ const Header = forwardRef(
             />
           </>
         )}
-        
       </header>
     );
   }

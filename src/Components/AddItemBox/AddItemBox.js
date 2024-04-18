@@ -11,6 +11,7 @@ const AddItemBox = ({
   color,
   margin,
   itemId,
+  isSheet,
 }) => {
   const dynamicStyle = {
     "--counter-bg-color": backgroundColor,
@@ -92,7 +93,11 @@ const AddItemBox = ({
   };
 
   return (
-    <div className={styles.counter} style={dynamicStyle}>
+    <div
+      className={styles.counter}
+      style={dynamicStyle}
+      data-is-sheet={isSheet ? "true" : "false"}
+    >
       <button
         onClick={(e) => decrement(e)}
         className={

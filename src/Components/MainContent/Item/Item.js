@@ -88,7 +88,7 @@ const Item = ({ item, category, toggleCardOpen, toggleMapVisibility }) => {
       </div>
       <div className={styles.order}>
         {amount > 0 ? (
-          <AddItemBox margin="0 0.5rem" itemId={item.itemid} />
+          <AddItemBox margin="0 0.5rem" itemId={item.itemid} isSheet={false} />
         ) : (
           <button
             className={styles.counter}
