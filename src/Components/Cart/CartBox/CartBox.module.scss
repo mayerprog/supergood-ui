@@ -32,6 +32,9 @@
     text-overflow: ellipsis;
     overflow: hidden;
     margin-bottom: 0.4rem;
+    @media (max-width: 310px) {
+      font-size: 15px;
+    }
   }
   .countBox {
     display: flex;
@@ -50,9 +53,12 @@
 @media (max-width: 1024px) {
   .cartBox {
     display: flex;
+    flex: 1;
     flex-direction: row;
     justify-content: space-between;
     padding: 0.5em 1.5em;
+    // width: calc(100vw - 50px);
+    // width: 100vw;
 
     .cartImage {
       margin-right: 30px;
@@ -70,3 +76,9 @@
     }
   }
 }
+
+// @media (max-width: 600px) {
+//   .cartBox {
+//     width: none;
+//   }
+// }

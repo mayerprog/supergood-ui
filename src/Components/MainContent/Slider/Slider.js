@@ -41,32 +41,6 @@ const Slider = ({}) => {
     };
   }, []);
 
-  //for wheeling the slider
-  // useEffect(() => {
-  //   const slider = sliderRef.current; // Получаем DOM-элемент
-  //   const handleWheel = (e) => {
-  //     e.preventDefault();
-
-  //     if (e.deltaY > 0) {
-  //       slideToRight();
-  //     } else {
-  //       slideToLeft();
-  //     }
-  //   };
-
-  //   // Добавляем обработчик события
-  //   if (slider) {
-  //     slider.addEventListener("wheel", handleWheel, { passive: false });
-  //   }
-
-  //   // Убираем обработчик события при размонтировании компонента
-  //   return () => {
-  //     if (slider) {
-  //       slider.removeEventListener("wheel", handleWheel);
-  //     }
-  //   };
-  // }, [slideToRight, slideToLeft, sliderRef]);
-
   return (
     <>
       <div className={styles.slider} ref={sliderRef}>

@@ -10,8 +10,8 @@ import { useMediaQuery } from "react-responsive";
 const CartBox = ({ item, index, isSheet }) => {
   const [itemImage, setItemImage] = useState("");
   const [ref, loaded, onLoad] = useImageLoaded();
-  const mediaQuery = useMediaQuery({ maxWidth: 1024, minWidth: 368 });
-  const phoneMediaQuery = useMediaQuery({ maxWidth: 340 });
+  const mediaQuery = useMediaQuery({ maxWidth: 1024, minWidth: 367 });
+  const phoneMediaQuery = useMediaQuery({ maxWidth: 418 });
 
   const uid = item.img[0].uid;
   const uri = `${baseURL}/getFile?uid=${uid}`;

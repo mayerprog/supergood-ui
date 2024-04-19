@@ -84,18 +84,25 @@ const CartSheet = ({
         )}
       </div>
       {cartItems.length > 0 ? (
-        <>
+        <div className={styles.container}>
           <div className={styles.items}>
             {cartItems.map((item, index) => (
               <CartBox item={item} index={index} key={index} isSheet={true} />
             ))}
           </div>
+          <div className={styles.line} />
+
+          <div className={styles.orderSum}>
+            <span>Сумма заказа:</span>
+            <span>{itemsSum} ₽</span>
+          </div>
+
           <div className={styles.button}>
             <button className={styles.buttonStyle} onClick={handleClickSubmit}>
               <span className={styles.buttonText}>Оформить заказ</span>
             </button>
           </div>
-        </>
+        </div>
       ) : (
         <div className={styles.noItems}>
           <p>В корзине ничего нет {":("}</p>
