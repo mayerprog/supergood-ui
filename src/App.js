@@ -89,7 +89,6 @@ function App() {
     setMainSheetClosing(true);
   };
   const toggleCartSheetVisibility = () => {
-    // setIsCartSheetOpen(false);
     setCartSheetClosing(true);
   };
 
@@ -111,16 +110,6 @@ function App() {
   const addressList = useSelector((state) => state.address.addressList);
   const addressSelected = useSelector((state) => state.address.addressSelected);
   const cartItems = useSelector((state) => state.cart.cartItems);
-
-  // const handleResize = () => {
-  //   setIsCartSheetOpen(false);
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleResize);
-  //   return () => window.removeEventListener("resize", handleResize);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   // we find here address with selected: true to display it all over the app
   useEffect(() => {

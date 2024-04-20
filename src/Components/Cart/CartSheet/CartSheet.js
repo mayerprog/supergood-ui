@@ -79,12 +79,12 @@ const CartSheet = ({
             className={styles.noItemsText}
             onClick={() => setCartSheetClosing(true)}
           >
-            Вернуться к выбору блюд
+            Вернуться к выбору
           </span>
         )}
       </div>
       {cartItems.length > 0 ? (
-        <div className={styles.container}>
+        <div className={styles.itemsContainer}>
           <div className={styles.items}>
             {cartItems.map((item, index) => (
               <CartBox item={item} index={index} key={index} isSheet={true} />
