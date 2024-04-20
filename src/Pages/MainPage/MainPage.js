@@ -48,8 +48,6 @@ const MainPage = ({
   setIsCartSheetOpen,
   cartSheetClosing,
 }) => {
-  const [isCardOpen, setIsCardOpen] = useState(false);
-  const [itemCardId, setItemCardId] = useState(null);
   const [headerHeight, setHeaderHeight] = useState(0); // State to store header height
   const [scrolledCategory, setScrolledCategory] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -64,7 +62,6 @@ const MainPage = ({
   const [searchedItems, setSearchedItems] = useState([]);
   const [searchedCategories, setSearchedCategories] = useState(categories);
 
-  const cardRef = useRef(null);
   const wrapperRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -157,13 +154,6 @@ const MainPage = ({
 
   //to sum total price of items from cart
   useUpdateSumHook();
-
-  const toggleCardOpen = (itemId) => {
-    setIsCardOpen(!isCardOpen);
-    setItemCardId(itemId);
-  };
-
-  useOutsideHook(cardRef, toggleCardOpen); // to close popup <ModalCard /> clicking outside
   useOutsideHook(wrapperRef, toggleCartVisibility); // to close popup <Cart /> clicking outside
 
   return (
@@ -207,15 +197,11 @@ const MainPage = ({
           items={searchedItems}
           categories={searchedCategories}
           isCartVisible={isCartVisible}
-          isCardOpen={isCardOpen}
-          toggleCardOpen={toggleCardOpen}
           wrapperRef={wrapperRef}
-          cardRef={cardRef}
           selectedCategory={selectedCategory}
           headerHeight={headerHeight}
           setScrolledCategory={setScrolledCategory}
           setSelectedCategory={setSelectedCategory}
-          itemCardId={itemCardId}
           mapWrapperRef={mapWrapperRef}
           isMapOpen={isMapOpen}
           setIsMapOpen={setIsMapOpen}

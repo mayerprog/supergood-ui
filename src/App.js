@@ -21,7 +21,7 @@ import {
 import DeviceFooter from "./Components/Footer/DeviceFooter/DeviceFooter";
 
 function App() {
-  // modals and sheets
+  // modals
   const [isModalOptionsOpen, setIsModalOptionsOpen] = useState(false);
   const [isUserInfoOpen, setIsUserInfoOpen] = useState(false);
   const [isModalAddressOpen, setIsModalAddressOpen] = useState(false);
@@ -29,10 +29,15 @@ function App() {
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isPayTypeOpen, setIsPayTypeOpen] = useState(false);
+  // sheets
+
+  // Menu sheet
   const [isMainSheetOpen, setIsMainSheetOpen] = useState(false);
   const [mainSheetClosing, setMainSheetClosing] = useState(false);
+  // Cart sheet
   const [isCartSheetOpen, setIsCartSheetOpen] = useState(false);
   const [cartSheetClosing, setCartSheetClosing] = useState(false);
+  // Item card sheet
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isMainPage, setIsMainPage] = useState(false);

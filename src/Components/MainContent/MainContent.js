@@ -16,11 +16,10 @@ import ItemsShimmer from "../../Loaders/ItemsShimmer";
 import LoginModal from "../Login/LoginModal";
 import SearchField from "../Reusables/SearchField/SearchField";
 import { useMediaQuery } from "react-responsive";
+import { useOutsideHook } from "../../hooks/useOutsideHook";
 
 const MainContent = ({
   isCartVisible,
-  isCardOpen,
-  toggleCardOpen,
   wrapperRef,
   items,
   categories,
@@ -28,8 +27,6 @@ const MainContent = ({
   headerHeight,
   setScrolledCategory,
   setSelectedCategory,
-  itemCardId,
-  cardRef,
   mapWrapperRef,
   setIsMapOpen,
   isMapOpen,
@@ -48,8 +45,22 @@ const MainContent = ({
 }) => {
   const categoryRefs = useRef({});
   const navigate = useNavigate();
-
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
+
+  const [itemCardId, setItemCardId] = useState(null);
+
+  // Item card modal
+  const [isCardOpen, setIsCardOpen] = useState(false);
+  // Item card sheet
+
+  const cardRef = useRef(null);
+
+  const toggleCardOpen = (itemId) => {
+    setIsCardOpen(!isCardOpen);
+    setItemCardId(itemId);
+  };
+
+  useOutsideHook(cardRef, toggleCardOpen); // to close popup <ModalCard /> clicking outside
 
   // useEffect(() => {
   //   console.log(
