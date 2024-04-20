@@ -37,7 +37,6 @@ function App() {
   // Cart sheet
   const [isCartSheetOpen, setIsCartSheetOpen] = useState(false);
   const [cartSheetClosing, setCartSheetClosing] = useState(false);
-  // Item card sheet
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isMainPage, setIsMainPage] = useState(false);
@@ -181,12 +180,9 @@ function App() {
               toggleMapVisibility={toggleMapVisibility}
               isUserInfoOpen={isUserInfoOpen}
               isModalAddressOpen={isModalAddressOpen}
-              optionsRef={optionsRef}
               userInfoRef={userInfoRef}
               addressRef={addressRef}
-              toggleOptionsVisibility={toggleOptionsVisibility}
               toggleUserInfoVisibility={toggleUserInfoVisibility}
-              toggleAddressVisibility={toggleAddressVisibility}
               mapWrapperRef={mapWrapperRef}
               monitorMediaQuery={monitorMediaQuery}
               isLoginOpen={isLoginOpen}

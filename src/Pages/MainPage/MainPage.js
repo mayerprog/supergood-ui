@@ -29,7 +29,6 @@ const MainPage = ({
   userInfoRef,
   addressRef,
   toggleUserInfoVisibility,
-  toggleAddressVisibility,
   mapWrapperRef,
   monitorMediaQuery,
   isLoginOpen,
@@ -209,7 +208,6 @@ const MainPage = ({
           isUserInfoOpen={isUserInfoOpen}
           toggleUserInfoVisibility={toggleUserInfoVisibility}
           addressRef={addressRef}
-          toggleAddressVisibility={toggleAddressVisibility}
           isModalAddressOpen={isModalAddressOpen}
           toggleCartVisibility={toggleCartVisibility}
           loading={loading}
