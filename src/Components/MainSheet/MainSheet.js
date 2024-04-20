@@ -55,11 +55,13 @@ const MainSheet = ({
     <div className={styles.container} ref={mainSheetWrapperRef}>
       <SocialMedia />
 
-      {["Мои данные", "Мои адреса", "Мои заказы", "Выйти"].map((item) => (
-        <button className={styles.item}>
-          <span>{item}</span>
-        </button>
-      ))}
+      {["Мои данные", "Мои адреса", "Мои заказы", "Выйти"].map(
+        (item, index) => (
+          <button className={styles.item} key={index}>
+            <span>{item}</span>
+          </button>
+        )
+      )}
       <div className={styles.line} />
 
       {links.map((item) => (

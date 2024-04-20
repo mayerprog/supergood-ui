@@ -37,5 +37,5 @@ export const useImageLoaded = () => {
   //   };
   // }, [ref.current]);
 
-  return [ref, loaded, onLoad];
+  return [ref, loaded, setLoaded, onLoad];
 };

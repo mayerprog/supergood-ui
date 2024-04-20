@@ -61,7 +61,8 @@
 }
 
 .overlay,
-.cardOverlay {
+.cardOverlay,
+.sheetOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -78,4 +79,16 @@
 .cardOverlay {
   justify-content: center;
   align-items: center;
+}
+
+.sheetOverlay {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s, visibility 0.4s;
+}
+
+.sheetOverlay.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s;
 }

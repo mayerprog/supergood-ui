@@ -29,8 +29,8 @@ function App() {
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isPayTypeOpen, setIsPayTypeOpen] = useState(false);
-  // sheets
 
+  // sheets
   // Menu sheet
   const [isMainSheetOpen, setIsMainSheetOpen] = useState(false);
   const [mainSheetClosing, setMainSheetClosing] = useState(false);

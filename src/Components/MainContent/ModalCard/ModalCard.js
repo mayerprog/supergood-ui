@@ -8,15 +8,16 @@ import { MdImageNotSupported } from "react-icons/md";
 import { useImageLoaded } from "../../../hooks/useImageLoaded";
 import { baseURL } from "../../../config";
 import { addItemToCart } from "../../../services/addItemToCart";
+import ProductInfo from "../ProductInfo/ProductInfo";
 
 const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
   const items = useSelector((state) => state.item.items);
   const foundItem = items.find((item) => itemCardId === item.itemid);
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  const addressList = useSelector((state) => state.address.addressList);
-  const [addingInProgress, setAddingInProgress] = useState(false);
-  const [amount, setAmount] = useState(null);
-  const dispatch = useDispatch();
+  // const cartItems = useSelector((state) => state.cart.cartItems);
+  // const addressList = useSelector((state) => state.address.addressList);
+  // const [addingInProgress, setAddingInProgress] = useState(false);
+  // const [amount, setAmount] = useState(null);
+  // const dispatch = useDispatch();
 
   // useEffect(() => {
   //   console.log(
@@ -24,18 +25,18 @@ const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
   //   );
   // });
 
-  useEffect(() => {
-    const foundCartItem = cartItems.find(
-      (cartItem) => itemCardId === cartItem.itemid
-    );
-    if (foundCartItem) {
-      setAmount(foundCartItem.params.amount.value);
-    } else {
-      setAmount(0);
-    }
-  }, [cartItems, itemCardId]);
+  // useEffect(() => {
+  //   const foundCartItem = cartItems.find(
+  //     (cartItem) => itemCardId === cartItem.itemid
+  //   );
+  //   if (foundCartItem) {
+  //     setAmount(foundCartItem.params.amount.value);
+  //   } else {
+  //     setAmount(0);
+  //   }
+  // }, [cartItems, itemCardId]);
 
-  const [ref, loaded, onLoad] = useImageLoaded();
+  const [ref, loaded, setLoaded, onLoad] = useImageLoaded();
 
   const uid = foundItem.img[0].uid;
   const uri = `${baseURL}/getFile?uid=${uid}`;
@@ -49,82 +50,19 @@ const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
           src={uri}
           ref={ref}
           onLoad={onLoad}
+          onError={() => setLoaded(false)} // Handle image load errors
+          loading="lazy" // Native lazy loading
         />
       ) : (
         <div className={styles.productImage}>
           <MdImageNotSupported size={330} color="#ccc" />
         </div>
       )}
-      <div>
-        <div className={styles.productInfo}>
-          <h2>{foundItem.name}</h2>
-          <span
-            className={styles.addInfo}
-          >{`${foundItem.params.weightout.value} г.`}</span>
-          <span className={styles.description}>{foundItem.description}</span>
-          {foundItem.catname === "Пицца" && (
-            <div className={styles.addInfo}>
-              <PizzaOptions />
-            </div>
-          )}
-          <span className={styles.addInfo}>
-            Энергетическая ценность на 100 г
-          </span>
-          <div className={styles.energyBox}>
-            <div className={styles.energyInfo}>
-              <span className={styles.value}>
-                {foundItem.params.protein.value}
-              </span>
-              <span>Белки</span>
-            </div>
-            <div className={styles.energyInfo}>
-              <span className={styles.value}>{foundItem.params.fat.value}</span>
-              <span>Жиры</span>
-            </div>
-            <div className={styles.energyInfo}>
-              <span className={styles.value}>
-                {foundItem.params.carbo.value}
-              </span>
-              <span>Углеводы</span>
-            </div>
-            <div className={styles.energyInfo}>
-              <span className={styles.value}>
-                {foundItem.params.kcal.value}
-              </span>
-              <span>Калории</span>
-            </div>
-          </div>
-        </div>
 
-        <div className={styles.order}>
-          {amount > 0 ? (
-            <AddItemBox
-              margin="0 0.5rem"
-              itemId={itemCardId}
-              backgroundColor="#fcfcfc"
-              // boxShadow="0 0 2px rgba(0, 0, 0, 0.2)"
-            />
-          ) : (
-            <button
-              className={styles.counter}
-              onClick={(event) =>
-                addItemToCart({
-                  event,
-                  addingInProgress,
-                  setAddingInProgress,
-                  toggleMapVisibility,
-                  addressList,
-                  dispatch,
-                  item: foundItem,
-                })
-              }
-            >
-              <span className={styles.count}>Добавить</span>
-            </button>
-          )}
-          <span className={styles.price}>{`${foundItem.price} ₽`}</span>
-        </div>
-      </div>
+      <ProductInfo
+        itemCardId={itemCardId}
+        toggleMapVisibility={toggleMapVisibility}
+      />
     </div>
   );
 };

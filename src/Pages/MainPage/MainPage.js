@@ -15,7 +15,6 @@ import { useMediaQuery } from "react-responsive";
 import MainSheet from "../../Components/MainSheet/MainSheet";
 import NavBar from "../../Components/NavBar/NavBar";
 import CartSheet from "../../Components/Cart/CartSheet/CartSheet";
-import DeviceFooter from "../../Components/Footer/DeviceFooter/DeviceFooter";
 
 const MainPage = ({
   searchQuery,
@@ -47,23 +46,19 @@ const MainPage = ({
   setIsCartSheetOpen,
   cartSheetClosing,
 }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
+
   const [headerHeight, setHeaderHeight] = useState(0); // State to store header height
   const [scrolledCategory, setScrolledCategory] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-
-  const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   const items = useSelector((state) => state.item.items);
   const categories = [...new Set(items.map((item) => item.catname))]; // Unique categories
-
   const [searchedItems, setSearchedItems] = useState([]);
   const [searchedCategories, setSearchedCategories] = useState(categories);
-
-  const wrapperRef = useRef(null);
-
-  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   console.log(
@@ -71,52 +66,55 @@ const MainPage = ({
   //   );
   // });
 
-  useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-
-        const itemsArray = [];
-        const allItems = await itemAPI.getItems(1257);
-
-        Object.keys(allItems.items).forEach((categoryId) => {
-          const categoryObject = allItems.items[categoryId];
-          const category = Object.values(categoryObject);
-          // console.log("category", category);
-          category.forEach((itemGroup) => {
-            Object.values(itemGroup).forEach((item) => {
-              const itemForPush = Object.values(item);
-              // console.log("item", itemForPush);
-              itemsArray.push(itemForPush[0]);
-            });
-          });
-        });
-        dispatch(setItems(itemsArray));
-        if (itemsArray.length === 0) setLoading(true);
-        else setLoading(false);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, [dispatch]);
+  //to sum total price of items from cart
+  useUpdateSumHook();
 
   // useEffect(() => {
-  //   const itemsArray = [];
-  //   Object.keys(jsonData.items).forEach((categoryId) => {
-  //     const categoryObject = jsonData.items[categoryId];
-  //     const category = Object.values(categoryObject);
-  //     // console.log("category", category);
-  //     category.forEach((itemGroup) => {
-  //       Object.values(itemGroup).forEach((item) => {
-  //         const itemForPush = Object.values(item);
-  //         itemsArray.push(itemForPush[0]);
+  //   (async () => {
+  //     try {
+  //       setLoading(true);
+
+  //       const itemsArray = [];
+  //       const allItems = await itemAPI.getItems(1257);
+
+  //       Object.keys(allItems.items).forEach((categoryId) => {
+  //         const categoryObject = allItems.items[categoryId];
+  //         const category = Object.values(categoryObject);
+  //         // console.log("category", category);
+  //         category.forEach((itemGroup) => {
+  //           Object.values(itemGroup).forEach((item) => {
+  //             const itemForPush = Object.values(item);
+  //             // console.log("item", itemForPush);
+  //             itemsArray.push(itemForPush[0]);
+  //           });
+  //         });
   //       });
-  //     });
-  //   });
-  //   console.log("itemsArray", itemsArray);
-  //   dispatch(setItems(itemsArray));
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //       dispatch(setItems(itemsArray));
+  //       if (itemsArray.length === 0) setLoading(true);
+  //       else setLoading(false);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   })();
   // }, [dispatch]);
+
+  useEffect(() => {
+    const itemsArray = [];
+    Object.keys(jsonData.items).forEach((categoryId) => {
+      const categoryObject = jsonData.items[categoryId];
+      const category = Object.values(categoryObject);
+      // console.log("category", category);
+      category.forEach((itemGroup) => {
+        Object.values(itemGroup).forEach((item) => {
+          const itemForPush = Object.values(item);
+          itemsArray.push(itemForPush[0]);
+        });
+      });
+    });
+    console.log("itemsArray", itemsArray);
+    dispatch(setItems(itemsArray));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   useEffect(() => {
     let filteredItems = searchQuery.trim()
@@ -150,10 +148,6 @@ const MainPage = ({
       }
     }
   }, [headerRef, netbooksMediaQuery]);
-
-  //to sum total price of items from cart
-  useUpdateSumHook();
-  useOutsideHook(wrapperRef, toggleCartVisibility); // to close popup <Cart /> clicking outside
 
   return (
     <>
@@ -196,7 +190,6 @@ const MainPage = ({
           items={searchedItems}
           categories={searchedCategories}
           isCartVisible={isCartVisible}
-          wrapperRef={wrapperRef}
           selectedCategory={selectedCategory}
           headerHeight={headerHeight}
           setScrolledCategory={setScrolledCategory}

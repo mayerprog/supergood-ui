@@ -13,7 +13,7 @@ import { addItemToCart } from "../../../services/addItemToCart";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
-const Item = ({ item, category, toggleCardOpen, toggleMapVisibility }) => {
+const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [amount, setAmount] = useState(null);
   const [addingInProgress, setAddingInProgress] = useState(false);
@@ -67,7 +67,7 @@ const Item = ({ item, category, toggleCardOpen, toggleMapVisibility }) => {
   return (
     <div
       className={styles.card}
-      onClick={() => toggleCardOpen(item.itemid)}
+      onClick={() => toggleItemOpen(item.itemid)}
       ref={itemRef}
     >
       {isVisible && loaded ? (

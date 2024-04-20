@@ -17,10 +17,10 @@ import LoginModal from "../Login/LoginModal";
 import SearchField from "../Reusables/SearchField/SearchField";
 import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
+import ItemSheet from "./ItemSheet/ItemSheet";
 
 const MainContent = ({
   isCartVisible,
-  wrapperRef,
   items,
   categories,
   selectedCategory,
@@ -48,19 +48,37 @@ const MainContent = ({
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   const [itemCardId, setItemCardId] = useState(null);
-
   // Item card modal
   const [isCardOpen, setIsCardOpen] = useState(false);
   // Item card sheet
+  const [isItemSheetOpen, setIsItemSheetOpen] = useState(false);
+  const [itemSheetClosing, setItemSheetClosing] = useState(false);
 
   const cardRef = useRef(null);
+  const cartWrapperRef = useRef(null);
+  const itemSheetWrapperRef = useRef(null);
 
-  const toggleCardOpen = (itemId) => {
-    setIsCardOpen(!isCardOpen);
-    setItemCardId(itemId);
+  const toggleItemOpen = (itemId) => {
+    //if monitors then card modal is open, else - card sheet is open
+    if (!netbooksMediaQuery) {
+      setIsCardOpen(true);
+      setItemCardId(itemId);
+    } else {
+      setIsItemSheetOpen(true);
+      setItemCardId(itemId);
+    }
   };
 
-  useOutsideHook(cardRef, toggleCardOpen); // to close popup <ModalCard /> clicking outside
+  const toggleModalCardVisibility = () => {
+    setIsCardOpen(false);
+  };
+
+  const toggleItemSheetVisibility = () => {
+    setItemSheetClosing(true);
+  };
+  useOutsideHook(cartWrapperRef, toggleCartVisibility); // to close popup <Cart /> clicking outside
+  useOutsideHook(cardRef, toggleModalCardVisibility); // to close popup <ModalCard /> clicking outside
+  useOutsideHook(itemSheetWrapperRef, toggleItemSheetVisibility); // to close <ItemSheet /> clicking outside
 
   // useEffect(() => {
   //   console.log(
@@ -136,7 +154,7 @@ const MainContent = ({
             top="90px"
             height="calc(100vh - 180px)"
             transform="translateX(-20%)"
-            wrapperRef={wrapperRef}
+            cartWrapperRef={cartWrapperRef}
             toggleCartVisibility={toggleCartVisibility}
             navigate={navigate}
           />
@@ -147,7 +165,7 @@ const MainContent = ({
 
       <Slider />
 
-      {isCardOpen && (
+      {isCardOpen && !netbooksMediaQuery && (
         <div className={styles.cardOverlay}>
           <ModalCard
             itemCardId={itemCardId}
@@ -185,6 +203,29 @@ const MainContent = ({
           <AddressModal addressRef={addressRef} isModal={true} />
         </div>
       )}
+      {netbooksMediaQuery && (
+        <>
+          <div
+            className={`${styles.sheetOverlay} ${
+              isItemSheetOpen ? styles.visible : ""
+            }`}
+            data-is-cart="true"
+          >
+            {isItemSheetOpen && (
+              <ItemSheet
+                navigate={navigate}
+                setItemSheetClosing={setItemSheetClosing}
+                setIsItemSheetOpen={setIsItemSheetOpen}
+                itemSheetWrapperRef={itemSheetWrapperRef}
+                itemSheetClosing={itemSheetClosing}
+                itemCardId={itemCardId}
+                toggleMapVisibility={toggleMapVisibility}
+              />
+            )}
+          </div>
+        </>
+      )}
+
       {categories.map((category, index) => (
         <div key={index} ref={(el) => (categoryRefs.current[category] = el)}>
           <h2>{category}</h2>
@@ -195,7 +236,7 @@ const MainContent = ({
                 <Item
                   item={filteredProduct}
                   category={category}
-                  toggleCardOpen={toggleCardOpen}
+                  toggleItemOpen={toggleItemOpen}
                   key={index}
                   toggleMapVisibility={toggleMapVisibility}
                 />

@@ -7,7 +7,7 @@ import CartShimmer from "../../Loaders/CartShimmer";
 import React, { memo, useEffect } from "react";
 
 const Cart = ({
-  wrapperRef,
+  cartWrapperRef,
   position,
   top,
   height,
@@ -45,7 +45,7 @@ const Cart = ({
     return <CartShimmer />;
   }
   return (
-    <div className={styles.cart} ref={wrapperRef} style={dynamicStyle}>
+    <div className={styles.cart} ref={cartWrapperRef} style={dynamicStyle}>
       <div className={styles.cartHeader}>
         <span className={styles.cartTitle}>Корзина</span>
         <span
