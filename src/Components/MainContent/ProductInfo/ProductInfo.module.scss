@@ -12,10 +12,6 @@
   padding: 0 10px;
   // width: 100%;
 
-  // &[data-is-sheet="true"] {
-  //   min-height: 250px;
-  // }
-
   h2 {
     font-weight: normal;
   }
@@ -72,6 +68,19 @@
     .count {
       margin: 0 1rem;
       font-size: 1em;
+    }
+
+    &[data-is-sheet="true"] {
+      @media (min-width: 500px) {
+        width: 8rem;
+        height: 2.5rem;
+      }
+      @media (max-width: 500px) {
+        width: 6rem;
+      }
+      @media (max-width: 418px) {
+        width: 5rem;
+      }
     }
   }
   .price {

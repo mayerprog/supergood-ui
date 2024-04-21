@@ -76,11 +76,13 @@ const ProductInfo = ({ itemCardId, toggleMapVisibility, isSheet }) => {
             margin="0 0.5rem"
             itemId={itemCardId}
             backgroundColor="#fcfcfc"
+            isSheet={isSheet}
             // boxShadow="0 0 2px rgba(0, 0, 0, 0.2)"
           />
         ) : (
           <button
             className={styles.counter}
+            data-is-sheet={isSheet ? "true" : "false"}
             onClick={(event) =>
               addItemToCart({
                 event,
