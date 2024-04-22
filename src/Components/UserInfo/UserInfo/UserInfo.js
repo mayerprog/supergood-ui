@@ -15,13 +15,29 @@ dayjs.locale("ru"); // Use the Russian locale globally
 
 const mainColor = "#e9bc5b";
 
+const breakpointsValues = {
+  xxxs: 320,
+  xxs: 360,
+  xs: 400,
+  sm: 600,
+  md: 960,
+  lg: 1280,
+  xl: 1920,
+};
+
+// customizing MUI Datepicker
 const theme = createTheme(
   {
+    breakpoints: {
+      values: breakpointsValues,
+    },
     components: {
       MuiTextField: {
         styleOverrides: {
           root: {
-            minWidth: "414px",
+            minWidth: "200px",
+            maxWidth: "900px",
+            // backgroundColor: "white",
           },
         },
       },
@@ -46,6 +62,7 @@ const theme = createTheme(
               borderColor: "#ccc",
               borderRadius: "10px",
               height: "46px",
+              backgroundColor: "white",
             },
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
               borderColor: mainColor,
@@ -91,6 +108,48 @@ const theme = createTheme(
           },
         },
       },
+      MuiSvgIcon: {
+        styleOverrides: {
+          root: {
+            zIndex: 10001, // Ensure this is higher than the modal's z-index
+          },
+        },
+      },
+      MuiDateCalendar: {
+        // or MuiPaper, depending on the MUI version and component specifics
+        styleOverrides: {
+          root: {
+            [`@media (max-width:${breakpointsValues.xs}px)`]: {
+              width: "90%", // Set the desired width
+              margin: 0,
+            },
+            [`@media (max-width:${breakpointsValues.xxs}px)`]: {
+              width: "80%", // Set the desired width
+              margin: 0,
+            },
+            [`@media (max-width:${breakpointsValues.xxxs}px)`]: {
+              width: "70%", // Set the desired width
+              margin: 0,
+            },
+          },
+        },
+      },
+      MuiPickersLayout: {
+        // or MuiPaper, depending on the MUI version and component specifics
+        styleOverrides: {
+          root: {
+            [`@media (max-width:${breakpointsValues.xs}px)`]: {
+              width: "260px", // Set the desired width
+            },
+            [`@media (max-width:${breakpointsValues.xxs}px)`]: {
+              width: "230px", // Set the desired width
+            },
+            [`@media (max-width:${breakpointsValues.xxxs}px)`]: {
+              width: "200px", // Set the desired width
+            },
+          },
+        },
+      },
     },
   },
   ruRU
@@ -98,41 +157,45 @@ const theme = createTheme(
 
 const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
   const [selectedDate, setSelectedDate] = useState(null);
+  const handleInfoClose = () => {
+    toggleUserInfoVisibility();
+  };
 
   return (
-    <div className={styles.container} ref={userInfoRef}>
+    <>
       <h2>Мои данные</h2>
 
-      <div className={styles.inputContainer}>
-        <span>Имя</span>
-        <input className={styles.input} placeholder="Ваше имя" />
-      </div>
-      <div className={styles.inputContainer}>
-        <span>Эл.почта</span>
-        <input className={styles.input} placeholder="Электронная почта" />
-      </div>
-      <div className={styles.inputContainer}>
-        <span>Телефон</span>
-        <span className={styles.phone}>8 (977) 589 7234</span>
-      </div>
-      <div className={styles.inputContainer}>
-        {/* <span>Дата рождения</span> */}
-        <ThemeProvider theme={theme}>
-          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
-            <DatePicker
-              label="Введите дату рождения"
-              value={selectedDate}
-              onChange={(newValue) => {
-                setSelectedDate(newValue);
-              }}
-              format="DD.MM.YYYY"
-              mask="__.__.____"
-              defaultValue={dayjs("2022-04-17")}
-              minDate={dayjs("1930-01-01")}
-              maxDate={dayjs("2023-01-01")}
-            />
-          </LocalizationProvider>
-        </ThemeProvider>
+      <div className={styles.container}>
+        <div className={styles.inputContainer}>
+          <span>Имя</span>
+          <input className={styles.input} placeholder="Ваше имя" />
+        </div>
+        <div className={styles.inputContainer}>
+          <span>Эл.почта</span>
+          <input className={styles.input} placeholder="Электронная почта" />
+        </div>
+        <div className={styles.inputContainer}>
+          <span>Телефон</span>
+          <span className={styles.phone}>8 (977) 589 7234</span>
+        </div>
+        <div className={styles.inputContainer}>
+          <ThemeProvider theme={theme}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
+              <DatePicker
+                label="Введите дату рождения"
+                value={selectedDate}
+                onChange={(newValue) => {
+                  setSelectedDate(newValue);
+                }}
+                format="DD.MM.YYYY"
+                mask="__.__.____"
+                defaultValue={dayjs("2022-04-17")}
+                minDate={dayjs("1930-01-01")}
+                maxDate={dayjs("2023-01-01")}
+              />
+            </LocalizationProvider>
+          </ThemeProvider>
+        </div>
       </div>
       <div className={styles.buttonsContainer}>
         <button
@@ -141,14 +204,11 @@ const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
         >
           <span className={styles.buttonText}>Сохранить</span>
         </button>
-        <button
-          className={styles.buttonStyle}
-          onClick={toggleUserInfoVisibility}
-        >
+        <button className={styles.buttonStyle} onClick={handleInfoClose}>
           <span className={styles.buttonText}>Отмена</span>
         </button>
       </div>
-    </div>
+    </>
   );
 };
 

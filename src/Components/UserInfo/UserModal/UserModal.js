@@ -1,4 +1,4 @@
-import UserInfo from "../UserInfo";
+import UserInfo from "../UserInfo/UserInfo";
 import styles from "./UserModal.module.scss";
 
 const UserModal = ({ userInfoRef, toggleUserInfoVisibility }) => {

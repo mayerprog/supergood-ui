@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import styles from "./OrdersPage.module.scss";
-import UserInfo from "../../Components/UserInfo/UserInfo";
 import AddressModal from "../../Components/Address/AddressModal/AddressModal";
 import Orders from "../../Components/Orders/Orders";
 import UserModal from "../../Components/UserInfo/UserModal/UserModal";

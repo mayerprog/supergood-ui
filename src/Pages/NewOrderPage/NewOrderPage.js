@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import styles from "./NewOrderPage.module.scss";
-import UserInfo from "../../Components/UserInfo/UserInfo";
 import AddressModal from "../../Components/Address/AddressModal/AddressModal";
 import OrderCart from "../../Components/Cart/OrderCart/OrderCart";
 import Payment from "../../Components/Payment/Payment";

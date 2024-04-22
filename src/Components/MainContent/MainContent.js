@@ -10,7 +10,6 @@ import Cart from "../Cart/Cart";
 import { useNavigate } from "react-router-dom";
 import ModalCard from "./ModalCard/ModalCard";
 import MapComponent from "../MapComponent/MapComponent";
-import UserInfo from "../UserInfo/UserInfo";
 import AddressModal from "../Address/AddressModal/AddressModal";
 import ItemsShimmer from "../../Loaders/ItemsShimmer";
 import LoginModal from "../Login/LoginModal";
