@@ -100,8 +100,7 @@ const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
   const [selectedDate, setSelectedDate] = useState(null);
 
   return (
-    // <div className={styles.container} ref={userInfoRef}>
-    <>
+    <div className={styles.container} ref={userInfoRef}>
       <h2>Мои данные</h2>
 
       <div className={styles.inputContainer}>
@@ -149,8 +148,7 @@ const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
           <span className={styles.buttonText}>Отмена</span>
         </button>
       </div>
-      {/* </div> */}
-    </>
+    </div>
   );
 };
 

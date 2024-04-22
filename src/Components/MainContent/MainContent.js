@@ -18,6 +18,7 @@ import SearchField from "../Reusables/SearchField/SearchField";
 import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
 import ItemSheet from "./ItemSheet/ItemSheet";
+import UserModal from "../UserInfo/UserModal/UserModal";
 
 const MainContent = ({
   isCartVisible,
@@ -192,7 +193,7 @@ const MainContent = ({
       )}
       {isUserInfoOpen && (
         <div className={styles.cardOverlay}>
-          <UserInfo
+          <UserModal
             userInfoRef={userInfoRef}
             toggleUserInfoVisibility={toggleUserInfoVisibility}
           />

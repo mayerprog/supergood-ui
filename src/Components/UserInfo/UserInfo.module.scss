@@ -1,63 +1,64 @@
 @import "../../mixins/mixins";
 
-.container {
+// .container {
+//   display: flex;
+//   flex-direction: column;
+//   position: absolute;
+//   // margin-top: -170px;
+//   top: 20%;
+//   border-radius: 20px;
+//   box-shadow: 0 0 5px #ccc;
+//   width: 450px;
+//   font-family: "Inter", sans-serif;
+//   font-size: 15px;
+//   background-color: white;
+//   justify-content: center;
+//   align-items: flex-start;
+//   padding: 30px;
+
+h2 {
+  font-weight: 400;
+}
+
+.inputContainer {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  margin-top: -170px;
-  border-radius: 20px;
-  box-shadow: 0 0 5px #ccc;
-  width: 450px;
-  font-family: "Inter", sans-serif;
-  font-size: 15px;
-  background-color: white;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 30px;
+  justify-content: space-between;
 
-  h2 {
-    font-weight: 400;
+  span {
+    margin: 0 0 13px 15px;
   }
-
-  .inputContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    span {
-      margin: 0 0 13px 15px;
-    }
-    .phone {
-      font-size: large;
-      font-weight: 600;
-      margin-bottom: 30px;
-    }
-  }
-
-  .input {
-    width: 100%;
-    min-width: 350px;
-    padding: 0 15px;
-    margin-bottom: 20px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #ccc;
-    border-radius: 10px;
-    min-height: 40px;
-    font-size: 0.95rem;
-    font-family: "Inter", sans-serif;
-    @include focus-style(#ccc);
-  }
-
-  .buttonsContainer {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .buttonStyle {
-    @include reusable-button;
-  }
-  .buttonText {
-    @include reusable-button-text;
+  .phone {
+    font-size: large;
+    font-weight: 600;
+    margin-bottom: 30px;
   }
 }
+
+.input {
+  width: 100%;
+  min-width: 350px;
+  padding: 0 15px;
+  margin-bottom: 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ccc;
+  border-radius: 10px;
+  min-height: 40px;
+  font-size: 0.95rem;
+  font-family: "Inter", sans-serif;
+  @include focus-style(#ccc);
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.buttonStyle {
+  @include reusable-button;
+}
+.buttonText {
+  @include reusable-button-text;
+}
+// }

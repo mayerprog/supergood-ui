@@ -10,6 +10,7 @@ import { addOrders, setOrderInfo } from "../../redux/slices/orderSlice";
 import { removeAllItems } from "../../redux/slices/cartSlice";
 import { v4 as uuidv4 } from "uuid";
 import PayTypeModal from "../../Components/Payment/PayTypeModal/PayTypeModal";
+import UserModal from "../../Components/UserInfo/UserModal/UserModal";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -96,7 +97,7 @@ const NewOrderPage = ({
 
       {isUserInfoOpen && (
         <div className={styles.cardOverlay}>
-          <UserInfo
+          <UserModal
             userInfoRef={userInfoRef}
             toggleUserInfoVisibility={toggleUserInfoVisibility}
           />

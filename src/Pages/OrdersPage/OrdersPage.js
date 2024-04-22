@@ -5,6 +5,7 @@ import styles from "./OrdersPage.module.scss";
 import UserInfo from "../../Components/UserInfo/UserInfo";
 import AddressModal from "../../Components/Address/AddressModal/AddressModal";
 import Orders from "../../Components/Orders/Orders";
+import UserModal from "../../Components/UserInfo/UserModal/UserModal";
 
 const OrdersPage = ({
   userInfoRef,
@@ -32,7 +33,7 @@ const OrdersPage = ({
       )}
       {isUserInfoOpen && (
         <div className={styles.cardOverlay}>
-          <UserInfo
+          <UserModal
             userInfoRef={userInfoRef}
             toggleUserInfoVisibility={toggleUserInfoVisibility}
           />
