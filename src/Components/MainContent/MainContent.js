@@ -206,7 +206,7 @@ const MainContent = ({
           <UserScreen toggleUserInfoVisibility={toggleUserInfoVisibility} />
         </div>
       )}
-      {isModalAddressOpen && (
+      {isModalAddressOpen && !netbooksMediaQuery && (
         <div className={styles.cardOverlay}>
           <AddressModal addressRef={addressRef} isModal={true} />
         </div>
