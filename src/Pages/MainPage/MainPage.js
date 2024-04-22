@@ -182,6 +182,8 @@ const MainPage = ({
               setIsMainSheetOpen={setIsMainSheetOpen}
               mainSheetClosing={mainSheetClosing}
               setMainSheetClosing={setMainSheetClosing}
+              navigate={navigate}
+              toggleUserInfoVisibility={toggleUserInfoVisibility}
             />
           )}
         </div>

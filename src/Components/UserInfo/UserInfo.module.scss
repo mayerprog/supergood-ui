@@ -62,3 +62,34 @@ h2 {
   @include reusable-button-text;
 }
 // }
+
+@media (max-width: 1024px) {
+  .input {
+    max-width: 900px;
+    min-width: 195px;
+    width: 100%;
+    padding: 0;
+    text-indent: 10px; /* Adjust this value to move placeholder text to the right */
+    @include focus-style(#ccc);
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 100%;
+  }
+
+  .buttonsContainer {
+    flex: 1;
+  }
+}
+
+@media (max-width: 391px) {
+  .buttonsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .buttonStyle {
+    margin: 1.5rem 0 0 0;
+  }
+}

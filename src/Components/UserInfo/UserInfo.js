@@ -98,42 +98,46 @@ const theme = createTheme(
 
 const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
   const [selectedDate, setSelectedDate] = useState(null);
+  const handleInfoClose = () => {
+    toggleUserInfoVisibility();
+  };
 
   return (
     // <div className={styles.container} ref={userInfoRef}>
     <>
       <h2>Мои данные</h2>
 
-      <div className={styles.inputContainer}>
-        <span>Имя</span>
-        <input className={styles.input} placeholder="Ваше имя" />
-      </div>
-      <div className={styles.inputContainer}>
-        <span>Эл.почта</span>
-        <input className={styles.input} placeholder="Электронная почта" />
-      </div>
-      <div className={styles.inputContainer}>
-        <span>Телефон</span>
-        <span className={styles.phone}>8 (977) 589 7234</span>
-      </div>
-      <div className={styles.inputContainer}>
-        {/* <span>Дата рождения</span> */}
-        <ThemeProvider theme={theme}>
-          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
-            <DatePicker
-              label="Введите дату рождения"
-              value={selectedDate}
-              onChange={(newValue) => {
-                setSelectedDate(newValue);
-              }}
-              format="DD.MM.YYYY"
-              mask="__.__.____"
-              defaultValue={dayjs("2022-04-17")}
-              minDate={dayjs("1930-01-01")}
-              maxDate={dayjs("2023-01-01")}
-            />
-          </LocalizationProvider>
-        </ThemeProvider>
+      <div className={styles.container}>
+        <div className={styles.inputContainer}>
+          <span>Имя</span>
+          <input className={styles.input} placeholder="Ваше имя" />
+        </div>
+        <div className={styles.inputContainer}>
+          <span>Эл.почта</span>
+          <input className={styles.input} placeholder="Электронная почта" />
+        </div>
+        <div className={styles.inputContainer}>
+          <span>Телефон</span>
+          <span className={styles.phone}>8 (977) 589 7234</span>
+        </div>
+        {/* <div className={styles.inputContainer}>
+          <ThemeProvider theme={theme}>
+            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
+              <DatePicker
+                label="Введите дату рождения"
+                value={selectedDate}
+                onChange={(newValue) => {
+                  setSelectedDate(newValue);
+                }}
+                format="DD.MM.YYYY"
+                mask="__.__.____"
+                defaultValue={dayjs("2022-04-17")}
+                minDate={dayjs("1930-01-01")}
+                maxDate={dayjs("2023-01-01")}
+              />
+            </LocalizationProvider>
+          </ThemeProvider>
+        </div> */}
       </div>
       <div className={styles.buttonsContainer}>
         <button
@@ -142,10 +146,7 @@ const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
         >
           <span className={styles.buttonText}>Сохранить</span>
         </button>
-        <button
-          className={styles.buttonStyle}
-          onClick={toggleUserInfoVisibility}
-        >
+        <button className={styles.buttonStyle} onClick={handleInfoClose}>
           <span className={styles.buttonText}>Отмена</span>
         </button>
       </div>

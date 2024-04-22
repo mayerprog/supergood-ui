@@ -19,6 +19,7 @@ import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
 import ItemSheet from "./ItemSheet/ItemSheet";
 import UserModal from "../UserInfo/UserModal/UserModal";
+import UserScreen from "../UserInfo/UserScreen/UserScreen";
 
 const MainContent = ({
   isCartVisible,
@@ -191,12 +192,17 @@ const MainContent = ({
           />
         </div>
       )}
-      {isUserInfoOpen && (
+      {isUserInfoOpen && !netbooksMediaQuery && (
         <div className={styles.cardOverlay}>
           <UserModal
             userInfoRef={userInfoRef}
             toggleUserInfoVisibility={toggleUserInfoVisibility}
           />
+        </div>
+      )}
+      {isUserInfoOpen && netbooksMediaQuery && (
+        <div className={styles.cardOverlay}>
+          <UserScreen toggleUserInfoVisibility={toggleUserInfoVisibility} />
         </div>
       )}
       {isModalAddressOpen && (
