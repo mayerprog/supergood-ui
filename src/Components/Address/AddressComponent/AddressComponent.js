@@ -12,6 +12,7 @@ const AddressComponent = ({
   setIsMapOpen,
   isMapOpen,
   isModal,
+  toggleAddressVisibility,
 }) => {
   const [isChangeAddressOpen, setIsChangeAddressOpen] = useState(false); //for updating address
   const [isNewAddressOpen, setIsNewAddressOpen] = useState(false); //for adding new address
