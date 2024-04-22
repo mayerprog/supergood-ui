@@ -116,36 +116,34 @@ const theme = createTheme(
         },
       },
       MuiDateCalendar: {
-        // or MuiPaper, depending on the MUI version and component specifics
         styleOverrides: {
           root: {
             [`@media (max-width:${breakpointsValues.xs}px)`]: {
-              width: "90%", // Set the desired width
+              width: "90%",
               margin: 0,
             },
             [`@media (max-width:${breakpointsValues.xxs}px)`]: {
-              width: "80%", // Set the desired width
+              width: "80%",
               margin: 0,
             },
             [`@media (max-width:${breakpointsValues.xxxs}px)`]: {
-              width: "70%", // Set the desired width
+              width: "70%",
               margin: 0,
             },
           },
         },
       },
       MuiPickersLayout: {
-        // or MuiPaper, depending on the MUI version and component specifics
         styleOverrides: {
           root: {
             [`@media (max-width:${breakpointsValues.xs}px)`]: {
-              width: "260px", // Set the desired width
+              width: "260px",
             },
             [`@media (max-width:${breakpointsValues.xxs}px)`]: {
-              width: "230px", // Set the desired width
+              width: "230px",
             },
             [`@media (max-width:${breakpointsValues.xxxs}px)`]: {
-              width: "200px", // Set the desired width
+              width: "200px",
             },
           },
         },
@@ -155,7 +153,7 @@ const theme = createTheme(
   ruRU
 );
 
-const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
+const UserInfo = ({ toggleUserInfoVisibility }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const handleInfoClose = () => {
     toggleUserInfoVisibility();
