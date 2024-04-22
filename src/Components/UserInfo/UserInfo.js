@@ -36,7 +36,7 @@ const theme = createTheme(
           root: {
             minWidth: "200px",
             maxWidth: "900px",
-            backgroundColor: "white",
+            // backgroundColor: "white",
           },
         },
       },
@@ -61,6 +61,7 @@ const theme = createTheme(
               borderColor: "#ccc",
               borderRadius: "10px",
               height: "46px",
+              backgroundColor: "white",
             },
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
               borderColor: mainColor,
@@ -100,6 +101,13 @@ const theme = createTheme(
         },
       },
       MuiPickersPopper: {
+        styleOverrides: {
+          root: {
+            zIndex: 10001, // Ensure this is higher than the modal's z-index
+          },
+        },
+      },
+      MuiSvgIcon: {
         styleOverrides: {
           root: {
             zIndex: 10001, // Ensure this is higher than the modal's z-index
@@ -153,7 +161,6 @@ const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
   };
 
   return (
-    // <div className={styles.container} ref={userInfoRef}>
     <>
       <h2>Мои данные</h2>
 
@@ -200,7 +207,6 @@ const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
           <span className={styles.buttonText}>Отмена</span>
         </button>
       </div>
-      {/* </div> */}
     </>
   );
 };
