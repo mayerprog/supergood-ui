@@ -45,6 +45,7 @@ const MainPage = ({
   setCartSheetClosing,
   setIsCartSheetOpen,
   cartSheetClosing,
+  toggleAddressVisibility,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -184,6 +185,7 @@ const MainPage = ({
               setMainSheetClosing={setMainSheetClosing}
               navigate={navigate}
               toggleUserInfoVisibility={toggleUserInfoVisibility}
+              toggleAddressVisibility={toggleAddressVisibility}
             />
           )}
         </div>
@@ -202,6 +204,7 @@ const MainPage = ({
           userInfoRef={userInfoRef}
           isUserInfoOpen={isUserInfoOpen}
           toggleUserInfoVisibility={toggleUserInfoVisibility}
+          toggleAddressVisibility={toggleAddressVisibility}
           addressRef={addressRef}
           isModalAddressOpen={isModalAddressOpen}
           toggleCartVisibility={toggleCartVisibility}

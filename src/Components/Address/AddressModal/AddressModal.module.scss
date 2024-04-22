@@ -1,5 +1,3 @@
-@import "../../../mixins/mixins";
-
 .container {
   display: flex;
   flex-direction: column;
@@ -22,76 +20,6 @@
     @media (max-height: 666px) {
       margin-top: 300px;
     }
-  }
-
-  h2 {
-    font-weight: 400;
-  }
-
-  .addressContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 13px 15px;
-    label {
-      margin-left: 15px;
-    }
-    input[type="radio"]:after {
-      width: 15px;
-      height: 15px;
-      border-radius: 15px;
-      top: -2px;
-      left: -1px;
-      position: relative;
-      background-color: #d1d3d1;
-      content: "";
-      display: inline-block;
-      visibility: visible;
-      border: 2px solid white;
-      cursor: pointer;
-    }
-
-    input[type="radio"]:checked:after {
-      width: 15px;
-      height: 15px;
-      border-radius: 15px;
-      top: -2px;
-      left: -1px;
-      position: relative;
-      background-color: #e9bc5b;
-      content: "";
-      display: inline-block;
-      visibility: visible;
-      border: 2px solid white;
-      cursor: pointer;
-    }
-  }
-
-  .edit {
-    cursor: pointer;
-  }
-
-  .line {
-    height: 1px;
-    border: 0;
-    background: #ccc;
-    margin: 20px 0;
-  }
-  .addAddress {
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    align-items: center;
-    align-self: center;
-    padding-top: 20px;
-    cursor: pointer;
-    span {
-      margin-left: 7px;
-    }
-  }
-
-  .cardOverlay {
-    @include card-overlay;
   }
 }
 

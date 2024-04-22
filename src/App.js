@@ -199,6 +199,7 @@ function App() {
               setCartSheetClosing={setCartSheetClosing}
               setIsCartSheetOpen={setIsCartSheetOpen}
               cartSheetClosing={cartSheetClosing}
+              toggleAddressVisibility={toggleAddressVisibility}
             />
           }
         />

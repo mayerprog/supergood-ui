@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchSuggestions } from "../../../services/fetchSuggestions";
-import styles from "./AddAddressComponent.module.scss";
+import styles from "./AddAddressContainer.module.scss";
 import AddressDropDown from "../AddressDropDown/AddressDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,7 +12,7 @@ import {
 import { makeExistingAddressSelected } from "../../../services/makeExistingAddressSelected";
 import { ImBin } from "react-icons/im";
 
-const AddAddressComponent = ({
+const AddAddressContainer = ({
   item,
   streetName,
   closeChangeField,
@@ -149,4 +149,4 @@ const AddAddressComponent = ({
   );
 };
 
-export default AddAddressComponent;
+export default AddAddressContainer;

@@ -12,6 +12,7 @@ const MainSheet = ({
   mainSheetClosing,
   setMainSheetClosing,
   toggleUserInfoVisibility,
+  toggleAddressVisibility,
   navigate,
 }) => {
   const links = [
@@ -63,6 +64,8 @@ const MainSheet = ({
         handleClosing();
         break;
       case "Мои адреса":
+        toggleAddressVisibility();
+        handleClosing();
         break;
       case "Мои заказы":
         navigate("/orders");
