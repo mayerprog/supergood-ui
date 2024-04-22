@@ -20,6 +20,13 @@ h2 {
   font-weight: 400;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 100%;
+}
+
 .inputContainer {
   display: flex;
   flex-direction: column;
@@ -36,7 +43,7 @@ h2 {
 }
 
 .input {
-  width: 100%;
+  // width: 100%;
   min-width: 350px;
   padding: 0 15px;
   margin-bottom: 20px;
@@ -71,12 +78,6 @@ h2 {
     padding: 0;
     text-indent: 10px; /* Adjust this value to move placeholder text to the right */
     @include focus-style(#ccc);
-  }
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    width: 100%;
   }
 
   .buttonsContainer {

@@ -15,13 +15,28 @@ dayjs.locale("ru"); // Use the Russian locale globally
 
 const mainColor = "#e9bc5b";
 
+const breakpointsValues = {
+  xxxs: 320,
+  xxs: 360,
+  xs: 400,
+  sm: 600,
+  md: 960,
+  lg: 1280,
+  xl: 1920,
+};
+
 const theme = createTheme(
   {
+    breakpoints: {
+      values: breakpointsValues,
+    },
     components: {
       MuiTextField: {
         styleOverrides: {
           root: {
-            minWidth: "414px",
+            minWidth: "200px",
+            maxWidth: "900px",
+            backgroundColor: "white",
           },
         },
       },
@@ -91,6 +106,41 @@ const theme = createTheme(
           },
         },
       },
+      MuiDateCalendar: {
+        // or MuiPaper, depending on the MUI version and component specifics
+        styleOverrides: {
+          root: {
+            [`@media (max-width:${breakpointsValues.xs}px)`]: {
+              width: "90%", // Set the desired width
+              margin: 0,
+            },
+            [`@media (max-width:${breakpointsValues.xxs}px)`]: {
+              width: "80%", // Set the desired width
+              margin: 0,
+            },
+            [`@media (max-width:${breakpointsValues.xxxs}px)`]: {
+              width: "70%", // Set the desired width
+              margin: 0,
+            },
+          },
+        },
+      },
+      MuiPickersLayout: {
+        // or MuiPaper, depending on the MUI version and component specifics
+        styleOverrides: {
+          root: {
+            [`@media (max-width:${breakpointsValues.xs}px)`]: {
+              width: "260px", // Set the desired width
+            },
+            [`@media (max-width:${breakpointsValues.xxs}px)`]: {
+              width: "230px", // Set the desired width
+            },
+            [`@media (max-width:${breakpointsValues.xxxs}px)`]: {
+              width: "200px", // Set the desired width
+            },
+          },
+        },
+      },
     },
   },
   ruRU
@@ -120,7 +170,7 @@ const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
           <span>Телефон</span>
           <span className={styles.phone}>8 (977) 589 7234</span>
         </div>
-        {/* <div className={styles.inputContainer}>
+        <div className={styles.inputContainer}>
           <ThemeProvider theme={theme}>
             <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
               <DatePicker
@@ -137,7 +187,7 @@ const UserInfo = ({ userInfoRef, toggleUserInfoVisibility }) => {
               />
             </LocalizationProvider>
           </ThemeProvider>
-        </div> */}
+        </div>
       </div>
       <div className={styles.buttonsContainer}>
         <button
