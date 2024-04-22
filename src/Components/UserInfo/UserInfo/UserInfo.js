@@ -37,7 +37,6 @@ const theme = createTheme(
           root: {
             minWidth: "200px",
             maxWidth: "900px",
-            // backgroundColor: "white",
           },
         },
       },
@@ -81,6 +80,7 @@ const theme = createTheme(
         styleOverrides: {
           input: {
             marginTop: "-6px",
+            zIndex: 10001, // Ensure this is higher than the modal's z-index
           },
         },
       },
