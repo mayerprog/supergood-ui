@@ -23,6 +23,7 @@ const NewOrderPage = ({
   isPayTypeOpen,
   payTypeWrapperRef,
   togglePayTypeVisibility,
+  toggleAddressVisibility,
 }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const addressSelected = useSelector((state) => state.address.addressSelected);
@@ -104,7 +105,11 @@ const NewOrderPage = ({
       )}
       {isModalAddressOpen && (
         <div className={styles.cardOverlay}>
-          <AddressModal addressRef={addressRef} isModal={true} />
+          <AddressModal
+            addressRef={addressRef}
+            isModal={true}
+            toggleAddressVisibility={toggleAddressVisibility}
+          />
         </div>
       )}
     </div>

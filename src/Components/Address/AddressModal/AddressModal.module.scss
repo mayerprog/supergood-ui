@@ -18,6 +18,9 @@
   align-items: flex-start;
   padding: 30px;
   overflow-y: auto;
+  .icon {
+    cursor: pointer;
+  }
 }
 
 .container::-webkit-scrollbar {
@@ -54,10 +57,5 @@
     max-width: none;
     position: static;
     top: 0;
-  }
-
-  .icon {
-    align-self: flex-start;
-    cursor: pointer;
   }
 }
