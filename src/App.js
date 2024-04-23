@@ -219,6 +219,7 @@ function App() {
                 isPayTypeOpen={isPayTypeOpen}
                 payTypeWrapperRef={payTypeWrapperRef}
                 togglePayTypeVisibility={togglePayTypeVisibility}
+                toggleAddressVisibility={toggleAddressVisibility}
               />
             </ProtectedRoute>
           }
@@ -233,6 +234,7 @@ function App() {
                 addressRef={addressRef}
                 isUserInfoOpen={isUserInfoOpen}
                 isModalAddressOpen={isModalAddressOpen}
+                toggleAddressVisibility={toggleAddressVisibility}
               />
             </ProtectedRoute>
           }

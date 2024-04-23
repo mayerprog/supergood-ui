@@ -19,7 +19,6 @@ import { useOutsideHook } from "../../hooks/useOutsideHook";
 import ItemSheet from "./ItemSheet/ItemSheet";
 import UserModal from "../UserInfo/UserModal/UserModal";
 import UserScreen from "../UserInfo/UserScreen/UserScreen";
-import AddressScreen from "../Address/AddressScreen/AddressScreen";
 
 const MainContent = ({
   isCartVisible,
@@ -206,17 +205,12 @@ const MainContent = ({
           <UserScreen toggleUserInfoVisibility={toggleUserInfoVisibility} />
         </div>
       )}
-      {isModalAddressOpen && !netbooksMediaQuery && (
+      {isModalAddressOpen && (
         <div className={styles.cardOverlay}>
-          <AddressModal addressRef={addressRef} isModal={true} />
-        </div>
-      )}
-      {isModalAddressOpen && netbooksMediaQuery && (
-        <div className={styles.cardOverlay}>
-          <AddressScreen
+          <AddressModal
+            addressRef={addressRef}
             isModal={true}
             toggleAddressVisibility={toggleAddressVisibility}
-            addressRef={addressRef}
           />
         </div>
       )}

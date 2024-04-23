@@ -12,6 +12,7 @@ const OrdersPage = ({
   addressRef,
   isUserInfoOpen,
   isModalAddressOpen,
+  toggleAddressVisibility,
 }) => {
   const orders = useSelector((state) => state.order.orders);
 
@@ -40,7 +41,11 @@ const OrdersPage = ({
       )}
       {isModalAddressOpen && (
         <div className={styles.cardOverlay}>
-          <AddressModal addressRef={addressRef} isModal={true} />
+          <AddressModal
+            addressRef={addressRef}
+            isModal={true}
+            toggleAddressVisibility={toggleAddressVisibility}
+          />
         </div>
       )}
     </div>
