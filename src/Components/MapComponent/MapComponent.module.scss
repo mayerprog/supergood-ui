@@ -97,6 +97,11 @@
     width: 730px;
     height: 100%;
   }
+
+  .icon {
+    align-self: flex-start;
+    cursor: pointer;
+  }
 }
 
 ul::-webkit-scrollbar {

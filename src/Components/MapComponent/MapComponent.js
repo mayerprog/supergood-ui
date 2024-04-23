@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./MapComponent.module.scss";
+import { IoMdClose } from "react-icons/io";
 import {
   MapContainer,
   TileLayer,
@@ -27,7 +28,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [markerAddress, setMarkerAddress] = useState(""); //temporary address while choosing
   // const [mapPosition, setMapPosition] = useState([55.7558, 37.6173]); //temporary position while choosing
-  // const [mapPosition, setMapPosition] = useState([55.7558, 37.6173]); //temporary position while choosing
   const [suggestions, setSuggestions] = useState([]);
   const [isAddressValid, setIsAddressValid] = useState(false);
 
@@ -39,10 +39,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const addressSelected = useSelector((state) => state.address.addressSelected);
   const addressList = useSelector((state) => state.address.addressList);
   const mapPosition = useSelector((state) => state.address.mapPosition);
-
-  useEffect(() => {
-    console.log("mapPosition", mapPosition);
-  }, [mapPosition]);
 
   useEffect(() => {
     if (addressSelected) {
@@ -145,42 +141,59 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
 
   return (
     <div className={styles.mapContainer} ref={mapWrapperRef}>
-      <h3>Наша территория доставки</h3>
-      <div className={styles.addressContainer}>
-        <input
-          className={styles.input}
-          placeholder="Укажите адрес доставки (улица, номер дома)"
-          value={inputAddress}
-          onChange={(e) => {
-            setInputAddress(e.target.value);
-            fetchSuggestions(e.target.value, setSuggestions, setShowDropdown);
-          }}
-          onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
-          onBlur={() => setTimeout(() => setShowDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
-        />
-        {showDropdown && (
-          <AddressDropDown
-            setShowDropdown={setShowDropdown}
-            setInputAddress={setInputAddress}
-            suggestions={suggestions}
-            setSuggestions={setSuggestions}
-            dispatch={dispatch}
-            setMarkerAddress={setMarkerAddress}
-            setIsAddressValid={setIsAddressValid}
-          />
-        )}
-        <button className={styles.buttonStyle} onClick={handleAddress}>
-          <span className={styles.buttonText}>Подтвердить</span>
-        </button>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: "100%",
+        }}
+      >
+        <div>
+          <h3>Наша территория доставки</h3>
+          <div className={styles.addressContainer}>
+            <input
+              className={styles.input}
+              placeholder="Укажите адрес доставки (улица, номер дома)"
+              value={inputAddress}
+              onChange={(e) => {
+                setInputAddress(e.target.value);
+                fetchSuggestions(
+                  e.target.value,
+                  setSuggestions,
+                  setShowDropdown
+                );
+              }}
+              onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
+              onBlur={() => setTimeout(() => setShowDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
+            />
+            {showDropdown && (
+              <AddressDropDown
+                setShowDropdown={setShowDropdown}
+                setInputAddress={setInputAddress}
+                suggestions={suggestions}
+                setSuggestions={setSuggestions}
+                dispatch={dispatch}
+                setMarkerAddress={setMarkerAddress}
+                setIsAddressValid={setIsAddressValid}
+              />
+            )}
+            <button className={styles.buttonStyle} onClick={handleAddress}>
+              <span className={styles.buttonText}>Подтвердить</span>
+            </button>
+          </div>
+        </div>
+        <div onClick={() => setIsMapOpen(false)} className={styles.icon}>
+          <IoMdClose size={25} />
+        </div>
       </div>
       <MapContainer
-        // center={[55.7558, 37.6173]}
-        center={mapPosition}
-        zoom={11}
+        center={netbooksMediaQuery ? mapPosition : [55.7558, 37.6173]}
+        zoom={netbooksMediaQuery ? 16 : 10}
         attributionControl={false}
         className={styles.map}
         zoomControl={false}
-        minZoom={netbooksMediaQuery ? 16 : 10}
+        minZoom={10}
       >
         <TileLayer url="https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png" />
         <Marker position={mapPosition} icon={customIcon}>
