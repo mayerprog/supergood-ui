@@ -141,51 +141,36 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
 
   return (
     <div className={styles.mapContainer} ref={mapWrapperRef}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          width: "100%",
-        }}
-      >
-        <div>
-          <h3>Наша территория доставки</h3>
-          <div className={styles.addressContainer}>
-            <input
-              className={styles.input}
-              placeholder="Укажите адрес доставки (улица, номер дома)"
-              value={inputAddress}
-              onChange={(e) => {
-                setInputAddress(e.target.value);
-                fetchSuggestions(
-                  e.target.value,
-                  setSuggestions,
-                  setShowDropdown
-                );
-              }}
-              onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
-              onBlur={() => setTimeout(() => setShowDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
-            />
-            {showDropdown && (
-              <AddressDropDown
-                setShowDropdown={setShowDropdown}
-                setInputAddress={setInputAddress}
-                suggestions={suggestions}
-                setSuggestions={setSuggestions}
-                dispatch={dispatch}
-                setMarkerAddress={setMarkerAddress}
-                setIsAddressValid={setIsAddressValid}
-              />
-            )}
-            <button className={styles.buttonStyle} onClick={handleAddress}>
-              <span className={styles.buttonText}>Подтвердить</span>
-            </button>
-          </div>
-        </div>
-        <div onClick={() => setIsMapOpen(false)} className={styles.icon}>
-          <IoMdClose size={25} />
-        </div>
+      <div onClick={() => setIsMapOpen(false)} className={styles.icon}>
+        <IoMdClose size={25} />
+      </div>
+      <h3>Наша территория доставки</h3>
+      <div className={styles.addressContainer}>
+        <input
+          className={styles.input}
+          placeholder="Укажите адрес доставки (улица, номер дома)"
+          value={inputAddress}
+          onChange={(e) => {
+            setInputAddress(e.target.value);
+            fetchSuggestions(e.target.value, setSuggestions, setShowDropdown);
+          }}
+          onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
+          onBlur={() => setTimeout(() => setShowDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
+        />
+        {showDropdown && (
+          <AddressDropDown
+            setShowDropdown={setShowDropdown}
+            setInputAddress={setInputAddress}
+            suggestions={suggestions}
+            setSuggestions={setSuggestions}
+            dispatch={dispatch}
+            setMarkerAddress={setMarkerAddress}
+            setIsAddressValid={setIsAddressValid}
+          />
+        )}
+        <button className={styles.buttonStyle} onClick={handleAddress}>
+          <span className={styles.buttonText}>Подтвердить</span>
+        </button>
       </div>
       <MapContainer
         center={netbooksMediaQuery ? mapPosition : [55.7558, 37.6173]}
