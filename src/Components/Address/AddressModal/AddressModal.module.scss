@@ -39,10 +39,10 @@
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-// .container {
-//   -ms-overflow-style: none; /* IE and Edge */
-//   scrollbar-width: none; /* Firefox */
-// }
+.container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 
 @media (max-width: 1024px) {
   .container {
