@@ -127,10 +127,6 @@ const DeliveryAddress = ({
 }) => {
   const location = useLocation(); // Getting the current location
 
-  useEffect(() => {
-    console.log("location", typeof location.pathname);
-  });
-
   return (
     <button
       onClick={toggleMapVisibility}
