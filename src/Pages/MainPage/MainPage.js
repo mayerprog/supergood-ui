@@ -196,7 +196,6 @@ const MainPage = ({
             <MapComponent
               mapWrapperRef={mapWrapperRef}
               setIsMapOpen={setIsMapOpen}
-              netbooksMediaQuery={netbooksMediaQuery}
             />
           </div>
         )}

@@ -3,9 +3,9 @@ import logo from "../../assets/images/logo.jpg";
 import { GiShoppingCart } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
 import { FaLocationDot } from "react-icons/fa6";
-import { forwardRef, useContext } from "react";
+import { forwardRef, useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { setIsAuth } from "../../redux/slices/authSlice";
 import ModalOptions from "../ModalOptions/ModalOptions";
 import { IoMenuSharp } from "react-icons/io5";
@@ -109,7 +109,6 @@ const Header = forwardRef(
               addressSelected={addressSelected}
             />
             <IoMenuSharp
-              // size={33}
               color="#5f5f5f"
               className={styles.menu}
               onClick={toggleMenu}
@@ -126,6 +125,12 @@ const DeliveryAddress = ({
   isMainPage,
   addressSelected,
 }) => {
+  const location = useLocation(); // Getting the current location
+
+  useEffect(() => {
+    console.log("location", typeof location.pathname);
+  });
+
   return (
     <button
       onClick={toggleMapVisibility}
@@ -134,9 +139,13 @@ const DeliveryAddress = ({
     >
       <FaLocationDot size={18} color="#7c7c7c" className={styles.icon} />
       {addressSelected ? (
-        <span className={styles.buttonText}>{addressSelected}</span>
+        <span className={styles.buttonText} page-pathname={location.pathname}>
+          {addressSelected}
+        </span>
       ) : (
-        <span className={styles.buttonText}>Укажите адрес доставки</span>
+        <span className={styles.buttonText} page-pathname={location.pathname}>
+          Укажите адрес доставки
+        </span>
       )}
     </button>
   );

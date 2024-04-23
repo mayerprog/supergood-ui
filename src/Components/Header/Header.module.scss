@@ -60,6 +60,11 @@
     white-space: nowrap;
     display: block;
     max-width: 100%;
+    color: #7a7a7a;
+
+    &[page-pathname="/"] {
+      color: #222222;
+    }
 
     @media (max-width: 1024px) {
       font-size: 13px;
