@@ -240,9 +240,8 @@ function App() {
           }
         />
       </Routes>
-      {!netbooksMediaQuery ? (
-        <Footer />
-      ) : (
+      {!netbooksMediaQuery && <Footer />}
+      {netbooksMediaQuery && location.pathname === "/" && (
         <DeviceFooter setIsCartSheetOpen={setIsCartSheetOpen} />
       )}
     </div>

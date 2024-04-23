@@ -15,8 +15,13 @@ const AddressModal = ({
   useEffect(() => {
     console.log("AddressModal has been drawn");
   }, []);
+
   return (
-    <div className={styles.container} ref={addressRef}>
+    <div
+      className={styles.container}
+      ref={addressRef}
+      is-modal={isModal ? "true" : "false"}
+    >
       <div onClick={toggleAddressVisibility} className={styles.icon}>
         <IoMdClose size={25} />
       </div>
