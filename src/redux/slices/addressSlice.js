@@ -1097,6 +1097,7 @@ const initialState = {
   //   },
   // },
   addressSelected: "",
+  mapPosition: [55.7558, 37.6173],
   addressList: [
     // { id: 1, address: "5-я улица Ямского Поля, 7к2", selected: true },
     // { id: 2, address: "Авангардная улица, 13", selected: false },
@@ -1108,6 +1109,9 @@ export const addressSlice = createSlice({
   name: "address",
   initialState,
   reducers: {
+    setMapPosition: (state, action) => {
+      state.mapPosition = action.payload;
+    },
     setAddressSelected: (state, action) => {
       state.addressSelected = action.payload;
     },
@@ -1164,6 +1168,7 @@ export const {
   updateSelected,
   removeAddress,
   removeAddressSelected,
+  setMapPosition,
 } = addressSlice.actions;
 
 export default addressSlice.reducer;

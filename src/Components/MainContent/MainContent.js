@@ -175,14 +175,15 @@ const MainContent = ({
           />
         </div>
       )}
-      {isMapOpen && (
+      {/* {isMapOpen && !netbooksMediaQuery && (
         <div className={styles.cardOverlay}>
           <MapComponent
             mapWrapperRef={mapWrapperRef}
             setIsMapOpen={setIsMapOpen}
           />
         </div>
-      )}
+      )} */}
+
       {isLoginOpen && (
         <div className={styles.cardOverlay}>
           <LoginModal

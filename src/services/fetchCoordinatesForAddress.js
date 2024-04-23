@@ -1,8 +1,9 @@
 import axios from "axios";
+import { setMapPosition } from "../redux/slices/addressSlice";
 
 export const fetchCoordinatesForAddress = async (
   address,
-  setMapPosition,
+  dispatch,
   setMarkerAddress
 ) => {
   const axiosConfig = {
@@ -17,7 +18,7 @@ export const fetchCoordinatesForAddress = async (
     if (response.data && response.data[0]) {
       const { lat, lon } = response.data[0];
       const newPosition = [parseFloat(lat), parseFloat(lon)];
-      setMapPosition(newPosition);
+      dispatch(setMapPosition(newPosition));
       setMarkerAddress(address);
     }
   } catch (error) {

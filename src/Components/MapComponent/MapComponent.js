@@ -14,34 +14,39 @@ import pin from "../../assets/images/pin.png";
 import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
-import { addAddress } from "../../redux/slices/addressSlice";
+import { addAddress, setMapPosition } from "../../redux/slices/addressSlice";
 import AddressDropDown from "../Address/AddressDropDown/AddressDropDown";
 import { fetchSuggestions } from "../../services/fetchSuggestions";
 import { fetchCoordinatesForAddress } from "../../services/fetchCoordinatesForAddress";
 import { makeExistingAddressSelected } from "../../services/makeExistingAddressSelected";
+import { useMediaQuery } from "react-responsive";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygon, setmMultiPolygon] = useState([]);
   const [inputAddress, setInputAddress] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [markerAddress, setMarkerAddress] = useState(""); //temporary address while choosing
-  const [mapPosition, setMapPosition] = useState([0, 0]); //temporary position while choosing
+  // const [mapPosition, setMapPosition] = useState([55.7558, 37.6173]); //temporary position while choosing
+  // const [mapPosition, setMapPosition] = useState([55.7558, 37.6173]); //temporary position while choosing
   const [suggestions, setSuggestions] = useState([]);
   const [isAddressValid, setIsAddressValid] = useState(false);
 
   const dispatch = useDispatch();
 
+  const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
+
   // const polyLayers = useSelector((state) => state.address.polyLayers);
   const addressSelected = useSelector((state) => state.address.addressSelected);
   const addressList = useSelector((state) => state.address.addressList);
+  const mapPosition = useSelector((state) => state.address.mapPosition);
+
+  useEffect(() => {
+    console.log("mapPosition", mapPosition);
+  }, [mapPosition]);
 
   useEffect(() => {
     if (addressSelected) {
-      fetchCoordinatesForAddress(
-        addressSelected,
-        setMapPosition,
-        setMarkerAddress
-      );
+      fetchCoordinatesForAddress(addressSelected, dispatch, setMarkerAddress);
     }
     setInputAddress(addressSelected);
   }, [addressSelected]);
@@ -107,7 +112,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
     useMapEvents({
       click(e) {
         const { lat, lng } = e.latlng;
-        setMapPosition([lat, lng]);
+        dispatch(setMapPosition([lat, lng]));
         fetchAddress(lat, lng);
       },
     });
@@ -159,7 +164,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
             setInputAddress={setInputAddress}
             suggestions={suggestions}
             setSuggestions={setSuggestions}
-            setMapPosition={setMapPosition}
+            dispatch={dispatch}
             setMarkerAddress={setMarkerAddress}
             setIsAddressValid={setIsAddressValid}
           />
@@ -169,12 +174,13 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         </button>
       </div>
       <MapContainer
-        center={[55.7558, 37.6173]}
+        // center={[55.7558, 37.6173]}
+        center={mapPosition}
         zoom={11}
         attributionControl={false}
         className={styles.map}
         zoomControl={false}
-        minZoom={10}
+        minZoom={netbooksMediaQuery ? 16 : 10}
       >
         <TileLayer url="https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png" />
         <Marker position={mapPosition} icon={customIcon}>

@@ -15,6 +15,7 @@ import { useMediaQuery } from "react-responsive";
 import MainSheet from "../../Components/MainSheet/MainSheet";
 import NavBar from "../../Components/NavBar/NavBar";
 import CartSheet from "../../Components/Cart/CartSheet/CartSheet";
+import MapComponent from "../../Components/MapComponent/MapComponent";
 
 const MainPage = ({
   searchQuery,
@@ -189,6 +190,25 @@ const MainPage = ({
             />
           )}
         </div>
+
+        {isMapOpen && (
+          <div className={styles.cardOverlay}>
+            <MapComponent
+              mapWrapperRef={mapWrapperRef}
+              setIsMapOpen={setIsMapOpen}
+              netbooksMediaQuery={netbooksMediaQuery}
+            />
+          </div>
+        )}
+        {/* 
+        {isMapOpen && netbooksMediaQuery && (
+          <div className={styles.cardOverlay}>
+            <MapComponent
+              mapWrapperRef={mapWrapperRef}
+              setIsMapOpen={setIsMapOpen}
+            />
+          </div>
+        )} */}
 
         <MainContent
           items={searchedItems}
