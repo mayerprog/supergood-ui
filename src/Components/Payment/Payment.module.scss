@@ -16,7 +16,7 @@
   height: 100%;
   min-height: calc(100vh - 600px);
   margin: 0 auto;
-  @media (max-width: 800px) {
+  @media (max-width: 1024px) {
     align-self: center;
     position: static;
     top: 0;
@@ -77,6 +77,9 @@
     }
     &:active {
       background-color: darken(rgb(239, 199, 118), 3%);
+    }
+    @media (max-width: 340px) {
+      width: 150px;
     }
   }
   .buttonStyle {

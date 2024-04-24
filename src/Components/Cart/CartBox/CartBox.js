@@ -10,7 +10,6 @@ import { useMediaQuery } from "react-responsive";
 const CartBox = ({ item, index, isSheet, isOrderCart }) => {
   const [itemImage, setItemImage] = useState("");
   const [ref, loaded, onLoad] = useImageLoaded();
-  const mediaQuery = useMediaQuery({ maxWidth: 1024, minWidth: 367 });
   const phoneMediaQuery = useMediaQuery({ maxWidth: 418 });
 
   const uid = item.img[0].uid;
@@ -32,16 +31,11 @@ const CartBox = ({ item, index, isSheet, isOrderCart }) => {
         />
       ) : (
         <div className={styles.cartImage}>
-          <MdImageNotSupported size={!mediaQuery ? 50 : 100} color="#ccc" />
+          <MdImageNotSupported className={styles.icon} color="#ccc" />
         </div>
       )}
       <div className={styles.cartBoxText}>
-        <span
-          className={styles.text}
-          data-is-orderCart={isOrderCart ? "true" : "false"}
-        >
-          {item.name}
-        </span>
+        <span className={styles.text}>{item.name}</span>
         {!phoneMediaQuery ? (
           <div>
             <span>{`${item.price} ₽`}</span>
