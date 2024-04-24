@@ -19,6 +19,7 @@
   height: 2rem;
   width: var(--counter-width, 7rem);
   border: 1px none #ccc;
+
   // styles when used in sheet
   &[data-is-sheet="true"] {
     @media (min-width: 500px) {
