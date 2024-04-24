@@ -17,6 +17,11 @@
     box-sizing: border-box;
   }
 
+  @media (max-width: 800px) {
+    align-self: center;
+    max-width: 100%;
+  }
+
   .cartHeader {
     display: flex;
     flex-direction: row;

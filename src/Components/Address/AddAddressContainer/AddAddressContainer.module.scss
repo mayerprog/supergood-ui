@@ -28,6 +28,10 @@
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
   gap: 10px;
 
+  @media (max-width: 290px) {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  }
+
   .detailsInput {
     text-align: center;
     margin: 0 0 20px 0;
@@ -68,6 +72,17 @@
       grid-template-columns: repeat(auto-fit, minmax(100px, max-content));
       gap: 10px;
     }
+    @media (max-width: 535px) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, max-content));
+      gap: 10px;
+    }
+    @media (max-width: 429px) {
+      grid-template-columns: repeat(auto-fit, minmax(110px, max-content));
+    }
+    @media (max-width: 358px) {
+      grid-template-columns: repeat(auto-fit, minmax(120px, max-content));
+    }
   }
 }
 
@@ -75,14 +90,25 @@
 .binButton {
   @include reusable-button;
   margin: 0.3rem 1.5rem 0 0;
-  @media (max-width: 500px) {
-    margin: 0.3rem 0 0 0;
+
+  &[data-is-modal="true"] {
+    @media (max-width: 500px) {
+      margin: 0.3rem 0 0 0;
+    }
+    @media (max-width: 370px) {
+      width: 110px;
+    }
+    @media (max-width: 290px) {
+      width: 100px;
+    }
   }
-  @media (max-width: 370px) {
-    width: 110px;
-  }
-  @media (max-width: 290px) {
-    width: 100px;
+  &[data-is-modal="false"] {
+    @media (max-width: 429px) {
+      width: 120px;
+    }
+    @media (max-width: 358px) {
+      width: 150px;
+    }
   }
 }
 .buttonText {

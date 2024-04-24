@@ -32,10 +32,6 @@
     @media (max-width: 1024px) {
       box-shadow: none;
       background-color: white;
-      .logo {
-        width: 130px;
-        height: 38px;
-      }
     }
   }
 
@@ -44,6 +40,13 @@
     height: 51.8px;
     margin-right: 10px;
     cursor: pointer;
+  }
+
+  @media (max-width: 1024px) {
+    .logo {
+      width: 130px;
+      height: 38px;
+    }
   }
 
   .address {

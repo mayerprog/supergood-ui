@@ -24,6 +24,10 @@
     display: flex;
     flex-direction: row;
     gap: 20px;
+
+    @media (max-width: 800px) {
+      flex-direction: column;
+    }
   }
 
   .cardOverlay {

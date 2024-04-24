@@ -137,10 +137,18 @@ const AddAddressContainer = ({
         className={styles.buttonsContainer}
         data-is-modal={isModal ? "true" : "false"}
       >
-        <button className={styles.buttonStyle} onClick={handleUpdateAddress}>
+        <button
+          className={styles.buttonStyle}
+          onClick={handleUpdateAddress}
+          data-is-modal={isModal ? "true" : "false"}
+        >
           <span className={styles.buttonText}>Сохранить</span>
         </button>
-        <button className={styles.buttonStyle} onClick={closeChangeField}>
+        <button
+          className={styles.buttonStyle}
+          onClick={closeChangeField}
+          data-is-modal={isModal ? "true" : "false"}
+        >
           <span className={styles.buttonText}>Отмена</span>
         </button>
         {item && (
