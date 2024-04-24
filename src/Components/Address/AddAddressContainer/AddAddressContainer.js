@@ -17,6 +17,7 @@ const AddAddressContainer = ({
   streetName,
   closeChangeField,
   setAddressIndexForChange,
+  isModal,
 }) => {
   const [inputAddress, setInputAddress] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -132,7 +133,10 @@ const AddAddressContainer = ({
         </div>
         <input className={styles.input} placeholder="Комментарий курьеру" />
       </div>
-      <div className={styles.buttonsContainer}>
+      <div
+        className={styles.buttonsContainer}
+        data-is-modal={isModal ? "true" : "false"}
+      >
         <button className={styles.buttonStyle} onClick={handleUpdateAddress}>
           <span className={styles.buttonText}>Сохранить</span>
         </button>

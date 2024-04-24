@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./PayTypeModal.module.scss";
 
 const PayTypeModal = ({ payTypeWrapperRef }) => {
-  const [chosenValue, setChosenValue] = useState("");
+  const [chosenValue, setChosenValue] = useState("Наличными курьеру");
 
   const handleCheckBox = (event) => {
     setChosenValue(event.target.value);

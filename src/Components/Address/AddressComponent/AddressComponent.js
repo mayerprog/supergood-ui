@@ -77,6 +77,7 @@ const AddressComponent = ({
               closeChangeField={handleCloseChanging}
               item={item}
               setAddressIndexForChange={setAddressIndexForChange}
+              isModal={isModal}
             />
           )}
         </React.Fragment>

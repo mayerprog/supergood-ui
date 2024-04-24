@@ -10,6 +10,7 @@ import { removeAllItems } from "../../redux/slices/cartSlice";
 import { v4 as uuidv4 } from "uuid";
 import PayTypeModal from "../../Components/Payment/PayTypeModal/PayTypeModal";
 import UserModal from "../../Components/UserInfo/UserModal/UserModal";
+import { useMediaQuery } from "react-responsive";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -28,6 +29,8 @@ const NewOrderPage = ({
   const cartItems = useSelector((state) => state.cart.cartItems);
   const addressSelected = useSelector((state) => state.address.addressSelected);
   const itemsSum = useSelector((state) => state.cart.itemsSum);
+
+  const mediaQuery = useMediaQuery({ maxWidth: 800 });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

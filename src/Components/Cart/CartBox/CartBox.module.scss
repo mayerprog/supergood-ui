@@ -24,6 +24,13 @@
     display: flex;
     flex: 1;
     justify-content: flex-start;
+    padding-right: 7px;
+    @media (max-width: 380px) {
+      max-width: 100px;
+    }
+    @media (max-width: 300px) {
+      max-width: 80px;
+    }
   }
   .text {
     display: -webkit-box;

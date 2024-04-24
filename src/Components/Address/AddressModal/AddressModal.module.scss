@@ -18,6 +18,7 @@
   overflow-y: auto;
 
   &[is-modal="false"] {
+    min-width: 370px;
     @media (max-width: 1090px) {
       box-sizing: border-box;
     }

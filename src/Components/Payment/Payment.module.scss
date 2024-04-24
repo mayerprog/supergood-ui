@@ -3,6 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  flex: 1;
   position: sticky;
   top: 90px;
   border-radius: 20px;
