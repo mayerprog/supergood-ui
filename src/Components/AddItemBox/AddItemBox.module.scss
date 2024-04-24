@@ -45,6 +45,15 @@
     @media (max-width: 900px) {
       width: 4rem;
     }
+    @media (max-width: 800px) {
+      width: 7rem;
+    }
+    @media (max-width: 510px) {
+      width: 6rem;
+    }
+    @media (max-width: 420px) {
+      width: 4rem;
+    }
   }
 
   .cartCounterButton {
