@@ -8,15 +8,15 @@
   padding: 30px;
   font-size: 15px;
   font-family: "Inter", sans-serif;
-  // margin-left: 1.5vw;
-  // min-width: 500px;
   max-width: 500px;
   width: 100%;
   margin-top: 50px;
   height: 100%;
-  // min-height: 400px;
-  // height: calc(100vh - 400px);
-  // overflow-y: auto;
+
+  @media (max-width: 1090px) {
+    box-sizing: border-box;
+  }
+
   .cartHeader {
     display: flex;
     flex-direction: row;

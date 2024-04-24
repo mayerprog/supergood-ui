@@ -19,6 +19,7 @@
   height: 2rem;
   width: var(--counter-width, 7rem);
   border: 1px none #ccc;
+  // styles when used in sheet
   &[data-is-sheet="true"] {
     @media (min-width: 500px) {
       width: 8rem;
@@ -29,6 +30,20 @@
     }
     @media (max-width: 418px) {
       width: 5rem;
+    }
+    @media (max-width: 319px) {
+      width: 3.6rem;
+      .count {
+        font-size: 0.8em;
+        margin: 0;
+      }
+    }
+  }
+  // styles when used in NewOrderPage
+  &[data-is-orderCart="true"] {
+    width: 5rem;
+    @media (max-width: 900px) {
+      width: 4.5rem;
     }
   }
 
@@ -71,14 +86,19 @@
 @media (max-width: 368px) {
   .counter {
     width: 4.5rem;
+    .icon {
+      width: 11px;
+      height: 11px;
+    }
   }
 }
 
 @media (max-width: 319px) {
   .counter {
-    width: 3.6rem;
+    width: 3.4rem;
+    height: 1.7rem;
     .count {
-      font-size: 0.8em;
+      font-size: 0.7em;
       margin: 0;
     }
   }

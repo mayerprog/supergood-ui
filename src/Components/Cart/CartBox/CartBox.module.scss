@@ -42,43 +42,30 @@
     align-self: center;
     justify-content: flex-end;
   }
-
-  // @media (max-width: 368px) {
-  //   span {
-  //     font-size: 5px;
-  //   }
-  // }
-}
-
-@media (max-width: 1024px) {
-  .cartBox {
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0.5em 1.5em;
-    // width: calc(100vw - 50px);
-    // width: 100vw;
-
-    .cartImage {
-      margin-right: 30px;
-    }
-
-    .cartBoxText {
-      font-size: medium;
-    }
-
-    .countBox {
+  &[data-is-orderCart="false"] {
+    @media (max-width: 1024px) {
       display: flex;
       flex: 1;
-      align-self: center;
-      justify-content: flex-end;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0.5em 1.5em;
+      // width: calc(100vw - 50px);
+      // width: 100vw;
+
+      .cartImage {
+        margin-right: 30px;
+      }
+
+      .cartBoxText {
+        font-size: medium;
+      }
+
+      .countBox {
+        display: flex;
+        flex: 1;
+        align-self: center;
+        justify-content: flex-end;
+      }
     }
   }
 }
-
-// @media (max-width: 600px) {
-//   .cartBox {
-//     width: none;
-//   }
-// }

@@ -38,6 +38,7 @@ const Header = forwardRef(
     );
 
     const navigate = useNavigate();
+    const location = useLocation(); // Getting the current location
 
     const handleProfileClick = () => {
       if (isAuth) navigate("/user");
@@ -48,7 +49,11 @@ const Header = forwardRef(
     };
 
     return (
-      <header className={styles.header} ref={ref}>
+      <header
+        className={styles.header}
+        ref={ref}
+        page-pathname={location.pathname}
+      >
         <img
           src={logo}
           alt=""
@@ -72,6 +77,7 @@ const Header = forwardRef(
               toggleMapVisibility={toggleMapVisibility}
               isMainPage={isMainPage}
               addressSelected={addressSelected}
+              location={location}
             />
             <div className={styles.leftCluster}>
               <SocialMedia />
@@ -107,6 +113,7 @@ const Header = forwardRef(
               toggleMapVisibility={toggleMapVisibility}
               isMainPage={isMainPage}
               addressSelected={addressSelected}
+              location={location}
             />
             <IoMenuSharp
               color="#5f5f5f"
@@ -124,9 +131,8 @@ const DeliveryAddress = ({
   toggleMapVisibility,
   isMainPage,
   addressSelected,
+  location,
 }) => {
-  const location = useLocation(); // Getting the current location
-
   return (
     <button
       onClick={toggleMapVisibility}

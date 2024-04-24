@@ -28,7 +28,7 @@ const OrderCart = ({}) => {
         </span>
       </div>
       {cartItems.map((item, index) => (
-        <CartBox item={item} index={index} isSheet={false} />
+        <CartBox item={item} index={index} isSheet={false} isOrderCart={true} />
       ))}
     </div>
   );

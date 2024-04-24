@@ -12,6 +12,7 @@ const AddItemBox = ({
   margin,
   itemId,
   isSheet,
+  isOrderCart,
 }) => {
   const dynamicStyle = {
     "--counter-bg-color": backgroundColor,
@@ -97,6 +98,7 @@ const AddItemBox = ({
       className={styles.counter}
       style={dynamicStyle}
       data-is-sheet={isSheet ? "true" : "false"}
+      data-is-orderCart={isOrderCart ? "true" : "false"}
     >
       <button
         onClick={(e) => decrement(e)}
@@ -104,7 +106,7 @@ const AddItemBox = ({
           !backgroundColor ? styles.cardCounterButton : styles.cartCounterButton
         }
       >
-        <AiOutlineMinus />
+        <AiOutlineMinus className={styles.icon} />
       </button>
       <span className={styles.count}>{amount}</span>
       <button
@@ -113,7 +115,7 @@ const AddItemBox = ({
           !backgroundColor ? styles.cardCounterButton : styles.cartCounterButton
         }
       >
-        <AiOutlinePlus />
+        <AiOutlinePlus className={styles.icon} />
       </button>
     </div>
   );

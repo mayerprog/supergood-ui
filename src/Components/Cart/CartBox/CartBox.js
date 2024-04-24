@@ -7,7 +7,7 @@ import { useImageLoaded } from "../../../hooks/useImageLoaded";
 import { baseURL } from "../../../config";
 import { useMediaQuery } from "react-responsive";
 
-const CartBox = ({ item, index, isSheet }) => {
+const CartBox = ({ item, index, isSheet, isOrderCart }) => {
   const [itemImage, setItemImage] = useState("");
   const [ref, loaded, onLoad] = useImageLoaded();
   const mediaQuery = useMediaQuery({ maxWidth: 1024, minWidth: 367 });
@@ -17,7 +17,11 @@ const CartBox = ({ item, index, isSheet }) => {
   const uri = `${baseURL}/getFile?uid=${uid}`;
 
   return (
-    <div className={styles.cartBox} key={index}>
+    <div
+      className={styles.cartBox}
+      key={index}
+      data-is-orderCart={isOrderCart ? "true" : "false"}
+    >
       {loaded ? (
         <img
           className={styles.cartImage}
@@ -56,6 +60,7 @@ const CartBox = ({ item, index, isSheet }) => {
           width="5em"
           color="#5f5f5f"
           isSheet={isSheet}
+          isOrderCart={isOrderCart}
         />
       </div>
     </div>

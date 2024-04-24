@@ -16,6 +16,13 @@
   align-items: flex-start;
   padding: 30px;
   overflow-y: auto;
+
+  &[is-modal="false"] {
+    @media (max-width: 1090px) {
+      box-sizing: border-box;
+    }
+  }
+
   .icon {
     display: none;
   }
@@ -26,6 +33,20 @@
     .icon {
       display: block;
       cursor: pointer;
+    }
+
+    @media (max-width: 1024px) {
+      box-sizing: border-box;
+      background-color: #fcfcfc;
+      align-items: normal;
+      border-radius: 0;
+      box-shadow: 0;
+      max-height: 100%;
+      min-height: 100%;
+      min-width: none;
+      max-width: none;
+      position: static;
+      top: 0;
     }
   }
 }
@@ -51,21 +72,21 @@
   scrollbar-width: none; /* Firefox */
 }
 
-@media (max-width: 1024px) {
-  .container {
-    box-sizing: border-box;
-    background-color: #fcfcfc;
-    align-items: normal;
-    border-radius: 0;
-    box-shadow: 0;
-    max-height: 100%;
-    min-height: 100%;
-    min-width: none;
-    max-width: none;
+// @media (max-width: 1024px) {
+//   .container {
+//     box-sizing: border-box;
+//     background-color: #fcfcfc;
+//     align-items: normal;
+//     border-radius: 0;
+//     box-shadow: 0;
+//     max-height: 100%;
+//     min-height: 100%;
+//     min-width: none;
+//     max-width: none;
 
-    &[is-modal="true"] {
-      position: static;
-      top: 0;
-    }
-  }
-}
+//     &[is-modal="true"] {
+//       position: static;
+//       top: 0;
+//     }
+//   }
+// }

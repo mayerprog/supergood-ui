@@ -28,6 +28,17 @@
   transition: box-shadow 0.2s ease-in-out, background 0.4s;
   will-change: transform;
 
+  &[page-pathname="/"] {
+    @media (max-width: 1024px) {
+      box-shadow: none;
+      background-color: white;
+      .logo {
+        width: 130px;
+        height: 38px;
+      }
+    }
+  }
+
   .logo {
     width: 220px;
     height: 51.8px;
@@ -156,17 +167,5 @@
     min-width: 33px;
     height: 33px;
     cursor: pointer;
-  }
-}
-
-@media (max-width: 1024px) {
-  .header {
-    box-shadow: none;
-    background-color: white;
-
-    .logo {
-      width: 130px;
-      height: 38px;
-    }
   }
 }
