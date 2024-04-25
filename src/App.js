@@ -10,7 +10,7 @@ import NewOrderPage from "./Pages/NewOrderPage/NewOrderPage";
 import OrdersPage from "./Pages/OrdersPage/OrdersPage";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useOutsideHook } from "./hooks/useOutsideHook";
 import { useMediaQuery } from "react-responsive";
 import {
@@ -19,6 +19,8 @@ import {
   updateSelected,
 } from "./redux/slices/addressSlice";
 import DeviceFooter from "./Components/Footer/DeviceFooter/DeviceFooter";
+import { fetchCoordinatesForAddress } from "./services/fetchCoordinatesForAddress";
+import LevelContext from "./contexts/LevelContext";
 
 function App() {
   // modals
@@ -133,6 +135,20 @@ function App() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressList, addressSelected]);
+
+  const { setMarkerAddress, setMarkerPosition } = useContext(LevelContext);
+
+  // to fetch coordinates if there is addressSelected
+  useEffect(() => {
+    if (addressSelected) {
+      fetchCoordinatesForAddress(
+        addressSelected,
+        dispatch,
+        setMarkerAddress,
+        setMarkerPosition
+      );
+    }
+  }, [addressSelected]);
 
   useEffect(() => {
     setIsMainPage(location.pathname === "/");

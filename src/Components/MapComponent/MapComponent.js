@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./MapComponent.module.scss";
 import { IoMdClose } from "react-icons/io";
 import {
@@ -21,15 +21,17 @@ import { fetchSuggestions } from "../../services/fetchSuggestions";
 import { fetchCoordinatesForAddress } from "../../services/fetchCoordinatesForAddress";
 import { makeExistingAddressSelected } from "../../services/makeExistingAddressSelected";
 import { useMediaQuery } from "react-responsive";
+import LevelContext from "../../contexts/LevelContext";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygon, setmMultiPolygon] = useState([]);
   const [inputAddress, setInputAddress] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-  const [markerAddress, setMarkerAddress] = useState(""); //temporary address while choosing
-  // const [mapPosition, setMapPosition] = useState([55.7558, 37.6173]); //temporary position while choosing
   const [suggestions, setSuggestions] = useState([]);
   const [isAddressValid, setIsAddressValid] = useState(false);
+
+  const { markerAddress, markerPosition, setMarkerAddress, setMarkerPosition } =
+    useContext(LevelContext);
 
   const dispatch = useDispatch();
 
@@ -41,9 +43,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const mapPosition = useSelector((state) => state.address.mapPosition);
 
   useEffect(() => {
-    if (addressSelected) {
-      fetchCoordinatesForAddress(addressSelected, dispatch, setMarkerAddress);
-    }
     setInputAddress(addressSelected);
   }, [addressSelected]);
 
@@ -109,6 +108,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
       click(e) {
         const { lat, lng } = e.latlng;
         dispatch(setMapPosition([lat, lng]));
+        setMarkerPosition([lat, lng]);
         fetchAddress(lat, lng);
       },
     });
@@ -165,6 +165,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
             setSuggestions={setSuggestions}
             dispatch={dispatch}
             setMarkerAddress={setMarkerAddress}
+            setMarkerPosition={setMarkerPosition}
             setIsAddressValid={setIsAddressValid}
           />
         )}
@@ -181,7 +182,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         minZoom={10}
       >
         <TileLayer url="https://basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png" />
-        <Marker position={mapPosition} icon={customIcon}>
+        <Marker position={markerPosition} icon={customIcon}>
           <Popup>{markerAddress}</Popup>
         </Marker>
         <MapEvents />

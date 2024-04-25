@@ -1,21 +1,24 @@
-// import { createContext, useRef, useState } from "react";
-// import { useSelector } from "react-redux";
+import { createContext, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
-// const LevelContext = createContext();
+const LevelContext = createContext();
 
-// export const LevelContextProvider = ({ children }) => {
-//   const [amount, setAmount] = useState(null);
+export const LevelContextProvider = ({ children }) => {
+  const [markerAddress, setMarkerAddress] = useState(""); //temporary address while choosing
+  const [markerPosition, setMarkerPosition] = useState([0, 0]);
 
-//   return (
-//     <LevelContext.Provider
-//       value={{
-//         amount,
-//         setAmount,
-//       }}
-//     >
-//       {children}
-//     </LevelContext.Provider>
-//   );
-// };
+  return (
+    <LevelContext.Provider
+      value={{
+        markerAddress,
+        setMarkerAddress,
+        markerPosition,
+        setMarkerPosition,
+      }}
+    >
+      {children}
+    </LevelContext.Provider>
+  );
+};
 
-// export default LevelContext;
+export default LevelContext;

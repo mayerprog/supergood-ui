@@ -15,7 +15,7 @@ const cartPersistConfig = {
 const addressPersistConfig = {
   key: "address",
   storage: storage,
-  blacklist: ["addressList"],
+  blacklist: ["addressList", "mapPosition"],
 };
 
 const rootReducer = combineReducers({

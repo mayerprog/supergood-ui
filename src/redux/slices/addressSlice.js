@@ -1111,9 +1111,11 @@ export const addressSlice = createSlice({
   reducers: {
     setMapPosition: (state, action) => {
       state.mapPosition = action.payload;
+      console.log("mapPositionState", state.mapPosition);
     },
     setAddressSelected: (state, action) => {
       state.addressSelected = action.payload;
+      // console.log("addressSelected", state.addressSelected);
     },
     removeAddressSelected: (state, action) => {
       state.addressSelected = "";

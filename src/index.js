@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import { LevelContextProvider } from "./contexts/LevelContext";
 
 let persistor = persistStore(store);
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -16,7 +17,9 @@ root.render(
     <BrowserRouter>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <App />
+          <LevelContextProvider>
+            <App />
+          </LevelContextProvider>
         </PersistGate>
       </Provider>
     </BrowserRouter>

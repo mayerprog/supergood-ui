@@ -8,11 +8,17 @@ const AddressDropDown = ({
   setSuggestions,
   dispatch,
   setMarkerAddress,
+  setMarkerPosition,
   setIsAddressValid,
 }) => {
   const handleAddressClick = (name) => {
     if (setMarkerAddress) {
-      fetchCoordinatesForAddress(name, dispatch, setMarkerAddress);
+      fetchCoordinatesForAddress(
+        name,
+        dispatch,
+        setMarkerAddress,
+        setMarkerPosition
+      );
     }
     setInputAddress(name);
     setIsAddressValid(true);
