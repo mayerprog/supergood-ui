@@ -43,7 +43,7 @@ const OrdersContainer = ({ setOrderIndex, orders }) => {
             ))}
         </div>
       )}
-      <div className={styles.title}>
+      {/* <div className={styles.title}>
         <h3>Завершенные</h3>
         <div onClick={() => setIsCompletedListVisible(!isCompletedListVisible)}>
           {isCompletedListVisible ? <FaChevronUp /> : <FaChevronDown />}
@@ -64,7 +64,7 @@ const OrdersContainer = ({ setOrderIndex, orders }) => {
                   </div>
                   <span>{order.date}</span>
                   <span className={styles.time}>{order.time}</span>
-                  <span>Наличными курьеру</span>
+                  <span>{order.payType}</span>
                   <span>Отменен</span>
                   <span className={styles.price}>{order.payAmount} ₽</span>
                 </div>
@@ -72,7 +72,7 @@ const OrdersContainer = ({ setOrderIndex, orders }) => {
               </div>
             ))}
         </div>
-      )}
+      )} */}
     </div>
   );
 };

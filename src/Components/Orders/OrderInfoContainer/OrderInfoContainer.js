@@ -27,7 +27,7 @@ const OrderInfoContainer = ({ chosenOrder }) => {
               <div>{item.name}</div>
               <div className={styles.amount}>{item.params.amount.value}</div>
             </div>
-            <div className={styles.price}>{item.price}</div>
+            <div className={styles.info}>{item.price} ₽</div>
           </div>
         ))}
         <div className={styles.line} />
