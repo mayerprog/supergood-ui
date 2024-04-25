@@ -41,7 +41,7 @@
     }
   }
   // styles when used in NewOrderPage
-  &[data-is-orderCart="true"] {
+  &[data-is-ordercart="true"] {
     @media (max-width: 1024px) {
       width: 7rem;
     }

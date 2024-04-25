@@ -20,7 +20,7 @@ const AddressModal = ({
     <div
       className={styles.container}
       ref={addressRef}
-      is-modal={isModal ? "true" : "false"}
+      data-is-modal={isModal ? "true" : "false"}
     >
       <div onClick={toggleAddressVisibility} className={styles.icon}>
         <IoMdClose size={25} />

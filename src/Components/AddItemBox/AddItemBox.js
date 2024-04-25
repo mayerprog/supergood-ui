@@ -98,7 +98,7 @@ const AddItemBox = ({
       className={styles.counter}
       style={dynamicStyle}
       data-is-sheet={isSheet ? "true" : "false"}
-      data-is-orderCart={isOrderCart ? "true" : "false"}
+      data-is-ordercart={isOrderCart ? "true" : "false"}
     >
       <button
         onClick={(e) => decrement(e)}

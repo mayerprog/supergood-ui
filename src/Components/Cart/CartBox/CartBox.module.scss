@@ -61,7 +61,7 @@
     justify-content: flex-end;
   }
 
-  &[data-is-orderCart="false"] {
+  &[data-is-ordercart="false"] {
     @media (max-width: 1024px) {
       display: flex;
       flex: 1;
@@ -95,7 +95,7 @@
     }
   }
 
-  &[data-is-orderCart="true"] {
+  &[data-is-ordercart="true"] {
     @media (max-width: 472px) {
       .cartBoxText {
         font-size: 14px;

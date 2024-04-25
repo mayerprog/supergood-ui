@@ -52,6 +52,18 @@
 
   &[data-is-sheet="true"] {
     padding-bottom: 2.5em;
+    .counter {
+      @media (min-width: 500px) {
+        width: 8rem;
+        height: 2.5rem;
+      }
+      @media (max-width: 500px) {
+        width: 6rem;
+      }
+      @media (max-width: 418px) {
+        width: 5rem;
+      }
+    }
   }
 
   .counter {
@@ -68,19 +80,6 @@
     .count {
       margin: 0 1rem;
       font-size: 1em;
-    }
-
-    &[data-is-sheet="true"] {
-      @media (min-width: 500px) {
-        width: 8rem;
-        height: 2.5rem;
-      }
-      @media (max-width: 500px) {
-        width: 6rem;
-      }
-      @media (max-width: 418px) {
-        width: 5rem;
-      }
     }
   }
   .price {

@@ -19,7 +19,7 @@ const CartBox = ({ item, index, isSheet, isOrderCart }) => {
     <div
       className={styles.cartBox}
       key={index}
-      data-is-orderCart={isOrderCart ? "true" : "false"}
+      data-is-ordercart={isOrderCart ? "true" : "false"}
     >
       {loaded ? (
         <img

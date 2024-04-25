@@ -17,7 +17,7 @@
   padding: 30px;
   overflow-y: auto;
 
-  &[is-modal="false"] {
+  &[data-is-modal="false"] {
     min-width: 370px;
     @media (max-width: 1090px) {
       box-sizing: border-box;
@@ -34,7 +34,7 @@
     display: none;
   }
 
-  &[is-modal="true"] {
+  &[data-is-modal="true"] {
     position: absolute;
     top: 20%;
     .icon {
