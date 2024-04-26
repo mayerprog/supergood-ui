@@ -2,13 +2,17 @@
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  width: 100%;
   padding: 15px;
+  width: 60%;
+  align-self: flex-start;
   margin: 10px 0;
-  align-self: center;
   box-sizing: border-box;
   background-color: var(--promo-bg-color);
   //   background-color: #bed0eb;
+  &[data-is-modal="true"] {
+    width: 100%;
+    align-self: center;
+  }
 }
 
 h1 {

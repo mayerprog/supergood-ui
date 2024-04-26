@@ -54,7 +54,7 @@ const LoyaltyPage = () => {
           сумма заказов, тем выше статус и размер бонусного кешбэка!
         </p>
       </div>
-      <PromoCards cards={cards} message={null} />
+      <PromoCards cards={cards} message={null} isModal={false} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import styles from "./PromoCards.module.scss";
 
-const PromoCards = ({ cards, message }) => {
+const PromoCards = ({ cards, message, isModal }) => {
   return (
     <>
       {cards.map((card, index) => (
@@ -10,6 +10,7 @@ const PromoCards = ({ cards, message }) => {
             "--promo-bg-color": card.backgroundColor,
           }}
           key={index}
+          data-is-modal={isModal ? "true" : "false"}
         >
           <h3>Ваш статус лояльности</h3>
 

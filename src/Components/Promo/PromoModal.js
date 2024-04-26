@@ -23,6 +23,7 @@ const PromoModal = ({ promoWrapperRef, togglePromoVisibility }) => {
       <PromoCards
         cards={cards}
         message="Совершите заказы еще на 10000 руб. и ваш кэшбэк вырастет до 10%"
+        isModal={true}
       />
       <span className={styles.loyaltyInfo}>Подробнее о системе лояльности</span>
     </div>
