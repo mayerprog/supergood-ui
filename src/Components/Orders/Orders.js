@@ -4,12 +4,15 @@ import { useNavigate } from "react-router-dom";
 import OrderInfoContainer from "./OrderInfoContainer/OrderInfoContainer";
 import styles from "./Orders.module.scss";
 import OrdersContainer from "./OrdersContainer/OrdersContainer";
+import { useMediaQuery } from "react-responsive";
 
 const Orders = () => {
   const [orderIndex, setOrderIndex] = useState(null);
   const orders = useSelector((state) => state.order.orders);
   const [chosenOrder, setChosenOrder] = useState(orders[0]);
   const navigate = useNavigate();
+
+  const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   useEffect(() => {
     if (orders.length > 1) {

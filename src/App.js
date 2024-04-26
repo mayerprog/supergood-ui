@@ -21,6 +21,7 @@ import {
 import DeviceFooter from "./Components/Footer/DeviceFooter/DeviceFooter";
 import { fetchCoordinatesForAddress } from "./services/fetchCoordinatesForAddress";
 import LevelContext from "./contexts/LevelContext";
+import LoyaltyPage from "./Pages/LoyaltyPage/LoyaltyPage";
 
 function App() {
   // modals
@@ -281,6 +282,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/loyalty" element={<LoyaltyPage />} />
       </Routes>
       {!netbooksMediaQuery && <Footer />}
       {netbooksMediaQuery && location.pathname === "/" && (

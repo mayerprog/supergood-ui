@@ -17,8 +17,7 @@
     cursor: pointer;
   }
 
-  .bonusContainer,
-  .loyaltyContainer {
+  .bonusContainer {
     display: flex;
     flex-direction: column;
     border-radius: 10px;
@@ -27,15 +26,7 @@
     margin: 10px 0;
     align-self: center;
     box-sizing: border-box;
-  }
-  .bonusContainer {
     background-color: #f3f3f3;
-  }
-  .loyaltyContainer {
-    background-color: #ebd09484;
-  }
-  h1 {
-    margin: 5px 0;
   }
 
   h3 {

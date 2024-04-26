@@ -1,7 +1,16 @@
+import PromoCards from "./PromoCards/PromoCards";
 import styles from "./PromoModal.module.scss";
 import { IoMdClose } from "react-icons/io";
 
 const PromoModal = ({ promoWrapperRef, togglePromoVisibility }) => {
+  const cards = [
+    {
+      levelRusName: "Приветственный уровень",
+      levelEngName: "START",
+      cashBack: "Кешбэк 7%",
+      backgroundColor: "#ebd09484",
+    },
+  ];
   return (
     <div className={styles.container} ref={promoWrapperRef}>
       <div onClick={togglePromoVisibility} className={styles.icon}>
@@ -11,14 +20,10 @@ const PromoModal = ({ promoWrapperRef, togglePromoVisibility }) => {
         <h3>Баланс бонусных рублей</h3>
         <span>1000 ₽</span>
       </div>
-      <div className={styles.loyaltyContainer}>
-        <h3>Ваш статус лояльности</h3>
-        <h1>START</h1>
-        <h4>Кэшбэк 7%</h4>
-        <span>
-          Совершите заказы еще на 10000 руб. и ваш кэшбэк вырастет до 10%
-        </span>
-      </div>
+      <PromoCards
+        cards={cards}
+        message="Совершите заказы еще на 10000 руб. и ваш кэшбэк вырастет до 10%"
+      />
       <span className={styles.loyaltyInfo}>Подробнее о системе лояльности</span>
     </div>
   );
