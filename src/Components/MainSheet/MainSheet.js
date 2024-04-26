@@ -69,6 +69,7 @@ const MainSheet = ({
         break;
       case "Мои заказы":
         navigate("/orders");
+        handleClosing();
         break;
       case "Выйти":
         break;

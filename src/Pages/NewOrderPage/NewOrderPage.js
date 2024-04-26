@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 import PayTypeModal from "../../Components/Payment/PayTypeModal/PayTypeModal";
 import UserModal from "../../Components/UserInfo/UserModal/UserModal";
 import { useMediaQuery } from "react-responsive";
+import MainSheet from "../../Components/MainSheet/MainSheet";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -25,6 +26,11 @@ const NewOrderPage = ({
   payTypeWrapperRef,
   togglePayTypeVisibility,
   toggleAddressVisibility,
+  isMainSheetOpen,
+  setIsMainSheetOpen,
+  mainSheetWrapperRef,
+  mainSheetClosing,
+  setMainSheetClosing,
 }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const addressSelected = useSelector((state) => state.address.addressSelected);
@@ -95,6 +101,24 @@ const NewOrderPage = ({
           <div className={styles.cardOverlay}>
             <PayTypeModal payTypeWrapperRef={payTypeWrapperRef} />
           </div>
+        )}
+      </div>
+
+      <div
+        className={`${styles.sheetOverlay} ${
+          isMainSheetOpen ? styles.visible : ""
+        }`}
+      >
+        {isMainSheetOpen && (
+          <MainSheet
+            mainSheetWrapperRef={mainSheetWrapperRef}
+            setIsMainSheetOpen={setIsMainSheetOpen}
+            mainSheetClosing={mainSheetClosing}
+            setMainSheetClosing={setMainSheetClosing}
+            navigate={navigate}
+            toggleUserInfoVisibility={toggleUserInfoVisibility}
+            toggleAddressVisibility={toggleAddressVisibility}
+          />
         )}
       </div>
 

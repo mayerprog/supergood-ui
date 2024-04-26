@@ -5,6 +5,8 @@ import styles from "./OrdersPage.module.scss";
 import AddressModal from "../../Components/Address/AddressModal/AddressModal";
 import Orders from "../../Components/Orders/Orders";
 import UserModal from "../../Components/UserInfo/UserModal/UserModal";
+import MainSheet from "../../Components/MainSheet/MainSheet";
+import { useNavigate } from "react-router-dom";
 
 const OrdersPage = ({
   userInfoRef,
@@ -13,8 +15,15 @@ const OrdersPage = ({
   isUserInfoOpen,
   isModalAddressOpen,
   toggleAddressVisibility,
+  isMainSheetOpen,
+  setIsMainSheetOpen,
+  mainSheetWrapperRef,
+  mainSheetClosing,
+  setMainSheetClosing,
 }) => {
   const orders = useSelector((state) => state.order.orders);
+
+  const navigate = useNavigate();
 
   return (
     <div className={styles.content}>
@@ -31,6 +40,25 @@ const OrdersPage = ({
       ) : (
         <Orders />
       )}
+
+      <div
+        className={`${styles.sheetOverlay} ${
+          isMainSheetOpen ? styles.visible : ""
+        }`}
+      >
+        {isMainSheetOpen && (
+          <MainSheet
+            mainSheetWrapperRef={mainSheetWrapperRef}
+            setIsMainSheetOpen={setIsMainSheetOpen}
+            mainSheetClosing={mainSheetClosing}
+            setMainSheetClosing={setMainSheetClosing}
+            navigate={navigate}
+            toggleUserInfoVisibility={toggleUserInfoVisibility}
+            toggleAddressVisibility={toggleAddressVisibility}
+          />
+        )}
+      </div>
+
       {isUserInfoOpen && (
         <div className={styles.cardOverlay}>
           <UserModal

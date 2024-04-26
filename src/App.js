@@ -236,6 +236,11 @@ function App() {
                 payTypeWrapperRef={payTypeWrapperRef}
                 togglePayTypeVisibility={togglePayTypeVisibility}
                 toggleAddressVisibility={toggleAddressVisibility}
+                isMainSheetOpen={isMainSheetOpen}
+                setIsMainSheetOpen={setIsMainSheetOpen}
+                mainSheetWrapperRef={mainSheetWrapperRef}
+                mainSheetClosing={mainSheetClosing}
+                setMainSheetClosing={setMainSheetClosing}
               />
             </ProtectedRoute>
           }
@@ -251,6 +256,11 @@ function App() {
                 isUserInfoOpen={isUserInfoOpen}
                 isModalAddressOpen={isModalAddressOpen}
                 toggleAddressVisibility={toggleAddressVisibility}
+                isMainSheetOpen={isMainSheetOpen}
+                setIsMainSheetOpen={setIsMainSheetOpen}
+                mainSheetWrapperRef={mainSheetWrapperRef}
+                mainSheetClosing={mainSheetClosing}
+                setMainSheetClosing={setMainSheetClosing}
               />
             </ProtectedRoute>
           }
