@@ -37,6 +37,34 @@ const ModalOptions = ({
     toggleOptionsVisibility(false);
   };
 
+  const handleClick = (action) => {
+    switch (action) {
+      case "Мои данные":
+        toggleUserInfoVisibility();
+        toggleOptionsVisibility(false);
+        break;
+      case "Мои адреса":
+        toggleAddressVisibility();
+        toggleOptionsVisibility(false);
+        break;
+      case "Мои заказы":
+        navigate("/orders");
+        toggleOptionsVisibility(false);
+
+        break;
+      case "Промокоды":
+        toggleOptionsVisibility(false);
+
+        break;
+      case "Выйти":
+        dispatch(setIsAuth(false));
+        toggleOptionsVisibility(false);
+        break;
+      default:
+        return;
+    }
+  };
+
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -44,18 +72,17 @@ const ModalOptions = ({
   }, []);
   return (
     <div className={styles.container} ref={optionsRef}>
-      <button className={styles.item} onClick={handleInfoOnClick}>
-        Мои данные
-      </button>
-      <button className={styles.item} onClick={handleAddressOnClick}>
-        Мои адреса
-      </button>
-      <button className={styles.item} onClick={handleOrdersOnClick}>
-        Мои заказы
-      </button>
-      <button className={styles.item} onClick={handleLogoutOnClick}>
-        Выйти
-      </button>
+      {["Мои данные", "Мои адреса", "Мои заказы", "Промокоды", "Выйти"].map(
+        (item, index) => (
+          <button
+            className={styles.item}
+            key={index}
+            onClick={() => handleClick(item)}
+          >
+            {item}
+          </button>
+        )
+      )}
     </div>
   );
 };

@@ -5,6 +5,8 @@ import styles from "./MainSheet.module.scss";
 import { useEffect } from "react";
 import SocialMedia from "../Reusables/SocialMedia/SocialMedia";
 import MobileApps from "../Reusables/MobileApps/MobileApps";
+import { setIsAuth } from "../../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const MainSheet = ({
   mainSheetWrapperRef,
@@ -28,6 +30,8 @@ const MainSheet = ({
   //     `Компонент MainSheet отрисован в ${new Date().toLocaleTimeString()}`
   //   );
   // });
+
+  const dispatch = useDispatch();
 
   useGSAP(() => {
     const menu = mainSheetWrapperRef.current;
@@ -72,6 +76,8 @@ const MainSheet = ({
         handleClosing();
         break;
       case "Выйти":
+        dispatch(setIsAuth(false));
+        handleClosing();
         break;
       default:
         return;
