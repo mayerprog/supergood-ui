@@ -18,6 +18,7 @@ import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
 import ItemSheet from "./ItemSheet/ItemSheet";
 import UserModal from "../UserInfo/UserModal/UserModal";
+import PromoModal from "../Promo/PromoModal";
 
 const MainContent = ({
   isCartVisible,
@@ -27,9 +28,6 @@ const MainContent = ({
   headerHeight,
   setScrolledCategory,
   setSelectedCategory,
-  mapWrapperRef,
-  setIsMapOpen,
-  isMapOpen,
   userInfoRef,
   isUserInfoOpen,
   toggleUserInfoVisibility,
@@ -43,6 +41,9 @@ const MainContent = ({
   loading,
   toggleMapVisibility,
   setSearchQuery,
+  promoWrapperRef,
+  isPromoOpen,
+  togglePromoVisibility,
 }) => {
   const categoryRefs = useRef({});
   const navigate = useNavigate();
@@ -175,14 +176,6 @@ const MainContent = ({
           />
         </div>
       )}
-      {/* {isMapOpen && !netbooksMediaQuery && (
-        <div className={styles.cardOverlay}>
-          <MapComponent
-            mapWrapperRef={mapWrapperRef}
-            setIsMapOpen={setIsMapOpen}
-          />
-        </div>
-      )} */}
 
       {isLoginOpen && (
         <div className={styles.cardOverlay}>
@@ -206,6 +199,15 @@ const MainContent = ({
             addressRef={addressRef}
             isModal={true}
             toggleAddressVisibility={toggleAddressVisibility}
+          />
+        </div>
+      )}
+      {isPromoOpen && (
+        <div className={styles.cardOverlay}>
+          <PromoModal
+            promoWrapperRef={promoWrapperRef}
+            isModal={true}
+            togglePromoVisibility={togglePromoVisibility}
           />
         </div>
       )}

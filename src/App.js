@@ -31,6 +31,7 @@ function App() {
   const [isMapOpen, setIsMapOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isPayTypeOpen, setIsPayTypeOpen] = useState(false);
+  const [isPromoOpen, setIsPromoOpen] = useState(false);
 
   // sheets
   // Menu sheet
@@ -50,6 +51,7 @@ function App() {
   const mapWrapperRef = useRef(null);
   const loginWrapperRef = useRef(null);
   const payTypeWrapperRef = useRef(null);
+  const promoWrapperRef = useRef(null);
   const mainSheetWrapperRef = useRef(null);
   const cartSheetWrapperRef = useRef(null);
 
@@ -90,6 +92,9 @@ function App() {
   const togglePayTypeVisibility = () => {
     setIsPayTypeOpen(!isPayTypeOpen);
   };
+  const togglePromoVisibility = () => {
+    setIsPromoOpen(!isPromoOpen);
+  };
 
   const toggleMainSheetVisibility = () => {
     setMainSheetClosing(true);
@@ -106,6 +111,7 @@ function App() {
   useOutsideHook(addressRef, toggleAddressVisibility); // to close popup <AddressModal /> clicking outside
   useOutsideHook(loginWrapperRef, toggleLoginVisibility); // to close popup <LoginModal /> clicking outside
   useOutsideHook(payTypeWrapperRef, togglePayTypeVisibility); // to close popup <PayTypeModal /> clicking outside
+  useOutsideHook(promoWrapperRef, togglePromoVisibility); // to close popup <PromoModal /> clicking outside
   useOutsideHook(mainSheetWrapperRef, toggleMainSheetVisibility); // to close <MainSheet /> clicking outside
   useOutsideHook(cartSheetWrapperRef, toggleCartSheetVisibility); // to close <CartSheet /> clicking outside
 
@@ -179,6 +185,7 @@ function App() {
         toggleUserInfoVisibility={toggleUserInfoVisibility}
         toggleAddressVisibility={toggleAddressVisibility}
         toggleLoginVisibility={toggleLoginVisibility}
+        togglePromoVisibility={togglePromoVisibility}
         netbooksMediaQuery={netbooksMediaQuery}
         setIsMainSheetOpen={setIsMainSheetOpen}
       />
@@ -216,6 +223,9 @@ function App() {
               setIsCartSheetOpen={setIsCartSheetOpen}
               cartSheetClosing={cartSheetClosing}
               toggleAddressVisibility={toggleAddressVisibility}
+              promoWrapperRef={promoWrapperRef}
+              isPromoOpen={isPromoOpen}
+              togglePromoVisibility={togglePromoVisibility}
             />
           }
         />

@@ -9,32 +9,13 @@ const ModalOptions = ({
   toggleOptionsVisibility,
   toggleUserInfoVisibility,
   toggleAddressVisibility,
+  togglePromoVisibility,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleResize = () => {
     toggleOptionsVisibility();
-  };
-
-  const handleInfoOnClick = () => {
-    toggleUserInfoVisibility();
-    toggleOptionsVisibility(false);
-  };
-
-  const handleAddressOnClick = () => {
-    toggleAddressVisibility();
-    toggleOptionsVisibility(false);
-  };
-
-  const handleOrdersOnClick = () => {
-    navigate("/orders");
-    toggleOptionsVisibility(false);
-  };
-
-  const handleLogoutOnClick = () => {
-    dispatch(setIsAuth(false));
-    toggleOptionsVisibility(false);
   };
 
   const handleClick = (action) => {
@@ -53,8 +34,8 @@ const ModalOptions = ({
 
         break;
       case "Промокоды":
+        togglePromoVisibility();
         toggleOptionsVisibility(false);
-
         break;
       case "Выйти":
         dispatch(setIsAuth(false));
