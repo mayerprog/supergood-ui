@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./OrdersContainer.module.scss";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { MdImageNotSupported } from "react-icons/md";
@@ -12,79 +12,87 @@ const OrdersContainer = ({ setOrderIndex, orders }) => {
     setOrderIndex(orderId);
   };
 
+  useEffect(() => {
+    console.log("orders", orders);
+  });
+
   return (
     <div className={styles.container}>
-      <div className={styles.title}>
-        <h3>Активные</h3>
-        <div onClick={() => setIsPendingListVisible(!isPendingListVisible)}>
-          {isPendingListVisible ? <FaChevronUp /> : <FaChevronDown />}
-        </div>
-      </div>
-      {isPendingListVisible && (
-        <div className={styles.ordersList}>
-          {orders
-            .filter((order) => order.status === "Pending")
-            .map((order, index) => (
-              <div key={index}>
-                <div className={styles.orderInfo}>
-                  <div
-                    className={styles.order}
-                    onClick={() => handleChooseOrder(order.orderId)}
-                  >
-                    <span className={styles.orderId}>
-                      Заказ {order.orderId}
-                    </span>
-                    <div className={styles.dateTime}>
-                      <span>
-                        {order.date} {order.time}
-                      </span>
-                    </div>
-                  </div>
-                  <span>{order.payType}</span>
-                  <div className={styles.deliveryInfo}>
-                    <span className={styles.price}>{order.payAmount} ₽</span>
-                    <span className={styles.cooking}>готовится</span>
-                  </div>
-                </div>
-                <div className={styles.image}>
-                  <MdImageNotSupported size={40} color="#ccc" />
-                </div>
-              </div>
-            ))}
-        </div>
-      )}
-      {/* <div className={styles.title}>
-        <h3>Завершенные</h3>
-        <div onClick={() => setIsCompletedListVisible(!isCompletedListVisible)}>
-          {isCompletedListVisible ? <FaChevronUp /> : <FaChevronDown />}
-        </div>
-      </div>
-      {isCompletedListVisible && (
-        <div className={styles.ordersList}>
-          {orders
-            .filter((order) => order.status === "Cancelled")
-            .map((order, index) => (
-              <div>
-                <div key={index} className={styles.orderInfo}>
-                  <div
-                    className={styles.order}
-                    onClick={() => handleChooseOrder(order.orderId)}
-                  >
-                    <span>Заказ {order.orderId}</span>
-                  </div>
-                  <span>{order.date}</span>
-                  <span className={styles.time}>{order.time}</span>
-                  <span>{order.payType}</span>
-                  <span>Отменен</span>
-                  <span className={styles.price}>{order.payAmount} ₽</span>
-                </div>
-                <div className={styles.line} />
-              </div>
-            ))}
-        </div>
-      )} */}
+      <OrderList
+        isVisible={isPendingListVisible}
+        setIsVisible={setIsPendingListVisible}
+        handleChooseOrder={handleChooseOrder}
+        orders={orders}
+        title="Активные"
+        cookingStatus="готовится"
+        status="Pending"
+      />
+      <OrderList
+        isVisible={isCompletedListVisible}
+        setIsVisible={setIsCompletedListVisible}
+        handleChooseOrder={handleChooseOrder}
+        orders={orders}
+        title="Завершённые"
+        cookingStatus="отменён"
+        status="Cancelled"
+      />
     </div>
   );
 };
+
+const OrderList = ({
+  handleChooseOrder,
+  orders,
+  title,
+  status,
+  isVisible,
+  setIsVisible,
+}) => (
+  <>
+    <div className={styles.title}>
+      <h3>{title}</h3>
+      <div onClick={() => setIsVisible(!isVisible)}>
+        {isVisible ? <FaChevronUp /> : <FaChevronDown />}
+      </div>
+    </div>
+    {isVisible && (
+      <div className={styles.ordersList}>
+        {orders
+          .filter((order) => order.status === status)
+          .map((order, index) => (
+            <div key={index}>
+              <div className={styles.orderInfo}>
+                <div
+                  className={styles.order}
+                  onClick={() => handleChooseOrder(order.orderId)}
+                >
+                  <span className={styles.orderId}>Заказ {order.orderId}</span>
+                  <div className={styles.dateTime}>
+                    <span>
+                      {order.date} {order.time}
+                    </span>
+                  </div>
+                </div>
+                <span>{order.payType}</span>
+                <div className={styles.deliveryInfo}>
+                  <span className={styles.price}>{order.payAmount} ₽</span>
+                  <span className={styles.cooking}>{status}</span>
+                </div>
+              </div>
+              <div className={styles.imageContainer}>
+                {order.items.map((item, index) => (
+                  <MdImageNotSupported
+                    color="#ccc"
+                    key={index}
+                    className={styles.image}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+      </div>
+    )}
+  </>
+);
 
 export default OrdersContainer;
