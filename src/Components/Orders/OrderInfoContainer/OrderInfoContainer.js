@@ -23,7 +23,7 @@ const OrderInfoContainer = ({ chosenOrder }) => {
               <MdImageNotSupported size={40} color="#ccc" />
             </div>
 
-            <div className={styles.info}>
+            <div className={styles.name}>
               <div>{item.name}</div>
               <div className={styles.amount}>{item.params.amount.value}</div>
             </div>
@@ -34,11 +34,11 @@ const OrderInfoContainer = ({ chosenOrder }) => {
       </div>
       <div className={styles.details}>
         <span>Оплата</span>
-        <div className={styles.payment}>
+        <div className={styles.orderDetails}>
           <div className={styles.info}>Стоимость заказа</div>
           <div className={styles.info}>{chosenOrder.payAmount} ₽</div>
         </div>
-        <div className={styles.payment}>
+        <div className={styles.orderDetails}>
           <div className={styles.wholeSum}>Итого</div>
           <div className={styles.wholeSum}>{chosenOrder.payAmount} ₽</div>
         </div>

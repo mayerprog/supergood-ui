@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./OrdersContainer.module.scss";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { MdImageNotSupported } from "react-icons/md";
 
 const OrdersContainer = ({ setOrderIndex, orders }) => {
   const [isPendingListVisible, setIsPendingListVisible] = useState(true);
@@ -30,15 +31,24 @@ const OrdersContainer = ({ setOrderIndex, orders }) => {
                     className={styles.order}
                     onClick={() => handleChooseOrder(order.orderId)}
                   >
-                    <span>Заказ {order.orderId}</span>
+                    <span className={styles.orderId}>
+                      Заказ {order.orderId}
+                    </span>
+                    <div className={styles.dateTime}>
+                      <span>
+                        {order.date} {order.time}
+                      </span>
+                    </div>
                   </div>
-                  <span>{order.date}</span>
-                  <span>{order.time}</span>
                   <span>{order.payType}</span>
-                  <span>Готовится</span>
-                  <span className={styles.price}>{order.payAmount} ₽</span>
+                  <div className={styles.deliveryInfo}>
+                    <span className={styles.price}>{order.payAmount} ₽</span>
+                    <span className={styles.cooking}>готовится</span>
+                  </div>
                 </div>
-                <div className={styles.line} />
+                <div className={styles.image}>
+                  <MdImageNotSupported size={40} color="#ccc" />
+                </div>
               </div>
             ))}
         </div>

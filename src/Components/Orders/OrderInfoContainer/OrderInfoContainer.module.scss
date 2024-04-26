@@ -1,13 +1,13 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  min-width: 450px;
   margin-left: 30px;
   height: 100%;
+  width: calc(60% - 30px);
 
   .header {
     color: #888888;
@@ -21,6 +21,12 @@
       margin: 10px;
     }
     .info {
+      margin: 20px;
+    }
+    .name {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
       margin: 20px;
     }
 
@@ -39,13 +45,6 @@
     }
   }
   .orderDetails {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  .payment {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
