@@ -45,6 +45,7 @@ const OrderList = ({
   orders,
   title,
   status,
+  cookingStatus,
   isVisible,
   setIsVisible,
 }) => (
@@ -76,7 +77,7 @@ const OrderList = ({
                 <span>{order.payType}</span>
                 <div className={styles.deliveryInfo}>
                   <span className={styles.price}>{order.payAmount} ₽</span>
-                  <span className={styles.cooking}>{status}</span>
+                  <span className={styles.cooking}>{cookingStatus}</span>
                 </div>
               </div>
               <div className={styles.imageContainer}>

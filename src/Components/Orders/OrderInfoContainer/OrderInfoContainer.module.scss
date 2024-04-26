@@ -8,6 +8,14 @@
   margin-left: 30px;
   height: 100%;
   width: calc(60% - 30px);
+  overflow-x: auto;
+
+  @media (max-width: 1024px) {
+    align-self: center;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 30px;
+  }
 
   .header {
     color: #888888;
