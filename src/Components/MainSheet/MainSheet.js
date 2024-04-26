@@ -15,6 +15,7 @@ const MainSheet = ({
   setMainSheetClosing,
   toggleUserInfoVisibility,
   toggleAddressVisibility,
+  togglePromoVisibility,
   navigate,
 }) => {
   const links = [
@@ -75,6 +76,10 @@ const MainSheet = ({
         navigate("/orders");
         handleClosing();
         break;
+      case "Промокоды":
+        togglePromoVisibility();
+        handleClosing();
+        break;
       case "Выйти":
         dispatch(setIsAuth(false));
         handleClosing();
@@ -88,7 +93,7 @@ const MainSheet = ({
     <div className={styles.container} ref={mainSheetWrapperRef}>
       <SocialMedia />
 
-      {["Мои данные", "Мои адреса", "Мои заказы", "Выйти"].map(
+      {["Мои данные", "Мои адреса", "Мои заказы", "Промокоды", "Выйти"].map(
         (item, index) => (
           <button
             className={styles.item}

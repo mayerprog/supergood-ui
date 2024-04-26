@@ -251,6 +251,9 @@ function App() {
                 mainSheetWrapperRef={mainSheetWrapperRef}
                 mainSheetClosing={mainSheetClosing}
                 setMainSheetClosing={setMainSheetClosing}
+                promoWrapperRef={promoWrapperRef}
+                isPromoOpen={isPromoOpen}
+                togglePromoVisibility={togglePromoVisibility}
               />
             </ProtectedRoute>
           }
@@ -271,6 +274,9 @@ function App() {
                 mainSheetWrapperRef={mainSheetWrapperRef}
                 mainSheetClosing={mainSheetClosing}
                 setMainSheetClosing={setMainSheetClosing}
+                promoWrapperRef={promoWrapperRef}
+                isPromoOpen={isPromoOpen}
+                togglePromoVisibility={togglePromoVisibility}
               />
             </ProtectedRoute>
           }

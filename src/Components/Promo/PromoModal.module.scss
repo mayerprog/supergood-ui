@@ -60,3 +60,18 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .container {
+    width: 100%;
+    position: static;
+    top: 0;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: 0;
+    box-sizing: border-box;
+    align-items: normal;
+    background-color: #fcfcfc;
+    justify-content: flex-start;
+  }
+}

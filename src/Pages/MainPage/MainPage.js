@@ -189,6 +189,7 @@ const MainPage = ({
               navigate={navigate}
               toggleUserInfoVisibility={toggleUserInfoVisibility}
               toggleAddressVisibility={toggleAddressVisibility}
+              togglePromoVisibility={togglePromoVisibility}
             />
           )}
         </div>
