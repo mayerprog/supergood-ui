@@ -9,4 +9,26 @@
   font-family: "Inter", sans-serif;
   margin-bottom: 20px;
   padding: 30px;
+
+  .promoCardContainer {
+    display: flex;
+    flex-direction: row;
+    .promoInfo {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      margin: 0 15px;
+      align-self: flex-start;
+      p {
+        margin-top: -5px;
+      }
+      span {
+        font-weight: 600;
+      }
+    }
+
+    @media (max-width: 520px) {
+      flex-direction: column;
+    }
+  }
 }

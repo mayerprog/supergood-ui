@@ -2,26 +2,6 @@ import PromoCards from "../../Components/Promo/PromoCards/PromoCards";
 import styles from "./LoyaltyPage.module.scss";
 
 const LoyaltyPage = () => {
-  const cards = [
-    {
-      levelRusName: "Приветственный уровень",
-      levelEngName: "START",
-      cashBack: "Кешбэк 7%",
-      backgroundColor: "#ebd09484",
-    },
-    {
-      levelRusName: "Продвинутый уровень",
-      levelEngName: "GOOD",
-      cashBack: "Кешбэк 10%",
-      backgroundColor: "#bed0eb",
-    },
-    {
-      levelRusName: "Эксклюзивный уровень",
-      levelEngName: "SUPERGOOD",
-      cashBack: "Кешбэк 15%",
-      backgroundColor: "#ade8d2",
-    },
-  ];
   return (
     <div className={styles.container}>
       <h1>Новая система лояльности SuperGood</h1>
@@ -54,7 +34,63 @@ const LoyaltyPage = () => {
           сумма заказов, тем выше статус и размер бонусного кешбэка!
         </p>
       </div>
-      <PromoCards cards={cards} message={null} isModal={false} />
+      <div className={styles.promoCardContainer}>
+        <PromoCards
+          cards={[
+            {
+              levelRusName: "Приветственный уровень",
+              levelEngName: "START",
+              cashBack: "Кешбэк 7%",
+              backgroundColor: "#ebd09484",
+            },
+          ]}
+          message={null}
+          isModal={false}
+        />
+        <div className={styles.promoInfo}>
+          <h1>1.START</h1>
+          <p>(приветственный уровень)</p>
+          <span>7% бонусами с каждого заказа</span>
+        </div>
+      </div>
+      <div className={styles.promoCardContainer}>
+        <PromoCards
+          cards={[
+            {
+              levelRusName: "Продвинутый уровень",
+              levelEngName: "GOOD",
+              cashBack: "Кешбэк 10%",
+              backgroundColor: "#bed0eb",
+            },
+          ]}
+          message={null}
+          isModal={false}
+        />
+        <div className={styles.promoInfo}>
+          <h1>1.GOOD</h1>
+          <p>(продвинутый уровень, при сумме заказов от 10 000 руб.)</p>
+          <span>10% бонусами с каждого заказа</span>
+        </div>
+      </div>
+      <div className={styles.promoCardContainer}>
+        <PromoCards
+          cards={[
+            {
+              levelRusName: "Эксклюзивный уровень",
+              levelEngName: "SUPERGOOD",
+              cashBack: "Кешбэк 15%",
+              backgroundColor: "#ade8d2",
+            },
+          ]}
+          message={null}
+          isModal={false}
+        />
+        <div className={styles.promoInfo}>
+          <h1>1.START</h1>
+          <p>(эксклюзивный уровень, при сумме заказов от 25 000 руб.)</p>
+          <span>15% бонусами с каждого заказа</span>
+        </div>
+      </div>
     </div>
   );
 };
