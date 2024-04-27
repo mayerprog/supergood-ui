@@ -47,9 +47,9 @@ const MainPage = ({
   setIsCartSheetOpen,
   cartSheetClosing,
   toggleAddressVisibility,
-  promoWrapperRef,
-  isPromoOpen,
-  togglePromoVisibility,
+  bonusWrapperRef,
+  isBonusOpen,
+  toggleBonusVisibility,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -189,7 +189,7 @@ const MainPage = ({
               navigate={navigate}
               toggleUserInfoVisibility={toggleUserInfoVisibility}
               toggleAddressVisibility={toggleAddressVisibility}
-              togglePromoVisibility={togglePromoVisibility}
+              toggleBonusVisibility={toggleBonusVisibility}
             />
           )}
         </div>
@@ -224,9 +224,9 @@ const MainPage = ({
           toggleLoginVisibility={toggleLoginVisibility}
           toggleMapVisibility={toggleMapVisibility}
           setSearchQuery={setSearchQuery}
-          promoWrapperRef={promoWrapperRef}
-          isPromoOpen={isPromoOpen}
-          togglePromoVisibility={togglePromoVisibility}
+          bonusWrapperRef={bonusWrapperRef}
+          isBonusOpen={isBonusOpen}
+          toggleBonusVisibility={toggleBonusVisibility}
         />
         {!monitorMediaQuery && (
           <Cart

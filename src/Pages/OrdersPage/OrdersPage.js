@@ -7,7 +7,7 @@ import Orders from "../../Components/Orders/Orders";
 import UserModal from "../../Components/UserInfo/UserModal/UserModal";
 import MainSheet from "../../Components/MainSheet/MainSheet";
 import { useNavigate } from "react-router-dom";
-import PromoModal from "../../Components/Promo/PromoModal";
+import BonusModal from "../../Components/Promo/BonusModal/BonusModal";
 
 const OrdersPage = ({
   userInfoRef,
@@ -21,9 +21,9 @@ const OrdersPage = ({
   mainSheetWrapperRef,
   mainSheetClosing,
   setMainSheetClosing,
-  promoWrapperRef,
-  isPromoOpen,
-  togglePromoVisibility,
+  bonusWrapperRef,
+  isBonusOpen,
+  toggleBonusVisibility,
 }) => {
   const orders = useSelector((state) => state.order.orders);
 
@@ -59,7 +59,7 @@ const OrdersPage = ({
             navigate={navigate}
             toggleUserInfoVisibility={toggleUserInfoVisibility}
             toggleAddressVisibility={toggleAddressVisibility}
-            togglePromoVisibility={togglePromoVisibility}
+            toggleBonusVisibility={toggleBonusVisibility}
           />
         )}
       </div>
@@ -81,12 +81,12 @@ const OrdersPage = ({
           />
         </div>
       )}
-      {isPromoOpen && (
+      {isBonusOpen && (
         <div className={styles.cardOverlay}>
-          <PromoModal
-            promoWrapperRef={promoWrapperRef}
+          <BonusModal
+            bonusWrapperRef={bonusWrapperRef}
             isModal={true}
-            togglePromoVisibility={togglePromoVisibility}
+            toggleBonusVisibility={toggleBonusVisibility}
           />
         </div>
       )}

@@ -1,4 +1,4 @@
-import PromoCards from "../../Components/Promo/PromoCards/PromoCards";
+import BonusCards from "../../Components/Promo/BonusCards/BonusCards";
 import styles from "./LoyaltyPage.module.scss";
 
 const LoyaltyPage = () => {
@@ -35,7 +35,7 @@ const LoyaltyPage = () => {
         </p>
       </div>
       <div className={styles.promoCardContainer}>
-        <PromoCards
+        <BonusCards
           cards={[
             {
               levelRusName: "Приветственный уровень",
@@ -54,7 +54,7 @@ const LoyaltyPage = () => {
         </div>
       </div>
       <div className={styles.promoCardContainer}>
-        <PromoCards
+        <BonusCards
           cards={[
             {
               levelRusName: "Продвинутый уровень",
@@ -73,7 +73,7 @@ const LoyaltyPage = () => {
         </div>
       </div>
       <div className={styles.promoCardContainer}>
-        <PromoCards
+        <BonusCards
           cards={[
             {
               levelRusName: "Эксклюзивный уровень",

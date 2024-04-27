@@ -18,7 +18,7 @@ import { useMediaQuery } from "react-responsive";
 import { useOutsideHook } from "../../hooks/useOutsideHook";
 import ItemSheet from "./ItemSheet/ItemSheet";
 import UserModal from "../UserInfo/UserModal/UserModal";
-import PromoModal from "../Promo/PromoModal";
+import BonusModal from "../Promo/BonusModal/BonusModal";
 
 const MainContent = ({
   isCartVisible,
@@ -41,9 +41,9 @@ const MainContent = ({
   loading,
   toggleMapVisibility,
   setSearchQuery,
-  promoWrapperRef,
-  isPromoOpen,
-  togglePromoVisibility,
+  bonusWrapperRef,
+  isBonusOpen,
+  toggleBonusVisibility,
 }) => {
   const categoryRefs = useRef({});
   const navigate = useNavigate();
@@ -202,12 +202,12 @@ const MainContent = ({
           />
         </div>
       )}
-      {isPromoOpen && (
+      {isBonusOpen && (
         <div className={styles.cardOverlay}>
-          <PromoModal
-            promoWrapperRef={promoWrapperRef}
+          <BonusModal
+            bonusWrapperRef={bonusWrapperRef}
             isModal={true}
-            togglePromoVisibility={togglePromoVisibility}
+            toggleBonusVisibility={toggleBonusVisibility}
           />
         </div>
       )}

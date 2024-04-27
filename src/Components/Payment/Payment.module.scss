@@ -56,9 +56,20 @@
     justify-content: space-between;
     margin-top: 20px;
   }
-  .info {
+  .info,
+  .promo {
     margin: 10px;
   }
+
+  .promo {
+    color: #868686;
+
+    &:hover {
+      color: black;
+      cursor: pointer;
+    }
+  }
+
   .sum {
     font-weight: 600;
     font-size: 20px;

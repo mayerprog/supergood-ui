@@ -1,8 +1,8 @@
-import PromoCards from "./PromoCards/PromoCards";
-import styles from "./PromoModal.module.scss";
+import BonusCards from "../BonusCards/BonusCards";
+import styles from "./BonusModal.module.scss";
 import { IoMdClose } from "react-icons/io";
 
-const PromoModal = ({ promoWrapperRef, togglePromoVisibility }) => {
+const BonusModal = ({ bonusWrapperRef, toggleBonusVisibility }) => {
   const cards = [
     {
       levelRusName: "Приветственный уровень",
@@ -12,15 +12,15 @@ const PromoModal = ({ promoWrapperRef, togglePromoVisibility }) => {
     },
   ];
   return (
-    <div className={styles.container} ref={promoWrapperRef}>
-      <div onClick={togglePromoVisibility} className={styles.icon}>
+    <div className={styles.container} ref={bonusWrapperRef}>
+      <div onClick={toggleBonusVisibility} className={styles.icon}>
         <IoMdClose size={25} />
       </div>
       <div className={styles.bonusContainer}>
         <h3>Баланс бонусных рублей</h3>
         <span>1000 ₽</span>
       </div>
-      <PromoCards
+      <BonusCards
         cards={cards}
         message="Совершите заказы еще на 10000 руб. и ваш кэшбэк вырастет до 10%"
         isModal={true}
@@ -30,4 +30,4 @@ const PromoModal = ({ promoWrapperRef, togglePromoVisibility }) => {
   );
 };
 
-export default PromoModal;
+export default BonusModal;

@@ -12,7 +12,7 @@ import PayTypeModal from "../../Components/Payment/PayTypeModal/PayTypeModal";
 import UserModal from "../../Components/UserInfo/UserModal/UserModal";
 import { useMediaQuery } from "react-responsive";
 import MainSheet from "../../Components/MainSheet/MainSheet";
-import PromoModal from "../../Components/Promo/PromoModal";
+import BonusModal from "../../Components/Promo/BonusModal/BonusModal";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -32,9 +32,9 @@ const NewOrderPage = ({
   mainSheetWrapperRef,
   mainSheetClosing,
   setMainSheetClosing,
-  promoWrapperRef,
-  isPromoOpen,
-  togglePromoVisibility,
+  bonusWrapperRef,
+  isBonusOpen,
+  toggleBonusVisibility,
 }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const addressSelected = useSelector((state) => state.address.addressSelected);
@@ -125,7 +125,7 @@ const NewOrderPage = ({
             navigate={navigate}
             toggleUserInfoVisibility={toggleUserInfoVisibility}
             toggleAddressVisibility={toggleAddressVisibility}
-            togglePromoVisibility={togglePromoVisibility}
+            toggleBonusVisibility={toggleBonusVisibility}
           />
         )}
       </div>
@@ -147,12 +147,12 @@ const NewOrderPage = ({
           />
         </div>
       )}
-      {isPromoOpen && (
+      {isBonusOpen && (
         <div className={styles.cardOverlay}>
-          <PromoModal
-            promoWrapperRef={promoWrapperRef}
+          <BonusModal
+            bonusWrapperRef={bonusWrapperRef}
             isModal={true}
-            togglePromoVisibility={togglePromoVisibility}
+            toggleBonusVisibility={toggleBonusVisibility}
           />
         </div>
       )}

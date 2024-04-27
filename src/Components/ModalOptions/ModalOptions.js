@@ -9,7 +9,7 @@ const ModalOptions = ({
   toggleOptionsVisibility,
   toggleUserInfoVisibility,
   toggleAddressVisibility,
-  togglePromoVisibility,
+  toggleBonusVisibility,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,8 +33,8 @@ const ModalOptions = ({
         toggleOptionsVisibility(false);
 
         break;
-      case "Промокоды":
-        togglePromoVisibility();
+      case "Бонусы":
+        toggleBonusVisibility();
         toggleOptionsVisibility(false);
         break;
       case "Выйти":
@@ -53,7 +53,7 @@ const ModalOptions = ({
   }, []);
   return (
     <div className={styles.container} ref={optionsRef}>
-      {["Мои данные", "Мои адреса", "Мои заказы", "Промокоды", "Выйти"].map(
+      {["Мои данные", "Мои адреса", "Мои заказы", "Бонусы", "Выйти"].map(
         (item, index) => (
           <button
             className={styles.item}

@@ -26,7 +26,7 @@ const Header = forwardRef(
       toggleUserInfoVisibility,
       toggleAddressVisibility,
       toggleLoginVisibility,
-      togglePromoVisibility,
+      toggleBonusVisibility,
       setIsMainSheetOpen,
       netbooksMediaQuery,
     },
@@ -71,7 +71,7 @@ const Header = forwardRef(
                   optionsRef={optionsRef}
                   toggleUserInfoVisibility={toggleUserInfoVisibility}
                   toggleAddressVisibility={toggleAddressVisibility}
-                  togglePromoVisibility={togglePromoVisibility}
+                  toggleBonusVisibility={toggleBonusVisibility}
                 />
               </div>
             )}

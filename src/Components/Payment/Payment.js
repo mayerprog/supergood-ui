@@ -47,6 +47,7 @@ const Payment = ({ handleSetOrderInfo, togglePayTypeVisibility }) => {
           <div className={styles.info}>Время доставки</div>
           <div className={styles.info}>45 мин</div>
         </div>
+        <div className={styles.promo}>Использовать промокод или бонусы</div>
         <div className={styles.finalPayment}>
           <button
             className={styles.paymentButtonStyle}

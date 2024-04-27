@@ -1,6 +1,6 @@
-import styles from "./PromoCards.module.scss";
+import styles from "./BonusCards.module.scss";
 
-const PromoCards = ({ cards, message, isModal }) => {
+const BonusCards = ({ cards, message, isModal }) => {
   return (
     <>
       {cards.map((card, index) => (
@@ -24,4 +24,4 @@ const PromoCards = ({ cards, message, isModal }) => {
   );
 };
 
-export default PromoCards;
+export default BonusCards;
