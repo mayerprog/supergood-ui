@@ -167,6 +167,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
             setMarkerAddress={setMarkerAddress}
             setMarkerPosition={setMarkerPosition}
             setIsAddressValid={setIsAddressValid}
+            isModal={true}
           />
         )}
         <button className={styles.buttonStyle} onClick={handleAddress}>

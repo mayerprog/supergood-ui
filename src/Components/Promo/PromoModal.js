@@ -8,7 +8,7 @@ const PromoModal = ({ promoWrapperRef, togglePromoVisibility }) => {
       levelRusName: "Приветственный уровень",
       levelEngName: "START",
       cashBack: "Кешбэк 7%",
-      backgroundColor: "#ebd09484",
+      backgroundColor: "#EAF2B6",
     },
   ];
   return (

@@ -93,6 +93,7 @@ const AddAddressContainer = ({
             suggestions={suggestions}
             setSuggestions={setSuggestions}
             setIsAddressValid={setIsAddressValid}
+            isModal={false}
           />
         )}
 

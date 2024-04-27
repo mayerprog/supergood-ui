@@ -41,7 +41,7 @@ const LoyaltyPage = () => {
               levelRusName: "Приветственный уровень",
               levelEngName: "START",
               cashBack: "Кешбэк 7%",
-              backgroundColor: "#ebd09484",
+              backgroundColor: "#EAF2B6",
             },
           ]}
           message={null}
@@ -60,7 +60,7 @@ const LoyaltyPage = () => {
               levelRusName: "Продвинутый уровень",
               levelEngName: "GOOD",
               cashBack: "Кешбэк 10%",
-              backgroundColor: "#bed0eb",
+              backgroundColor: "#D3E5F9",
             },
           ]}
           message={null}
@@ -79,7 +79,7 @@ const LoyaltyPage = () => {
               levelRusName: "Эксклюзивный уровень",
               levelEngName: "SUPERGOOD",
               cashBack: "Кешбэк 15%",
-              backgroundColor: "#ade8d2",
+              backgroundColor: "#FBEED5",
             },
           ]}
           message={null}

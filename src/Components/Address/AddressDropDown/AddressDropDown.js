@@ -10,6 +10,7 @@ const AddressDropDown = ({
   setMarkerAddress,
   setMarkerPosition,
   setIsAddressValid,
+  isModal,
 }) => {
   const handleAddressClick = (name) => {
     if (setMarkerAddress) {
@@ -26,13 +27,14 @@ const AddressDropDown = ({
     setShowDropdown(false);
   };
   return (
-    <ul>
+    <ul className={styles.listContainer} data-is-modal={isModal ? true : false}>
       {suggestions.length === 0 ? (
         <li
           onClick={() => {
             setSuggestions([]);
             setShowDropdown(false);
           }}
+          className={styles.list}
         >
           К сожалению, мы не доставляем по этому адресу
         </li>
@@ -43,6 +45,7 @@ const AddressDropDown = ({
             onClick={() => {
               handleAddressClick(suggestion.display_name);
             }}
+            className={styles.list}
           >
             {suggestion.display_name}
           </li>
