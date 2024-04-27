@@ -33,6 +33,7 @@ function App() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isPayTypeOpen, setIsPayTypeOpen] = useState(false);
   const [isBonusOpen, setIsBonusOpen] = useState(false);
+  const [isOrderPromoOpen, setIsOrderPromoOpen] = useState(false);
 
   // sheets
   // Menu sheet
@@ -53,6 +54,7 @@ function App() {
   const loginWrapperRef = useRef(null);
   const payTypeWrapperRef = useRef(null);
   const bonusWrapperRef = useRef(null);
+  const orderPromoWrapperRef = useRef(null);
   const mainSheetWrapperRef = useRef(null);
   const cartSheetWrapperRef = useRef(null);
 
@@ -97,6 +99,10 @@ function App() {
     setIsBonusOpen(!isBonusOpen);
   };
 
+  const toggleOrderPromoVisibility = () => {
+    setIsOrderPromoOpen(!isOrderPromoOpen);
+  };
+
   const toggleMainSheetVisibility = () => {
     setMainSheetClosing(true);
   };
@@ -113,6 +119,7 @@ function App() {
   useOutsideHook(loginWrapperRef, toggleLoginVisibility); // to close popup <LoginModal /> clicking outside
   useOutsideHook(payTypeWrapperRef, togglePayTypeVisibility); // to close popup <PayTypeModal /> clicking outside
   useOutsideHook(bonusWrapperRef, toggleBonusVisibility); // to close popup <BonusModal /> clicking outside
+  useOutsideHook(orderPromoWrapperRef, toggleOrderPromoVisibility); // to close popup <OrderPromoModal /> clicking outside
   useOutsideHook(mainSheetWrapperRef, toggleMainSheetVisibility); // to close <MainSheet /> clicking outside
   useOutsideHook(cartSheetWrapperRef, toggleCartSheetVisibility); // to close <CartSheet /> clicking outside
 
@@ -255,6 +262,9 @@ function App() {
                 bonusWrapperRef={bonusWrapperRef}
                 isBonusOpen={isBonusOpen}
                 toggleBonusVisibility={toggleBonusVisibility}
+                toggleOrderPromoVisibility={toggleOrderPromoVisibility}
+                orderPromoWrapperRef={orderPromoWrapperRef}
+                isOrderPromoOpen={isOrderPromoOpen}
               />
             </ProtectedRoute>
           }

@@ -48,10 +48,7 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
           <p>для активации введите номер</p>
 
           <div className={styles.inputContainer}>
-            <input
-              placeholder="Номер сертификата"
-              className={styles.input}
-            ></input>
+            <input placeholder="Номер сертификата" className={styles.input} />
             <button className={styles.certButtonStyle}>
               <span className={styles.buttonText}>Активировать</span>
             </button>

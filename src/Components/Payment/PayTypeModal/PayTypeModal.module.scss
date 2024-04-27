@@ -75,6 +75,8 @@
 
   .input {
     @include reusable-input;
+    @include focus-style(#e9bc5b);
+
     margin-bottom: 0;
   }
 
@@ -86,6 +88,7 @@
     border-radius: 10px;
     width: 100%;
     margin: 15px 0;
+    background-color: #f2f2f2;
 
     .certButtonStyle {
       @include reusable-button;

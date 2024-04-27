@@ -13,6 +13,7 @@ import UserModal from "../../Components/UserInfo/UserModal/UserModal";
 import { useMediaQuery } from "react-responsive";
 import MainSheet from "../../Components/MainSheet/MainSheet";
 import BonusModal from "../../Components/Promo/BonusModal/BonusModal";
+import OrderPromoModal from "../../Components/Promo/OrderPromoModal/OrderPromoModal";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -35,6 +36,9 @@ const NewOrderPage = ({
   bonusWrapperRef,
   isBonusOpen,
   toggleBonusVisibility,
+  toggleOrderPromoVisibility,
+  orderPromoWrapperRef,
+  isOrderPromoOpen,
 }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const addressSelected = useSelector((state) => state.address.addressSelected);
@@ -100,12 +104,21 @@ const NewOrderPage = ({
         <Payment
           handleSetOrderInfo={handleSetOrderInfo}
           togglePayTypeVisibility={togglePayTypeVisibility}
+          toggleOrderPromoVisibility={toggleOrderPromoVisibility}
         />
         {isPayTypeOpen && (
           <div className={styles.cardOverlay}>
             <PayTypeModal
               payTypeWrapperRef={payTypeWrapperRef}
               togglePayTypeVisibility={togglePayTypeVisibility}
+            />
+          </div>
+        )}
+        {isOrderPromoOpen && (
+          <div className={styles.cardOverlay}>
+            <OrderPromoModal
+              toggleOrderPromoVisibility={toggleOrderPromoVisibility}
+              orderPromoWrapperRef={orderPromoWrapperRef}
             />
           </div>
         )}
