@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 15%;
+  top: 10%;
   border-radius: 20px;
   box-shadow: 0 0 5px #ccc;
   font-family: "Inter", sans-serif;
@@ -22,9 +22,35 @@
     @include reusable-input;
     @include focus-style(#e9bc5b);
   }
+  .buttonStyle {
+    @include reusable-button;
+    height: 35px;
+    width: 100%;
+    align-self: flex-start;
+    margin: 0 0 1rem;
+    background-color: #e9bc5b;
+    @include interactive-bg(#e9bc5b);
+  }
+  .buttonText {
+    @include reusable-button-text;
+  }
+  .addInfo,
+  .info {
+    color: #6f6f6f;
+    margin: -10px 0 20px;
+  }
+  .info {
+    margin: 10px 0;
+  }
+
+  span {
+    font-weight: 800;
+    font-size: larger;
+    color: #323232;
+  }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 600px) {
   .container {
     width: 100%;
     position: static;
@@ -33,8 +59,12 @@
     border-radius: 0;
     box-shadow: 0;
     box-sizing: border-box;
-    align-items: normal;
+    align-items: center;
     background-color: #fcfcfc;
     justify-content: flex-start;
+    .icon {
+      cursor: pointer;
+      align-self: flex-start;
+    }
   }
 }
