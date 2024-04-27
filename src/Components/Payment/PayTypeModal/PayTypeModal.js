@@ -1,13 +1,13 @@
 import { useState } from "react";
 import styles from "./PayTypeModal.module.scss";
+import { IoMdClose } from "react-icons/io";
 
-const PayTypeModal = ({ payTypeWrapperRef }) => {
+const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
   const [chosenValue, setChosenValue] = useState("Наличными курьеру");
   const [showCertificateInput, setShowCertificateInput] = useState(false);
 
   const handleCheckBox = (event) => {
     setChosenValue(event.target.value);
-
     switch (event.target.value) {
       case "Подарочный сертификат":
         setShowCertificateInput(true);
@@ -24,6 +24,9 @@ const PayTypeModal = ({ payTypeWrapperRef }) => {
 
   return (
     <div ref={payTypeWrapperRef} className={styles.container}>
+      <div onClick={togglePayTypeVisibility} className={styles.icon}>
+        <IoMdClose size={25} />
+      </div>
       <h2>Способ оплаты</h2>
 
       {["Наличными курьеру", "Банковской картой", "Подарочный сертификат"].map(

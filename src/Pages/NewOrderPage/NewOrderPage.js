@@ -103,7 +103,10 @@ const NewOrderPage = ({
         />
         {isPayTypeOpen && (
           <div className={styles.cardOverlay}>
-            <PayTypeModal payTypeWrapperRef={payTypeWrapperRef} />
+            <PayTypeModal
+              payTypeWrapperRef={payTypeWrapperRef}
+              togglePayTypeVisibility={togglePayTypeVisibility}
+            />
           </div>
         )}
       </div>
