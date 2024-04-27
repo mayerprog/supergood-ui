@@ -5,6 +5,7 @@
   flex-direction: column;
   position: absolute;
   border-radius: 20px;
+  top: 10%;
   box-shadow: 0 0 5px #ccc;
   width: 400px;
   font-family: "Inter", sans-serif;
@@ -12,7 +13,7 @@
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
-  padding: 25px 0;
+  padding: 25px;
   background-color: #fafafa;
 
   .payTypeContainer {
@@ -57,15 +58,44 @@
     }
   }
 
-  .buttonsContainer {
-    display: flex;
-    flex-direction: row;
-  }
-
   .buttonStyle {
     @include reusable-button;
+    margin: 1rem 0;
   }
   .buttonText {
     @include reusable-button-text;
+  }
+
+  .input {
+    @include reusable-input;
+    margin-bottom: 0;
+  }
+
+  .certificate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 3px #ccc;
+    border-radius: 10px;
+    width: 100%;
+    margin: 15px 0;
+
+    .certButtonStyle {
+      @include reusable-button;
+      height: 35px;
+      width: 130px;
+      align-self: center;
+      margin: 1rem 0;
+      background-color: #e9bc5b;
+      @include interactive-bg(#e9bc5b);
+    }
+    .inputContainer {
+      display: flex;
+      flex-direction: column;
+    }
+
+    h3 {
+      margin-bottom: 0;
+    }
   }
 }

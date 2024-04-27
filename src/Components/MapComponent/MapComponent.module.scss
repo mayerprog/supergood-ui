@@ -75,43 +75,6 @@
       text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
       font-size: 12px;
     }
-    ul {
-      list-style: none;
-      margin-top: 30px;
-      position: absolute;
-      z-index: 1001;
-      background-color: #fff;
-      padding: 0.5em;
-      border-width: 0;
-      border-radius: 5px;
-      cursor: pointer;
-      box-sizing: border-box;
-      font-family: "Inter", sans-serif;
-      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
-      overflow-y: auto;
-      max-height: 350px;
-      width: 72%;
-
-      @media (max-width: 1024px) {
-        width: 60%;
-      }
-      @media (max-width: 520px) {
-        width: 50%;
-      }
-      @media (max-width: 320px) {
-        width: 46%;
-      }
-    }
-
-    li {
-      padding: 10px;
-      cursor: pointer;
-    }
-
-    li:hover {
-      background-color: #eee;
-      border-radius: 5px;
-    }
   }
 
   .map {
@@ -123,18 +86,6 @@
     align-self: flex-end;
     cursor: pointer;
   }
-}
-
-ul::-webkit-scrollbar {
-  display: block;
-  width: 5px;
-}
-
-ul::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-right: none;
-  border-left: none;
-  cursor: pointer;
 }
 
 @media (max-width: 1024px) {
