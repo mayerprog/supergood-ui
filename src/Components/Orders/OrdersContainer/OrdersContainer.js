@@ -3,13 +3,19 @@ import styles from "./OrdersContainer.module.scss";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { MdImageNotSupported } from "react-icons/md";
 
-const OrdersContainer = ({ setOrderIndex, orders }) => {
+const OrdersContainer = ({
+  setOrderIndex,
+  orders,
+  scrollToBottom,
+  netbooksMediaQuery,
+}) => {
   const [isPendingListVisible, setIsPendingListVisible] = useState(true);
   const [isCompletedListVisible, setIsCompletedListVisible] = useState(false);
 
   const handleChooseOrder = (orderId) => {
     console.log("id", orderId);
     setOrderIndex(orderId);
+    netbooksMediaQuery && scrollToBottom();
   };
 
   useEffect(() => {
@@ -26,6 +32,7 @@ const OrdersContainer = ({ setOrderIndex, orders }) => {
         title="Активные"
         cookingStatus="готовится"
         status="Pending"
+        netbooksMediaQuery={netbooksMediaQuery}
       />
       <OrderList
         isVisible={isCompletedListVisible}
@@ -48,6 +55,7 @@ const OrderList = ({
   cookingStatus,
   isVisible,
   setIsVisible,
+  netbooksMediaQuery,
 }) => (
   <>
     <div className={styles.title}>
@@ -74,7 +82,9 @@ const OrderList = ({
                     </span>
                   </div>
                 </div>
-                <span>{order.payType}</span>
+
+                <span></span>
+
                 <div className={styles.deliveryInfo}>
                   <span className={styles.price}>{order.payAmount} ₽</span>
                   <span className={styles.cooking}>{cookingStatus}</span>

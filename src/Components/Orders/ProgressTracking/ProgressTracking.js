@@ -31,12 +31,12 @@ const ProgressTracking = () => {
           )
         )}
       </div>
-      <button onClick={() => setActiveStep((prev) => Math.max(prev - 1, 1))}>
+      {/* <button onClick={() => setActiveStep((prev) => Math.max(prev - 1, 1))}>
         Prev
       </button>
       <button onClick={() => setActiveStep((prev) => Math.min(prev + 1, 4))}>
         Next
-      </button>
+      </button> */}
     </div>
   );
 };

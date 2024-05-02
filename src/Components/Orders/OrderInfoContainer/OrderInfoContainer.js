@@ -1,11 +1,20 @@
 import styles from "./OrderInfoContainer.module.scss";
 import pepperoni from "../../../assets/images/pizza/pepperoni.jpg";
+
 import ProgressTracking from "../ProgressTracking/ProgressTracking";
 import { MdImageNotSupported } from "react-icons/md";
+// import { IoArrowBackOutline } from "react-icons/io5";
+import { IoArrowUpCircleSharp } from "react-icons/io5";
 
-const OrderInfoContainer = ({ chosenOrder }) => {
+const OrderInfoContainer = ({
+  chosenOrder,
+  netbooksMediaQuery,
+  setChosenOrder,
+  orderRef,
+  scrollToTop,
+}) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={orderRef}>
       <div className={styles.header}>
         <h3>Заказ № {chosenOrder.orderId}</h3>
       </div>
@@ -33,6 +42,14 @@ const OrderInfoContainer = ({ chosenOrder }) => {
         <div className={styles.line} />
       </div>
       <div className={styles.details}>
+        <span>Способ оплаты</span>
+        <div className={styles.orderDetails}>
+          <div className={styles.info}>{chosenOrder.payType}</div>
+        </div>
+
+        <div className={styles.line} />
+      </div>
+      <div className={styles.details}>
         <span>Оплата</span>
         <div className={styles.orderDetails}>
           <div className={styles.info}>Стоимость заказа</div>
@@ -43,6 +60,9 @@ const OrderInfoContainer = ({ chosenOrder }) => {
           <div className={styles.wholeSum}>{chosenOrder.payAmount} ₽</div>
         </div>
       </div>
+      {netbooksMediaQuery && (
+        <IoArrowUpCircleSharp className={styles.icon} onClick={scrollToTop} />
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import OrderInfoContainer from "./OrderInfoContainer/OrderInfoContainer";
@@ -10,7 +10,9 @@ const Orders = () => {
   const [orderIndex, setOrderIndex] = useState(null);
   const orders = useSelector((state) => state.order.orders);
   const [chosenOrder, setChosenOrder] = useState(orders[0]);
+
   const navigate = useNavigate();
+  const orderRef = useRef();
 
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
@@ -23,10 +25,28 @@ const Orders = () => {
     }
   }, [orderIndex, orders]);
 
+  const scrollToBottom = () => {
+    orderRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className={styles.container}>
-      <OrdersContainer setOrderIndex={setOrderIndex} orders={orders} />
-      <OrderInfoContainer chosenOrder={chosenOrder} />
+      <OrdersContainer
+        setOrderIndex={setOrderIndex}
+        orders={orders}
+        scrollToBottom={scrollToBottom}
+        netbooksMediaQuery={netbooksMediaQuery}
+      />
+      <OrderInfoContainer
+        chosenOrder={chosenOrder}
+        orderRef={orderRef}
+        netbooksMediaQuery={netbooksMediaQuery}
+        scrollToTop={scrollToTop}
+      />
     </div>
   );
 };
