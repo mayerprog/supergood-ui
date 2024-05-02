@@ -37,7 +37,7 @@ const MainSheet = ({
   useGSAP(() => {
     const menu = mainSheetWrapperRef.current;
     gsap.from(menu, {
-      x: "100%",
+      x: "-100%",
       opacity: 1,
       duration: 0.6,
       delay: 0.5,
@@ -48,7 +48,7 @@ const MainSheet = ({
     const menu = mainSheetWrapperRef.current;
     if (mainSheetClosing) {
       gsap.to(menu, {
-        x: "100%",
+        x: "-100%",
         opacity: 1,
         duration: 0.5,
         ease: "power2.in",

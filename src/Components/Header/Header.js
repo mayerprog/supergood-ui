@@ -55,14 +55,14 @@ const Header = forwardRef(
         ref={ref}
         page-pathname={location.pathname}
       >
-        <img
-          src={logo}
-          alt=""
-          className={styles.logo}
-          onClick={() => navigate("/")}
-        />
         {!netbooksMediaQuery ? (
           <>
+            <img
+              src={logo}
+              alt=""
+              className={styles.logo}
+              onClick={() => navigate("/")}
+            />
             {isMainPage && <SearchField setSearchQuery={setSearchQuery} />}
             {isModalOptionsOpen && (
               <div className={styles.optionsOverlay}>
@@ -111,16 +111,23 @@ const Header = forwardRef(
           </>
         ) : (
           <>
+            <CgProfile
+              color="#5f5f5f"
+              className={styles.menu}
+              onClick={toggleMenu}
+            />
             <DeliveryAddress
               toggleMapVisibility={toggleMapVisibility}
               isMainPage={isMainPage}
               addressSelected={addressSelected}
               location={location}
             />
-            <IoMenuSharp
-              color="#5f5f5f"
-              className={styles.menu}
-              onClick={toggleMenu}
+
+            <img
+              src={logo}
+              alt=""
+              className={styles.logo}
+              onClick={() => navigate("/")}
             />
           </>
         )}
