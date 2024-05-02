@@ -56,3 +56,23 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 }
+
+.container::-webkit-scrollbar {
+  display: block;
+  width: 5px;
+}
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-right: none;
+  border-left: none;
+}
+
+// /* Hide scrollbar for IE, Edge and Firefox */
+// .container {
+//   -ms-overflow-style: none; /* IE and Edge */
+//   scrollbar-width: none; /* Firefox */
+// }
