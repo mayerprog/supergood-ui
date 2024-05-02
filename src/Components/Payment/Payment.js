@@ -6,23 +6,13 @@ import { updateSum } from "../../redux/slices/cartSlice";
 import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 import { removeOrderInfo } from "../../redux/slices/orderSlice";
 
-const Payment = ({
-  handleSetOrderInfo,
-  togglePayTypeVisibility,
-  toggleOrderPromoVisibility,
-}) => {
+const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
   const itemsSum = useSelector((state) => state.cart.itemsSum);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   //to sum total price of items from cart
   useUpdateSumHook();
-
-  const handleClickSubmit = () => {
-    handleSetOrderInfo();
-    // dispatch(removeOrderInfo());
-    navigate("/orders");
-  };
 
   return (
     <div className={styles.container}>
@@ -54,7 +44,7 @@ const Payment = ({
         <div className={styles.promo} onClick={toggleOrderPromoVisibility}>
           Использовать промокод или бонусы
         </div>
-        <div className={styles.finalPayment}>
+        {/* <div className={styles.finalPayment}>
           <button
             className={styles.paymentButtonStyle}
             onClick={handleClickSubmit}
@@ -62,7 +52,7 @@ const Payment = ({
             <span className={styles.paymentButtonText}>Оформить заказ</span>
           </button>
           <div className={styles.sum}>{itemsSum} ₽</div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

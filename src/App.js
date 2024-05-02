@@ -298,9 +298,13 @@ function App() {
         <Route path="/loyalty" element={<LoyaltyPage />} />
       </Routes>
       {!netbooksMediaQuery && <Footer />}
-      {netbooksMediaQuery && location.pathname === "/" && (
-        <DeviceFooter setIsCartSheetOpen={setIsCartSheetOpen} />
-      )}
+      {netbooksMediaQuery &&
+        (location.pathname === "/" || location.pathname === "/submit") && (
+          <DeviceFooter
+            setIsCartSheetOpen={setIsCartSheetOpen}
+            location={location}
+          />
+        )}
     </div>
   );
 }
