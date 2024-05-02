@@ -24,6 +24,7 @@ const OrdersPage = ({
   bonusWrapperRef,
   isBonusOpen,
   toggleBonusVisibility,
+  toggleLoginVisibility,
 }) => {
   const orders = useSelector((state) => state.order.orders);
 
@@ -60,6 +61,7 @@ const OrdersPage = ({
             toggleUserInfoVisibility={toggleUserInfoVisibility}
             toggleAddressVisibility={toggleAddressVisibility}
             toggleBonusVisibility={toggleBonusVisibility}
+            toggleLoginVisibility={toggleLoginVisibility}
           />
         )}
       </div>

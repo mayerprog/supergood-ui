@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  margin-top: -170px;
+  top: 20%;
   border-radius: 20px;
   box-shadow: 0 0 5px #ccc;
   width: 400px;
@@ -13,13 +13,19 @@
   background-color: white;
   justify-content: center;
   align-items: center;
-  padding: 50px;
+  padding: 30px 40px;
   .inputContainer {
     display: flex;
     flex-direction: column;
+    padding: 15px;
+
     span {
       margin: 0 0 10px 0;
     }
+  }
+  .icon {
+    align-self: flex-start;
+    cursor: pointer;
   }
   .input {
     @include reusable-input;
@@ -37,9 +43,6 @@
 
   .checkboxContainer {
     .checkbox {
-      //   -webkit-appearance: none;
-      //   -moz-appearance: none;
-      //   appearance: none;
       vertical-align: middle;
       cursor: pointer;
       accent-color: #e9bc5b;
@@ -71,5 +74,24 @@
   .buttonText {
     @include reusable-button-text;
     font-size: 14px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    width: 100%;
+    position: static;
+    top: 0;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: 0;
+    box-sizing: border-box;
+    align-items: normal;
+    background-color: #fcfcfc;
+    justify-content: flex-start;
+
+    .icon {
+      cursor: pointer;
+    }
   }
 }

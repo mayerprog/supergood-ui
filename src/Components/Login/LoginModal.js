@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { authAPI } from "../../api/authAPI";
+import { IoMdClose } from "react-icons/io";
 
 const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const [phone, setPhone] = useState("");
@@ -83,6 +84,9 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
 
   return (
     <div className={styles.container} ref={loginWrapperRef}>
+      <div onClick={toggleLoginVisibility} className={styles.icon}>
+        <IoMdClose size={25} />
+      </div>
       {!codeSent ? (
         <div className={styles.inputContainer}>
           <span>Введите телефон</span>

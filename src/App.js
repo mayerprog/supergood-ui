@@ -234,6 +234,7 @@ function App() {
               bonusWrapperRef={bonusWrapperRef}
               isBonusOpen={isBonusOpen}
               toggleBonusVisibility={toggleBonusVisibility}
+              toggleLoginVisibility={toggleLoginVisibility}
             />
           }
         />
@@ -265,6 +266,7 @@ function App() {
                 toggleOrderPromoVisibility={toggleOrderPromoVisibility}
                 orderPromoWrapperRef={orderPromoWrapperRef}
                 isOrderPromoOpen={isOrderPromoOpen}
+                toggleLoginVisibility={toggleLoginVisibility}
               />
             </ProtectedRoute>
           }
@@ -288,6 +290,7 @@ function App() {
                 bonusWrapperRef={bonusWrapperRef}
                 isBonusOpen={isBonusOpen}
                 toggleBonusVisibility={toggleBonusVisibility}
+                toggleLoginVisibility={toggleLoginVisibility}
               />
             </ProtectedRoute>
           }

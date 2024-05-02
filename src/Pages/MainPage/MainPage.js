@@ -190,6 +190,7 @@ const MainPage = ({
               toggleUserInfoVisibility={toggleUserInfoVisibility}
               toggleAddressVisibility={toggleAddressVisibility}
               toggleBonusVisibility={toggleBonusVisibility}
+              toggleLoginVisibility={toggleLoginVisibility}
             />
           )}
         </div>

@@ -6,7 +6,8 @@ import { useEffect } from "react";
 import SocialMedia from "../Reusables/SocialMedia/SocialMedia";
 import MobileApps from "../Reusables/MobileApps/MobileApps";
 import { setIsAuth } from "../../redux/slices/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 
 const MainSheet = ({
   mainSheetWrapperRef,
@@ -16,8 +17,11 @@ const MainSheet = ({
   toggleUserInfoVisibility,
   toggleAddressVisibility,
   toggleBonusVisibility,
+  toggleLoginVisibility,
   navigate,
 }) => {
+  const isAuth = useSelector((state) => state.auth.isAuth);
+
   const links = [
     { name: "О компании", link: "https://supergood.ru/about" },
     { name: "Оплата и доставка", link: "https://supergood.ru/delivery-n-pay" },
@@ -84,6 +88,10 @@ const MainSheet = ({
         dispatch(setIsAuth(false));
         handleClosing();
         break;
+      case "Войти":
+        toggleLoginVisibility();
+        handleClosing();
+        break;
       default:
         return;
     }
@@ -93,17 +101,24 @@ const MainSheet = ({
     <div className={styles.container} ref={mainSheetWrapperRef}>
       <SocialMedia />
 
-      {["Мои данные", "Мои адреса", "Мои заказы", "Бонусы", "Выйти"].map(
-        (item, index) => (
-          <button
-            className={styles.item}
-            key={index}
-            onClick={() => handleClick(item)}
-          >
-            <span>{item}</span>
-          </button>
+      {isAuth ? (
+        ["Мои данные", "Мои адреса", "Мои заказы", "Бонусы", "Выйти"].map(
+          (item, index) => (
+            <button
+              className={styles.item}
+              key={index}
+              onClick={() => handleClick(item)}
+            >
+              <span>{item}</span>
+            </button>
+          )
         )
+      ) : (
+        <button className={styles.item} onClick={() => handleClick("Войти")}>
+          <span>Войти</span>
+        </button>
       )}
+
       <div className={styles.line} />
 
       {links.map((item, index) => (

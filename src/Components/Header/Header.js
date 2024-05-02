@@ -111,11 +111,20 @@ const Header = forwardRef(
           </>
         ) : (
           <>
-            <CgProfile
-              color="#5f5f5f"
-              className={styles.menu}
-              onClick={toggleMenu}
-            />
+            {isAuth ? (
+              <CgProfile
+                color="#5f5f5f"
+                className={styles.menu}
+                onClick={toggleMenu}
+              />
+            ) : (
+              <IoMenuSharp
+                color="#5f5f5f"
+                className={styles.menu}
+                onClick={toggleMenu}
+              />
+            )}
+
             <DeliveryAddress
               toggleMapVisibility={toggleMapVisibility}
               isMainPage={isMainPage}

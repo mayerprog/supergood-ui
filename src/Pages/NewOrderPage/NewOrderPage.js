@@ -39,6 +39,7 @@ const NewOrderPage = ({
   toggleOrderPromoVisibility,
   orderPromoWrapperRef,
   isOrderPromoOpen,
+  toggleLoginVisibility,
 }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const addressSelected = useSelector((state) => state.address.addressSelected);
@@ -139,6 +140,7 @@ const NewOrderPage = ({
             toggleUserInfoVisibility={toggleUserInfoVisibility}
             toggleAddressVisibility={toggleAddressVisibility}
             toggleBonusVisibility={toggleBonusVisibility}
+            toggleLoginVisibility={toggleLoginVisibility}
           />
         )}
       </div>
