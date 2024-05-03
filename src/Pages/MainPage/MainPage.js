@@ -65,6 +65,8 @@ const MainPage = ({
   const [searchedItems, setSearchedItems] = useState([]);
   const [searchedCategories, setSearchedCategories] = useState(categories);
 
+  const cartWrapperRef = useRef(null);
+
   // useEffect(() => {
   //   console.log(
   //     `Компонент MainPage отрисован в ${new Date().toLocaleTimeString()}`
@@ -228,6 +230,7 @@ const MainPage = ({
           bonusWrapperRef={bonusWrapperRef}
           isBonusOpen={isBonusOpen}
           toggleBonusVisibility={toggleBonusVisibility}
+          cartWrapperRef={cartWrapperRef}
         />
         {!monitorMediaQuery && (
           <Cart
@@ -238,6 +241,7 @@ const MainPage = ({
             toggleCartVisibility={toggleCartVisibility}
             loading={loading}
             navigate={navigate}
+            cartWrapperRef={cartWrapperRef}
           />
         )}
 

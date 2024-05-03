@@ -4,7 +4,7 @@ import CartBox from "./CartBox/CartBox";
 import { useNavigate } from "react-router-dom";
 import { removeAllItems } from "../../redux/slices/cartSlice";
 import CartShimmer from "../../Loaders/CartShimmer";
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useRef } from "react";
 
 const Cart = ({
   cartWrapperRef,
@@ -27,6 +27,12 @@ const Cart = ({
     "--cart-height": height,
     "--cart-transform": transform,
   };
+
+  useEffect(() => {
+    if (cartWrapperRef.current) {
+      cartWrapperRef.current.scrollTop = 10000;
+    }
+  }, [cartItems]);
 
   // useEffect(() => {
   //   console.log(

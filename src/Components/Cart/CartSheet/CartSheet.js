@@ -1,7 +1,7 @@
 import styles from "./CartSheet.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAllItems } from "../../../redux/slices/cartSlice";
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import CartBox from "../CartBox/CartBox";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -32,12 +32,17 @@ const CartSheet = ({
     }
   };
 
-  const toggleDeviceCart = () => {
-    setIsCartSheetOpen(true);
-  };
+  useEffect(() => {
+    if (cartSheetWrapperRef.current) {
+      setTimeout(() => {
+        cartSheetWrapperRef.current.scrollTop = 10000;
+      }, 300);
+    }
+  }, [cartItems]);
 
   useGSAP(() => {
     const menu = cartSheetWrapperRef.current;
+
     gsap.from(menu, {
       y: "100%",
       opacity: 1,
@@ -48,6 +53,7 @@ const CartSheet = ({
   }, []);
   useGSAP(() => {
     const menu = cartSheetWrapperRef.current;
+
     if (cartSheetClosing) {
       gsap.to(menu, {
         y: "100%",

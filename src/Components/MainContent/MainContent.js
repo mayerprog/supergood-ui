@@ -44,6 +44,7 @@ const MainContent = ({
   bonusWrapperRef,
   isBonusOpen,
   toggleBonusVisibility,
+  cartWrapperRef,
 }) => {
   const categoryRefs = useRef({});
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ const MainContent = ({
   const [itemSheetClosing, setItemSheetClosing] = useState(false);
 
   const cardRef = useRef(null);
-  const cartWrapperRef = useRef(null);
+  // const cartWrapperRef = useRef(null);
   const itemSheetWrapperRef = useRef(null);
 
   const toggleItemOpen = (itemId) => {

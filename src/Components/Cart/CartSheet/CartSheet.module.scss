@@ -125,3 +125,18 @@
   border-top: 0.1px solid #ccc;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
+
+.cartSheet::-webkit-scrollbar {
+  display: block;
+  width: 2px;
+}
+.cartSheet::-webkit-scrollbar-track {
+  background: transparent;
+  margin-top: 53px;
+}
+
+.cartSheet::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-right: none;
+  border-left: none;
+}
