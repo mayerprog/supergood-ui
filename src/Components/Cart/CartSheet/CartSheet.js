@@ -33,11 +33,12 @@ const CartSheet = ({
   };
 
   useEffect(() => {
-    if (cartSheetWrapperRef.current) {
-      setTimeout(() => {
+    const timer = setTimeout(() => {
+      if (cartSheetWrapperRef.current) {
         cartSheetWrapperRef.current.scrollTop = 10000;
-      }, 300);
-    }
+      }
+    }, 200); // set setTimeout because of the duration 0.2sec in useGSAP
+    return () => clearTimeout(timer);
   }, [cartItems]);
 
   useGSAP(() => {
