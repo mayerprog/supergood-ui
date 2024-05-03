@@ -34,7 +34,7 @@
   }
 
   .logo {
-    width: 220px;
+    width: 150px;
     height: 51.8px;
     margin-right: 10px;
     cursor: pointer;
@@ -42,8 +42,9 @@
 
   @media (max-width: 1024px) {
     .logo {
-      width: 130px;
+      width: 50px;
       height: 38px;
+      margin-right: 0;
     }
   }
 

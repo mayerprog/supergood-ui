@@ -1,5 +1,6 @@
 import styles from "./Header.module.scss";
-import logo from "../../assets/images/logo.jpg";
+import big_logo from "../../assets/logos/big_logo.png";
+import small_logo from "../../assets/logos/small_logo.png";
 import { GiShoppingCart } from "react-icons/gi";
 import { CgProfile } from "react-icons/cg";
 import { FaLocationDot } from "react-icons/fa6";
@@ -58,7 +59,7 @@ const Header = forwardRef(
         {!netbooksMediaQuery ? (
           <>
             <img
-              src={logo}
+              src={big_logo}
               alt=""
               className={styles.logo}
               onClick={() => navigate("/")}
@@ -113,13 +114,13 @@ const Header = forwardRef(
           <>
             {isAuth ? (
               <CgProfile
-                color="#5f5f5f"
+                color="#353535"
                 className={styles.menu}
                 onClick={toggleMenu}
               />
             ) : (
               <IoMenuSharp
-                color="#5f5f5f"
+                color="#353535"
                 className={styles.menu}
                 onClick={toggleMenu}
               />
@@ -133,7 +134,7 @@ const Header = forwardRef(
             />
 
             <img
-              src={logo}
+              src={small_logo}
               alt=""
               className={styles.logo}
               onClick={() => navigate("/")}

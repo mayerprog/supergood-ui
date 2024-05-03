@@ -1,5 +1,5 @@
 import styles from "./Footer.module.scss";
-import logo from "../../assets/images/logo.jpg";
+import big_logo from "../../assets/logos/big_logo.png";
 import { useNavigate } from "react-router-dom";
 import MobileApps from "../Reusables/MobileApps/MobileApps";
 import { GiShoppingCart } from "react-icons/gi";
@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <img
-        src={logo}
+        src={big_logo}
         alt=""
         className={styles.logo}
         onClick={() => navigate("/")}
