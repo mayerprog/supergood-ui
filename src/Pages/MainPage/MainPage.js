@@ -5,7 +5,6 @@ import Cart from "../../Components/Cart/Cart";
 import MainContent from "../../Components/MainContent/MainContent";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import styles from "./MainPage.module.scss";
-import { useOutsideHook } from "../../hooks/useOutsideHook";
 import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 import { setItems } from "../../redux/slices/itemSlice";
 import jsonData from "../../newApi_getItems.json";

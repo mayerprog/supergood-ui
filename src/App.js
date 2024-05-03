@@ -175,9 +175,9 @@ function App() {
     }
   }, [netbooksMediaQuery]);
 
-  useEffect(() => {
-    console.log("cartItems", cartItems);
-  }, [cartItems]);
+  // useEffect(() => {
+  //   console.log("cartItems", cartItems);
+  // }, [cartItems]);
 
   return (
     <div className={styles.app}>
