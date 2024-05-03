@@ -129,7 +129,6 @@ function App() {
 
   const addressList = useSelector((state) => state.address.addressList);
   const addressSelected = useSelector((state) => state.address.addressSelected);
-  const cartItems = useSelector((state) => state.cart.cartItems);
 
   // we find here address with selected: true to display it all over the app
   useEffect(() => {
@@ -174,10 +173,6 @@ function App() {
       setIsMainSheetOpen(false);
     }
   }, [netbooksMediaQuery]);
-
-  // useEffect(() => {
-  //   console.log("cartItems", cartItems);
-  // }, [cartItems]);
 
   return (
     <div className={styles.app}>
@@ -234,7 +229,6 @@ function App() {
               bonusWrapperRef={bonusWrapperRef}
               isBonusOpen={isBonusOpen}
               toggleBonusVisibility={toggleBonusVisibility}
-              toggleLoginVisibility={toggleLoginVisibility}
             />
           }
         />

@@ -5,14 +5,25 @@ import { useNavigate } from "react-router-dom";
 import { updateSum } from "../../redux/slices/cartSlice";
 import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 import { removeOrderInfo } from "../../redux/slices/orderSlice";
+import { useMediaQuery } from "react-responsive";
+import { handleSetOrderInfo } from "../../services/handleSetOrderInfo";
 
 const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
   const itemsSum = useSelector((state) => state.cart.itemsSum);
+  const addressSelected = useSelector((state) => state.address.addressSelected);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   //to sum total price of items from cart
   useUpdateSumHook();
+
+  const handleClickSubmit = () => {
+    handleSetOrderInfo({ cartItems, itemsSum, addressSelected, dispatch });
+    navigate("/orders");
+  };
 
   return (
     <div className={styles.container}>
@@ -44,15 +55,17 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
         <div className={styles.promo} onClick={toggleOrderPromoVisibility}>
           Использовать промокод или бонусы
         </div>
-        {/* <div className={styles.finalPayment}>
-          <button
-            className={styles.paymentButtonStyle}
-            onClick={handleClickSubmit}
-          >
-            <span className={styles.paymentButtonText}>Оформить заказ</span>
-          </button>
-          <div className={styles.sum}>{itemsSum} ₽</div>
-        </div> */}
+        {!netbooksMediaQuery && (
+          <div className={styles.finalPayment}>
+            <button
+              className={styles.paymentButtonStyle}
+              onClick={handleClickSubmit}
+            >
+              <span className={styles.paymentButtonText}>Оформить заказ</span>
+            </button>
+            <div className={styles.sum}>{itemsSum} ₽</div>
+          </div>
+        )}
       </div>
     </div>
   );
