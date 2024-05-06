@@ -15,8 +15,10 @@
     width: 100%;
     margin-left: 0;
     margin-top: 30px;
-    // box-shadow: none;
-    // padding: 0;
+  }
+
+  @media (max-width: 300px) {
+    padding: 10px;
   }
 
   .header {
@@ -30,27 +32,44 @@
       color: #888888;
       margin: 10px;
     }
-    .info {
+    .info,
+    .infoPrice {
       margin: 20px;
     }
-    .name {
+    .infoPrice {
+      @media (max-width: 432px) {
+        margin: 10px;
+      }
+    }
+
+    .productInfo {
       display: flex;
       flex-direction: column;
       flex: 1;
       margin: 20px;
+      @media (max-width: 330px) {
+        margin: 20px 0 20px 5px;
+      }
+      @media (max-width: 406px) {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+    .name {
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 3;
       text-overflow: ellipsis;
       overflow: hidden;
-      @media (max-width: 330px) {
-        margin: 20px 0 20px 5px;
-      }
     }
 
     .amount {
       color: #888888;
       font-size: 15px;
+      height: 100%;
     }
     .wholeSum {
       font-weight: 600;

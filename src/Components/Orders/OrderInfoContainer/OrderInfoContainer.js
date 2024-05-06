@@ -2,7 +2,7 @@ import styles from "./OrderInfoContainer.module.scss";
 import pepperoni from "../../../assets/images/pizza/pepperoni.jpg";
 
 import ProgressTracking from "../ProgressTracking/ProgressTracking";
-import { MdImageNotSupported } from "react-icons/md";
+// import { MdImageNotSupported } from "react-icons/md";
 // import { IoArrowBackOutline } from "react-icons/io5";
 import { IoArrowUpCircleSharp } from "react-icons/io5";
 import OrderImages from "../OrderImages/OrderImages";
@@ -10,7 +10,6 @@ import OrderImages from "../OrderImages/OrderImages";
 const OrderInfoContainer = ({
   chosenOrder,
   netbooksMediaQuery,
-  setChosenOrder,
   orderRef,
   scrollToTop,
 }) => {
@@ -31,11 +30,11 @@ const OrderInfoContainer = ({
           <div className={styles.orderDetails}>
             <OrderImages item={item} detailInfo={true} />
 
-            <div className={styles.name}>
-              <div>{item.name}</div>
+            <div className={styles.productInfo}>
+              <div className={styles.name}>{item.name}</div>
               <div className={styles.amount}>{item.params.amount.value}</div>
             </div>
-            <div className={styles.info}>{item.price} ₽</div>
+            <div className={styles.infoPrice}>{item.price} ₽</div>
           </div>
         ))}
         <div className={styles.line} />
