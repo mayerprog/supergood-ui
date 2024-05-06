@@ -5,6 +5,7 @@ import ProgressTracking from "../ProgressTracking/ProgressTracking";
 import { MdImageNotSupported } from "react-icons/md";
 // import { IoArrowBackOutline } from "react-icons/io5";
 import { IoArrowUpCircleSharp } from "react-icons/io5";
+import OrderImages from "../OrderImages/OrderImages";
 
 const OrderInfoContainer = ({
   chosenOrder,
@@ -26,10 +27,10 @@ const OrderInfoContainer = ({
       </div>
       <div className={styles.details}>
         <span>Состав заказа</span>
-        {chosenOrder.items.map((item) => (
+        {chosenOrder.items.map((item, index) => (
           <div className={styles.orderDetails}>
-            <div>
-              <MdImageNotSupported size={40} color="#ccc" />
+            <div key={index}>
+              <OrderImages item={item} />
             </div>
 
             <div className={styles.name}>

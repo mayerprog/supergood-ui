@@ -5,13 +5,20 @@ import { itemAPI } from "../../../api/itemAPI";
 import { MdImageNotSupported } from "react-icons/md";
 import { baseURL } from "../../../config";
 import { useMediaQuery } from "react-responsive";
+import { fetchImage } from "../../../services/fetchImage";
 
 const CartBox = ({ item, index, isSheet, isOrderCart }) => {
-  const [itemImage, setItemImage] = useState("");
+  const [loaded, setLoaded] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+
   const phoneMediaQuery = useMediaQuery({ maxWidth: 418 });
 
   const uid = item.img[0].uid;
-  const uri = `${baseURL}/getFile?uid=${uid}`;
+  // const uri = `${baseURL}/getFile?uid=${uid}`;
+
+  useEffect(() => {
+    fetchImage({ uid, width: 170, height: 170, setImageUrl, setLoaded });
+  }, [uid]);
 
   return (
     <div
@@ -19,19 +26,22 @@ const CartBox = ({ item, index, isSheet, isOrderCart }) => {
       key={index}
       data-is-ordercart={isOrderCart ? "true" : "false"}
     >
-      {/* {loaded ? ( */}
-      <img
-        className={styles.cartImage}
-        alt={item.name}
-        src={uri}
-        // ref={ref}
-        // onLoad={onLoad}
-      />
-      {/* ) : (
+      {!loaded && (
         <div className={styles.cartImage}>
           <MdImageNotSupported className={styles.icon} color="#ccc" />
         </div>
-      )} */}
+      )}
+      {loaded && (
+        <>
+          <img
+            className={styles.cartImage}
+            loading="lazy"
+            alt={item.name}
+            src={imageUrl}
+            onLoad={() => setLoaded(true)}
+          />
+        </>
+      )}
       <div className={styles.cartBoxText}>
         <span className={styles.text}>{item.name}</span>
         {!phoneMediaQuery ? (

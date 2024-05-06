@@ -8,10 +8,14 @@ import { MdImageNotSupported } from "react-icons/md";
 import { baseURL } from "../../../config";
 import { addItemToCart } from "../../../services/addItemToCart";
 import ProductInfo from "../ProductInfo/ProductInfo";
+import { fetchImage } from "../../../services/fetchImage";
 
 const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
   const items = useSelector((state) => state.item.items);
   const foundItem = items.find((item) => itemCardId === item.itemid);
+  const [loaded, setLoaded] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+
   // const cartItems = useSelector((state) => state.cart.cartItems);
   // const addressList = useSelector((state) => state.address.addressList);
   // const [addingInProgress, setAddingInProgress] = useState(false);
@@ -36,25 +40,44 @@ const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
   // }, [cartItems, itemCardId]);
 
   const uid = foundItem.img[0].uid;
-  const uri = `${baseURL}/getFile?uid=${uid}`;
+
+  // useEffect(() => {
+  //   fetchImage({ uid, width: 330, height: 330, setImageUrl, setLoaded });
+  // }, [uid]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await fetchImage({
+          uid,
+          width: 330,
+          height: 330,
+          setImageUrl,
+          setLoaded,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
 
   return (
     <div ref={cardRef} className={styles.container}>
-      {/* {loaded ? ( */}
-      <img
-        className={styles.productImage}
-        alt={foundItem.name}
-        src={uri}
-        // ref={ref}
-        // onLoad={onLoad}
-        // onError={() => setLoaded(false)} // Handle image load errors
-        loading="lazy" // Native lazy loading
-      />
-      {/* ) : (
+      {!loaded ? (
         <div className={styles.productImage}>
           <MdImageNotSupported size={330} color="#ccc" />
         </div>
-      )} */}
+      ) : (
+        <>
+          <img
+            className={styles.productImage}
+            loading="lazy"
+            alt={foundItem.name}
+            src={imageUrl}
+            onLoad={() => setLoaded(true)}
+          />
+        </>
+      )}
 
       <ProductInfo
         itemCardId={itemCardId}

@@ -9,7 +9,13 @@ import { useMediaQuery } from "react-responsive";
 const Orders = () => {
   const [orderIndex, setOrderIndex] = useState(null);
   const orders = useSelector((state) => state.order.orders);
+
   const [chosenOrder, setChosenOrder] = useState(orders[0]);
+
+  const [loaded, setLoaded] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+
+  //  const foundItem = items.find((item) => itemCardId === item.itemid);
 
   const navigate = useNavigate();
   const orderRef = useRef();
@@ -17,11 +23,13 @@ const Orders = () => {
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   useEffect(() => {
+    console.log("orders", orders);
     if (orders.length > 1) {
       const foundItem = orders.find((order) => order.orderId === orderIndex);
       if (foundItem) {
         setChosenOrder(foundItem);
       }
+      console.log("chosenOrder", chosenOrder);
     }
   }, [orderIndex, orders]);
 

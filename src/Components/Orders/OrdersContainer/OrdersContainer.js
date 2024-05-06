@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./OrdersContainer.module.scss";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { MdImageNotSupported } from "react-icons/md";
+import OrderImages from "../OrderImages/OrderImages";
 
 const OrdersContainer = ({
   setOrderIndex,
@@ -92,11 +93,9 @@ const OrderList = ({
               </div>
               <div className={styles.imageContainer}>
                 {order.items.map((item, index) => (
-                  <MdImageNotSupported
-                    color="#ccc"
-                    key={index}
-                    className={styles.image}
-                  />
+                  <div key={index} className={styles.image}>
+                    <OrderImages item={item} />
+                  </div>
                 ))}
               </div>
             </div>
