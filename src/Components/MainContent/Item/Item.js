@@ -6,10 +6,10 @@ import { addItems } from "../../../redux/slices/cartSlice";
 import PizzaOptions from "../PizzaOptions/PizzaOptions";
 import { itemAPI } from "../../../api/itemAPI";
 import { MdImageNotSupported } from "react-icons/md";
-import { useImageLoaded } from "../../../hooks/useImageLoaded";
 import { baseURL } from "../../../config.js";
 import { useMediaQuery } from "react-responsive";
 import { addItemToCart } from "../../../services/addItemToCart";
+import { fetchImage } from "../../../services/fetchImage.js";
 
 // import { setItems } from "../../../redux/slices/itemSlice";
 
@@ -17,13 +17,17 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [amount, setAmount] = useState(null);
   const [addingInProgress, setAddingInProgress] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
 
   const itemRef = useRef();
 
-  const [ref, loaded, onLoad] = useImageLoaded();
-
   const uid = item.img[0].uid;
-  const uri = `${baseURL}/getFile?uid=${uid}`;
+  // const uri = `${baseURL}/getFileNew.php?uid=${uid}&w=170&h=170`;
+
+  useEffect(() => {
+    fetchImage({ uid, width: 170, height: 170, setImageUrl });
+  }, [uid]);
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const addressList = useSelector((state) => state.address.addressList);
@@ -51,6 +55,9 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
             observer.unobserve(entry.target);
+            setTimeout(() => {
+              setLoaded(true);
+            }, 300);
           }
         });
       },
@@ -69,17 +76,22 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
       className={styles.card}
       onClick={() => toggleItemOpen(item.itemid)}
       ref={itemRef}
+      data-is-loaded={loaded ? "true" : "false"}
     >
-      {isVisible && loaded ? (
-        <img
-          className={styles.productImage}
-          alt={item.name}
-          src={uri}
-          ref={ref}
-          onLoad={onLoad}
-        />
-      ) : (
-        <MdImageNotSupported className={styles.productImage} color="#ccc" />
+      {isVisible && !loaded && (
+        <MdImageNotSupported className={styles.placeholderImage} color="#ccc" />
+      )}
+      {isVisible && loaded && (
+        <>
+          <img
+            className={styles.productImage}
+            loading="lazy"
+            alt={item.name}
+            src={imageUrl}
+            onLoad={() => setLoaded(true)}
+            // style={{ display: loaded ? "block" : "none" }} // Control visibility via CSS
+          />
+        </>
       )}
 
       <div className={styles.productInfo}>

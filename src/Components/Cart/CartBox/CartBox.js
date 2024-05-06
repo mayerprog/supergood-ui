@@ -3,13 +3,11 @@ import AddItemBox from "../../AddItemBox/AddItemBox";
 import styles from "./CartBox.module.scss";
 import { itemAPI } from "../../../api/itemAPI";
 import { MdImageNotSupported } from "react-icons/md";
-import { useImageLoaded } from "../../../hooks/useImageLoaded";
 import { baseURL } from "../../../config";
 import { useMediaQuery } from "react-responsive";
 
 const CartBox = ({ item, index, isSheet, isOrderCart }) => {
   const [itemImage, setItemImage] = useState("");
-  const [ref, loaded, onLoad] = useImageLoaded();
   const phoneMediaQuery = useMediaQuery({ maxWidth: 418 });
 
   const uid = item.img[0].uid;
@@ -21,19 +19,19 @@ const CartBox = ({ item, index, isSheet, isOrderCart }) => {
       key={index}
       data-is-ordercart={isOrderCart ? "true" : "false"}
     >
-      {loaded ? (
-        <img
-          className={styles.cartImage}
-          alt={item.name}
-          src={uri}
-          ref={ref}
-          onLoad={onLoad}
-        />
-      ) : (
+      {/* {loaded ? ( */}
+      <img
+        className={styles.cartImage}
+        alt={item.name}
+        src={uri}
+        // ref={ref}
+        // onLoad={onLoad}
+      />
+      {/* ) : (
         <div className={styles.cartImage}>
           <MdImageNotSupported className={styles.icon} color="#ccc" />
         </div>
-      )}
+      )} */}
       <div className={styles.cartBoxText}>
         <span className={styles.text}>{item.name}</span>
         {!phoneMediaQuery ? (

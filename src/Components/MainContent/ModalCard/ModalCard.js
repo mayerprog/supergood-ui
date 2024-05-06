@@ -5,7 +5,6 @@ import PizzaOptions from "../PizzaOptions/PizzaOptions";
 import AddItemBox from "../../AddItemBox/AddItemBox";
 import { addItems } from "../../../redux/slices/cartSlice";
 import { MdImageNotSupported } from "react-icons/md";
-import { useImageLoaded } from "../../../hooks/useImageLoaded";
 import { baseURL } from "../../../config";
 import { addItemToCart } from "../../../services/addItemToCart";
 import ProductInfo from "../ProductInfo/ProductInfo";
@@ -36,28 +35,26 @@ const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
   //   }
   // }, [cartItems, itemCardId]);
 
-  const [ref, loaded, setLoaded, onLoad] = useImageLoaded();
-
   const uid = foundItem.img[0].uid;
   const uri = `${baseURL}/getFile?uid=${uid}`;
 
   return (
     <div ref={cardRef} className={styles.container}>
-      {loaded ? (
-        <img
-          className={styles.productImage}
-          alt={foundItem.name}
-          src={uri}
-          ref={ref}
-          onLoad={onLoad}
-          onError={() => setLoaded(false)} // Handle image load errors
-          loading="lazy" // Native lazy loading
-        />
-      ) : (
+      {/* {loaded ? ( */}
+      <img
+        className={styles.productImage}
+        alt={foundItem.name}
+        src={uri}
+        // ref={ref}
+        // onLoad={onLoad}
+        // onError={() => setLoaded(false)} // Handle image load errors
+        loading="lazy" // Native lazy loading
+      />
+      {/* ) : (
         <div className={styles.productImage}>
           <MdImageNotSupported size={330} color="#ccc" />
         </div>
-      )}
+      )} */}
 
       <ProductInfo
         itemCardId={itemCardId}

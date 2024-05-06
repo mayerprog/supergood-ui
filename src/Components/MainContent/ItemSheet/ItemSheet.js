@@ -3,7 +3,6 @@ import React from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import styles from "./ItemSheet.module.scss";
-import { useImageLoaded } from "../../../hooks/useImageLoaded";
 import { baseURL } from "../../../config";
 import { MdImageNotSupported } from "react-icons/md";
 import ProductInfo from "../ProductInfo/ProductInfo";
@@ -49,26 +48,25 @@ const ItemSheet = ({
       });
     }
   }, [itemSheetClosing]);
-  const [ref, loaded, setLoaded, onLoad] = useImageLoaded();
 
   const uid = foundItem.img[0].uid;
   const uri = `${baseURL}/getFile?uid=${uid}`;
 
   return (
     <div className={styles.container} ref={itemSheetWrapperRef}>
-      {loaded ? (
-        <div className={styles.productImage}>
-          <img
-            alt={foundItem.name}
-            src={uri}
-            ref={ref}
-            onLoad={onLoad}
-            onError={() => setLoaded(false)} // Handle image load errors
-            loading="lazy" // Native lazy loading
-            className={styles.image}
-          />
-        </div>
-      ) : (
+      {/* {loaded ? ( */}
+      <div className={styles.productImage}>
+        <img
+          alt={foundItem.name}
+          src={uri}
+          // ref={ref}
+          // onLoad={onLoad}
+          // onError={() => setLoaded(false)} // Handle image load errors
+          loading="lazy" // Native lazy loading
+          className={styles.image}
+        />
+      </div>
+      {/* ) : (
         <div className={styles.productImage}>
           <MdImageNotSupported
             // size={330}
@@ -76,7 +74,7 @@ const ItemSheet = ({
             className={styles.image}
           />
         </div>
-      )}
+      )} */}
 
       <ProductInfo
         itemCardId={itemCardId}

@@ -15,6 +15,7 @@ import MainSheet from "../../Components/MainSheet/MainSheet";
 import NavBar from "../../Components/NavBar/NavBar";
 import CartSheet from "../../Components/Cart/CartSheet/CartSheet";
 import MapComponent from "../../Components/MapComponent/MapComponent";
+import { fetchImage } from "../../services/fetchImage";
 
 const MainPage = ({
   searchQuery,
@@ -63,6 +64,7 @@ const MainPage = ({
   const categories = [...new Set(items.map((item) => item.catname))]; // Unique categories
   const [searchedItems, setSearchedItems] = useState([]);
   const [searchedCategories, setSearchedCategories] = useState(categories);
+  const [imageUrl, setImageUrl] = useState("");
 
   const cartWrapperRef = useRef(null);
 
@@ -81,6 +83,14 @@ const MainPage = ({
         setLoading(true);
         const itemsArray = [];
         const allItems = await itemAPI.getItems(1257);
+        if (allItems.error === "stopped department") {
+          fetchImage({
+            uid: "19f05932f0",
+            width: 600,
+            height: 842,
+            setImageUrl,
+          });
+        }
         Object.keys(allItems.items).forEach((categoryId) => {
           const categoryObject = allItems.items[categoryId];
           const category = Object.values(categoryObject);
@@ -97,6 +107,24 @@ const MainPage = ({
       }
     })();
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   const itemsArray = [];
+  //   Object.keys(jsonData.items).forEach((categoryId) => {
+  //     const categoryObject = jsonData.items[categoryId];
+  //     const category = Object.values(categoryObject);
+  //     // console.log("category", category);
+  //     category.forEach((itemGroup) => {
+  //       Object.values(itemGroup).forEach((item) => {
+  //         const itemForPush = Object.values(item);
+  //         itemsArray.push(itemForPush[0]);
+  //       });
+  //     });
+  //   });
+  //   console.log("itemsArray", itemsArray);
+  //   dispatch(setItems(itemsArray));
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [dispatch]);
 
   useEffect(() => {
     let filteredItems = searchQuery.trim()
@@ -133,7 +161,7 @@ const MainPage = ({
 
   return (
     <>
-      {netbooksMediaQuery && !loading && (
+      {netbooksMediaQuery && !loading && !imageUrl && (
         <NavBar
           categories={categories}
           onCategorySelect={setSelectedCategory}
@@ -142,7 +170,7 @@ const MainPage = ({
         />
       )}
       <div className={styles.content}>
-        {!netbooksMediaQuery && (
+        {!netbooksMediaQuery && !imageUrl && (
           <Sidebar
             categories={searchedCategories}
             onCategorySelect={setSelectedCategory}
@@ -182,33 +210,45 @@ const MainPage = ({
           </div>
         )}
 
-        <MainContent
-          items={searchedItems}
-          categories={searchedCategories}
-          isCartVisible={isCartVisible}
-          selectedCategory={selectedCategory}
-          headerHeight={headerHeight}
-          setScrolledCategory={setScrolledCategory}
-          setSelectedCategory={setSelectedCategory}
-          userInfoRef={userInfoRef}
-          isUserInfoOpen={isUserInfoOpen}
-          toggleUserInfoVisibility={toggleUserInfoVisibility}
-          toggleAddressVisibility={toggleAddressVisibility}
-          addressRef={addressRef}
-          isModalAddressOpen={isModalAddressOpen}
-          toggleCartVisibility={toggleCartVisibility}
-          loading={loading}
-          isLoginOpen={isLoginOpen}
-          loginWrapperRef={loginWrapperRef}
-          toggleLoginVisibility={toggleLoginVisibility}
-          toggleMapVisibility={toggleMapVisibility}
-          setSearchQuery={setSearchQuery}
-          bonusWrapperRef={bonusWrapperRef}
-          isBonusOpen={isBonusOpen}
-          toggleBonusVisibility={toggleBonusVisibility}
-          cartWrapperRef={cartWrapperRef}
-        />
-        {!monitorMediaQuery && (
+        {imageUrl ? (
+          <div className={styles.errorImage}>
+            <img
+              className={styles.img}
+              loading="lazy"
+              alt="department stopped"
+              src={imageUrl}
+            />
+          </div>
+        ) : (
+          <MainContent
+            items={searchedItems}
+            categories={searchedCategories}
+            isCartVisible={isCartVisible}
+            selectedCategory={selectedCategory}
+            headerHeight={headerHeight}
+            setScrolledCategory={setScrolledCategory}
+            setSelectedCategory={setSelectedCategory}
+            userInfoRef={userInfoRef}
+            isUserInfoOpen={isUserInfoOpen}
+            toggleUserInfoVisibility={toggleUserInfoVisibility}
+            toggleAddressVisibility={toggleAddressVisibility}
+            addressRef={addressRef}
+            isModalAddressOpen={isModalAddressOpen}
+            toggleCartVisibility={toggleCartVisibility}
+            loading={loading}
+            isLoginOpen={isLoginOpen}
+            loginWrapperRef={loginWrapperRef}
+            toggleLoginVisibility={toggleLoginVisibility}
+            toggleMapVisibility={toggleMapVisibility}
+            setSearchQuery={setSearchQuery}
+            bonusWrapperRef={bonusWrapperRef}
+            isBonusOpen={isBonusOpen}
+            toggleBonusVisibility={toggleBonusVisibility}
+            cartWrapperRef={cartWrapperRef}
+          />
+        )}
+
+        {!monitorMediaQuery && !imageUrl && (
           <Cart
             position="sticky"
             top="105px"
@@ -221,7 +261,7 @@ const MainPage = ({
           />
         )}
 
-        {netbooksMediaQuery && (
+        {netbooksMediaQuery && !imageUrl && (
           <>
             <div
               className={`${styles.sheetOverlay} ${

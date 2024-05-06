@@ -26,13 +26,16 @@ export const itemAPI = {
       console.log("Failed to get all products. Check console for details.");
     }
   },
-  async getFile(uid) {
+  async getFile(params) {
+    const { uid, width, height } = params;
     try {
-      const response = await instance.post(`/getFile`, {
-        uid: uid,
+      const response = await instance.get(`/getFileNew.php`, {
+        params: { uid: uid, w: width, h: height },
+        responseType: "blob", // This tells axios to expect a binary response instead of JSON
       });
-      console.log("files", response);
-      return response;
+      const url = window.URL.createObjectURL(response.data);
+      console.log("File URL", url);
+      return url;
     } catch (err) {
       console.error(
         "Error getting products:",
