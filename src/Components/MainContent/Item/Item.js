@@ -25,10 +25,6 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
   const uid = item.img[0].uid;
   // const uri = `${baseURL}/getFileNew.php?uid=${uid}&w=170&h=170`;
 
-  useEffect(() => {
-    fetchImage({ uid, width: 170, height: 170, setImageUrl });
-  }, [uid]);
-
   const cartItems = useSelector((state) => state.cart.cartItems);
   const addressList = useSelector((state) => state.address.addressList);
 
@@ -51,13 +47,19 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        entries.forEach(async (entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
             observer.unobserve(entry.target);
-            setTimeout(() => {
-              setLoaded(true);
-            }, 300);
+            await fetchImage({
+              uid,
+              width: 170,
+              height: 170,
+              setImageUrl,
+            });
+            // setTimeout(() => {
+            setLoaded(true);
+            // }, 500);
           }
         });
       },
@@ -89,7 +91,6 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
             alt={item.name}
             src={imageUrl}
             onLoad={() => setLoaded(true)}
-            // style={{ display: loaded ? "block" : "none" }} // Control visibility via CSS
           />
         </>
       )}
