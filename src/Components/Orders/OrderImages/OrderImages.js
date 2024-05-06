@@ -3,7 +3,7 @@ import { fetchImage } from "../../../services/fetchImage";
 import styles from "./OrderImages.module.scss";
 import { MdImageNotSupported } from "react-icons/md";
 
-const OrderImages = ({ item }) => {
+const OrderImages = ({ item, detailInfo }) => {
   const [loaded, setLoaded] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
 
@@ -14,8 +14,14 @@ const OrderImages = ({ item }) => {
   }, [uid]);
 
   return (
-    <div>
-      {!loaded && <MdImageNotSupported className={styles.icon} color="#ccc" />}
+    <>
+      {!loaded && (
+        <MdImageNotSupported
+          className={styles.cartImage}
+          color="#ccc"
+          data-is-info={detailInfo ? "true" : "false"}
+        />
+      )}
       {loaded && (
         <>
           <img
@@ -24,10 +30,11 @@ const OrderImages = ({ item }) => {
             alt={item.name}
             src={imageUrl}
             onLoad={() => setLoaded(true)}
+            data-is-info={detailInfo ? "true" : "false"}
           />
         </>
       )}
-    </div>
+    </>
   );
 };
 

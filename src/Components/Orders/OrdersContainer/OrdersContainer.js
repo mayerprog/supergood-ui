@@ -93,9 +93,7 @@ const OrderList = ({
               </div>
               <div className={styles.imageContainer}>
                 {order.items.map((item, index) => (
-                  <div key={index} className={styles.image}>
-                    <OrderImages item={item} />
-                  </div>
+                  <OrderImages item={item} detailInfo={false} />
                 ))}
               </div>
             </div>

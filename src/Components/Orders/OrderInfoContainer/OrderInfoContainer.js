@@ -29,9 +29,7 @@ const OrderInfoContainer = ({
         <span>Состав заказа</span>
         {chosenOrder.items.map((item, index) => (
           <div className={styles.orderDetails}>
-            <div key={index}>
-              <OrderImages item={item} />
-            </div>
+            <OrderImages item={item} detailInfo={true} />
 
             <div className={styles.name}>
               <div>{item.name}</div>
