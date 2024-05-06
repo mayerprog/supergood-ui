@@ -1,4 +1,4 @@
-// getItems
+// get items from API
 
 useEffect(() => {
   (async () => {
@@ -28,6 +28,8 @@ useEffect(() => {
   })();
 }, [dispatch]);
 
+// get items from json
+
 // useEffect(() => {
 //   const itemsArray = [];
 //   Object.keys(jsonData.items).forEach((categoryId) => {
@@ -45,3 +47,41 @@ useEffect(() => {
 //   dispatch(setItems(itemsArray));
 //   // eslint-disable-next-line react-hooks/exhaustive-deps
 // }, [dispatch]);
+
+// get poly points
+
+useEffect(() => {
+  (async () => {
+    try {
+      const data = await addressAPI.getPoly();
+      const polygonArray = [];
+      const polyMap = new Map();
+
+      // const polyValuesState = Object.values(polyLayers);
+      const points = data.points;
+      const polyValues = [];
+
+      points.forEach((item) => {
+        const value = Object.values(item)[0];
+        polyValues.push(value);
+      });
+
+      for (let i = 0; i < polyValues.length; i++) {
+        if (polyMap.has(polyValues[i].dept_id)) {
+          polyMap
+            .get(polyValues[i].dept_id)
+            .push([polyValues[i].latitude, polyValues[i].longtitude]);
+        } else {
+          polyMap.set(polyValues[i].dept_id, []);
+        }
+      }
+      // push arrays of points to polygonArray
+      for (let item of polyMap.values()) {
+        polygonArray.push(item);
+      }
+      setmMultiPolygon(polygonArray);
+    } catch (err) {
+      console.log(err);
+    }
+  })();
+}, []);

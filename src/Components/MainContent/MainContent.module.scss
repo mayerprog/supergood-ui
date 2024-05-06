@@ -1,3 +1,5 @@
+@import "../../mixins/mixins";
+
 .container {
   display: flex;
   flex-direction: column;
@@ -63,17 +65,8 @@
 .overlay,
 .cardOverlay,
 .sheetOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 10000;
-  display: flex;
+  @include card-overlay;
   justify-content: flex-end;
-  // align-items: center;
-  overflow: auto;
 }
 
 .cardOverlay {

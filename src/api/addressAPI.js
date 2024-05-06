@@ -29,7 +29,7 @@ export const addressAPI = {
 
   async getPoly() {
     try {
-      const response = await instance.post(`/getPoly`);
+      const response = await instance.post(`/getpoly.php`);
       return response.data;
     } catch (err) {
       console.error(

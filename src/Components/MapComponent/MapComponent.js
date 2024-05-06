@@ -50,6 +50,8 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
     (async () => {
       try {
         const data = await addressAPI.getPoly();
+
+        console.log("data", data);
         const polygonArray = [];
         const polyMap = new Map();
 
