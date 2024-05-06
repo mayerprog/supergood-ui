@@ -5,6 +5,8 @@ import { useGSAP } from "@gsap/react";
 import styles from "./ItemSheet.module.scss";
 import { baseURL } from "../../../config";
 import { MdImageNotSupported } from "react-icons/md";
+import { IoMdClose } from "react-icons/io";
+
 import ProductInfo from "../ProductInfo/ProductInfo";
 import { fetchImage } from "../../../services/fetchImage";
 
@@ -16,6 +18,7 @@ const ItemSheet = ({
   itemSheetClosing,
   itemCardId,
   toggleMapVisibility,
+  toggleItemSheetVisibility,
 }) => {
   const [loaded, setLoaded] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
@@ -58,8 +61,8 @@ const ItemSheet = ({
       try {
         await fetchImage({
           uid,
-          width: 800,
-          height: 800,
+          width: 900,
+          height: 900,
           setImageUrl,
           setLoaded,
         });
@@ -71,6 +74,9 @@ const ItemSheet = ({
 
   return (
     <div className={styles.container} ref={itemSheetWrapperRef}>
+      <div className={styles.icon} onClick={toggleItemSheetVisibility}>
+        <IoMdClose size={25} />
+      </div>
       {!loaded ? (
         <div className={styles.productImage}>
           <MdImageNotSupported className={styles.image} color="#ccc" />

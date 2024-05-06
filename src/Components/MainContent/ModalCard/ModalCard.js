@@ -9,8 +9,14 @@ import { baseURL } from "../../../config";
 import { addItemToCart } from "../../../services/addItemToCart";
 import ProductInfo from "../ProductInfo/ProductInfo";
 import { fetchImage } from "../../../services/fetchImage";
+import { IoMdClose } from "react-icons/io";
 
-const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
+const ModalCard = ({
+  itemCardId,
+  cardRef,
+  toggleMapVisibility,
+  toggleModalCardVisibility,
+}) => {
   const items = useSelector((state) => state.item.items);
   const foundItem = items.find((item) => itemCardId === item.itemid);
   const [loaded, setLoaded] = useState(false);
@@ -59,6 +65,9 @@ const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
 
   return (
     <div ref={cardRef} className={styles.container}>
+      <div className={styles.icon} onClick={toggleModalCardVisibility}>
+        <IoMdClose size={25} />
+      </div>
       {!loaded ? (
         <div className={styles.productImage}>
           <MdImageNotSupported size={330} color="#ccc" />

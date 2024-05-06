@@ -174,6 +174,7 @@ const MainContent = ({
             itemCardId={itemCardId}
             cardRef={cardRef}
             toggleMapVisibility={toggleMapVisibility}
+            toggleModalCardVisibility={toggleModalCardVisibility}
           />
         </div>
       )}
@@ -229,6 +230,7 @@ const MainContent = ({
                 itemSheetClosing={itemSheetClosing}
                 itemCardId={itemCardId}
                 toggleMapVisibility={toggleMapVisibility}
+                toggleItemSheetVisibility={toggleItemSheetVisibility}
               />
             )}
           </div>

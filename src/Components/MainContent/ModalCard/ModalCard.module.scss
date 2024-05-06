@@ -17,12 +17,17 @@
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
-  padding: 25px 0;
+  padding: 25px 20px;
   background-color: #fafafa;
 
   .productImage {
     width: 330px;
     height: 330px;
     align-self: center;
+  }
+
+  .icon {
+    align-self: flex-start;
+    cursor: pointer;
   }
 }
