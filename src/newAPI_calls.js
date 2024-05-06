@@ -1,5 +1,4 @@
 // get items from API
-
 useEffect(() => {
   (async () => {
     try {
@@ -29,7 +28,6 @@ useEffect(() => {
 }, [dispatch]);
 
 // get items from json
-
 // useEffect(() => {
 //   const itemsArray = [];
 //   Object.keys(jsonData.items).forEach((categoryId) => {
@@ -49,7 +47,6 @@ useEffect(() => {
 // }, [dispatch]);
 
 // get poly points
-
 useEffect(() => {
   (async () => {
     try {

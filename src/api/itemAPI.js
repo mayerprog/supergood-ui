@@ -34,7 +34,7 @@ export const itemAPI = {
         responseType: "blob", // This tells axios to expect a binary response instead of JSON
       });
       const url = window.URL.createObjectURL(response.data);
-      console.log("File URL", url);
+      // console.log("File URL", url);
       return url;
     } catch (err) {
       console.error(

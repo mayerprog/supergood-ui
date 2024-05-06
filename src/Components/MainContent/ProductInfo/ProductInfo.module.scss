@@ -8,6 +8,7 @@
   max-height: calc(100vh - 250px);
   min-height: 348px;
   padding: 0 10px;
+  margin-bottom: 1rem;
 
   h2 {
     font-weight: normal;
@@ -72,7 +73,6 @@
     // box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
     height: 2rem;
     width: 7rem;
-    margin-top: 1rem;
 
     .count {
       margin: 0 1rem;

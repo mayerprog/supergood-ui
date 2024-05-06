@@ -51,24 +51,18 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
       try {
         const data = await addressAPI.getPoly();
 
-        console.log("data", data);
         const polygonArray = [];
         const polyMap = new Map();
 
-        // const polyValuesState = Object.values(polyLayers);
         const points = data.points;
-        const polyValues = [];
 
-        points.forEach((item) => {
-          const value = Object.values(item)[0];
-          polyValues.push(value);
-        });
+        const polyValues = Object.values(points);
 
         for (let i = 0; i < polyValues.length; i++) {
           if (polyMap.has(polyValues[i].dept_id)) {
             polyMap
               .get(polyValues[i].dept_id)
-              .push([polyValues[i].latitude, polyValues[i].longtitude]);
+              .push([polyValues[i].latitude, polyValues[i].longitude]);
           } else {
             polyMap.set(polyValues[i].dept_id, []);
           }
@@ -77,6 +71,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         for (let item of polyMap.values()) {
           polygonArray.push(item);
         }
+        console.log("polyMap", polyMap);
         setmMultiPolygon(polygonArray);
       } catch (err) {
         console.log(err);
