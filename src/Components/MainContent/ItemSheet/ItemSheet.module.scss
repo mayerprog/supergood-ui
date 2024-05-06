@@ -28,3 +28,18 @@
     }
   }
 }
+
+.container::-webkit-scrollbar {
+  display: block;
+  width: 3px;
+}
+.container::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 20px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-right: none;
+  border-left: none;
+}

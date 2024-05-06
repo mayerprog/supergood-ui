@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import styles from "./ItemSheet.module.scss";
 import { baseURL } from "../../../config";
 import { MdImageNotSupported } from "react-icons/md";
 import ProductInfo from "../ProductInfo/ProductInfo";
+import { fetchImage } from "../../../services/fetchImage";
 
 const ItemSheet = ({
   navigate,
@@ -16,10 +17,13 @@ const ItemSheet = ({
   itemCardId,
   toggleMapVisibility,
 }) => {
-  const dispatch = useDispatch();
+  const [loaded, setLoaded] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
 
   const items = useSelector((state) => state.item.items);
   const foundItem = items.find((item) => itemCardId === item.itemid);
+
+  const uid = foundItem.img[0].uid;
 
   const handleClosing = () => {
     setItemSheetClosing(false);
@@ -49,32 +53,39 @@ const ItemSheet = ({
     }
   }, [itemSheetClosing]);
 
-  const uid = foundItem.img[0].uid;
-  const uri = `${baseURL}/getFile?uid=${uid}`;
+  useEffect(() => {
+    (async () => {
+      try {
+        await fetchImage({
+          uid,
+          width: 800,
+          height: 800,
+          setImageUrl,
+          setLoaded,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
 
   return (
     <div className={styles.container} ref={itemSheetWrapperRef}>
-      {/* {loaded ? ( */}
-      <div className={styles.productImage}>
-        <img
-          alt={foundItem.name}
-          src={uri}
-          // ref={ref}
-          // onLoad={onLoad}
-          // onError={() => setLoaded(false)} // Handle image load errors
-          loading="lazy" // Native lazy loading
-          className={styles.image}
-        />
-      </div>
-      {/* ) : (
+      {!loaded ? (
         <div className={styles.productImage}>
-          <MdImageNotSupported
-            // size={330}
-            color="#ccc"
+          <MdImageNotSupported className={styles.image} color="#ccc" />
+        </div>
+      ) : (
+        <div className={styles.productImage}>
+          <img
             className={styles.image}
+            loading="lazy"
+            alt={foundItem.name}
+            src={imageUrl}
+            onLoad={() => setLoaded(true)}
           />
         </div>
-      )} */}
+      )}
 
       <ProductInfo
         itemCardId={itemCardId}

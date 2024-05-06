@@ -41,10 +41,6 @@ const ModalCard = ({ itemCardId, cardRef, toggleMapVisibility }) => {
 
   const uid = foundItem.img[0].uid;
 
-  // useEffect(() => {
-  //   fetchImage({ uid, width: 330, height: 330, setImageUrl, setLoaded });
-  // }, [uid]);
-
   useEffect(() => {
     (async () => {
       try {
