@@ -14,8 +14,9 @@ const instance = axios.create({
 export const authAPI = {
   async getSms(phone) {
     try {
-      const response = await instance.post(`/auth`, {
+      const response = await instance.post(`/auth.php`, {
         phone: phone,
+        os_source: "web",
       });
       console.log("data", response.data);
       return response.data;
@@ -29,7 +30,7 @@ export const authAPI = {
   },
   async login(phone, code, token) {
     try {
-      const response = await instance.post(`/auth`, {
+      const response = await instance.post(`/auth.php`, {
         phone: phone,
         code: code,
         token: token,

@@ -17,7 +17,7 @@ import {
   addAddress,
   setAddressSelected,
   updateSelected,
-} from "./redux/slices/addressSlice";
+} from "./redux/slices/userSlice";
 import DeviceFooter from "./Components/Footer/DeviceFooter/DeviceFooter";
 import { fetchCoordinatesForAddress } from "./services/fetchCoordinatesForAddress";
 import LevelContext from "./contexts/LevelContext";
@@ -127,8 +127,8 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const addressList = useSelector((state) => state.address.addressList);
-  const addressSelected = useSelector((state) => state.address.addressSelected);
+  const addressList = useSelector((state) => state.user.addressList);
+  const addressSelected = useSelector((state) => state.user.addressSelected);
 
   // we find here address with selected: true to display it all over the app
   useEffect(() => {
@@ -173,6 +173,12 @@ function App() {
       setIsMainSheetOpen(false);
     }
   }, [netbooksMediaQuery]);
+
+  // useEffect(() => {
+  //   if (!netbooksMediaQuery) {
+  //     setIsMainSheetOpen(false);
+  //   }
+  // }, [netbooksMediaQuery]);
 
   return (
     <div className={styles.app}>

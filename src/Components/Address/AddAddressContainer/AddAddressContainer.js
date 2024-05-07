@@ -8,7 +8,7 @@ import {
   removeAddress,
   removeAddressSelected,
   updateAddress,
-} from "../../../redux/slices/addressSlice";
+} from "../../../redux/slices/userSlice";
 import { makeExistingAddressSelected } from "../../../services/makeExistingAddressSelected";
 import { ImBin } from "react-icons/im";
 
@@ -24,7 +24,7 @@ const AddAddressContainer = ({
   const [showDropdown, setShowDropdown] = useState(false);
   const [isAddressValid, setIsAddressValid] = useState(false);
 
-  const addressList = useSelector((state) => state.address.addressList);
+  const addressList = useSelector((state) => state.user.addressList);
 
   const dispatch = useDispatch();
 

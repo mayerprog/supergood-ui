@@ -6,6 +6,8 @@ import { addItems } from "../../../redux/slices/cartSlice";
 import PizzaOptions from "../PizzaOptions/PizzaOptions";
 import { itemAPI } from "../../../api/itemAPI";
 import { MdImageNotSupported } from "react-icons/md";
+import { IoFastFoodOutline } from "react-icons/io5";
+
 import { baseURL } from "../../../config.js";
 import { useMediaQuery } from "react-responsive";
 import { addItemToCart } from "../../../services/addItemToCart";
@@ -26,7 +28,7 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
   // const uri = `${baseURL}/getFileNew.php?uid=${uid}&w=170&h=170`;
 
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const addressList = useSelector((state) => state.address.addressList);
+  const addressList = useSelector((state) => state.user.addressList);
 
   const dispatch = useDispatch();
 
@@ -80,8 +82,8 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
       ref={itemRef}
       data-is-loaded={loaded ? "true" : "false"}
     >
-      {isVisible && !loaded && (
-        <MdImageNotSupported className={styles.placeholderImage} color="#ccc" />
+      {!loaded && (
+        <IoFastFoodOutline className={styles.placeholderImage} color="#ccc" />
       )}
       {isVisible && loaded && (
         <>

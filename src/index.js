@@ -13,17 +13,17 @@ import { LevelContextProvider } from "./contexts/LevelContext";
 let persistor = persistStore(store);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <LevelContextProvider>
+  <BrowserRouter>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <LevelContextProvider>
+          <React.StrictMode>
             <App />
-          </LevelContextProvider>
-        </PersistGate>
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>
+          </React.StrictMode>
+        </LevelContextProvider>
+      </PersistGate>
+    </Provider>
+  </BrowserRouter>
 );
 
 reportWebVitals();

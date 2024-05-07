@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AddItemBox from "../../AddItemBox/AddItemBox";
 import styles from "./CartBox.module.scss";
 import { itemAPI } from "../../../api/itemAPI";
-import { MdImageNotSupported } from "react-icons/md";
+import { IoFastFoodOutline } from "react-icons/io5";
 import { baseURL } from "../../../config";
 import { useMediaQuery } from "react-responsive";
 import { fetchImage } from "../../../services/fetchImage";
@@ -28,7 +28,7 @@ const CartBox = ({ item, index, isSheet, isOrderCart }) => {
     >
       {!loaded && (
         <div className={styles.cartImage}>
-          <MdImageNotSupported className={styles.icon} color="#ccc" />
+          <IoFastFoodOutline className={styles.icon} color="#ccc" />
         </div>
       )}
       {loaded && (

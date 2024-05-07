@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./OrdersContainer.module.scss";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { MdImageNotSupported } from "react-icons/md";
+
 import OrderImages from "../OrderImages/OrderImages";
 
 const OrdersContainer = ({

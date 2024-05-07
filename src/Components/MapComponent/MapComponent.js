@@ -15,7 +15,7 @@ import pin from "../../assets/images/pin.png";
 import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
-import { addAddress, setMapPosition } from "../../redux/slices/addressSlice";
+import { addAddress, setMapPosition } from "../../redux/slices/userSlice";
 import AddressDropDown from "../Address/AddressDropDown/AddressDropDown";
 import { fetchSuggestions } from "../../services/fetchSuggestions";
 import { fetchCoordinatesForAddress } from "../../services/fetchCoordinatesForAddress";
@@ -37,10 +37,10 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
 
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
-  // const polyLayers = useSelector((state) => state.address.polyLayers);
-  const addressSelected = useSelector((state) => state.address.addressSelected);
-  const addressList = useSelector((state) => state.address.addressList);
-  const mapPosition = useSelector((state) => state.address.mapPosition);
+  // const polyLayers = useSelector((state) => state.user.polyLayers);
+  const addressSelected = useSelector((state) => state.user.addressSelected);
+  const addressList = useSelector((state) => state.user.addressList);
+  const mapPosition = useSelector((state) => state.user.mapPosition);
 
   useEffect(() => {
     setInputAddress(addressSelected);

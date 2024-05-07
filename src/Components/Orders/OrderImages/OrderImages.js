@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchImage } from "../../../services/fetchImage";
 import styles from "./OrderImages.module.scss";
-import { MdImageNotSupported } from "react-icons/md";
+import { IoFastFoodOutline } from "react-icons/io5";
 
 const OrderImages = ({ item, detailInfo }) => {
   const [loaded, setLoaded] = useState(false);
@@ -16,7 +16,7 @@ const OrderImages = ({ item, detailInfo }) => {
   return (
     <>
       {!loaded && (
-        <MdImageNotSupported
+        <IoFastFoodOutline
           className={styles.cartImage}
           color="#ccc"
           data-is-info={detailInfo ? "true" : "false"}

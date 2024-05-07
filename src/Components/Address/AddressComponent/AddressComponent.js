@@ -3,7 +3,7 @@ import styles from "./AddressComponent.module.scss";
 import React, { useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { MdOutlineAdd } from "react-icons/md";
-import { updateSelected } from "../../../redux/slices/addressSlice";
+import { updateSelected } from "../../../redux/slices/userSlice";
 import AddAddressContainer from "../AddAddressContainer/AddAddressContainer";
 import MapComponent from "../../MapComponent/MapComponent";
 
@@ -19,7 +19,7 @@ const AddressComponent = ({
 
   const dispatch = useDispatch();
 
-  const addressList = useSelector((state) => state.address.addressList);
+  const addressList = useSelector((state) => state.user.addressList);
 
   const handleChangeAddress = (id) => {
     setAddressIndexForChange(id);

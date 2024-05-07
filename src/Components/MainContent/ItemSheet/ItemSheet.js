@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import styles from "./ItemSheet.module.scss";
 import { baseURL } from "../../../config";
-import { MdImageNotSupported } from "react-icons/md";
+import { IoFastFoodOutline } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 
 import ProductInfo from "../ProductInfo/ProductInfo";
@@ -80,7 +80,7 @@ const ItemSheet = ({
       <div>
         {!loaded ? (
           <div className={styles.productImage}>
-            <MdImageNotSupported size={500} color="#ccc" />
+            <IoFastFoodOutline size={500} color="#ccc" />
           </div>
         ) : (
           <img

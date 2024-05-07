@@ -36,7 +36,7 @@ const Header = forwardRef(
     const isAuth = useSelector((state) => state.auth.isAuth);
     const itemsSum = useSelector((state) => state.cart.itemsSum);
     const addressSelected = useSelector(
-      (state) => state.address.addressSelected
+      (state) => state.user.addressSelected
     );
 
     const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import { updateSelected } from "../redux/slices/addressSlice";
+import { updateSelected } from "../redux/slices/userSlice";
 
 export const makeExistingAddressSelected = (
   addressList,

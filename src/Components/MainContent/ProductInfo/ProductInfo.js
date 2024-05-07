@@ -9,7 +9,7 @@ const ProductInfo = ({ itemCardId, toggleMapVisibility, isSheet }) => {
   const items = useSelector((state) => state.item.items);
   const foundItem = items.find((item) => itemCardId === item.itemid);
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const addressList = useSelector((state) => state.address.addressList);
+  const addressList = useSelector((state) => state.user.addressList);
   const [addingInProgress, setAddingInProgress] = useState(false);
   const [amount, setAmount] = useState(null);
   const dispatch = useDispatch();

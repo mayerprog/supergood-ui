@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setMapPosition } from "../redux/slices/addressSlice";
+import { setMapPosition } from "../redux/slices/userSlice";
 
 export const fetchCoordinatesForAddress = async (
   address,

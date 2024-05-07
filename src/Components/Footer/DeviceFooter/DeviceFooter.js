@@ -11,7 +11,7 @@ const DeviceFooter = ({ setIsCartSheetOpen, location }) => {
   const dispatch = useDispatch();
 
   const itemsSum = useSelector((state) => state.cart.itemsSum);
-  const addressSelected = useSelector((state) => state.address.addressSelected);
+  const addressSelected = useSelector((state) => state.user.addressSelected);
   const cartItems = useSelector((state) => state.cart.cartItems);
 
   const handleFooterClick = () => {

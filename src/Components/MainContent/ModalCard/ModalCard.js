@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PizzaOptions from "../PizzaOptions/PizzaOptions";
 import AddItemBox from "../../AddItemBox/AddItemBox";
 import { addItems } from "../../../redux/slices/cartSlice";
-import { MdImageNotSupported } from "react-icons/md";
+import { IoFastFoodOutline } from "react-icons/io5";
 import { baseURL } from "../../../config";
 import { addItemToCart } from "../../../services/addItemToCart";
 import ProductInfo from "../ProductInfo/ProductInfo";
@@ -23,7 +23,7 @@ const ModalCard = ({
   const [imageUrl, setImageUrl] = useState("");
 
   // const cartItems = useSelector((state) => state.cart.cartItems);
-  // const addressList = useSelector((state) => state.address.addressList);
+  // const addressList = useSelector((state) => state.user.addressList);
   // const [addingInProgress, setAddingInProgress] = useState(false);
   // const [amount, setAmount] = useState(null);
   // const dispatch = useDispatch();
@@ -71,7 +71,7 @@ const ModalCard = ({
         </div>
         {!loaded ? (
           <div className={styles.productImage}>
-            <MdImageNotSupported size={330} color="#ccc" />
+            <IoFastFoodOutline size={330} color="#ccc" />
           </div>
         ) : (
           <>
