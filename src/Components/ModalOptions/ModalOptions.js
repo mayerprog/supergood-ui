@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styles from "./ModalOptions.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setIsAuth } from "../../redux/slices/authSlice";
+import { removeDataLogin, setIsAuth } from "../../redux/slices/authSlice";
 
 const ModalOptions = ({
   optionsRef,
@@ -38,7 +38,7 @@ const ModalOptions = ({
         toggleOptionsVisibility(false);
         break;
       case "Выйти":
-        dispatch(setIsAuth(false));
+        dispatch(removeDataLogin());
         toggleOptionsVisibility(false);
         break;
       default:

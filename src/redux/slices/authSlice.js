@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isAuth: true,
+  isAuth: false,
   dataSms: {},
   dataLogin: {},
 };
@@ -19,11 +19,15 @@ export const authSlice = createSlice({
     },
     setDataLogin: (state, action) => {
       state.dataLogin = action.payload;
+    },
+    removeDataLogin: (state, action) => {
+      state.dataLogin = [];
       console.log("dataLogin", state.dataLogin);
     },
   },
 });
 
-export const { setIsAuth, setDataSms, setDataLogin } = authSlice.actions;
+export const { setIsAuth, setDataSms, setDataLogin, removeDataLogin } =
+  authSlice.actions;
 
 export default authSlice.reducer;

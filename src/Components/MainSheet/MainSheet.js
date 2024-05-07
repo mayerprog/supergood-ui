@@ -5,7 +5,7 @@ import styles from "./MainSheet.module.scss";
 import { useEffect } from "react";
 import SocialMedia from "../Reusables/SocialMedia/SocialMedia";
 import MobileApps from "../Reusables/MobileApps/MobileApps";
-import { setIsAuth } from "../../redux/slices/authSlice";
+import { removeDataLogin } from "../../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
@@ -85,7 +85,7 @@ const MainSheet = ({
         handleClosing();
         break;
       case "Выйти":
-        dispatch(setIsAuth(false));
+        dispatch(removeDataLogin());
         handleClosing();
         break;
       case "Войти":

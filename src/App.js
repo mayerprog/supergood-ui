@@ -22,6 +22,7 @@ import DeviceFooter from "./Components/Footer/DeviceFooter/DeviceFooter";
 import { fetchCoordinatesForAddress } from "./services/fetchCoordinatesForAddress";
 import LevelContext from "./contexts/LevelContext";
 import LoyaltyPage from "./Pages/LoyaltyPage/LoyaltyPage";
+import { setIsAuth } from "./redux/slices/authSlice";
 
 function App() {
   // modals
@@ -129,6 +130,7 @@ function App() {
 
   const addressList = useSelector((state) => state.user.addressList);
   const addressSelected = useSelector((state) => state.user.addressSelected);
+  const dataLogin = useSelector((state) => state.auth.dataLogin);
 
   // we find here address with selected: true to display it all over the app
   useEffect(() => {
@@ -174,11 +176,15 @@ function App() {
     }
   }, [netbooksMediaQuery]);
 
-  // useEffect(() => {
-  //   if (!netbooksMediaQuery) {
-  //     setIsMainSheetOpen(false);
-  //   }
-  // }, [netbooksMediaQuery]);
+  // checking if client is authorised
+  useEffect(() => {
+    if (dataLogin.token) {
+      dispatch(setIsAuth(true));
+    } else {
+      dispatch(setIsAuth(false));
+    }
+    console.log("dataLogin", dataLogin);
+  }, [dataLogin]);
 
   return (
     <div className={styles.app}>

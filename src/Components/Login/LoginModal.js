@@ -123,7 +123,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
             onChange={handleEnterCode}
             maxLength="4"
           />
-          <button className={styles.buttonStyle}>
+          <button className={styles.buttonStyle} onClick={handleSendPhone}>
             <span className={styles.buttonText}>Выслать код повторно</span>
           </button>
         </div>
