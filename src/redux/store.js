@@ -18,17 +18,11 @@ const userPersistConfig = {
   blacklist: ["addressList", "mapPosition"],
 };
 
-const authPersistConfig = {
-  key: "auth",
-  storage: storage,
-  blacklist: ["dataSms", "isAuth"],
-};
-
 const rootReducer = combineReducers({
   item: itemReducer,
   cart: persistReducer(cartPersistConfig, cartReducer),
   user: persistReducer(userPersistConfig, userSlice),
-  auth: persistReducer(authPersistConfig, authReducer),
+  auth: authReducer,
   order: orderReducer,
 });
 

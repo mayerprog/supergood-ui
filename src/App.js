@@ -23,6 +23,8 @@ import { fetchCoordinatesForAddress } from "./services/fetchCoordinatesForAddres
 import LevelContext from "./contexts/LevelContext";
 import LoyaltyPage from "./Pages/LoyaltyPage/LoyaltyPage";
 import { setIsAuth } from "./redux/slices/authSlice";
+import { userAPI } from "./api/userAPI";
+import Cookies from "js-cookie";
 
 function App() {
   // modals
@@ -131,6 +133,7 @@ function App() {
   const addressList = useSelector((state) => state.user.addressList);
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const dataLogin = useSelector((state) => state.auth.dataLogin);
+  const token = useSelector((state) => state.auth.token);
 
   // we find here address with selected: true to display it all over the app
   useEffect(() => {
@@ -179,12 +182,21 @@ function App() {
   // checking if client is authorised
   useEffect(() => {
     if (dataLogin.token) {
+      Cookies.set("token", dataLogin.token, { expires: 7, secure: true });
+    }
+  }, [dataLogin]);
+
+  // setting cookies for storing token
+  useEffect(() => {
+    const token = Cookies.get("token");
+    console.log("token", token);
+    if (token) {
+      userAPI.getUserPref(token);
       dispatch(setIsAuth(true));
     } else {
       dispatch(setIsAuth(false));
     }
-    console.log("dataLogin", dataLogin);
-  }, [dataLogin]);
+  }, [token]);
 
   return (
     <div className={styles.app}>

@@ -1,8 +1,6 @@
 import axios from "axios";
 import { baseURL } from "../config.js";
 
-// const path = "/tasks";
-
 const instance = axios.create({
   baseURL: baseURL,
   // withCredentials: true, // Axios includes the cookie in the request

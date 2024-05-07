@@ -3,6 +3,7 @@ import styles from "./ModalOptions.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeDataLogin, setIsAuth } from "../../redux/slices/authSlice";
+import Cookies from "js-cookie";
 
 const ModalOptions = ({
   optionsRef,
@@ -38,7 +39,8 @@ const ModalOptions = ({
         toggleOptionsVisibility(false);
         break;
       case "Выйти":
-        dispatch(removeDataLogin());
+        Cookies.remove("token");
+        dispatch(setIsAuth(false));
         toggleOptionsVisibility(false);
         break;
       default:

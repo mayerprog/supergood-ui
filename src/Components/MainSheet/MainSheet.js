@@ -8,6 +8,7 @@ import MobileApps from "../Reusables/MobileApps/MobileApps";
 import { removeDataLogin } from "../../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
+import Cookies from "js-cookie";
 
 const MainSheet = ({
   mainSheetWrapperRef,
@@ -85,7 +86,7 @@ const MainSheet = ({
         handleClosing();
         break;
       case "Выйти":
-        dispatch(removeDataLogin());
+        Cookies.remove("token");
         handleClosing();
         break;
       case "Войти":

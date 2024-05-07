@@ -11,13 +11,14 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setAddressList: (state, action) => {
+      state.addressList = action.payload;
+    },
     setMapPosition: (state, action) => {
       state.mapPosition = action.payload;
-      console.log("mapPositionState", state.mapPosition);
     },
     setAddressSelected: (state, action) => {
       state.addressSelected = action.payload;
-      // console.log("addressSelected", state.addressSelected);
     },
     removeAddressSelected: (state, action) => {
       state.addressSelected = "";
@@ -67,6 +68,7 @@ export const userSlice = createSlice({
 
 export const {
   setAddressSelected,
+  setAddressList,
   addAddress,
   updateAddress,
   updateSelected,
