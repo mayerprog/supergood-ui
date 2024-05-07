@@ -65,25 +65,26 @@ const ModalCard = ({
 
   return (
     <div ref={cardRef} className={styles.container}>
-      <div className={styles.icon} onClick={toggleModalCardVisibility}>
-        <IoMdClose size={25} />
-      </div>
-      {!loaded ? (
-        <div className={styles.productImage}>
-          <MdImageNotSupported size={330} color="#ccc" />
+      <div>
+        <div className={styles.icon} onClick={toggleModalCardVisibility}>
+          <IoMdClose size={25} />
         </div>
-      ) : (
-        <>
-          <img
-            className={styles.productImage}
-            loading="lazy"
-            alt={foundItem.name}
-            src={imageUrl}
-            onLoad={() => setLoaded(true)}
-          />
-        </>
-      )}
-
+        {!loaded ? (
+          <div className={styles.productImage}>
+            <MdImageNotSupported size={330} color="#ccc" />
+          </div>
+        ) : (
+          <>
+            <img
+              className={styles.productImage}
+              loading="lazy"
+              alt={foundItem.name}
+              src={imageUrl}
+              onLoad={() => setLoaded(true)}
+            />
+          </>
+        )}
+      </div>
       <ProductInfo
         itemCardId={itemCardId}
         toggleMapVisibility={toggleMapVisibility}

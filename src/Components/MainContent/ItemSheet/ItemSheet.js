@@ -77,21 +77,21 @@ const ItemSheet = ({
       <div className={styles.icon} onClick={toggleItemSheetVisibility}>
         <IoMdClose size={25} />
       </div>
-      {!loaded ? (
-        <div className={styles.productImage}>
-          <MdImageNotSupported className={styles.image} color="#ccc" />
-        </div>
-      ) : (
-        <div className={styles.productImage}>
+      <div>
+        {!loaded ? (
+          <div className={styles.productImage}>
+            <MdImageNotSupported size={500} color="#ccc" />
+          </div>
+        ) : (
           <img
-            className={styles.image}
+            className={styles.productImage}
             loading="lazy"
             alt={foundItem.name}
             src={imageUrl}
             onLoad={() => setLoaded(true)}
           />
-        </div>
-      )}
+        )}
+      </div>
 
       <ProductInfo
         itemCardId={itemCardId}

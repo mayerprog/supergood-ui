@@ -71,7 +71,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         for (let item of polyMap.values()) {
           polygonArray.push(item);
         }
-        console.log("polyMap", polyMap);
+        // console.log("polyMap", polyMap);
         setmMultiPolygon(polygonArray);
       } catch (err) {
         console.log(err);

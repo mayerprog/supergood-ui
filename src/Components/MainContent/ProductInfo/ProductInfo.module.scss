@@ -6,9 +6,14 @@
   align-self: flex-start;
   overflow-y: auto;
   max-height: calc(100vh - 250px);
-  min-height: 348px;
+  min-height: 330px;
   padding: 0 10px;
   margin-bottom: 1rem;
+
+  &[data-is-sheet="true"] {
+    min-height: 200px;
+    margin-bottom: 0;
+  }
 
   h2 {
     font-weight: normal;
@@ -48,7 +53,9 @@
   flex-direction: row;
 
   &[data-is-sheet="true"] {
-    padding-bottom: 2.5em;
+    // padding-bottom: 2.5em;
+    padding-top: 2.5em;
+
     .counter {
       @media (min-width: 500px) {
         width: 8rem;
