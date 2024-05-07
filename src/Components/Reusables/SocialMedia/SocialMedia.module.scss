@@ -2,10 +2,15 @@
   display: flex;
   margin-right: 20px;
   flex-direction: row;
+  align-items: center;
   img {
     width: 37px;
     height: 37px;
     margin-right: 10px;
+    @media (max-width: 1280px) {
+      width: 30px;
+      height: 30px;
+    }
   }
   .lastimg {
     margin-right: 5px;

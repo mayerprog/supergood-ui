@@ -94,19 +94,17 @@
 
   .cartButton {
     @include header-button(rgb(235, 187, 93));
+    display: flex;
     background-color: #e9bc5b;
-    justify-content: space-between;
-    max-width: 200px;
-    text-overflow: ellipsis;
+    width: 130px;
     transition: 0.4s ease;
     font-weight: 400;
-    margin-right: 40px;
-
+    margin-right: 30px;
+    font-size: 13px;
     cursor: default;
 
-    @media (max-width: 1481px) {
-      max-width: 110px;
-      width: auto;
+    .icon {
+      @include icon-style;
     }
 
     @media (max-width: 1280px) {
@@ -115,16 +113,6 @@
         text-shadow: 0px 1px 2px #ccc;
         cursor: pointer;
       }
-    }
-    @media (max-width: 1099px) {
-      max-width: 70px;
-    }
-    @media (max-width: 822px) {
-      margin-right: 20px;
-    }
-
-    .icon {
-      @include icon-style;
     }
   }
 

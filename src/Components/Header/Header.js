@@ -90,7 +90,7 @@ const Header = forwardRef(
                   onClick={() => toggleCartVisibility(true)}
                 >
                   <GiShoppingCart size={25} className={styles.icon} />
-                  <span className={styles.buttonText}>{itemsSum} ₽</span>
+                  <span>{itemsSum} ₽</span>
                 </button>
               )}
               {!isAuth ? (
