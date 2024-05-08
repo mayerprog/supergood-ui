@@ -179,24 +179,16 @@ function App() {
     }
   }, [netbooksMediaQuery]);
 
-  // checking if client is authorised
-  useEffect(() => {
-    if (dataLogin.token) {
-      Cookies.set("token", dataLogin.token, { expires: 7, secure: true });
-    }
-  }, [dataLogin]);
-
   // setting cookies for storing token
   useEffect(() => {
     const token = Cookies.get("token");
-    console.log("token", token);
     if (token) {
       userAPI.getUserPref(token);
       dispatch(setIsAuth(true));
     } else {
       dispatch(setIsAuth(false));
     }
-  }, [token]);
+  }, [dispatch]);
 
   return (
     <div className={styles.app}>

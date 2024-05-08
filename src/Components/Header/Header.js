@@ -35,9 +35,7 @@ const Header = forwardRef(
   ) => {
     const isAuth = useSelector((state) => state.auth.isAuth);
     const itemsSum = useSelector((state) => state.cart.itemsSum);
-    const addressSelected = useSelector(
-      (state) => state.user.addressSelected
-    );
+    const addressSelected = useSelector((state) => state.user.addressSelected);
 
     const navigate = useNavigate();
     const location = useLocation(); // Getting the current location
@@ -48,6 +46,10 @@ const Header = forwardRef(
 
     const toggleMenu = () => {
       setIsMainSheetOpen(true);
+    };
+    const openLoginModal = () => {
+      console.log("opened");
+      toggleLoginVisibility();
     };
 
     return (
@@ -94,10 +96,7 @@ const Header = forwardRef(
                 </button>
               )}
               {!isAuth ? (
-                <button
-                  className={styles.loginButton}
-                  onClick={toggleLoginVisibility}
-                >
+                <button className={styles.loginButton} onClick={openLoginModal}>
                   Войти
                 </button>
               ) : (

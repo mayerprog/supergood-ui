@@ -16,6 +16,10 @@ import NavBar from "../../Components/NavBar/NavBar";
 import CartSheet from "../../Components/Cart/CartSheet/CartSheet";
 import MapComponent from "../../Components/MapComponent/MapComponent";
 import { fetchImage } from "../../services/fetchImage";
+import LoginModal from "../../Components/Login/LoginModal";
+import UserModal from "../../Components/UserInfo/UserModal/UserModal";
+import AddressModal from "../../Components/Address/AddressModal/AddressModal";
+import BonusModal from "../../Components/Promo/BonusModal/BonusModal";
 
 const MainPage = ({
   searchQuery,
@@ -259,6 +263,41 @@ const MainPage = ({
             navigate={navigate}
             cartWrapperRef={cartWrapperRef}
           />
+        )}
+
+        {isLoginOpen && (
+          <div className={styles.cardOverlay}>
+            <LoginModal
+              loginWrapperRef={loginWrapperRef}
+              toggleLoginVisibility={toggleLoginVisibility}
+            />
+          </div>
+        )}
+        {isUserInfoOpen && (
+          <div className={styles.cardOverlay}>
+            <UserModal
+              userInfoRef={userInfoRef}
+              toggleUserInfoVisibility={toggleUserInfoVisibility}
+            />
+          </div>
+        )}
+        {isModalAddressOpen && (
+          <div className={styles.cardOverlay}>
+            <AddressModal
+              addressRef={addressRef}
+              isModal={true}
+              toggleAddressVisibility={toggleAddressVisibility}
+            />
+          </div>
+        )}
+        {isBonusOpen && (
+          <div className={styles.cardOverlay}>
+            <BonusModal
+              bonusWrapperRef={bonusWrapperRef}
+              isModal={true}
+              toggleBonusVisibility={toggleBonusVisibility}
+            />
+          </div>
         )}
 
         {netbooksMediaQuery && !imageUrl && (

@@ -5,7 +5,7 @@ import styles from "./MainSheet.module.scss";
 import { useEffect } from "react";
 import SocialMedia from "../Reusables/SocialMedia/SocialMedia";
 import MobileApps from "../Reusables/MobileApps/MobileApps";
-import { removeDataLogin } from "../../redux/slices/authSlice";
+import { removeDataLogin, setIsAuth } from "../../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import Cookies from "js-cookie";
@@ -87,6 +87,7 @@ const MainSheet = ({
         break;
       case "Выйти":
         Cookies.remove("token");
+        dispatch(setIsAuth(false));
         handleClosing();
         break;
       case "Войти":

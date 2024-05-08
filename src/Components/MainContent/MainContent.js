@@ -28,22 +28,13 @@ const MainContent = ({
   headerHeight,
   setScrolledCategory,
   setSelectedCategory,
-  userInfoRef,
-  isUserInfoOpen,
-  toggleUserInfoVisibility,
-  toggleAddressVisibility,
-  addressRef,
-  isModalAddressOpen,
+
   toggleCartVisibility,
-  isLoginOpen,
-  loginWrapperRef,
-  toggleLoginVisibility,
+
   loading,
   toggleMapVisibility,
   setSearchQuery,
-  bonusWrapperRef,
-  isBonusOpen,
-  toggleBonusVisibility,
+
   cartWrapperRef,
 }) => {
   const categoryRefs = useRef({});
@@ -175,41 +166,6 @@ const MainContent = ({
             cardRef={cardRef}
             toggleMapVisibility={toggleMapVisibility}
             toggleModalCardVisibility={toggleModalCardVisibility}
-          />
-        </div>
-      )}
-
-      {isLoginOpen && (
-        <div className={styles.cardOverlay}>
-          <LoginModal
-            loginWrapperRef={loginWrapperRef}
-            toggleLoginVisibility={toggleLoginVisibility}
-          />
-        </div>
-      )}
-      {isUserInfoOpen && (
-        <div className={styles.cardOverlay}>
-          <UserModal
-            userInfoRef={userInfoRef}
-            toggleUserInfoVisibility={toggleUserInfoVisibility}
-          />
-        </div>
-      )}
-      {isModalAddressOpen && (
-        <div className={styles.cardOverlay}>
-          <AddressModal
-            addressRef={addressRef}
-            isModal={true}
-            toggleAddressVisibility={toggleAddressVisibility}
-          />
-        </div>
-      )}
-      {isBonusOpen && (
-        <div className={styles.cardOverlay}>
-          <BonusModal
-            bonusWrapperRef={bonusWrapperRef}
-            isModal={true}
-            toggleBonusVisibility={toggleBonusVisibility}
           />
         </div>
       )}

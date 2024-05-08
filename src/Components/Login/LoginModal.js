@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { authAPI } from "../../api/authAPI";
 import { IoMdClose } from "react-icons/io";
+import Cookies from "js-cookie";
 
 const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const [phone, setPhone] = useState("");
@@ -41,6 +42,8 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
           );
           if (response.status === "ok") {
             dispatch(setDataLogin(response));
+            // setting the token after logging in
+            Cookies.set("token", dataSms.token, { expires: 7, secure: true });
             handleLogin();
           }
         }
