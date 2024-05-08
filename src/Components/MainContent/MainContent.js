@@ -28,13 +28,10 @@ const MainContent = ({
   headerHeight,
   setScrolledCategory,
   setSelectedCategory,
-
   toggleCartVisibility,
-
   loading,
   toggleMapVisibility,
   setSearchQuery,
-
   cartWrapperRef,
 }) => {
   const categoryRefs = useRef({});

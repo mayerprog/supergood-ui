@@ -179,7 +179,7 @@ function App() {
     }
   }, [netbooksMediaQuery]);
 
-  // setting cookies for storing token
+  // getting the token from cookies for authorization
   useEffect(() => {
     const token = Cookies.get("token");
     if (token) {

@@ -125,6 +125,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
             placeholder="ХХХХ"
             onChange={handleEnterCode}
             maxLength="4"
+            autoFocus={true}
           />
           <button className={styles.buttonStyle} onClick={handleSendPhone}>
             <span className={styles.buttonText}>Выслать код повторно</span>

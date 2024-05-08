@@ -199,7 +199,6 @@ const MainPage = ({
               navigate={navigate}
               toggleUserInfoVisibility={toggleUserInfoVisibility}
               toggleAddressVisibility={toggleAddressVisibility}
-              toggleBonusVisibility={toggleBonusVisibility}
               toggleLoginVisibility={toggleLoginVisibility}
             />
           )}
@@ -232,22 +231,10 @@ const MainPage = ({
             headerHeight={headerHeight}
             setScrolledCategory={setScrolledCategory}
             setSelectedCategory={setSelectedCategory}
-            userInfoRef={userInfoRef}
-            isUserInfoOpen={isUserInfoOpen}
-            toggleUserInfoVisibility={toggleUserInfoVisibility}
-            toggleAddressVisibility={toggleAddressVisibility}
-            addressRef={addressRef}
-            isModalAddressOpen={isModalAddressOpen}
             toggleCartVisibility={toggleCartVisibility}
             loading={loading}
-            isLoginOpen={isLoginOpen}
-            loginWrapperRef={loginWrapperRef}
-            toggleLoginVisibility={toggleLoginVisibility}
             toggleMapVisibility={toggleMapVisibility}
             setSearchQuery={setSearchQuery}
-            bonusWrapperRef={bonusWrapperRef}
-            isBonusOpen={isBonusOpen}
-            toggleBonusVisibility={toggleBonusVisibility}
             cartWrapperRef={cartWrapperRef}
           />
         )}
