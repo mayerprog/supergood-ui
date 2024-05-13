@@ -29,6 +29,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const [isAddressValid, setIsAddressValid] = useState(false);
+  const [addressData, setAddressData] = useState(null);
 
   const { markerAddress, markerPosition, setMarkerAddress, setMarkerPosition } =
     useContext(LevelContext);
@@ -80,23 +81,27 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   }, []);
 
   const fetchAddress = async (lat, lng) => {
-    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
-    const axiosConfig = {
-      timeout: 10000,
-    };
+    // const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+    // const axiosConfig = {
+    //   timeout: 10000,
+    // };
 
     try {
-      const response = await axios.get(url, axiosConfig);
-      if (response.data) {
-        const data = response.data;
-        setInputAddress(data.display_name);
-        setMarkerAddress(data.display_name);
+      // const response = await axios.get(url, axiosConfig);
+      const response = await addressAPI.getAddress(lat, lng);
+
+      if (response) {
+        const data = Object.values(response.streets)[0];
+        console.log("data", data);
+
+        setInputAddress(`${data.street}, ${data.yhouse}`);
+        setMarkerAddress(`${data.street}, ${data.yhouse}`);
+        setAddressData(data);
         setIsAddressValid(true);
       }
-      //   const address = await addressAPI.postAddress(lat, lng);
-      //   console.log(address, "address");
     } catch (error) {
       console.error("Failed to fetch address:", error);
+      alert("Не удалось определить точный адрес");
     }
   };
 
@@ -117,14 +122,14 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
       return; // Stop the function if the address is not validated
     }
     const addressExists = addressList.some(
-      (item) => item.address === inputAddress
+      (item) => `${item.street}, ${item.yhouse}` === inputAddress
     );
     if (addressExists) {
       //if exists just make it selected
       makeExistingAddressSelected(addressList, inputAddress, dispatch);
     } else {
       // if does not exist then add to the addressList
-      dispatch(addAddress({ address: inputAddress, selected: true }));
+      dispatch(addAddress({ data: addressData, selected: true }));
     }
     setIsMapOpen(false);
   };

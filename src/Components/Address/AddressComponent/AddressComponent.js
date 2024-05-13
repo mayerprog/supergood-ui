@@ -58,7 +58,7 @@ const AddressComponent = ({
                     onChange={() => handleChangeSelected(index)}
                     value={index}
                   />
-                  <label>{item.address}</label>
+                  <label>{`${item.street}, ${item.yhouse}`}</label>
                 </div>
 
                 <div
@@ -73,7 +73,7 @@ const AddressComponent = ({
           )}
           {isChangeAddressOpen && addressIndexForChange === index && (
             <AddAddressContainer
-              streetName={item.address}
+              streetName={`${item.street}, ${item.yhouse}`}
               closeChangeField={handleCloseChanging}
               item={item}
               setAddressIndexForChange={setAddressIndexForChange}

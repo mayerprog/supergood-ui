@@ -25,6 +25,7 @@ import LoyaltyPage from "./Pages/LoyaltyPage/LoyaltyPage";
 import { setIsAuth } from "./redux/slices/authSlice";
 import { userAPI } from "./api/userAPI";
 import Cookies from "js-cookie";
+import { addressAPI } from "./api/addressAPI";
 
 function App() {
   // modals
@@ -145,7 +146,11 @@ function App() {
       dispatch(updateSelected(0));
     // to set selected address
     if (selectedAddressList.length > 0)
-      dispatch(setAddressSelected(selectedAddressList[0].address));
+      dispatch(
+        setAddressSelected(
+          `${selectedAddressList[0].street}, ${selectedAddressList[0].yhouse}`
+        )
+      );
     // add address which saved in redux persist (addressSelected) to addressList
     if (addressSelected && addressList.length === 0 && !hasRunOnce.current) {
       hasRunOnce.current = true;
@@ -189,6 +194,17 @@ function App() {
       dispatch(setIsAuth(false));
     }
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const response = await addressAPI.getAddressList("строг");
+  //       console.log("response", response);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   })();
+  // }, []);
 
   return (
     <div className={styles.app}>
