@@ -63,6 +63,24 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   useEffect(() => {
     (async () => {
       try {
+        const selectedStreet = addressSelected.split(",")[0];
+        if (selectedStreet) {
+          const response = await addressAPI.getAddressList(selectedStreet);
+          if (response) {
+            const data = Object.values(response.streets)[0];
+            console.log("data", data.streetid);
+            setStreetid(data.streetid);
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
         const data = await addressAPI.getPoly();
 
         const polygonArray = [];

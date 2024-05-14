@@ -41,17 +41,29 @@ const HouseDropDown = ({
 
   return (
     <ul className={styles.listContainer} data-is-modal={isModal ? true : false}>
-      {suggestions.map((suggestion, index) => (
+      {suggestions.length === 0 ? (
         <li
-          key={index}
           onClick={() => {
-            handleAddressClick(suggestion);
+            setSuggestions([]);
+            setShowHouseDropdown(false);
           }}
           className={styles.list}
         >
-          {suggestion.yhouse}
+          К сожалению, мы не доставляем по этому адресу
         </li>
-      ))}
+      ) : (
+        suggestions.map((suggestion, index) => (
+          <li
+            key={index}
+            onClick={() => {
+              handleAddressClick(suggestion);
+            }}
+            className={styles.list}
+          >
+            {suggestion.yhouse}
+          </li>
+        ))
+      )}
     </ul>
   );
 };

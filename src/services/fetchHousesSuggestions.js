@@ -13,9 +13,6 @@ export const fetchHousesSuggestions = async (
     return;
   }
 
-  // const house = input.split(",")[1].trim();
-  // const streetid = suggestions[0].streetid;
-
   try {
     const response = await addressAPI.getHouse(streetid, input);
     if (response) {
