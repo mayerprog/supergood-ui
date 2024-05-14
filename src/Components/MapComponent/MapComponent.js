@@ -16,20 +16,31 @@ import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { addAddress, setMapPosition } from "../../redux/slices/userSlice";
-import AddressDropDown from "../Address/AddressDropDown/AddressDropDown";
-import { fetchSuggestions } from "../../services/fetchSuggestions";
+import AddressDropDown from "../Address/HouseDropDown/HouseDropDown";
+import { fetchSuggestionsStreet } from "../../services/fetchSuggestionsStreet";
 import { fetchCoordinatesForAddress } from "../../services/fetchCoordinatesForAddress";
 import { makeExistingAddressSelected } from "../../services/makeExistingAddressSelected";
 import { useMediaQuery } from "react-responsive";
 import LevelContext from "../../contexts/LevelContext";
+import { fetchHousesSuggestions } from "../../services/fetchHousesSuggestions";
+import HouseDropDown from "../Address/HouseDropDown/HouseDropDown";
+import StreetDropDown from "../Address/StreetDropDown copy/StreetDropDown";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygon, setmMultiPolygon] = useState([]);
-  const [inputAddress, setInputAddress] = useState("");
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [suggestions, setSuggestions] = useState([]);
   const [isAddressValid, setIsAddressValid] = useState(false);
   const [addressData, setAddressData] = useState(null);
+  const [streetid, setStreetid] = useState(null);
+
+  const [inputAddress, setInputAddress] = useState("");
+  const [inputStreet, setInputStreet] = useState("");
+  const [inputHouse, setInputHouse] = useState("");
+
+  const [showStreetDropdown, setShowStreetDropdown] = useState(false);
+  const [showHouseDropdown, setShowHouseDropdown] = useState(false);
+
+  const [streetSuggestions, setStreetSuggestions] = useState([]);
+  const [houseSuggestions, setHouseSuggestions] = useState([]);
 
   const { markerAddress, markerPosition, setMarkerAddress, setMarkerPosition } =
     useContext(LevelContext);
@@ -45,6 +56,8 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
 
   useEffect(() => {
     setInputAddress(addressSelected);
+    setInputStreet(addressSelected.split(",")[0]);
+    setInputHouse(addressSelected.split(",")[1].trim());
   }, [addressSelected]);
 
   useEffect(() => {
@@ -81,19 +94,13 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   }, []);
 
   const fetchAddress = async (lat, lng) => {
-    // const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
-    // const axiosConfig = {
-    //   timeout: 10000,
-    // };
-
     try {
-      // const response = await axios.get(url, axiosConfig);
       const response = await addressAPI.getAddress(lat, lng);
 
       if (response) {
         const data = Object.values(response.streets)[0];
-        console.log("data", data);
-
+        setInputStreet(data.street);
+        setInputHouse(data.yhouse);
         setInputAddress(`${data.street}, ${data.yhouse}`);
         setMarkerAddress(`${data.street}, ${data.yhouse}`);
         setAddressData(data);
@@ -128,7 +135,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
       //if exists just make it selected
       makeExistingAddressSelected(addressList, inputAddress, dispatch);
     } else {
-      // if does not exist then add to the addressList
+      // if does not exist then just add to the addressList
       dispatch(addAddress({ data: addressData, selected: true }));
     }
     setIsMapOpen(false);
@@ -150,26 +157,63 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
       <div className={styles.addressContainer}>
         <input
           className={styles.input}
-          placeholder="Укажите адрес доставки (улица, номер дома)"
-          value={inputAddress}
+          placeholder="Укажите улицу"
+          value={inputStreet}
           onChange={(e) => {
-            setInputAddress(e.target.value);
-            fetchSuggestions(e.target.value, setSuggestions, setShowDropdown);
+            setInputStreet(e.target.value);
+            fetchSuggestionsStreet(
+              e.target.value,
+              setStreetSuggestions,
+              setShowStreetDropdown
+            );
           }}
-          onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
-          onBlur={() => setTimeout(() => setShowDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
+          onFocus={() =>
+            streetSuggestions.length > 0 && setShowStreetDropdown(true)
+          }
+          onBlur={() => setTimeout(() => setShowStreetDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
         />
-        {showDropdown && (
-          <AddressDropDown
-            setShowDropdown={setShowDropdown}
-            setInputAddress={setInputAddress}
-            suggestions={suggestions}
-            setSuggestions={setSuggestions}
+        {showStreetDropdown && (
+          <StreetDropDown
+            setShowStreetDropdown={setShowStreetDropdown}
+            setShowHouseDropdown={setShowHouseDropdown}
+            setInputStreet={setInputStreet}
+            suggestions={streetSuggestions}
+            setHouseSuggestions={setHouseSuggestions}
+            isModal={true}
+            setStreetid={setStreetid}
+          />
+        )}
+        <input
+          className={styles.inputHouse}
+          placeholder="Дом"
+          value={inputHouse}
+          onChange={(e) => {
+            setInputHouse(e.target.value);
+            fetchHousesSuggestions(
+              e.target.value,
+              setHouseSuggestions,
+              setShowHouseDropdown,
+              streetid
+            );
+          }}
+          onFocus={() =>
+            houseSuggestions.length > 0 && setShowHouseDropdown(true)
+          }
+          onBlur={() => setTimeout(() => setShowHouseDropdown(false), 100)}
+        />
+        {showHouseDropdown && (
+          <HouseDropDown
+            setShowHouseDropdown={setShowHouseDropdown}
+            setInputHouse={setInputHouse}
+            suggestions={houseSuggestions}
+            setSuggestions={setHouseSuggestions}
             dispatch={dispatch}
             setMarkerAddress={setMarkerAddress}
             setMarkerPosition={setMarkerPosition}
             setIsAddressValid={setIsAddressValid}
             isModal={true}
+            setAddressData={setAddressData}
+            setInputAddress={setInputAddress}
           />
         )}
         <button className={styles.buttonStyle} onClick={handleAddress}>

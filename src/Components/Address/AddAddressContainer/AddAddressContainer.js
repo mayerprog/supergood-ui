@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { fetchSuggestions } from "../../../services/fetchSuggestions";
+import { fetchSuggestionsStreet } from "../../../services/fetchSuggestionsStreet";
 import styles from "./AddAddressContainer.module.scss";
-import AddressDropDown from "../AddressDropDown/AddressDropDown";
+import AddressDropDown from "../HouseDropDown/HouseDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addAddress,
@@ -34,7 +34,7 @@ const AddAddressContainer = ({
 
   const addressOnChange = (value) => {
     setInputAddress(value);
-    fetchSuggestions(value, setSuggestions, setShowDropdown);
+    fetchSuggestionsStreet(value, setSuggestions, setShowDropdown);
   };
 
   const handleUpdateAddress = () => {
@@ -68,7 +68,8 @@ const AddAddressContainer = ({
   };
 
   const handleRemoveAddress = () => {
-    dispatch(removeAddress(item.id));
+    dispatch(removeAddress(item.addressid));
+    console.log("item", item);
     dispatch(removeAddressSelected());
     setAddressIndexForChange(null);
   };

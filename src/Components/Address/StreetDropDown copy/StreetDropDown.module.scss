@@ -27,16 +27,16 @@
   }
   &[data-is-modal="true"] {
     margin-top: 30px;
-    width: 72%;
-    @media (max-width: 1024px) {
-      width: 60%;
-    }
-    @media (max-width: 520px) {
-      width: 50%;
-    }
-    @media (max-width: 320px) {
-      width: 46%;
-    }
+    width: 60%;
+    // @media (max-width: 1024px) {
+    //   width: 60%;
+    // }
+    // @media (max-width: 520px) {
+    //   width: 50%;
+    // }
+    // @media (max-width: 320px) {
+    //   width: 46%;
+    // }
   }
 }
 
