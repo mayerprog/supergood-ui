@@ -28,22 +28,25 @@ import StreetDropDown from "../Address/StreetDropDown/StreetDropDown";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygon, setmMultiPolygon] = useState([]);
-  const [isAddressValid, setIsAddressValid] = useState(false);
-  const [addressData, setAddressData] = useState(null);
-  const [streetid, setStreetid] = useState(null);
-
   const [inputAddress, setInputAddress] = useState("");
   const [inputStreet, setInputStreet] = useState("");
   const [inputHouse, setInputHouse] = useState("");
-
   const [showStreetDropdown, setShowStreetDropdown] = useState(false);
   const [showHouseDropdown, setShowHouseDropdown] = useState(false);
-
   const [streetSuggestions, setStreetSuggestions] = useState([]);
   const [houseSuggestions, setHouseSuggestions] = useState([]);
+  const [isAddressValid, setIsAddressValid] = useState(false);
 
-  const { markerAddress, markerPosition, setMarkerAddress, setMarkerPosition } =
-    useContext(LevelContext);
+  const {
+    markerAddress,
+    markerPosition,
+    setMarkerAddress,
+    setMarkerPosition,
+    streetid,
+    setStreetid,
+    addressData,
+    setAddressData,
+  } = useContext(LevelContext);
 
   const dispatch = useDispatch();
 
@@ -61,7 +64,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
     setInputHouse(addressSelected.split(",")[1].trim());
   }, [addressSelected]);
 
-  //this useEffect must define streetid for changinf house number input if needed
+  //this useEffect must define streetid for changing house number input if needed
   useEffect(() => {
     (async () => {
       try {
@@ -199,7 +202,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
               setInputStreet={setInputStreet}
               suggestions={streetSuggestions}
               setHouseSuggestions={setHouseSuggestions}
-              isModal={true}
+              isModal={false}
               setStreetid={setStreetid}
             />
           )}
@@ -233,7 +236,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
               setMarkerAddress={setMarkerAddress}
               setMarkerPosition={setMarkerPosition}
               setIsAddressValid={setIsAddressValid}
-              isModal={true}
+              isModal={false}
               setAddressData={setAddressData}
               setInputAddress={setInputAddress}
             />

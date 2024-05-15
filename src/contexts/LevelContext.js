@@ -6,6 +6,8 @@ const LevelContext = createContext();
 export const LevelContextProvider = ({ children }) => {
   const [markerAddress, setMarkerAddress] = useState(""); //temporary address while choosing
   const [markerPosition, setMarkerPosition] = useState([0, 0]);
+  const [streetid, setStreetid] = useState(null);
+  const [addressData, setAddressData] = useState(null);
 
   return (
     <LevelContext.Provider
@@ -14,6 +16,10 @@ export const LevelContextProvider = ({ children }) => {
         setMarkerAddress,
         markerPosition,
         setMarkerPosition,
+        streetid,
+        setStreetid,
+        addressData,
+        setAddressData,
       }}
     >
       {children}

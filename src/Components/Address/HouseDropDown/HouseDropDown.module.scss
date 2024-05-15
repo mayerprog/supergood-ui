@@ -16,15 +16,18 @@
   width: 100%;
 
   .list {
-    padding: 10px 0;
+    padding: 10px;
     cursor: pointer;
+    @media (max-width: 300px) {
+      padding: 10px 0;
+    }
   }
 
   .list:hover {
     background-color: #eee;
     border-radius: 5px;
   }
-  &[data-is-modal="false"] {
+  &[data-is-modal="true"] {
     margin-top: 38px;
   }
 }

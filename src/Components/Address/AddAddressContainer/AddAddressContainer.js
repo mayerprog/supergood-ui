@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { fetchSuggestionsStreet } from "../../../services/fetchSuggestionsStreet";
 import styles from "./AddAddressContainer.module.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,8 @@ import { makeExistingAddressSelected } from "../../../services/makeExistingAddre
 import { ImBin } from "react-icons/im";
 import StreetDropDown from "../StreetDropDown/StreetDropDown";
 import HouseDropDown from "../HouseDropDown/HouseDropDown";
+import LevelContext from "../../../contexts/LevelContext";
+import { fetchHousesSuggestions } from "../../../services/fetchHousesSuggestions";
 
 const AddAddressContainer = ({
   item,
@@ -21,29 +23,40 @@ const AddAddressContainer = ({
   isModal,
 }) => {
   const [inputAddress, setInputAddress] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [inputStreet, setInputStreet] = useState("");
+  const [inputHouse, setInputHouse] = useState("");
+  const [showStreetDropdown, setShowStreetDropdown] = useState(false);
+  const [showHouseDropdown, setShowHouseDropdown] = useState(false);
+  const [streetSuggestions, setStreetSuggestions] = useState([]);
+  const [houseSuggestions, setHouseSuggestions] = useState([]);
   const [isAddressValid, setIsAddressValid] = useState(false);
 
+  const {
+    setMarkerAddress,
+    setMarkerPosition,
+    streetid,
+    setStreetid,
+    addressData,
+    setAddressData,
+  } = useContext(LevelContext);
   const addressList = useSelector((state) => state.user.addressList);
+  const addressSelected = useSelector((state) => state.user.addressSelected);
 
   const dispatch = useDispatch();
 
+  // to put street and house names from selected address in all input fields
   useEffect(() => {
-    setInputAddress(streetName);
-  }, [streetName]);
-
-  const addressOnChange = (value) => {
-    setInputAddress(value);
-    fetchSuggestionsStreet(value, setSuggestions, setShowDropdown);
-  };
+    setInputAddress(addressSelected);
+    setInputStreet(addressSelected.split(",")[0]);
+    setInputHouse(addressSelected.split(",")[1].trim());
+  }, [addressSelected]);
 
   const handleUpdateAddress = () => {
     if (!isAddressValid) {
       return; // Stop the function if the address is not validated
     }
     const addressExists = addressList.some(
-      (item) => item.address === inputAddress
+      (item) => `${item.street}, ${item.yhouse}` === inputAddress
     );
     //if we update existing address
     if (item) {
@@ -61,8 +74,8 @@ const AddAddressContainer = ({
       } else {
         // if no addresses added then first address should be selected automatically
         if (addressList.length === 0)
-          dispatch(addAddress({ address: inputAddress, selected: true }));
-        else dispatch(addAddress({ address: inputAddress, selected: false }));
+          dispatch(addAddress({ data: addressData, selected: true }));
+        else dispatch(addAddress({ data: addressData, selected: false }));
       }
     }
     closeChangeField();
@@ -70,43 +83,82 @@ const AddAddressContainer = ({
 
   const handleRemoveAddress = () => {
     dispatch(removeAddress(item.addressid));
-    console.log("item", item);
     dispatch(removeAddressSelected());
     setAddressIndexForChange(null);
   };
 
   return (
     <>
-      <div className={styles.inputContainer}>
-        <input
-          className={styles.input}
-          placeholder="Введите улицу"
-          value={inputAddress}
-          onChange={(e) => {
-            addressOnChange(e.target.value);
-          }}
-          onFocus={() => suggestions.length > 0 && setShowDropdown(true)}
-          onBlur={() => setTimeout(() => setShowDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
-        />
-        {showDropdown && (
-          <StreetDropDown
-            setShowDropdown={setShowDropdown}
-            setInputAddress={setInputAddress}
-            suggestions={suggestions}
-            setSuggestions={setSuggestions}
-            setIsAddressValid={setIsAddressValid}
-            isModal={false}
-          />
-        )}
-
+      <div className={styles.container}>
+        <div className={styles.addressContainer}>
+          <div className={styles.streetInputContainer}>
+            <input
+              className={styles.input}
+              placeholder="Введите улицу"
+              value={inputStreet}
+              onChange={(e) => {
+                setInputStreet(e.target.value);
+                fetchSuggestionsStreet(
+                  e.target.value,
+                  setStreetSuggestions,
+                  setShowStreetDropdown
+                );
+              }}
+              onFocus={() =>
+                streetSuggestions.length > 0 && setShowStreetDropdown(true)
+              }
+              onBlur={() => setTimeout(() => setShowStreetDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
+            />
+            {showStreetDropdown && (
+              <StreetDropDown
+                setShowStreetDropdown={setShowStreetDropdown}
+                setShowHouseDropdown={setShowHouseDropdown}
+                setInputStreet={setInputStreet}
+                suggestions={streetSuggestions}
+                setHouseSuggestions={setHouseSuggestions}
+                isModal={true}
+                setStreetid={setStreetid}
+              />
+            )}
+          </div>
+          <div className={styles.houseInputContainer}>
+            <input
+              className={styles.input}
+              placeholder="Дом"
+              name="house"
+              value={inputHouse}
+              onChange={(e) => {
+                setInputHouse(e.target.value);
+                fetchHousesSuggestions(
+                  e.target.value,
+                  setHouseSuggestions,
+                  setShowHouseDropdown,
+                  streetid
+                );
+              }}
+              onFocus={() =>
+                houseSuggestions.length > 0 && setShowHouseDropdown(true)
+              }
+              onBlur={() => setTimeout(() => setShowHouseDropdown(false), 100)}
+            />
+            {showHouseDropdown && (
+              <HouseDropDown
+                setShowHouseDropdown={setShowHouseDropdown}
+                setInputHouse={setInputHouse}
+                suggestions={houseSuggestions}
+                setSuggestions={setHouseSuggestions}
+                dispatch={dispatch}
+                setMarkerAddress={setMarkerAddress}
+                setMarkerPosition={setMarkerPosition}
+                setIsAddressValid={setIsAddressValid}
+                isModal={true}
+                setAddressData={setAddressData}
+                setInputAddress={setInputAddress}
+              />
+            )}
+          </div>
+        </div>
         <div className={styles.details}>
-          <input
-            className={styles.detailsInput}
-            placeholder="Дом"
-            type="number"
-            name="house"
-            // value={address}
-          />
           <input
             className={styles.detailsInput}
             placeholder="Кв./офис"

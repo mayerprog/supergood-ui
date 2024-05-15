@@ -22,7 +22,6 @@ const HouseDropDown = ({
       suggestion.streetid,
       suggestion.house
     );
-    console.log("suggestion", suggestion);
     setSuggestions(Object.values(response.streets));
     setInputHouse(suggestion.yhouse);
     setSuggestions([]);
