@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { fetchCoordinatesForAddress } from "../../../services/fetchCoordinatesForAddress";
 import styles from "./HouseDropDown.module.scss";
 import { addressAPI } from "../../../api/addressAPI";
 import { setMapPosition } from "../../../redux/slices/userSlice";

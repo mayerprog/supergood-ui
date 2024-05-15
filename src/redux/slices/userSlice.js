@@ -30,6 +30,8 @@ const initialState = {
       minor_area_id: "1176",
     },
   ],
+  userData: {},
+  salesid: null,
 };
 
 export const userSlice = createSlice({
@@ -38,9 +40,16 @@ export const userSlice = createSlice({
   reducers: {
     setAddressList: (state, action) => {
       state.addressList = action.payload;
+      console.log("addressList", state.addressList);
+    },
+    setUserData: (state, action) => {
+      state.userData = action.payload;
+    },
+    setSalesid: (state, action) => {
+      state.salesid = action.payload;
     },
     setMapPosition: (state, action) => {
-      state.mapPosition = action.payload;
+      state.userData = action.payload;
     },
     setAddressSelected: (state, action) => {
       state.addressSelected = action.payload;
@@ -99,6 +108,8 @@ export const userSlice = createSlice({
 export const {
   setAddressSelected,
   setAddressList,
+  setUserData,
+  setSalesid,
   addAddress,
   updateAddress,
   updateSelected,

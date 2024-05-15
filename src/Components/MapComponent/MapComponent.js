@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addAddress, setMapPosition } from "../../redux/slices/userSlice";
 import AddressDropDown from "../Address/HouseDropDown/HouseDropDown";
 import { fetchSuggestionsStreet } from "../../services/fetchSuggestionsStreet";
-import { fetchCoordinatesForAddress } from "../../services/fetchCoordinatesForAddress";
 import { makeExistingAddressSelected } from "../../services/makeExistingAddressSelected";
 import { useMediaQuery } from "react-responsive";
 import LevelContext from "../../contexts/LevelContext";

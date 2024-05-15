@@ -15,7 +15,10 @@ import { useOutsideHook } from "./hooks/useOutsideHook";
 import { useMediaQuery } from "react-responsive";
 import {
   addAddress,
+  setAddressList,
   setAddressSelected,
+  setSalesid,
+  setUserData,
   updateSelected,
 } from "./redux/slices/userSlice";
 import DeviceFooter from "./Components/Footer/DeviceFooter/DeviceFooter";
@@ -184,27 +187,36 @@ function App() {
     }
   }, [netbooksMediaQuery]);
 
-  // getting the token from cookies for authorization
+  // setting data from getUserPref with token form cookies
   useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) {
-      userAPI.getUserPref(token);
-      dispatch(setIsAuth(true));
-    } else {
-      dispatch(setIsAuth(false));
-    }
-  }, [dispatch]);
+    (async () => {
+      try {
+        const token = Cookies.get("token");
+        console.log("token", token);
+        if (token) {
+          const data = await userAPI.getUserPref(token);
+          dispatch(
+            setUserData({
+              name: data.name,
+              birthday: data.birthday,
+              birthdaybonus: data.birthdaybonus,
+              email: data.email,
+              gender: data.gender,
+              userid: data.userid,
+            })
+          );
+          dispatch(setSalesid(data.salesid));
+          dispatch(setAddressList(Object.values(data.address)));
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const response = await addressAPI.getAddressList("строг");
-  //       console.log("response", response);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   })();
-  // }, []);
+          dispatch(setIsAuth(true));
+        } else {
+          dispatch(setIsAuth(false));
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [dispatch]);
 
   return (
     <div className={styles.app}>

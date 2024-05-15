@@ -13,6 +13,66 @@ const instance = axios.create({
 });
 
 export const addressAPI = {
+  async saveAddress(params) {
+    const {
+      token,
+      street,
+      lat,
+      long,
+      addressId,
+      streetId,
+      houseId,
+      entrance,
+      floor,
+      flat,
+      description,
+      selected,
+    } = params;
+    try {
+      const response = await instance.post(`/saveaddress.php`, {
+        token,
+        street,
+        lat,
+        long,
+        addressId,
+        streetId,
+        houseId,
+        entrance,
+        floor,
+        flat,
+        description,
+        selected,
+      });
+      console.log("responseFromSaveAddress", response.data);
+      return response.data;
+    } catch (err) {
+      console.error(
+        "Error saving address:",
+        err.response ? err.response.data : err
+      );
+      console.log("Failed to save address. Check console for details.");
+    }
+  },
+
+  async deleteAddress(params) {
+    const { token, addressId, status } = params;
+    try {
+      const response = await instance.post(`/saveaddress.php`, {
+        token,
+        addressId,
+        status,
+      });
+      console.log("responseFromDeleteAddress", response.data);
+      return response.data;
+    } catch (err) {
+      console.error(
+        "Error saving address:",
+        err.response ? err.response.data : err
+      );
+      console.log("Failed to save address. Check console for details.");
+    }
+  },
+
   async getAddress(lat, long) {
     try {
       const response = await instance.post(`/getaddress.php`, {

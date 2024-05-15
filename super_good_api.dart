@@ -227,6 +227,7 @@ abstract class SuperGoodApi {
     @Field("id") int lineId, // id of item in the server
   );
 
+  //get orders history
   @FormUrlEncoded()
   @POST("getsales.php")
   Future<String> getOrders(

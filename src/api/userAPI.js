@@ -14,6 +14,7 @@ export const userAPI = {
       const response = await instance.post(`/getuserpref.php`, {
         token,
       });
+      console.log("getUserPref", response.data);
       return response.data;
     } catch (err) {
       console.error(
