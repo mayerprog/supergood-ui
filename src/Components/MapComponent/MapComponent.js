@@ -174,67 +174,71 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
       </div>
       <h3>Наша территория доставки</h3>
       <div className={styles.addressContainer}>
-        <input
-          className={styles.input}
-          placeholder="Укажите улицу"
-          value={inputStreet}
-          onChange={(e) => {
-            setInputStreet(e.target.value);
-            fetchSuggestionsStreet(
-              e.target.value,
-              setStreetSuggestions,
-              setShowStreetDropdown
-            );
-          }}
-          onFocus={() =>
-            streetSuggestions.length > 0 && setShowStreetDropdown(true)
-          }
-          onBlur={() => setTimeout(() => setShowStreetDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
-        />
-        {showStreetDropdown && (
-          <StreetDropDown
-            setShowStreetDropdown={setShowStreetDropdown}
-            setShowHouseDropdown={setShowHouseDropdown}
-            setInputStreet={setInputStreet}
-            suggestions={streetSuggestions}
-            setHouseSuggestions={setHouseSuggestions}
-            isModal={true}
-            setStreetid={setStreetid}
+        <div className={styles.inputContainer}>
+          <input
+            className={styles.input}
+            placeholder="Укажите улицу"
+            value={inputStreet}
+            onChange={(e) => {
+              setInputStreet(e.target.value);
+              fetchSuggestionsStreet(
+                e.target.value,
+                setStreetSuggestions,
+                setShowStreetDropdown
+              );
+            }}
+            onFocus={() =>
+              streetSuggestions.length > 0 && setShowStreetDropdown(true)
+            }
+            onBlur={() => setTimeout(() => setShowStreetDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
           />
-        )}
-        <input
-          className={styles.inputHouse}
-          placeholder="Дом"
-          value={inputHouse}
-          onChange={(e) => {
-            setInputHouse(e.target.value);
-            fetchHousesSuggestions(
-              e.target.value,
-              setHouseSuggestions,
-              setShowHouseDropdown,
-              streetid
-            );
-          }}
-          onFocus={() =>
-            houseSuggestions.length > 0 && setShowHouseDropdown(true)
-          }
-          onBlur={() => setTimeout(() => setShowHouseDropdown(false), 100)}
-        />
-        {showHouseDropdown && (
-          <HouseDropDown
-            setShowHouseDropdown={setShowHouseDropdown}
-            setInputHouse={setInputHouse}
-            suggestions={houseSuggestions}
-            setSuggestions={setHouseSuggestions}
-            dispatch={dispatch}
-            setMarkerAddress={setMarkerAddress}
-            setMarkerPosition={setMarkerPosition}
-            setIsAddressValid={setIsAddressValid}
-            isModal={true}
-            setAddressData={setAddressData}
-            setInputAddress={setInputAddress}
+          {showStreetDropdown && (
+            <StreetDropDown
+              setShowStreetDropdown={setShowStreetDropdown}
+              setShowHouseDropdown={setShowHouseDropdown}
+              setInputStreet={setInputStreet}
+              suggestions={streetSuggestions}
+              setHouseSuggestions={setHouseSuggestions}
+              isModal={true}
+              setStreetid={setStreetid}
+            />
+          )}
+        </div>
+        <div className={styles.houseInputContainer}>
+          <input
+            className={styles.inputHouse}
+            placeholder="Дом"
+            value={inputHouse}
+            onChange={(e) => {
+              setInputHouse(e.target.value);
+              fetchHousesSuggestions(
+                e.target.value,
+                setHouseSuggestions,
+                setShowHouseDropdown,
+                streetid
+              );
+            }}
+            onFocus={() =>
+              houseSuggestions.length > 0 && setShowHouseDropdown(true)
+            }
+            onBlur={() => setTimeout(() => setShowHouseDropdown(false), 100)}
           />
-        )}
+          {showHouseDropdown && (
+            <HouseDropDown
+              setShowHouseDropdown={setShowHouseDropdown}
+              setInputHouse={setInputHouse}
+              suggestions={houseSuggestions}
+              setSuggestions={setHouseSuggestions}
+              dispatch={dispatch}
+              setMarkerAddress={setMarkerAddress}
+              setMarkerPosition={setMarkerPosition}
+              setIsAddressValid={setIsAddressValid}
+              isModal={true}
+              setAddressData={setAddressData}
+              setInputAddress={setInputAddress}
+            />
+          )}
+        </div>
         <button className={styles.buttonStyle} onClick={handleAddress}>
           <span className={styles.buttonText}>Подтвердить</span>
         </button>

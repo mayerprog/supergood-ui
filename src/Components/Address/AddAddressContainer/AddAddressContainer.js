@@ -11,6 +11,7 @@ import {
 import { makeExistingAddressSelected } from "../../../services/makeExistingAddressSelected";
 import { ImBin } from "react-icons/im";
 import StreetDropDown from "../StreetDropDown/StreetDropDown";
+import HouseDropDown from "../HouseDropDown/HouseDropDown";
 
 const AddAddressContainer = ({
   item,
