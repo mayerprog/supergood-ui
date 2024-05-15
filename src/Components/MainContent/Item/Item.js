@@ -83,7 +83,7 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
       data-is-loaded={loaded ? "true" : "false"}
     >
       {!loaded && (
-        <IoFastFoodOutline className={styles.placeholderImage} color="#ccc" />
+        <IoFastFoodOutline className={styles.productImage} color="#ccc" />
       )}
       {isVisible && loaded && (
         <>
