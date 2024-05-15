@@ -14,10 +14,10 @@ import StreetDropDown from "../StreetDropDown/StreetDropDown";
 import HouseDropDown from "../HouseDropDown/HouseDropDown";
 import LevelContext from "../../../contexts/LevelContext";
 import { fetchHousesSuggestions } from "../../../services/fetchHousesSuggestions";
+import { addressAPI } from "../../../api/addressAPI";
 
 const AddAddressContainer = ({
   item,
-  streetName,
   closeChangeField,
   setAddressIndexForChange,
   isModal,
@@ -40,23 +40,45 @@ const AddAddressContainer = ({
     setAddressData,
   } = useContext(LevelContext);
   const addressList = useSelector((state) => state.user.addressList);
-  const addressSelected = useSelector((state) => state.user.addressSelected);
 
   const dispatch = useDispatch();
 
   // to put street and house names from selected address in all input fields
   useEffect(() => {
-    setInputAddress(addressSelected);
-    setInputStreet(addressSelected.split(",")[0]);
-    setInputHouse(addressSelected.split(",")[1].trim());
-  }, [addressSelected]);
+    if (item) {
+      setInputStreet(item.street);
+      setInputHouse(item.yhouse);
+    } else {
+      setInputStreet("");
+      setInputHouse("");
+    }
+  }, [item]);
+
+  //this useEffect must define streetid for changing house number input if needed
+  useEffect(() => {
+    (async () => {
+      try {
+        if (item) {
+          const response = await addressAPI.getAddressList(item.street);
+          if (response) {
+            const data = Object.values(response.streets)[0];
+            setStreetid(data.streetid);
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [item]);
 
   const handleUpdateAddress = () => {
     if (!isAddressValid) {
       return; // Stop the function if the address is not validated
     }
     const addressExists = addressList.some(
-      (item) => `${item.street}, ${item.yhouse}` === inputAddress
+      (address) =>
+        `${address.street}, ${address.yhouse}` ===
+        `${inputStreet}, ${inputHouse}`
     );
     //if we update existing address
     if (item) {

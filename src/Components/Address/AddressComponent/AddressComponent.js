@@ -73,7 +73,6 @@ const AddressComponent = ({
           )}
           {isChangeAddressOpen && addressIndexForChange === index && (
             <AddAddressContainer
-              streetName={`${item.street}, ${item.yhouse}`}
               closeChangeField={handleCloseChanging}
               item={item}
               setAddressIndexForChange={setAddressIndexForChange}
@@ -86,10 +85,7 @@ const AddressComponent = ({
         (isNewAddressOpen ? (
           <>
             <h3>Добавьте адрес</h3>
-            <AddAddressContainer
-              streetName=""
-              closeChangeField={handleCloseChanging}
-            />
+            <AddAddressContainer closeChangeField={handleCloseChanging} />
           </>
         ) : (
           <div className={styles.addAddress} onClick={handleAddAddress}>
