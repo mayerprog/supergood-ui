@@ -24,7 +24,7 @@ import { useMediaQuery } from "react-responsive";
 import LevelContext from "../../contexts/LevelContext";
 import { fetchHousesSuggestions } from "../../services/fetchHousesSuggestions";
 import HouseDropDown from "../Address/HouseDropDown/HouseDropDown";
-import StreetDropDown from "../Address/StreetDropDown copy/StreetDropDown";
+import StreetDropDown from "../Address/StreetDropDown/StreetDropDown";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygon, setmMultiPolygon] = useState([]);
@@ -54,12 +54,14 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const addressList = useSelector((state) => state.user.addressList);
   const mapPosition = useSelector((state) => state.user.mapPosition);
 
+  // to put street and house names from selected address in all input fields
   useEffect(() => {
     setInputAddress(addressSelected);
     setInputStreet(addressSelected.split(",")[0]);
     setInputHouse(addressSelected.split(",")[1].trim());
   }, [addressSelected]);
 
+  //this useEffect must define streetid for changinf house number input if needed
   useEffect(() => {
     (async () => {
       try {
@@ -68,7 +70,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
           const response = await addressAPI.getAddressList(selectedStreet);
           if (response) {
             const data = Object.values(response.streets)[0];
-            console.log("data", data.streetid);
             setStreetid(data.streetid);
           }
         }

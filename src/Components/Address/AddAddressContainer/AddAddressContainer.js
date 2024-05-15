@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchSuggestionsStreet } from "../../../services/fetchSuggestionsStreet";
 import styles from "./AddAddressContainer.module.scss";
-import AddressDropDown from "../HouseDropDown/HouseDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addAddress,
@@ -11,6 +10,7 @@ import {
 } from "../../../redux/slices/userSlice";
 import { makeExistingAddressSelected } from "../../../services/makeExistingAddressSelected";
 import { ImBin } from "react-icons/im";
+import StreetDropDown from "../StreetDropDown/StreetDropDown";
 
 const AddAddressContainer = ({
   item,
@@ -88,7 +88,7 @@ const AddAddressContainer = ({
           onBlur={() => setTimeout(() => setShowDropdown(false), 100)} // Hide dropdown when not focused; delay to allow click event to register
         />
         {showDropdown && (
-          <AddressDropDown
+          <StreetDropDown
             setShowDropdown={setShowDropdown}
             setInputAddress={setInputAddress}
             suggestions={suggestions}
