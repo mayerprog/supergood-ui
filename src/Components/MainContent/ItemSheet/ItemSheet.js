@@ -79,8 +79,8 @@ const ItemSheet = ({
       </div>
       <div>
         {!loaded ? (
-          <div className={styles.productImage}>
-            <IoFastFoodOutline size={500} color="#ccc" />
+          <div>
+            <IoFastFoodOutline className={styles.productImage} color="#ccc" />
           </div>
         ) : (
           <img
