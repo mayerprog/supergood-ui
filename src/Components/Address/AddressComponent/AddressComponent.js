@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./AddressComponent.module.scss";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { MdOutlineAdd } from "react-icons/md";
 import { updateSelected } from "../../../redux/slices/userSlice";
 import AddAddressContainer from "../AddAddressContainer/AddAddressContainer";
 import MapComponent from "../../MapComponent/MapComponent";
+import LevelContext from "../../../contexts/LevelContext";
+import { addressAPI } from "../../../api/addressAPI";
 
 const AddressComponent = ({
   mapWrapperRef,
@@ -17,9 +19,16 @@ const AddressComponent = ({
   const [isNewAddressOpen, setIsNewAddressOpen] = useState(false); //for adding new address
   const [addressIndexForChange, setAddressIndexForChange] = useState(null); //for identifying address for update
 
-  const dispatch = useDispatch();
+  const { addressData } = useContext(LevelContext);
 
   const addressList = useSelector((state) => state.user.addressList);
+  const token = useSelector((state) => state.user.token);
+  const floor = useSelector((state) => state.user.floor);
+  const flat = useSelector((state) => state.user.flat);
+  const entrance = useSelector((state) => state.user.entrance);
+  const description = useSelector((state) => state.user.description);
+
+  const dispatch = useDispatch();
 
   const handleChangeAddress = (id) => {
     setAddressIndexForChange(id);
@@ -40,8 +49,32 @@ const AddressComponent = ({
     setIsNewAddressOpen(false);
   };
 
-  const handleChangeSelected = (index) => {
-    dispatch(updateSelected(index));
+  const handleChangeSelected = async (elementIndex) => {
+    const foundAddress = addressList.find(
+      (item, index) => elementIndex === index
+    );
+
+    try {
+      const response = await addressAPI.saveAddress({
+        token: token,
+        street: foundAddress.street,
+        lat: foundAddress.lat,
+        long: foundAddress.long,
+        addressid: foundAddress.addressid,
+        streetid: foundAddress.streetid,
+        houseid: foundAddress.houseid,
+        entrance: foundAddress.entrance,
+        floor: foundAddress.floor,
+        flat: foundAddress.flat,
+        description: foundAddress.description,
+        selected: true,
+      });
+      if (response.status === "ok") {
+        dispatch(updateSelected(elementIndex));
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <>

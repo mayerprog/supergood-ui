@@ -10,7 +10,6 @@ import {
   setEntrance,
   setFlat,
   setFloor,
-  updateAddress,
 } from "../../../redux/slices/userSlice";
 import { makeExistingAddressSelected } from "../../../services/makeExistingAddressSelected";
 import { ImBin } from "react-icons/im";

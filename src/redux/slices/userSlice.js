@@ -69,12 +69,6 @@ export const userSlice = createSlice({
         },
       ];
     },
-    updateAddress: (state, action) => {
-      const { id, newAddress } = action.payload;
-      state.addressList = state.addressList.map((item) =>
-        item.id === id ? { ...item, address: newAddress } : item
-      );
-    },
     updateSelected: (state, action) => {
       const elementIndex = action.payload;
 
@@ -110,7 +104,6 @@ export const {
   setEntrance,
   setDescription,
   addAddress,
-  updateAddress,
   updateSelected,
   removeAddress,
   removeAddressSelected,

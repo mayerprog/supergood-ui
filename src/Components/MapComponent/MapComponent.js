@@ -162,7 +162,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
           description: description,
           selected: true,
         });
-        console.log("responseSaveAddress", response);
         if (response.status === "ok") {
           dispatch(addAddress({ data: addressData, selected: true }));
         }
