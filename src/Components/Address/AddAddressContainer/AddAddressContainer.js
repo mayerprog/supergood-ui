@@ -15,6 +15,7 @@ import HouseDropDown from "../HouseDropDown/HouseDropDown";
 import LevelContext from "../../../contexts/LevelContext";
 import { fetchHousesSuggestions } from "../../../services/fetchHousesSuggestions";
 import { addressAPI } from "../../../api/addressAPI";
+import { useUpdateStreetid } from "../../../hooks/useUpdateStreetid";
 
 const AddAddressContainer = ({
   item,
@@ -55,21 +56,7 @@ const AddAddressContainer = ({
   }, [item]);
 
   //this useEffect must define streetid for changing house number input if needed
-  useEffect(() => {
-    (async () => {
-      try {
-        if (item) {
-          const response = await addressAPI.getAddressList(item.street);
-          if (response) {
-            const data = Object.values(response.streets)[0];
-            setStreetid(data.streetid);
-          }
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, [item]);
+  useUpdateStreetid(item.street, setStreetid);
 
   const handleUpdateAddress = () => {
     if (!isAddressValid) {

@@ -12,11 +12,9 @@ import {
 } from "react-leaflet";
 import { Icon } from "leaflet";
 import pin from "../../assets/images/pin.png";
-import axios from "axios";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { addAddress, setMapPosition } from "../../redux/slices/userSlice";
-import AddressDropDown from "../Address/HouseDropDown/HouseDropDown";
 import { fetchSuggestionsStreet } from "../../services/fetchSuggestionsStreet";
 import { makeExistingAddressSelected } from "../../services/makeExistingAddressSelected";
 import { useMediaQuery } from "react-responsive";
@@ -24,6 +22,7 @@ import LevelContext from "../../contexts/LevelContext";
 import { fetchHousesSuggestions } from "../../services/fetchHousesSuggestions";
 import HouseDropDown from "../Address/HouseDropDown/HouseDropDown";
 import StreetDropDown from "../Address/StreetDropDown/StreetDropDown";
+import { useUpdateStreetid } from "../../hooks/useUpdateStreetid";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygon, setmMultiPolygon] = useState([]);
@@ -64,22 +63,9 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   }, [addressSelected]);
 
   //this useEffect must define streetid for changing house number input if needed
-  useEffect(() => {
-    (async () => {
-      try {
-        const selectedStreet = addressSelected.split(",")[0];
-        if (selectedStreet) {
-          const response = await addressAPI.getAddressList(selectedStreet);
-          if (response) {
-            const data = Object.values(response.streets)[0];
-            setStreetid(data.streetid);
-          }
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, []);
+  const selectedStreet = addressSelected.split(",")[0];
+
+  useUpdateStreetid(selectedStreet, setStreetid);
 
   useEffect(() => {
     (async () => {
