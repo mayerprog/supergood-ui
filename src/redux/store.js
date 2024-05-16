@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import itemReducer from "./slices/itemSlice";
 import cartReducer from "./slices/cartSlice";
-import userSlice from "./slices/userSlice";
+import userReducer from "./slices/userSlice";
 import authReducer from "./slices/authSlice";
 import orderReducer from "./slices/orderSlice";
 import { persistReducer } from "redux-persist";
@@ -12,16 +12,17 @@ const cartPersistConfig = {
   storage,
 };
 
-const userPersistConfig = {
-  key: "user",
-  storage: storage,
-  blacklist: ["addressList", "mapPosition", "userData", "salesid", "token"],
-};
+// const userPersistConfig = {
+//   key: "user",
+//   storage: storage,
+//   blacklist: ["addressList", "mapPosition", "userData", "salesid", "token"],
+// };
 
 const rootReducer = combineReducers({
   item: itemReducer,
   cart: persistReducer(cartPersistConfig, cartReducer),
-  user: persistReducer(userPersistConfig, userSlice),
+  // user: persistReducer(userPersistConfig, userSlice),
+  user: userReducer,
   auth: authReducer,
   order: orderReducer,
 });

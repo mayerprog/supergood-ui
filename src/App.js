@@ -66,9 +66,6 @@ function App() {
   const mainSheetWrapperRef = useRef(null);
   const cartSheetWrapperRef = useRef(null);
 
-  //strict mode flag
-  const hasRunOnce = useRef(false);
-
   // to show <Cart /> and to disable Cart button in Header when width > 1280px
   const monitorMediaQuery = useMediaQuery({ maxWidth: 1280 });
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
@@ -156,11 +153,6 @@ function App() {
         )
       );
     else dispatch(setAddressSelected("")); // ??? убрать
-    // add address which saved in redux persist (addressSelected) to addressList
-    // if (addressSelected.length > 0 && addressList.length === 0 && !hasRunOnce.current) { // ДОДЕЛАТЬ ЛОГИКУ
-    //   hasRunOnce.current = true;
-    //   dispatch(addAddress({ data: addressSelected, selected: true }));
-    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressList, addressSelected]);
 

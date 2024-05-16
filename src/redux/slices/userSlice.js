@@ -53,13 +53,6 @@ export const userSlice = createSlice({
     },
     addAddress: (state, action) => {
       const { data, selected } = action.payload;
-
-      //if new address selected=true, then make all old addresses selected false
-      if (selected) {
-        state.addressList.forEach((item) => {
-          item.selected = false;
-        });
-      }
       //to add new address to addressList
       state.addressList = [
         ...state.addressList,
@@ -79,11 +72,6 @@ export const userSlice = createSlice({
           selected: isSelected,
         };
       });
-      // to update addressSelected according to changed selected property
-      const selectedAddress = state.addressList.find((item) => item.selected);
-      state.addressSelected = selectedAddress
-        ? `${selectedAddress.street}, ${selectedAddress.yhouse}`
-        : "";
     },
     removeAddress: (state, action) => {
       state.addressList = state.addressList.filter(

@@ -139,35 +139,36 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
     if (!isAddressValid) {
       return; // Stop the function if the address is not validated
     }
-    const addressExists = addressList.some(
-      (item) => `${item.street}, ${item.yhouse}` === inputAddress
-    );
-    if (addressExists) {
-      //if exists just make it selected
-      makeExistingAddressSelected(addressList, inputAddress, dispatch);
-    } else {
-      // if does not exist then just add to the addressList
-      try {
-        const response = await addressAPI.saveAddress({
-          token: token,
-          street: addressData.street,
-          lat: addressData.lat,
-          long: addressData.long,
-          addressid: addressData.addressid,
-          streetid: addressData.streetid,
-          houseid: addressData.houseid,
-          entrance: entrance,
-          floor: floor,
-          flat: flat,
-          description: description,
-          selected: true,
-        });
-        if (response.status === "ok") {
+
+    try {
+      const response = await addressAPI.saveAddress({
+        token: token,
+        street: addressData.street,
+        lat: addressData.lat,
+        long: addressData.long,
+        addressid: addressData.addressid,
+        streetid: addressData.streetid,
+        houseid: addressData.houseid,
+        entrance: entrance,
+        floor: floor,
+        flat: flat,
+        description: description,
+        selected: true,
+      });
+      if (response.status === "ok") {
+        const addressExists = addressList.some(
+          (item) => `${item.street}, ${item.yhouse}` === inputAddress
+        );
+        if (addressExists) {
+          //if exists just make it selected
+          makeExistingAddressSelected(addressList, inputAddress, dispatch);
+        } else {
+          // if does not exist then just add to the addressList
           dispatch(addAddress({ data: addressData, selected: true }));
         }
-      } catch (err) {
-        console.log(err);
       }
+    } catch (err) {
+      console.log(err);
     }
     setIsMapOpen(false);
   };
