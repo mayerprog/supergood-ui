@@ -55,11 +55,11 @@ export const addressAPI = {
   },
 
   async deleteAddress(params) {
-    const { token, addressId, status } = params;
+    const { token, addressid, status } = params;
     try {
       const response = await instance.post(`/saveaddress.php`, {
         token,
-        addressId,
+        addressid,
         status,
       });
       console.log("responseFromDeleteAddress", response.data);

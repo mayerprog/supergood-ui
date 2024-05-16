@@ -32,6 +32,7 @@ const initialState = {
   ],
   userData: {},
   salesid: null,
+  token: null,
 };
 
 export const userSlice = createSlice({
@@ -47,6 +48,9 @@ export const userSlice = createSlice({
     },
     setSalesid: (state, action) => {
       state.salesid = action.payload;
+    },
+    setToken: (state, action) => {
+      state.token = action.payload;
     },
     setMapPosition: (state, action) => {
       state.userData = action.payload;
@@ -110,6 +114,7 @@ export const {
   setAddressList,
   setUserData,
   setSalesid,
+  setToken,
   addAddress,
   updateAddress,
   updateSelected,

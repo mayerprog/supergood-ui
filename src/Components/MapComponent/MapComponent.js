@@ -50,7 +50,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
 
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
-  // const polyLayers = useSelector((state) => state.user.polyLayers);
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const addressList = useSelector((state) => state.user.addressList);
   const mapPosition = useSelector((state) => state.user.mapPosition);

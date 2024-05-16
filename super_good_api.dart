@@ -152,7 +152,7 @@ abstract class SuperGoodApi {
     @Field("token") String token,
     @Field("hash") String hash,
     @Field("addressid") int? addressId,
-    @Field("status") int status,
+    @Field("status") int status, // always 2
   );
 
   @POST("getuserpref.php")

@@ -18,6 +18,7 @@ import {
   setAddressList,
   setAddressSelected,
   setSalesid,
+  setToken,
   setUserData,
   updateSelected,
 } from "./redux/slices/userSlice";
@@ -154,6 +155,7 @@ function App() {
           `${selectedAddressList[0].street}, ${selectedAddressList[0].yhouse}`
         )
       );
+    else dispatch(setAddressSelected(""));
     // add address which saved in redux persist (addressSelected) to addressList
     if (addressSelected && addressList.length === 0 && !hasRunOnce.current) {
       hasRunOnce.current = true;
@@ -166,6 +168,7 @@ function App() {
 
   // to fetch coordinates if there is addressSelected
   useEffect(() => {
+    console.log("addressSelected", addressSelected);
     if (addressSelected) {
       fetchCoordinatesForAddress(
         addressSelected,
@@ -207,8 +210,8 @@ function App() {
           );
           dispatch(setSalesid(data.salesid));
           dispatch(setAddressList(Object.values(data.address)));
-
           dispatch(setIsAuth(true));
+          dispatch(setToken(token));
         } else {
           dispatch(setIsAuth(false));
         }

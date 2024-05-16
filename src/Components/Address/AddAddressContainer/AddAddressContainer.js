@@ -41,6 +41,7 @@ const AddAddressContainer = ({
     setAddressData,
   } = useContext(LevelContext);
   const addressList = useSelector((state) => state.user.addressList);
+  const token = useSelector((state) => state.user.token);
 
   const dispatch = useDispatch();
 
@@ -90,10 +91,21 @@ const AddAddressContainer = ({
     closeChangeField();
   };
 
-  const handleRemoveAddress = () => {
-    dispatch(removeAddress(item.addressid));
-    dispatch(removeAddressSelected());
-    setAddressIndexForChange(null);
+  const handleRemoveAddress = async () => {
+    try {
+      const response = await addressAPI.deleteAddress({
+        token: token,
+        addressid: item.addressid,
+        status: 2,
+      });
+      if (response.status === "ok") {
+        dispatch(removeAddress(item.addressid));
+        dispatch(removeAddressSelected());
+        setAddressIndexForChange(null);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

@@ -54,7 +54,6 @@ useEffect(() => {
       const polygonArray = [];
       const polyMap = new Map();
 
-      // const polyValuesState = Object.values(polyLayers);
       const points = data.points;
       const polyValues = [];
 
