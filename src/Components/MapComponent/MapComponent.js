@@ -53,6 +53,11 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const addressList = useSelector((state) => state.user.addressList);
   const mapPosition = useSelector((state) => state.user.mapPosition);
+  const token = useSelector((state) => state.user.token);
+  const floor = useSelector((state) => state.user.floor);
+  const flat = useSelector((state) => state.user.flat);
+  const entrance = useSelector((state) => state.user.entrance);
+  const description = useSelector((state) => state.user.description);
 
   // to put street and house names from selected address in all input fields
   useEffect(() => {
@@ -130,7 +135,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
     return null; // the component is only for side effects, it doesn't render anything
   };
 
-  const handleAddress = () => {
+  const handleAddress = async () => {
     if (!isAddressValid) {
       return; // Stop the function if the address is not validated
     }
@@ -142,7 +147,28 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
       makeExistingAddressSelected(addressList, inputAddress, dispatch);
     } else {
       // if does not exist then just add to the addressList
-      dispatch(addAddress({ data: addressData, selected: true }));
+      try {
+        const response = await addressAPI.saveAddress({
+          token: token,
+          street: addressData.street,
+          lat: addressData.lat,
+          long: addressData.long,
+          addressid: addressData.addressid,
+          streetid: addressData.streetid,
+          houseid: addressData.houseid,
+          entrance: entrance,
+          floor: floor,
+          flat: flat,
+          description: description,
+          selected: true,
+        });
+        console.log("responseSaveAddress", response);
+        if (response.status === "ok") {
+          dispatch(addAddress({ data: addressData, selected: true }));
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
     setIsMapOpen(false);
   };

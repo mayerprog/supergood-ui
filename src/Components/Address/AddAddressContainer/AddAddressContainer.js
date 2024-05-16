@@ -6,6 +6,10 @@ import {
   addAddress,
   removeAddress,
   removeAddressSelected,
+  setDescription,
+  setEntrance,
+  setFlat,
+  setFloor,
   updateAddress,
 } from "../../../redux/slices/userSlice";
 import { makeExistingAddressSelected } from "../../../services/makeExistingAddressSelected";
@@ -42,6 +46,10 @@ const AddAddressContainer = ({
   } = useContext(LevelContext);
   const addressList = useSelector((state) => state.user.addressList);
   const token = useSelector((state) => state.user.token);
+  const floor = useSelector((state) => state.user.floor);
+  const flat = useSelector((state) => state.user.flat);
+  const entrance = useSelector((state) => state.user.entrance);
+  const description = useSelector((state) => state.user.description);
 
   const dispatch = useDispatch();
 
@@ -50,16 +58,24 @@ const AddAddressContainer = ({
     if (item) {
       setInputStreet(item.street);
       setInputHouse(item.yhouse);
+      dispatch(setFloor(item.floor));
+      dispatch(setFlat(item.flat));
+      dispatch(setEntrance(item.entrance));
+      dispatch(setDescription(item.description));
     } else {
       setInputStreet("");
       setInputHouse("");
+      dispatch(setFloor(""));
+      dispatch(setFlat(""));
+      dispatch(setEntrance(""));
+      dispatch(setDescription(""));
     }
   }, [item]);
 
   //this useEffect must define streetid for changing house number input if needed
-  useUpdateStreetid(item.street, setStreetid);
+  useUpdateStreetid(item?.street, setStreetid);
 
-  const handleUpdateAddress = () => {
+  const handleUpdateAddress = async () => {
     if (!isAddressValid) {
       return; // Stop the function if the address is not validated
     }
@@ -82,10 +98,30 @@ const AddAddressContainer = ({
         makeExistingAddressSelected(addressList, inputAddress, dispatch);
         // if address does not exist then add to the addressList
       } else {
-        // if no addresses added then first address should be selected automatically
-        if (addressList.length === 0)
-          dispatch(addAddress({ data: addressData, selected: true }));
-        else dispatch(addAddress({ data: addressData, selected: false }));
+        try {
+          const response = await addressAPI.saveAddress({
+            token: token,
+            street: addressData.street,
+            lat: addressData.lat,
+            long: addressData.long,
+            addressid: addressData.addressid,
+            streetid: addressData.streetid,
+            houseid: addressData.houseid,
+            entrance: entrance,
+            floor: floor,
+            flat: flat,
+            description: description,
+            selected: true,
+          });
+          if (response.status === "ok") {
+            // if no addresses added then first address should be selected automatically
+            if (addressList.length === 0)
+              dispatch(addAddress({ data: addressData, selected: true }));
+            else dispatch(addAddress({ data: addressData, selected: false }));
+          }
+        } catch (err) {
+          console.log(err);
+        }
       }
     }
     closeChangeField();
@@ -184,30 +220,41 @@ const AddAddressContainer = ({
             className={styles.detailsInput}
             placeholder="Кв./офис"
             name="flat"
-            // value={address}
-          />
-          <input
-            className={styles.detailsInput}
-            placeholder="Домофон"
-            name="doorphone"
-            // value={address}
+            value={flat}
+            onChange={(e) => {
+              dispatch(setFlat(e.target.value));
+            }}
           />
           <input
             className={styles.detailsInput}
             placeholder="Подъезд"
             type="number"
             name="entrance"
-            // value={address}
+            value={entrance}
+            onChange={(e) => {
+              dispatch(setEntrance(e.target.value));
+            }}
           />
           <input
             className={styles.detailsInput}
             placeholder="Этаж"
             type="number"
             name="floor"
-            // value={address}
+            value={floor}
+            onChange={(e) => {
+              dispatch(setFloor(e.target.value));
+            }}
           />
         </div>
-        <input className={styles.input} placeholder="Комментарий курьеру" />
+        <input
+          className={styles.input}
+          placeholder="Комментарий курьеру"
+          name="description"
+          value={description}
+          onChange={(e) => {
+            dispatch(setDescription(e.target.value));
+          }}
+        />
       </div>
       <div
         className={styles.buttonsContainer}

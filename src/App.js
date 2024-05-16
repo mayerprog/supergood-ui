@@ -155,12 +155,12 @@ function App() {
           `${selectedAddressList[0].street}, ${selectedAddressList[0].yhouse}`
         )
       );
-    else dispatch(setAddressSelected(""));
+    else dispatch(setAddressSelected("")); // ??? убрать
     // add address which saved in redux persist (addressSelected) to addressList
-    if (addressSelected && addressList.length === 0 && !hasRunOnce.current) {
-      hasRunOnce.current = true;
-      dispatch(addAddress({ address: addressSelected, selected: true }));
-    }
+    // if (addressSelected.length > 0 && addressList.length === 0 && !hasRunOnce.current) { // ДОДЕЛАТЬ ЛОГИКУ
+    //   hasRunOnce.current = true;
+    //   dispatch(addAddress({ data: addressSelected, selected: true }));
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressList, addressSelected]);
 

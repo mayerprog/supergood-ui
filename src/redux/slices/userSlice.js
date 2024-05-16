@@ -1,35 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
   addressSelected: "",
   mapPosition: [55.7558, 37.6173],
-  addressList: [
-    {
-      houseid: 5320618,
-      streetid: 12272,
-      name: "Строгинский бульвар",
-      street: "Строгинский бульвар",
-      yhouse: "5",
-      house: "5",
-      build: "",
-      struct: null,
-      lat: 55.805341,
-      long: 37.398994,
-      socrname: "",
-      inpoly: true,
-      dept_id: 1374,
-      deptid: 1374,
-      addressid: 210167,
-      flat: "",
-      floor: "",
-      entrance: "",
-      description: "",
-      rectype: 1,
-      selected: true,
-      minor_area_id: "1176",
-    },
-  ],
+  addressList: [],
+  floor: "",
+  flat: "",
+  entrance: "",
+  description: "",
   userData: {},
   salesid: null,
   token: null,
@@ -48,6 +26,18 @@ export const userSlice = createSlice({
     },
     setSalesid: (state, action) => {
       state.salesid = action.payload;
+    },
+    setFloor: (state, action) => {
+      state.floor = action.payload;
+    },
+    setFlat: (state, action) => {
+      state.flat = action.payload;
+    },
+    setEntrance: (state, action) => {
+      state.entrance = action.payload;
+    },
+    setDescription: (state, action) => {
+      state.description = action.payload;
     },
     setToken: (state, action) => {
       state.token = action.payload;
@@ -115,6 +105,10 @@ export const {
   setUserData,
   setSalesid,
   setToken,
+  setFloor,
+  setFlat,
+  setEntrance,
+  setDescription,
   addAddress,
   updateAddress,
   updateSelected,
