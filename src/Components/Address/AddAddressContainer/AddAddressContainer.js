@@ -84,14 +84,49 @@ const AddAddressContainer = ({
         `${address.street}, ${address.yhouse}` ===
         `${inputStreet}, ${inputHouse}`
     );
-    //if we update existing address
+    //IF WE UPDATE EXISTING ADDRESS
     if (item) {
       //if address exists then return
       if (addressExists) return;
       // if address does not exist then update
-      else dispatch(updateAddress({ id: item.id, newAddress: inputAddress }));
+      else {
+        const selectedAddress = addressList.find((address) => address.selected);
+        const isSelected = selectedAddress === item;
+        try {
+          const responseDelete = await addressAPI.deleteAddress({
+            token: token,
+            addressid: item.addressid,
+            status: 2,
+          });
+          if (responseDelete.status === "ok") {
+            dispatch(removeAddress(item.addressid));
+            dispatch(removeAddressSelected());
+            setAddressIndexForChange(null);
+          }
 
-      //if we add new address
+          const responseSave = await addressAPI.saveAddress({
+            token: token,
+            street: addressData.street,
+            lat: addressData.lat,
+            long: addressData.long,
+            addressid: addressData.addressid,
+            streetid: addressData.streetid,
+            houseid: addressData.houseid,
+            entrance: entrance,
+            floor: floor,
+            flat: flat,
+            description: description,
+            selected: isSelected,
+          });
+          if (responseSave.status === "ok") {
+            dispatch(addAddress({ data: addressData, selected: isSelected }));
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      //IF WE ADD NEW ADDRESS
     } else {
       //if address exists just make it selected
       if (addressExists) {
