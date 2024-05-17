@@ -23,6 +23,7 @@ import { fetchHousesSuggestions } from "../../services/fetchHousesSuggestions";
 import HouseDropDown from "../Address/HouseDropDown/HouseDropDown";
 import StreetDropDown from "../Address/StreetDropDown/StreetDropDown";
 import { useUpdateStreetid } from "../../hooks/useUpdateStreetid";
+import { useGetPoly } from "../../hooks/useGetPoly";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygonPoly, setmMultiPolygonPoly] = useState([]);
@@ -71,73 +72,8 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const selectedStreet = addressSelected.street;
 
   useUpdateStreetid(selectedStreet, setStreetid);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const dataPoly = await addressAPI.getPoly();
-
-        const polygonArray = [];
-        const polyMap = new Map();
-
-        const points = dataPoly.points;
-
-        const polyValues = Object.values(points);
-
-        for (let i = 0; i < polyValues.length; i++) {
-          if (polyMap.has(polyValues[i].dept_id)) {
-            polyMap
-              .get(polyValues[i].dept_id)
-              .push([polyValues[i].latitude, polyValues[i].longitude]);
-          } else {
-            polyMap.set(polyValues[i].dept_id, []);
-          }
-        }
-        // push arrays of points to polygonArray
-        for (let item of polyMap.values()) {
-          polygonArray.push(item);
-        }
-        console.log("polygonArrayAll", polygonArray);
-
-        console.log("polyMap", polyMap);
-        setmMultiPolygonPoly(polygonArray);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const dataPolyFew = await addressAPI.getPolyFew();
-
-        const polygonArray = [];
-        const polyMap = new Map();
-
-        const points = dataPolyFew.points;
-
-        const polyValues = Object.values(points);
-
-        for (let i = 0; i < polyValues.length; i++) {
-          if (polyMap.has(polyValues[i].dept_id)) {
-            polyMap
-              .get(polyValues[i].dept_id)
-              .push([polyValues[i].latitude, polyValues[i].longitude]);
-          } else {
-            polyMap.set(polyValues[i].dept_id, []);
-          }
-        }
-        // push arrays of points to polygonArray
-        for (let item of polyMap.values()) {
-          polygonArray.push(item);
-        }
-        setmMultiPolygonPolyFew(polygonArray);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, []);
+  useGetPoly(setmMultiPolygonPoly, 0);
+  useGetPoly(setmMultiPolygonPolyFew, 1);
 
   const fetchAddress = async (lat, lng) => {
     try {
