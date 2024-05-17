@@ -53,6 +53,13 @@ export const userSlice = createSlice({
     },
     addAddress: (state, action) => {
       const { data, selected } = action.payload;
+
+      //if new address selected=true, then make all old addresses selected false
+      if (selected) {
+        state.addressList.forEach((item) => {
+          item.selected = false;
+        });
+      }
       //to add new address to addressList
       state.addressList = [
         ...state.addressList,

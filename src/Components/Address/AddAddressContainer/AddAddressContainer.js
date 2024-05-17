@@ -10,6 +10,7 @@ import {
   setEntrance,
   setFlat,
   setFloor,
+  updateSelected,
 } from "../../../redux/slices/userSlice";
 import { makeExistingAddressSelected } from "../../../services/makeExistingAddressSelected";
 import { ImBin } from "react-icons/im";
@@ -115,10 +116,12 @@ const AddAddressContainer = ({
             floor: floor,
             flat: flat,
             description: description,
-            selected: isSelected,
+            selected: true,
+            // надо уточнить, будут ли изменения в бэке, если нет, то все новые адреса делать по умолчанию selected: true
+            // если изменения будут, то вместо true поставить isSelected
           });
           if (responseSave.status === "ok") {
-            dispatch(addAddress({ data: addressData, selected: isSelected }));
+            dispatch(addAddress({ data: addressData, selected: true }));
           }
         } catch (err) {
           console.log(err);
@@ -127,48 +130,66 @@ const AddAddressContainer = ({
 
       //IF WE ADD NEW ADDRESS
     } else {
-      //if address exists just make it selected
-      if (addressExists) {
-        makeExistingAddressSelected(addressList, inputAddress, dispatch);
-        // if address does not exist then add to the addressList
-      } else {
-        try {
-          const response = await addressAPI.saveAddress({
-            token: token,
-            street: addressData.street,
-            lat: addressData.lat,
-            long: addressData.long,
-            addressid: addressData.addressid,
-            streetid: addressData.streetid,
-            houseid: addressData.houseid,
-            entrance: entrance,
-            floor: floor,
-            flat: flat,
-            description: description,
-            selected: true,
-          });
-          if (response.status === "ok") {
+      try {
+        const response = await addressAPI.saveAddress({
+          token: token,
+          street: addressData.street,
+          lat: addressData.lat,
+          long: addressData.long,
+          addressid: addressData.addressid,
+          streetid: addressData.streetid,
+          houseid: addressData.houseid,
+          entrance: entrance,
+          floor: floor,
+          flat: flat,
+          description: description,
+          selected: true,
+        });
+        if (response.status === "ok") {
+          //if address exists just make it selected
+          if (addressExists) {
+            makeExistingAddressSelected(addressList, inputAddress, dispatch);
+            // if address does not exist then add to the addressList
+          } else {
             // if no addresses added then first address should be selected automatically
             if (addressList.length === 0)
               dispatch(addAddress({ data: addressData, selected: true }));
             else dispatch(addAddress({ data: addressData, selected: false }));
           }
-        } catch (err) {
-          console.log(err);
         }
+      } catch (err) {
+        console.log(err);
       }
     }
     closeChangeField();
   };
 
   const handleRemoveAddress = async () => {
+    const firstAddress = addressList[0];
     try {
-      const response = await addressAPI.deleteAddress({
+      const responseDelete = await addressAPI.deleteAddress({
         token: token,
         addressid: item.addressid,
         status: 2,
       });
-      if (response.status === "ok") {
+      const responseSave = await addressAPI.saveAddress({
+        token: token,
+        street: firstAddress.street,
+        lat: firstAddress.lat,
+        long: firstAddress.long,
+        addressid: firstAddress.addressid,
+        streetid: firstAddress.streetid,
+        houseid: firstAddress.houseid,
+        entrance: firstAddress.entrance,
+        floor: firstAddress.floor,
+        flat: firstAddress.flat,
+        description: firstAddress.description,
+        selected: true,
+      });
+      if (responseSave.status === "ok") {
+        dispatch(updateSelected(0));
+      }
+      if (responseDelete.status === "ok") {
         dispatch(removeAddress(item.addressid));
         dispatch(removeAddressSelected());
         setAddressIndexForChange(null);

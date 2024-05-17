@@ -139,20 +139,19 @@ function App() {
 
   // we find here address with selected: true to display it all over the app
   useEffect(() => {
-    const selectedAddressList = addressList.filter(
-      (address) => address.selected
-    );
-    // if no selected addresses then make first address selected
-    if (selectedAddressList.length === 0 && addressList.length > 0)
-      dispatch(updateSelected(0));
-    // to set selected address
-    if (selectedAddressList.length > 0)
-      dispatch(
-        setAddressSelected(
-          `${selectedAddressList[0].street}, ${selectedAddressList[0].yhouse}`
-        )
+    (async () => {
+      const selectedAddressList = addressList.filter(
+        (address) => address.selected
       );
-    else dispatch(setAddressSelected("")); // ??? убрать
+      // to set selected address
+      if (selectedAddressList.length > 0)
+        dispatch(
+          setAddressSelected(
+            `${selectedAddressList[0].street}, ${selectedAddressList[0].yhouse}`
+          )
+        );
+      else dispatch(setAddressSelected("")); // ??? убрать
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressList, addressSelected]);
 
