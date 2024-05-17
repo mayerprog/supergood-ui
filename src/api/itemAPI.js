@@ -13,9 +13,9 @@ const instance = axios.create({
 });
 
 export const itemAPI = {
-  async getItems(deptid) {
+  async getItems(deptId) {
     try {
-      const response = await instance.post(`/getitems.php`, { deptid: deptid });
+      const response = await instance.post(`/getitems.php`, { deptId });
       console.log("items", response.data);
       return response.data;
     } catch (err) {

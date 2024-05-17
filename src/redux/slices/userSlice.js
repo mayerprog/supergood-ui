@@ -11,7 +11,7 @@ const initialState = {
   userData: {},
   salesid: null,
   token: null,
-  minorAreaId: null,
+  minorAreaId: "",
 };
 
 export const userSlice = createSlice({

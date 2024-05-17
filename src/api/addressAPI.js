@@ -151,4 +151,16 @@ export const addressAPI = {
       console.log("Failed to get points. Check console for details.");
     }
   },
+  async getPolyFew() {
+    try {
+      const response = await instance.post(`/getpolyfew.php`);
+      return response.data;
+    } catch (err) {
+      console.error(
+        "Error getting points:",
+        err.response ? err.response.data : err
+      );
+      console.log("Failed to get points. Check console for details.");
+    }
+  },
 };

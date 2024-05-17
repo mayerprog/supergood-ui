@@ -25,7 +25,8 @@ import StreetDropDown from "../Address/StreetDropDown/StreetDropDown";
 import { useUpdateStreetid } from "../../hooks/useUpdateStreetid";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
-  const [multiPolygon, setmMultiPolygon] = useState([]);
+  const [multiPolygonPoly, setmMultiPolygonPoly] = useState([]);
+  const [multiPolygonPolyFew, setmMultiPolygonPolyFew] = useState([]);
   const [inputAddress, setInputAddress] = useState("");
   const [inputStreet, setInputStreet] = useState("");
   const [inputHouse, setInputHouse] = useState("");
@@ -74,12 +75,12 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   useEffect(() => {
     (async () => {
       try {
-        const data = await addressAPI.getPoly();
+        const dataPoly = await addressAPI.getPoly();
 
         const polygonArray = [];
         const polyMap = new Map();
 
-        const points = data.points;
+        const points = dataPoly.points;
 
         const polyValues = Object.values(points);
 
@@ -96,8 +97,42 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         for (let item of polyMap.values()) {
           polygonArray.push(item);
         }
-        // console.log("polyMap", polyMap);
-        setmMultiPolygon(polygonArray);
+        console.log("polygonArrayAll", polygonArray);
+
+        console.log("polyMap", polyMap);
+        setmMultiPolygonPoly(polygonArray);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const dataPolyFew = await addressAPI.getPolyFew();
+
+        const polygonArray = [];
+        const polyMap = new Map();
+
+        const points = dataPolyFew.points;
+
+        const polyValues = Object.values(points);
+
+        for (let i = 0; i < polyValues.length; i++) {
+          if (polyMap.has(polyValues[i].dept_id)) {
+            polyMap
+              .get(polyValues[i].dept_id)
+              .push([polyValues[i].latitude, polyValues[i].longitude]);
+          } else {
+            polyMap.set(polyValues[i].dept_id, []);
+          }
+        }
+        // push arrays of points to polygonArray
+        for (let item of polyMap.values()) {
+          polygonArray.push(item);
+        }
+        setmMultiPolygonPolyFew(polygonArray);
       } catch (err) {
         console.log(err);
       }
@@ -178,7 +213,8 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
     iconSize: [30, 30],
   });
 
-  const orangeptions = { color: "orange" };
+  const orangeOptions = { color: "orange" };
+  const blueOptions = { color: "#44a5bf" };
 
   return (
     <div className={styles.mapContainer} ref={mapWrapperRef}>
@@ -270,7 +306,8 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         </Marker>
         <MapEvents />
         <ZoomControl position="topleft" zoomInText="+" zoomOutText="-" />
-        <Polygon pathOptions={orangeptions} positions={multiPolygon} />
+        <Polygon pathOptions={orangeOptions} positions={multiPolygonPoly} />
+        <Polygon pathOptions={blueOptions} positions={multiPolygonPolyFew} />
       </MapContainer>
     </div>
   );

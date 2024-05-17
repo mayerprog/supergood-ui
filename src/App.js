@@ -130,9 +130,6 @@ function App() {
   const dispatch = useDispatch();
 
   const addressList = useSelector((state) => state.user.addressList);
-  const addressSelected = useSelector((state) => state.user.addressSelected);
-  const dataLogin = useSelector((state) => state.auth.dataLogin);
-  const token = useSelector((state) => state.auth.token);
 
   // we find here address with selected: true to display it all over the app
   useEffect(() => {
@@ -140,14 +137,11 @@ function App() {
       (address) => address.selected
     );
     if (selectedAddressList.length > 0) {
-      console.log("minor_area_id", selectedAddressList[0].minor_area_id);
+      // console.log("minor_area_id", selectedAddressList[0]);
       // to set selected address
-      if (selectedAddressList.length > 0) {
-        dispatch(setAddressSelected(selectedAddressList[0]));
-        // else dispatch(setAddressSelected({})); // ??? убрать
-        dispatch(setDeptid(selectedAddressList[0]?.minor_area_id));
-      }
-    }
+      dispatch(setAddressSelected(selectedAddressList[0]));
+      dispatch(setDeptid(selectedAddressList[0]?.minor_area_id));
+    } else dispatch(setAddressSelected(""));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressList]);
 
