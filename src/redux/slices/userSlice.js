@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  addressSelected: "",
+  addressSelected: {},
   mapPosition: [55.7558, 37.6173],
   addressList: [],
   floor: "",
@@ -19,7 +19,6 @@ export const userSlice = createSlice({
   reducers: {
     setAddressList: (state, action) => {
       state.addressList = action.payload;
-      console.log("addressList", state.addressList);
     },
     setUserData: (state, action) => {
       state.userData = action.payload;
@@ -49,7 +48,7 @@ export const userSlice = createSlice({
       state.addressSelected = action.payload;
     },
     removeAddressSelected: (state, action) => {
-      state.addressSelected = "";
+      state.addressSelected = {};
     },
     addAddress: (state, action) => {
       const { data, selected } = action.payload;

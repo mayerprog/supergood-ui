@@ -23,7 +23,7 @@ export const handleSetOrderInfo = (params) => {
 
   const orderInfoToDispatch = {
     orderId: uuidv4(),
-    address: addressSelected,
+    address: `${addressSelected.street}, ${addressSelected.yhouse}`,
     noContact: true,
     payAmount: itemsSum,
     payType: "Наличными курьеру",

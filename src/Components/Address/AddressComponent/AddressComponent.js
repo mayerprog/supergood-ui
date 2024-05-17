@@ -3,7 +3,10 @@ import styles from "./AddressComponent.module.scss";
 import React, { useContext, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { MdOutlineAdd } from "react-icons/md";
-import { updateSelected } from "../../../redux/slices/userSlice";
+import {
+  setMapPosition,
+  updateSelected,
+} from "../../../redux/slices/userSlice";
 import AddAddressContainer from "../AddAddressContainer/AddAddressContainer";
 import MapComponent from "../../MapComponent/MapComponent";
 import LevelContext from "../../../contexts/LevelContext";
@@ -19,7 +22,7 @@ const AddressComponent = ({
   const [isNewAddressOpen, setIsNewAddressOpen] = useState(false); //for adding new address
   const [addressIndexForChange, setAddressIndexForChange] = useState(null); //for identifying address for update
 
-  const { addressData } = useContext(LevelContext);
+  const { setMarkerAddress, setMarkerPosition } = useContext(LevelContext);
 
   const addressList = useSelector((state) => state.user.addressList);
   const token = useSelector((state) => state.user.token);
@@ -54,6 +57,8 @@ const AddressComponent = ({
       (item, index) => elementIndex === index
     );
 
+    console.log("foundAddress", foundAddress);
+
     try {
       const response = await addressAPI.saveAddress({
         token: token,
@@ -71,6 +76,13 @@ const AddressComponent = ({
       });
       if (response.status === "ok") {
         dispatch(updateSelected(elementIndex));
+        const newPosition = [
+          parseFloat(foundAddress.lat),
+          parseFloat(foundAddress.long),
+        ];
+        dispatch(setMapPosition(newPosition));
+        setMarkerPosition(newPosition);
+        setMarkerAddress(`${foundAddress.street}, ${foundAddress.yhouse}`);
       }
     } catch (err) {
       console.log(err);

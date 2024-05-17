@@ -15,7 +15,6 @@ export const fetchCoordinatesForAddress = async (
   )}`;
   try {
     const response = await axios.get(url, axiosConfig);
-    // console.log("response", response.data);
     if (response.data && response.data[0]) {
       const { lat, lon } = response.data[0];
       const newPosition = [parseFloat(lat), parseFloat(lon)];

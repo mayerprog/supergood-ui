@@ -17,6 +17,7 @@ import {
   addAddress,
   setAddressList,
   setAddressSelected,
+  setMapPosition,
   setSalesid,
   setToken,
   setUserData,
@@ -139,36 +140,23 @@ function App() {
 
   // we find here address with selected: true to display it all over the app
   useEffect(() => {
+    const selectedAddressList = addressList.filter(
+      (address) => address.selected
+    );
+
     (async () => {
-      const selectedAddressList = addressList.filter(
-        (address) => address.selected
-      );
       // to set selected address
       if (selectedAddressList.length > 0)
         dispatch(
           setAddressSelected(
-            `${selectedAddressList[0].street}, ${selectedAddressList[0].yhouse}`
+            // `${selectedAddressList[0].street}, ${selectedAddressList[0].yhouse}`
+            selectedAddressList[0]
           )
         );
       else dispatch(setAddressSelected("")); // ??? убрать
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressList, addressSelected]);
-
-  const { setMarkerAddress, setMarkerPosition } = useContext(LevelContext);
-
-  // to fetch coordinates if there is addressSelected
-  useEffect(() => {
-    console.log("addressSelected", addressSelected);
-    if (addressSelected) {
-      fetchCoordinatesForAddress(
-        addressSelected,
-        dispatch,
-        setMarkerAddress,
-        setMarkerPosition
-      );
-    }
-  }, [addressSelected]);
 
   useEffect(() => {
     setIsMainPage(location.pathname === "/");

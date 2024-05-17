@@ -160,7 +160,7 @@ const DeliveryAddress = ({
       <FaLocationDot size={18} color="#7c7c7c" className={styles.icon} />
       {addressSelected ? (
         <span className={styles.buttonText} page-pathname={location.pathname}>
-          {addressSelected}
+          {`${addressSelected.street}, ${addressSelected.yhouse}`}
         </span>
       ) : (
         <span className={styles.buttonText} page-pathname={location.pathname}>
