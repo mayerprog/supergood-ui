@@ -72,6 +72,8 @@ const MainPage = ({
 
   const cartWrapperRef = useRef(null);
 
+  const deptid = useSelector((state) => state.user.deptid);
+
   // useEffect(() => {
   //   console.log(
   //     `Компонент MainPage отрисован в ${new Date().toLocaleTimeString()}`
@@ -86,7 +88,7 @@ const MainPage = ({
       try {
         setLoading(true);
         const itemsArray = [];
-        const allItems = await itemAPI.getItems(1257);
+        const allItems = await itemAPI.getItems(deptid);
         if (allItems.error === "stopped department") {
           fetchImage({
             uid: "19f05932f0",

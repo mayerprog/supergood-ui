@@ -1,5 +1,4 @@
 import styles from "./OrderInfoContainer.module.scss";
-import pepperoni from "../../../assets/images/pizza/pepperoni.jpg";
 
 import ProgressTracking from "../ProgressTracking/ProgressTracking";
 // import { MdImageNotSupported } from "react-icons/md";

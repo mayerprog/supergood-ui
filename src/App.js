@@ -10,22 +10,18 @@ import NewOrderPage from "./Pages/NewOrderPage/NewOrderPage";
 import OrdersPage from "./Pages/OrdersPage/OrdersPage";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useOutsideHook } from "./hooks/useOutsideHook";
 import { useMediaQuery } from "react-responsive";
 import {
-  addAddress,
   setAddressList,
   setAddressSelected,
-  setMapPosition,
+  setDeptid,
   setSalesid,
   setToken,
   setUserData,
-  updateSelected,
 } from "./redux/slices/userSlice";
 import DeviceFooter from "./Components/Footer/DeviceFooter/DeviceFooter";
-import { fetchCoordinatesForAddress } from "./services/fetchCoordinatesForAddress";
-import LevelContext from "./contexts/LevelContext";
 import LoyaltyPage from "./Pages/LoyaltyPage/LoyaltyPage";
 import { setIsAuth } from "./redux/slices/authSlice";
 import { userAPI } from "./api/userAPI";
@@ -143,20 +139,17 @@ function App() {
     const selectedAddressList = addressList.filter(
       (address) => address.selected
     );
-
-    (async () => {
+    if (selectedAddressList.length > 0) {
+      console.log("minor_area_id", selectedAddressList[0].minor_area_id);
       // to set selected address
-      if (selectedAddressList.length > 0)
-        dispatch(
-          setAddressSelected(
-            // `${selectedAddressList[0].street}, ${selectedAddressList[0].yhouse}`
-            selectedAddressList[0]
-          )
-        );
-      else dispatch(setAddressSelected("")); // ??? убрать
-    })();
+      if (selectedAddressList.length > 0) {
+        dispatch(setAddressSelected(selectedAddressList[0]));
+        // else dispatch(setAddressSelected({})); // ??? убрать
+        dispatch(setDeptid(selectedAddressList[0]?.minor_area_id));
+      }
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addressList, addressSelected]);
+  }, [addressList]);
 
   useEffect(() => {
     setIsMainPage(location.pathname === "/");

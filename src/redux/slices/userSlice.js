@@ -11,6 +11,7 @@ const initialState = {
   userData: {},
   salesid: null,
   token: null,
+  minorAreaId: null,
 };
 
 export const userSlice = createSlice({
@@ -25,6 +26,9 @@ export const userSlice = createSlice({
     },
     setSalesid: (state, action) => {
       state.salesid = action.payload;
+    },
+    setDeptid: (state, action) => {
+      state.minorAreaId = action.payload;
     },
     setFloor: (state, action) => {
       state.floor = action.payload;
@@ -92,6 +96,7 @@ export const {
   setAddressList,
   setUserData,
   setSalesid,
+  setDeptid,
   setToken,
   setFloor,
   setFlat,

@@ -5,6 +5,7 @@ import { setMapPosition } from "../../../redux/slices/userSlice";
 const HouseDropDown = ({
   setShowHouseDropdown,
   setInputHouse,
+  setInputStreet,
   suggestions,
   setSuggestions,
   dispatch,
