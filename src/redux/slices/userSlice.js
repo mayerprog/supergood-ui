@@ -42,7 +42,7 @@ export const userSlice = createSlice({
       state.token = action.payload;
     },
     setMapPosition: (state, action) => {
-      state.userData = action.payload;
+      state.mapPosition = action.payload;
     },
     setAddressSelected: (state, action) => {
       state.addressSelected = action.payload;
