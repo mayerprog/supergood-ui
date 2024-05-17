@@ -152,9 +152,7 @@ const AddAddressContainer = ({
             // if address does not exist then add to the addressList
           } else {
             // if no addresses added then first address should be selected automatically
-            if (addressList.length === 0)
-              dispatch(addAddress({ data: addressData, selected: true }));
-            else dispatch(addAddress({ data: addressData, selected: false }));
+            dispatch(addAddress({ data: addressData, selected: true }));
           }
         }
       } catch (err) {

@@ -40,7 +40,7 @@ const ProductInfo = ({ itemCardId, toggleMapVisibility, isSheet }) => {
         <h2>{foundItem.name}</h2>
         <span
           className={styles.addInfo}
-        >{`${foundItem.params.weightout.value} г.`}</span>
+        >{`${foundItem.params.weightout.value} ${foundItem.params.weightout.unit}.`}</span>
         <span className={styles.description}>{foundItem.description}</span>
         {foundItem.catname === "Пицца" && (
           <div className={styles.addInfo}>

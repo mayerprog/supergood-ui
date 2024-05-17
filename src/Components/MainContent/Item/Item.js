@@ -125,7 +125,7 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
         <div>
           <div
             className={styles.amount}
-          >{`${item.params.weightout.value} г.`}</div>
+          >{`${item.params.weightout.value} ${item.params.weightout.unit}.`}</div>
           <div className={styles.price}>{`${item.price} ₽`}</div>
         </div>
       </div>

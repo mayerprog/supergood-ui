@@ -48,14 +48,14 @@ const CartBox = ({ item, index, isSheet, isOrderCart }) => {
           <div>
             <span>{`${item.price} ₽`}</span>
             &nbsp;|&nbsp;
-            <span>{`${item.params.weightout.value} г.`}</span>
+            <span>{`${item.params.weightout.value} ${item.params.weightout.unit}.`}</span>
           </div>
         ) : (
           <div>
             <span className={styles.text}>{`${item.price} ₽`}</span>
             <span
               className={styles.text}
-            >{`${item.params.weightout.value} г.`}</span>
+            >{`${item.params.weightout.value} ${item.params.weightout.unit}.`}</span>
           </div>
         )}
       </div>
