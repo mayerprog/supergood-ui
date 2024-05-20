@@ -10,7 +10,9 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { LevelContextProvider } from "./contexts/LevelContext";
 
-let persistor = persistStore(store);
+export const persistor = persistStore(store);
+// export { persistor };
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>

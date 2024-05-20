@@ -12,6 +12,7 @@ const ProductInfo = ({ itemCardId, toggleMapVisibility, isSheet }) => {
   const addressList = useSelector((state) => state.user.addressList);
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   const [addingInProgress, setAddingInProgress] = useState(false);
   const [amount, setAmount] = useState(null);
@@ -97,6 +98,7 @@ const ProductInfo = ({ itemCardId, toggleMapVisibility, isSheet }) => {
                 item: foundItem,
                 token,
                 salesid,
+                isAuth,
               })
             }
           >

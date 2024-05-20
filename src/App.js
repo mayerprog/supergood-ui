@@ -3,7 +3,6 @@ import styles from "./App.module.scss";
 
 import "leaflet/dist/leaflet.css";
 import MainPage from "./Pages/MainPage/MainPage";
-import { store } from "./redux/store";
 import { Route, Routes, useLocation } from "react-router-dom";
 import ProtectedRoute from "./HOC/ProtectedRoute";
 import NewOrderPage from "./Pages/NewOrderPage/NewOrderPage";
@@ -26,7 +25,7 @@ import LoyaltyPage from "./Pages/LoyaltyPage/LoyaltyPage";
 import { setIsAuth } from "./redux/slices/authSlice";
 import { userAPI } from "./api/userAPI";
 import Cookies from "js-cookie";
-import { addressAPI } from "./api/addressAPI";
+import { persistor } from "./index";
 
 function App() {
   // modals
@@ -66,6 +65,8 @@ function App() {
   // to show <Cart /> and to disable Cart button in Header when width > 1280px
   const monitorMediaQuery = useMediaQuery({ maxWidth: 1280 });
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
+
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
@@ -187,6 +188,15 @@ function App() {
       }
     })();
   }, [dispatch]);
+
+  useEffect(() => {
+    if (isAuth) {
+      // Purge persisted state
+      persistor.purge().then(() => {
+        console.log("Persisted state purged");
+      });
+    }
+  }, [isAuth]);
 
   return (
     <div className={styles.app}>

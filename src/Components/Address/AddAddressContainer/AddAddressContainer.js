@@ -163,7 +163,7 @@ const AddAddressContainer = ({
   };
 
   const handleRemoveAddress = async () => {
-    const firstAddress = addressList[0];
+    const firstAddress = addressList[1];
     try {
       const responseDelete = await addressAPI.deleteAddress({
         token: token,
@@ -185,7 +185,7 @@ const AddAddressContainer = ({
         selected: true,
       });
       if (responseSave.status === "ok") {
-        dispatch(updateSelected(0));
+        dispatch(updateSelected(1));
       }
       if (responseDelete.status === "ok") {
         dispatch(removeAddress(item.addressid));

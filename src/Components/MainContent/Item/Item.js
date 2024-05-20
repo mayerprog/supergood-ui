@@ -28,6 +28,7 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
   const addressList = useSelector((state) => state.user.addressList);
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   const dispatch = useDispatch();
 
@@ -117,6 +118,7 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
                 item,
                 token,
                 salesid,
+                isAuth,
               })
             }
           >

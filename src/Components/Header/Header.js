@@ -7,7 +7,6 @@ import { FaLocationDot } from "react-icons/fa6";
 import { forwardRef, useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { setIsAuth } from "../../redux/slices/authSlice";
 import ModalOptions from "../ModalOptions/ModalOptions";
 import { IoMenuSharp } from "react-icons/io5";
 import { gsap } from "gsap";
