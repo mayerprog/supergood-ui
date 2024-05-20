@@ -13,8 +13,6 @@ import { useMediaQuery } from "react-responsive";
 import { addItemToCart } from "../../../services/addItemToCart";
 import { fetchImage } from "../../../services/fetchImage.js";
 
-// import { setItems } from "../../../redux/slices/itemSlice";
-
 const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [amount, setAmount] = useState(null);
@@ -25,10 +23,11 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
   const itemRef = useRef();
 
   const uid = item.img[0].uid;
-  // const uri = `${baseURL}/getFileNew.php?uid=${uid}&w=170&h=170`;
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const addressList = useSelector((state) => state.user.addressList);
+  const token = useSelector((state) => state.user.token);
+  const salesid = useSelector((state) => state.user.salesid);
 
   const dispatch = useDispatch();
 
@@ -116,6 +115,8 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
                 addressList,
                 dispatch,
                 item,
+                token,
+                salesid,
               })
             }
           >

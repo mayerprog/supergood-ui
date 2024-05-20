@@ -3,6 +3,7 @@ import styles from "./AddItemBox.module.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItems, updateItem } from "../../redux/slices/cartSlice";
+import { putToCartAPI } from "../../services/putToCartAPI";
 
 const AddItemBox = ({
   backgroundColor,
@@ -27,6 +28,8 @@ const AddItemBox = ({
   const dispatch = useDispatch();
 
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const token = useSelector((state) => state.user.token);
+  const salesid = useSelector((state) => state.user.salesid);
 
   const foundCartItem = cartItems.find(
     (cartItem) => itemId === cartItem.itemid
@@ -42,7 +45,7 @@ const AddItemBox = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItems, itemId, foundCartItem]);
 
-  const increment = (event) => {
+  const increment = async (event) => {
     event.stopPropagation();
     const item = cartItems.find((item) => item.itemid === itemId);
     if (!item) return;
@@ -64,10 +67,14 @@ const AddItemBox = ({
       price: item.price + item.initialPrice,
     };
 
-    dispatch(updateItem(updatedItem));
+    const response = await putToCartAPI(updatedItem, token, salesid);
+
+    if (response.status === "ok") {
+      dispatch(updateItem(updatedItem));
+    }
   };
 
-  const decrement = (event) => {
+  const decrement = async (event) => {
     event.stopPropagation();
 
     const item = cartItems.find((item) => item.itemid === itemId);
@@ -90,7 +97,11 @@ const AddItemBox = ({
       price: item.price - item.initialPrice,
     };
 
-    dispatch(updateItem(updatedItem));
+    const response = await putToCartAPI(updatedItem, token, salesid);
+
+    if (response.status === "ok") {
+      dispatch(updateItem(updatedItem));
+    }
   };
 
   return (
