@@ -2,8 +2,15 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import styles from "./AddItemBox.module.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeItems, updateItem } from "../../redux/slices/cartSlice";
+import {
+  removeItems,
+  setItems,
+  setItemsSum,
+  updateItem,
+  updateSum,
+} from "../../redux/slices/cartSlice";
 import { putToCartAPI } from "../../services/putToCartAPI";
+import { cartAPI } from "../../api/cartAPI";
 
 const AddItemBox = ({
   backgroundColor,
@@ -30,6 +37,7 @@ const AddItemBox = ({
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   const foundCartItem = cartItems.find(
     (cartItem) => itemId === cartItem.itemid
@@ -37,10 +45,15 @@ const AddItemBox = ({
 
   useEffect(() => {
     if (foundCartItem) {
-      if (foundCartItem.params.amount.value < 1) {
-        dispatch(removeItems(foundCartItem.itemid));
+      // console.log("foundCartItem.qty", foundCartItem.qty);
+      if (!foundCartItem.qty) {
+        if (foundCartItem.params.amount.value < 1) {
+          dispatch(removeItems(foundCartItem.itemid));
+        }
+        setAmount(foundCartItem.params.amount.value);
+      } else {
+        setAmount(foundCartItem.qty);
       }
-      setAmount(foundCartItem.params.amount.value);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItems, itemId, foundCartItem]);
@@ -56,7 +69,9 @@ const AddItemBox = ({
         ...item.params,
         amount: {
           ...item.params.amount,
-          value: Number(item.params.amount.value) + 1,
+          value: item.qty
+            ? Number(item.qty) + 1
+            : Number(item.params.amount.value) + 1,
         },
         weightout: {
           ...item.params.weightout,
@@ -66,10 +81,17 @@ const AddItemBox = ({
       },
       price: item.price + item.initialPrice,
     };
-
-    const response = await putToCartAPI(updatedItem, token, salesid);
-
-    if (response.status === "ok") {
+    if (isAuth) {
+      const response = await putToCartAPI(updatedItem, token, salesid);
+      console.log("response", response);
+      if (response.status === "ok") {
+        const data = await cartAPI.getOrderInfo({ token, salesid });
+        const items = Object.values(data.sales.lines);
+        const itemsSum = data.sales.amount;
+        dispatch(setItems(items));
+        dispatch(updateSum(itemsSum));
+      }
+    } else {
       dispatch(updateItem(updatedItem));
     }
   };
@@ -86,7 +108,9 @@ const AddItemBox = ({
         ...item.params,
         amount: {
           ...item.params.amount,
-          value: Math.max(Number(item.params.amount.value) - 1, 0),
+          value: item.qty
+            ? Math.max(Number(item.qty) - 1, 0)
+            : Math.max(Number(item.params.amount.value) - 1, 0),
         },
         weightout: {
           ...item.params.weightout,
@@ -96,10 +120,16 @@ const AddItemBox = ({
       },
       price: item.price - item.initialPrice,
     };
-
-    const response = await putToCartAPI(updatedItem, token, salesid);
-
-    if (response.status === "ok") {
+    if (isAuth) {
+      const response = await putToCartAPI(updatedItem, token, salesid);
+      if (response.status === "ok") {
+        const data = await cartAPI.getOrderInfo({ token, salesid });
+        const items = Object.values(data.sales.lines);
+        const itemsSum = data.sales.amount;
+        dispatch(setItems(items));
+        dispatch(updateSum(itemsSum));
+      }
+    } else {
       dispatch(updateItem(updatedItem));
     }
   };

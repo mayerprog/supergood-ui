@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { cartAPI } from "../api/cartAPI";
-import { addItems } from "../redux/slices/cartSlice";
+import { addItems, setItems, updateSum } from "../redux/slices/cartSlice";
 import { putToCartAPI } from "./putToCartAPI";
 
 export const addItemToCart = async (info) => {
@@ -27,13 +27,13 @@ export const addItemToCart = async (info) => {
     if (isAuth) {
       const response = await putToCartAPI(item, token, salesid);
       if (response.status === "ok") {
-        dispatch(
-          addItems({
-            ...item,
-            initialPrice: item.price,
-            initialWeightout: item.params.weightout.value,
-          })
-        );
+        const data = await cartAPI.getOrderInfo({ token, salesid });
+        console.log("data", data);
+        const items = Object.values(data.sales.lines);
+        const itemsSum = data.sales.amount;
+
+        dispatch(setItems(items));
+        dispatch(updateSum(itemsSum));
       }
     } else {
       dispatch(

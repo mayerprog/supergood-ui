@@ -26,6 +26,9 @@ import { setIsAuth } from "./redux/slices/authSlice";
 import { userAPI } from "./api/userAPI";
 import Cookies from "js-cookie";
 import { persistor } from "./index";
+import { cartAPI } from "./api/cartAPI";
+import { setItems, updateSum } from "./redux/slices/cartSlice";
+import { useUpdateSumHook } from "./hooks/useUpdateSumHook";
 
 function App() {
   // modals
@@ -67,6 +70,10 @@ function App() {
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   const isAuth = useSelector((state) => state.auth.isAuth);
+  const token = useSelector((state) => state.user.token);
+  const salesid = useSelector((state) => state.user.salesid);
+  const addressList = useSelector((state) => state.user.addressList);
+  const addressSelected = useSelector((state) => state.user.addressSelected);
 
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
@@ -127,17 +134,14 @@ function App() {
   useOutsideHook(cartSheetWrapperRef, toggleCartSheetVisibility); // to close <CartSheet /> clicking outside
 
   const location = useLocation(); // Getting the current location
-
   const dispatch = useDispatch();
-
-  const addressList = useSelector((state) => state.user.addressList);
-  const salesid = useSelector((state) => state.user.salesid);
 
   // we find here address with selected: true to display it all over the app
   useEffect(() => {
     const selectedAddressList = addressList.filter(
       (address) => address.selected
     );
+    console.log("addressSelected", addressSelected);
     if (selectedAddressList.length > 0) {
       // console.log("minor_area_id", selectedAddressList[0]);
       // to set selected address
@@ -189,14 +193,36 @@ function App() {
     })();
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   if (isAuth) {
+  //     // Purge persisted state
+  //     persistor.purge().then(() => {
+  //       console.log("Persisted state purged");
+  //     });
+  //   }
+  // }, [isAuth]);
+
+  //getting order info
   useEffect(() => {
-    if (isAuth) {
-      // Purge persisted state
-      persistor.purge().then(() => {
-        console.log("Persisted state purged");
-      });
-    }
-  }, [isAuth]);
+    (async () => {
+      if (isAuth) {
+        try {
+          const data = await cartAPI.getOrderInfo({ token, salesid });
+          if (data.sales) {
+            const items = Object.values(data.sales.lines);
+            console.log("items", items);
+            const itemsSum = data.sales.amount;
+            console.log("itemsSum", itemsSum);
+
+            dispatch(setItems(items));
+            dispatch(updateSum(itemsSum));
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    })();
+  }, [dispatch, isAuth]);
 
   return (
     <div className={styles.app}>

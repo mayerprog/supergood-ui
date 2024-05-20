@@ -1,7 +1,6 @@
 import { cartAPI } from "../api/cartAPI";
 
 export const putToCartAPI = async (item, token, salesid) => {
-  console.log("salesid", salesid);
   try {
     const response = await cartAPI.addToCart({
       token,

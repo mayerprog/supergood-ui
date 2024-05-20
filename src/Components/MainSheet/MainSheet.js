@@ -9,6 +9,7 @@ import { removeDataLogin, setIsAuth } from "../../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import Cookies from "js-cookie";
+import { persistor } from "../..";
 
 const MainSheet = ({
   mainSheetWrapperRef,
@@ -88,6 +89,9 @@ const MainSheet = ({
       case "Выйти":
         Cookies.remove("token");
         dispatch(setIsAuth(false));
+        persistor.purge().then(() => {
+          console.log("Persisted state purged");
+        });
         handleClosing();
         break;
       case "Войти":

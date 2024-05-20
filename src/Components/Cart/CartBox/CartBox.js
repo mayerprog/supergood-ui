@@ -43,10 +43,12 @@ const CartBox = ({ item, index, isSheet, isOrderCart }) => {
         </>
       )}
       <div className={styles.cartBoxText}>
-        <span className={styles.text}>{item.name}</span>
+        <span className={styles.text}>
+          {item.name ? item.name : item.itemname}
+        </span>
         {!phoneMediaQuery ? (
           <div>
-            <span>{`${item.price} ₽`}</span>
+            <span>{`${item.price ? item.price : item.lineamount} ₽`}</span>
             &nbsp;|&nbsp;
             <span>{`${item.params.weightout.value} ${item.params.weightout.unit}.`}</span>
           </div>

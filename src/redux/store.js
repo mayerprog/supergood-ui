@@ -20,16 +20,28 @@ const cartPersistConfig = {
   storage,
 };
 
-// const userPersistConfig = {
-//   key: "user",
-//   storage: storage,
-//   blacklist: ["addressList", "mapPosition", "userData", "salesid", "token"],
-// };
+const userPersistConfig = {
+  key: "user",
+  storage: storage,
+  blacklist: [
+    // "addressList",
+    "mapPosition",
+    "userData",
+    "salesid",
+    // "token",
+    "floor",
+    "flat",
+    "entrance",
+    "description",
+    "minorAreaId",
+  ],
+};
 
 const rootReducer = combineReducers({
   item: itemReducer,
   cart: persistReducer(cartPersistConfig, cartReducer),
-  user: userReducer,
+  // user: userReducer,
+  user: persistReducer(userPersistConfig, userReducer),
   auth: authReducer,
   order: orderReducer,
 });

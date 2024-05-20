@@ -12,6 +12,11 @@ import { useEffect } from "react";
 import { authAPI } from "../../api/authAPI";
 import { IoMdClose } from "react-icons/io";
 import Cookies from "js-cookie";
+import { putToCartAPI } from "../../services/putToCartAPI";
+import { cartAPI } from "../../api/cartAPI";
+import { setItems, updateSum } from "../../redux/slices/cartSlice";
+import { persistor } from "../..";
+import { addressAPI } from "../../api/addressAPI";
 
 const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const [phone, setPhone] = useState("");
@@ -23,6 +28,10 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const [borderColor, setBorderColor] = useState("#ccc");
 
   const dataSms = useSelector((state) => state.auth.dataSms);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const token = useSelector((state) => state.user.token);
+  const salesid = useSelector((state) => state.user.salesid);
+  const addressSelected = useSelector((state) => state.user.addressSelected);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -70,9 +79,54 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
     setChecked(!checked);
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     dispatch(setIsAuth(true));
+    console.log("token", token);
+    console.log("addressSelected", addressSelected);
+    try {
+      const responseSave = await addressAPI.saveAddress({
+        token: token,
+        street: addressSelected.street,
+        lat: addressSelected.lat,
+        long: addressSelected.long,
+        addressid: addressSelected.addressid,
+        streetid: addressSelected.streetid,
+        houseid: addressSelected.houseid,
+        entrance: addressSelected.entrance,
+        floor: addressSelected.floor,
+        flat: addressSelected.flat,
+        description: addressSelected.description,
+        selected: true,
+        // надо уточнить, будут ли изменения в бэке, если нет, то все новые адреса делать по умолчанию selected: true
+        // если изменения будут, то вместо true поставить isSelected
+      });
+      console.log("responseSave", responseSave);
+    } catch (err) {
+      console.log(err);
+    }
+    //putting items from virtual cart to DB after authorization
+    if (cartItems) {
+      for (let i = 0; i < cartItems.length; i++) {
+        try {
+          const response = await putToCartAPI(cartItems[i], token, salesid);
+          console.log("responseLogin", response);
+          if (response.status === "ok") {
+            const data = await cartAPI.getOrderInfo({ token, salesid });
+            const items = Object.values(data.sales.lines);
+            const itemsSum = data.sales.amount;
+            dispatch(setItems(items));
+            dispatch(updateSum(itemsSum));
+            // persistor.purge().then(() => {
+            //   console.log("Persisted state purged");
+            // });
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
     toggleLoginVisibility();
+    // window.location.reload();
     navigate("/");
   };
   const handleSendPhone = async () => {

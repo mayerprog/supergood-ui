@@ -14,7 +14,11 @@ import { Icon } from "leaflet";
 import pin from "../../assets/images/pin.png";
 import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
-import { addAddress, setMapPosition } from "../../redux/slices/userSlice";
+import {
+  addAddress,
+  setAddressSelected,
+  setMapPosition,
+} from "../../redux/slices/userSlice";
 import { fetchSuggestionsStreet } from "../../services/fetchSuggestionsStreet";
 import { makeExistingAddressSelected } from "../../services/makeExistingAddressSelected";
 import { useMediaQuery } from "react-responsive";
@@ -110,7 +114,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
     if (!isAddressValid) {
       return; // Stop the function if the address is not validated
     }
-
     try {
       const response = await addressAPI.saveAddress({
         token: token,

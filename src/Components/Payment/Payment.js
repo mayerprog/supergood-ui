@@ -2,7 +2,6 @@ import styles from "./Payment.module.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateSum } from "../../redux/slices/cartSlice";
 import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 import { removeOrderInfo } from "../../redux/slices/orderSlice";
 import { useMediaQuery } from "react-responsive";
