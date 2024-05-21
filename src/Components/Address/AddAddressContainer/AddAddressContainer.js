@@ -6,6 +6,7 @@ import {
   addAddress,
   removeAddress,
   removeAddressSelected,
+  setAddressList,
   setDescription,
   setEntrance,
   setFlat,
@@ -21,6 +22,7 @@ import { fetchHousesSuggestions } from "../../../services/fetchHousesSuggestions
 import { addressAPI } from "../../../api/addressAPI";
 import { useUpdateStreetid } from "../../../hooks/useUpdateStreetid";
 import Cookies from "js-cookie";
+import { userAPI } from "../../../api/userAPI";
 
 const AddAddressContainer = ({
   item,
@@ -46,12 +48,13 @@ const AddAddressContainer = ({
     setAddressData,
   } = useContext(LevelContext);
   const addressList = useSelector((state) => state.user.addressList);
-  // const token = useSelector((state) => state.user.token);
+  const token = useSelector((state) => state.user.token);
   const floor = useSelector((state) => state.user.floor);
   const flat = useSelector((state) => state.user.flat);
   const entrance = useSelector((state) => state.user.entrance);
   const description = useSelector((state) => state.user.description);
-  const token = Cookies.get("token");
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  // const token = Cookies.get("token");
 
   const dispatch = useDispatch();
 
@@ -94,39 +97,48 @@ const AddAddressContainer = ({
       else {
         const selectedAddress = addressList.find((address) => address.selected);
         const isSelected = selectedAddress === item;
-        try {
-          const responseDelete = await addressAPI.deleteAddress({
-            token: token,
-            addressid: item.addressid,
-            status: 2,
-          });
-          if (responseDelete.status === "ok") {
-            dispatch(removeAddress(item.addressid));
-            dispatch(removeAddressSelected());
-            setAddressIndexForChange(null);
-          }
+        if (item.addressid) {
+          try {
+            const responseDelete = await addressAPI.deleteAddress({
+              token: token,
+              addressid: item.addressid,
+              status: 2,
+            });
+            if (responseDelete.status === "ok") {
+              const data = await userAPI.getUserPref(token);
+              dispatch(setAddressList(Object.values(data.address)));
+              // dispatch(removeAddress(item.addressid));
+              // dispatch(removeAddressSelected());
+              setAddressIndexForChange(null);
+            }
 
-          const responseSave = await addressAPI.saveAddress({
-            token: token,
-            street: addressData.street,
-            lat: addressData.lat,
-            long: addressData.long,
-            addressid: addressData.addressid,
-            streetid: addressData.streetid,
-            houseid: addressData.houseid,
-            entrance: entrance,
-            floor: floor,
-            flat: flat,
-            description: description,
-            selected: true,
-            // надо уточнить, будут ли изменения в бэке, если нет, то все новые адреса делать по умолчанию selected: true
-            // если изменения будут, то вместо true поставить isSelected
-          });
-          if (responseSave.status === "ok") {
-            dispatch(addAddress({ data: addressData, selected: true }));
+            const responseSave = await addressAPI.saveAddress({
+              token: token,
+              street: addressData.street,
+              lat: addressData.lat,
+              long: addressData.long,
+              addressid: addressData.addressid,
+              streetid: addressData.streetid,
+              houseid: addressData.houseid,
+              entrance: entrance,
+              floor: floor,
+              flat: flat,
+              description: description,
+              selected: true,
+              // надо уточнить, будут ли изменения в бэке, если нет, то все новые адреса делать по умолчанию selected: true
+              // если изменения будут, то вместо true поставить isSelected
+            });
+            if (responseSave.status === "ok") {
+              if (!isAuth) {
+                dispatch(addAddress({ data: addressData, selected: true }));
+              } else {
+                const data = await userAPI.getUserPref(token);
+                dispatch(setAddressList(Object.values(data.address)));
+              }
+            }
+          } catch (err) {
+            console.log(err);
           }
-        } catch (err) {
-          console.log(err);
         }
       }
 
@@ -154,7 +166,12 @@ const AddAddressContainer = ({
             // if address does not exist then add to the addressList
           } else {
             // if no addresses added then first address should be selected automatically
-            dispatch(addAddress({ data: addressData, selected: true }));
+            if (!isAuth) {
+              dispatch(addAddress({ data: addressData, selected: true }));
+            } else {
+              const data = await userAPI.getUserPref(token);
+              dispatch(setAddressList(Object.values(data.address)));
+            }
           }
         }
       } catch (err) {
@@ -167,36 +184,41 @@ const AddAddressContainer = ({
   const handleRemoveAddress = async () => {
     const firstAddress = addressList[1];
     console.log("addressList", addressList);
-    try {
-      const responseDelete = await addressAPI.deleteAddress({
-        token: token,
-        addressid: item.addressid,
-        status: 2,
-      });
-      // const responseSave = await addressAPI.saveAddress({
-      //   token: token,
-      //   street: firstAddress.street,
-      //   lat: firstAddress.lat,
-      //   long: firstAddress.long,
-      //   addressid: firstAddress.addressid,
-      //   streetid: firstAddress.streetid,
-      //   houseid: firstAddress.houseid,
-      //   entrance: firstAddress.entrance,
-      //   floor: firstAddress.floor,
-      //   flat: firstAddress.flat,
-      //   description: firstAddress.description,
-      //   selected: true,
-      // });
-      // if (responseSave.status === "ok") {
-      //   dispatch(updateSelected(1));
-      // }
-      if (responseDelete.status === "ok") {
-        dispatch(removeAddress(item.addressid));
-        dispatch(removeAddressSelected());
-        setAddressIndexForChange(null);
+    console.log("itemaddress", item);
+    if (item.addressid) {
+      try {
+        const responseDelete = await addressAPI.deleteAddress({
+          token: token,
+          addressid: item.addressid,
+          status: 2,
+        });
+        // const responseSave = await addressAPI.saveAddress({
+        //   token: token,
+        //   street: firstAddress.street,
+        //   lat: firstAddress.lat,
+        //   long: firstAddress.long,
+        //   addressid: firstAddress.addressid,
+        //   streetid: firstAddress.streetid,
+        //   houseid: firstAddress.houseid,
+        //   entrance: firstAddress.entrance,
+        //   floor: firstAddress.floor,
+        //   flat: firstAddress.flat,
+        //   description: firstAddress.description,
+        //   selected: true,
+        // });
+        // if (responseSave.status === "ok") {
+        //   dispatch(updateSelected(1));
+        // }
+        if (responseDelete.status === "ok") {
+          const data = await userAPI.getUserPref(token);
+          dispatch(setAddressList(Object.values(data.address)));
+          // dispatch(removeAddress(item.addressid));
+          // dispatch(removeAddressSelected());
+          setAddressIndexForChange(null);
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
     }
   };
 

@@ -16,7 +16,7 @@ import { addressAPI } from "../../api/addressAPI";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addAddress,
-  setAddressSelected,
+  setAddressList,
   setMapPosition,
 } from "../../redux/slices/userSlice";
 import { fetchSuggestionsStreet } from "../../services/fetchSuggestionsStreet";
@@ -28,6 +28,7 @@ import HouseDropDown from "../Address/HouseDropDown/HouseDropDown";
 import StreetDropDown from "../Address/StreetDropDown/StreetDropDown";
 import { useUpdateStreetid } from "../../hooks/useUpdateStreetid";
 import { useGetPoly } from "../../hooks/useGetPoly";
+import { userAPI } from "../../api/userAPI";
 
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygonPoly, setmMultiPolygonPoly] = useState([]);
@@ -64,6 +65,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const flat = useSelector((state) => state.user.flat);
   const entrance = useSelector((state) => state.user.entrance);
   const description = useSelector((state) => state.user.description);
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   // to put street and house names from selected address in all input fields
   useEffect(() => {
@@ -138,7 +140,12 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
           makeExistingAddressSelected(addressList, inputAddress, dispatch);
         } else {
           // if does not exist then just add to the addressList
-          dispatch(addAddress({ data: addressData, selected: true }));
+          if (!isAuth) {
+            dispatch(addAddress({ data: addressData, selected: true }));
+          } else {
+            const data = await userAPI.getUserPref(token);
+            dispatch(setAddressList(Object.values(data.address)));
+          }
         }
       }
     } catch (err) {

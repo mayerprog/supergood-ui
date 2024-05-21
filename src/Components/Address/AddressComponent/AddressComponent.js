@@ -56,9 +56,6 @@ const AddressComponent = ({
     const foundAddress = addressList.find(
       (item, index) => elementIndex === index
     );
-
-    console.log("foundAddress", foundAddress);
-
     try {
       const response = await addressAPI.saveAddress({
         token: token,

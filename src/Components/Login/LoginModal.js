@@ -18,7 +18,7 @@ import { setItems, updateSum } from "../../redux/slices/cartSlice";
 import { addressAPI } from "../../api/addressAPI";
 import { persistor } from "../../index";
 import { userAPI } from "../../api/userAPI";
-import { getOrderInfo } from "../../services/getOrderInfo";
+import { setAddressList } from "../../redux/slices/userSlice";
 
 const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const [phone, setPhone] = useState("");
@@ -53,6 +53,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
       const itemsSum = data.sales.amount;
       dispatch(setItems(items));
       dispatch(updateSum(itemsSum));
+      dispatch(setAddressList(Object.values(userPref.address)));
     }
   };
 
@@ -128,14 +129,6 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
         try {
           const userPref = await userAPI.getUserPref(token);
           await putToCartAPI(cartItems[i], token, userPref.salesid);
-          // const data = await cartAPI.getOrderInfo({
-          //   token,
-          //   salesid: userPref.salesid,
-          // });
-          // const items = Object.values(data.sales.lines);
-          // const itemsSum = data.sales.amount;
-          // dispatch(setItems(items));
-          // dispatch(updateSum(itemsSum));
           await getOrderInfo();
         } catch (err) {
           console.log(err);

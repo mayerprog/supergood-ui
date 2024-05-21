@@ -79,7 +79,6 @@ export const addressAPI = {
         lat,
         long,
       });
-      console.log("address", response.data);
       return response.data;
     } catch (err) {
       console.error(
@@ -110,7 +109,6 @@ export const addressAPI = {
       const response = await instance.post(`/getaddress.php`, {
         streetid,
       });
-      console.log("housesList", response.data);
       return response.data;
     } catch (err) {
       console.error(
@@ -127,7 +125,6 @@ export const addressAPI = {
         streetid,
         house,
       });
-      console.log("house", response.data);
       return response.data;
     } catch (err) {
       console.error(
