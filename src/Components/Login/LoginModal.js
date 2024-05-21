@@ -17,6 +17,8 @@ import { cartAPI } from "../../api/cartAPI";
 import { setItems, updateSum } from "../../redux/slices/cartSlice";
 import { addressAPI } from "../../api/addressAPI";
 import { persistor } from "../../index";
+import { setSalesid } from "../../redux/slices/userSlice";
+import { userAPI } from "../../api/userAPI";
 
 const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const [phone, setPhone] = useState("");
@@ -31,6 +33,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const salesid = useSelector((state) => state.user.salesid);
   const addressSelected = useSelector((state) => state.user.addressSelected);
+  const dataLogin = useSelector((state) => state.auth.dataLogin);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -51,7 +54,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
           if (response.status === "ok") {
             dispatch(setDataLogin(response));
             // setting the token after logging in
-            Cookies.set("token", dataSms.token, { expires: 7, secure: true });
+            Cookies.set("token", dataSms.token, { secure: true });
             handleLogin();
           }
         }
@@ -81,10 +84,8 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const handleLogin = async () => {
     const token = Cookies.get("token");
     dispatch(setIsAuth(true));
-    // console.log("token", token);
-    // console.log("addressSelected", addressSelected);
     try {
-      const responseSave = await addressAPI.saveAddress({
+      await addressAPI.saveAddress({
         token: token,
         street: addressSelected.street,
         lat: addressSelected.lat,
@@ -102,12 +103,20 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
       console.log(err);
     }
     //putting items from virtual cart to DB after authorization
-    if (cartItems) {
+    if (cartItems.length > 0) {
       for (let i = 0; i < cartItems.length; i++) {
         try {
-          const response = await putToCartAPI(cartItems[i], token, salesid);
+          const userPref = await userAPI.getUserPref(token);
+          const response = await putToCartAPI(
+            cartItems[i],
+            token,
+            userPref.salesid
+          );
           if (response.status === "ok") {
-            const data = await cartAPI.getOrderInfo({ token, salesid });
+            const data = await cartAPI.getOrderInfo({
+              token,
+              salesid: userPref.salesid,
+            });
             const items = Object.values(data.sales.lines);
             const itemsSum = data.sales.amount;
             dispatch(setItems(items));
@@ -122,7 +131,6 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
       console.log("Persisted state purged");
     });
     toggleLoginVisibility();
-    // window.location.reload();
     navigate("/");
   };
   const handleSendPhone = async () => {

@@ -164,6 +164,7 @@ const AddAddressContainer = ({
 
   const handleRemoveAddress = async () => {
     const firstAddress = addressList[1];
+    console.log("addressList", addressList);
     try {
       const responseDelete = await addressAPI.deleteAddress({
         token: token,

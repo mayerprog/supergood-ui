@@ -24,10 +24,10 @@ const userPersistConfig = {
   key: "user",
   storage: storage,
   blacklist: [
-    // "addressList",
+    "addressList",
     "mapPosition",
     "userData",
-    "salesid",
+    // "salesid",
     "token",
     "floor",
     "flat",

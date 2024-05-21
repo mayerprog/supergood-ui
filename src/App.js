@@ -74,6 +74,7 @@ function App() {
   const salesid = useSelector((state) => state.user.salesid);
   const addressList = useSelector((state) => state.user.addressList);
   const addressSelected = useSelector((state) => state.user.addressSelected);
+  const dataLogin = useSelector((state) => state.auth.dataLogin);
 
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
@@ -202,26 +203,29 @@ function App() {
   // }, [isAuth]);
 
   //getting order info
-  // useEffect(() => {
-  //   (async () => {
-  //     if (isAuth) {
-  //       try {
-  //         const data = await cartAPI.getOrderInfo({ token, salesid });
-  //         if (data.sales) {
-  //           const items = Object.values(data.sales.lines);
-  //           console.log("items", items);
-  //           const itemsSum = data.sales.amount;
-  //           console.log("itemsSum", itemsSum);
+  useEffect(() => {
+    (async () => {
+      if (isAuth) {
+        try {
+          const data = await cartAPI.getOrderInfo({ token, salesid });
+          if (data.sales) {
+            const items = Object.values(data.sales.lines);
+            const itemsSum = data.sales.amount;
 
-  //           dispatch(setItems(items));
-  //           dispatch(updateSum(itemsSum));
-  //         }
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     }
-  //   })();
-  // }, [dispatch, isAuth]);
+            dispatch(setItems(items));
+            dispatch(updateSum(itemsSum));
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    })();
+  }, [dispatch, isAuth]);
+
+  useEffect(() => {
+    console.log("token", token);
+    console.log("salesid", salesid);
+  }, [token, salesid]);
 
   return (
     <div className={styles.app}>

@@ -19,6 +19,7 @@ export const authSlice = createSlice({
     },
     setDataLogin: (state, action) => {
       state.dataLogin = action.payload;
+      console.log("dataLogin", state.dataLogin);
     },
   },
 });

@@ -16,7 +16,6 @@ export const fetchSuggestionsStreet = async (
     const response = await addressAPI.getAddressList(input);
     if (response) {
       const data = Object.values(response.streets);
-      console.log("data", data);
       setSuggestions(data);
       setShowDropdown(true);
     }
