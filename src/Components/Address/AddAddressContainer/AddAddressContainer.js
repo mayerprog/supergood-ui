@@ -182,9 +182,12 @@ const AddAddressContainer = ({
   };
 
   const handleRemoveAddress = async () => {
-    const firstAddress = addressList[1];
-    console.log("addressList", addressList);
+    console.log("firstAddress", addressList);
     console.log("itemaddress", item);
+    let firstAddress;
+    if (item === addressList[0]) firstAddress = addressList[1];
+    else firstAddress = addressList[0];
+
     if (item.addressid) {
       try {
         const responseDelete = await addressAPI.deleteAddress({
@@ -192,24 +195,25 @@ const AddAddressContainer = ({
           addressid: item.addressid,
           status: 2,
         });
-        // const responseSave = await addressAPI.saveAddress({
-        //   token: token,
-        //   street: firstAddress.street,
-        //   lat: firstAddress.lat,
-        //   long: firstAddress.long,
-        //   addressid: firstAddress.addressid,
-        //   streetid: firstAddress.streetid,
-        //   houseid: firstAddress.houseid,
-        //   entrance: firstAddress.entrance,
-        //   floor: firstAddress.floor,
-        //   flat: firstAddress.flat,
-        //   description: firstAddress.description,
-        //   selected: true,
-        // });
-        // if (responseSave.status === "ok") {
-        //   dispatch(updateSelected(1));
-        // }
-        if (responseDelete.status === "ok") {
+
+        const responseSave = await addressAPI.saveAddress({
+          token: token,
+          street: firstAddress.street,
+          lat: firstAddress.lat,
+          long: firstAddress.long,
+          addressid: firstAddress.addressid,
+          streetid: firstAddress.streetid,
+          houseid: firstAddress.houseid,
+          entrance: firstAddress.entrance,
+          floor: firstAddress.floor,
+          flat: firstAddress.flat,
+          description: firstAddress.description,
+          selected: true,
+        });
+        if (responseSave.status === "ok" && responseDelete.status === "ok") {
+          //   dispatch(updateSelected(1));
+          // }
+          // if (responseDelete.status === "ok") {
           const data = await userAPI.getUserPref(token);
           dispatch(setAddressList(Object.values(data.address)));
           // dispatch(removeAddress(item.addressid));

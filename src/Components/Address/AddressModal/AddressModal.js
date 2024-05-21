@@ -19,10 +19,6 @@ const AddressModal = ({
     console.log("AddressModal has been drawn");
   }, []);
 
-  useEffect(() => {
-    console.log("addressList", addressList);
-  }, []);
-
   return (
     <div
       className={styles.container}
