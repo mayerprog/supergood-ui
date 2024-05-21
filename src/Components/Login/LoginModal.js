@@ -15,8 +15,8 @@ import Cookies from "js-cookie";
 import { putToCartAPI } from "../../services/putToCartAPI";
 import { cartAPI } from "../../api/cartAPI";
 import { setItems, updateSum } from "../../redux/slices/cartSlice";
-import { persistor } from "../..";
 import { addressAPI } from "../../api/addressAPI";
+import { persistor } from "../../index";
 
 const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const [phone, setPhone] = useState("");
@@ -29,7 +29,6 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
 
   const dataSms = useSelector((state) => state.auth.dataSms);
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
   const addressSelected = useSelector((state) => state.user.addressSelected);
 
@@ -80,9 +79,10 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   };
 
   const handleLogin = async () => {
+    const token = Cookies.get("token");
     dispatch(setIsAuth(true));
-    console.log("token", token);
-    console.log("addressSelected", addressSelected);
+    // console.log("token", token);
+    // console.log("addressSelected", addressSelected);
     try {
       const responseSave = await addressAPI.saveAddress({
         token: token,
@@ -97,10 +97,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
         flat: addressSelected.flat,
         description: addressSelected.description,
         selected: true,
-        // надо уточнить, будут ли изменения в бэке, если нет, то все новые адреса делать по умолчанию selected: true
-        // если изменения будут, то вместо true поставить isSelected
       });
-      console.log("responseSave", responseSave);
     } catch (err) {
       console.log(err);
     }
@@ -109,22 +106,21 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
       for (let i = 0; i < cartItems.length; i++) {
         try {
           const response = await putToCartAPI(cartItems[i], token, salesid);
-          console.log("responseLogin", response);
           if (response.status === "ok") {
             const data = await cartAPI.getOrderInfo({ token, salesid });
             const items = Object.values(data.sales.lines);
             const itemsSum = data.sales.amount;
             dispatch(setItems(items));
             dispatch(updateSum(itemsSum));
-            // persistor.purge().then(() => {
-            //   console.log("Persisted state purged");
-            // });
           }
         } catch (err) {
           console.log(err);
         }
       }
     }
+    persistor.purge().then(() => {
+      console.log("Persisted state purged");
+    });
     toggleLoginVisibility();
     // window.location.reload();
     navigate("/");
@@ -132,8 +128,8 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const handleSendPhone = async () => {
     if (checked && isPhoneComplete) {
       const response = await authAPI.getSms(phoneToDB);
-      dispatch(setDataSms(response));
       if (response.status === "sms") {
+        dispatch(setDataSms(response));
         setCodeSent(true);
       }
     }

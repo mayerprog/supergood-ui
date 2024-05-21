@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeDataLogin, setIsAuth } from "../../redux/slices/authSlice";
 import Cookies from "js-cookie";
-import { persistor } from "../..";
+import { persistor } from "../../index";
 
 const ModalOptions = ({
   optionsRef,
@@ -46,6 +46,7 @@ const ModalOptions = ({
           console.log("Persisted state purged");
         });
         toggleOptionsVisibility(false);
+        window.location.reload();
         break;
       default:
         return;

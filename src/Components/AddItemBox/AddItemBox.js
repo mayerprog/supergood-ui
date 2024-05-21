@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   removeItems,
   setItems,
-  setItemsSum,
   updateItem,
   updateSum,
 } from "../../redux/slices/cartSlice";
@@ -45,7 +44,6 @@ const AddItemBox = ({
 
   useEffect(() => {
     if (foundCartItem) {
-      // console.log("foundCartItem.qty", foundCartItem.qty);
       if (!foundCartItem.qty) {
         if (foundCartItem.params.amount.value < 1) {
           dispatch(removeItems(foundCartItem.itemid));
@@ -83,7 +81,6 @@ const AddItemBox = ({
     };
     if (isAuth) {
       const response = await putToCartAPI(updatedItem, token, salesid);
-      console.log("response", response);
       if (response.status === "ok") {
         const data = await cartAPI.getOrderInfo({ token, salesid });
         const items = Object.values(data.sales.lines);

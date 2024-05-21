@@ -28,7 +28,6 @@ export const addItemToCart = async (info) => {
       const response = await putToCartAPI(item, token, salesid);
       if (response.status === "ok") {
         const data = await cartAPI.getOrderInfo({ token, salesid });
-        console.log("data", data);
         const items = Object.values(data.sales.lines);
         const itemsSum = data.sales.amount;
 

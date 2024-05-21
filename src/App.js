@@ -167,7 +167,6 @@ function App() {
     (async () => {
       try {
         const token = Cookies.get("token");
-        console.log("token", token);
         if (token) {
           const data = await userAPI.getUserPref(token);
           dispatch(
@@ -203,26 +202,26 @@ function App() {
   // }, [isAuth]);
 
   //getting order info
-  useEffect(() => {
-    (async () => {
-      if (isAuth) {
-        try {
-          const data = await cartAPI.getOrderInfo({ token, salesid });
-          if (data.sales) {
-            const items = Object.values(data.sales.lines);
-            console.log("items", items);
-            const itemsSum = data.sales.amount;
-            console.log("itemsSum", itemsSum);
+  // useEffect(() => {
+  //   (async () => {
+  //     if (isAuth) {
+  //       try {
+  //         const data = await cartAPI.getOrderInfo({ token, salesid });
+  //         if (data.sales) {
+  //           const items = Object.values(data.sales.lines);
+  //           console.log("items", items);
+  //           const itemsSum = data.sales.amount;
+  //           console.log("itemsSum", itemsSum);
 
-            dispatch(setItems(items));
-            dispatch(updateSum(itemsSum));
-          }
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    })();
-  }, [dispatch, isAuth]);
+  //           dispatch(setItems(items));
+  //           dispatch(updateSum(itemsSum));
+  //         }
+  //       } catch (err) {
+  //         console.log(err);
+  //       }
+  //     }
+  //   })();
+  // }, [dispatch, isAuth]);
 
   return (
     <div className={styles.app}>

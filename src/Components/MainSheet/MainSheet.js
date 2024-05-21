@@ -9,7 +9,7 @@ import { removeDataLogin, setIsAuth } from "../../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import Cookies from "js-cookie";
-import { persistor } from "../..";
+import { persistor } from "../../index";
 
 const MainSheet = ({
   mainSheetWrapperRef,
@@ -93,6 +93,7 @@ const MainSheet = ({
           console.log("Persisted state purged");
         });
         handleClosing();
+        window.location.reload();
         break;
       case "Войти":
         toggleLoginVisibility();

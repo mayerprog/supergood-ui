@@ -28,7 +28,7 @@ const userPersistConfig = {
     "mapPosition",
     "userData",
     "salesid",
-    // "token",
+    "token",
     "floor",
     "flat",
     "entrance",
