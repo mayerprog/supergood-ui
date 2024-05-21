@@ -3,6 +3,7 @@ import { IoMdClose } from "react-icons/io";
 
 import React, { useEffect } from "react";
 import AddressComponent from "../AddressComponent/AddressComponent";
+import { useSelector } from "react-redux";
 
 const AddressModal = ({
   mapWrapperRef,
@@ -12,8 +13,14 @@ const AddressModal = ({
   isModal,
   toggleAddressVisibility,
 }) => {
+  const addressList = useSelector((state) => state.user.addressList);
+
   useEffect(() => {
     console.log("AddressModal has been drawn");
+  }, []);
+
+  useEffect(() => {
+    console.log("addressList", addressList);
   }, []);
 
   return (

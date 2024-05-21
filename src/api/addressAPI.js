@@ -95,7 +95,6 @@ export const addressAPI = {
       const response = await instance.post(`/getaddress.php`, {
         street,
       });
-      console.log("addressList", response.data);
       return response.data;
     } catch (err) {
       console.error(

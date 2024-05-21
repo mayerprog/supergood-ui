@@ -20,6 +20,7 @@ export const cartAPI = {
         itemid,
         qty,
       });
+      console.log("addToCart", response.data);
       return response.data;
     } catch (err) {
       console.error(

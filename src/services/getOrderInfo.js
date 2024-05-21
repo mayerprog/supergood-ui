@@ -7,8 +7,10 @@ export const getOrderInfo = async (params) => {
     token,
     salesid,
   });
-  const items = Object.values(data.sales.lines);
-  const itemsSum = data.sales.amount;
-  dispatch(setItems(items));
-  dispatch(updateSum(itemsSum));
+  if (data.sales) {
+    const items = Object.values(data.sales.lines);
+    const itemsSum = data.sales.amount;
+    dispatch(setItems(items));
+    dispatch(updateSum(itemsSum));
+  }
 };

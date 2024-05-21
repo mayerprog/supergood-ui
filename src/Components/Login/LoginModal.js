@@ -17,7 +17,6 @@ import { cartAPI } from "../../api/cartAPI";
 import { setItems, updateSum } from "../../redux/slices/cartSlice";
 import { addressAPI } from "../../api/addressAPI";
 import { persistor } from "../../index";
-import { setSalesid } from "../../redux/slices/userSlice";
 import { userAPI } from "../../api/userAPI";
 import { getOrderInfo } from "../../services/getOrderInfo";
 
@@ -37,8 +36,24 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const token = Cookies.get("token");
+
   const dynamicStyle = {
     "--border-color": borderColor,
+  };
+
+  const getOrderInfo = async () => {
+    if (token) {
+      const userPref = await userAPI.getUserPref(token);
+      const data = await cartAPI.getOrderInfo({
+        token,
+        salesid: userPref.salesid,
+      });
+      const items = Object.values(data.sales.lines);
+      const itemsSum = data.sales.amount;
+      dispatch(setItems(items));
+      dispatch(updateSum(itemsSum));
+    }
   };
 
   useEffect(() => {
@@ -64,6 +79,12 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code, dataSms]);
 
+  useEffect(() => {
+    (async () => {
+      await getOrderInfo();
+    })();
+  }, [token]);
+
   const handleChangePhone = (event) => {
     let val = event.target.value;
     setPhone(val);
@@ -81,7 +102,6 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   };
 
   const handleLogin = async () => {
-    const token = Cookies.get("token");
     dispatch(setIsAuth(true));
     //putting selected address to DB after authorization
     try {
@@ -107,22 +127,16 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
       for (let i = 0; i < cartItems.length; i++) {
         try {
           const userPref = await userAPI.getUserPref(token);
-          const response = await putToCartAPI(
-            cartItems[i],
-            token,
-            userPref.salesid
-          );
-          if (response.status === "ok") {
-            // await getOrderInfo({ token, sales: userPref.salesid, dispatch });
-            const data = await cartAPI.getOrderInfo({
-              token,
-              salesid: userPref.salesid,
-            });
-            const items = Object.values(data.sales.lines);
-            const itemsSum = data.sales.amount;
-            dispatch(setItems(items));
-            dispatch(updateSum(itemsSum));
-          }
+          await putToCartAPI(cartItems[i], token, userPref.salesid);
+          // const data = await cartAPI.getOrderInfo({
+          //   token,
+          //   salesid: userPref.salesid,
+          // });
+          // const items = Object.values(data.sales.lines);
+          // const itemsSum = data.sales.amount;
+          // dispatch(setItems(items));
+          // dispatch(updateSum(itemsSum));
+          await getOrderInfo();
         } catch (err) {
           console.log(err);
         }

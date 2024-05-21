@@ -143,7 +143,6 @@ function App() {
     const selectedAddressList = addressList.filter(
       (address) => address.selected
     );
-    console.log("addressSelected", addressSelected);
     if (selectedAddressList.length > 0) {
       // console.log("minor_area_id", selectedAddressList[0]);
       // to set selected address

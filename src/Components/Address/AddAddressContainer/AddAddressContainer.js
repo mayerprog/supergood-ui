@@ -20,6 +20,7 @@ import LevelContext from "../../../contexts/LevelContext";
 import { fetchHousesSuggestions } from "../../../services/fetchHousesSuggestions";
 import { addressAPI } from "../../../api/addressAPI";
 import { useUpdateStreetid } from "../../../hooks/useUpdateStreetid";
+import Cookies from "js-cookie";
 
 const AddAddressContainer = ({
   item,
@@ -45,11 +46,12 @@ const AddAddressContainer = ({
     setAddressData,
   } = useContext(LevelContext);
   const addressList = useSelector((state) => state.user.addressList);
-  const token = useSelector((state) => state.user.token);
+  // const token = useSelector((state) => state.user.token);
   const floor = useSelector((state) => state.user.floor);
   const flat = useSelector((state) => state.user.flat);
   const entrance = useSelector((state) => state.user.entrance);
   const description = useSelector((state) => state.user.description);
+  const token = Cookies.get("token");
 
   const dispatch = useDispatch();
 
@@ -171,23 +173,23 @@ const AddAddressContainer = ({
         addressid: item.addressid,
         status: 2,
       });
-      const responseSave = await addressAPI.saveAddress({
-        token: token,
-        street: firstAddress.street,
-        lat: firstAddress.lat,
-        long: firstAddress.long,
-        addressid: firstAddress.addressid,
-        streetid: firstAddress.streetid,
-        houseid: firstAddress.houseid,
-        entrance: firstAddress.entrance,
-        floor: firstAddress.floor,
-        flat: firstAddress.flat,
-        description: firstAddress.description,
-        selected: true,
-      });
-      if (responseSave.status === "ok") {
-        dispatch(updateSelected(1));
-      }
+      // const responseSave = await addressAPI.saveAddress({
+      //   token: token,
+      //   street: firstAddress.street,
+      //   lat: firstAddress.lat,
+      //   long: firstAddress.long,
+      //   addressid: firstAddress.addressid,
+      //   streetid: firstAddress.streetid,
+      //   houseid: firstAddress.houseid,
+      //   entrance: firstAddress.entrance,
+      //   floor: firstAddress.floor,
+      //   flat: firstAddress.flat,
+      //   description: firstAddress.description,
+      //   selected: true,
+      // });
+      // if (responseSave.status === "ok") {
+      //   dispatch(updateSelected(1));
+      // }
       if (responseDelete.status === "ok") {
         dispatch(removeAddress(item.addressid));
         dispatch(removeAddressSelected());
