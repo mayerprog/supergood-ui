@@ -29,6 +29,7 @@ import { persistor } from "./index";
 import { cartAPI } from "./api/cartAPI";
 import { setItems, updateSum } from "./redux/slices/cartSlice";
 import { useUpdateSumHook } from "./hooks/useUpdateSumHook";
+import { getOrderInfo } from "./services/getOrderInfo";
 
 function App() {
   // modals
@@ -193,28 +194,12 @@ function App() {
     })();
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (isAuth) {
-  //     // Purge persisted state
-  //     persistor.purge().then(() => {
-  //       console.log("Persisted state purged");
-  //     });
-  //   }
-  // }, [isAuth]);
-
   //getting order info
   useEffect(() => {
     (async () => {
       if (isAuth) {
         try {
-          const data = await cartAPI.getOrderInfo({ token, salesid });
-          if (data.sales) {
-            const items = Object.values(data.sales.lines);
-            const itemsSum = data.sales.amount;
-
-            dispatch(setItems(items));
-            dispatch(updateSum(itemsSum));
-          }
+          await getOrderInfo({ token, salesid, dispatch });
         } catch (err) {
           console.log(err);
         }

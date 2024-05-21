@@ -10,6 +10,7 @@ import {
 } from "../../redux/slices/cartSlice";
 import { putToCartAPI } from "../../services/putToCartAPI";
 import { cartAPI } from "../../api/cartAPI";
+import { getOrderInfo } from "../../services/getOrderInfo";
 
 const AddItemBox = ({
   backgroundColor,
@@ -82,11 +83,7 @@ const AddItemBox = ({
     if (isAuth) {
       const response = await putToCartAPI(updatedItem, token, salesid);
       if (response.status === "ok") {
-        const data = await cartAPI.getOrderInfo({ token, salesid });
-        const items = Object.values(data.sales.lines);
-        const itemsSum = data.sales.amount;
-        dispatch(setItems(items));
-        dispatch(updateSum(itemsSum));
+        await getOrderInfo({ token, salesid, dispatch });
       }
     } else {
       dispatch(updateItem(updatedItem));

@@ -19,6 +19,7 @@ import { addressAPI } from "../../api/addressAPI";
 import { persistor } from "../../index";
 import { setSalesid } from "../../redux/slices/userSlice";
 import { userAPI } from "../../api/userAPI";
+import { getOrderInfo } from "../../services/getOrderInfo";
 
 const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const [phone, setPhone] = useState("");
@@ -31,9 +32,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
 
   const dataSms = useSelector((state) => state.auth.dataSms);
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const salesid = useSelector((state) => state.user.salesid);
   const addressSelected = useSelector((state) => state.user.addressSelected);
-  const dataLogin = useSelector((state) => state.auth.dataLogin);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -84,6 +83,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const handleLogin = async () => {
     const token = Cookies.get("token");
     dispatch(setIsAuth(true));
+    //putting selected address to DB after authorization
     try {
       await addressAPI.saveAddress({
         token: token,
@@ -113,6 +113,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
             userPref.salesid
           );
           if (response.status === "ok") {
+            // await getOrderInfo({ token, sales: userPref.salesid, dispatch });
             const data = await cartAPI.getOrderInfo({
               token,
               salesid: userPref.salesid,

@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { cartAPI } from "../api/cartAPI";
 import { addItems, setItems, updateSum } from "../redux/slices/cartSlice";
 import { putToCartAPI } from "./putToCartAPI";
+import { getOrderInfo } from "./getOrderInfo";
 
 export const addItemToCart = async (info) => {
   const {
@@ -27,12 +28,7 @@ export const addItemToCart = async (info) => {
     if (isAuth) {
       const response = await putToCartAPI(item, token, salesid);
       if (response.status === "ok") {
-        const data = await cartAPI.getOrderInfo({ token, salesid });
-        const items = Object.values(data.sales.lines);
-        const itemsSum = data.sales.amount;
-
-        dispatch(setItems(items));
-        dispatch(updateSum(itemsSum));
+        await getOrderInfo({ token, salesid, dispatch });
       }
     } else {
       dispatch(
