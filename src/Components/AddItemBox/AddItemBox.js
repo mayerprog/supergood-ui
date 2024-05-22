@@ -46,16 +46,13 @@ const AddItemBox = ({
   useEffect(() => {
     if (foundCartItem) {
       if (!foundCartItem.qty) {
-        if (foundCartItem.params.amount.value < 1) {
-          dispatch(removeItems(foundCartItem.itemid));
-        }
         setAmount(foundCartItem.params.amount.value);
       } else {
         setAmount(foundCartItem.qty);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartItems, itemId, foundCartItem]);
+  }, [foundCartItem]);
 
   const increment = async (event) => {
     event.stopPropagation();
@@ -115,16 +112,27 @@ const AddItemBox = ({
       price: item.price - item.initialPrice,
     };
     if (isAuth) {
-      const response = await putToCartAPI(updatedItem, token, salesid);
-      if (response.status === "ok") {
-        const data = await cartAPI.getOrderInfo({ token, salesid });
-        const items = Object.values(data.sales.lines);
-        const itemsSum = data.sales.amount;
-        dispatch(setItems(items));
-        dispatch(updateSum(itemsSum));
+      if (item.qty > 1) {
+        const response = await putToCartAPI(updatedItem, token, salesid);
+        if (response.status === "ok") {
+          await getOrderInfo({ token, salesid, dispatch });
+        }
+      } else {
+        const response = await cartAPI.deleteItem({
+          token,
+          salesid,
+          id: item.id,
+        });
+        if (response.status === "ok") {
+          await getOrderInfo({ token, salesid, dispatch });
+        }
       }
     } else {
-      dispatch(updateItem(updatedItem));
+      if (item.params.amount.value > 1) {
+        dispatch(updateItem(updatedItem));
+      } else {
+        dispatch(removeItems(item.itemid));
+      }
     }
   };
 
