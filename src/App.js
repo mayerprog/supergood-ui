@@ -182,7 +182,7 @@ function App() {
     }
   }, [netbooksMediaQuery]);
 
-  // setting data from getUserPref with token form cookies
+  // setting data from getUserPref with token from cookies
   useEffect(() => {
     (async () => {
       try {
@@ -201,8 +201,8 @@ function App() {
           );
           dispatch(setSalesid(data.salesid));
           dispatch(setAddressList(Object.values(data.address)));
-          dispatch(setIsAuth(true));
           dispatch(setToken(token));
+          dispatch(setIsAuth(true));
         } else {
           dispatch(setIsAuth(false));
         }

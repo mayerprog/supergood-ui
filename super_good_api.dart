@@ -277,7 +277,7 @@ abstract class SuperGoodApi {
     @Field("hash") String hash,
   );
 
-  // post order, and if paying online, then needed to be payed
+  // post order, and if paying online, then needed to be paid
   @FormUrlEncoded()
   @POST("orderpost.php")
   Future<String> orderPost(

@@ -18,7 +18,12 @@ import { setItems, updateSum } from "../../redux/slices/cartSlice";
 import { addressAPI } from "../../api/addressAPI";
 import { persistor } from "../../index";
 import { userAPI } from "../../api/userAPI";
-import { setAddressList, setToken } from "../../redux/slices/userSlice";
+import {
+  setAddressList,
+  setSalesid,
+  setToken,
+  setUserData,
+} from "../../redux/slices/userSlice";
 
 const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const [phone, setPhone] = useState("");
@@ -32,7 +37,6 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const dataSms = useSelector((state) => state.auth.dataSms);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const addressSelected = useSelector((state) => state.user.addressSelected);
-  const token = useSelector((state) => state.user.token);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -41,9 +45,8 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
     "--border-color": borderColor,
   };
 
-  const getOrderInfo = async () => {
-    const token = Cookies.get("token");
-
+  // setting data from getUserPref with token from cookies
+  const getOrderInfo = async (token) => {
     if (token) {
       const userPref = await userAPI.getUserPref(token);
       const data = await cartAPI.getOrderInfo({
@@ -55,14 +58,20 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
       dispatch(setItems(items));
       dispatch(updateSum(itemsSum));
       dispatch(setAddressList(Object.values(userPref.address)));
+      dispatch(setSalesid(data.salesid));
+      dispatch(setToken(token));
+      dispatch(
+        setUserData({
+          name: data.name,
+          birthday: data.birthday,
+          birthdaybonus: data.birthdaybonus,
+          email: data.email,
+          gender: data.gender,
+          userid: data.userid,
+        })
+      );
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      await getOrderInfo();
-    })();
-  }, []);
 
   useEffect(() => {
     (async () => {
@@ -106,26 +115,27 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
 
   const handleLogin = async () => {
     const token = Cookies.get("token");
-
     dispatch(setIsAuth(true));
     //putting selected address to DB after authorization
-    try {
-      await addressAPI.saveAddress({
-        token: token,
-        street: addressSelected.street,
-        lat: addressSelected.lat,
-        long: addressSelected.long,
-        addressid: addressSelected.addressid,
-        streetid: addressSelected.streetid,
-        houseid: addressSelected.houseid,
-        entrance: addressSelected.entrance,
-        floor: addressSelected.floor,
-        flat: addressSelected.flat,
-        description: addressSelected.description,
-        selected: true,
-      });
-    } catch (err) {
-      console.log(err);
+    if (addressSelected) {
+      try {
+        await addressAPI.saveAddress({
+          token: token,
+          street: addressSelected.street,
+          lat: addressSelected.lat,
+          long: addressSelected.long,
+          addressid: addressSelected.addressid,
+          streetid: addressSelected.streetid,
+          houseid: addressSelected.houseid,
+          entrance: addressSelected.entrance,
+          floor: addressSelected.floor,
+          flat: addressSelected.flat,
+          description: addressSelected.description,
+          selected: true,
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
     //putting items from virtual cart to DB after authorization
     if (cartItems.length > 0) {
@@ -133,12 +143,18 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
         try {
           const userPref = await userAPI.getUserPref(token);
           await putToCartAPI(cartItems[i], token, userPref.salesid);
-          await getOrderInfo();
         } catch (err) {
           console.log(err);
         }
       }
     }
+
+    try {
+      await getOrderInfo(token);
+    } catch (err) {
+      console.log(err);
+    }
+
     persistor.purge().then(() => {
       console.log("Persisted state purged");
     });
