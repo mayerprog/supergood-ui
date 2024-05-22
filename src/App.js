@@ -78,14 +78,7 @@ function App() {
   const addressList = useSelector((state) => state.user.addressList);
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const dataLogin = useSelector((state) => state.auth.dataLogin);
-  const {
-    setMarkerAddress,
-    setMarkerPosition,
-    streetid,
-    setStreetid,
-    addressData,
-    setAddressData,
-  } = useContext(LevelContext);
+  const { setMarkerAddress, setMarkerPosition } = useContext(LevelContext);
 
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
@@ -203,6 +196,7 @@ function App() {
           dispatch(setAddressList(Object.values(data.address)));
           dispatch(setToken(token));
           dispatch(setIsAuth(true));
+          await getOrderInfo({ token, salesid: data.salesid, dispatch });
         } else {
           dispatch(setIsAuth(false));
         }
@@ -212,18 +206,18 @@ function App() {
     })();
   }, [dispatch]);
 
-  //getting order info
-  useEffect(() => {
-    (async () => {
-      if (isAuth) {
-        try {
-          await getOrderInfo({ token, salesid, dispatch });
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    })();
-  }, [dispatch, isAuth]);
+  // //getting order info
+  // useEffect(() => {
+  //   (async () => {
+  //     if (isAuth) {
+  //       try {
+  //         await getOrderInfo({ token, salesid, dispatch });
+  //       } catch (err) {
+  //         console.log(err);
+  //       }
+  //     }
+  //   })();
+  // }, [dispatch, isAuth]);
 
   useEffect(() => {
     console.log("token", token);

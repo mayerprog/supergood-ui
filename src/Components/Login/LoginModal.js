@@ -57,6 +57,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
       const itemsSum = data.sales.amount;
       dispatch(setItems(items));
       dispatch(updateSum(itemsSum));
+
       dispatch(setAddressList(Object.values(userPref.address)));
       dispatch(setSalesid(data.salesid));
       dispatch(setToken(token));
