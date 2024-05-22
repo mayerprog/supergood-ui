@@ -18,7 +18,7 @@ import { setItems, updateSum } from "../../redux/slices/cartSlice";
 import { addressAPI } from "../../api/addressAPI";
 import { persistor } from "../../index";
 import { userAPI } from "../../api/userAPI";
-import { setAddressList } from "../../redux/slices/userSlice";
+import { setAddressList, setToken } from "../../redux/slices/userSlice";
 
 const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const [phone, setPhone] = useState("");
@@ -32,17 +32,18 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const dataSms = useSelector((state) => state.auth.dataSms);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const addressSelected = useSelector((state) => state.user.addressSelected);
+  const token = useSelector((state) => state.user.token);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const token = Cookies.get("token");
 
   const dynamicStyle = {
     "--border-color": borderColor,
   };
 
   const getOrderInfo = async () => {
+    const token = Cookies.get("token");
+
     if (token) {
       const userPref = await userAPI.getUserPref(token);
       const data = await cartAPI.getOrderInfo({
@@ -59,6 +60,12 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
 
   useEffect(() => {
     (async () => {
+      await getOrderInfo();
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
       try {
         if (code.length === 4) {
           const response = await authAPI.login(
@@ -70,6 +77,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
             dispatch(setDataLogin(response));
             // setting the token after logging in
             Cookies.set("token", dataSms.token, { secure: true });
+
             handleLogin();
           }
         }
@@ -79,12 +87,6 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code, dataSms]);
-
-  useEffect(() => {
-    (async () => {
-      await getOrderInfo();
-    })();
-  }, [token]);
 
   const handleChangePhone = (event) => {
     let val = event.target.value;
@@ -103,6 +105,8 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   };
 
   const handleLogin = async () => {
+    const token = Cookies.get("token");
+
     dispatch(setIsAuth(true));
     //putting selected address to DB after authorization
     try {
