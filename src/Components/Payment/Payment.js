@@ -51,9 +51,15 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
           <div className={styles.info}>Время доставки</div>
           <div className={styles.info}>45 мин</div>
         </div>
+
         <div className={styles.promo} onClick={toggleOrderPromoVisibility}>
           Использовать промокод или бонусы
         </div>
+        <input
+          className={styles.input}
+          placeholder="Ваш комментарий к заказу"
+          // onChange={(e) => setDescription(e.target.value)}
+        />
         {!netbooksMediaQuery && (
           <div className={styles.finalPayment}>
             <button

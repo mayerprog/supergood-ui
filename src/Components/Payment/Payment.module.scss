@@ -112,4 +112,15 @@
   .buttonText {
     font-weight: 400;
   }
+  .input {
+    @include form-input-style;
+    border: 1px solid #ccc;
+    text-overflow: ellipsis;
+    padding-left: 37px;
+    margin: 10px 0;
+    @include focus-style(#ccc);
+    @media (max-width: 332px) {
+      padding-left: 15px;
+    }
+  }
 }

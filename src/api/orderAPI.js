@@ -55,7 +55,6 @@ export const orderAPI = {
         salesid,
         addressid,
       });
-      console.log("min sum", response.data);
       return response.data;
     } catch (err) {
       console.error(
