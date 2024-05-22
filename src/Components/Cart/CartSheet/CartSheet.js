@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import DeviceFooter from "../../Footer/DeviceFooter/DeviceFooter";
 import { GiShoppingCart } from "react-icons/gi";
+import { deleteCart } from "../../../services/deleteCart";
 
 const CartSheet = ({
   cartSheetWrapperRef,
@@ -19,6 +20,9 @@ const CartSheet = ({
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const itemsSum = useSelector((state) => state.cart.itemsSum);
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  const token = useSelector((state) => state.user.token);
+  const salesid = useSelector((state) => state.user.salesid);
 
   const handleClosing = () => {
     setCartSheetClosing(false);
@@ -77,7 +81,9 @@ const CartSheet = ({
         {cartItems.length > 0 ? (
           <span
             className={styles.buttonText}
-            onClick={() => dispatch(removeAllItems())}
+            onClick={() =>
+              deleteCart({ dispatch, cartItems, isAuth, token, salesid })
+            }
           >
             Очистить
           </span>

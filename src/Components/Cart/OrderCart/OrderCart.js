@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CartBox from "../CartBox/CartBox";
 import { removeAllItems } from "../../../redux/slices/cartSlice";
+import { deleteCart } from "../../../services/deleteCart";
 
 const OrderCart = ({}) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const itemsSum = useSelector((state) => state.cart.itemsSum);
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  const token = useSelector((state) => state.user.token);
+  const salesid = useSelector((state) => state.user.salesid);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -22,7 +25,9 @@ const OrderCart = ({}) => {
         <span className={styles.cartTitle}>Ваш заказ</span>
         <span
           className={styles.deleteTitle}
-          onClick={() => dispatch(removeAllItems())}
+          onClick={() =>
+            deleteCart({ dispatch, cartItems, isAuth, token, salesid })
+          }
         >
           Очистить
         </span>

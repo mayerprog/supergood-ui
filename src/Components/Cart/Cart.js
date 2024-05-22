@@ -6,6 +6,7 @@ import { removeAllItems } from "../../redux/slices/cartSlice";
 import CartShimmer from "../../Loaders/CartShimmer";
 import React, { memo, useEffect, useRef } from "react";
 import { cartAPI } from "../../api/cartAPI";
+import { deleteCart } from "../../services/deleteCart";
 
 const Cart = ({
   cartWrapperRef,
@@ -51,25 +52,6 @@ const Cart = ({
     }
   };
 
-  const removeItems = async () => {
-    if (!isAuth) {
-      dispatch(removeAllItems());
-    } else {
-      if (cartItems.length > 0) {
-        console.log("cartItems", cartItems);
-        try {
-          await Promise.all(
-            cartItems.map((item) =>
-              cartAPI.deleteItem({ token, salesid, id: item.id })
-            )
-          );
-        } catch (err) {
-          console.log(err);
-        }
-      }
-    }
-  };
-
   if (loading) {
     return <CartShimmer />;
   }
@@ -78,7 +60,12 @@ const Cart = ({
     <div className={styles.cart} ref={cartWrapperRef} style={dynamicStyle}>
       <div className={styles.cartHeader}>
         <span className={styles.cartTitle}>Корзина</span>
-        <span className={styles.deleteTitle} onClick={removeItems}>
+        <span
+          className={styles.deleteTitle}
+          onClick={() =>
+            deleteCart({ dispatch, cartItems, isAuth, token, salesid })
+          }
+        >
           Очистить
         </span>
       </div>
