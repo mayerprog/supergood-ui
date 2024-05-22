@@ -14,6 +14,7 @@ import {
   persistReducer,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { thunk } from "redux-thunk";
 
 const cartPersistConfig = {
   key: "cart",
@@ -27,7 +28,7 @@ const userPersistConfig = {
     "addressList",
     "mapPosition",
     "userData",
-    // "salesid",
+    "salesid",
     "token",
     "floor",
     "flat",
@@ -58,5 +59,5 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         ignoredPaths: ["_persist"],
       },
-    }),
+    }).concat(thunk),
 });

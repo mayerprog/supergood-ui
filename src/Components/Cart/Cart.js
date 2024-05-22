@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { removeAllItems } from "../../redux/slices/cartSlice";
 import CartShimmer from "../../Loaders/CartShimmer";
 import React, { memo, useEffect, useRef } from "react";
+import { cartAPI } from "../../api/cartAPI";
 
 const Cart = ({
   cartWrapperRef,
@@ -20,6 +21,9 @@ const Cart = ({
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const itemsSum = useSelector((state) => state.cart.itemsSum);
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  const token = useSelector((state) => state.user.token);
+  const salesid = useSelector((state) => state.user.salesid);
 
   const dynamicStyle = {
     "--cart-position": position,
@@ -47,17 +51,34 @@ const Cart = ({
     }
   };
 
+  const removeItems = async () => {
+    if (!isAuth) {
+      dispatch(removeAllItems());
+    } else {
+      if (cartItems.length > 0) {
+        console.log("cartItems", cartItems);
+        try {
+          await Promise.all(
+            cartItems.map((item) =>
+              cartAPI.deleteItem({ token, salesid, id: item.id })
+            )
+          );
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    }
+  };
+
   if (loading) {
     return <CartShimmer />;
   }
+
   return (
     <div className={styles.cart} ref={cartWrapperRef} style={dynamicStyle}>
       <div className={styles.cartHeader}>
         <span className={styles.cartTitle}>Корзина</span>
-        <span
-          className={styles.deleteTitle}
-          onClick={() => dispatch(removeAllItems())}
-        >
+        <span className={styles.deleteTitle} onClick={removeItems}>
           Очистить
         </span>
       </div>
