@@ -9,13 +9,14 @@ import NewOrderPage from "./Pages/NewOrderPage/NewOrderPage";
 import OrdersPage from "./Pages/OrdersPage/OrdersPage";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useOutsideHook } from "./hooks/useOutsideHook";
 import { useMediaQuery } from "react-responsive";
 import {
   setAddressList,
   setAddressSelected,
   setDeptid,
+  setMapPosition,
   setSalesid,
   setToken,
   setUserData,
@@ -30,6 +31,7 @@ import { cartAPI } from "./api/cartAPI";
 import { setItems, updateSum } from "./redux/slices/cartSlice";
 import { useUpdateSumHook } from "./hooks/useUpdateSumHook";
 import { getOrderInfo } from "./services/getOrderInfo";
+import LevelContext from "./contexts/LevelContext";
 
 function App() {
   // modals
@@ -76,6 +78,14 @@ function App() {
   const addressList = useSelector((state) => state.user.addressList);
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const dataLogin = useSelector((state) => state.auth.dataLogin);
+  const {
+    setMarkerAddress,
+    setMarkerPosition,
+    streetid,
+    setStreetid,
+    addressData,
+    setAddressData,
+  } = useContext(LevelContext);
 
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
@@ -144,10 +154,19 @@ function App() {
       (address) => address.selected
     );
     if (selectedAddressList.length > 0) {
-      // console.log("minor_area_id", selectedAddressList[0]);
+      console.log("minor_area_id", selectedAddressList[0]);
       // to set selected address
       dispatch(setAddressSelected(selectedAddressList[0]));
       dispatch(setDeptid(selectedAddressList[0]?.minor_area_id));
+      const newPosition = [
+        parseFloat(selectedAddressList[0].lat),
+        parseFloat(selectedAddressList[0].long),
+      ];
+      dispatch(setMapPosition(newPosition));
+      setMarkerPosition(newPosition);
+      setMarkerAddress(
+        `${selectedAddressList[0].street}, ${selectedAddressList[0].yhouse}`
+      );
     } else dispatch(setAddressSelected(""));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addressList]);
