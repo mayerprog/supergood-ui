@@ -206,19 +206,6 @@ function App() {
     })();
   }, [dispatch]);
 
-  // //getting order info
-  // useEffect(() => {
-  //   (async () => {
-  //     if (isAuth) {
-  //       try {
-  //         await getOrderInfo({ token, salesid, dispatch });
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     }
-  //   })();
-  // }, [dispatch, isAuth]);
-
   useEffect(() => {
     console.log("token", token);
     console.log("salesid", salesid);

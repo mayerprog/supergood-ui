@@ -1,13 +1,13 @@
 import styles from "./CartSheet.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAllItems } from "../../../redux/slices/cartSlice";
-import React, { memo, useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import CartBox from "../CartBox/CartBox";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import DeviceFooter from "../../Footer/DeviceFooter/DeviceFooter";
 import { GiShoppingCart } from "react-icons/gi";
 import { deleteCart } from "../../../services/deleteCart";
+import { handleClickSubmit } from "../../../services/handleClickSubmit";
 
 const CartSheet = ({
   cartSheetWrapperRef,
@@ -23,17 +23,13 @@ const CartSheet = ({
   const isAuth = useSelector((state) => state.auth.isAuth);
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
+  const addressSelected = useSelector((state) => state.user.addressSelected);
+  const [errMessage, setErrMessage] = useState("");
+  const [itemsUnavailable, setItemsUnavailable] = useState("");
 
   const handleClosing = () => {
     setCartSheetClosing(false);
     setIsCartSheetOpen(false);
-  };
-
-  const handleClickSubmit = () => {
-    if (cartItems.length > 0) {
-      setIsCartSheetOpen(false);
-      navigate("/submit");
-    }
   };
 
   useEffect(() => {
@@ -110,8 +106,33 @@ const CartSheet = ({
             <span>{itemsSum} ₽</span>
           </div>
 
+          {errMessage && <span className={styles.error}>{errMessage}</span>}
+          {itemsUnavailable.length > 0 && (
+            <span className={styles.addErrInfo}>Отсутствующие позиции:</span>
+          )}
+          {itemsUnavailable.length > 0 &&
+            itemsUnavailable.map((item, index) => (
+              <span className={styles.errorItems} key={index}>
+                {item.itemname}
+              </span>
+            ))}
+
           <div className={styles.button}>
-            <button className={styles.buttonStyle} onClick={handleClickSubmit}>
+            <button
+              className={styles.buttonStyle}
+              onClick={() =>
+                handleClickSubmit({
+                  token,
+                  salesid,
+                  cartItems,
+                  action: setIsCartSheetOpen,
+                  navigate,
+                  addressSelected,
+                  setErrMessage,
+                  setItemsUnavailable,
+                })
+              }
+            >
               <span className={styles.buttonText}>Оформить заказ</span>
             </button>
           </div>

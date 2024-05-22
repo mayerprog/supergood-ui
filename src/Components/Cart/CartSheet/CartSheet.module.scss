@@ -90,6 +90,26 @@
   text-align: center;
 }
 
+.error,
+.errorItems,
+.addErrInfo {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  padding: 5px;
+  color: red;
+  text-align: center;
+}
+
+.errorItems {
+  font-weight: 600;
+}
+
+.addErrInfo {
+  color: black;
+  font-weight: 500;
+}
+
 .button {
   display: flex;
   flex: 1;

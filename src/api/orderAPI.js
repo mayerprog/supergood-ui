@@ -47,20 +47,22 @@ export const orderAPI = {
       console.log("Failed to post order. Check console for details.");
     }
   },
-  async getOrderInfo(params) {
-    const { token, salesid } = params;
+  async getMinSum(params) {
+    const { token, salesid, addressid } = params;
     try {
-      const response = await instance.post(`/getsalesinfo.php`, {
+      const response = await instance.post(`/minsum.php`, {
         token,
         salesid,
+        addressid,
       });
+      console.log("min sum", response.data);
       return response.data;
     } catch (err) {
       console.error(
-        "Error getting order info:",
+        "Error getting minimum sum:",
         err.response ? err.response.data : err
       );
-      console.log("Failed to get order info. Check console for details.");
+      console.log("Failed to get minimum sum. Check console for details.");
     }
   },
 };

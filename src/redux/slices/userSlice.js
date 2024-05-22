@@ -50,7 +50,6 @@ export const userSlice = createSlice({
     },
     setAddressSelected: (state, action) => {
       state.addressSelected = action.payload;
-      console.log("addressSelected", state.addressSelected);
     },
     removeAddressSelected: (state, action) => {
       state.addressSelected = {};

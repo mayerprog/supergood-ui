@@ -277,6 +277,16 @@ abstract class SuperGoodApi {
     @Field("hash") String hash,
   );
 
+  // check if order is satisfying minimum price
+  @FormUrlEncoded()
+  @POST("minsum.php")
+  Future<String> minsum(
+    @Field("token") String token,
+    @Field("hash") String hash,
+    @Field("salesid") String salesid,
+    @Field("addressid") int addressid,
+  );
+
   // post order, and if paying online, then needed to be paid
   @FormUrlEncoded()
   @POST("orderpost.php")

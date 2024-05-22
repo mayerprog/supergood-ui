@@ -4,9 +4,10 @@ import CartBox from "./CartBox/CartBox";
 import { useNavigate } from "react-router-dom";
 import { removeAllItems } from "../../redux/slices/cartSlice";
 import CartShimmer from "../../Loaders/CartShimmer";
-import React, { memo, useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { cartAPI } from "../../api/cartAPI";
 import { deleteCart } from "../../services/deleteCart";
+import { handleClickSubmit } from "../../services/handleClickSubmit";
 
 const Cart = ({
   cartWrapperRef,
@@ -25,7 +26,10 @@ const Cart = ({
   const isAuth = useSelector((state) => state.auth.isAuth);
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
+  const addressSelected = useSelector((state) => state.user.addressSelected);
 
+  const [errMessage, setErrMessage] = useState("");
+  const [itemsUnavailable, setItemsUnavailable] = useState([]);
   const dynamicStyle = {
     "--cart-position": position,
     "--cart-top": top,
@@ -44,13 +48,6 @@ const Cart = ({
   //     `Компонент Cart отрисован в ${new Date().toLocaleTimeString()}`
   //   );
   // });
-
-  const handleClickSubmit = () => {
-    if (cartItems.length > 0) {
-      toggleCartVisibility(false);
-      navigate("/submit");
-    }
-  };
 
   if (loading) {
     return <CartShimmer />;
@@ -78,8 +75,32 @@ const Cart = ({
           <span>Сумма заказа:</span>
           <span>{itemsSum} ₽</span>
         </div>
+        {errMessage && <span className={styles.error}>{errMessage}</span>}
+        {itemsUnavailable.length > 0 && (
+          <span className={styles.addErrInfo}>Отсутствующие позиции:</span>
+        )}
+        {itemsUnavailable.length > 0 &&
+          itemsUnavailable.map((item, index) => (
+            <span className={styles.errorItems} key={index}>
+              {item.itemname}
+            </span>
+          ))}
         <div className={styles.button}>
-          <button className={styles.buttonStyle} onClick={handleClickSubmit}>
+          <button
+            className={styles.buttonStyle}
+            onClick={() =>
+              handleClickSubmit({
+                token,
+                salesid,
+                cartItems,
+                action: toggleCartVisibility,
+                navigate,
+                addressSelected,
+                setErrMessage,
+                setItemsUnavailable,
+              })
+            }
+          >
             <span className={styles.buttonText}>Оформить заказ</span>
           </button>
         </div>

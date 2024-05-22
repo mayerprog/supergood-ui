@@ -62,6 +62,22 @@
     background: #ccc;
   }
 
+  .error,
+  .errorItems {
+    color: red;
+    text-align: center;
+    padding: 5px;
+  }
+
+  .errorItems {
+    font-weight: 600;
+  }
+
+  .addErrInfo {
+    text-align: center;
+    padding: 5px;
+  }
+
   .button {
     display: flex;
     align-items: flex-end;
