@@ -6,6 +6,7 @@ import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 import { removeOrderInfo } from "../../redux/slices/orderSlice";
 import { useMediaQuery } from "react-responsive";
 import { handleSetOrderInfo } from "../../services/handleSetOrderInfo";
+import { setDescription } from "../../redux/slices/userSlice";
 
 const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
   const itemsSum = useSelector((state) => state.cart.itemsSum);
@@ -58,7 +59,7 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
         <input
           className={styles.input}
           placeholder="Ваш комментарий к заказу"
-          // onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => dispatch(setDescription(e.target.value))}
         />
         {!netbooksMediaQuery && (
           <div className={styles.finalPayment}>

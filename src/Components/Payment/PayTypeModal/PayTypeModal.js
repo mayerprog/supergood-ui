@@ -40,7 +40,7 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
 
       {["Наличными курьеру", "Банковской картой", "Подарочный сертификат"].map(
         (item, index) => (
-          <div className={styles.payTypeContainer} key={item}>
+          <div className={styles.payTypeContainer} key={index}>
             <input
               type="radio"
               checked={item === chosenValue}
@@ -63,7 +63,7 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
               className={styles.buttonStyle}
               onClick={() => dispatch(setChangeAmount(inputChange))}
             >
-              <span className={styles.buttonText}>Ок</span>
+              <span className={styles.buttonText}>ОК</span>
             </button>
           </div>
         </div>

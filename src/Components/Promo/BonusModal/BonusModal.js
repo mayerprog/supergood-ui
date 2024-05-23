@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import BonusCards from "../BonusCards/BonusCards";
 import styles from "./BonusModal.module.scss";
 import { IoMdClose } from "react-icons/io";
@@ -11,6 +12,8 @@ const BonusModal = ({ bonusWrapperRef, toggleBonusVisibility }) => {
       backgroundColor: "#EAF2B6",
     },
   ];
+
+  const bonus = useSelector((state) => state.order.bonus);
   return (
     <div className={styles.container} ref={bonusWrapperRef}>
       <div onClick={toggleBonusVisibility} className={styles.icon}>
@@ -18,7 +21,7 @@ const BonusModal = ({ bonusWrapperRef, toggleBonusVisibility }) => {
       </div>
       <div className={styles.bonusContainer}>
         <h3>Баланс бонусных рублей</h3>
-        <span>1000 ₽</span>
+        <span>{bonus}</span>
       </div>
       <BonusCards
         cards={cards}

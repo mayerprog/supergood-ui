@@ -64,4 +64,34 @@ export const orderAPI = {
       console.log("Failed to get minimum sum. Check console for details.");
     }
   },
+  async getBonus(token) {
+    try {
+      const response = await instance.post(`/getbalance.php`, {
+        token,
+      });
+      console.log("bonus", response.data);
+      return response.data;
+    } catch (err) {
+      console.error(
+        "Error getting points:",
+        err.response ? err.response.data : err
+      );
+      console.log("Failed to get points. Check console for details.");
+    }
+  },
+  async getLoyalty(token) {
+    try {
+      const response = await instance.post(`/getbalancelevel.php`, {
+        token,
+      });
+      console.log("loyaltylvl", response.data);
+      return response.data;
+    } catch (err) {
+      console.error(
+        "Error getting points:",
+        err.response ? err.response.data : err
+      );
+      console.log("Failed to get points. Check console for details.");
+    }
+  },
 };

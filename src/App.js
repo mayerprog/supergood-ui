@@ -32,6 +32,8 @@ import { setItems, updateSum } from "./redux/slices/cartSlice";
 import { useUpdateSumHook } from "./hooks/useUpdateSumHook";
 import { getOrderInfo } from "./services/getOrderInfo";
 import LevelContext from "./contexts/LevelContext";
+import { orderAPI } from "./api/orderAPI";
+import { setBonus } from "./redux/slices/orderSlice";
 
 function App() {
   // modals
@@ -197,6 +199,9 @@ function App() {
           dispatch(setToken(token));
           dispatch(setIsAuth(true));
           await getOrderInfo({ token, salesid: data.salesid, dispatch });
+          const bonusData = await orderAPI.getBonus(token);
+          const bonus = bonusData.bonuses[0].discamount.split(".")[0];
+          dispatch(setBonus(bonus));
         } else {
           dispatch(setIsAuth(false));
         }

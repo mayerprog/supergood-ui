@@ -4,6 +4,8 @@ const initialState = {
   //   orderInfo: {},
   orders: [],
   changeAmount: null,
+  description: "",
+  bonus: null,
 };
 
 export const orderSlice = createSlice({
@@ -23,10 +25,21 @@ export const orderSlice = createSlice({
     setChangeAmount: (state, action) => {
       state.changeAmount = action.payload;
     },
+    setDescription: (state, action) => {
+      state.description = action.payload;
+    },
+    setBonus: (state, action) => {
+      state.bonus = action.payload;
+    },
   },
 });
 
-export const { setOrderInfo, removeOrderInfo, addOrders, setChangeAmount } =
-  orderSlice.actions;
+export const {
+  setOrderInfo,
+  removeOrderInfo,
+  addOrders,
+  setChangeAmount,
+  setBonus,
+} = orderSlice.actions;
 
 export default orderSlice.reducer;
