@@ -116,7 +116,7 @@
     @include form-input-style;
     border: 1px solid #ccc;
     text-overflow: ellipsis;
-    padding-left: 37px;
+    padding-left: 25px;
     margin: 10px 0;
     @include focus-style(#ccc);
     @media (max-width: 332px) {

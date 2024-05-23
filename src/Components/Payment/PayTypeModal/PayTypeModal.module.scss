@@ -108,6 +108,32 @@
       margin-bottom: 0;
     }
   }
+  .cashInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0;
+
+    .buttonStyle {
+      @include reusable-button;
+      height: 35px;
+      width: 100px;
+      align-self: center;
+      margin: 1rem 0;
+      background-color: #e9bc5b;
+      @include interactive-bg(#e9bc5b);
+    }
+    .inputContainer {
+      display: flex;
+      flex-direction: column;
+    }
+    .input {
+      @include reusable-input;
+      @include focus-style(#e9bc5b);
+      margin-bottom: 0;
+      width: 130px;
+    }
+  }
   .icon {
     cursor: pointer;
   }
