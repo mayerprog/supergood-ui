@@ -12,6 +12,7 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
   const itemsSum = useSelector((state) => state.cart.itemsSum);
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const deliveryTime = useSelector((state) => state.cart.deliveryTime);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
         </div>
         <div className={styles.paymentDetails}>
           <div className={styles.info}>Время доставки</div>
-          <div className={styles.info}>45 мин</div>
+          <div className={styles.info}>{deliveryTime} мин</div>
         </div>
 
         <div className={styles.promo} onClick={toggleOrderPromoVisibility}>

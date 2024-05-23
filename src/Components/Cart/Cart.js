@@ -27,6 +27,7 @@ const Cart = ({
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
   const addressSelected = useSelector((state) => state.user.addressSelected);
+  const deliveryTime = useSelector((state) => state.cart.deliveryTime);
 
   const [errMessage, setErrMessage] = useState("");
   const [itemsUnavailable, setItemsUnavailable] = useState([]);
@@ -71,6 +72,10 @@ const Cart = ({
       ))}
       <div className={styles.cartFooter}>
         <div className={styles.line} />
+        <div className={styles.orderSum}>
+          <span>Время доставки:</span>
+          <span>{deliveryTime} мин</span>
+        </div>
         <div className={styles.orderSum}>
           <span>Сумма заказа:</span>
           <span>{itemsSum} ₽</span>

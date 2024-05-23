@@ -18,8 +18,6 @@ export const handleClickSubmit = async (params) => {
         salesid,
         addressid: addressSelected.addressid,
       });
-      console.log(response);
-
       if (response.status === "ok") {
         action(false);
         navigate("/submit");
