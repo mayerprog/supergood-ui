@@ -14,7 +14,11 @@ import { IoMdClose } from "react-icons/io";
 import Cookies from "js-cookie";
 import { putToCartAPI } from "../../services/putToCartAPI";
 import { cartAPI } from "../../api/cartAPI";
-import { setItems, updateSum } from "../../redux/slices/cartSlice";
+import {
+  setDeliveryTime,
+  setItems,
+  updateSum,
+} from "../../redux/slices/cartSlice";
 import { addressAPI } from "../../api/addressAPI";
 import { persistor } from "../../index";
 import { userAPI } from "../../api/userAPI";
@@ -55,8 +59,12 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
       });
       const items = Object.values(data.sales.lines);
       const itemsSum = data.sales.amount;
+      const deliveryTime = data.sales.calcdlvtime;
+
       dispatch(setItems(items));
       dispatch(updateSum(itemsSum));
+      if (itemsSum) dispatch(updateSum(itemsSum));
+      if (deliveryTime) dispatch(setDeliveryTime(deliveryTime));
 
       dispatch(setAddressList(Object.values(userPref.address)));
       dispatch(setSalesid(data.salesid));

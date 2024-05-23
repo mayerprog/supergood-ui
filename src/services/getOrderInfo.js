@@ -16,7 +16,6 @@ export const getOrderInfo = async (params) => {
     const itemsSum = data.sales.amount;
     const deliveryTime = data.sales.calcdlvtime;
 
-    console.log("itemsSum", itemsSum);
     dispatch(setItems(items));
     if (itemsSum) dispatch(updateSum(itemsSum));
     if (deliveryTime) dispatch(setDeliveryTime(deliveryTime));
