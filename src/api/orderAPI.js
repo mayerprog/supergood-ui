@@ -69,7 +69,6 @@ export const orderAPI = {
       const response = await instance.post(`/getbalance.php`, {
         token,
       });
-      console.log("bonus", response.data);
       return response.data;
     } catch (err) {
       console.error(

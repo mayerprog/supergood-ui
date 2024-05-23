@@ -40,7 +40,10 @@ const LoyaltyPage = () => {
             {
               levelRusName: "Приветственный уровень",
               levelEngName: "START",
-              cashBack: "Кешбэк 7%",
+              cashback: "7",
+              nextCashback: "10",
+              nextRequirement: "",
+              untilRequirement: null,
               backgroundColor: "#EAF2B6",
             },
           ]}
@@ -59,7 +62,10 @@ const LoyaltyPage = () => {
             {
               levelRusName: "Продвинутый уровень",
               levelEngName: "GOOD",
-              cashBack: "Кешбэк 10%",
+              cashback: "10",
+              nextCashback: "15",
+              nextRequirement: "",
+              untilRequirement: null,
               backgroundColor: "#D3E5F9",
             },
           ]}
@@ -67,7 +73,7 @@ const LoyaltyPage = () => {
           isModal={false}
         />
         <div className={styles.promoInfo}>
-          <h1>1.GOOD</h1>
+          <h1>2.GOOD</h1>
           <p>(продвинутый уровень, при сумме заказов от 10 000 руб.)</p>
           <span>10% бонусами с каждого заказа</span>
         </div>
@@ -78,7 +84,10 @@ const LoyaltyPage = () => {
             {
               levelRusName: "Эксклюзивный уровень",
               levelEngName: "SUPERGOOD",
-              cashBack: "Кешбэк 15%",
+              cashback: "15",
+              nextCashback: "15",
+              nextRequirement: "",
+              untilRequirement: null,
               backgroundColor: "#FBEED5",
             },
           ]}
@@ -86,7 +95,7 @@ const LoyaltyPage = () => {
           isModal={false}
         />
         <div className={styles.promoInfo}>
-          <h1>1.START</h1>
+          <h1>3.SUPERGOOD</h1>
           <p>(эксклюзивный уровень, при сумме заказов от 25 000 руб.)</p>
           <span>15% бонусами с каждого заказа</span>
         </div>

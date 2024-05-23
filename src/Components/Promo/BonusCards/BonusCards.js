@@ -12,12 +12,18 @@ const BonusCards = ({ cards, message, isModal }) => {
           key={index}
           data-is-modal={isModal ? "true" : "false"}
         >
-          <h3>Ваш статус лояльности</h3>
+          {message ? <h3>Ваш статус лояльности</h3> : null}
 
           <span className={styles.level}>{card.levelRusName}</span>
           <h1>{card.levelEngName}</h1>
-          <h4>{card.cashBack}</h4>
-          <span>{message}</span>
+          <h3>{`Кешбэк ${card.cashback} %`}</h3>
+          {!(card.levelEngName === "SUPERGOOD") ? (
+            !message ? (
+              <span>{message}</span>
+            ) : (
+              <span>{`${message} ${card.untilRequirement} руб. и ваш кэшбэк вырастет до ${card.nextCashback}%`}</span>
+            )
+          ) : null}
         </div>
       ))}
     </>

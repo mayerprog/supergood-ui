@@ -177,7 +177,7 @@ function App() {
     }
   }, [netbooksMediaQuery]);
 
-  // setting data from getUserPref with token from cookies
+  // setting data from DB with token from cookies
   useEffect(() => {
     (async () => {
       try {

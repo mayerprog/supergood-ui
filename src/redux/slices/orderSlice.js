@@ -6,6 +6,7 @@ const initialState = {
   changeAmount: null,
   description: "",
   bonus: null,
+  loyalty: null,
 };
 
 export const orderSlice = createSlice({
