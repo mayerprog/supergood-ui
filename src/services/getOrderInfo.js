@@ -10,7 +10,8 @@ export const getOrderInfo = async (params) => {
   if (data.sales) {
     const items = Object.values(data.sales.lines);
     const itemsSum = data.sales.amount;
+    console.log("itemsSum", itemsSum);
     dispatch(setItems(items));
-    dispatch(updateSum(itemsSum));
+    if (itemsSum) dispatch(updateSum(itemsSum));
   }
 };

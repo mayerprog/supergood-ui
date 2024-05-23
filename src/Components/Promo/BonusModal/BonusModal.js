@@ -1,13 +1,17 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BonusCards from "../BonusCards/BonusCards";
 import styles from "./BonusModal.module.scss";
 import { IoMdClose } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { orderAPI } from "../../../api/orderAPI";
+import { setLoyalty } from "../../../redux/slices/orderSlice";
 
 const BonusModal = ({ bonusWrapperRef, toggleBonusVisibility }) => {
   const [cards, setCards] = useState([]);
   const token = useSelector((state) => state.user.token);
+  const bonus = useSelector((state) => state.order.bonus);
+
+  const dispatch = useDispatch();
 
   const defineLoyaltyInfo = (spent, level) => {
     console.log(level, spent);
@@ -59,24 +63,26 @@ const BonusModal = ({ bonusWrapperRef, toggleBonusVisibility }) => {
   useEffect(() => {
     (async () => {
       const data = await orderAPI.getLoyalty(token);
-      const loyaltyInfo = data.bonuses;
-      if (loyaltyInfo.length === 0) {
-        setCards([
-          {
-            levelRusName: "Приветственный уровень",
-            levelEngName: "START",
-            cashback: "7",
-            nextCashback: "10",
-            nextRequirement: "10000",
-            untilRequirement: 10000,
-            backgroundColor: "#EAF2B6",
-          },
-        ]);
-      } else defineLoyaltyInfo(loyaltyInfo.bonus_lost, loyaltyInfo.bonus_name);
+      if (data) {
+        const loyaltyInfo = data.bonuses[0];
+        if (loyaltyInfo.length === 0) {
+          setCards([
+            {
+              levelRusName: "Приветственный уровень",
+              levelEngName: "START",
+              cashback: "7",
+              nextCashback: "10",
+              nextRequirement: "10000",
+              untilRequirement: 10000,
+              backgroundColor: "#EAF2B6",
+            },
+          ]);
+        } else
+          defineLoyaltyInfo(loyaltyInfo.bonus_lost, loyaltyInfo.bonus_name);
+      }
     })();
   }, []);
 
-  const bonus = useSelector((state) => state.order.bonus);
   return (
     <div className={styles.container} ref={bonusWrapperRef}>
       <div onClick={toggleBonusVisibility} className={styles.icon}>

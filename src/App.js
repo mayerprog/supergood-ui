@@ -33,7 +33,7 @@ import { useUpdateSumHook } from "./hooks/useUpdateSumHook";
 import { getOrderInfo } from "./services/getOrderInfo";
 import LevelContext from "./contexts/LevelContext";
 import { orderAPI } from "./api/orderAPI";
-import { setBonus } from "./redux/slices/orderSlice";
+import { setBonus, setLoyalty } from "./redux/slices/orderSlice";
 
 function App() {
   // modals
@@ -183,25 +183,42 @@ function App() {
       try {
         const token = Cookies.get("token");
         if (token) {
-          const data = await userAPI.getUserPref(token);
-          dispatch(
-            setUserData({
-              name: data.name,
-              birthday: data.birthday,
-              birthdaybonus: data.birthdaybonus,
-              email: data.email,
-              gender: data.gender,
-              userid: data.userid,
-            })
-          );
-          dispatch(setSalesid(data.salesid));
-          dispatch(setAddressList(Object.values(data.address)));
           dispatch(setToken(token));
           dispatch(setIsAuth(true));
-          await getOrderInfo({ token, salesid: data.salesid, dispatch });
+
+          //getting data from getUserPref
+          const data = await userAPI.getUserPref(token);
+          if (data) {
+            dispatch(
+              setUserData({
+                name: data.name,
+                birthday: data.birthday,
+                birthdaybonus: data.birthdaybonus,
+                email: data.email,
+                gender: data.gender,
+                userid: data.userid,
+              })
+            );
+            dispatch(setSalesid(data.salesid));
+            dispatch(setAddressList(Object.values(data.address)));
+
+            //getting cart data
+            await getOrderInfo({ token, salesid: data.salesid, dispatch });
+          }
+
+          //getting bonus points
           const bonusData = await orderAPI.getBonus(token);
-          const bonus = bonusData.bonuses[0].discamount.split(".")[0];
-          dispatch(setBonus(bonus));
+          if (bonusData) {
+            const bonus = bonusData.bonuses[0].discamount.split(".")[0];
+            dispatch(setBonus(bonus));
+          }
+
+          //getting loyalty info
+          const loyalty = await orderAPI.getLoyalty(token);
+          if (loyalty) {
+            const loyaltyInfo = data.bonuses;
+            dispatch(setLoyalty(loyaltyInfo));
+          }
         } else {
           dispatch(setIsAuth(false));
         }

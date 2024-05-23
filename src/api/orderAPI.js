@@ -83,7 +83,6 @@ export const orderAPI = {
       const response = await instance.post(`/getbalancelevel.php`, {
         token,
       });
-      console.log("loyaltylvl", response.data);
       return response.data;
     } catch (err) {
       console.error(
@@ -91,6 +90,24 @@ export const orderAPI = {
         err.response ? err.response.data : err
       );
       console.log("Failed to get points. Check console for details.");
+    }
+  },
+  async setPromoCode(params) {
+    const { token, salesid, promo } = params;
+    try {
+      const response = await instance.post(`/setpromo.php`, {
+        token,
+        salesid,
+        promo,
+      });
+      console.log("response", response.data);
+      return response.data;
+    } catch (err) {
+      console.error(
+        "Error activating promo:",
+        err.response ? err.response.data : err
+      );
+      console.log("Failed to activate promocode. Check console for details.");
     }
   },
 };

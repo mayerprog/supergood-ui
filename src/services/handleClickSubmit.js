@@ -18,13 +18,12 @@ export const handleClickSubmit = async (params) => {
         salesid,
         addressid: addressSelected.addressid,
       });
+      console.log(response);
+
       if (response.status === "ok") {
         action(false);
         navigate("/submit");
       } else {
-        if (response.errorcode === 2500) {
-          setErrMessage(response.msg);
-        }
         if (response.errorcode === 200) {
           setErrMessage(response.msg);
           const errorItems = response.params.items;
@@ -38,6 +37,7 @@ export const handleClickSubmit = async (params) => {
           );
           setItemsUnavailable(foundItems);
         }
+        setErrMessage(response.msg);
       }
     } catch (err) {
       console.log(err);

@@ -6,7 +6,7 @@ const initialState = {
   changeAmount: null,
   description: "",
   bonus: null,
-  loyalty: null,
+  loyalty: [], //can be empty if no orders made
 };
 
 export const orderSlice = createSlice({
@@ -32,6 +32,9 @@ export const orderSlice = createSlice({
     setBonus: (state, action) => {
       state.bonus = action.payload;
     },
+    setLoyalty: (state, action) => {
+      state.loyalty = action.payload;
+    },
   },
 });
 
@@ -41,6 +44,7 @@ export const {
   addOrders,
   setChangeAmount,
   setBonus,
+  setLoyalty,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;
