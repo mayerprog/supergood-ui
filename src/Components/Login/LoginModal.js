@@ -151,7 +151,12 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
       for (let i = 0; i < cartItems.length; i++) {
         try {
           const userPref = await userAPI.getUserPref(token);
-          await putToCartAPI(cartItems[i], token, userPref.salesid);
+          await putToCartAPI(
+            cartItems[i],
+            token,
+            userPref.salesid,
+            addressSelected.deptid
+          );
         } catch (err) {
           console.log(err);
         }

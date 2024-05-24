@@ -55,6 +55,8 @@ function App() {
   const [isCartSheetOpen, setIsCartSheetOpen] = useState(false);
   const [cartSheetClosing, setCartSheetClosing] = useState(false);
 
+  const [cards, setCards] = useState([]);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [isMainPage, setIsMainPage] = useState(false);
 
@@ -74,12 +76,9 @@ function App() {
   const monitorMediaQuery = useMediaQuery({ maxWidth: 1280 });
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
-  const isAuth = useSelector((state) => state.auth.isAuth);
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
   const addressList = useSelector((state) => state.user.addressList);
-  const addressSelected = useSelector((state) => state.user.addressSelected);
-  const dataLogin = useSelector((state) => state.auth.dataLogin);
   const { setMarkerAddress, setMarkerPosition } = useContext(LevelContext);
 
   const toggleOptionsVisibility = () => {
@@ -149,7 +148,7 @@ function App() {
       (address) => address.selected
     );
     if (selectedAddressList.length > 0) {
-      console.log("minor_area_id", selectedAddressList[0]);
+      console.log("addressSelected", selectedAddressList[0]);
       // to set selected address
       dispatch(setAddressSelected(selectedAddressList[0]));
       dispatch(setDeptid(selectedAddressList[0]?.minor_area_id));
@@ -215,8 +214,9 @@ function App() {
 
           //getting loyalty info
           const loyalty = await orderAPI.getLoyalty(token);
+
           if (loyalty) {
-            const loyaltyInfo = data.bonuses;
+            const loyaltyInfo = loyalty.bonuses;
             dispatch(setLoyalty(loyaltyInfo));
           }
         } else {

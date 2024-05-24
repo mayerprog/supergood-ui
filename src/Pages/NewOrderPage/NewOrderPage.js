@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./NewOrderPage.module.scss";
 import AddressModal from "../../Components/Address/AddressModal/AddressModal";
 import OrderCart from "../../Components/Cart/OrderCart/OrderCart";
@@ -11,6 +11,7 @@ import { useMediaQuery } from "react-responsive";
 import MainSheet from "../../Components/MainSheet/MainSheet";
 import BonusModal from "../../Components/Promo/BonusModal/BonusModal";
 import OrderPromoModal from "../../Components/Promo/OrderPromoModal/OrderPromoModal";
+import { orderAPI } from "../../api/orderAPI";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -38,15 +39,50 @@ const NewOrderPage = ({
   isOrderPromoOpen,
   toggleLoginVisibility,
 }) => {
+  const [errMessage, setErrMessage] = useState("");
+  const [itemsUnavailable, setItemsUnavailable] = useState([]);
+
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const token = useSelector((state) => state.user.token);
+  const salesid = useSelector((state) => state.user.salesid);
+  const addressSelected = useSelector((state) => state.user.addressSelected);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (cartItems.length === 0) {
-      navigate("/");
-    }
+    (async () => {
+      if (cartItems.length === 0) {
+        navigate("/");
+      } else {
+        try {
+          const response = await orderAPI.getMinSum({
+            token,
+            salesid,
+            addressid: addressSelected.addressid,
+          });
+          if (response.errorcode) {
+            if (response.errorcode === 200) {
+              setErrMessage(response.msg);
+              const errorItems = response.params.items;
+
+              const foundItems = cartItems.filter((cartItem) =>
+                errorItems.some(
+                  (errorItem) => errorItem.itemid === cartItem.itemid
+                )
+              );
+              setItemsUnavailable(foundItems);
+            }
+            setErrMessage(response.msg);
+          } else {
+            setItemsUnavailable("");
+            setErrMessage("");
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItems]);
 
@@ -61,7 +97,10 @@ const NewOrderPage = ({
             setIsMapOpen={setIsMapOpen}
             isMapOpen={isMapOpen}
           />
-          <OrderCart />
+          <OrderCart
+            errMessage={errMessage}
+            itemsUnavailable={itemsUnavailable}
+          />
         </div>
         <Payment
           togglePayTypeVisibility={togglePayTypeVisibility}

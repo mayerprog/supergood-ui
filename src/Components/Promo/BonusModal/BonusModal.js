@@ -5,18 +5,17 @@ import { IoMdClose } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { orderAPI } from "../../../api/orderAPI";
 import { setLoyalty } from "../../../redux/slices/orderSlice";
+import { defineLoyaltyInfo } from "../../../services/defineLoyaltyInfo";
 
 const BonusModal = ({ bonusWrapperRef, toggleBonusVisibility }) => {
   const [cards, setCards] = useState([]);
-  const token = useSelector((state) => state.user.token);
   const bonus = useSelector((state) => state.order.bonus);
+  const loyalty = useSelector((state) => state.order.loyalty);
 
-  const dispatch = useDispatch();
-
-  const defineLoyaltyInfo = (spent, level) => {
-    console.log(level, spent);
-    switch (level) {
-      case "START":
+  useEffect(() => {
+    // console.log("loyalty", loyalty);
+    if (loyalty) {
+      if (loyalty.length === 0) {
         setCards([
           {
             levelRusName: "Приветственный уровень",
@@ -24,64 +23,14 @@ const BonusModal = ({ bonusWrapperRef, toggleBonusVisibility }) => {
             cashback: "7",
             nextCashback: "10",
             nextRequirement: "10000",
-            untilRequirement: 10000 - spent,
+            untilRequirement: 10000,
             backgroundColor: "#EAF2B6",
           },
         ]);
-        break;
-      case "GOOD":
-        setCards([
-          {
-            levelRusName: "Продвинутый уровень",
-            levelEngName: "GOOD",
-            cashback: "10",
-            nextCashback: "15",
-            nextRequirement: "25000",
-            untilRequirement: 25000 - spent,
-            backgroundColor: "#D3E5F9",
-          },
-        ]);
-        break;
-      case "SUPERGOOD":
-        setCards([
-          {
-            levelRusName: "Эксклюзивный уровень",
-            levelEngName: "SUPERGOOD",
-            cashback: "15",
-            nextCashback: "15",
-            nextRequirement: "",
-            untilRequirement: null,
-            backgroundColor: "#FBEED5",
-          },
-        ]);
-        break;
-      default:
-        return;
+      } else
+        defineLoyaltyInfo(loyalty.bonus_lost, loyalty.bonus_name, setCards);
     }
-  };
-
-  useEffect(() => {
-    (async () => {
-      const data = await orderAPI.getLoyalty(token);
-      if (data) {
-        const loyaltyInfo = data.bonuses[0];
-        if (loyaltyInfo.length === 0) {
-          setCards([
-            {
-              levelRusName: "Приветственный уровень",
-              levelEngName: "START",
-              cashback: "7",
-              nextCashback: "10",
-              nextRequirement: "10000",
-              untilRequirement: 10000,
-              backgroundColor: "#EAF2B6",
-            },
-          ]);
-        } else
-          defineLoyaltyInfo(loyaltyInfo.bonus_lost, loyaltyInfo.bonus_name);
-      }
-    })();
-  }, []);
+  }, [loyalty]);
 
   return (
     <div className={styles.container} ref={bonusWrapperRef}>
