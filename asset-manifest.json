@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.639e5bcb.css",
+    "main.js": "/static/js/main.a810f189.js",
+    "static/js/453.84522deb.chunk.js": "/static/js/453.84522deb.chunk.js",
+    "static/media/kolc.jpg": "/static/media/kolc.63003b6a57129e7a1305.jpg",
+    "static/media/chorizo.jpg": "/static/media/chorizo.5c885d9e4f3ed345282b.jpg",
+    "static/media/minus10.jpg": "/static/media/minus10.8e20ee95237bf1304735.jpg",
+    "static/media/minus20.jpg": "/static/media/minus20.cc3349e9f17cac9c9509.jpg",
+    "static/media/Google-Play.png": "/static/media/Google-Play.8887882f0c196ee095ac.png",
+    "static/media/App-Store.png": "/static/media/App-Store.f777c1dc4c64ca168566.png",
+    "static/media/vk.png": "/static/media/vk.46a727c40540261a6ad3.png",
+    "static/media/telegram.png": "/static/media/telegram.e9722f26cc228e817986.png",
+    "static/media/phone.png": "/static/media/phone.555baddb7dc7222fcd8d.png",
+    "static/media/discount.png": "/static/media/discount.405ccaed260eaa5431b3.png",
+    "static/media/big_logo.png": "/static/media/big_logo.97e698afe7d96acabce3.png",
+    "static/media/pin.png": "/static/media/pin.a44fca73ba01f2baaee3.png",
+    "index.html": "/index.html",
+    "main.639e5bcb.css.map": "/static/css/main.639e5bcb.css.map",
+    "main.a810f189.js.map": "/static/js/main.a810f189.js.map",
+    "453.84522deb.chunk.js.map": "/static/js/453.84522deb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.639e5bcb.css",
+    "static/js/main.a810f189.js"
+  ]
+}
