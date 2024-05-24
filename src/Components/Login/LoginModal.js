@@ -60,10 +60,25 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
       const items = Object.values(data.sales.lines);
       const itemsSum = data.sales.amount;
       const deliveryTime = data.sales.calcdlvtime;
+      let promo;
 
       dispatch(setItems(items));
-      dispatch(updateSum(itemsSum));
-      if (itemsSum) dispatch(updateSum(itemsSum));
+
+      if (itemsSum) {
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].promocode) {
+            promo = items[i].lineamount;
+          }
+        }
+        if (promo) {
+          dispatch(updateSum(itemsSum + promo));
+        } else {
+          dispatch(updateSum(itemsSum));
+        }
+      } else {
+        dispatch(updateSum(0));
+      }
+
       if (deliveryTime) dispatch(setDeliveryTime(deliveryTime));
 
       dispatch(setAddressList(Object.values(userPref.address)));

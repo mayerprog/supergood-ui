@@ -1,6 +1,4 @@
-import { useSelector } from "react-redux";
-import { cartAPI } from "../api/cartAPI";
-import { addItems, setItems, updateSum } from "../redux/slices/cartSlice";
+import { addItems } from "../redux/slices/cartSlice";
 import { putToCartAPI } from "./putToCartAPI";
 import { getOrderInfo } from "./getOrderInfo";
 

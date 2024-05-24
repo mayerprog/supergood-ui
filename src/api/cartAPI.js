@@ -50,7 +50,7 @@ export const cartAPI = {
   async getOrderInfo(params) {
     const { token, salesid } = params;
     try {
-      const response = await instance.post(`/getsalesinfo.php`, {
+      const response = await instance.post(`/getsalesinfo_new.php`, {
         token,
         salesid,
       });

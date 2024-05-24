@@ -26,10 +26,6 @@ import LoyaltyPage from "./Pages/LoyaltyPage/LoyaltyPage";
 import { setIsAuth } from "./redux/slices/authSlice";
 import { userAPI } from "./api/userAPI";
 import Cookies from "js-cookie";
-import { persistor } from "./index";
-import { cartAPI } from "./api/cartAPI";
-import { setItems, updateSum } from "./redux/slices/cartSlice";
-import { useUpdateSumHook } from "./hooks/useUpdateSumHook";
 import { getOrderInfo } from "./services/getOrderInfo";
 import LevelContext from "./contexts/LevelContext";
 import { orderAPI } from "./api/orderAPI";
@@ -54,8 +50,6 @@ function App() {
   // Cart sheet
   const [isCartSheetOpen, setIsCartSheetOpen] = useState(false);
   const [cartSheetClosing, setCartSheetClosing] = useState(false);
-
-  const [cards, setCards] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isMainPage, setIsMainPage] = useState(false);
@@ -202,7 +196,11 @@ function App() {
             dispatch(setAddressList(Object.values(data.address)));
 
             //getting cart data
-            await getOrderInfo({ token, salesid: data.salesid, dispatch });
+            await getOrderInfo({
+              token,
+              salesid: data.salesid,
+              dispatch,
+            });
           }
 
           //getting bonus points
@@ -214,7 +212,6 @@ function App() {
 
           //getting loyalty info
           const loyalty = await orderAPI.getLoyalty(token);
-
           if (loyalty) {
             const loyaltyInfo = loyalty.bonuses;
             dispatch(setLoyalty(loyaltyInfo));

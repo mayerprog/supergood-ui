@@ -17,7 +17,21 @@ export const getOrderInfo = async (params) => {
     const deliveryTime = data.sales.calcdlvtime;
 
     dispatch(setItems(items));
-    if (itemsSum) dispatch(updateSum(itemsSum));
+    let promo;
+    if (itemsSum) {
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].promocode) {
+          promo = items[i].lineamount;
+        }
+      }
+      if (promo) {
+        dispatch(updateSum(itemsSum + promo));
+      } else {
+        dispatch(updateSum(itemsSum));
+      }
+    } else {
+      dispatch(updateSum(0));
+    }
     if (deliveryTime) dispatch(setDeliveryTime(deliveryTime));
   }
 };

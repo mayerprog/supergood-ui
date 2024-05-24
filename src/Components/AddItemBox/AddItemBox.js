@@ -2,12 +2,7 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import styles from "./AddItemBox.module.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  removeItems,
-  setItems,
-  updateItem,
-  updateSum,
-} from "../../redux/slices/cartSlice";
+import { removeItems, updateItem } from "../../redux/slices/cartSlice";
 import { putToCartAPI } from "../../services/putToCartAPI";
 import { cartAPI } from "../../api/cartAPI";
 import { getOrderInfo } from "../../services/getOrderInfo";
