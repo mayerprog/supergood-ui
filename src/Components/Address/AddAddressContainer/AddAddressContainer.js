@@ -182,11 +182,11 @@ const AddAddressContainer = ({
   };
 
   const handleRemoveAddress = async () => {
-    console.log("firstAddress", addressList);
-    console.log("itemaddress", item);
+    const selectedAddress = addressList.find((address) => address.selected);
     let firstAddress;
     if (item === addressList[0]) firstAddress = addressList[1];
     else firstAddress = addressList[0];
+    let ifSelected = item.selected;
 
     if (item.addressid) {
       try {
@@ -195,22 +195,39 @@ const AddAddressContainer = ({
           addressid: item.addressid,
           status: 2,
         });
+        if (ifSelected) {
+          await addressAPI.saveAddress({
+            token: token,
+            street: firstAddress.street,
+            lat: firstAddress.lat,
+            long: firstAddress.long,
+            addressid: firstAddress.addressid,
+            streetid: firstAddress.streetid,
+            houseid: firstAddress.houseid,
+            entrance: firstAddress.entrance,
+            floor: firstAddress.floor,
+            flat: firstAddress.flat,
+            description: firstAddress.description,
+            selected: true,
+          });
+        } else {
+          await addressAPI.saveAddress({
+            token: token,
+            street: selectedAddress.street,
+            lat: selectedAddress.lat,
+            long: selectedAddress.long,
+            addressid: selectedAddress.addressid,
+            streetid: selectedAddress.streetid,
+            houseid: selectedAddress.houseid,
+            entrance: selectedAddress.entrance,
+            floor: selectedAddress.floor,
+            flat: selectedAddress.flat,
+            description: selectedAddress.description,
+            selected: true,
+          });
+        }
 
-        const responseSave = await addressAPI.saveAddress({
-          token: token,
-          street: firstAddress.street,
-          lat: firstAddress.lat,
-          long: firstAddress.long,
-          addressid: firstAddress.addressid,
-          streetid: firstAddress.streetid,
-          houseid: firstAddress.houseid,
-          entrance: firstAddress.entrance,
-          floor: firstAddress.floor,
-          flat: firstAddress.flat,
-          description: firstAddress.description,
-          selected: true,
-        });
-        if (responseSave.status === "ok" && responseDelete.status === "ok") {
+        if (responseDelete.status === "ok") {
           //   dispatch(updateSelected(1));
           // }
           // if (responseDelete.status === "ok") {
