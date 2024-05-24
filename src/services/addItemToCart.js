@@ -26,7 +26,15 @@ export const addItemToCart = async (info) => {
   if (addressList.length === 0) toggleMapVisibility();
   else {
     if (isAuth) {
-      const response = await putToCartAPI(item, token, salesid);
+      const selectedAddressList = addressList.filter(
+        (address) => address.selected
+      );
+      const response = await putToCartAPI(
+        item,
+        token,
+        salesid,
+        selectedAddressList[0].deptid
+      );
       if (response.status === "ok") {
         await getOrderInfo({ token, salesid, dispatch });
       }

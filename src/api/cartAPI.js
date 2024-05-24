@@ -17,6 +17,7 @@ export const cartAPI = {
         token,
         salesid,
         id,
+        deptid,
         itemid,
         qty,
       });

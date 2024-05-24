@@ -38,6 +38,7 @@ const AddItemBox = ({
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
   const isAuth = useSelector((state) => state.auth.isAuth);
+  const addressSelected = useSelector((state) => state.user.addressSelected);
 
   const foundCartItem = cartItems.find(
     (cartItem) => itemId === cartItem.itemid
@@ -78,7 +79,12 @@ const AddItemBox = ({
       price: item.price + item.initialPrice,
     };
     if (isAuth) {
-      const response = await putToCartAPI(updatedItem, token, salesid);
+      const response = await putToCartAPI(
+        updatedItem,
+        token,
+        salesid,
+        addressSelected.deptid
+      );
       if (response.status === "ok") {
         await getOrderInfo({ token, salesid, dispatch });
       }
@@ -113,7 +119,12 @@ const AddItemBox = ({
     };
     if (isAuth) {
       if (item.qty > 1) {
-        const response = await putToCartAPI(updatedItem, token, salesid);
+        const response = await putToCartAPI(
+          updatedItem,
+          token,
+          salesid,
+          addressSelected.deptid
+        );
         if (response.status === "ok") {
           await getOrderInfo({ token, salesid, dispatch });
         }

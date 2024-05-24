@@ -16,7 +16,6 @@ export const itemAPI = {
   async getItems(deptId) {
     try {
       const response = await instance.post(`/getitems.php`, { deptId });
-      console.log("items", response.data);
       return response.data;
     } catch (err) {
       console.error(
