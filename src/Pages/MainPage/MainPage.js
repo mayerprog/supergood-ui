@@ -72,7 +72,7 @@ const MainPage = ({
 
   const cartWrapperRef = useRef(null);
 
-  const minorAreaId = useSelector((state) => state.user.minorAreaId);
+  const deptId = useSelector((state) => state.user.deptId);
 
   // useEffect(() => {
   //   console.log(
@@ -88,7 +88,7 @@ const MainPage = ({
       try {
         setLoading(true);
         const itemsArray = [];
-        const allItems = await itemAPI.getItems(parseInt(minorAreaId));
+        const allItems = await itemAPI.getItems(parseInt(deptId));
         if (allItems.error === "stopped department") {
           fetchImage({
             uid: "19f05932f0",

@@ -15,7 +15,7 @@ import { useMediaQuery } from "react-responsive";
 import {
   setAddressList,
   setAddressSelected,
-  setDeptid,
+  setDeptId,
   setMapPosition,
   setSalesid,
   setToken,
@@ -151,7 +151,7 @@ function App() {
       console.log("addressSelected", selectedAddressList[0]);
       // to set selected address
       dispatch(setAddressSelected(selectedAddressList[0]));
-      dispatch(setDeptid(selectedAddressList[0]?.minor_area_id));
+      dispatch(setDeptId(selectedAddressList[0]?.deptid));
       const newPosition = [
         parseFloat(selectedAddressList[0].lat),
         parseFloat(selectedAddressList[0].long),
