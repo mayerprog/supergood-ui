@@ -12,6 +12,8 @@ export const fetchMinSum = async (params) => {
         addressid: addressSelected.addressid,
       });
       if (response.status === "ok") {
+        dispatch(setErrMessage(""));
+        dispatch(setItemsUnavailable([]));
         action();
       } else {
         if (response.errorcode === 200) {
