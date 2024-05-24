@@ -13,12 +13,6 @@ const OrderCart = ({ errMessage, itemsUnavailable }) => {
   const salesid = useSelector((state) => state.user.salesid);
   const dispatch = useDispatch();
 
-  const navigate = useNavigate();
-
-  const handleClickSubmit = () => {
-    navigate("/submit");
-  };
-
   return (
     <div className={styles.cart}>
       <div className={styles.cartHeader}>

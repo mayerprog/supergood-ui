@@ -6,6 +6,8 @@ const initialState = {
   description: "",
   bonus: null,
   loyalty: [], //can be empty if no orders made
+  errMessage: "",
+  itemsUnavailable: [],
 };
 
 export const orderSlice = createSlice({
@@ -28,10 +30,22 @@ export const orderSlice = createSlice({
     setLoyalty: (state, action) => {
       state.loyalty = action.payload;
     },
+    setErrMessage: (state, action) => {
+      state.errMessage = action.payload;
+    },
+    setItemsUnavailable: (state, action) => {
+      state.itemsUnavailable = action.payload;
+    },
   },
 });
 
-export const { addOrders, setChangeAmount, setBonus, setLoyalty } =
-  orderSlice.actions;
+export const {
+  addOrders,
+  setChangeAmount,
+  setBonus,
+  setLoyalty,
+  setErrMessage,
+  setItemsUnavailable,
+} = orderSlice.actions;
 
 export default orderSlice.reducer;

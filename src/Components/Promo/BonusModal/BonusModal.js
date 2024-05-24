@@ -13,7 +13,6 @@ const BonusModal = ({ bonusWrapperRef, toggleBonusVisibility }) => {
   const loyalty = useSelector((state) => state.order.loyalty);
 
   useEffect(() => {
-    // console.log("loyalty", loyalty);
     if (loyalty) {
       if (loyalty.length === 0) {
         setCards([

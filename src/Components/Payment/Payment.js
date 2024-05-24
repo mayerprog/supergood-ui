@@ -7,12 +7,15 @@ import { removeOrderInfo } from "../../redux/slices/orderSlice";
 import { useMediaQuery } from "react-responsive";
 import { handleSetOrderInfo } from "../../services/handleSetOrderInfo";
 import { setDescription } from "../../redux/slices/userSlice";
+import { fetchMinSum } from "../../services/fetchMinSum";
 
 const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
   const itemsSum = useSelector((state) => state.cart.itemsSum);
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const deliveryTime = useSelector((state) => state.cart.deliveryTime);
+  const token = useSelector((state) => state.user.token);
+  const salesid = useSelector((state) => state.user.salesid);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -66,7 +69,16 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
           <div className={styles.finalPayment}>
             <button
               className={styles.paymentButtonStyle}
-              onClick={handleClickSubmit}
+              onClick={() =>
+                fetchMinSum({
+                  token,
+                  salesid,
+                  cartItems,
+                  addressSelected,
+                  dispatch,
+                  action: handleClickSubmit,
+                })
+              }
             >
               <span className={styles.paymentButtonText}>Оформить заказ</span>
             </button>

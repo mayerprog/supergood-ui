@@ -12,6 +12,11 @@ import MainSheet from "../../Components/MainSheet/MainSheet";
 import BonusModal from "../../Components/Promo/BonusModal/BonusModal";
 import OrderPromoModal from "../../Components/Promo/OrderPromoModal/OrderPromoModal";
 import { orderAPI } from "../../api/orderAPI";
+import { fetchMinSum } from "../../services/fetchMinSum";
+import {
+  setErrMessage,
+  setItemsUnavailable,
+} from "../../redux/slices/orderSlice";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -39,10 +44,10 @@ const NewOrderPage = ({
   isOrderPromoOpen,
   toggleLoginVisibility,
 }) => {
-  const [errMessage, setErrMessage] = useState("");
-  const [itemsUnavailable, setItemsUnavailable] = useState([]);
-
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const errMessage = useSelector((state) => state.order.errMessage);
+  const itemsUnavailable = useSelector((state) => state.order.itemsUnavailable);
+  const orders = useSelector((state) => state.order.orders);
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
   const addressSelected = useSelector((state) => state.user.addressSelected);
@@ -50,39 +55,27 @@ const NewOrderPage = ({
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const handleAction = () => {
+    dispatch(setItemsUnavailable(""));
+    dispatch(setErrMessage(""));
+  };
+
   useEffect(() => {
     (async () => {
-      if (cartItems.length === 0) {
+      if (cartItems.length === 0 && orders.length === 0) {
         navigate("/");
       } else {
-        try {
-          const response = await orderAPI.getMinSum({
-            token,
-            salesid,
-            addressid: addressSelected.addressid,
-          });
-          if (response.errorcode) {
-            if (response.errorcode === 200) {
-              setErrMessage(response.msg);
-              const errorItems = response.params.items;
-
-              const foundItems = cartItems.filter((cartItem) =>
-                errorItems.some(
-                  (errorItem) => errorItem.itemid === cartItem.itemid
-                )
-              );
-              setItemsUnavailable(foundItems);
-            }
-            setErrMessage(response.msg);
-          } else {
-            setItemsUnavailable("");
-            setErrMessage("");
-          }
-        } catch (err) {
-          console.log(err);
-        }
+        await fetchMinSum({
+          token,
+          salesid,
+          cartItems,
+          addressSelected,
+          dispatch,
+          action: handleAction,
+        });
       }
     })();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItems]);
 

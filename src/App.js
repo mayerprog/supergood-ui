@@ -327,25 +327,25 @@ function App() {
         <Route
           path="/orders"
           element={
-            <ProtectedRoute>
-              <OrdersPage
-                userInfoRef={userInfoRef}
-                toggleUserInfoVisibility={toggleUserInfoVisibility}
-                addressRef={addressRef}
-                isUserInfoOpen={isUserInfoOpen}
-                isModalAddressOpen={isModalAddressOpen}
-                toggleAddressVisibility={toggleAddressVisibility}
-                isMainSheetOpen={isMainSheetOpen}
-                setIsMainSheetOpen={setIsMainSheetOpen}
-                mainSheetWrapperRef={mainSheetWrapperRef}
-                mainSheetClosing={mainSheetClosing}
-                setMainSheetClosing={setMainSheetClosing}
-                bonusWrapperRef={bonusWrapperRef}
-                isBonusOpen={isBonusOpen}
-                toggleBonusVisibility={toggleBonusVisibility}
-                toggleLoginVisibility={toggleLoginVisibility}
-              />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <OrdersPage
+              userInfoRef={userInfoRef}
+              toggleUserInfoVisibility={toggleUserInfoVisibility}
+              addressRef={addressRef}
+              isUserInfoOpen={isUserInfoOpen}
+              isModalAddressOpen={isModalAddressOpen}
+              toggleAddressVisibility={toggleAddressVisibility}
+              isMainSheetOpen={isMainSheetOpen}
+              setIsMainSheetOpen={setIsMainSheetOpen}
+              mainSheetWrapperRef={mainSheetWrapperRef}
+              mainSheetClosing={mainSheetClosing}
+              setMainSheetClosing={setMainSheetClosing}
+              bonusWrapperRef={bonusWrapperRef}
+              isBonusOpen={isBonusOpen}
+              toggleBonusVisibility={toggleBonusVisibility}
+              toggleLoginVisibility={toggleLoginVisibility}
+            />
+            // </ProtectedRoute>
           }
         />
         <Route path="/loyalty" element={<LoyaltyPage />} />

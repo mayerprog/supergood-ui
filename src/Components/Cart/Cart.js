@@ -1,13 +1,10 @@
 import styles from "./Cart.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import CartBox from "./CartBox/CartBox";
-import { useNavigate } from "react-router-dom";
-import { removeAllItems } from "../../redux/slices/cartSlice";
 import CartShimmer from "../../Loaders/CartShimmer";
 import React, { memo, useEffect, useRef, useState } from "react";
-import { cartAPI } from "../../api/cartAPI";
 import { deleteCart } from "../../services/deleteCart";
-import { handleClickSubmit } from "../../services/handleClickSubmit";
+import { fetchMinSum } from "../../services/fetchMinSum";
 
 const Cart = ({
   cartWrapperRef,
@@ -29,8 +26,9 @@ const Cart = ({
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const deliveryTime = useSelector((state) => state.cart.deliveryTime);
 
-  const [errMessage, setErrMessage] = useState("");
-  const [itemsUnavailable, setItemsUnavailable] = useState([]);
+  const errMessage = useSelector((state) => state.order.errMessage);
+  const itemsUnavailable = useSelector((state) => state.order.itemsUnavailable);
+
   const dynamicStyle = {
     "--cart-position": position,
     "--cart-top": top,
@@ -49,6 +47,11 @@ const Cart = ({
   //     `Компонент Cart отрисован в ${new Date().toLocaleTimeString()}`
   //   );
   // });
+
+  const handleClickSubmit = () => {
+    toggleCartVisibility(false);
+    navigate("/submit");
+  };
 
   if (loading) {
     return <CartShimmer />;
@@ -94,15 +97,13 @@ const Cart = ({
           <button
             className={styles.buttonStyle}
             onClick={() =>
-              handleClickSubmit({
+              fetchMinSum({
                 token,
                 salesid,
                 cartItems,
-                action: toggleCartVisibility,
-                navigate,
                 addressSelected,
-                setErrMessage,
-                setItemsUnavailable,
+                dispatch,
+                action: handleClickSubmit,
               })
             }
           >

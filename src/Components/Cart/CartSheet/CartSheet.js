@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { GiShoppingCart } from "react-icons/gi";
 import { deleteCart } from "../../../services/deleteCart";
-import { handleClickSubmit } from "../../../services/handleClickSubmit";
+import { fetchMinSum } from "../../../services/fetchMinSum";
 
 const CartSheet = ({
   cartSheetWrapperRef,
@@ -26,8 +26,8 @@ const CartSheet = ({
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const deliveryTime = useSelector((state) => state.cart.deliveryTime);
 
-  const [errMessage, setErrMessage] = useState("");
-  const [itemsUnavailable, setItemsUnavailable] = useState("");
+  const errMessage = useSelector((state) => state.order.errMessage);
+  const itemsUnavailable = useSelector((state) => state.order.itemsUnavailable);
 
   const handleClosing = () => {
     setCartSheetClosing(false);
@@ -54,6 +54,7 @@ const CartSheet = ({
       ease: "power2.out",
     });
   }, []);
+
   useGSAP(() => {
     const menu = cartSheetWrapperRef.current;
 
@@ -67,6 +68,11 @@ const CartSheet = ({
       });
     }
   }, [cartSheetClosing]);
+
+  const handleClickSubmit = () => {
+    setIsCartSheetOpen(false);
+    navigate("/submit");
+  };
 
   return (
     <div className={styles.cartSheet} ref={cartSheetWrapperRef}>
@@ -126,15 +132,13 @@ const CartSheet = ({
             <button
               className={styles.buttonStyle}
               onClick={() =>
-                handleClickSubmit({
+                fetchMinSum({
                   token,
                   salesid,
                   cartItems,
-                  action: setIsCartSheetOpen,
-                  navigate,
                   addressSelected,
-                  setErrMessage,
-                  setItemsUnavailable,
+                  dispatch,
+                  action: handleClickSubmit,
                 })
               }
             >
