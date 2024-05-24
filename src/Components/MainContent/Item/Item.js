@@ -99,7 +99,7 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
 
       <div className={styles.productInfo}>
         <span className={styles.productTitle}>{item.name}</span>
-        {category === "Пицца" && !mediaQuery && <PizzaOptions />}
+        {/* {category === "Пицца" && !mediaQuery && <PizzaOptions />} */}
       </div>
       <div className={styles.order}>
         {amount > 0 ? (

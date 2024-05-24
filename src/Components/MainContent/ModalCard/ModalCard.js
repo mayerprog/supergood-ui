@@ -1,11 +1,7 @@
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ModalCard.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import PizzaOptions from "../PizzaOptions/PizzaOptions";
-import AddItemBox from "../../AddItemBox/AddItemBox";
-import { addItems } from "../../../redux/slices/cartSlice";
+import { useSelector } from "react-redux";
 import { IoFastFoodOutline } from "react-icons/io5";
-import { baseURL } from "../../../config";
 import ProductInfo from "../ProductInfo/ProductInfo";
 import { fetchImage } from "../../../services/fetchImage";
 import { IoMdClose } from "react-icons/io";

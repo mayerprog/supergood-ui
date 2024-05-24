@@ -46,11 +46,11 @@ const ProductInfo = ({ itemCardId, toggleMapVisibility, isSheet }) => {
           className={styles.addInfo}
         >{`${foundItem.params.weightout.value} ${foundItem.params.weightout.unit}.`}</span>
         <span className={styles.description}>{foundItem.description}</span>
-        {foundItem.catname === "Пицца" && (
+        {/* {foundItem.catname === "Пицца" && (
           <div className={styles.addInfo}>
             <PizzaOptions />
           </div>
-        )}
+        )} */}
         <span className={styles.addInfo}>Энергетическая ценность на 100 г</span>
         <div className={styles.energyBox}>
           <div className={styles.energyInfo}>

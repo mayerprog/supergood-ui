@@ -96,18 +96,19 @@ const MainPage = ({
             height: 842,
             setImageUrl,
           });
-        }
-        Object.keys(allItems.items).forEach((categoryId) => {
-          const categoryObject = allItems.items[categoryId];
-          const category = Object.values(categoryObject);
+        } else {
+          Object.keys(allItems.items).forEach((categoryId) => {
+            const categoryObject = allItems.items[categoryId];
+            const category = Object.values(categoryObject);
 
-          category.forEach((itemGroup) => {
-            itemsArray.push(itemGroup);
+            category.forEach((itemGroup) => {
+              itemsArray.push(itemGroup);
+            });
           });
-        });
-        dispatch(setItems(itemsArray));
-        if (itemsArray.length === 0) setLoading(true);
-        else setLoading(false);
+          dispatch(setItems(itemsArray));
+          if (itemsArray.length === 0) setLoading(true);
+          else setLoading(false);
+        }
       } catch (err) {
         console.log(err);
       }

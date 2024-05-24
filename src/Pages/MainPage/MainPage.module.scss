@@ -16,11 +16,22 @@
   flex: 1;
   justify-content: center;
   align-self: center;
-  height: 100vh;
 
   .img {
     width: 700px;
     height: 100%;
+    @media (max-width: 745px) {
+      width: 500px;
+    }
+    @media (max-width: 535px) {
+      width: 400px;
+    }
+    @media (max-width: 423px) {
+      width: 300px;
+    }
+    @media (max-width: 310px) {
+      width: 200px;
+    }
   }
 }
 
