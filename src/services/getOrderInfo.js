@@ -15,7 +15,6 @@ export const getOrderInfo = async (params) => {
     const items = Object.values(data.sales.lines);
     const itemsSum = data.sales.amount;
     const deliveryTime = data.sales.calcdlvtime;
-
     dispatch(setItems(items));
     let promo;
     if (itemsSum) {

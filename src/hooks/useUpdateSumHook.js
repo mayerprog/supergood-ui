@@ -17,5 +17,5 @@ export const useUpdateSumHook = () => {
         dispatch(updateSum(sum));
       }
     }
-  }, [cartItems, dispatch]);
+  }, [cartItems, isAuth, dispatch]);
 };

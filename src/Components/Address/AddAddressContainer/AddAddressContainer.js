@@ -17,7 +17,7 @@ import { makeExistingAddressSelected } from "../../../services/makeExistingAddre
 import { ImBin } from "react-icons/im";
 import StreetDropDown from "../StreetDropDown/StreetDropDown";
 import HouseDropDown from "../HouseDropDown/HouseDropDown";
-import LevelContext from "../../../contexts/LevelContext";
+import AddressContext from "../../../contexts/AddressContext";
 import { fetchHousesSuggestions } from "../../../services/fetchHousesSuggestions";
 import { addressAPI } from "../../../api/addressAPI";
 import { useUpdateStreetid } from "../../../hooks/useUpdateStreetid";
@@ -46,7 +46,8 @@ const AddAddressContainer = ({
     setStreetid,
     addressData,
     setAddressData,
-  } = useContext(LevelContext);
+  } = useContext(AddressContext);
+
   const addressList = useSelector((state) => state.user.addressList);
   const token = useSelector((state) => state.user.token);
   const floor = useSelector((state) => state.user.floor);

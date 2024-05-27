@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Cart from "../../Components/Cart/Cart";
@@ -20,6 +20,8 @@ import LoginModal from "../../Components/Login/LoginModal";
 import UserModal from "../../Components/UserInfo/UserModal/UserModal";
 import AddressModal from "../../Components/Address/AddressModal/AddressModal";
 import BonusModal from "../../Components/Promo/BonusModal/BonusModal";
+import PromoErrorModal from "../../Components/Promo/PromoErrorModal/PromoErrorModal";
+import ModalsContext from "../../contexts/ModalsContext";
 
 const MainPage = ({
   searchQuery,
@@ -71,6 +73,8 @@ const MainPage = ({
   const [imageUrl, setImageUrl] = useState("");
 
   const cartWrapperRef = useRef(null);
+
+  const { isPromoErrorOpen } = useContext(ModalsContext);
 
   const deptId = useSelector((state) => state.user.deptId);
 
@@ -278,6 +282,11 @@ const MainPage = ({
               isModal={true}
               toggleAddressVisibility={toggleAddressVisibility}
             />
+          </div>
+        )}
+        {isPromoErrorOpen && (
+          <div className={styles.cardOverlay}>
+            <PromoErrorModal />
           </div>
         )}
         {isBonusOpen && (

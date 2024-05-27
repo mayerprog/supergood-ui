@@ -1,0 +1,62 @@
+@import "../../../mixins/mixins";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  border-radius: 20px;
+  top: 20%;
+  box-shadow: 0 0 5px #ccc;
+  width: 400px;
+  font-family: "Inter", sans-serif;
+  background-color: #fcfcfc;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 25px;
+  background-color: #fafafa;
+
+  h2 {
+    text-align: center;
+  }
+
+  .buttonsContainer {
+    display: flex;
+    flex: 1;
+    justify-content: space-evenly;
+  }
+
+  .buttonStyle,
+  .buttonCancel {
+    @include reusable-button;
+    margin: 1rem 0;
+    align-self: center;
+  }
+  .buttonCancel {
+    background-color: #e9bc5b;
+  }
+  .buttonText {
+    @include reusable-button-text;
+  }
+
+  .icon {
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 474px) {
+  .container {
+    width: 100%;
+    position: static;
+    top: 0;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: 0;
+    box-sizing: border-box;
+    background-color: #fcfcfc;
+    justify-content: flex-start;
+    .buttonsContainer {
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+  }
+}

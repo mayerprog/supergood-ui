@@ -27,9 +27,11 @@ import { setIsAuth } from "./redux/slices/authSlice";
 import { userAPI } from "./api/userAPI";
 import Cookies from "js-cookie";
 import { getOrderInfo } from "./services/getOrderInfo";
-import LevelContext from "./contexts/LevelContext";
+import AddressContext from "./contexts/AddressContext";
 import { orderAPI } from "./api/orderAPI";
 import { setBonus, setLoyalty } from "./redux/slices/orderSlice";
+import { setMinAmount } from "./redux/slices/cartSlice";
+import ModalsContext from "./contexts/ModalsContext";
 
 function App() {
   // modals
@@ -73,7 +75,11 @@ function App() {
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
   const addressList = useSelector((state) => state.user.addressList);
-  const { setMarkerAddress, setMarkerPosition } = useContext(LevelContext);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const { setMarkerAddress, setMarkerPosition } = useContext(AddressContext);
+  const { promoErrorWrapperRef, togglePromoErrorVisibility } =
+    useContext(ModalsContext);
 
   const toggleOptionsVisibility = () => {
     setIsModalOptionsOpen(!isModalOptionsOpen);
@@ -132,6 +138,7 @@ function App() {
   useOutsideHook(orderPromoWrapperRef, toggleOrderPromoVisibility); // to close popup <OrderPromoModal /> clicking outside
   useOutsideHook(mainSheetWrapperRef, toggleMainSheetVisibility); // to close <MainSheet /> clicking outside
   useOutsideHook(cartSheetWrapperRef, toggleCartSheetVisibility); // to close <CartSheet /> clicking outside
+  useOutsideHook(promoErrorWrapperRef, togglePromoErrorVisibility); // to close <CartSheet /> clicking outside
 
   const location = useLocation(); // Getting the current location
   const dispatch = useDispatch();
@@ -230,6 +237,15 @@ function App() {
     console.log("salesid", salesid);
   }, [token, salesid]);
 
+  // setting minamount of promo if it exists in Cart
+  useEffect(() => {
+    if (cartItems) {
+      cartItems.forEach(
+        (item) => item.minamount && dispatch(setMinAmount(item.minamount))
+      );
+    }
+  }, [cartItems]);
+
   return (
     <div className={styles.app}>
       <Header
@@ -324,25 +340,25 @@ function App() {
         <Route
           path="/orders"
           element={
-            // <ProtectedRoute>
-            <OrdersPage
-              userInfoRef={userInfoRef}
-              toggleUserInfoVisibility={toggleUserInfoVisibility}
-              addressRef={addressRef}
-              isUserInfoOpen={isUserInfoOpen}
-              isModalAddressOpen={isModalAddressOpen}
-              toggleAddressVisibility={toggleAddressVisibility}
-              isMainSheetOpen={isMainSheetOpen}
-              setIsMainSheetOpen={setIsMainSheetOpen}
-              mainSheetWrapperRef={mainSheetWrapperRef}
-              mainSheetClosing={mainSheetClosing}
-              setMainSheetClosing={setMainSheetClosing}
-              bonusWrapperRef={bonusWrapperRef}
-              isBonusOpen={isBonusOpen}
-              toggleBonusVisibility={toggleBonusVisibility}
-              toggleLoginVisibility={toggleLoginVisibility}
-            />
-            // </ProtectedRoute>
+            <ProtectedRoute>
+              <OrdersPage
+                userInfoRef={userInfoRef}
+                toggleUserInfoVisibility={toggleUserInfoVisibility}
+                addressRef={addressRef}
+                isUserInfoOpen={isUserInfoOpen}
+                isModalAddressOpen={isModalAddressOpen}
+                toggleAddressVisibility={toggleAddressVisibility}
+                isMainSheetOpen={isMainSheetOpen}
+                setIsMainSheetOpen={setIsMainSheetOpen}
+                mainSheetWrapperRef={mainSheetWrapperRef}
+                mainSheetClosing={mainSheetClosing}
+                setMainSheetClosing={setMainSheetClosing}
+                bonusWrapperRef={bonusWrapperRef}
+                isBonusOpen={isBonusOpen}
+                toggleBonusVisibility={toggleBonusVisibility}
+                toggleLoginVisibility={toggleLoginVisibility}
+              />
+            </ProtectedRoute>
           }
         />
         <Route path="/loyalty" element={<LoyaltyPage />} />

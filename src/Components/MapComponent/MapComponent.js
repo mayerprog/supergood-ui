@@ -22,7 +22,7 @@ import {
 import { fetchSuggestionsStreet } from "../../services/fetchSuggestionsStreet";
 import { makeExistingAddressSelected } from "../../services/makeExistingAddressSelected";
 import { useMediaQuery } from "react-responsive";
-import LevelContext from "../../contexts/LevelContext";
+import AddressContext from "../../contexts/AddressContext";
 import { fetchHousesSuggestions } from "../../services/fetchHousesSuggestions";
 import HouseDropDown from "../Address/HouseDropDown/HouseDropDown";
 import StreetDropDown from "../Address/StreetDropDown/StreetDropDown";
@@ -51,7 +51,7 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
     setStreetid,
     addressData,
     setAddressData,
-  } = useContext(LevelContext);
+  } = useContext(AddressContext);
 
   const dispatch = useDispatch();
 

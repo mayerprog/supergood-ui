@@ -2,8 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cartItems: [],
-  itemsSum: 0,
+  itemsSum: null,
   deliveryTime: 0,
+  minAmount: 0,
 };
 
 export const cartSlice = createSlice({
@@ -18,6 +19,10 @@ export const cartSlice = createSlice({
     },
     setDeliveryTime: (state, action) => {
       state.deliveryTime = action.payload;
+    },
+    setMinAmount: (state, action) => {
+      state.minAmount = action.payload;
+      console.log("minAmount", state.minAmount);
     },
     removeItems: (state, action) => {
       state.cartItems = state.cartItems.filter(
@@ -43,6 +48,7 @@ export const {
   addItems,
   setItems,
   setDeliveryTime,
+  setMinAmount,
   removeItems,
   updateItem,
   updateSum,

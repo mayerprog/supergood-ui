@@ -9,7 +9,7 @@ import {
 } from "../../../redux/slices/userSlice";
 import AddAddressContainer from "../AddAddressContainer/AddAddressContainer";
 import MapComponent from "../../MapComponent/MapComponent";
-import LevelContext from "../../../contexts/LevelContext";
+import AddressContext from "../../../contexts/AddressContext";
 import { addressAPI } from "../../../api/addressAPI";
 
 const AddressComponent = ({
@@ -22,7 +22,7 @@ const AddressComponent = ({
   const [isNewAddressOpen, setIsNewAddressOpen] = useState(false); //for adding new address
   const [addressIndexForChange, setAddressIndexForChange] = useState(null); //for identifying address for update
 
-  const { setMarkerAddress, setMarkerPosition } = useContext(LevelContext);
+  const { setMarkerAddress, setMarkerPosition } = useContext(AddressContext);
 
   const addressList = useSelector((state) => state.user.addressList);
   const token = useSelector((state) => state.user.token);

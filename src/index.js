@@ -8,7 +8,8 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
-import { LevelContextProvider } from "./contexts/LevelContext";
+import { AddressContextProvider } from "./contexts/AddressContext";
+import { ModalsContextProvider } from "./contexts/ModalsContext";
 
 export const persistor = persistStore(store);
 
@@ -17,11 +18,13 @@ root.render(
   <BrowserRouter>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <LevelContextProvider>
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>
-        </LevelContextProvider>
+        <AddressContextProvider>
+          <ModalsContextProvider>
+            <React.StrictMode>
+              <App />
+            </React.StrictMode>
+          </ModalsContextProvider>
+        </AddressContextProvider>
       </PersistGate>
     </Provider>
   </BrowserRouter>

@@ -1,11 +1,12 @@
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import styles from "./AddItemBox.module.scss";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItems, updateItem } from "../../redux/slices/cartSlice";
 import { putToCartAPI } from "../../services/putToCartAPI";
 import { cartAPI } from "../../api/cartAPI";
 import { getOrderInfo } from "../../services/getOrderInfo";
+import ModalsContext from "../../contexts/ModalsContext";
 
 const AddItemBox = ({
   backgroundColor,
@@ -32,12 +33,20 @@ const AddItemBox = ({
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
-  const isAuth = useSelector((state) => state.auth.isAuth);
   const addressSelected = useSelector((state) => state.user.addressSelected);
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  const itemsSum = useSelector((state) => state.cart.itemsSum);
+  const minAmount = useSelector((state) => state.cart.minAmount);
 
   const foundCartItem = cartItems.find(
     (cartItem) => itemId === cartItem.itemid
   );
+
+  const { togglePromoErrorVisibility } = useContext(ModalsContext);
+
+  useEffect(() => {
+    console.log("render");
+  }, []);
 
   useEffect(() => {
     if (foundCartItem) {
@@ -112,6 +121,20 @@ const AddItemBox = ({
       },
       price: item.price - item.initialPrice,
     };
+
+    // checking if itemsSum will be bigger than minSum after deleting an item. If not - then needed to delete promocode
+    if (!item.promocode && item) {
+      const promoItem = cartItems.find((item) => item.promocode != null);
+      if (promoItem) {
+        const withoutPromo =
+          itemsSum - promoItem.lineamount - item.lineamount / item.qty; //sum without promo and decremented item
+        if (withoutPromo < minAmount) {
+          togglePromoErrorVisibility(true);
+          return;
+        }
+      }
+    }
+
     if (isAuth) {
       if (item.qty > 1) {
         const response = await putToCartAPI(
