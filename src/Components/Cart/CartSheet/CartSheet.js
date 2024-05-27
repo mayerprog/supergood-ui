@@ -114,7 +114,7 @@ const CartSheet = ({
           </div>
           <div className={styles.orderSum}>
             <span>Сумма заказа:</span>
-            <span>{itemsSum} ₽</span>
+            <span>{itemsSum ? itemsSum : 0} ₽</span>
           </div>
 
           {errMessage && <span className={styles.error}>{errMessage}</span>}

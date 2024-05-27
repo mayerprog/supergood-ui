@@ -99,7 +99,6 @@ const ProductInfo = ({ itemCardId, toggleMapVisibility, isSheet }) => {
                 token,
                 salesid,
                 isAuth,
-                cartItems,
               })
             }
           >

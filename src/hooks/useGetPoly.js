@@ -35,5 +35,5 @@ export const useGetPoly = (setPoints, polyFew) => {
         console.log(err);
       }
     })();
-  }, []);
+  }, [setPoints, polyFew]);
 };
