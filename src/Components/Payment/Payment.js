@@ -37,7 +37,10 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
       <div>
         <h3>Способ оплаты</h3>
         <div className={styles.paymentDetails}>
-          <div className={styles.info}>Выбрать способ оплаты</div>
+          <div>
+            <div className={styles.infoPayType}>Выбрать способ оплаты</div>
+            <div className={styles.chosenPayType}>Наличными</div>
+          </div>
           <button
             className={styles.buttonStyle}
             onClick={togglePayTypeVisibility}

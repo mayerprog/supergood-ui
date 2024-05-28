@@ -55,6 +55,7 @@ export const orderAPI = {
         salesid,
         addressid,
       });
+      console.log("response", response);
       return response.data;
     } catch (err) {
       console.error(

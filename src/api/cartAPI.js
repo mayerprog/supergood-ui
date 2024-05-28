@@ -21,7 +21,6 @@ export const cartAPI = {
         itemid,
         qty,
       });
-      console.log("response", response);
       return response.data;
     } catch (err) {
       console.error(

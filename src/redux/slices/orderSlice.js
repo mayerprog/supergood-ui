@@ -8,6 +8,7 @@ const initialState = {
   loyalty: [], //can be empty if no orders made
   errMessage: "",
   itemsUnavailable: [],
+  promo: "",
 };
 
 export const orderSlice = createSlice({
@@ -36,6 +37,9 @@ export const orderSlice = createSlice({
     setItemsUnavailable: (state, action) => {
       state.itemsUnavailable = action.payload;
     },
+    setPromo: (state, action) => {
+      state.promo = action.payload;
+    },
   },
 });
 
@@ -46,6 +50,7 @@ export const {
   setLoyalty,
   setErrMessage,
   setItemsUnavailable,
+  setPromo,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;

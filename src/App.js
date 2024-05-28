@@ -56,6 +56,8 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isMainPage, setIsMainPage] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   const headerRef = useRef(null);
   const optionsRef = useRef(null);
   const userInfoRef = useRef(null);
@@ -181,6 +183,7 @@ function App() {
   useEffect(() => {
     (async () => {
       try {
+        setLoading(true);
         const token = Cookies.get("token");
         if (token) {
           dispatch(setToken(token));
@@ -226,6 +229,7 @@ function App() {
         } else {
           dispatch(setIsAuth(false));
         }
+        setLoading(false);
       } catch (err) {
         console.log(err);
       }
@@ -307,34 +311,35 @@ function App() {
         <Route
           path="/submit"
           element={
-            <ProtectedRoute>
-              <NewOrderPage
-                userInfoRef={userInfoRef}
-                toggleUserInfoVisibility={toggleUserInfoVisibility}
-                addressRef={addressRef}
-                isUserInfoOpen={isUserInfoOpen}
-                isModalAddressOpen={isModalAddressOpen}
-                mapWrapperRef={mapWrapperRef}
-                setIsMapOpen={setIsMapOpen}
-                isMapOpen={isMapOpen}
-                isPayTypeOpen={isPayTypeOpen}
-                payTypeWrapperRef={payTypeWrapperRef}
-                togglePayTypeVisibility={togglePayTypeVisibility}
-                toggleAddressVisibility={toggleAddressVisibility}
-                isMainSheetOpen={isMainSheetOpen}
-                setIsMainSheetOpen={setIsMainSheetOpen}
-                mainSheetWrapperRef={mainSheetWrapperRef}
-                mainSheetClosing={mainSheetClosing}
-                setMainSheetClosing={setMainSheetClosing}
-                bonusWrapperRef={bonusWrapperRef}
-                isBonusOpen={isBonusOpen}
-                toggleBonusVisibility={toggleBonusVisibility}
-                toggleOrderPromoVisibility={toggleOrderPromoVisibility}
-                orderPromoWrapperRef={orderPromoWrapperRef}
-                isOrderPromoOpen={isOrderPromoOpen}
-                toggleLoginVisibility={toggleLoginVisibility}
-              />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <NewOrderPage
+              userInfoRef={userInfoRef}
+              toggleUserInfoVisibility={toggleUserInfoVisibility}
+              addressRef={addressRef}
+              isUserInfoOpen={isUserInfoOpen}
+              isModalAddressOpen={isModalAddressOpen}
+              mapWrapperRef={mapWrapperRef}
+              setIsMapOpen={setIsMapOpen}
+              isMapOpen={isMapOpen}
+              isPayTypeOpen={isPayTypeOpen}
+              payTypeWrapperRef={payTypeWrapperRef}
+              togglePayTypeVisibility={togglePayTypeVisibility}
+              toggleAddressVisibility={toggleAddressVisibility}
+              isMainSheetOpen={isMainSheetOpen}
+              setIsMainSheetOpen={setIsMainSheetOpen}
+              mainSheetWrapperRef={mainSheetWrapperRef}
+              mainSheetClosing={mainSheetClosing}
+              setMainSheetClosing={setMainSheetClosing}
+              bonusWrapperRef={bonusWrapperRef}
+              isBonusOpen={isBonusOpen}
+              toggleBonusVisibility={toggleBonusVisibility}
+              toggleOrderPromoVisibility={toggleOrderPromoVisibility}
+              orderPromoWrapperRef={orderPromoWrapperRef}
+              isOrderPromoOpen={isOrderPromoOpen}
+              toggleLoginVisibility={toggleLoginVisibility}
+              loading={loading}
+            />
+            // </ProtectedRoute>
           }
         />
         <Route

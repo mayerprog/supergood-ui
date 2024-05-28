@@ -57,13 +57,23 @@
     justify-content: space-between;
     margin-top: 20px;
   }
-  .info,
-  .promo {
+  .info {
     margin: 10px;
+  }
+
+  .infoPayType {
+    margin: 0 10px 10px 10px;
+  }
+
+  .chosenPayType {
+    color: #e7ad2f;
+    margin-left: 10px;
+    font-weight: 500;
   }
 
   .promo {
     color: #868686;
+    margin: 10px;
 
     &:hover {
       color: black;
@@ -100,6 +110,7 @@
     height: 40px;
     width: 100px;
     background-color: white;
+    align-self: center;
   }
 
   .paymentButtonText,

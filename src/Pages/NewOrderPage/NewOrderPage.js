@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./NewOrderPage.module.scss";
 import AddressModal from "../../Components/Address/AddressModal/AddressModal";
 import OrderCart from "../../Components/Cart/OrderCart/OrderCart";
@@ -17,6 +17,9 @@ import {
   setErrMessage,
   setItemsUnavailable,
 } from "../../redux/slices/orderSlice";
+import ModalsContext from "../../contexts/ModalsContext";
+import PromoErrorModal from "../../Components/Promo/PromoErrorModal/PromoErrorModal";
+import ItemsShimmer from "../../Loaders/ItemsShimmer";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -43,14 +46,18 @@ const NewOrderPage = ({
   orderPromoWrapperRef,
   isOrderPromoOpen,
   toggleLoginVisibility,
+  loading,
 }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const errMessage = useSelector((state) => state.order.errMessage);
   const itemsUnavailable = useSelector((state) => state.order.itemsUnavailable);
   const orders = useSelector((state) => state.order.orders);
+  const isAuth = useSelector((state) => state.auth.isAuth);
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
   const addressSelected = useSelector((state) => state.user.addressSelected);
+
+  const { isPromoErrorOpen } = useContext(ModalsContext);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -61,24 +68,15 @@ const NewOrderPage = ({
   };
 
   useEffect(() => {
-    (async () => {
-      if (cartItems.length === 0 && orders.length === 0) {
-        navigate("/");
-      } else {
-        await fetchMinSum({
-          token,
-          salesid,
-          cartItems,
-          addressSelected,
-          dispatch,
-          action: handleAction,
-        });
-      }
-    })();
-
+    if (cartItems.length === 0 && orders.length === 0) {
+      navigate("/");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartItems]);
+  }, [cartItems, orders]);
 
+  if (loading) {
+    return <ItemsShimmer />;
+  }
   return (
     <div className={styles.container}>
       <h2>Оформление заказа</h2>
@@ -152,6 +150,11 @@ const NewOrderPage = ({
             isModal={true}
             toggleAddressVisibility={toggleAddressVisibility}
           />
+        </div>
+      )}
+      {isPromoErrorOpen && (
+        <div className={styles.cardOverlay}>
+          <PromoErrorModal />
         </div>
       )}
       {isBonusOpen && (

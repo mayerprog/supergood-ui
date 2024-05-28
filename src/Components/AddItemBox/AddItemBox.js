@@ -45,10 +45,6 @@ const AddItemBox = ({
   const { togglePromoErrorVisibility } = useContext(ModalsContext);
 
   useEffect(() => {
-    console.log("render");
-  }, []);
-
-  useEffect(() => {
     if (foundCartItem) {
       if (!foundCartItem.qty) {
         setAmount(foundCartItem.params.amount.value);
