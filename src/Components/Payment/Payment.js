@@ -31,9 +31,20 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
   //to sum total price of items from cart
   useUpdateSumHook();
 
-  const handleClickSubmit = () => {
+  const handleAction = () => {
     handleSetOrderInfo({ cartItems, itemsSum, addressSelected, dispatch });
     navigate("/orders");
+  };
+
+  const handleClickSubmit = async () => {
+    await fetchMinSum({
+      token,
+      salesid,
+      cartItems,
+      addressSelected,
+      dispatch,
+      action: handleAction,
+    });
   };
 
   // defining cashback sum
@@ -108,16 +119,7 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
           <div className={styles.finalPayment}>
             <button
               className={styles.paymentButtonStyle}
-              onClick={() =>
-                fetchMinSum({
-                  token,
-                  salesid,
-                  cartItems,
-                  addressSelected,
-                  dispatch,
-                  action: handleClickSubmit,
-                })
-              }
+              onClick={handleClickSubmit}
             >
               <span className={styles.paymentButtonText}>Оформить заказ</span>
             </button>

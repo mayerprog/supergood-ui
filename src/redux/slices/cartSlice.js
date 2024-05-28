@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   cartItems: [],
   itemsSum: null,
+  noPromoItemsSum: null,
   deliveryTime: 0,
   minAmount: 0,
-  noPromoItemsSum: null,
   itemsUnavailable: [],
 };
 

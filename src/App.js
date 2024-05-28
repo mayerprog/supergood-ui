@@ -30,12 +30,8 @@ import Cookies from "js-cookie";
 import { getOrderInfo } from "./services/getOrderInfo";
 import AddressContext from "./contexts/AddressContext";
 import { orderAPI } from "./api/orderAPI";
-import {
-  setBonus,
-  setLoyalty,
-  setLoyaltyCard,
-} from "./redux/slices/orderSlice";
-import { setMinAmount, setNoPromoItems } from "./redux/slices/cartSlice";
+import { setBonus, setLoyaltyCard } from "./redux/slices/orderSlice";
+import { setMinAmount } from "./redux/slices/cartSlice";
 import ModalsContext from "./contexts/ModalsContext";
 import { defineLoyaltyInfo } from "./services/defineLoyaltyInfo";
 
