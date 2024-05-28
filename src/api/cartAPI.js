@@ -38,6 +38,7 @@ export const cartAPI = {
         salesid,
         id,
       });
+      // console.log("response", response);
       return response.data;
     } catch (err) {
       console.error(

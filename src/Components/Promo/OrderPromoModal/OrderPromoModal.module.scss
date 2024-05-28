@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 10%;
+  top: 20%;
   border-radius: 20px;
   box-shadow: 0 0 5px #ccc;
   font-family: "Inter", sans-serif;
@@ -13,6 +13,10 @@
   justify-content: center;
   padding: 30px 40px;
   color: #323232;
+
+  .content {
+    margin-top: 15px;
+  }
 
   .icon {
     cursor: pointer;
@@ -39,6 +43,13 @@
     color: #6f6f6f;
     margin: -10px 0 20px;
   }
+  .addInfo {
+    &[data-is-error="true"] {
+      color: red;
+      font-weight: 600;
+    }
+  }
+
   .info {
     margin: 10px 0;
   }
@@ -47,6 +58,30 @@
     font-weight: 800;
     font-size: larger;
     color: #323232;
+  }
+
+  .checkboxContainer {
+    display: flex;
+    flex: 1;
+    margin-bottom: 20px;
+    .checkbox {
+      vertical-align: middle;
+      cursor: pointer;
+      accent-color: #e7b341;
+      height: 26px;
+      width: 26px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: white;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      margin-left: 7px;
+      font-size: large;
+      font-weight: 600;
+    }
   }
 }
 

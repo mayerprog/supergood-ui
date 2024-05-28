@@ -38,13 +38,12 @@ const AddItemBox = ({
   const itemsSum = useSelector((state) => state.cart.itemsSum);
   const minAmount = useSelector((state) => state.cart.minAmount);
 
-  const foundCartItem = cartItems.find(
-    (cartItem) => itemId === cartItem.itemid
-  );
-
   const { togglePromoErrorVisibility } = useContext(ModalsContext);
 
   useEffect(() => {
+    const foundCartItem = cartItems.find(
+      (cartItem) => itemId === cartItem.itemid
+    );
     if (foundCartItem) {
       if (!foundCartItem.qty) {
         setAmount(foundCartItem.params.amount.value);
@@ -53,7 +52,7 @@ const AddItemBox = ({
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [foundCartItem]);
+  }, []);
 
   const increment = async (event) => {
     event.stopPropagation();

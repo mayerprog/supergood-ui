@@ -22,7 +22,6 @@ export const cartSlice = createSlice({
     },
     setMinAmount: (state, action) => {
       state.minAmount = action.payload;
-      console.log("minAmount", state.minAmount);
     },
     removeItems: (state, action) => {
       state.cartItems = state.cartItems.filter(
