@@ -5,7 +5,7 @@ import GooglePlay from "../../../assets/images/Google-Play.png";
 const MobileApps = () => {
   return (
     <div className={styles.appLinks}>
-      <span>В приложении удобнее!</span>
+      <span>С приложением удобнее!</span>
       <div className={styles.images}>
         <a
           href="https://apps.apple.com/ru/app/supergood/id1520374517"

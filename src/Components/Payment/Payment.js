@@ -10,16 +10,23 @@ import { setDescription } from "../../redux/slices/userSlice";
 import { fetchMinSum } from "../../services/fetchMinSum";
 
 const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
+  const [cashbackSum, setCashbackSum] = useState();
   const itemsSum = useSelector((state) => state.cart.itemsSum);
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const deliveryTime = useSelector((state) => state.cart.deliveryTime);
+  const bonusActivated = useSelector((state) => state.order.bonusActivated);
+  const loyaltyCard = useSelector((state) => state.order.loyaltyCard);
+
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
+  const noPromoItemsSum = useSelector((state) => state.cart.noPromoItemsSum);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
+
+  const promoItem = cartItems.find((item) => item.promocode != null);
 
   //to sum total price of items from cart
   useUpdateSumHook();
@@ -28,6 +35,16 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
     handleSetOrderInfo({ cartItems, itemsSum, addressSelected, dispatch });
     navigate("/orders");
   };
+
+  // defining cashback sum
+  useEffect(() => {
+    if (loyaltyCard) {
+      const cashback = parseInt(loyaltyCard.cashback);
+      const cashbackDecimal = cashback / 100;
+      const cashbackSum = Math.round(itemsSum * cashbackDecimal);
+      setCashbackSum(cashbackSum);
+    }
+  }, [loyaltyCard, itemsSum]);
 
   return (
     <div className={styles.container}>
@@ -53,8 +70,27 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
         <h2>Итого</h2>
         <div className={styles.paymentDetails}>
           <div className={styles.info}>Стоимость заказа</div>
-          <div className={styles.info}>{itemsSum} ₽</div>
+          <div className={styles.info}>{noPromoItemsSum} ₽</div>
         </div>
+
+        {bonusActivated && (
+          <div className={styles.paymentDetails}>
+            <div className={styles.info}>Оплата бонусами</div>
+            <div className={styles.info}>-{bonusActivated} ₽</div>
+          </div>
+        )}
+        {promoItem && (
+          <div className={styles.paymentDetails}>
+            <div className={styles.info}>Скидка по промокоду</div>
+            <div className={styles.info}>{promoItem.lineamount} ₽</div>
+          </div>
+        )}
+
+        <div className={styles.paymentDetails}>
+          <div className={styles.info}>Начислим бонусов</div>
+          <div className={styles.info}>{cashbackSum} ₽</div>
+        </div>
+
         <div className={styles.paymentDetails}>
           <div className={styles.info}>Время доставки</div>
           <div className={styles.info}>{deliveryTime} мин</div>

@@ -1,5 +1,6 @@
 import { orderAPI } from "../api/orderAPI";
-import { setErrMessage, setItemsUnavailable } from "../redux/slices/orderSlice";
+import { setItemsUnavailable } from "../redux/slices/cartSlice";
+import { setErrMessage } from "../redux/slices/orderSlice";
 
 export const fetchMinSum = async (params) => {
   const { token, salesid, cartItems, addressSelected, dispatch, action } =

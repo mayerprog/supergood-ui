@@ -15,10 +15,10 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
   const handleCheckBox = (event) => {
     setChosenValue(event.target.value);
     switch (event.target.value) {
-      case "Подарочный сертификат":
-        setShowCertificateInput(true);
-        setShowCashInput(false);
-        break;
+      // case "Подарочный сертификат":
+      //   setShowCertificateInput(true);
+      //   setShowCashInput(false);
+      //   break;
       case "Банковской картой":
         setShowCertificateInput(false);
         setShowCashInput(false);
@@ -27,6 +27,10 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
       case "Наличными курьеру":
         setShowCertificateInput(false);
         setShowCashInput(true);
+        break;
+      case "Картой курьеру":
+        setShowCertificateInput(false);
+        setShowCashInput(false);
         break;
     }
   };
@@ -38,7 +42,7 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
       </div>
       <h2>Способ оплаты</h2>
 
-      {["Наличными курьеру", "Банковской картой", "Подарочный сертификат"].map(
+      {["Наличными курьеру", "Банковской картой", "Картой курьеру"].map(
         (item, index) => (
           <div className={styles.payTypeContainer} key={index}>
             <input
@@ -69,7 +73,7 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
         </div>
       )}
 
-      {showCertificateInput && (
+      {/* {showCertificateInput && (
         <div className={styles.certificate}>
           <h3>Подарочный сертификат</h3>
           <p>для активации введите номер</p>
@@ -81,7 +85,7 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
             </button>
           </div>
         </div>
-      )}
+      )} */}
 
       <button
         className={styles.buttonStyle}

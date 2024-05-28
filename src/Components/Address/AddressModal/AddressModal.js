@@ -15,9 +15,9 @@ const AddressModal = ({
 }) => {
   const addressList = useSelector((state) => state.user.addressList);
 
-  useEffect(() => {
-    console.log("AddressModal has been drawn");
-  }, []);
+  // useEffect(() => {
+  //   console.log("AddressModal has been drawn");
+  // }, []);
 
   return (
     <div

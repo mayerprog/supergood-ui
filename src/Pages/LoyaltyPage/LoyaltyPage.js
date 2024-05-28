@@ -36,17 +36,15 @@ const LoyaltyPage = () => {
       </div>
       <div className={styles.promoCardContainer}>
         <BonusCards
-          cards={[
-            {
-              levelRusName: "Приветственный уровень",
-              levelEngName: "START",
-              cashback: "7",
-              nextCashback: "10",
-              nextRequirement: "",
-              untilRequirement: null,
-              backgroundColor: "#EAF2B6",
-            },
-          ]}
+          card={{
+            levelRusName: "Приветственный уровень",
+            levelEngName: "START",
+            cashback: "7",
+            nextCashback: "10",
+            nextRequirement: "",
+            untilRequirement: null,
+            backgroundColor: "#EAF2B6",
+          }}
           message={null}
           isModal={false}
         />
@@ -58,17 +56,15 @@ const LoyaltyPage = () => {
       </div>
       <div className={styles.promoCardContainer}>
         <BonusCards
-          cards={[
-            {
-              levelRusName: "Продвинутый уровень",
-              levelEngName: "GOOD",
-              cashback: "10",
-              nextCashback: "15",
-              nextRequirement: "",
-              untilRequirement: null,
-              backgroundColor: "#D3E5F9",
-            },
-          ]}
+          card={{
+            levelRusName: "Продвинутый уровень",
+            levelEngName: "GOOD",
+            cashback: "10",
+            nextCashback: "15",
+            nextRequirement: "",
+            untilRequirement: null,
+            backgroundColor: "#D3E5F9",
+          }}
           message={null}
           isModal={false}
         />
@@ -80,17 +76,15 @@ const LoyaltyPage = () => {
       </div>
       <div className={styles.promoCardContainer}>
         <BonusCards
-          cards={[
-            {
-              levelRusName: "Эксклюзивный уровень",
-              levelEngName: "SUPERGOOD",
-              cashback: "15",
-              nextCashback: "15",
-              nextRequirement: "",
-              untilRequirement: null,
-              backgroundColor: "#FBEED5",
-            },
-          ]}
+          card={{
+            levelRusName: "Эксклюзивный уровень",
+            levelEngName: "SUPERGOOD",
+            cashback: "15",
+            nextCashback: "15",
+            nextRequirement: "",
+            untilRequirement: null,
+            backgroundColor: "#FBEED5",
+          }}
           message={null}
           isModal={false}
         />

@@ -4,32 +4,16 @@ import styles from "./BonusModal.module.scss";
 import { IoMdClose } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { orderAPI } from "../../../api/orderAPI";
-import { setLoyalty } from "../../../redux/slices/orderSlice";
+import { setLoyaltyCard } from "../../../redux/slices/orderSlice";
 import { defineLoyaltyInfo } from "../../../services/defineLoyaltyInfo";
 
 const BonusModal = ({ bonusWrapperRef, toggleBonusVisibility }) => {
-  const [cards, setCards] = useState([]);
   const bonus = useSelector((state) => state.order.bonus);
-  const loyalty = useSelector((state) => state.order.loyalty);
+  const loyaltyCard = useSelector((state) => state.order.loyaltyCard);
 
   useEffect(() => {
-    if (loyalty) {
-      if (loyalty.length === 0) {
-        setCards([
-          {
-            levelRusName: "Приветственный уровень",
-            levelEngName: "START",
-            cashback: "7",
-            nextCashback: "10",
-            nextRequirement: "10000",
-            untilRequirement: 10000,
-            backgroundColor: "#EAF2B6",
-          },
-        ]);
-      } else
-        defineLoyaltyInfo(loyalty.bonus_lost, loyalty.bonus_name, setCards);
-    }
-  }, [loyalty]);
+    console.log("loyaltyCard", loyaltyCard);
+  }, [loyaltyCard]);
 
   return (
     <div className={styles.container} ref={bonusWrapperRef}>
@@ -41,7 +25,7 @@ const BonusModal = ({ bonusWrapperRef, toggleBonusVisibility }) => {
         <span>{bonus}</span>
       </div>
       <BonusCards
-        cards={cards}
+        card={loyaltyCard}
         message="Совершите заказы еще на"
         isModal={true}
       />

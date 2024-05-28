@@ -5,10 +5,9 @@ const initialState = {
   changeAmount: null,
   description: "",
   bonus: null,
-  loyalty: [], //can be empty if no orders made
   errMessage: "",
-  itemsUnavailable: [],
-  promo: "",
+  bonusActivated: null,
+  loyaltyCard: [],
 };
 
 export const orderSlice = createSlice({
@@ -28,17 +27,14 @@ export const orderSlice = createSlice({
     setBonus: (state, action) => {
       state.bonus = action.payload;
     },
-    setLoyalty: (state, action) => {
-      state.loyalty = action.payload;
-    },
     setErrMessage: (state, action) => {
       state.errMessage = action.payload;
     },
-    setItemsUnavailable: (state, action) => {
-      state.itemsUnavailable = action.payload;
+    setBonusActivated: (state, action) => {
+      state.bonusActivated = action.payload;
     },
-    setPromo: (state, action) => {
-      state.promo = action.payload;
+    setLoyaltyCard: (state, action) => {
+      state.loyaltyCard = action.payload;
     },
   },
 });
@@ -47,10 +43,9 @@ export const {
   addOrders,
   setChangeAmount,
   setBonus,
-  setLoyalty,
   setErrMessage,
-  setItemsUnavailable,
-  setPromo,
+  setBonusActivated,
+  setLoyaltyCard,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;

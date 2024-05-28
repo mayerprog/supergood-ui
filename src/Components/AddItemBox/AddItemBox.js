@@ -37,6 +37,7 @@ const AddItemBox = ({
   const isAuth = useSelector((state) => state.auth.isAuth);
   const itemsSum = useSelector((state) => state.cart.itemsSum);
   const minAmount = useSelector((state) => state.cart.minAmount);
+  const noPromoItemsSum = useSelector((state) => state.cart.noPromoItemsSum);
 
   const { togglePromoErrorVisibility } = useContext(ModalsContext);
 
@@ -52,7 +53,7 @@ const AddItemBox = ({
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [cartItems]);
 
   const increment = async (event) => {
     event.stopPropagation();
@@ -117,16 +118,13 @@ const AddItemBox = ({
       price: item.price - item.initialPrice,
     };
 
-    // checking if itemsSum will be bigger than minSum after deleting an item. If not - then needed to delete promocode
-    if (!item.promocode && item) {
-      const promoItem = cartItems.find((item) => item.promocode != null);
-      if (promoItem) {
-        const withoutPromo =
-          itemsSum - promoItem.lineamount - item.lineamount / item.qty; //sum without promo and decremented item
-        if (withoutPromo < minAmount) {
-          togglePromoErrorVisibility(true);
-          return;
-        }
+    // checking if total sum will be bigger than minSum after deleting an item. If not - then needed to delete promocode
+    const promoItem = cartItems.find((item) => item.promocode != null);
+    if (promoItem) {
+      const withoutPromo = noPromoItemsSum - item.lineamount / item.qty; //sum without promo and decremented item
+      if (withoutPromo < minAmount) {
+        togglePromoErrorVisibility(true);
+        return;
       }
     }
 

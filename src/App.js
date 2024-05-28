@@ -17,6 +17,7 @@ import {
   setAddressSelected,
   setDeptId,
   setMapPosition,
+  setMinorAreaId,
   setSalesid,
   setToken,
   setUserData,
@@ -29,9 +30,14 @@ import Cookies from "js-cookie";
 import { getOrderInfo } from "./services/getOrderInfo";
 import AddressContext from "./contexts/AddressContext";
 import { orderAPI } from "./api/orderAPI";
-import { setBonus, setLoyalty } from "./redux/slices/orderSlice";
+import {
+  setBonus,
+  setLoyalty,
+  setLoyaltyCard,
+} from "./redux/slices/orderSlice";
 import { setMinAmount, setNoPromoItems } from "./redux/slices/cartSlice";
 import ModalsContext from "./contexts/ModalsContext";
+import { defineLoyaltyInfo } from "./services/defineLoyaltyInfo";
 
 function App() {
   // modals
@@ -78,6 +84,7 @@ function App() {
   const salesid = useSelector((state) => state.user.salesid);
   const addressList = useSelector((state) => state.user.addressList);
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const bonus = useSelector((state) => state.order.bonus);
 
   const { setMarkerAddress, setMarkerPosition } = useContext(AddressContext);
   const { promoErrorWrapperRef, togglePromoErrorVisibility } =
@@ -155,6 +162,8 @@ function App() {
       // to set selected address
       dispatch(setAddressSelected(selectedAddressList[0]));
       dispatch(setDeptId(selectedAddressList[0]?.deptid));
+      dispatch(setMinorAreaId(selectedAddressList[0]?.minor_area_id));
+
       const newPosition = [
         parseFloat(selectedAddressList[0].lat),
         parseFloat(selectedAddressList[0].long),
@@ -224,7 +233,24 @@ function App() {
           const loyalty = await orderAPI.getLoyalty(token);
           if (loyalty) {
             const loyaltyInfo = loyalty.bonuses;
-            dispatch(setLoyalty(loyaltyInfo));
+            if (loyaltyInfo.length === 0) {
+              dispatch(
+                setLoyaltyCard({
+                  levelRusName: "Приветственный уровень",
+                  levelEngName: "START",
+                  cashback: "7",
+                  nextCashback: "10",
+                  nextRequirement: "10000",
+                  untilRequirement: 10000,
+                  backgroundColor: "#EAF2B6",
+                })
+              );
+            } else
+              defineLoyaltyInfo(
+                loyaltyInfo.bonus_lost,
+                loyaltyInfo.bonus_name,
+                dispatch
+              );
           }
         } else {
           dispatch(setIsAuth(false));

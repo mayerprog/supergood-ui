@@ -13,13 +13,11 @@ import BonusModal from "../../Components/Promo/BonusModal/BonusModal";
 import OrderPromoModal from "../../Components/Promo/OrderPromoModal/OrderPromoModal";
 import { orderAPI } from "../../api/orderAPI";
 import { fetchMinSum } from "../../services/fetchMinSum";
-import {
-  setErrMessage,
-  setItemsUnavailable,
-} from "../../redux/slices/orderSlice";
+import { setErrMessage } from "../../redux/slices/orderSlice";
 import ModalsContext from "../../contexts/ModalsContext";
 import PromoErrorModal from "../../Components/Promo/PromoErrorModal/PromoErrorModal";
 import ItemsShimmer from "../../Loaders/ItemsShimmer";
+import { setItemsUnavailable } from "../../redux/slices/cartSlice";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -50,12 +48,8 @@ const NewOrderPage = ({
 }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const errMessage = useSelector((state) => state.order.errMessage);
-  const itemsUnavailable = useSelector((state) => state.order.itemsUnavailable);
+  const itemsUnavailable = useSelector((state) => state.cart.itemsUnavailable);
   const orders = useSelector((state) => state.order.orders);
-  const isAuth = useSelector((state) => state.auth.isAuth);
-  const token = useSelector((state) => state.user.token);
-  const salesid = useSelector((state) => state.user.salesid);
-  const addressSelected = useSelector((state) => state.user.addressSelected);
 
   const { isPromoErrorOpen } = useContext(ModalsContext);
 

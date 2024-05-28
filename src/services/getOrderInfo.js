@@ -2,7 +2,7 @@ import { cartAPI } from "../api/cartAPI";
 import {
   setDeliveryTime,
   setItems,
-  setNoPromoItems,
+  setNoPromoItemsSum,
   updateSum,
 } from "../redux/slices/cartSlice";
 
@@ -18,7 +18,7 @@ export const getOrderInfo = async (params) => {
     const deliveryTime = data.sales.calcdlvtime;
     dispatch(setItems(items));
     let promo;
-    dispatch(setNoPromoItems(itemsSum));
+    dispatch(setNoPromoItemsSum(itemsSum));
     if (itemsSum) {
       for (let i = 0; i < items.length; i++) {
         if (items[i].promocode) {

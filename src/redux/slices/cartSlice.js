@@ -5,7 +5,8 @@ const initialState = {
   itemsSum: null,
   deliveryTime: 0,
   minAmount: 0,
-  noPromoItems: null,
+  noPromoItemsSum: null,
+  itemsUnavailable: [],
 };
 
 export const cartSlice = createSlice({
@@ -41,8 +42,11 @@ export const cartSlice = createSlice({
     updateSum: (state, action) => {
       state.itemsSum = action.payload;
     },
-    setNoPromoItems: (state, action) => {
-      state.noPromoItems = action.payload;
+    setNoPromoItemsSum: (state, action) => {
+      state.noPromoItemsSum = action.payload;
+    },
+    setItemsUnavailable: (state, action) => {
+      state.itemsUnavailable = action.payload;
     },
   },
 });
@@ -56,7 +60,8 @@ export const {
   updateItem,
   updateSum,
   removeAllItems,
-  setNoPromoItems,
+  setNoPromoItemsSum,
+  setItemsUnavailable,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

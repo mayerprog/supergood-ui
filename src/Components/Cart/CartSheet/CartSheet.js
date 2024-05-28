@@ -27,7 +27,7 @@ const CartSheet = ({
   const deliveryTime = useSelector((state) => state.cart.deliveryTime);
 
   const errMessage = useSelector((state) => state.order.errMessage);
-  const itemsUnavailable = useSelector((state) => state.order.itemsUnavailable);
+  const itemsUnavailable = useSelector((state) => state.cart.itemsUnavailable);
 
   const handleClosing = () => {
     setCartSheetClosing(false);

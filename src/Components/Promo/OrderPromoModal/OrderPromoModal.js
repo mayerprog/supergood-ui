@@ -5,7 +5,7 @@ import { orderAPI } from "../../../api/orderAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAPI } from "../../../api/cartAPI";
 import { getOrderInfo } from "../../../services/getOrderInfo";
-import { setBonus, setPromo } from "../../../redux/slices/orderSlice";
+import { setBonus, setBonusActivated } from "../../../redux/slices/orderSlice";
 import { updateSum } from "../../../redux/slices/cartSlice";
 
 const OrderPromoModal = ({
@@ -16,16 +16,17 @@ const OrderPromoModal = ({
   const [bonusChecked, setBonusChecked] = useState(false);
 
   const [maxBonus, setMaxBonus] = useState(null);
-  const [bonusInput, setBonusInput] = useState("");
   const [isError, setIsError] = useState(false);
+
+  const [promoInput, setPromoInput] = useState("");
+  const [bonusInput, setBonusInput] = useState("");
 
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
-  const promo = useSelector((state) => state.order.promo);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const bonus = useSelector((state) => state.order.bonus);
   const itemsSum = useSelector((state) => state.cart.itemsSum);
-  const noPromoItems = useSelector((state) => state.cart.noPromoItems);
+  const noPromoItemsSum = useSelector((state) => state.cart.noPromoItemsSum);
 
   const dispatch = useDispatch();
 
@@ -33,7 +34,7 @@ const OrderPromoModal = ({
 
   const handlePromoActivation = async () => {
     try {
-      await orderAPI.setPromoCode({ token, salesid, promo });
+      await orderAPI.setPromoCode({ token, salesid, promo: promoInput });
       await getOrderInfo({ token, salesid, dispatch });
       toggleOrderPromoVisibility();
     } catch (err) {
@@ -50,7 +51,9 @@ const OrderPromoModal = ({
         await cartAPI.deleteItem({ token, salesid, id: promoItem.id });
         await getOrderInfo({ token, salesid, dispatch });
       }
-      dispatch(updateSum(noPromoItems - bonusInput));
+      dispatch(setBonusActivated(bonusInput));
+      dispatch(setBonus(bonus - bonusInput));
+      dispatch(updateSum(noPromoItemsSum - bonusInput));
       toggleOrderPromoVisibility();
     }
   };
@@ -66,7 +69,7 @@ const OrderPromoModal = ({
   };
 
   useEffect(() => {
-    const bonusTotal = Math.round(noPromoItems * 0.3);
+    const bonusTotal = Math.round(noPromoItemsSum * 0.3);
     if (bonusTotal <= bonus) {
       setMaxBonus(bonusTotal);
     } else {
@@ -95,8 +98,8 @@ const OrderPromoModal = ({
             <input
               placeholder="Введите промокод"
               className={styles.input}
-              onChange={(e) => dispatch(setPromo(e.target.value))}
-              value={promo}
+              onChange={(e) => setPromoInput(e.target.value)}
+              value={promoInput}
             />
             <button
               className={styles.buttonStyle}
