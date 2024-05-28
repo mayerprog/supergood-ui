@@ -17,6 +17,7 @@ import { cartAPI } from "../../api/cartAPI";
 import {
   setDeliveryTime,
   setItems,
+  setNoPromoItems,
   updateSum,
 } from "../../redux/slices/cartSlice";
 import { addressAPI } from "../../api/addressAPI";
@@ -63,6 +64,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
       let promo;
 
       dispatch(setItems(items));
+      dispatch(setNoPromoItems(itemsSum));
 
       if (itemsSum) {
         for (let i = 0; i < items.length; i++) {

@@ -25,10 +25,11 @@ const OrderPromoModal = ({
   const cartItems = useSelector((state) => state.cart.cartItems);
   const bonus = useSelector((state) => state.order.bonus);
   const itemsSum = useSelector((state) => state.cart.itemsSum);
-
-  const promoItem = cartItems.find((item) => item.promocode != null);
+  const noPromoItems = useSelector((state) => state.cart.noPromoItems);
 
   const dispatch = useDispatch();
+
+  const promoItem = cartItems.find((item) => item.promocode != null);
 
   const handlePromoActivation = async () => {
     try {
@@ -49,7 +50,7 @@ const OrderPromoModal = ({
         await cartAPI.deleteItem({ token, salesid, id: promoItem.id });
         await getOrderInfo({ token, salesid, dispatch });
       }
-      dispatch(updateSum(itemsSum - bonusInput));
+      dispatch(updateSum(noPromoItems - bonusInput));
       toggleOrderPromoVisibility();
     }
   };
@@ -65,12 +66,7 @@ const OrderPromoModal = ({
   };
 
   useEffect(() => {
-    let bonusTotal;
-    if (promoItem) {
-      bonusTotal = Math.round((itemsSum - promoItem.lineamount) * 0.3);
-    } else {
-      bonusTotal = Math.round(itemsSum * 0.3);
-    }
+    const bonusTotal = Math.round(noPromoItems * 0.3);
     if (bonusTotal <= bonus) {
       setMaxBonus(bonusTotal);
     } else {

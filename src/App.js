@@ -30,7 +30,7 @@ import { getOrderInfo } from "./services/getOrderInfo";
 import AddressContext from "./contexts/AddressContext";
 import { orderAPI } from "./api/orderAPI";
 import { setBonus, setLoyalty } from "./redux/slices/orderSlice";
-import { setMinAmount } from "./redux/slices/cartSlice";
+import { setMinAmount, setNoPromoItems } from "./redux/slices/cartSlice";
 import ModalsContext from "./contexts/ModalsContext";
 
 function App() {
