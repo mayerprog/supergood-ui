@@ -12,6 +12,7 @@ export const fetchMinSum = async (params) => {
         salesid,
         addressid: addressSelected.addressid,
       });
+      console.log("responseMinSum", response);
       if (response.status === "ok") {
         dispatch(setErrMessage(""));
         dispatch(setItemsUnavailable([]));

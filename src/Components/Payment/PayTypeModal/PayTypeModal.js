@@ -35,6 +35,11 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
     }
   };
 
+  const handleSetChange = () => {
+    dispatch(setChangeAmount(parseInt(inputChange)));
+    setShowCashInput(false);
+  };
+
   return (
     <div ref={payTypeWrapperRef} className={styles.container}>
       <div onClick={togglePayTypeVisibility} className={styles.icon}>
@@ -62,11 +67,9 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
               placeholder="Сдача с"
               className={styles.input}
               onChange={(e) => setInputChange(e.target.value)}
+              type="number"
             />
-            <button
-              className={styles.buttonStyle}
-              onClick={() => dispatch(setChangeAmount(inputChange))}
-            >
+            <button className={styles.buttonStyle} onClick={handleSetChange}>
               <span className={styles.buttonText}>ОК</span>
             </button>
           </div>

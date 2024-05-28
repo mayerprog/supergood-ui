@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   orders: [],
-  changeAmount: null,
-  description: "",
+  changeAmount: 0,
+  orderDescription: "",
   bonus: null,
   errMessage: "",
   bonusActivated: null,
@@ -21,8 +21,8 @@ export const orderSlice = createSlice({
     setChangeAmount: (state, action) => {
       state.changeAmount = action.payload;
     },
-    setDescription: (state, action) => {
-      state.description = action.payload;
+    setOrderDescription: (state, action) => {
+      state.orderDescription = action.payload;
     },
     setBonus: (state, action) => {
       state.bonus = action.payload;
@@ -43,6 +43,7 @@ export const {
   addOrders,
   setChangeAmount,
   setBonus,
+  setOrderDescription,
   setErrMessage,
   setBonusActivated,
   setLoyaltyCard,

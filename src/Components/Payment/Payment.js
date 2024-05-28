@@ -6,8 +6,10 @@ import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 import { removeOrderInfo } from "../../redux/slices/orderSlice";
 import { useMediaQuery } from "react-responsive";
 import { handleSetOrderInfo } from "../../services/handleSetOrderInfo";
-import { setDescription } from "../../redux/slices/userSlice";
+import { setOrderDescription } from "../../redux/slices/orderSlice";
 import { fetchMinSum } from "../../services/fetchMinSum";
+import { orderAPI } from "../../api/orderAPI";
+import paymentType from "../../paymentType";
 
 const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
   const [cashbackSum, setCashbackSum] = useState();
@@ -17,6 +19,10 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
   const deliveryTime = useSelector((state) => state.cart.deliveryTime);
   const bonusActivated = useSelector((state) => state.order.bonusActivated);
   const loyaltyCard = useSelector((state) => state.order.loyaltyCard);
+  const bonus = useSelector((state) => state.order.bonus);
+  const changeAmount = useSelector((state) => state.order.changeAmount);
+  const orderDescription = useSelector((state) => state.order.orderDescription);
+  const minorAreaId = useSelector((state) => state.user.minorAreaId);
 
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
@@ -31,9 +37,39 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
   //to sum total price of items from cart
   useUpdateSumHook();
 
-  const handleAction = () => {
-    handleSetOrderInfo({ cartItems, itemsSum, addressSelected, dispatch });
-    navigate("/orders");
+  const handleAction = async () => {
+    // handleSetOrderInfo({ cartItems, itemsSum, addressSelected, dispatch });
+    // navigate("/orders");
+    const addressid = addressSelected.addressid.toString();
+    const paytype = paymentType.CASH_TO_COURIER;
+    const points = parseInt(bonus);
+    const minor_area_id = parseInt(minorAreaId);
+
+    // console.log("addressid", typeof addressid);
+    // console.log("payamount", typeof itemsSum);
+    // console.log("bonus", typeof points);
+    // console.log("changeAmount", typeof changeAmount);
+    // console.log("paytype", typeof paytype);
+    // console.log("description", typeof orderDescription);
+    // console.log("deliveryTime", typeof deliveryTime);
+    // console.log("minorAreaId", typeof minorAreaId);
+    try {
+      await orderAPI.orderPost({
+        token,
+        salesid,
+        addressid,
+        nocontact: 0,
+        payamount: itemsSum,
+        points,
+        changeamount: changeAmount,
+        paytype,
+        description: orderDescription,
+        dlvtime: deliveryTime,
+        minor_area_id,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleClickSubmit = async () => {
@@ -113,7 +149,7 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
         <input
           className={styles.input}
           placeholder="Ваш комментарий к заказу"
-          onChange={(e) => dispatch(setDescription(e.target.value))}
+          onChange={(e) => dispatch(setOrderDescription(e.target.value))}
         />
         {!netbooksMediaQuery && (
           <div className={styles.finalPayment}>

@@ -4,6 +4,8 @@ import { GiShoppingCart } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
 import { handleSetOrderInfo } from "../../../services/handleSetOrderInfo";
 import { fetchMinSum } from "../../../services/fetchMinSum";
+import paymentType from "../../../paymentType";
+import { orderAPI } from "../../../api/orderAPI";
 
 const DeviceFooter = ({ setIsCartSheetOpen, location }) => {
   const navigate = useNavigate();
@@ -14,10 +16,37 @@ const DeviceFooter = ({ setIsCartSheetOpen, location }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
+  const bonus = useSelector((state) => state.order.bonus);
+  const minorAreaId = useSelector((state) => state.user.minorAreaId);
+  const changeAmount = useSelector((state) => state.order.changeAmount);
+  const orderDescription = useSelector((state) => state.order.orderDescription);
+  const deliveryTime = useSelector((state) => state.cart.deliveryTime);
 
-  const handleAction = () => {
-    handleSetOrderInfo({ cartItems, itemsSum, addressSelected, dispatch });
-    navigate("/orders");
+  const handleAction = async () => {
+    // handleSetOrderInfo({ cartItems, itemsSum, addressSelected, dispatch });
+    // navigate("/orders");
+    const addressid = addressSelected.addressid.toString();
+    const paytype = paymentType.CASH_TO_COURIER;
+    const points = parseInt(bonus);
+    const minor_area_id = parseInt(minorAreaId);
+
+    try {
+      await orderAPI.orderPost({
+        token,
+        salesid,
+        addressid,
+        nocontact: 0,
+        payamount: itemsSum,
+        points,
+        changeamount: changeAmount,
+        paytype,
+        description: orderDescription,
+        dlvtime: deliveryTime,
+        minor_area_id,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleFooterClick = async () => {

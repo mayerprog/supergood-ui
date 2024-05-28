@@ -38,6 +38,7 @@ export const orderAPI = {
         dlvtime,
         minor_area_id,
       });
+      console.log("response", response.data);
       return response.data;
     } catch (err) {
       console.error(
