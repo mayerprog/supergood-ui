@@ -19,6 +19,12 @@ import { thunk } from "redux-thunk";
 const cartPersistConfig = {
   key: "cart",
   storage,
+  blacklist: [
+    "noPromoItemsSum",
+    "deliveryTime",
+    "minAmount",
+    "itemsUnavailable",
+  ],
 };
 
 const userPersistConfig = {
@@ -35,6 +41,7 @@ const userPersistConfig = {
     "entrance",
     "description",
     "minorAreaId",
+    "deptId",
   ],
 };
 
