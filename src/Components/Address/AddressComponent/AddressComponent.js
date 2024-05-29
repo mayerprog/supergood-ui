@@ -22,7 +22,8 @@ const AddressComponent = ({
   const [isNewAddressOpen, setIsNewAddressOpen] = useState(false); //for adding new address
   const [addressIndexForChange, setAddressIndexForChange] = useState(null); //for identifying address for update
 
-  const { setMarkerAddress, setMarkerPosition } = useContext(AddressContext);
+  const { setMarkerAddress, setMarkerPosition, setAddressData } =
+    useContext(AddressContext);
 
   const addressList = useSelector((state) => state.user.addressList);
   const token = useSelector((state) => state.user.token);
@@ -33,7 +34,11 @@ const AddressComponent = ({
 
   const dispatch = useDispatch();
 
-  const handleChangeAddress = (id) => {
+  const handleChangeAddress = (id, addressid) => {
+    const selectedAddress = addressList.find(
+      (address) => address.addressid === addressid
+    );
+    setAddressData(selectedAddress);
     setAddressIndexForChange(id);
     setIsNewAddressOpen(false);
     setIsChangeAddressOpen(true);
@@ -104,7 +109,7 @@ const AddressComponent = ({
                 </div>
 
                 <div
-                  onClick={() => handleChangeAddress(index)}
+                  onClick={() => handleChangeAddress(index, item.addressid)}
                   className={styles.edit}
                 >
                   <FiEdit size={20} />

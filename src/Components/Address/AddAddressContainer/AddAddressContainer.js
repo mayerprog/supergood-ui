@@ -37,7 +37,6 @@ const AddAddressContainer = ({
   const [showHouseDropdown, setShowHouseDropdown] = useState(false);
   const [streetSuggestions, setStreetSuggestions] = useState([]);
   const [houseSuggestions, setHouseSuggestions] = useState([]);
-  const [isAddressValid, setIsAddressValid] = useState(false);
 
   const {
     setMarkerAddress,
@@ -54,7 +53,6 @@ const AddAddressContainer = ({
   const flat = useSelector((state) => state.user.flat);
   const entrance = useSelector((state) => state.user.entrance);
   const description = useSelector((state) => state.user.description);
-  const isAuth = useSelector((state) => state.auth.isAuth);
   // const token = Cookies.get("token");
 
   const dispatch = useDispatch();
@@ -82,65 +80,46 @@ const AddAddressContainer = ({
   useUpdateStreetid(item?.street, setStreetid);
 
   const handleUpdateAddress = async () => {
-    if (!isAddressValid) {
-      return; // Stop the function if the address is not validated
-    }
-    const addressExists = addressList.some(
-      (address) =>
-        `${address.street}, ${address.yhouse}` ===
-        `${inputStreet}, ${inputHouse}`
-    );
     //IF WE UPDATE EXISTING ADDRESS
     if (item) {
-      //if address exists then return
-      if (addressExists) return;
-      // if address does not exist then update
-      else {
-        const selectedAddress = addressList.find((address) => address.selected);
-        const isSelected = selectedAddress === item;
-        if (item.addressid) {
-          try {
-            const responseDelete = await addressAPI.deleteAddress({
-              token: token,
-              addressid: item.addressid,
-              status: 2,
-            });
-            if (responseDelete.status === "ok") {
-              const data = await userAPI.getUserPref(token);
-              dispatch(setAddressList(Object.values(data.address)));
-              // dispatch(removeAddress(item.addressid));
-              // dispatch(removeAddressSelected());
-              setAddressIndexForChange(null);
-            }
+      const selectedAddress = addressList.find((address) => address.selected);
+      const isSelected = selectedAddress === item;
 
-            const responseSave = await addressAPI.saveAddress({
-              token: token,
-              street: addressData.street,
-              lat: addressData.lat,
-              long: addressData.long,
-              addressid: addressData.addressid,
-              streetid: addressData.streetid,
-              houseid: addressData.houseid,
-              entrance: entrance,
-              floor: floor,
-              flat: flat,
-              description: description,
-              selected: true,
-              // надо уточнить, будут ли изменения в бэке, если нет, то все новые адреса делать по умолчанию selected: true
-              // если изменения будут, то вместо true поставить isSelected
-            });
-            if (responseSave.status === "ok") {
-              if (!isAuth) {
-                dispatch(addAddress({ data: addressData, selected: true }));
-              } else {
-                const data = await userAPI.getUserPref(token);
-                dispatch(setAddressList(Object.values(data.address)));
-              }
-            }
-          } catch (err) {
-            console.log(err);
+      if (item.addressid) {
+        try {
+          const responseDelete = await addressAPI.deleteAddress({
+            token: token,
+            addressid: item.addressid,
+            status: 2,
+          });
+          if (responseDelete.status === "ok") {
+            await userAPI.getUserPref(token);
           }
+          const responseSave = await addressAPI.saveAddress({
+            token: token,
+            street: addressData.street,
+            lat: addressData.lat,
+            long: addressData.long,
+            addressid: 0,
+            streetid: addressData.streetid,
+            houseid: addressData.houseid,
+            entrance: entrance,
+            floor: floor,
+            flat: flat,
+            description: description,
+            selected: true,
+            // надо уточнить, будут ли изменения в бэке, если нет, то все новые адреса делать по умолчанию selected: true
+            // если изменения будут, то вместо true поставить isSelected
+          });
+          if (responseSave.status === "ok") {
+            const data = await userAPI.getUserPref(token);
+            dispatch(setAddressList(Object.values(data.address)));
+            setAddressIndexForChange(null);
+          }
+        } catch (err) {
+          console.log(err);
         }
+        // }
       }
 
       //IF WE ADD NEW ADDRESS
@@ -161,19 +140,8 @@ const AddAddressContainer = ({
           selected: true,
         });
         if (response.status === "ok") {
-          //if address exists just make it selected
-          if (addressExists) {
-            makeExistingAddressSelected(addressList, inputAddress, dispatch);
-            // if address does not exist then add to the addressList
-          } else {
-            // if no addresses added then first address should be selected automatically
-            if (!isAuth) {
-              dispatch(addAddress({ data: addressData, selected: true }));
-            } else {
-              const data = await userAPI.getUserPref(token);
-              dispatch(setAddressList(Object.values(data.address)));
-            }
-          }
+          const data = await userAPI.getUserPref(token);
+          dispatch(setAddressList(Object.values(data.address)));
         }
       } catch (err) {
         console.log(err);
@@ -229,13 +197,8 @@ const AddAddressContainer = ({
         }
 
         if (responseDelete.status === "ok") {
-          //   dispatch(updateSelected(1));
-          // }
-          // if (responseDelete.status === "ok") {
           const data = await userAPI.getUserPref(token);
           dispatch(setAddressList(Object.values(data.address)));
-          // dispatch(removeAddress(item.addressid));
-          // dispatch(removeAddressSelected());
           setAddressIndexForChange(null);
         }
       } catch (err) {
@@ -307,7 +270,6 @@ const AddAddressContainer = ({
                 dispatch={dispatch}
                 setMarkerAddress={setMarkerAddress}
                 setMarkerPosition={setMarkerPosition}
-                setIsAddressValid={setIsAddressValid}
                 isModal={true}
                 setAddressData={setAddressData}
                 setInputAddress={setInputAddress}

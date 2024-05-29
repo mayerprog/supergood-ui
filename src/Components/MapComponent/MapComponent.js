@@ -40,7 +40,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [showHouseDropdown, setShowHouseDropdown] = useState(false);
   const [streetSuggestions, setStreetSuggestions] = useState([]);
   const [houseSuggestions, setHouseSuggestions] = useState([]);
-  const [isAddressValid, setIsAddressValid] = useState(false);
 
   const {
     markerAddress,
@@ -92,7 +91,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         setInputAddress(`${data.street}, ${data.yhouse}`);
         setMarkerAddress(`${data.street}, ${data.yhouse}`);
         setAddressData(data);
-        setIsAddressValid(true);
       }
     } catch (error) {
       console.error("Failed to fetch address:", error);
@@ -113,9 +111,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   };
 
   const handleAddress = async () => {
-    if (!isAddressValid) {
-      return; // Stop the function if the address is not validated
-    }
     try {
       const response = await addressAPI.saveAddress({
         token: token,
@@ -227,7 +222,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
               dispatch={dispatch}
               setMarkerAddress={setMarkerAddress}
               setMarkerPosition={setMarkerPosition}
-              setIsAddressValid={setIsAddressValid}
               isModal={false}
               setAddressData={setAddressData}
               setInputAddress={setInputAddress}

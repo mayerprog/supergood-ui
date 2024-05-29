@@ -5,13 +5,11 @@ import { setMapPosition } from "../../../redux/slices/userSlice";
 const HouseDropDown = ({
   setShowHouseDropdown,
   setInputHouse,
-  setInputStreet,
   suggestions,
   setSuggestions,
   dispatch,
   setMarkerAddress,
   setMarkerPosition,
-  setIsAddressValid,
   isModal,
   setAddressData,
   setInputAddress,
@@ -26,7 +24,6 @@ const HouseDropDown = ({
     setSuggestions([]);
     setAddressData(suggestion);
     setShowHouseDropdown(false);
-    setIsAddressValid(true);
     const newPosition = [
       parseFloat(suggestion.lat),
       parseFloat(suggestion.long),
