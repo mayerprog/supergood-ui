@@ -12,7 +12,6 @@ const HouseDropDown = ({
   setMarkerPosition,
   isModal,
   setAddressData,
-  setInputAddress,
 }) => {
   const handleAddressClick = async (suggestion) => {
     const response = await addressAPI.getHouse(

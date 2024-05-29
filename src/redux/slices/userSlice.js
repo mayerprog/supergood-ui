@@ -55,12 +55,9 @@ export const userSlice = createSlice({
     setAddressSelected: (state, action) => {
       state.addressSelected = action.payload;
     },
-    removeAddressSelected: (state, action) => {
-      state.addressSelected = {};
-    },
+
     addAddress: (state, action) => {
       const { data, selected } = action.payload;
-
       //if new address selected=true, then make all old addresses selected false
       if (selected) {
         state.addressList.forEach((item) => {
@@ -87,11 +84,6 @@ export const userSlice = createSlice({
         };
       });
     },
-    removeAddress: (state, action) => {
-      state.addressList = state.addressList.filter(
-        (item) => item.addressid !== action.payload
-      );
-    },
   },
 });
 
@@ -109,8 +101,6 @@ export const {
   setDescription,
   addAddress,
   updateSelected,
-  removeAddress,
-  removeAddressSelected,
   setMapPosition,
 } = userSlice.actions;
 

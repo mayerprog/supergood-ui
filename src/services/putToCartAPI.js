@@ -10,6 +10,7 @@ export const putToCartAPI = async (item, token, salesid, deptid) => {
       itemid: item.itemid,
       qty: item.params.amount.value,
     });
+
     return response;
   } catch (err) {
     console.log(err);

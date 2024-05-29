@@ -3,15 +3,11 @@ import { fetchSuggestionsStreet } from "../../../services/fetchSuggestionsStreet
 import styles from "./AddAddressContainer.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addAddress,
-  removeAddress,
-  removeAddressSelected,
   setAddressList,
   setDescription,
   setEntrance,
   setFlat,
   setFloor,
-  updateSelected,
 } from "../../../redux/slices/userSlice";
 import { ImBin } from "react-icons/im";
 import StreetDropDown from "../StreetDropDown/StreetDropDown";
@@ -163,20 +159,22 @@ const AddAddressContainer = ({
         });
         if (responseDelete.status === "ok") {
           if (ifSelected) {
-            await addressAPI.saveAddress({
-              token: token,
-              street: firstAddress.street,
-              lat: firstAddress.lat,
-              long: firstAddress.long,
-              addressid: firstAddress.addressid,
-              streetid: firstAddress.streetid,
-              houseid: firstAddress.houseid,
-              entrance: firstAddress.entrance,
-              floor: firstAddress.floor,
-              flat: firstAddress.flat,
-              description: firstAddress.description,
-              selected: true,
-            });
+            if (firstAddress) {
+              await addressAPI.saveAddress({
+                token: token,
+                street: firstAddress.street,
+                lat: firstAddress.lat,
+                long: firstAddress.long,
+                addressid: firstAddress.addressid,
+                streetid: firstAddress.streetid,
+                houseid: firstAddress.houseid,
+                entrance: firstAddress.entrance,
+                floor: firstAddress.floor,
+                flat: firstAddress.flat,
+                description: firstAddress.description,
+                selected: true,
+              });
+            }
           } else {
             await addressAPI.saveAddress({
               token: token,

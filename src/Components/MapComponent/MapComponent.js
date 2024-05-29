@@ -20,7 +20,6 @@ import {
   setMapPosition,
 } from "../../redux/slices/userSlice";
 import { fetchSuggestionsStreet } from "../../services/fetchSuggestionsStreet";
-import { makeExistingAddressSelected } from "../../services/makeExistingAddressSelected";
 import { useMediaQuery } from "react-responsive";
 import AddressContext from "../../contexts/AddressContext";
 import { fetchHousesSuggestions } from "../../services/fetchHousesSuggestions";
@@ -33,7 +32,6 @@ import { userAPI } from "../../api/userAPI";
 const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const [multiPolygonPoly, setmMultiPolygonPoly] = useState([]);
   const [multiPolygonPolyFew, setmMultiPolygonPolyFew] = useState([]);
-  const [inputAddress, setInputAddress] = useState("");
   const [inputStreet, setInputStreet] = useState("");
   const [inputHouse, setInputHouse] = useState("");
   const [showStreetDropdown, setShowStreetDropdown] = useState(false);
@@ -57,7 +55,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   const addressSelected = useSelector((state) => state.user.addressSelected);
-  const addressList = useSelector((state) => state.user.addressList);
   const mapPosition = useSelector((state) => state.user.mapPosition);
   const token = useSelector((state) => state.user.token);
   const floor = useSelector((state) => state.user.floor);
@@ -68,7 +65,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
 
   // to put street and house names from selected address in all input fields
   useEffect(() => {
-    setInputAddress(addressSelected);
     setInputStreet(addressSelected.street);
     setInputHouse(addressSelected.yhouse);
   }, []);
@@ -88,7 +84,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
         const data = Object.values(response.streets)[0];
         setInputStreet(data.street);
         setInputHouse(data.yhouse);
-        setInputAddress(`${data.street}, ${data.yhouse}`);
         setMarkerAddress(`${data.street}, ${data.yhouse}`);
         setAddressData(data);
       }
@@ -111,41 +106,28 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
   };
 
   const handleAddress = async () => {
-    try {
-      const response = await addressAPI.saveAddress({
-        token: token,
-        street: addressData.street,
-        lat: addressData.lat,
-        long: addressData.long,
-        addressid: addressData.addressid,
-        streetid: addressData.streetid,
-        houseid: addressData.houseid,
-        entrance: entrance,
-        floor: floor,
-        flat: flat,
-        description: description,
-        selected: true,
-      });
-      if (response.status === "ok") {
-        const addressExists = addressList.some(
-          (item) => `${item.street}, ${item.yhouse}` === inputAddress
-        );
-        if (addressExists) {
-          //if exists just make it selected
-          makeExistingAddressSelected(addressList, inputAddress, dispatch);
-        } else {
-          // if does not exist then just add to the addressList
-          if (!isAuth) {
-            dispatch(addAddress({ data: addressData, selected: true }));
-          } else {
-            const data = await userAPI.getUserPref(token);
-            dispatch(setAddressList(Object.values(data.address)));
-          }
-        }
+    if (isAuth) {
+      try {
+        await addressAPI.saveAddress({
+          token: token,
+          street: addressData.street,
+          lat: addressData.lat,
+          long: addressData.long,
+          addressid: addressData.addressid,
+          streetid: addressData.streetid,
+          houseid: addressData.houseid,
+          entrance: entrance,
+          floor: floor,
+          flat: flat,
+          description: description,
+          selected: true,
+        });
+        const data = await userAPI.getUserPref(token);
+        dispatch(setAddressList(Object.values(data.address)));
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } else dispatch(addAddress({ data: addressData, selected: true }));
     setIsMapOpen(false);
   };
 
@@ -224,7 +206,6 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
               setMarkerPosition={setMarkerPosition}
               isModal={false}
               setAddressData={setAddressData}
-              setInputAddress={setInputAddress}
             />
           )}
         </div>
