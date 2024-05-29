@@ -13,7 +13,7 @@ import BonusModal from "../../Components/Promo/BonusModal/BonusModal";
 import OrderPromoModal from "../../Components/Promo/OrderPromoModal/OrderPromoModal";
 import { orderAPI } from "../../api/orderAPI";
 import { fetchMinSum } from "../../services/fetchMinSum";
-import { setErrMessage } from "../../redux/slices/orderSlice";
+import { setCartErrMessage } from "../../redux/slices/cartSlice";
 import ModalsContext from "../../contexts/ModalsContext";
 import PromoErrorModal from "../../Components/Promo/PromoErrorModal/PromoErrorModal";
 import ItemsShimmer from "../../Loaders/ItemsShimmer";
@@ -47,7 +47,7 @@ const NewOrderPage = ({
   loading,
 }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const errMessage = useSelector((state) => state.order.errMessage);
+  const cartErrMessage = useSelector((state) => state.cart.cartErrMessage);
   const itemsUnavailable = useSelector((state) => state.cart.itemsUnavailable);
   const orders = useSelector((state) => state.order.orders);
 
@@ -58,7 +58,7 @@ const NewOrderPage = ({
 
   const handleAction = () => {
     dispatch(setItemsUnavailable(""));
-    dispatch(setErrMessage(""));
+    dispatch(setCartErrMessage(""));
   };
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const NewOrderPage = ({
             isMapOpen={isMapOpen}
           />
           <OrderCart
-            errMessage={errMessage}
+            cartErrMessage={cartErrMessage}
             itemsUnavailable={itemsUnavailable}
           />
         </div>

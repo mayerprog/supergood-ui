@@ -3,7 +3,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
-import { removeOrderInfo } from "../../redux/slices/orderSlice";
+import {
+  removeOrderInfo,
+  setOrderErrMessage,
+} from "../../redux/slices/orderSlice";
 import { useMediaQuery } from "react-responsive";
 import { handleSetOrderInfo } from "../../services/handleSetOrderInfo";
 import { setOrderDescription } from "../../redux/slices/orderSlice";
@@ -23,6 +26,7 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
   const changeAmount = useSelector((state) => state.order.changeAmount);
   const orderDescription = useSelector((state) => state.order.orderDescription);
   const minorAreaId = useSelector((state) => state.user.minorAreaId);
+  const orderErrMessage = useSelector((state) => state.order.orderErrMessage);
 
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
@@ -45,16 +49,8 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
     const points = parseInt(bonus);
     const minor_area_id = parseInt(minorAreaId);
 
-    // console.log("addressid", typeof addressid);
-    // console.log("payamount", typeof itemsSum);
-    // console.log("bonus", typeof points);
-    // console.log("changeAmount", typeof changeAmount);
-    // console.log("paytype", typeof paytype);
-    // console.log("description", typeof orderDescription);
-    // console.log("deliveryTime", typeof deliveryTime);
-    // console.log("minorAreaId", typeof minorAreaId);
     try {
-      await orderAPI.orderPost({
+      const response = await orderAPI.orderPost({
         token,
         salesid,
         addressid,
@@ -67,6 +63,9 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
         dlvtime: deliveryTime,
         minor_area_id,
       });
+      if (response.status === "error") {
+        dispatch(setOrderErrMessage(response.msg));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -151,6 +150,10 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
           placeholder="Ваш комментарий к заказу"
           onChange={(e) => dispatch(setOrderDescription(e.target.value))}
         />
+        {orderErrMessage && (
+          <span className={styles.error}>{orderErrMessage}</span>
+        )}
+
         {!netbooksMediaQuery && (
           <div className={styles.finalPayment}>
             <button

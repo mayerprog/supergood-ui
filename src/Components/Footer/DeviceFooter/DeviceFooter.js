@@ -6,6 +6,7 @@ import { handleSetOrderInfo } from "../../../services/handleSetOrderInfo";
 import { fetchMinSum } from "../../../services/fetchMinSum";
 import paymentType from "../../../paymentType";
 import { orderAPI } from "../../../api/orderAPI";
+import { setOrderErrMessage } from "../../../redux/slices/orderSlice";
 
 const DeviceFooter = ({ setIsCartSheetOpen, location }) => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const DeviceFooter = ({ setIsCartSheetOpen, location }) => {
     const minor_area_id = parseInt(minorAreaId);
 
     try {
-      await orderAPI.orderPost({
+      const response = await orderAPI.orderPost({
         token,
         salesid,
         addressid,
@@ -44,6 +45,9 @@ const DeviceFooter = ({ setIsCartSheetOpen, location }) => {
         dlvtime: deliveryTime,
         minor_area_id,
       });
+      if (response.status === "error") {
+        dispatch(setOrderErrMessage(response.msg));
+      }
     } catch (err) {
       console.log(err);
     }

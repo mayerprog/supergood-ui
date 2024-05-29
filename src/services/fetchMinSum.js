@@ -1,6 +1,6 @@
 import { orderAPI } from "../api/orderAPI";
 import { setItemsUnavailable } from "../redux/slices/cartSlice";
-import { setErrMessage } from "../redux/slices/orderSlice";
+import { setCartErrMessage } from "../redux/slices/cartSlice";
 
 export const fetchMinSum = async (params) => {
   const { token, salesid, cartItems, addressSelected, dispatch, action } =
@@ -12,14 +12,13 @@ export const fetchMinSum = async (params) => {
         salesid,
         addressid: addressSelected.addressid,
       });
-      console.log("responseMinSum", response);
       if (response.status === "ok") {
-        dispatch(setErrMessage(""));
+        dispatch(setCartErrMessage(""));
         dispatch(setItemsUnavailable([]));
         action();
       } else {
         if (response.errorcode === 200) {
-          dispatch(setErrMessage(response.msg));
+          dispatch(setCartErrMessage(response.msg));
           const errorItems = response.params.items;
           //   const errorItems = [
           //     { itemid: 52385, name: "Брускетта со слабосоленым лососем и авокадо" },
@@ -31,7 +30,7 @@ export const fetchMinSum = async (params) => {
           );
           dispatch(setItemsUnavailable(foundItems));
         }
-        dispatch(setErrMessage(response.msg));
+        dispatch(setCartErrMessage(response.msg));
       }
     } catch (err) {
       console.log(err);

@@ -6,7 +6,7 @@ import CartBox from "../CartBox/CartBox";
 import { removeAllItems } from "../../../redux/slices/cartSlice";
 import { deleteCart } from "../../../services/deleteCart";
 
-const OrderCart = ({ errMessage, itemsUnavailable }) => {
+const OrderCart = ({ cartErrMessage, itemsUnavailable }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const isAuth = useSelector((state) => state.auth.isAuth);
   const token = useSelector((state) => state.user.token);
@@ -35,7 +35,7 @@ const OrderCart = ({ errMessage, itemsUnavailable }) => {
           key={index}
         />
       ))}
-      {errMessage && <span className={styles.error}>{errMessage}</span>}
+      {cartErrMessage && <span className={styles.error}>{cartErrMessage}</span>}
       {itemsUnavailable.length > 0 && (
         <span className={styles.addErrInfo}>Отсутствующие позиции:</span>
       )}

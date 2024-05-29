@@ -26,7 +26,7 @@ const Cart = ({
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const deliveryTime = useSelector((state) => state.cart.deliveryTime);
 
-  const errMessage = useSelector((state) => state.order.errMessage);
+  const cartErrMessage = useSelector((state) => state.cart.cartErrMessage);
   const itemsUnavailable = useSelector((state) => state.cart.itemsUnavailable);
 
   const dynamicStyle = {
@@ -83,7 +83,9 @@ const Cart = ({
           <span>Сумма заказа:</span>
           <span>{itemsSum ? itemsSum : 0} ₽</span>
         </div>
-        {errMessage && <span className={styles.error}>{errMessage}</span>}
+        {cartErrMessage && (
+          <span className={styles.error}>{cartErrMessage}</span>
+        )}
         {itemsUnavailable.length > 0 && (
           <span className={styles.addErrInfo}>Отсутствующие позиции:</span>
         )}

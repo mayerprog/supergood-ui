@@ -7,6 +7,7 @@ const initialState = {
   deliveryTime: 0,
   minAmount: 0,
   itemsUnavailable: [],
+  cartErrMessage: "",
 };
 
 export const cartSlice = createSlice({
@@ -18,6 +19,9 @@ export const cartSlice = createSlice({
     },
     setItems: (state, action) => {
       state.cartItems = action.payload;
+    },
+    setCartErrMessage: (state, action) => {
+      state.cartErrMessage = action.payload;
     },
     setDeliveryTime: (state, action) => {
       state.deliveryTime = action.payload;
@@ -56,6 +60,7 @@ export const {
   setItems,
   setDeliveryTime,
   setMinAmount,
+  setCartErrMessage,
   removeItems,
   updateItem,
   updateSum,
