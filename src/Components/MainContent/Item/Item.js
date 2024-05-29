@@ -119,6 +119,7 @@ const Item = ({ item, category, toggleItemOpen, toggleMapVisibility }) => {
                 token,
                 salesid,
                 isAuth,
+                cartItems,
               })
             }
           >

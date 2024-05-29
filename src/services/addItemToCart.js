@@ -1,6 +1,7 @@
 import { addItems } from "../redux/slices/cartSlice";
 import { putToCartAPI } from "./putToCartAPI";
 import { getOrderInfo } from "./getOrderInfo";
+import { cartAPI } from "../api/cartAPI";
 
 export const addItemToCart = async (info) => {
   const {
@@ -14,6 +15,7 @@ export const addItemToCart = async (info) => {
     token,
     salesid,
     isAuth,
+    cartItems,
   } = info;
   event.stopPropagation();
 
@@ -27,15 +29,21 @@ export const addItemToCart = async (info) => {
       const selectedAddressList = addressList.filter(
         (address) => address.selected
       );
-      const response = await putToCartAPI(
-        item,
-        token,
-        salesid,
-        selectedAddressList[0].deptid
-      );
-      if (response.status === "ok") {
-        await getOrderInfo({ token, salesid, dispatch });
+      const cutlery = cartItems.find((item) => item.itemid === 50831);
+      await putToCartAPI(item, token, salesid, selectedAddressList[0].deptid);
+      // if no cutlery then add it to Cart
+      if (!cutlery) {
+        const response = await cartAPI.addToCart({
+          token,
+          salesid,
+          id: 0,
+          deptid: selectedAddressList[0].deptid,
+          itemid: 50831,
+          qty: 1,
+        });
       }
+
+      await getOrderInfo({ token, salesid, dispatch });
     } else {
       dispatch(
         addItems({
