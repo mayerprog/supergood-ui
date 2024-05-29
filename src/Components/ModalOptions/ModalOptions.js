@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { removeDataLogin, setIsAuth } from "../../redux/slices/authSlice";
 import Cookies from "js-cookie";
 import { persistor } from "../../index";
+import { removeAllItems, updateSum } from "../../redux/slices/cartSlice";
 
 const ModalOptions = ({
   optionsRef,
@@ -40,11 +41,13 @@ const ModalOptions = ({
         toggleOptionsVisibility(false);
         break;
       case "Выйти":
-        Cookies.remove("token");
-        dispatch(setIsAuth(false));
         persistor.purge().then(() => {
           console.log("Persisted state purged");
         });
+        Cookies.remove("token");
+        dispatch(removeAllItems());
+        dispatch(updateSum(0));
+        dispatch(setIsAuth(false));
         toggleOptionsVisibility(false);
         window.location.reload();
         break;

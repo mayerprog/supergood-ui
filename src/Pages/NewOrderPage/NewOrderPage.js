@@ -4,7 +4,7 @@ import AddressModal from "../../Components/Address/AddressModal/AddressModal";
 import OrderCart from "../../Components/Cart/OrderCart/OrderCart";
 import Payment from "../../Components/Payment/Payment";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PayTypeModal from "../../Components/Payment/PayTypeModal/PayTypeModal";
 import UserModal from "../../Components/UserInfo/UserModal/UserModal";
 import { useMediaQuery } from "react-responsive";
@@ -12,8 +12,6 @@ import MainSheet from "../../Components/MainSheet/MainSheet";
 import BonusModal from "../../Components/Promo/BonusModal/BonusModal";
 import OrderPromoModal from "../../Components/Promo/OrderPromoModal/OrderPromoModal";
 import { orderAPI } from "../../api/orderAPI";
-import { fetchMinSum } from "../../services/fetchMinSum";
-import { setCartErrMessage } from "../../redux/slices/cartSlice";
 import ModalsContext from "../../contexts/ModalsContext";
 import PromoErrorModal from "../../Components/Promo/PromoErrorModal/PromoErrorModal";
 import ItemsShimmer from "../../Loaders/ItemsShimmer";
@@ -45,9 +43,12 @@ const NewOrderPage = ({
   isOrderPromoOpen,
   toggleLoginVisibility,
   loading,
+  cartErrMessage,
+  setCartErrMessage,
+  orderErrMessage,
+  setOrderErrMessage,
 }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const cartErrMessage = useSelector((state) => state.cart.cartErrMessage);
   const itemsUnavailable = useSelector((state) => state.cart.itemsUnavailable);
   const orders = useSelector((state) => state.order.orders);
 
@@ -58,7 +59,7 @@ const NewOrderPage = ({
 
   const handleAction = () => {
     dispatch(setItemsUnavailable(""));
-    dispatch(setCartErrMessage(""));
+    setCartErrMessage("");
   };
 
   useEffect(() => {
@@ -90,6 +91,9 @@ const NewOrderPage = ({
         <Payment
           togglePayTypeVisibility={togglePayTypeVisibility}
           toggleOrderPromoVisibility={toggleOrderPromoVisibility}
+          setCartErrMessage={setCartErrMessage}
+          orderErrMessage={orderErrMessage}
+          setOrderErrMessage={setOrderErrMessage}
         />
         {isPayTypeOpen && (
           <div className={styles.cardOverlay}>

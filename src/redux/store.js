@@ -41,8 +41,9 @@ const userPersistConfig = {
 const rootReducer = combineReducers({
   item: itemReducer,
   cart: persistReducer(cartPersistConfig, cartReducer),
-  // user: userReducer,
+  // cart: cartReducer,
   user: persistReducer(userPersistConfig, userReducer),
+  // user: userReducer,
   auth: authReducer,
   order: orderReducer,
 });
@@ -51,10 +52,10 @@ export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      // immutableCheck: {
-      //   // Ignore state paths, e.g. state for 'items':
-      //   ignoredPaths: ["items.data"],
-      // },
+      immutableCheck: {
+        // Ignore state paths, e.g. state for 'items':
+        ignoredPaths: ["items.data"],
+      },
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         ignoredPaths: ["_persist"],

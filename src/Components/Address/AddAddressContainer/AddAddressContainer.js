@@ -13,7 +13,6 @@ import {
   setFloor,
   updateSelected,
 } from "../../../redux/slices/userSlice";
-import { makeExistingAddressSelected } from "../../../services/makeExistingAddressSelected";
 import { ImBin } from "react-icons/im";
 import StreetDropDown from "../StreetDropDown/StreetDropDown";
 import HouseDropDown from "../HouseDropDown/HouseDropDown";
@@ -21,7 +20,6 @@ import AddressContext from "../../../contexts/AddressContext";
 import { fetchHousesSuggestions } from "../../../services/fetchHousesSuggestions";
 import { addressAPI } from "../../../api/addressAPI";
 import { useUpdateStreetid } from "../../../hooks/useUpdateStreetid";
-import Cookies from "js-cookie";
 import { userAPI } from "../../../api/userAPI";
 
 const AddAddressContainer = ({
@@ -30,7 +28,6 @@ const AddAddressContainer = ({
   setAddressIndexForChange,
   isModal,
 }) => {
-  const [inputAddress, setInputAddress] = useState("");
   const [inputStreet, setInputStreet] = useState("");
   const [inputHouse, setInputHouse] = useState("");
   const [showStreetDropdown, setShowStreetDropdown] = useState(false);
@@ -272,7 +269,6 @@ const AddAddressContainer = ({
                 setMarkerPosition={setMarkerPosition}
                 isModal={true}
                 setAddressData={setAddressData}
-                setInputAddress={setInputAddress}
               />
             )}
           </div>

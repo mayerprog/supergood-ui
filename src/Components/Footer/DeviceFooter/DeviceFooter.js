@@ -6,9 +6,13 @@ import { handleSetOrderInfo } from "../../../services/handleSetOrderInfo";
 import { fetchMinSum } from "../../../services/fetchMinSum";
 import paymentType from "../../../paymentType";
 import { orderAPI } from "../../../api/orderAPI";
-import { setOrderErrMessage } from "../../../redux/slices/orderSlice";
 
-const DeviceFooter = ({ setIsCartSheetOpen, location }) => {
+const DeviceFooter = ({
+  setIsCartSheetOpen,
+  location,
+  setCartErrMessage,
+  setOrderErrMessage,
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -46,7 +50,7 @@ const DeviceFooter = ({ setIsCartSheetOpen, location }) => {
         minor_area_id,
       });
       if (response.status === "error") {
-        dispatch(setOrderErrMessage(response.msg));
+        setOrderErrMessage(response.msg);
       }
     } catch (err) {
       console.log(err);
@@ -64,6 +68,7 @@ const DeviceFooter = ({ setIsCartSheetOpen, location }) => {
         addressSelected,
         dispatch,
         action: handleAction,
+        setCartErrMessage,
       });
     }
   };

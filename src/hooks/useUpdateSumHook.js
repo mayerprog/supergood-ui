@@ -8,14 +8,12 @@ export const useUpdateSumHook = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isAuth) {
-      if (cartItems) {
-        const sum = cartItems.reduce(
-          (accumulator, currentValue) => accumulator + currentValue.price,
-          0
-        );
-        dispatch(updateSum(sum));
-      }
+    if (!isAuth && cartItems.length > 0) {
+      const sum = cartItems.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.price,
+        0
+      );
+      dispatch(updateSum(sum));
     }
   }, [cartItems, isAuth, dispatch]);
 };

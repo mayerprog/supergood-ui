@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import Cookies from "js-cookie";
 import { persistor } from "../../index";
+import { removeAllItems, updateSum } from "../../redux/slices/cartSlice";
 
 const MainSheet = ({
   mainSheetWrapperRef,
@@ -87,11 +88,13 @@ const MainSheet = ({
         handleClosing();
         break;
       case "Выйти":
-        Cookies.remove("token");
-        dispatch(setIsAuth(false));
         persistor.purge().then(() => {
           console.log("Persisted state purged");
         });
+        Cookies.remove("token");
+        dispatch(setIsAuth(false));
+        dispatch(removeAllItems());
+        dispatch(updateSum(0));
         handleClosing();
         window.location.reload();
         break;

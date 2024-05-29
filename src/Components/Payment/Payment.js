@@ -2,11 +2,6 @@ import styles from "./Payment.module.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
-import {
-  removeOrderInfo,
-  setOrderErrMessage,
-} from "../../redux/slices/orderSlice";
 import { useMediaQuery } from "react-responsive";
 import { handleSetOrderInfo } from "../../services/handleSetOrderInfo";
 import { setOrderDescription } from "../../redux/slices/orderSlice";
@@ -14,7 +9,13 @@ import { fetchMinSum } from "../../services/fetchMinSum";
 import { orderAPI } from "../../api/orderAPI";
 import paymentType from "../../paymentType";
 
-const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
+const Payment = ({
+  togglePayTypeVisibility,
+  toggleOrderPromoVisibility,
+  setCartErrMessage,
+  orderErrMessage,
+  setOrderErrMessage,
+}) => {
   const [cashbackSum, setCashbackSum] = useState();
   const itemsSum = useSelector((state) => state.cart.itemsSum);
   const addressSelected = useSelector((state) => state.user.addressSelected);
@@ -26,7 +27,6 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
   const changeAmount = useSelector((state) => state.order.changeAmount);
   const orderDescription = useSelector((state) => state.order.orderDescription);
   const minorAreaId = useSelector((state) => state.user.minorAreaId);
-  const orderErrMessage = useSelector((state) => state.order.orderErrMessage);
 
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
@@ -37,9 +37,6 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   const promoItem = cartItems.find((item) => item.promocode != null);
-
-  //to sum total price of items from cart
-  useUpdateSumHook();
 
   const handleAction = async () => {
     // handleSetOrderInfo({ cartItems, itemsSum, addressSelected, dispatch });
@@ -64,7 +61,7 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
         minor_area_id,
       });
       if (response.status === "error") {
-        dispatch(setOrderErrMessage(response.msg));
+        setOrderErrMessage(response.msg);
       }
     } catch (err) {
       console.log(err);
@@ -79,6 +76,7 @@ const Payment = ({ togglePayTypeVisibility, toggleOrderPromoVisibility }) => {
       addressSelected,
       dispatch,
       action: handleAction,
+      setCartErrMessage,
     });
   };
 

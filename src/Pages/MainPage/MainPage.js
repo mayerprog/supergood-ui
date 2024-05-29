@@ -22,6 +22,7 @@ import AddressModal from "../../Components/Address/AddressModal/AddressModal";
 import BonusModal from "../../Components/Promo/BonusModal/BonusModal";
 import PromoErrorModal from "../../Components/Promo/PromoErrorModal/PromoErrorModal";
 import ModalsContext from "../../contexts/ModalsContext";
+import { updateSum } from "../../redux/slices/cartSlice";
 
 const MainPage = ({
   searchQuery,
@@ -56,6 +57,8 @@ const MainPage = ({
   bonusWrapperRef,
   isBonusOpen,
   toggleBonusVisibility,
+  setCartErrMessage,
+  cartErrMessage,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -77,6 +80,8 @@ const MainPage = ({
   const { isPromoErrorOpen } = useContext(ModalsContext);
 
   const deptId = useSelector((state) => state.user.deptId);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   // useEffect(() => {
   //   console.log(
@@ -85,7 +90,16 @@ const MainPage = ({
   // });
 
   //to sum total price of items from cart
-  useUpdateSumHook();
+  // useUpdateSumHook();
+  useEffect(() => {
+    if (!isAuth && cartItems.length > 0) {
+      const sum = cartItems.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.price,
+        0
+      );
+      dispatch(updateSum(sum));
+    }
+  }, [cartItems, isAuth, dispatch]);
 
   useEffect(() => {
     (async () => {
@@ -243,6 +257,8 @@ const MainPage = ({
             toggleMapVisibility={toggleMapVisibility}
             setSearchQuery={setSearchQuery}
             cartWrapperRef={cartWrapperRef}
+            cartErrMessage={cartErrMessage}
+            setCartErrMessage={setCartErrMessage}
           />
         )}
 
@@ -256,6 +272,8 @@ const MainPage = ({
             loading={loading}
             navigate={navigate}
             cartWrapperRef={cartWrapperRef}
+            cartErrMessage={cartErrMessage}
+            setCartErrMessage={setCartErrMessage}
           />
         )}
 
@@ -314,6 +332,8 @@ const MainPage = ({
                   setIsCartSheetOpen={setIsCartSheetOpen}
                   cartSheetClosing={cartSheetClosing}
                   navigate={navigate}
+                  cartErrMessage={cartErrMessage}
+                  setCartErrMessage={setCartErrMessage}
                 />
               )}
             </div>

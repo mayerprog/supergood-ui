@@ -33,6 +33,8 @@ const MainContent = ({
   toggleMapVisibility,
   setSearchQuery,
   cartWrapperRef,
+  cartErrMessage,
+  setCartErrMessage,
 }) => {
   const categoryRefs = useRef({});
   const navigate = useNavigate();
@@ -148,6 +150,8 @@ const MainContent = ({
             cartWrapperRef={cartWrapperRef}
             toggleCartVisibility={toggleCartVisibility}
             navigate={navigate}
+            cartErrMessage={cartErrMessage}
+            setCartErrMessage={setCartErrMessage}
           />
         </div>
       )}

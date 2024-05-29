@@ -15,6 +15,8 @@ const Cart = ({
   toggleCartVisibility,
   loading,
   navigate,
+  cartErrMessage,
+  setCartErrMessage,
 }) => {
   const dispatch = useDispatch();
 
@@ -26,7 +28,6 @@ const Cart = ({
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const deliveryTime = useSelector((state) => state.cart.deliveryTime);
 
-  const cartErrMessage = useSelector((state) => state.cart.cartErrMessage);
   const itemsUnavailable = useSelector((state) => state.cart.itemsUnavailable);
 
   const dynamicStyle = {
@@ -75,10 +76,12 @@ const Cart = ({
       ))}
       <div className={styles.cartFooter}>
         <div className={styles.line} />
-        <div className={styles.orderSum}>
-          <span>Время доставки:</span>
-          <span>{deliveryTime} мин</span>
-        </div>
+        {isAuth && (
+          <div className={styles.orderSum}>
+            <span>Время доставки:</span>
+            <span>{deliveryTime} мин</span>
+          </div>
+        )}
         <div className={styles.orderSum}>
           <span>Сумма заказа:</span>
           <span>{itemsSum ? itemsSum : 0} ₽</span>
@@ -106,6 +109,7 @@ const Cart = ({
                 addressSelected,
                 dispatch,
                 action: handleClickSubmit,
+                setCartErrMessage,
               })
             }
           >

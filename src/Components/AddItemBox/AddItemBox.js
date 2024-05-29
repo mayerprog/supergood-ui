@@ -35,7 +35,6 @@ const AddItemBox = ({
   const salesid = useSelector((state) => state.user.salesid);
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const isAuth = useSelector((state) => state.auth.isAuth);
-  const itemsSum = useSelector((state) => state.cart.itemsSum);
   const minAmount = useSelector((state) => state.cart.minAmount);
   const noPromoItemsSum = useSelector((state) => state.cart.noPromoItemsSum);
 

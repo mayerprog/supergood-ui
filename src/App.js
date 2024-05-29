@@ -58,6 +58,9 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isMainPage, setIsMainPage] = useState(false);
 
+  const [cartErrMessage, setCartErrMessage] = useState("");
+  const [orderErrMessage, setOrderErrMessage] = useState();
+
   const [loading, setLoading] = useState(false);
 
   const headerRef = useRef(null);
@@ -81,6 +84,7 @@ function App() {
   const addressList = useSelector((state) => state.user.addressList);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const bonus = useSelector((state) => state.order.bonus);
+  const isAuth = useSelector((state) => state.user.isAuth);
 
   const { setMarkerAddress, setMarkerPosition } = useContext(AddressContext);
   const { promoErrorWrapperRef, togglePromoErrorVisibility } =
@@ -190,7 +194,7 @@ function App() {
       try {
         setLoading(true);
         const token = Cookies.get("token");
-        if (token) {
+        if (token != null) {
           dispatch(setToken(token));
           dispatch(setIsAuth(true));
 
@@ -327,6 +331,8 @@ function App() {
               bonusWrapperRef={bonusWrapperRef}
               isBonusOpen={isBonusOpen}
               toggleBonusVisibility={toggleBonusVisibility}
+              cartErrMessage={cartErrMessage}
+              setCartErrMessage={setCartErrMessage}
             />
           }
         />
@@ -360,6 +366,10 @@ function App() {
               isOrderPromoOpen={isOrderPromoOpen}
               toggleLoginVisibility={toggleLoginVisibility}
               loading={loading}
+              cartErrMessage={cartErrMessage}
+              setCartErrMessage={setCartErrMessage}
+              orderErrMessage={orderErrMessage}
+              setOrderErrMessage={setOrderErrMessage}
             />
             // </ProtectedRoute>
           }
@@ -396,6 +406,8 @@ function App() {
           <DeviceFooter
             setIsCartSheetOpen={setIsCartSheetOpen}
             location={location}
+            setCartErrMessage={setCartErrMessage}
+            setOrderErrMessage={setOrderErrMessage}
           />
         )}
     </div>

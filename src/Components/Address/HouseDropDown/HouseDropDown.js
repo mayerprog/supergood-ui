@@ -31,7 +31,6 @@ const HouseDropDown = ({
     dispatch(setMapPosition(newPosition));
     setMarkerPosition(newPosition);
     setMarkerAddress(`${suggestion.street}, ${suggestion.yhouse}`);
-    setInputAddress(`${suggestion.street}, ${suggestion.yhouse}`);
   };
 
   return (

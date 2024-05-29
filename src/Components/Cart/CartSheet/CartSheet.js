@@ -15,6 +15,8 @@ const CartSheet = ({
   setIsCartSheetOpen,
   cartSheetClosing,
   navigate,
+  cartErrMessage,
+  setCartErrMessage,
 }) => {
   const dispatch = useDispatch();
 
@@ -26,7 +28,6 @@ const CartSheet = ({
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const deliveryTime = useSelector((state) => state.cart.deliveryTime);
 
-  const cartErrMessage = useSelector((state) => state.cart.cartErrMessage);
   const itemsUnavailable = useSelector((state) => state.cart.itemsUnavailable);
 
   const handleClosing = () => {
@@ -108,10 +109,12 @@ const CartSheet = ({
             ))}
           </div>
           <div className={styles.line} />
-          <div className={styles.orderSum}>
-            <span>Время доставки:</span>
-            <span>{deliveryTime} мин</span>
-          </div>
+          {isAuth && (
+            <div className={styles.orderSum}>
+              <span>Время доставки:</span>
+              <span>{deliveryTime} мин</span>
+            </div>
+          )}
           <div className={styles.orderSum}>
             <span>Сумма заказа:</span>
             <span>{itemsSum ? itemsSum : 0} ₽</span>
@@ -141,6 +144,7 @@ const CartSheet = ({
                   addressSelected,
                   dispatch,
                   action: handleClickSubmit,
+                  setCartErrMessage,
                 })
               }
             >
