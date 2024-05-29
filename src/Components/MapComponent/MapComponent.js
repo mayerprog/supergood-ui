@@ -65,8 +65,8 @@ const MapComponent = ({ mapWrapperRef, setIsMapOpen }) => {
 
   // to put street and house names from selected address in all input fields
   useEffect(() => {
-    setInputStreet(addressSelected.street);
-    setInputHouse(addressSelected.yhouse);
+    setInputStreet(addressSelected.street || "");
+    setInputHouse(addressSelected.yhouse || "");
   }, []);
 
   //this useEffect must define streetid for changing house number input if needed
