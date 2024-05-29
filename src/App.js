@@ -58,8 +58,9 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isMainPage, setIsMainPage] = useState(false);
 
+  //err messages when checking min sum
   const [cartErrMessage, setCartErrMessage] = useState("");
-  const [orderErrMessage, setOrderErrMessage] = useState();
+  const [orderErrMessage, setOrderErrMessage] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -83,8 +84,6 @@ function App() {
   const salesid = useSelector((state) => state.user.salesid);
   const addressList = useSelector((state) => state.user.addressList);
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const bonus = useSelector((state) => state.order.bonus);
-  const isAuth = useSelector((state) => state.user.isAuth);
 
   const { setMarkerAddress, setMarkerPosition } = useContext(AddressContext);
   const { promoErrorWrapperRef, togglePromoErrorVisibility } =

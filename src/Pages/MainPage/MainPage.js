@@ -5,7 +5,6 @@ import Cart from "../../Components/Cart/Cart";
 import MainContent from "../../Components/MainContent/MainContent";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import styles from "./MainPage.module.scss";
-import { useUpdateSumHook } from "../../hooks/useUpdateSumHook";
 import { setItems } from "../../redux/slices/itemSlice";
 import jsonData from "../../newApi_getItems.json";
 import { useNavigate } from "react-router-dom";
@@ -59,6 +58,8 @@ const MainPage = ({
   toggleBonusVisibility,
   setCartErrMessage,
   cartErrMessage,
+  itemsUnavailable,
+  setItemsUnavailable,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -90,7 +91,6 @@ const MainPage = ({
   // });
 
   //to sum total price of items from cart
-  // useUpdateSumHook();
   useEffect(() => {
     if (!isAuth && cartItems.length > 0) {
       const sum = cartItems.reduce(

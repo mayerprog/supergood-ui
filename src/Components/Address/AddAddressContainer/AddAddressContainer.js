@@ -161,39 +161,38 @@ const AddAddressContainer = ({
           addressid: item.addressid,
           status: 2,
         });
-        if (ifSelected) {
-          await addressAPI.saveAddress({
-            token: token,
-            street: firstAddress.street,
-            lat: firstAddress.lat,
-            long: firstAddress.long,
-            addressid: firstAddress.addressid,
-            streetid: firstAddress.streetid,
-            houseid: firstAddress.houseid,
-            entrance: firstAddress.entrance,
-            floor: firstAddress.floor,
-            flat: firstAddress.flat,
-            description: firstAddress.description,
-            selected: true,
-          });
-        } else {
-          await addressAPI.saveAddress({
-            token: token,
-            street: selectedAddress.street,
-            lat: selectedAddress.lat,
-            long: selectedAddress.long,
-            addressid: selectedAddress.addressid,
-            streetid: selectedAddress.streetid,
-            houseid: selectedAddress.houseid,
-            entrance: selectedAddress.entrance,
-            floor: selectedAddress.floor,
-            flat: selectedAddress.flat,
-            description: selectedAddress.description,
-            selected: true,
-          });
-        }
-
         if (responseDelete.status === "ok") {
+          if (ifSelected) {
+            await addressAPI.saveAddress({
+              token: token,
+              street: firstAddress.street,
+              lat: firstAddress.lat,
+              long: firstAddress.long,
+              addressid: firstAddress.addressid,
+              streetid: firstAddress.streetid,
+              houseid: firstAddress.houseid,
+              entrance: firstAddress.entrance,
+              floor: firstAddress.floor,
+              flat: firstAddress.flat,
+              description: firstAddress.description,
+              selected: true,
+            });
+          } else {
+            await addressAPI.saveAddress({
+              token: token,
+              street: selectedAddress.street,
+              lat: selectedAddress.lat,
+              long: selectedAddress.long,
+              addressid: selectedAddress.addressid,
+              streetid: selectedAddress.streetid,
+              houseid: selectedAddress.houseid,
+              entrance: selectedAddress.entrance,
+              floor: selectedAddress.floor,
+              flat: selectedAddress.flat,
+              description: selectedAddress.description,
+              selected: true,
+            });
+          }
           const data = await userAPI.getUserPref(token);
           dispatch(setAddressList(Object.values(data.address)));
           setAddressIndexForChange(null);
