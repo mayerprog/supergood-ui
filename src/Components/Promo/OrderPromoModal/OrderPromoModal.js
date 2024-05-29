@@ -18,6 +18,8 @@ const OrderPromoModal = ({
   const [maxBonus, setMaxBonus] = useState(null);
   const [isError, setIsError] = useState(false);
 
+  const [promoErrorMessage, setPromoErrorMessage] = useState(false);
+
   const [promoInput, setPromoInput] = useState("");
   const [bonusInput, setBonusInput] = useState("");
 
@@ -34,9 +36,17 @@ const OrderPromoModal = ({
 
   const handlePromoActivation = async () => {
     try {
-      await orderAPI.setPromoCode({ token, salesid, promo: promoInput });
-      await getOrderInfo({ token, salesid, dispatch });
-      toggleOrderPromoVisibility();
+      const response = await orderAPI.setPromoCode({
+        token,
+        salesid,
+        promo: promoInput,
+      });
+      if (response.status === "error") {
+        setPromoErrorMessage(response.msg);
+      } else {
+        await getOrderInfo({ token, salesid, dispatch });
+        toggleOrderPromoVisibility();
+      }
     } catch (err) {
       console.log(err);
     }
@@ -97,10 +107,14 @@ const OrderPromoModal = ({
           <>
             <input
               placeholder="Введите промокод"
-              className={styles.input}
+              className={styles.inputPromo}
               onChange={(e) => setPromoInput(e.target.value)}
               value={promoInput}
             />
+            {promoErrorMessage && (
+              <span className={styles.error}>{promoErrorMessage}</span>
+            )}
+
             <button
               className={styles.buttonStyle}
               onClick={handlePromoActivation}

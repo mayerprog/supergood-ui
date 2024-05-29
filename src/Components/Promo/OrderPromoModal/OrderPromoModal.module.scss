@@ -3,6 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  flex: 1;
   position: absolute;
   top: 20%;
   border-radius: 20px;
@@ -13,6 +14,7 @@
   justify-content: center;
   padding: 30px 40px;
   color: #323232;
+  min-width: 370px;
 
   .content {
     margin-top: 15px;
@@ -22,16 +24,28 @@
     cursor: pointer;
   }
 
-  .input {
+  .input,
+  .inputPromo {
     @include reusable-input;
     @include focus-style(#e9bc5b);
   }
+  .inputPromo {
+    margin-bottom: 5px;
+  }
+  .inputPromo + .error {
+    display: block;
+    color: red;
+    padding: 5px;
+    font-weight: 400;
+    font-size: 17px;
+  }
+
   .buttonStyle {
     @include reusable-button;
     height: 35px;
     width: 100%;
     align-self: flex-start;
-    margin: 0 0 1rem;
+    margin: 1rem 0 1rem;
     background-color: #e9bc5b;
     @include interactive-bg(#e9bc5b);
   }
@@ -41,7 +55,7 @@
   .addInfo,
   .info {
     color: #6f6f6f;
-    margin: -10px 0 20px;
+    margin: -5px 0 5px;
   }
   .addInfo {
     &[data-is-error="true"] {

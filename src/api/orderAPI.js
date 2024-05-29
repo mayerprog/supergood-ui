@@ -102,6 +102,7 @@ export const orderAPI = {
         salesid,
         promo,
       });
+      console.log("response", response.data);
       return response.data;
     } catch (err) {
       console.error(
