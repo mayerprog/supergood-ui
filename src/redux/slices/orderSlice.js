@@ -1,21 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  orders: [],
   changeAmount: 0,
   orderDescription: "",
   bonus: null,
   newBonus: 0,
   bonusActivated: null,
   loyaltyCard: [],
+  orders: [],
+  ordersItems: [],
 };
 
 export const orderSlice = createSlice({
   name: "order",
   initialState,
   reducers: {
-    addOrders: (state, action) => {
-      state.orders = [...state.orders, action.payload];
+    // addOrders: (state, action) => {
+    //   state.orders = [...state.orders, action.payload];
+    // },
+    setOrders: (state, action) => {
+      state.orders = action.payload;
+    },
+    setOrdersItems: (state, action) => {
+      state.ordersItems = action.payload;
+      console.log("ordersItems", state.ordersItems);
     },
     setChangeAmount: (state, action) => {
       state.changeAmount = parseInt(action.payload);
@@ -39,7 +47,9 @@ export const orderSlice = createSlice({
 });
 
 export const {
-  addOrders,
+  // addOrders,
+  setOrders,
+  setOrdersItems,
   setChangeAmount,
   setBonus,
   setNewBonus,

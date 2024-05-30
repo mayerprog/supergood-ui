@@ -112,4 +112,21 @@ export const orderAPI = {
       console.log("Failed to activate promocode. Check console for details.");
     }
   },
+  async getSalesIds(params) {
+    const { token, salesid } = params;
+    try {
+      const response = await instance.post(`/getsales.php`, {
+        token,
+        salesid,
+      });
+      console.log("response", response.data);
+      return response.data;
+    } catch (err) {
+      console.error(
+        "Error getting order info:",
+        err.response ? err.response.data : err
+      );
+      console.log("Failed to get order info. Check console for details.");
+    }
+  },
 };

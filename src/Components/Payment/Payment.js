@@ -40,33 +40,33 @@ const Payment = ({
   const promoItem = cartItems.find((item) => item.promocode != null);
 
   const handleAction = async () => {
-    // handleSetOrderInfo({ cartItems, itemsSum, addressSelected, dispatch });
-    // navigate("/orders");
     const addressid = addressSelected.addressid.toString();
     const paytype = paymentType.CASH_TO_COURIER;
     const points = newBonus;
     const minor_area_id = parseInt(minorAreaId);
 
-    try {
-      const response = await orderAPI.orderPost({
-        token,
-        salesid,
-        addressid,
-        nocontact: 0,
-        payamount: itemsSum,
-        points,
-        changeamount: changeAmount,
-        paytype,
-        description: orderDescription,
-        dlvtime: deliveryTime,
-        minor_area_id,
-      });
-      if (response.status === "error") {
-        setOrderErrMessage(response.msg);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   const response = await orderAPI.orderPost({
+    //     token,
+    //     salesid,
+    //     addressid,
+    //     nocontact: 0,
+    //     payamount: itemsSum,
+    //     points,
+    //     changeamount: changeAmount,
+    //     paytype,
+    //     description: orderDescription,
+    //     dlvtime: deliveryTime,
+    //     minor_area_id,
+    //   });
+    //   if (response.status === "error") {
+    //     setOrderErrMessage(response.msg);
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    // handleSetOrderInfo({ cartItems, itemsSum, addressSelected, dispatch });
+    navigate("/orders");
   };
 
   const handleClickSubmit = async () => {

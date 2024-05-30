@@ -3,9 +3,10 @@ import styles from "./OrdersContainer.module.scss";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 import OrderImages from "../OrderImages/OrderImages";
+import { useSelector } from "react-redux";
 
 const OrdersContainer = ({
-  setOrderIndex,
+  setOrderId,
   orders,
   scrollToBottom,
   netbooksMediaQuery,
@@ -13,15 +14,10 @@ const OrdersContainer = ({
   const [isPendingListVisible, setIsPendingListVisible] = useState(true);
   const [isCompletedListVisible, setIsCompletedListVisible] = useState(false);
 
-  const handleChooseOrder = (orderId) => {
-    console.log("id", orderId);
-    setOrderIndex(orderId);
+  const handleChooseOrder = (id) => {
+    setOrderId(id);
     netbooksMediaQuery && scrollToBottom();
   };
-
-  useEffect(() => {
-    console.log("orders", orders);
-  });
 
   return (
     <div className={styles.container}>
@@ -35,7 +31,7 @@ const OrdersContainer = ({
         status="Pending"
         netbooksMediaQuery={netbooksMediaQuery}
       />
-      <OrderList
+      {/* <OrderList
         isVisible={isCompletedListVisible}
         setIsVisible={setIsCompletedListVisible}
         handleChooseOrder={handleChooseOrder}
@@ -43,7 +39,7 @@ const OrdersContainer = ({
         title="Завершённые"
         cookingStatus="отменён"
         status="Cancelled"
-      />
+      /> */}
     </div>
   );
 };
@@ -56,7 +52,6 @@ const OrderList = ({
   cookingStatus,
   isVisible,
   setIsVisible,
-  netbooksMediaQuery,
 }) => (
   <>
     <div className={styles.title}>
@@ -68,33 +63,29 @@ const OrderList = ({
     {isVisible && (
       <div className={styles.ordersList}>
         {orders
-          .filter((order) => order.status === status)
+          // .filter((order) => order.status === status)
           .map((order, index) => (
             <div key={index}>
               <div className={styles.orderInfo}>
                 <div
                   className={styles.order}
-                  onClick={() => handleChooseOrder(order.orderId)}
+                  onClick={() => handleChooseOrder(order.id)}
                 >
-                  <span className={styles.orderId}>Заказ {order.orderId}</span>
+                  <span className={styles.orderId}>Заказ {order.shortid}</span>
                   <div className={styles.dateTime}>
-                    <span>
-                      {order.date} {order.time}
-                    </span>
+                    <span>{order.createddate.substring(0, 16)}</span>
                   </div>
                 </div>
 
                 <span></span>
 
                 <div className={styles.deliveryInfo}>
-                  <span className={styles.price}>{order.payAmount} ₽</span>
+                  <span className={styles.price}>{order.amount} ₽</span>
                   <span className={styles.cooking}>{cookingStatus}</span>
                 </div>
               </div>
               <div className={styles.imageContainer}>
-                {order.items.map((item, index) => (
-                  <OrderImages item={item} detailInfo={false} />
-                ))}
+                <OrderImages order={order} detailInfo={false} />
               </div>
             </div>
           ))}

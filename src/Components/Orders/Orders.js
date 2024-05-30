@@ -7,15 +7,10 @@ import OrdersContainer from "./OrdersContainer/OrdersContainer";
 import { useMediaQuery } from "react-responsive";
 
 const Orders = () => {
-  const [orderIndex, setOrderIndex] = useState(null);
+  const [orderId, setOrderId] = useState(null);
   const orders = useSelector((state) => state.order.orders);
 
   const [chosenOrder, setChosenOrder] = useState(orders[0]);
-
-  const [loaded, setLoaded] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
-
-  //  const foundItem = items.find((item) => itemCardId === item.itemid);
 
   const navigate = useNavigate();
   const orderRef = useRef();
@@ -23,15 +18,14 @@ const Orders = () => {
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
 
   useEffect(() => {
-    console.log("orders", orders);
     if (orders.length > 1) {
-      const foundItem = orders.find((order) => order.orderId === orderIndex);
+      const foundItem = orders.find((order) => order.id === orderId);
       if (foundItem) {
         setChosenOrder(foundItem);
       }
       console.log("chosenOrder", chosenOrder);
     }
-  }, [orderIndex, orders]);
+  }, [orderId, orders]);
 
   const scrollToBottom = () => {
     orderRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -44,7 +38,7 @@ const Orders = () => {
   return (
     <div className={styles.container}>
       <OrdersContainer
-        setOrderIndex={setOrderIndex}
+        setOrderId={setOrderId}
         orders={orders}
         scrollToBottom={scrollToBottom}
         netbooksMediaQuery={netbooksMediaQuery}

@@ -11,10 +11,6 @@ const BonusModal = ({ bonusWrapperRef, toggleBonusVisibility }) => {
   const bonus = useSelector((state) => state.order.bonus);
   const loyaltyCard = useSelector((state) => state.order.loyaltyCard);
 
-  useEffect(() => {
-    console.log("loyaltyCard", loyaltyCard);
-  }, [loyaltyCard]);
-
   return (
     <div className={styles.container} ref={bonusWrapperRef}>
       <div onClick={toggleBonusVisibility} className={styles.icon}>

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./OrdersPage.module.scss";
 import AddressModal from "../../Components/Address/AddressModal/AddressModal";
@@ -8,6 +8,9 @@ import UserModal from "../../Components/UserInfo/UserModal/UserModal";
 import MainSheet from "../../Components/MainSheet/MainSheet";
 import { useNavigate } from "react-router-dom";
 import BonusModal from "../../Components/Promo/BonusModal/BonusModal";
+import { orderAPI } from "../../api/orderAPI";
+import { setOrders, setOrdersItems } from "../../redux/slices/orderSlice";
+import { cartAPI } from "../../api/cartAPI";
 
 const OrdersPage = ({
   userInfoRef,
@@ -27,8 +30,30 @@ const OrdersPage = ({
   toggleLoginVisibility,
 }) => {
   const orders = useSelector((state) => state.order.orders);
+  const token = useSelector((state) => state.user.token);
+  const salesid = useSelector((state) => state.user.salesid);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await orderAPI.getSalesIds({ token, salesid });
+        const salesValues = Object.values(data.sales);
+        dispatch(setOrders(salesValues));
+        const salesIds = Object.values(data.salesids[0]);
+        const ordersItems = [];
+        for (let salesId of salesIds) {
+          const data = await cartAPI.getOrderInfo({ token, salesid: salesId });
+          ordersItems.push(data.sales);
+        }
+        dispatch(setOrdersItems(ordersItems));
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
 
   return (
     <div className={styles.content}>
