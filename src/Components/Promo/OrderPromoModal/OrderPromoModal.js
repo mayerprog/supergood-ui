@@ -5,7 +5,11 @@ import { orderAPI } from "../../../api/orderAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAPI } from "../../../api/cartAPI";
 import { getOrderInfo } from "../../../services/getOrderInfo";
-import { setBonus, setBonusActivated } from "../../../redux/slices/orderSlice";
+import {
+  setBonus,
+  setBonusActivated,
+  setNewBonus,
+} from "../../../redux/slices/orderSlice";
 import { updateSum } from "../../../redux/slices/cartSlice";
 
 const OrderPromoModal = ({
@@ -53,6 +57,8 @@ const OrderPromoModal = ({
   };
 
   const handleBonusActivation = async () => {
+    console.log("bonusInput", typeof bonusInput);
+    console.log("maxBonus", typeof maxBonus);
     if (bonusInput > maxBonus) {
       setIsError(true);
     } else {
@@ -62,11 +68,15 @@ const OrderPromoModal = ({
         await getOrderInfo({ token, salesid, dispatch });
       }
       dispatch(setBonusActivated(bonusInput));
-      dispatch(setBonus(bonus - bonusInput));
+      dispatch(setNewBonus(bonus - bonusInput));
       dispatch(updateSum(noPromoItemsSum - bonusInput));
       toggleOrderPromoVisibility();
     }
   };
+
+  useEffect(() => {
+    console.log("bonus", bonus);
+  }, [bonus]);
 
   const changeCheckbox = (param) => {
     if (param === promoChecked) {
@@ -85,7 +95,7 @@ const OrderPromoModal = ({
     } else {
       setMaxBonus(bonus);
     }
-  }, [itemsSum, promoItem]);
+  }, [noPromoItemsSum, bonus]);
 
   return (
     <div className={styles.container} ref={orderPromoWrapperRef}>
@@ -146,7 +156,7 @@ const OrderPromoModal = ({
               placeholder="Введите количество"
               className={styles.input}
               value={bonusInput}
-              onChange={(e) => setBonusInput(e.target.value)}
+              onChange={(e) => setBonusInput(parseInt(e.target.value))}
               type="number"
             />
             <div

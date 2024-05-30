@@ -24,6 +24,7 @@ const Payment = ({
   const bonusActivated = useSelector((state) => state.order.bonusActivated);
   const loyaltyCard = useSelector((state) => state.order.loyaltyCard);
   const bonus = useSelector((state) => state.order.bonus);
+  const newBonus = useSelector((state) => state.order.newBonus);
   const changeAmount = useSelector((state) => state.order.changeAmount);
   const orderDescription = useSelector((state) => state.order.orderDescription);
   const minorAreaId = useSelector((state) => state.user.minorAreaId);
@@ -43,7 +44,7 @@ const Payment = ({
     // navigate("/orders");
     const addressid = addressSelected.addressid.toString();
     const paytype = paymentType.CASH_TO_COURIER;
-    const points = parseInt(bonus);
+    const points = newBonus;
     const minor_area_id = parseInt(minorAreaId);
 
     try {

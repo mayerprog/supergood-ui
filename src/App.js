@@ -231,7 +231,7 @@ function App() {
           //getting loyalty info
           const loyalty = await orderAPI.getLoyalty(token);
           if (loyalty) {
-            const loyaltyInfo = loyalty.bonuses;
+            const loyaltyInfo = loyalty.bonuses[0];
             if (loyaltyInfo.length === 0) {
               dispatch(
                 setLoyaltyCard({

@@ -1,14 +1,13 @@
 import { useState } from "react";
 import styles from "./PayTypeModal.module.scss";
 import { IoMdClose } from "react-icons/io";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setChangeAmount } from "../../../redux/slices/orderSlice";
 
 const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
   const [chosenValue, setChosenValue] = useState("Наличными курьеру");
   const [showCertificateInput, setShowCertificateInput] = useState(false);
   const [showCashInput, setShowCashInput] = useState(true);
-  const [inputChange, setInputChange] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -35,9 +34,8 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
     }
   };
 
-  const handleSetChange = () => {
-    dispatch(setChangeAmount(parseInt(inputChange)));
-    setShowCashInput(false);
+  const handleSetChange = (value) => {
+    dispatch(setChangeAmount(parseInt(value)));
   };
 
   return (
@@ -66,12 +64,12 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
             <input
               placeholder="Сдача с"
               className={styles.input}
-              onChange={(e) => setInputChange(e.target.value)}
+              onChange={(e) => handleSetChange(e.target.value)}
               type="number"
             />
-            <button className={styles.buttonStyle} onClick={handleSetChange}>
+            {/* <button className={styles.buttonStyle} onClick={handleSetChange}>
               <span className={styles.buttonText}>ОК</span>
-            </button>
+            </button> */}
           </div>
         </div>
       )}
