@@ -71,7 +71,7 @@ const OrderList = ({
                   className={styles.order}
                   onClick={() => handleChooseOrder(order.id)}
                 >
-                  <span className={styles.orderId}>Заказ {order.shortid}</span>
+                  <span className={styles.orderId}>Заказ №{order.shortid}</span>
                   <div className={styles.dateTime}>
                     <span>{order.createddate.substring(0, 16)}</span>
                   </div>

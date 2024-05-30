@@ -12,7 +12,6 @@ const Orders = () => {
 
   const [chosenOrder, setChosenOrder] = useState(orders[0]);
 
-  const navigate = useNavigate();
   const orderRef = useRef();
 
   const netbooksMediaQuery = useMediaQuery({ maxWidth: 1024 });
@@ -23,7 +22,6 @@ const Orders = () => {
       if (foundItem) {
         setChosenOrder(foundItem);
       }
-      console.log("chosenOrder", chosenOrder);
     }
   }, [orderId, orders]);
 

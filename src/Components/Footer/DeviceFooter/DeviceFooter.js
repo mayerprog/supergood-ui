@@ -2,7 +2,6 @@ import styles from "./DeviceFooter.module.scss";
 import { useNavigate } from "react-router-dom";
 import { GiShoppingCart } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
-import { handleSetOrderInfo } from "../../../services/handleSetOrderInfo";
 import { fetchMinSum } from "../../../services/fetchMinSum";
 import paymentType from "../../../paymentType";
 import { orderAPI } from "../../../api/orderAPI";
@@ -28,8 +27,6 @@ const DeviceFooter = ({
   const deliveryTime = useSelector((state) => state.cart.deliveryTime);
 
   const handleAction = async () => {
-    // handleSetOrderInfo({ cartItems, itemsSum, addressSelected, dispatch });
-    // navigate("/orders");
     const addressid = addressSelected.addressid.toString();
     const paytype = paymentType.CASH_TO_COURIER;
     const points = parseInt(bonus);
@@ -55,6 +52,7 @@ const DeviceFooter = ({
     } catch (err) {
       console.log(err);
     }
+    navigate("/orders");
   };
 
   const handleFooterClick = async () => {

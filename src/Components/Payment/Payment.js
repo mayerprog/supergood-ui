@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import { handleSetOrderInfo } from "../../services/handleSetOrderInfo";
 import { setOrderDescription } from "../../redux/slices/orderSlice";
 import { fetchMinSum } from "../../services/fetchMinSum";
 import { orderAPI } from "../../api/orderAPI";
@@ -65,7 +64,6 @@ const Payment = ({
     // } catch (err) {
     //   console.log(err);
     // }
-    // handleSetOrderInfo({ cartItems, itemsSum, addressSelected, dispatch });
     navigate("/orders");
   };
 

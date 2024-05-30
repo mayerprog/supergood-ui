@@ -6,6 +6,7 @@ import OrderImages, { OrderImage } from "../OrderImages/OrderImages";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { handlePayType } from "../../../services/handlePayType";
+import { useFilterOrder } from "../../../hooks/useFilterOrder";
 
 const OrderInfoContainer = ({
   chosenOrder,
@@ -13,20 +14,11 @@ const OrderInfoContainer = ({
   orderRef,
   scrollToTop,
 }) => {
-  const [filteredItems, setFilteredItems] = useState([]);
   const [payType, setPayType] = useState("");
 
-  const ordersItems = useSelector((state) => state.order.ordersItems);
+  const [filteredItems, setFilteredItems] = useState([]);
 
-  useEffect(() => {
-    if (ordersItems.length > 0) {
-      const filteredOrder = ordersItems.find(
-        (item) => item.id === chosenOrder.id
-      );
-      const items = Object.values(filteredOrder.lines);
-      setFilteredItems(items);
-    }
-  }, [ordersItems, chosenOrder]);
+  useFilterOrder(chosenOrder, setFilteredItems);
 
   useEffect(() => {
     handlePayType(chosenOrder.paym_type, setPayType);
@@ -35,7 +27,7 @@ const OrderInfoContainer = ({
   return (
     <div className={styles.container} ref={orderRef}>
       <div className={styles.header}>
-        <h3>Заказ № {chosenOrder.shortid}</h3>
+        <h3>Заказ №{chosenOrder.shortid}</h3>
       </div>
       <ProgressTracking />
       <div className={styles.details}>
@@ -68,12 +60,8 @@ const OrderInfoContainer = ({
       </div>
       <div className={styles.details}>
         <span>Оплата</span>
-        {/* <div className={styles.orderDetails}>
-          <div className={styles.info}>Стоимость заказа</div>
-          <div className={styles.info}>{chosenOrder.payAmount} ₽</div>
-        </div> */}
         <div className={styles.orderDetails}>
-          <div className={styles.wholeSum}>Стоимость заказа</div>
+          <div className={styles.wholeSum}>Итого</div>
           <div className={styles.wholeSum}>{chosenOrder.amount} ₽</div>
         </div>
       </div>
