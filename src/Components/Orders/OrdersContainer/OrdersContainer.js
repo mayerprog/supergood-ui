@@ -35,7 +35,6 @@ const OrdersContainer = ({
         handleChooseOrder={handleChooseOrder}
         orders={activeOrders}
         title="Активные"
-        cookingStatus="готовится"
         netbooksMediaQuery={netbooksMediaQuery}
       />
       <OrderList
@@ -44,7 +43,6 @@ const OrdersContainer = ({
         handleChooseOrder={handleChooseOrder}
         orders={completedOrders}
         title="Завершённые"
-        cookingStatus="отменён"
       />
     </div>
   );
@@ -54,7 +52,6 @@ const OrderList = ({
   handleChooseOrder,
   orders,
   title,
-  cookingStatus,
   isVisible,
   setIsVisible,
 }) => {
