@@ -5,11 +5,7 @@ import { orderAPI } from "../../../api/orderAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAPI } from "../../../api/cartAPI";
 import { getOrderInfo } from "../../../services/getOrderInfo";
-import {
-  setBonus,
-  setBonusActivated,
-  setNewBonus,
-} from "../../../redux/slices/orderSlice";
+import { setBonus, setBonusActivated } from "../../../redux/slices/orderSlice";
 import { updateSum } from "../../../redux/slices/cartSlice";
 
 const OrderPromoModal = ({
@@ -68,7 +64,6 @@ const OrderPromoModal = ({
         await getOrderInfo({ token, salesid, dispatch });
       }
       dispatch(setBonusActivated(bonusInput));
-      dispatch(setNewBonus(bonus - bonusInput));
       dispatch(updateSum(noPromoItemsSum - bonusInput));
       toggleOrderPromoVisibility();
     }

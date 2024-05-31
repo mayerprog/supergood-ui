@@ -12,8 +12,8 @@ const OrderImages = ({ order, detailInfo }) => {
 
   return (
     <>
-      {filteredItems.map((item) => (
-        <OrderImage item={item} detailInfo={detailInfo} />
+      {filteredItems.map((item, index) => (
+        <OrderImage item={item} detailInfo={detailInfo} key={index} />
       ))}
     </>
   );

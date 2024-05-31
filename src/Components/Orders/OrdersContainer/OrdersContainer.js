@@ -4,6 +4,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 import OrderImages from "../OrderImages/OrderImages";
 import { useSelector } from "react-redux";
+import { handleStatusType } from "../../../services/handleStatusType";
 
 const OrdersContainer = ({
   setOrderId,
@@ -13,11 +14,17 @@ const OrdersContainer = ({
 }) => {
   const [isPendingListVisible, setIsPendingListVisible] = useState(true);
   const [isCompletedListVisible, setIsCompletedListVisible] = useState(false);
+  const [completedOrders, setCompletedOrders] = useState([]);
+  const [activeOrders, setActivedOrders] = useState([]);
 
   const handleChooseOrder = (id) => {
     setOrderId(id);
     netbooksMediaQuery && scrollToBottom();
   };
+
+  useEffect(() => {
+    handleStatusType(orders, setCompletedOrders, setActivedOrders);
+  }, [orders]);
 
   return (
     <div className={styles.container}>
@@ -25,21 +32,19 @@ const OrdersContainer = ({
         isVisible={isPendingListVisible}
         setIsVisible={setIsPendingListVisible}
         handleChooseOrder={handleChooseOrder}
-        orders={orders}
+        orders={activeOrders}
         title="Активные"
         cookingStatus="готовится"
-        status="Pending"
         netbooksMediaQuery={netbooksMediaQuery}
       />
-      {/* <OrderList
+      <OrderList
         isVisible={isCompletedListVisible}
         setIsVisible={setIsCompletedListVisible}
         handleChooseOrder={handleChooseOrder}
-        orders={orders}
+        orders={completedOrders}
         title="Завершённые"
         cookingStatus="отменён"
-        status="Cancelled"
-      /> */}
+      />
     </div>
   );
 };
@@ -52,19 +57,18 @@ const OrderList = ({
   cookingStatus,
   isVisible,
   setIsVisible,
-}) => (
-  <>
-    <div className={styles.title}>
-      <h3>{title}</h3>
-      <div onClick={() => setIsVisible(!isVisible)}>
-        {isVisible ? <FaChevronUp /> : <FaChevronDown />}
+}) => {
+  return (
+    <>
+      <div className={styles.title}>
+        <h3>{title}</h3>
+        <div onClick={() => setIsVisible(!isVisible)}>
+          {isVisible ? <FaChevronUp /> : <FaChevronDown />}
+        </div>
       </div>
-    </div>
-    {isVisible && (
-      <div className={styles.ordersList}>
-        {orders
-          // .filter((order) => order.status === status)
-          .map((order, index) => (
+      {isVisible && (
+        <div className={styles.ordersList}>
+          {orders.map((order, index) => (
             <div key={index}>
               <div className={styles.orderInfo}>
                 <div
@@ -81,7 +85,9 @@ const OrderList = ({
 
                 <div className={styles.deliveryInfo}>
                   <span className={styles.price}>{order.amount} ₽</span>
-                  <span className={styles.cooking}>{cookingStatus}</span>
+                  <span className={styles.cooking} title={title}>
+                    {cookingStatus}
+                  </span>
                 </div>
               </div>
               <div className={styles.imageContainer}>
@@ -89,9 +95,10 @@ const OrderList = ({
               </div>
             </div>
           ))}
-      </div>
-    )}
-  </>
-);
+        </div>
+      )}
+    </>
+  );
+};
 
 export default OrdersContainer;

@@ -7,8 +7,10 @@ export const useFilterOrder = (order, setFilteredItems) => {
   useEffect(() => {
     if (ordersItems.length > 0) {
       const filteredOrder = ordersItems.find((item) => item.id === order.id);
-      const items = Object.values(filteredOrder.lines);
-      setFilteredItems(items);
+      if (filteredOrder) {
+        const items = Object.values(filteredOrder.lines);
+        setFilteredItems(items);
+      }
     }
   }, [ordersItems, order]);
 };

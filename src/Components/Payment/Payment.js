@@ -41,29 +41,28 @@ const Payment = ({
   const handleAction = async () => {
     const addressid = addressSelected.addressid.toString();
     const paytype = paymentType.CASH_TO_COURIER;
-    const points = newBonus;
     const minor_area_id = parseInt(minorAreaId);
 
-    // try {
-    //   const response = await orderAPI.orderPost({
-    //     token,
-    //     salesid,
-    //     addressid,
-    //     nocontact: 0,
-    //     payamount: itemsSum,
-    //     points,
-    //     changeamount: changeAmount,
-    //     paytype,
-    //     description: orderDescription,
-    //     dlvtime: deliveryTime,
-    //     minor_area_id,
-    //   });
-    //   if (response.status === "error") {
-    //     setOrderErrMessage(response.msg);
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      const response = await orderAPI.orderPost({
+        token,
+        salesid,
+        addressid,
+        nocontact: 0,
+        payamount: itemsSum,
+        points: bonusActivated,
+        changeamount: changeAmount,
+        paytype,
+        description: orderDescription,
+        dlvtime: deliveryTime,
+        minor_area_id,
+      });
+      if (response.status === "error") {
+        setOrderErrMessage(response.msg);
+      }
+    } catch (err) {
+      console.log(err);
+    }
     navigate("/orders");
   };
 

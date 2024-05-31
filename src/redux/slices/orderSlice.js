@@ -4,7 +4,6 @@ const initialState = {
   changeAmount: 0,
   orderDescription: "",
   bonus: null,
-  newBonus: 0,
   bonusActivated: null,
   loyaltyCard: [],
   orders: [],
@@ -15,9 +14,6 @@ export const orderSlice = createSlice({
   name: "order",
   initialState,
   reducers: {
-    // addOrders: (state, action) => {
-    //   state.orders = [...state.orders, action.payload];
-    // },
     setOrders: (state, action) => {
       state.orders = action.payload;
     },
@@ -34,9 +30,7 @@ export const orderSlice = createSlice({
     setBonus: (state, action) => {
       state.bonus = parseInt(action.payload);
     },
-    setNewBonus: (state, action) => {
-      state.newBonus = parseInt(action.payload);
-    },
+
     setBonusActivated: (state, action) => {
       state.bonusActivated = parseInt(action.payload);
     },
@@ -47,12 +41,10 @@ export const orderSlice = createSlice({
 });
 
 export const {
-  // addOrders,
   setOrders,
   setOrdersItems,
   setChangeAmount,
   setBonus,
-  setNewBonus,
   setOrderDescription,
   setBonusActivated,
   setLoyaltyCard,

@@ -20,16 +20,15 @@ const DeviceFooter = ({
   const cartItems = useSelector((state) => state.cart.cartItems);
   const token = useSelector((state) => state.user.token);
   const salesid = useSelector((state) => state.user.salesid);
-  const bonus = useSelector((state) => state.order.bonus);
   const minorAreaId = useSelector((state) => state.user.minorAreaId);
   const changeAmount = useSelector((state) => state.order.changeAmount);
+  const bonusActivated = useSelector((state) => state.order.bonusActivated);
   const orderDescription = useSelector((state) => state.order.orderDescription);
   const deliveryTime = useSelector((state) => state.cart.deliveryTime);
 
   const handleAction = async () => {
     const addressid = addressSelected.addressid.toString();
     const paytype = paymentType.CASH_TO_COURIER;
-    const points = parseInt(bonus);
     const minor_area_id = parseInt(minorAreaId);
 
     try {
@@ -39,7 +38,7 @@ const DeviceFooter = ({
         addressid,
         nocontact: 0,
         payamount: itemsSum,
-        points,
+        points: bonusActivated,
         changeamount: changeAmount,
         paytype,
         description: orderDescription,
