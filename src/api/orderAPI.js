@@ -113,11 +113,10 @@ export const orderAPI = {
     }
   },
   async getSalesIds(params) {
-    const { token, salesid } = params;
+    const { token } = params;
     try {
       const response = await instance.post(`/getsales.php`, {
         token,
-        salesid,
       });
       console.log("response", response.data);
       return response.data;

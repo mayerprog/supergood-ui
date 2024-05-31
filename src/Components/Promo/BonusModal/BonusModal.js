@@ -10,6 +10,36 @@ import { defineLoyaltyInfo } from "../../../services/defineLoyaltyInfo";
 const BonusModal = ({ bonusWrapperRef, toggleBonusVisibility }) => {
   const bonus = useSelector((state) => state.order.bonus);
   const loyaltyCard = useSelector((state) => state.order.loyaltyCard);
+  const token = useSelector((state) => state.user.token);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      const loyalty = await orderAPI.getLoyalty(token);
+      if (loyalty) {
+        const loyaltyInfo = loyalty.bonuses[0];
+        if (!loyaltyInfo) {
+          dispatch(
+            setLoyaltyCard({
+              levelRusName: "Приветственный уровень",
+              levelEngName: "START",
+              cashback: "7",
+              nextCashback: "10",
+              nextRequirement: "10000",
+              untilRequirement: 10000,
+              backgroundColor: "#EAF2B6",
+            })
+          );
+        } else
+          defineLoyaltyInfo(
+            loyaltyInfo.bonus_lost,
+            loyaltyInfo.bonus_name,
+            dispatch
+          );
+      }
+    })();
+  }, []);
 
   return (
     <div className={styles.container} ref={bonusWrapperRef}>

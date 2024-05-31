@@ -11,6 +11,8 @@ import BonusModal from "../../Components/Promo/BonusModal/BonusModal";
 import { orderAPI } from "../../api/orderAPI";
 import { setOrders, setOrdersItems } from "../../redux/slices/orderSlice";
 import { cartAPI } from "../../api/cartAPI";
+import ItemsShimmer from "../../Loaders/ItemsShimmer";
+import Cookies from "js-cookie";
 
 const OrdersPage = ({
   userInfoRef,
@@ -29,9 +31,10 @@ const OrdersPage = ({
   toggleBonusVisibility,
   toggleLoginVisibility,
 }) => {
+  const [loading, setLoading] = useState(false);
+
   const orders = useSelector((state) => state.order.orders);
-  const token = useSelector((state) => state.user.token);
-  const salesid = useSelector((state) => state.user.salesid);
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -39,85 +42,103 @@ const OrdersPage = ({
   useEffect(() => {
     (async () => {
       try {
-        const data = await orderAPI.getSalesIds({ token, salesid });
-        const salesValues = Object.values(data.sales);
-        dispatch(setOrders(salesValues));
-        const salesIds = Object.values(data.salesids[0]);
-        const ordersItems = [];
-        for (let salesId of salesIds) {
-          const data = await cartAPI.getOrderInfo({ token, salesid: salesId });
-          ordersItems.push(data.sales);
+        setLoading(true);
+        const token = Cookies.get("token");
+
+        const data = await orderAPI.getSalesIds({ token });
+        console.log("data", data);
+        if (data) {
+          const salesValues = Object.values(data.sales);
+          dispatch(setOrders(salesValues));
+          const salesIds = Object.values(data.salesids[0]);
+          const ordersItems = [];
+          for (let salesId of salesIds) {
+            const data = await cartAPI.getOrderInfo({
+              token,
+              salesid: salesId,
+            });
+            ordersItems.push(data.sales);
+          }
+          dispatch(setOrdersItems(ordersItems));
         }
-        dispatch(setOrdersItems(ordersItems));
+        setLoading(false);
       } catch (err) {
         console.log(err);
       }
     })();
   }, []);
 
+  if (loading) {
+    return <ItemsShimmer />;
+  }
+
   return (
-    <div className={styles.content}>
-      <h2>Мои заказы</h2>
-      {!orders.length ? (
-        <span>
-          Пока нет ваших заказов. Заказать блюда можно
-          <a href="/" className={styles.linkStyle}>
-            {" "}
-            здесь
-          </a>
-          .
-        </span>
-      ) : (
-        <Orders />
-      )}
+    <>
+      {isAuth && (
+        <div className={styles.content}>
+          <h2>Мои заказы</h2>
+          {!orders.length ? (
+            <span>
+              Пока нет ваших заказов. Заказать блюда можно
+              <a href="/" className={styles.linkStyle}>
+                {" "}
+                здесь
+              </a>
+              .
+            </span>
+          ) : (
+            <Orders />
+          )}
 
-      <div
-        className={`${styles.sheetOverlay} ${
-          isMainSheetOpen ? styles.visible : ""
-        }`}
-      >
-        {isMainSheetOpen && (
-          <MainSheet
-            mainSheetWrapperRef={mainSheetWrapperRef}
-            setIsMainSheetOpen={setIsMainSheetOpen}
-            mainSheetClosing={mainSheetClosing}
-            setMainSheetClosing={setMainSheetClosing}
-            navigate={navigate}
-            toggleUserInfoVisibility={toggleUserInfoVisibility}
-            toggleAddressVisibility={toggleAddressVisibility}
-            toggleBonusVisibility={toggleBonusVisibility}
-            toggleLoginVisibility={toggleLoginVisibility}
-          />
-        )}
-      </div>
+          <div
+            className={`${styles.sheetOverlay} ${
+              isMainSheetOpen ? styles.visible : ""
+            }`}
+          >
+            {isMainSheetOpen && (
+              <MainSheet
+                mainSheetWrapperRef={mainSheetWrapperRef}
+                setIsMainSheetOpen={setIsMainSheetOpen}
+                mainSheetClosing={mainSheetClosing}
+                setMainSheetClosing={setMainSheetClosing}
+                navigate={navigate}
+                toggleUserInfoVisibility={toggleUserInfoVisibility}
+                toggleAddressVisibility={toggleAddressVisibility}
+                toggleBonusVisibility={toggleBonusVisibility}
+                toggleLoginVisibility={toggleLoginVisibility}
+              />
+            )}
+          </div>
 
-      {isUserInfoOpen && (
-        <div className={styles.cardOverlay}>
-          <UserModal
-            userInfoRef={userInfoRef}
-            toggleUserInfoVisibility={toggleUserInfoVisibility}
-          />
+          {isUserInfoOpen && (
+            <div className={styles.cardOverlay}>
+              <UserModal
+                userInfoRef={userInfoRef}
+                toggleUserInfoVisibility={toggleUserInfoVisibility}
+              />
+            </div>
+          )}
+          {isModalAddressOpen && (
+            <div className={styles.cardOverlay}>
+              <AddressModal
+                addressRef={addressRef}
+                isModal={true}
+                toggleAddressVisibility={toggleAddressVisibility}
+              />
+            </div>
+          )}
+          {isBonusOpen && (
+            <div className={styles.cardOverlay}>
+              <BonusModal
+                bonusWrapperRef={bonusWrapperRef}
+                isModal={true}
+                toggleBonusVisibility={toggleBonusVisibility}
+              />
+            </div>
+          )}
         </div>
       )}
-      {isModalAddressOpen && (
-        <div className={styles.cardOverlay}>
-          <AddressModal
-            addressRef={addressRef}
-            isModal={true}
-            toggleAddressVisibility={toggleAddressVisibility}
-          />
-        </div>
-      )}
-      {isBonusOpen && (
-        <div className={styles.cardOverlay}>
-          <BonusModal
-            bonusWrapperRef={bonusWrapperRef}
-            isModal={true}
-            toggleBonusVisibility={toggleBonusVisibility}
-          />
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 

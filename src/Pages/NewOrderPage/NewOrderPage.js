@@ -50,7 +50,7 @@ const NewOrderPage = ({
 }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const itemsUnavailable = useSelector((state) => state.cart.itemsUnavailable);
-  const orders = useSelector((state) => state.order.orders);
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   const { isPromoErrorOpen } = useContext(ModalsContext);
 
@@ -63,108 +63,112 @@ const NewOrderPage = ({
   };
 
   useEffect(() => {
-    if (cartItems.length === 0 && orders.length === 0) {
+    if (cartItems.length === 0) {
       navigate("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartItems, orders]);
+  }, [cartItems]);
 
   if (loading) {
     return <ItemsShimmer />;
   }
   return (
-    <div className={styles.container}>
-      <h2>Оформление заказа</h2>
-      <div className={styles.content}>
-        <div className={styles.addressCartContainer}>
-          <AddressModal
-            isModal={false}
-            mapWrapperRef={mapWrapperRef}
-            setIsMapOpen={setIsMapOpen}
-            isMapOpen={isMapOpen}
-          />
-          <OrderCart
-            cartErrMessage={cartErrMessage}
-            itemsUnavailable={itemsUnavailable}
-          />
-        </div>
-        <Payment
-          togglePayTypeVisibility={togglePayTypeVisibility}
-          toggleOrderPromoVisibility={toggleOrderPromoVisibility}
-          setCartErrMessage={setCartErrMessage}
-          orderErrMessage={orderErrMessage}
-          setOrderErrMessage={setOrderErrMessage}
-        />
-        {isPayTypeOpen && (
-          <div className={styles.cardOverlay}>
-            <PayTypeModal
-              payTypeWrapperRef={payTypeWrapperRef}
+    <>
+      {isAuth && (
+        <div className={styles.container}>
+          <h2>Оформление заказа</h2>
+          <div className={styles.content}>
+            <div className={styles.addressCartContainer}>
+              <AddressModal
+                isModal={false}
+                mapWrapperRef={mapWrapperRef}
+                setIsMapOpen={setIsMapOpen}
+                isMapOpen={isMapOpen}
+              />
+              <OrderCart
+                cartErrMessage={cartErrMessage}
+                itemsUnavailable={itemsUnavailable}
+              />
+            </div>
+            <Payment
               togglePayTypeVisibility={togglePayTypeVisibility}
-            />
-          </div>
-        )}
-        {isOrderPromoOpen && (
-          <div className={styles.cardOverlay}>
-            <OrderPromoModal
               toggleOrderPromoVisibility={toggleOrderPromoVisibility}
-              orderPromoWrapperRef={orderPromoWrapperRef}
+              setCartErrMessage={setCartErrMessage}
+              orderErrMessage={orderErrMessage}
+              setOrderErrMessage={setOrderErrMessage}
             />
+            {isPayTypeOpen && (
+              <div className={styles.cardOverlay}>
+                <PayTypeModal
+                  payTypeWrapperRef={payTypeWrapperRef}
+                  togglePayTypeVisibility={togglePayTypeVisibility}
+                />
+              </div>
+            )}
+            {isOrderPromoOpen && (
+              <div className={styles.cardOverlay}>
+                <OrderPromoModal
+                  toggleOrderPromoVisibility={toggleOrderPromoVisibility}
+                  orderPromoWrapperRef={orderPromoWrapperRef}
+                />
+              </div>
+            )}
           </div>
-        )}
-      </div>
 
-      <div
-        className={`${styles.sheetOverlay} ${
-          isMainSheetOpen ? styles.visible : ""
-        }`}
-      >
-        {isMainSheetOpen && (
-          <MainSheet
-            mainSheetWrapperRef={mainSheetWrapperRef}
-            setIsMainSheetOpen={setIsMainSheetOpen}
-            mainSheetClosing={mainSheetClosing}
-            setMainSheetClosing={setMainSheetClosing}
-            navigate={navigate}
-            toggleUserInfoVisibility={toggleUserInfoVisibility}
-            toggleAddressVisibility={toggleAddressVisibility}
-            toggleBonusVisibility={toggleBonusVisibility}
-            toggleLoginVisibility={toggleLoginVisibility}
-          />
-        )}
-      </div>
+          <div
+            className={`${styles.sheetOverlay} ${
+              isMainSheetOpen ? styles.visible : ""
+            }`}
+          >
+            {isMainSheetOpen && (
+              <MainSheet
+                mainSheetWrapperRef={mainSheetWrapperRef}
+                setIsMainSheetOpen={setIsMainSheetOpen}
+                mainSheetClosing={mainSheetClosing}
+                setMainSheetClosing={setMainSheetClosing}
+                navigate={navigate}
+                toggleUserInfoVisibility={toggleUserInfoVisibility}
+                toggleAddressVisibility={toggleAddressVisibility}
+                toggleBonusVisibility={toggleBonusVisibility}
+                toggleLoginVisibility={toggleLoginVisibility}
+              />
+            )}
+          </div>
 
-      {isUserInfoOpen && (
-        <div className={styles.cardOverlay}>
-          <UserModal
-            userInfoRef={userInfoRef}
-            toggleUserInfoVisibility={toggleUserInfoVisibility}
-          />
+          {isUserInfoOpen && (
+            <div className={styles.cardOverlay}>
+              <UserModal
+                userInfoRef={userInfoRef}
+                toggleUserInfoVisibility={toggleUserInfoVisibility}
+              />
+            </div>
+          )}
+          {isModalAddressOpen && (
+            <div className={styles.cardOverlay}>
+              <AddressModal
+                addressRef={addressRef}
+                isModal={true}
+                toggleAddressVisibility={toggleAddressVisibility}
+              />
+            </div>
+          )}
+          {isPromoErrorOpen && (
+            <div className={styles.cardOverlay}>
+              <PromoErrorModal />
+            </div>
+          )}
+          {isBonusOpen && (
+            <div className={styles.cardOverlay}>
+              <BonusModal
+                bonusWrapperRef={bonusWrapperRef}
+                isModal={true}
+                toggleBonusVisibility={toggleBonusVisibility}
+              />
+            </div>
+          )}
         </div>
       )}
-      {isModalAddressOpen && (
-        <div className={styles.cardOverlay}>
-          <AddressModal
-            addressRef={addressRef}
-            isModal={true}
-            toggleAddressVisibility={toggleAddressVisibility}
-          />
-        </div>
-      )}
-      {isPromoErrorOpen && (
-        <div className={styles.cardOverlay}>
-          <PromoErrorModal />
-        </div>
-      )}
-      {isBonusOpen && (
-        <div className={styles.cardOverlay}>
-          <BonusModal
-            bonusWrapperRef={bonusWrapperRef}
-            isModal={true}
-            toggleBonusVisibility={toggleBonusVisibility}
-          />
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 

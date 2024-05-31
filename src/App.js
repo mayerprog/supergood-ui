@@ -4,7 +4,6 @@ import styles from "./App.module.scss";
 import "leaflet/dist/leaflet.css";
 import MainPage from "./Pages/MainPage/MainPage";
 import { Route, Routes, useLocation } from "react-router-dom";
-import ProtectedRoute from "./HOC/ProtectedRoute";
 import NewOrderPage from "./Pages/NewOrderPage/NewOrderPage";
 import OrdersPage from "./Pages/OrdersPage/OrdersPage";
 import Header from "./Components/Header/Header";
@@ -232,7 +231,7 @@ function App() {
           const loyalty = await orderAPI.getLoyalty(token);
           if (loyalty) {
             const loyaltyInfo = loyalty.bonuses[0];
-            if (loyaltyInfo.length === 0) {
+            if (!loyaltyInfo) {
               dispatch(
                 setLoyaltyCard({
                   levelRusName: "Приветственный уровень",
@@ -338,7 +337,6 @@ function App() {
         <Route
           path="/submit"
           element={
-            // <ProtectedRoute>
             <NewOrderPage
               userInfoRef={userInfoRef}
               toggleUserInfoVisibility={toggleUserInfoVisibility}
@@ -370,31 +368,28 @@ function App() {
               orderErrMessage={orderErrMessage}
               setOrderErrMessage={setOrderErrMessage}
             />
-            // </ProtectedRoute>
           }
         />
         <Route
           path="/orders"
           element={
-            <ProtectedRoute>
-              <OrdersPage
-                userInfoRef={userInfoRef}
-                toggleUserInfoVisibility={toggleUserInfoVisibility}
-                addressRef={addressRef}
-                isUserInfoOpen={isUserInfoOpen}
-                isModalAddressOpen={isModalAddressOpen}
-                toggleAddressVisibility={toggleAddressVisibility}
-                isMainSheetOpen={isMainSheetOpen}
-                setIsMainSheetOpen={setIsMainSheetOpen}
-                mainSheetWrapperRef={mainSheetWrapperRef}
-                mainSheetClosing={mainSheetClosing}
-                setMainSheetClosing={setMainSheetClosing}
-                bonusWrapperRef={bonusWrapperRef}
-                isBonusOpen={isBonusOpen}
-                toggleBonusVisibility={toggleBonusVisibility}
-                toggleLoginVisibility={toggleLoginVisibility}
-              />
-            </ProtectedRoute>
+            <OrdersPage
+              userInfoRef={userInfoRef}
+              toggleUserInfoVisibility={toggleUserInfoVisibility}
+              addressRef={addressRef}
+              isUserInfoOpen={isUserInfoOpen}
+              isModalAddressOpen={isModalAddressOpen}
+              toggleAddressVisibility={toggleAddressVisibility}
+              isMainSheetOpen={isMainSheetOpen}
+              setIsMainSheetOpen={setIsMainSheetOpen}
+              mainSheetWrapperRef={mainSheetWrapperRef}
+              mainSheetClosing={mainSheetClosing}
+              setMainSheetClosing={setMainSheetClosing}
+              bonusWrapperRef={bonusWrapperRef}
+              isBonusOpen={isBonusOpen}
+              toggleBonusVisibility={toggleBonusVisibility}
+              toggleLoginVisibility={toggleLoginVisibility}
+            />
           }
         />
         <Route path="/loyalty" element={<LoyaltyPage />} />
