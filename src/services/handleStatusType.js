@@ -11,7 +11,6 @@ export const handleStatusType = (
     order.status != statusType.orderStatusCanceled &&
     order.status != statusType.orderStatusDelivered &&
     order.status != statusType.orderStatusCompleted &&
-    order.status != statusType.orderStatusConnectionLost &&
     order.status != statusType.orderStatusStopped
       ? filteredActivedOrders.push(order)
       : filteredCompletedOrders.push(order);

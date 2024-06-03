@@ -4,9 +4,14 @@ import { IoMdClose } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { setChangeAmount } from "../../../redux/slices/orderSlice";
 
-const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
-  const [chosenValue, setChosenValue] = useState("Наличными курьеру");
-  const [showCertificateInput, setShowCertificateInput] = useState(false);
+const PayTypeModal = ({
+  payTypeWrapperRef,
+  togglePayTypeVisibility,
+  setChosenPayType,
+  chosenValue,
+  setChosenValue,
+}) => {
+  // const [showCertificateInput, setShowCertificateInput] = useState(false);
   const [showCashInput, setShowCashInput] = useState(true);
 
   const dispatch = useDispatch();
@@ -18,17 +23,17 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
       //   setShowCertificateInput(true);
       //   setShowCashInput(false);
       //   break;
-      case "Банковской картой":
-        setShowCertificateInput(false);
-        setShowCashInput(false);
-        break;
+      // case "Банковской картой":
+      //   setShowCertificateInput(false);
+      //   setShowCashInput(false);
+      //   break;
 
       case "Наличными курьеру":
-        setShowCertificateInput(false);
+        // setShowCertificateInput(false);
         setShowCashInput(true);
         break;
       case "Картой курьеру":
-        setShowCertificateInput(false);
+        // setShowCertificateInput(false);
         setShowCashInput(false);
         break;
     }
@@ -45,19 +50,17 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
       </div>
       <h2>Способ оплаты</h2>
 
-      {["Наличными курьеру", "Банковской картой", "Картой курьеру"].map(
-        (item, index) => (
-          <div className={styles.payTypeContainer} key={index}>
-            <input
-              type="radio"
-              checked={item === chosenValue}
-              onChange={handleCheckBox}
-              value={item}
-            />
-            <label>{item}</label>
-          </div>
-        )
-      )}
+      {["Наличными курьеру", "Картой курьеру"].map((item, index) => (
+        <div className={styles.payTypeContainer} key={index}>
+          <input
+            type="radio"
+            checked={item === chosenValue}
+            onChange={handleCheckBox}
+            value={item}
+          />
+          <label>{item}</label>
+        </div>
+      ))}
       {showCashInput && (
         <div className={styles.cashInput}>
           <div className={styles.inputContainer}>
@@ -90,7 +93,10 @@ const PayTypeModal = ({ payTypeWrapperRef, togglePayTypeVisibility }) => {
 
       <button
         className={styles.buttonStyle}
-        onClick={() => console.log("Save")}
+        onClick={() => {
+          setChosenPayType(chosenValue);
+          togglePayTypeVisibility();
+        }}
       >
         <span className={styles.buttonText}>Выбрать</span>
       </button>

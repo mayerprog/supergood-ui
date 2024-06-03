@@ -3,10 +3,16 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
-import { setOrderDescription } from "../../redux/slices/orderSlice";
+import {
+  setOrderDescription,
+  setOrders,
+  setOrdersItems,
+} from "../../redux/slices/orderSlice";
 import { fetchMinSum } from "../../services/fetchMinSum";
 import { orderAPI } from "../../api/orderAPI";
 import paymentType from "../../paymentType";
+import { cartAPI } from "../../api/cartAPI";
+import Cookies from "js-cookie";
 
 const Payment = ({
   togglePayTypeVisibility,
@@ -14,16 +20,16 @@ const Payment = ({
   setCartErrMessage,
   orderErrMessage,
   setOrderErrMessage,
+  chosenPayType,
 }) => {
   const [cashbackSum, setCashbackSum] = useState();
+
   const itemsSum = useSelector((state) => state.cart.itemsSum);
   const addressSelected = useSelector((state) => state.user.addressSelected);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const deliveryTime = useSelector((state) => state.cart.deliveryTime);
   const bonusActivated = useSelector((state) => state.order.bonusActivated);
   const loyaltyCard = useSelector((state) => state.order.loyaltyCard);
-  const bonus = useSelector((state) => state.order.bonus);
-  const newBonus = useSelector((state) => state.order.newBonus);
   const changeAmount = useSelector((state) => state.order.changeAmount);
   const orderDescription = useSelector((state) => state.order.orderDescription);
   const minorAreaId = useSelector((state) => state.user.minorAreaId);
@@ -40,7 +46,12 @@ const Payment = ({
 
   const handleAction = async () => {
     const addressid = addressSelected.addressid.toString();
-    const paytype = paymentType.CASH_TO_COURIER;
+
+    const paytype =
+      chosenPayType === "Наличными курьеру"
+        ? paymentType.CASH_TO_COURIER
+        : paymentType.CARD_TO_COURIER;
+
     const minor_area_id = parseInt(minorAreaId);
 
     try {
@@ -59,11 +70,19 @@ const Payment = ({
       });
       if (response.status === "error") {
         setOrderErrMessage(response.msg);
+      } else if (response.status === "ok") {
+        const token = Cookies.get("token");
+
+        const data = await orderAPI.getSalesIds({ token });
+        if (data) {
+          const salesValues = Object.values(data.sales);
+          dispatch(setOrders(salesValues));
+        }
+        navigate("/orders");
       }
     } catch (err) {
       console.log(err);
     }
-    navigate("/orders");
   };
 
   const handleClickSubmit = async () => {
@@ -98,7 +117,7 @@ const Payment = ({
         <div className={styles.paymentDetails}>
           <div>
             <div className={styles.infoPayType}>Выбрать способ оплаты</div>
-            <div className={styles.chosenPayType}>Наличными</div>
+            <div className={styles.chosenPayType}>{chosenPayType}</div>
           </div>
           <button
             className={styles.buttonStyle}

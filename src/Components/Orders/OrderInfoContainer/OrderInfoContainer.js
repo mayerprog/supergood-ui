@@ -20,11 +20,10 @@ const OrderInfoContainer = ({
 
   const [filteredItems, setFilteredItems] = useState([]);
 
-  // const containerRef = useRef(null);
-
   useFilterOrder(chosenOrder, setFilteredItems);
 
   useEffect(() => {
+    console.log("chosenOrder", chosenOrder);
     getStatusInfo(chosenOrder.status, setActiveStep);
   }, [chosenOrder]);
 

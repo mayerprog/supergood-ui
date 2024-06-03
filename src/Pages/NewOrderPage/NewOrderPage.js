@@ -49,6 +49,9 @@ const NewOrderPage = ({
   orderErrMessage,
   setOrderErrMessage,
 }) => {
+  const [chosenPayType, setChosenPayType] = useState("Наличными курьеру");
+  const [chosenValue, setChosenValue] = useState("Наличными курьеру");
+
   const cartItems = useSelector((state) => state.cart.cartItems);
   const itemsUnavailable = useSelector((state) => state.cart.itemsUnavailable);
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -97,12 +100,16 @@ const NewOrderPage = ({
               setCartErrMessage={setCartErrMessage}
               orderErrMessage={orderErrMessage}
               setOrderErrMessage={setOrderErrMessage}
+              chosenPayType={chosenPayType}
             />
             {isPayTypeOpen && (
               <div className={styles.cardOverlay}>
                 <PayTypeModal
                   payTypeWrapperRef={payTypeWrapperRef}
                   togglePayTypeVisibility={togglePayTypeVisibility}
+                  setChosenPayType={setChosenPayType}
+                  chosenValue={chosenValue}
+                  setChosenValue={setChosenValue}
                 />
               </div>
             )}

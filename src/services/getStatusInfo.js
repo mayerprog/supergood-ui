@@ -20,8 +20,8 @@ export const getStatusInfo = (status, setActiveStep) => {
     // case statusType.orderStatusWaitPayment:
     //   return "Ожидание оплаты";
     case statusType.orderStatusConnectionLost:
-      setActiveStep && setActiveStep(5);
-      return "Соединение потеряно";
+      setActiveStep && setActiveStep(1);
+      return "Устанавливается соединение";
     case statusType.orderStatusUnknown:
       setActiveStep && setActiveStep(5);
       return "Статус неизвестен";
