@@ -105,28 +105,30 @@ const MainPage = ({
     (async () => {
       try {
         setLoading(true);
-        const itemsArray = [];
-        const allItems = await itemAPI.getItems(parseInt(deptId));
-        if (allItems.error === "stopped department") {
-          fetchImage({
-            uid: "19f05932f0",
-            width: 600,
-            height: 842,
-            setImageUrl,
-          });
-        } else {
-          Object.keys(allItems.items).forEach((categoryId) => {
-            const categoryObject = allItems.items[categoryId];
-            const category = Object.values(categoryObject);
+        // const itemsArray = [];
+        // const allItems = await itemAPI.getItems(parseInt(deptId));
+        // console.log("allItems", allItems);
 
-            category.forEach((itemGroup) => {
-              itemsArray.push(itemGroup);
-            });
-          });
-          dispatch(setItems(itemsArray));
-          if (itemsArray.length === 0) setLoading(true);
-          else setLoading(false);
-        }
+        // if (allItems.error === "stopped department") {
+        //   fetchImage({
+        //     uid: "19f05932f0",
+        //     width: 600,
+        //     height: 842,
+        //     setImageUrl,
+        //   });
+        // } else {
+        //   Object.keys(allItems.items).forEach((categoryId) => {
+        //     const categoryObject = allItems.items[categoryId];
+        //     const category = Object.values(categoryObject);
+
+        //     category.forEach((itemGroup) => {
+        //       itemsArray.push(itemGroup);
+        //     });
+        //   });
+        //   dispatch(setItems(itemsArray));
+        //   if (itemsArray.length === 0) setLoading(true);
+        //   else setLoading(false);
+        // }
       } catch (err) {
         console.log(err);
       }

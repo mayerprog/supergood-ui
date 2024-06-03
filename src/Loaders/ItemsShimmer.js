@@ -1,30 +1,39 @@
+import React from "react";
 import ContentLoader from "react-content-loader";
 import { useMediaQuery } from "react-responsive";
+import styles from "./ItemsShimmer.module.scss";
 
 const ItemsShimmer = () => {
-  const mediaQuery = useMediaQuery({ maxWidth: 1745, minWidth: 1481 });
+  const isSmallScreen = useMediaQuery({ minWidth: 880, maxWidth: 1023 });
+  const isExtraSmallScreen = useMediaQuery({ maxWidth: 960 });
+  const isSuperLargeScreen = useMediaQuery({ minWidth: 1500, maxWidth: 1700 });
+  const isLargeScreen = useMediaQuery({ minWidth: 1281, maxWidth: 1500 });
 
-  const width = !mediaQuery ? "1080" : "1030";
+  let width;
+  if (isSmallScreen) width = 220;
+  else if (isExtraSmallScreen) width = 180;
+  else if (isLargeScreen) width = 180;
+  else if (isSuperLargeScreen) width = 220;
+  else width = 240;
+
   return (
-    <div style={{ flex: "1" }}>
+    <div className={styles.container}>
       <ContentLoader
         speed={2}
-        width={width}
+        width="100%"
         height={1700}
-        viewBox={`0 0 ${width} 1700`}
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
       >
-        {/* <rect rx="10" ry="10" width="800" height="200" x={40} /> */}
         {Array.from({ length: 20 }).map((_, index) => (
           <rect
             key={index}
-            x={30 + (index % 4) * 250}
-            y={Math.floor(index / 4) * 330}
+            x={(index % 4) * (width + 20)}
+            y={Math.floor(index / 4) * (width + 150)}
             rx="10"
             ry="10"
-            width="200"
-            height="300"
+            width={width}
+            height={width * 1.5}
           />
         ))}
       </ContentLoader>

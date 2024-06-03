@@ -42,7 +42,7 @@ const OrdersContainer = ({
         setIsVisible={setIsCompletedListVisible}
         handleChooseOrder={handleChooseOrder}
         orders={completedOrders}
-        title="Завершённые"
+        title="Закрытые"
       />
     </div>
   );

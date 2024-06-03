@@ -2,9 +2,9 @@ import ContentLoader from "react-content-loader";
 import { useMediaQuery } from "react-responsive";
 
 const SidebarShimmer = () => {
-  const mediaQuery = useMediaQuery({ maxWidth: 1745, minWidth: 1481 });
+  // const mediaQuery = useMediaQuery({ maxWidth: 1745, minWidth: 1481 });
 
-  const width = !mediaQuery ? "220" : "180";
+  // const width = !mediaQuery ? "220" : "180";
   return (
     <div
       style={{
@@ -17,9 +17,9 @@ const SidebarShimmer = () => {
     >
       <ContentLoader
         speed={2}
-        width={width}
+        width={180}
         height={700}
-        viewBox={`0 0 ${width} 700`}
+        viewBox={`0 0 ${180} 700`}
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
       >
@@ -29,7 +29,7 @@ const SidebarShimmer = () => {
             y={20 + index * 60}
             rx="10"
             ry="10"
-            width={width}
+            width={180}
             height="40"
           />
         ))}
