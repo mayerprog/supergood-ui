@@ -16,6 +16,7 @@ import ModalsContext from "../../contexts/ModalsContext";
 import PromoErrorModal from "../../Components/Promo/PromoErrorModal/PromoErrorModal";
 import ItemsShimmer from "../../Loaders/ItemsShimmer";
 import { setItemsUnavailable } from "../../redux/slices/cartSlice";
+import NewOrderShimmer from "../../Loaders/NewOrderShimmer";
 
 const NewOrderPage = ({
   userInfoRef,
@@ -70,7 +71,7 @@ const NewOrderPage = ({
   }, [cartItems]);
 
   if (loading) {
-    return <ItemsShimmer />;
+    return <NewOrderShimmer />;
   }
   return (
     <>

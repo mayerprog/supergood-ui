@@ -191,69 +191,69 @@ function App() {
     (async () => {
       try {
         setLoading(true);
-        const token = Cookies.get("token");
-        if (token != null) {
-          dispatch(setToken(token));
-          dispatch(setIsAuth(true));
+        // const token = Cookies.get("token");
+        // if (token != null) {
+        //   dispatch(setToken(token));
+        //   dispatch(setIsAuth(true));
 
-          //getting data from getUserPref
-          const data = await userAPI.getUserPref(token);
-          if (data) {
-            dispatch(
-              setUserData({
-                name: data.name,
-                birthday: data.birthday,
-                birthdaybonus: data.birthdaybonus,
-                email: data.email,
-                gender: data.gender,
-                userid: data.userid,
-              })
-            );
-            dispatch(setSalesid(data.salesid));
-            dispatch(setAddressList(Object.values(data.address)));
+        //   //getting data from getUserPref
+        //   const data = await userAPI.getUserPref(token);
+        //   if (data) {
+        //     dispatch(
+        //       setUserData({
+        //         name: data.name,
+        //         birthday: data.birthday,
+        //         birthdaybonus: data.birthdaybonus,
+        //         email: data.email,
+        //         gender: data.gender,
+        //         userid: data.userid,
+        //       })
+        //     );
+        //     dispatch(setSalesid(data.salesid));
+        //     dispatch(setAddressList(Object.values(data.address)));
 
-            //getting cart data
-            await getOrderInfo({
-              token,
-              salesid: data.salesid,
-              dispatch,
-            });
-          }
+        //     //getting cart data
+        //     await getOrderInfo({
+        //       token,
+        //       salesid: data.salesid,
+        //       dispatch,
+        //     });
+        //   }
 
-          //getting bonus points
-          const bonusData = await orderAPI.getBonus(token);
-          if (bonusData) {
-            const bonus = bonusData.bonuses[0].discamount.split(".")[0];
-            dispatch(setBonus(bonus));
-          }
+        //   //getting bonus points
+        //   const bonusData = await orderAPI.getBonus(token);
+        //   if (bonusData) {
+        //     const bonus = bonusData.bonuses[0].discamount.split(".")[0];
+        //     dispatch(setBonus(bonus));
+        //   }
 
-          //getting loyalty info
-          const loyalty = await orderAPI.getLoyalty(token);
-          if (loyalty) {
-            const loyaltyInfo = loyalty.bonuses[0];
-            if (!loyaltyInfo) {
-              dispatch(
-                setLoyaltyCard({
-                  levelRusName: "Приветственный уровень",
-                  levelEngName: "START",
-                  cashback: "7",
-                  nextCashback: "10",
-                  nextRequirement: "10000",
-                  untilRequirement: 10000,
-                  backgroundColor: "#EAF2B6",
-                })
-              );
-            } else
-              defineLoyaltyInfo(
-                loyaltyInfo.bonus_lost,
-                loyaltyInfo.bonus_name,
-                dispatch
-              );
-          }
-        } else {
-          dispatch(setIsAuth(false));
-        }
-        setLoading(false);
+        //   //getting loyalty info
+        //   const loyalty = await orderAPI.getLoyalty(token);
+        //   if (loyalty) {
+        //     const loyaltyInfo = loyalty.bonuses[0];
+        //     if (!loyaltyInfo) {
+        //       dispatch(
+        //         setLoyaltyCard({
+        //           levelRusName: "Приветственный уровень",
+        //           levelEngName: "START",
+        //           cashback: "7",
+        //           nextCashback: "10",
+        //           nextRequirement: "10000",
+        //           untilRequirement: 10000,
+        //           backgroundColor: "#EAF2B6",
+        //         })
+        //       );
+        //     } else
+        //       defineLoyaltyInfo(
+        //         loyaltyInfo.bonus_lost,
+        //         loyaltyInfo.bonus_name,
+        //         dispatch
+        //       );
+        //   }
+        // } else {
+        //   dispatch(setIsAuth(false));
+        // }
+        // setLoading(false);
       } catch (err) {
         console.log(err);
       }

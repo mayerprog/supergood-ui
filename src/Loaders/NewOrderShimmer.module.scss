@@ -1,0 +1,23 @@
+.shimmerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.shimmerRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 20px;
+
+  // & > div {
+  //   margin-right: 20px;
+  // }
+
+  // & > div:last-child {
+  //   margin-right: 0;
+  // }
+}
