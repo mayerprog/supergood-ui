@@ -25,12 +25,12 @@ const OrdersShimmer = () => {
         {!mediaQuery && (
           <ContentLoader
             speed={2}
-            width={600}
+            width={width}
             height="100vh"
             backgroundColor="#f3f3f3"
             foregroundColor="#ecebeb"
           >
-            <rect rx="10" ry="10" width="500" height="500" y={20} x={20} />
+            <rect rx="10" ry="10" width="500" height="700" y={20} x={20} />
           </ContentLoader>
         )}
       </div>

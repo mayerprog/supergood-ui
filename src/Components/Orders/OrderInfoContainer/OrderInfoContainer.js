@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { handlePayType } from "../../../services/handlePayType";
 import { useFilterOrder } from "../../../hooks/useFilterOrder";
+import { getStatusInfo } from "../../../services/getStatusInfo";
 
 const OrderInfoContainer = ({
   chosenOrder,
@@ -15,10 +16,16 @@ const OrderInfoContainer = ({
   scrollToTop,
 }) => {
   const [payType, setPayType] = useState("");
+  const [activeStep, setActiveStep] = useState(1);
 
   const [filteredItems, setFilteredItems] = useState([]);
 
   useFilterOrder(chosenOrder, setFilteredItems);
+
+  useEffect(() => {
+    console.log("chosenOrder", chosenOrder.status);
+    getStatusInfo(chosenOrder.status, setActiveStep);
+  }, [chosenOrder]);
 
   useEffect(() => {
     handlePayType(chosenOrder.paym_type, setPayType);
@@ -29,7 +36,7 @@ const OrderInfoContainer = ({
       <div className={styles.header}>
         <h3>Заказ №{chosenOrder.shortid}</h3>
       </div>
-      <ProgressTracking />
+      <ProgressTracking activeStep={activeStep} />
       <div className={styles.details}>
         <span>Адрес</span>
         <div className={styles.info}>{chosenOrder.street_name}</div>

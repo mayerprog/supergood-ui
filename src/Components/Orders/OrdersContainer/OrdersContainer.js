@@ -5,7 +5,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import OrderImages from "../OrderImages/OrderImages";
 import { useSelector } from "react-redux";
 import { handleStatusType } from "../../../services/handleStatusType";
-import { getStatusText } from "../../../services/getStatusText";
+import { getStatusInfo } from "../../../services/getStatusInfo";
 
 const OrdersContainer = ({
   setOrderId,
@@ -83,7 +83,7 @@ const OrderList = ({
                 <div className={styles.deliveryInfo}>
                   <span className={styles.price}>{order.amount} ₽</span>
                   <span className={styles.cooking} title={title}>
-                    {getStatusText(order.status)}
+                    {getStatusInfo(order.status)}
                   </span>
                 </div>
               </div>
