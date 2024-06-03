@@ -43,4 +43,22 @@ export const itemAPI = {
       console.log("Failed to get all products. Check console for details.");
     }
   },
+  async getPromotions(params) {
+    const { token, deptId } = params;
+    console.log("deptId", deptId);
+    try {
+      const response = await instance.post(`/getpromotions.php`, {
+        token,
+        deptId,
+      });
+      console.log("promotions", response.data);
+      return response.data;
+    } catch (err) {
+      console.error(
+        "Error getting promotions:",
+        err.response ? err.response.data : err
+      );
+      console.log("Failed to get all promotions. Check console for details.");
+    }
+  },
 };

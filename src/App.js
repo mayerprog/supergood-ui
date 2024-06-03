@@ -33,6 +33,7 @@ import { setBonus, setLoyaltyCard } from "./redux/slices/orderSlice";
 import { setMinAmount } from "./redux/slices/cartSlice";
 import ModalsContext from "./contexts/ModalsContext";
 import { defineLoyaltyInfo } from "./services/defineLoyaltyInfo";
+import { itemAPI } from "./api/itemAPI";
 
 function App() {
   // modals
@@ -250,6 +251,14 @@ function App() {
                 dispatch
               );
           }
+          const selectedAddressList = addressList.filter(
+            (address) => address.selected
+          );
+          console.log("selectedAddressList", selectedAddressList);
+          const promotions = await itemAPI.getPromotions({
+            token,
+            deptId: selectedAddressList[0].deptid,
+          });
         } else {
           dispatch(setIsAuth(false));
         }
