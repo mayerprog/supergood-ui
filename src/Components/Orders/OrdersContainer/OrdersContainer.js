@@ -57,21 +57,16 @@ const OrderList = ({
 }) => {
   return (
     <>
-      <div className={styles.title}>
+      <div className={styles.title} onClick={() => setIsVisible(!isVisible)}>
         <h3>{title}</h3>
-        <div onClick={() => setIsVisible(!isVisible)}>
-          {isVisible ? <FaChevronUp /> : <FaChevronDown />}
-        </div>
+        <div>{isVisible ? <FaChevronUp /> : <FaChevronDown />}</div>
       </div>
       {isVisible && (
         <div className={styles.ordersList}>
           {orders.map((order, index) => (
-            <div key={index}>
+            <div key={index} onClick={() => handleChooseOrder(order.id)}>
               <div className={styles.orderInfo}>
-                <div
-                  className={styles.order}
-                  onClick={() => handleChooseOrder(order.id)}
-                >
+                <div className={styles.order}>
                   <span className={styles.orderId}>Заказ №{order.shortid}</span>
                   <div className={styles.dateTime}>
                     <span>{order.createddate.substring(0, 16)}</span>
