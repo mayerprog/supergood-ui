@@ -49,7 +49,7 @@ const ModalOptions = ({
         dispatch(updateSum(0));
         dispatch(setIsAuth(false));
         toggleOptionsVisibility(false);
-        window.location.reload();
+        navigate("/");
         break;
       default:
         return;

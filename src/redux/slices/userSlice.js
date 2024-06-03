@@ -13,12 +13,16 @@ const initialState = {
   token: null,
   deptId: "",
   minorAreaId: "",
+  phone: "",
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setPhone: (state, action) => {
+      state.phone = action.payload;
+    },
     setAddressList: (state, action) => {
       state.addressList = action.payload;
     },
@@ -88,6 +92,7 @@ export const userSlice = createSlice({
 });
 
 export const {
+  setPhone,
   setAddressSelected,
   setAddressList,
   setUserData,

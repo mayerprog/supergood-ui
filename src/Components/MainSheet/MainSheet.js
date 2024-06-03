@@ -96,7 +96,7 @@ const MainSheet = ({
         dispatch(removeAllItems());
         dispatch(updateSum(0));
         handleClosing();
-        window.location.reload();
+        navigate("/");
         break;
       case "Войти":
         toggleLoginVisibility();

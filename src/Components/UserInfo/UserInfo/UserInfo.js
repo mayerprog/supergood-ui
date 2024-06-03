@@ -9,6 +9,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 
 import "dayjs/locale/ru";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 dayjs.extend(customParseFormat);
 
 dayjs.locale("ru"); // Use the Russian locale globally
@@ -155,6 +156,8 @@ const theme = createTheme(
 
 const UserInfo = ({ toggleUserInfoVisibility }) => {
   const [selectedDate, setSelectedDate] = useState(null);
+  const phone = useSelector((state) => state.user.phone);
+
   const handleInfoClose = () => {
     toggleUserInfoVisibility();
   };
@@ -174,7 +177,7 @@ const UserInfo = ({ toggleUserInfoVisibility }) => {
         </div>
         <div className={styles.inputContainer}>
           <span>Телефон</span>
-          <span className={styles.phone}>8 (977) 589 7234</span>
+          <span className={styles.phone}>{phone}</span>
         </div>
         <div className={styles.inputContainer}>
           <ThemeProvider theme={theme}>

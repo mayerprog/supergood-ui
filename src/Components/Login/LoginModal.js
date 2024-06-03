@@ -25,13 +25,14 @@ import { persistor } from "../../index";
 import { userAPI } from "../../api/userAPI";
 import {
   setAddressList,
+  setPhone,
   setSalesid,
   setToken,
   setUserData,
 } from "../../redux/slices/userSlice";
 
 const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
-  const [phone, setPhone] = useState("");
+  // const [phone, setPhone] = useState("");
   const [phoneToDB, setPhoneToDB] = useState("");
   const [code, setCode] = useState("");
   const [checked, setChecked] = useState(false);
@@ -42,6 +43,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
   const dataSms = useSelector((state) => state.auth.dataSms);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const addressSelected = useSelector((state) => state.user.addressSelected);
+  const phone = useSelector((state) => state.user.phone);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -125,7 +127,7 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
 
   const handleChangePhone = (event) => {
     let val = event.target.value;
-    setPhone(val);
+    dispatch(setPhone(val));
     setPhoneToDB(val.replace(/\D/g, ""));
     if (val.length < 18) setBorderColor("#c36060");
     else setBorderColor("#ccc");
