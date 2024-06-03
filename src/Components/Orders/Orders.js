@@ -39,6 +39,7 @@ const Orders = () => {
         setOrderId={setOrderId}
         orders={orders}
         scrollToBottom={scrollToBottom}
+        scrollToTop={scrollToTop}
         netbooksMediaQuery={netbooksMediaQuery}
       />
       <OrderInfoContainer

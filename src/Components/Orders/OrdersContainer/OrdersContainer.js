@@ -11,16 +11,17 @@ const OrdersContainer = ({
   setOrderId,
   orders,
   scrollToBottom,
+  scrollToTop,
   netbooksMediaQuery,
 }) => {
   const [isPendingListVisible, setIsPendingListVisible] = useState(true);
-  const [isCompletedListVisible, setIsCompletedListVisible] = useState(false);
+  const [isCompletedListVisible, setIsCompletedListVisible] = useState(true);
   const [completedOrders, setCompletedOrders] = useState([]);
   const [activeOrders, setActivedOrders] = useState([]);
 
   const handleChooseOrder = (id) => {
     setOrderId(id);
-    netbooksMediaQuery && scrollToBottom();
+    netbooksMediaQuery ? scrollToBottom() : scrollToTop();
   };
 
   useEffect(() => {
