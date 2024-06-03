@@ -16,6 +16,17 @@ export const handleStatusType = (
       ? filteredActivedOrders.push(order)
       : filteredCompletedOrders.push(order);
   });
-  setCompletedOrders(filteredCompletedOrders);
-  setActivedOrders(filteredActivedOrders);
+
+  const sortedCompletedOrders = filteredCompletedOrders.sort((a, b) => {
+    const dateA = new Date(a.createddate);
+    const dateB = new Date(b.createddate);
+    return dateB - dateA;
+  });
+  const sortedActivedOrders = filteredActivedOrders.sort((a, b) => {
+    const dateA = new Date(a.createddate);
+    const dateB = new Date(b.createddate);
+    return dateB - dateA;
+  });
+  setCompletedOrders(sortedCompletedOrders);
+  setActivedOrders(sortedActivedOrders);
 };
