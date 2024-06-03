@@ -13,6 +13,7 @@ import { setOrders, setOrdersItems } from "../../redux/slices/orderSlice";
 import { cartAPI } from "../../api/cartAPI";
 import ItemsShimmer from "../../Loaders/ItemsShimmer";
 import Cookies from "js-cookie";
+import OrdersShimmer from "../../Loaders/OrdersShimmer";
 
 const OrdersPage = ({
   userInfoRef,
@@ -69,7 +70,7 @@ const OrdersPage = ({
   }, []);
 
   if (loading) {
-    return <ItemsShimmer />;
+    return <OrdersShimmer />;
   }
 
   return (
