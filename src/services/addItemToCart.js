@@ -29,19 +29,20 @@ export const addItemToCart = async (info) => {
       const selectedAddressList = addressList.filter(
         (address) => address.selected
       );
-      const cutlery = cartItems.find((item) => item.itemid === 50831);
       await putToCartAPI(item, token, salesid, selectedAddressList[0].deptid);
-      // if no cutlery then add it to Cart
-      if (!cutlery) {
-        const response = await cartAPI.addToCart({
-          token,
-          salesid,
-          id: 0,
-          deptid: selectedAddressList[0].deptid,
-          itemid: 50831,
-          qty: 1,
-        });
-      }
+
+      // const cutlery = cartItems.find((item) => item.itemid === 50831);
+      // // if no cutlery then add it to Cart
+      // if (!cutlery) {
+      //   const response = await cartAPI.addToCart({
+      //     token,
+      //     salesid,
+      //     id: 0,
+      //     deptid: selectedAddressList[0].deptid,
+      //     itemid: 50831,
+      //     qty: 1,
+      //   });
+      // }
 
       await getOrderInfo({ token, salesid, dispatch });
     } else {

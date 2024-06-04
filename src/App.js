@@ -254,10 +254,9 @@ function App() {
           const selectedAddressList = addressList.filter(
             (address) => address.selected
           );
-          console.log("selectedAddressList", selectedAddressList);
           const promotions = await itemAPI.getPromotions({
             token,
-            deptId: selectedAddressList[0].deptid,
+            deptId: selectedAddressList[0]?.deptid,
           });
         } else {
           dispatch(setIsAuth(false));

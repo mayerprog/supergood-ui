@@ -176,18 +176,18 @@ const LoginModal = ({ loginWrapperRef, toggleLoginVisibility }) => {
             userPref.salesid,
             addressSelected.deptid
           );
-          const cutlery = cartItems.find((item) => item.itemid === 50831);
-          // if no cutlery then add it to Cart
-          if (!cutlery) {
-            await cartAPI.addToCart({
-              token,
-              salesid: userPref.salesid,
-              id: 0,
-              deptid: addressSelected.deptid,
-              itemid: 50831,
-              qty: 1,
-            });
-          }
+          // const cutlery = cartItems.find((item) => item.itemid === 50831);
+          // // if no cutlery then add it to Cart
+          // if (!cutlery) {
+          //   await cartAPI.addToCart({
+          //     token,
+          //     salesid: userPref.salesid,
+          //     id: 0,
+          //     deptid: addressSelected.deptid,
+          //     itemid: 50831,
+          //     qty: 1,
+          //   });
+          // }
         } catch (err) {
           console.log(err);
         }
